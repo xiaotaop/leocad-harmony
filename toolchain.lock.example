@@ -1,0 +1,13 @@
+# Copy this file to toolchain.lock on day 1 and replace every TODO with the
+# exact installed value. Do not commit local SDK paths or signing secrets.
+
+UPSTREAM_TAG=v26.09
+UPSTREAM_COMMIT=5196355d4a5adb35f14c97e7672d7a9bfd3af391
+TARGET_ARCH=arm64-v8a
+DEVECO_STUDIO_VERSION=TODO
+HARMONYOS_SDK_VERSION=TODO
+HARMONYOS_API_VERSION=TODO
+CLANG_VERSION=TODO
+CMAKE_VERSION=TODO
+QT_VERSION=6.12.TODO
+QT_HARMONYOS_BUILD_COMMIT=TODO
