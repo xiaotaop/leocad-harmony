@@ -1,0 +1,103 @@
+diff --git a/common/lc_application.cpp b/common/lc_application.cpp
+index 8bad68d5..27869934 100644
+--- a/common/lc_application.cpp
++++ b/common/lc_application.cpp
+@@ -971,10 +971,14 @@ lcStartupMode lcApplication::Initialize(const QList<QPair<QString, bool>>& Libra
+ 	{
+ 		QString Message;
+ 
++		// The first release packages its parts library and does not request the
++		// INTERNET permission, so pointing the user at a download page would be
++		// both unreachable advice and inconsistent with the privacy policy. Tell
++		// them what happened and what can actually be done about it.
+ 		if (mLibrary->LoadBuiltinPieces())
+-			Message = tr("LeoCAD could not find a compatible Parts Library so only a small number of parts will be available.\n\nPlease visit https://www.leocad.org for information on how to download and install a library.");
++			Message = tr("The built-in parts library could not be loaded, so only a limited set of parts is available. Try reinstalling the application.");
+ 		else
+-			Message = tr("LeoCAD could not load Parts Library.\n\nPlease visit https://www.leocad.org for information on how to download and install a library.");
++			Message = tr("The parts library could not be loaded. Try reinstalling the application.");
+ 
+ 		if (gMainWindow)
+ 			QMessageBox::information(gMainWindow, tr("LeoCAD"), Message);
+diff --git a/leocad.pro b/leocad.pro
+index c4a8f215..e7a26bac 100644
+--- a/leocad.pro
++++ b/leocad.pro
+@@ -171,6 +171,21 @@ ios {
+ 	DEFINES += LC_DISABLE_BLENDER=1
+ }
+ 
++# Qt 6.12 ships mkspecs/ohos-clang, whose qmake.conf sets QMAKE_PLATFORM = ohos,
++# so "ohos" is the scope name qmake matches for HarmonyOS builds.
++ohos {
++	# The first release is fully offline and does not request the INTERNET
++	# permission. Without this define, lcDoInitialUpdateCheck() (qt/qtmain.cpp)
++	# requests https://www.leocad.org/updates.txt on startup, which would break
++	# that claim and show a network error on a device with no connectivity.
++	DEFINES += LC_DISABLE_UPDATE_CHECK=1
++
++	# External rendering and the render dialog are out of first-release scope;
++	# the menu entries are removed by lcMainWindow::ApplyFirstReleaseScope().
++	DEFINES += LC_DISABLE_RENDER_DIALOG=1
++	DEFINES += LC_DISABLE_BLENDER=1
++}
++
+ SOURCES += \
+ 	common/camera.cpp \
+ 	common/group.cpp \
+diff --git a/qt/qtmain.cpp b/qt/qtmain.cpp
+index ace3239e..debca8d4 100644
+--- a/qt/qtmain.cpp
++++ b/qt/qtmain.cpp
+@@ -2,6 +2,7 @@
+ #include "lc_application.h"
+ #include "lc_updatedialog.h"
+ #include "lc_profile.h"
++#include "lc_library.h"
+ #include "pieceinf.h"
+ #include <QApplication>
+ #include <locale.h>
+@@ -205,6 +206,14 @@ int main(int argc, char *argv[])
+ 	LibraryPaths += qMakePair(QString::fromLatin1(LC_LDRAW_LIBRARY_PATH), false);
+ #endif
+ 
++	// The parts library that ships inside the application package. Placed after
++	// LC_LDRAW_LIBRARY_PATH so an explicitly configured path still takes
++	// precedence, and before Initialize() consumes the list. Marked official so
++	// the piece count is recorded (lcPiecesLibrary::SetOfficialPieces()).
++	const QString BundledLibrary = lcPiecesLibrary::FindBundledLibraryArchive();
++	if (!BundledLibrary.isEmpty())
++		LibraryPaths += qMakePair(BundledLibrary, true);
++
+ 	setlocale(LC_NUMERIC, "C");
+ 
+ 	lcStartupMode StartupMode = Application.Initialize(LibraryPaths);
+diff --git a/resources/leocad_zh_CN.ts b/resources/leocad_zh_CN.ts
+index 6e936275..9c7d4eae 100644
+--- a/resources/leocad_zh_CN.ts
++++ b/resources/leocad_zh_CN.ts
+@@ -4931,20 +4931,12 @@ Anisotropic: %5
+ </translation>
+     </message>
+     <message>
+-        <source>LeoCAD could not find a compatible Parts Library so only a small number of parts will be available.
+-
+-Please visit https://www.leocad.org for information on how to download and install a library.</source>
+-        <translation>LeoCAD 未找到兼容的零件库，因此只能使用少量零件。
+-
+-有关下载和安装零件库的信息，请访问 https://www.leocad.org。</translation>
++        <source>The built-in parts library could not be loaded, so only a limited set of parts is available. Try reinstalling the application.</source>
++        <translation>内置零件库加载失败，仅能使用少量零件。请尝试重新安装应用。</translation>
+     </message>
+     <message>
+-        <source>LeoCAD could not load Parts Library.
+-
+-Please visit https://www.leocad.org for information on how to download and install a library.</source>
+-        <translation>LeoCAD 无法加载零件库。
+-
+-有关下载和安装零件库的信息，请访问 https://www.leocad.org。</translation>
++        <source>The parts library could not be loaded. Try reinstalling the application.</source>
++        <translation>零件库加载失败。请尝试重新安装应用。</translation>
+     </message>
+     <message>
+         <source>LeoCAD</source>

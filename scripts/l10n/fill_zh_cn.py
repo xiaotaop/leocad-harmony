@@ -256,6 +256,10 @@ TRANSLATIONS: dict[str, dict[str, str]] = {
         "LeoCAD could not find a compatible Parts Library so only a small number of parts will be available.\n\nPlease visit https://www.leocad.org for information on how to download and install a library.":
             "LeoCAD 未找到兼容的零件库，因此只能使用少量零件。\n\n有关下载和安装零件库的信息，请访问 https://www.leocad.org。",
         "Unknown option: '%1'.": "未知选项：'%1'。",
+        "The built-in parts library could not be loaded, so only a limited set of parts is available. Try reinstalling the application.":
+            "内置零件库加载失败，仅能使用少量零件。请尝试重新安装应用。",
+        "The parts library could not be loaded. Try reinstalling the application.":
+            "零件库加载失败。请尝试重新安装应用。",
         "LeoCAD Version %1\n": "LeoCAD 版本 %1\n",
         "LeoCAD Continuous Build %1\n": "LeoCAD 持续构建 %1\n",
         "Compiled %1\n": "编译于 %1\n",
