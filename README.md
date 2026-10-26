@@ -43,7 +43,9 @@ tests/device/                Physical-device test procedures and evidence index
 docs/                        Architecture, schedule and release documentation
 ```
 
-The new port directories currently contain contracts and ownership notes. Build files and implementation will be added during the migration.
+The root `CMakeLists.txt` is the shared desktop/HarmonyOS build entry. The port
+directories contain module contracts and will receive platform-specific changes
+without mixing generated HAP files or signing material into source control.
 
 ## Team workflow
 
@@ -57,7 +59,19 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and the [two-week development plan](docs/
 
 ## Build status
 
-The HarmonyOS build is not available yet. Do not treat the upstream desktop qmake build as proof that the HarmonyOS package works. Toolchain versions will be frozen from [`toolchain.lock.example`](toolchain.lock.example) into a local `toolchain.lock` on the first development day.
+The CMake wrapper and desktop Qt 6.12 compile regression are available. The
+HarmonyOS HAP remains blocked until Qt 6.12 for HarmonyOS is installed; a desktop
+CI success is not proof that the package runs on HarmonyOS.
+
+Run the local baseline check with:
+
+```powershell
+pwsh -File scripts/check-toolchain.ps1
+```
+
+Exact committed versions and the known Qt blocker are in
+[`toolchain.lock`](toolchain.lock). See the [D1 baseline](docs/D1_BASELINE.md)
+and [store submission checklist](docs/STORE_SUBMISSION_CHECKLIST.md).
 
 ## Licensing and trademarks
 

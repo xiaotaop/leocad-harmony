@@ -1,68 +1,76 @@
-name: LeoCAD CI
+name: LeoCAD Harmony Port CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main
+      - "feature/**"
+      - "release/**"
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build-ubuntu:
+  port-policy:
+    name: Port baseline policy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v4  
-      with:
-        version: '5.15.*'
-        cache: 'true'
-    - name: Get number of CPU cores
-      uses: SimenB/github-actions-cpu-cores@v1
-      id: cpu-cores
-    - name: Generate Makefile
-      run: qmake PREFIX=/usr
-    - name: Build
-      run: make -j ${{ steps.cpu-cores.outputs.count }}
+      - uses: actions/checkout@v4
+      - name: Check required project files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f CMakeLists.txt
+          test -f cmake/LeoCADSources.cmake
+          test -f toolchain.lock
+          test -f docs/D1_BASELINE.md
+          test -f docs/STORE_SUBMISSION_CHECKLIST.md
+          grep -q '^UPSTREAM_TAG=v26.09$' toolchain.lock
+          grep -q '^TARGET_ARCH=arm64-v8a$' toolchain.lock
+          ! git ls-files | grep -E '\.(p12|p7b|cer|hap|app)$'
+      - name: Check source list paths
+        shell: pwsh
+        run: |
+          $content = Get-Content cmake/LeoCADSources.cmake -Raw
+          $paths = [regex]::Matches($content, '(?m)^\s+((common|qt|resources)/[^\s\)]+)') |
+            ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
+          $missing = $paths | Where-Object { -not (Test-Path -LiteralPath $_) }
+          if ($missing) { throw "Missing source-list files: $($missing -join ', ')" }
 
-  build-macos:
-    runs-on: macos-latest
+  desktop-build:
+    name: Qt 6.12 desktop compile regression
+    runs-on: ubuntu-latest
+    needs: port-policy
     steps:
-    - uses: actions/checkout@v3
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v4
-      with:
-        version: '6.11.*'
-        cache: 'true'
-    - name: Cache Library
-      uses: actions/cache@v3
-      id: cache-library
-      with:
-        path: library.bin
-        key: library-26.08
-    - name: Download Library
-      if: steps.cache-library.outputs.cache-hit != 'true'
-      run: |
-        wget https://github.com/leozide/leocad/releases/download/v25.09/Library-26.08.zip -O library.zip
-        unzip library.zip
-    - name: Cache POV-Ray
-      uses: actions/cache@v3
-      id: cache-povray
-      with:
-        path: povray
-        key: povray-build1
-    - name: Download POV-Ray
-      if: steps.cache-povray.outputs.cache-hit != 'true'
-      run: |
-        wget https://github.com/leozide/povray/releases/download/build1/povray
-        chmod +x povray
-        curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/leozide/leocad/commits/master | jq -r '.sha' > remote.txt
-        REMOTE=$(cat remote.txt)
-        echo "REMOTE=$REMOTE"        
-    - name: Get number of CPU cores
-      uses: SimenB/github-actions-cpu-cores@v1
-      id: cpu-cores
-    - name: Generate Makefile
-      run: qmake -early QMAKE_DEFAULT_LIBDIRS=$(xcrun -show-sdk-path)/usr/lib PREFIX=/usr
-    - name: Build
-      run: make -j ${{ steps.cpu-cores.outputs.count }}
+      - uses: actions/checkout@v4
+      - name: Install native dependencies
+        run: sudo apt-get update && sudo apt-get install -y ninja-build zlib1g-dev
+      - name: Install Qt 6.12
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: "6.12.*"
+          cache: true
+      - name: Configure
+        run: cmake -S . -B build/desktop -G Ninja -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build/desktop --parallel 2
+
+  harmony-toolchain-note:
+    name: HarmonyOS packaging gate
+    runs-on: ubuntu-latest
+    needs: port-policy
+    steps:
+      - uses: actions/checkout@v4
+      - name: Record packaging status
+        shell: bash
+        run: |
+          status=$(sed -n 's/^QT_HARMONYOS_STATUS=//p' toolchain.lock)
+          echo "Qt for HarmonyOS status: ${status}"
+          echo "HAP is built on the controlled DevEco/Qt toolchain after Qt installation."

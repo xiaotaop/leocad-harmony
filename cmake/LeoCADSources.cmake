@@ -1,0 +1,115 @@
+set(LEOCAD_SOURCES
+    common/camera.cpp
+    common/group.cpp
+    common/image.cpp
+    common/lc_modelhistory.cpp
+    common/light.cpp
+    common/minifig.cpp
+    common/object.cpp
+    common/piece.cpp
+    common/pieceinf.cpp
+    common/project.cpp
+    common/texfont.cpp
+    common/lc_aboutdialog.cpp
+    common/lc_application.cpp
+    common/lc_arraydialog.cpp
+    common/lc_blenderpreferences.cpp
+    common/lc_bricklink.cpp
+    common/lc_category.cpp
+    common/lc_categorydialog.cpp
+    common/lc_collapsiblewidget.cpp
+    common/lc_colorlist.cpp
+    common/lc_colorpicker.cpp
+    common/lc_colors.cpp
+    common/lc_commands.cpp
+    common/lc_context.cpp
+    common/lc_doublespinbox.cpp
+    common/lc_edgecolordialog.cpp
+    common/lc_editgroupsdialog.cpp
+    common/lc_file.cpp
+    common/lc_filter.cpp
+    common/lc_findreplacewidget.cpp
+    common/lc_glextensions.cpp
+    common/lc_groupdialog.cpp
+    common/lc_htmldialog.cpp
+    common/lc_http.cpp
+    common/lc_imagedialog.cpp
+    common/lc_instructions.cpp
+    common/lc_instructionsdialog.cpp
+    common/lc_keyframewidget.cpp
+    common/lc_ladderwidget.cpp
+    common/lc_library.cpp
+    common/lc_lxf.cpp
+    common/lc_mainwindow.cpp
+    common/lc_mesh.cpp
+    common/lc_meshloader.cpp
+    common/lc_minifigdialog.cpp
+    common/lc_model.cpp
+    common/lc_modellistdialog.cpp
+    common/lc_objectproperty.cpp
+    common/lc_pagesetupdialog.cpp
+    common/lc_partpalettedialog.cpp
+    common/lc_partselectionpopup.cpp
+    common/lc_partselectionwidget.cpp
+    common/lc_previewwidget.cpp
+    common/lc_profile.cpp
+    common/lc_propertieswidget.cpp
+    common/lc_scene.cpp
+    common/lc_selectdialog.cpp
+    common/lc_setsdatabasedialog.cpp
+    common/lc_shortcuts.cpp
+    common/lc_string.cpp
+    common/lc_stringcache.cpp
+    common/lc_synth.cpp
+    common/lc_texture.cpp
+    common/lc_thumbnailmanager.cpp
+    common/lc_timelinewidget.cpp
+    common/lc_traintrack.cpp
+    common/lc_updatedialog.cpp
+    common/lc_view.cpp
+    common/lc_viewmanipulator.cpp
+    common/lc_viewsphere.cpp
+    common/lc_viewwidget.cpp
+    common/lc_zipfile.cpp
+    qt/qtmain.cpp
+    qt/lc_qpropertiesdialog.cpp
+    qt/lc_qpreferencesdialog.cpp
+    qt/lc_qutils.cpp
+    qt/lc_renderdialog.cpp
+)
+
+file(GLOB LEOCAD_HEADERS CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_LIST_DIR}/../common/*.h"
+    "${CMAKE_CURRENT_LIST_DIR}/../qt/*.h"
+)
+
+set(LEOCAD_FORMS
+    common/lc_aboutdialog.ui
+    common/lc_arraydialog.ui
+    common/lc_categorydialog.ui
+    common/lc_editgroupsdialog.ui
+    common/lc_groupdialog.ui
+    common/lc_htmldialog.ui
+    common/lc_imagedialog.ui
+    common/lc_minifigdialog.ui
+    common/lc_modellistdialog.ui
+    common/lc_pagesetupdialog.ui
+    common/lc_partpalettedialog.ui
+    common/lc_selectdialog.ui
+    common/lc_setsdatabasedialog.ui
+    common/lc_updatedialog.ui
+    qt/lc_qpropertiesdialog.ui
+    qt/lc_qpreferencesdialog.ui
+    qt/lc_renderdialog.ui
+)
+
+set(LEOCAD_TRANSLATIONS
+    resources/leocad_cs.ts
+    resources/leocad_de.ts
+    resources/leocad_es.ts
+    resources/leocad_fr.ts
+    resources/leocad_pt.ts
+    resources/leocad_ru.ts
+    resources/leocad_uk.ts
+    resources/leocad_zh_CN.ts
+)
