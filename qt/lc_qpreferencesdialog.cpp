@@ -32,6 +32,53 @@ lcPreferencesDialog::lcPreferencesDialog(QWidget* Parent, lcPreferencesDialogOpt
 	delete ui->povrayLayout;
 #endif
 
+	// First HarmonyOS release scope (see docs/ui/界面清单与首发精简范围.md).
+	//
+	// These options either configure a feature the release does not ship or would
+	// let the user point the application at something that is not present in a
+	// packaged build. They are hidden rather than deleted from the .ui so that a
+	// single block restores the upstream dialog and so the .ui stays identical to
+	// upstream (the qt/ directory is a shared hotspot, see the plan section 3.1).
+	//
+	// Hiding a widget in a QFormLayout leaves its label behind, so each label is
+	// hidden together with the field it describes.
+	const QWidget* const RemovedPreferenceWidgets[] =
+	{
+		// Online update check: the release must not reach the network.
+		ui->checkForUpdates,
+		ui->label_10,
+
+		// Fixed library and colour configuration travel with the package.
+		ui->partsLibrary,
+		ui->partsLibraryBrowse,
+		ui->partsArchiveBrowse,
+		ui->label_5,
+		ui->ColorConfigEdit,
+		ui->ColorConfigBrowseButton,
+		ui->label_17,
+
+		// Minifig templates are packaged; no user-supplied path.
+		ui->MinifigSettingsEdit,
+		ui->MinifigSettingsBrowseButton,
+		ui->label_18,
+
+		// External renderers are out of scope.
+		ui->povrayExecutable,
+		ui->povrayExecutableBrowse,
+		ui->povrayLabel,
+		ui->lgeoPath,
+		ui->lgeoPathBrowse,
+		ui->label_9,
+		ui->BlenderAddonSettingsButton,
+		ui->label_39,
+	};
+
+	for (const QWidget* Widget : RemovedPreferenceWidgets)
+	{
+		if (Widget)
+			const_cast<QWidget*>(Widget)->hide();
+	}
+
 	ui->Language->addItem("\u010cesky");
 	ui->Language->addItem("Deutsch");
 	ui->Language->addItem("English");

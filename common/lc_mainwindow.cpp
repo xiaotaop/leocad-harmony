@@ -91,6 +91,11 @@ void lcMainWindow::CreateWidgets()
 	mModelTabWidget->tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
 	setCentralWidget(mModelTabWidget);
 
+	// Must run after the tab widget exists: ApplyFirstReleaseScope() is called
+	// from CreateMenus(), which happens before this widget is constructed.
+	mModelTabWidget->tabBar()->setMovable(false);
+	mModelTabWidget->tabBar()->setContextMenuPolicy(Qt::NoContextMenu);
+
 	connect(mModelTabWidget->tabBar(), &QTabBar::tabCloseRequested, this, &lcMainWindow::ModelTabClosed);
 	connect(mModelTabWidget->tabBar(), &QTabBar::customContextMenuRequested, this, &lcMainWindow::ModelTabContextMenuRequested);
 	connect(mModelTabWidget, &QTabWidget::currentChanged, this, &lcMainWindow::ModelTabChanged);
@@ -102,7 +107,36 @@ void lcMainWindow::CreateWidgets()
 	Settings.beginGroup("MainWindow");
 	resize(QSize(800, 600));
 	move(QPoint(200, 200));
-	restoreGeometry(Settings.value("Geometry").toByteArray());
+
+	// A geometry saved on a different screen setup can restore the window fully
+	// off-screen, which looks like the application failed to start. Only keep a
+	// stored geometry when it still overlaps a screen that exists now.
+	const QByteArray Geometry = Settings.value("Geometry").toByteArray();
+	bool GeometryUsable = false;
+
+	if (!Geometry.isEmpty() && restoreGeometry(Geometry))
+	{
+		GeometryUsable = false;
+
+		for (const QScreen* Screen : QGuiApplication::screens())
+			if (Screen->availableGeometry().intersects(frameGeometry()))
+			{
+				GeometryUsable = true;
+				break;
+			}
+	}
+
+	if (!GeometryUsable)
+	{
+		resize(QSize(800, 600));
+
+		const QScreen* PrimaryScreen = QGuiApplication::primaryScreen();
+		if (PrimaryScreen)
+			move(PrimaryScreen->availableGeometry().center() - rect().center());
+	}
+
+	restoreState(Settings.value("State").toByteArray());
+
 	restoreState(Settings.value("State").toByteArray());
 	mPartSelectionWidget->LoadState(Settings);
 	Settings.endGroup();
@@ -575,6 +609,128 @@ void lcMainWindow::CreateMenus()
 	HelpMenu->addSeparator();
 #endif
 	HelpMenu->addAction(mActions[LC_HELP_ABOUT]);
+
+	ApplyFirstReleaseScope();
+}
+
+// Removes the menu entries for features the first HarmonyOS release does not
+// ship (see docs/LeoCAD_鸿蒙PC首发版_两周分工与技术方案.md, section 1.2).
+//
+// Only the QAction* is taken out of its menu; the action object itself and every
+// dock widget pointer stay alive. That matters: UpdateDockWidgetActions()
+// dereferences mPartsToolBar/mColorsToolBar/mPropertiesToolBar/mTimelineToolBar/
+// mPreviewToolBar unconditionally, so hiding a dock by nulling the pointer would
+// crash the next time the View menu opens.
+//
+// Keeping the removal in one function makes the scope decision reviewable and
+// lets an unreleased build behave exactly like upstream by not calling it.
+void lcMainWindow::ApplyFirstReleaseScope()
+{
+	const lcCommandId RemovedCommands[] =
+	{
+		// Printing and documentation output.
+		LC_FILE_PRINT,
+		LC_FILE_PRINT_PREVIEW,
+		LC_FILE_INSTRUCTIONS,
+		LC_FILE_SAVE_IMAGE,
+
+		// Import/export formats outside the first-release scope.
+		LC_FILE_MERGE,
+		LC_FILE_IMPORT_LDD,
+		LC_FILE_IMPORT_INVENTORY,
+		LC_FILE_EXPORT_3DS,
+		LC_FILE_EXPORT_COLLADA,
+		LC_FILE_EXPORT_HTML,
+		LC_FILE_EXPORT_BRICKLINK,
+		LC_FILE_EXPORT_CSV,
+		LC_FILE_EXPORT_POVRAY,
+		LC_FILE_EXPORT_WAVEFRONT,
+
+		// External renderers.
+		LC_FILE_RENDER_POVRAY,
+		LC_FILE_RENDER_BLENDER,
+		LC_FILE_RENDER_OPEN_IN_BLENDER,
+
+		// Step-level editing and step navigation: the first release has no
+		// instructions or animation workflow.
+		LC_EDIT_PASTE_STEPS,
+		LC_VIEW_TIME_FIRST,
+		LC_VIEW_TIME_PREVIOUS,
+		LC_VIEW_TIME_NEXT,
+		LC_VIEW_TIME_LAST,
+		LC_VIEW_TIME_INSERT_BEFORE,
+		LC_VIEW_TIME_INSERT_AFTER,
+		LC_VIEW_TIME_DELETE,
+		LC_VIEW_TIME_ADD_KEYS,
+		LC_VIEW_FADE_PREVIOUS_STEPS,
+
+		// Find/replace is not reachable in a single-document first release.
+		LC_EDIT_FIND,
+		LC_EDIT_FIND_NEXT,
+		LC_EDIT_FIND_PREVIOUS,
+		LC_EDIT_FIND_ALL,
+		LC_EDIT_REPLACE,
+		LC_EDIT_REPLACE_NEXT,
+		LC_EDIT_REPLACE_ALL,
+
+		// Multi-view layouts.
+		LC_VIEW_SPLIT_HORIZONTAL,
+		LC_VIEW_SPLIT_VERTICAL,
+		LC_VIEW_REMOVE_VIEW,
+		LC_VIEW_RESET_VIEWS,
+
+		// Submodel and animation editing.
+		LC_PIECE_ARRAY,
+		LC_PIECE_MINIFIG_WIZARD,
+		LC_PIECE_REMOVE_KEY_FRAMES,
+		LC_PIECE_EDIT_SELECTED_SUBMODEL,
+		LC_PIECE_EDIT_END_SUBMODEL,
+		LC_PIECE_VIEW_SELECTED_MODEL,
+		LC_PIECE_INLINE_SELECTED_MODELS,
+		LC_PIECE_MOVE_SELECTION_TO_MODEL,
+		LC_MODEL_NEW,
+		LC_MODEL_LIST,
+
+		// Online update check.
+		LC_HELP_UPDATES,
+	};
+
+	for (const lcCommandId Command : RemovedCommands)
+	{
+		QAction* Action = mActions[Command];
+		if (!Action)
+			continue;
+
+		// Remove the action from every menu, menu bar and toolbar it was added
+		// to. The action object itself stays alive so HandleCommand() and the
+		// owned dock widgets keep working.
+		for (QWidget* Widget : QApplication::allWidgets())
+		{
+			if (QMenu* Menu = qobject_cast<QMenu*>(Widget))
+				Menu->removeAction(Action);
+			else if (QMenuBar* MenuBar = qobject_cast<QMenuBar*>(Widget))
+				MenuBar->removeAction(Action);
+		}
+
+		for (QToolBar* ToolBar : findChildren<QToolBar*>())
+			ToolBar->removeAction(Action);
+
+		Action->setVisible(false);
+		Action->setEnabled(false);
+	}
+
+	// A trailing separator is left behind after removals; drop any at the end of
+	// each menu so no menu shows a dangling divider.
+	for (QMenu* Menu : findChildren<QMenu*>())
+	{
+		const QList<QAction*> Actions = Menu->actions();
+		for (int Index = Actions.size() - 1; Index >= 0; --Index)
+		{
+			if (!Actions[Index]->isSeparator())
+				break;
+			Menu->removeAction(Actions[Index]);
+		}
+	}
 }
 
 void lcMainWindow::CreateToolBars()
@@ -2208,7 +2364,7 @@ void lcMainWindow::UpdateColor()
 	Pixmap.fill(QColor::fromRgbF(gColorList[mColorIndex].Value[0], gColorList[mColorIndex].Value[1], gColorList[mColorIndex].Value[2]));
 
 	mColorButton->setIcon(Pixmap);
-	mColorButton->setText(QString("  ") + gColorList[mColorIndex].Name);
+	mColorButton->setText(QString("  ") + lcGetColorDisplayName(mColorIndex));
 
 	mColorList->SetCurrentColor(mColorIndex);
 }

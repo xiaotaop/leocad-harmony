@@ -298,6 +298,7 @@ protected:
 	void CreateMenus();
 	void CreateToolBars();
 	void CreateStatusBar();
+	void ApplyFirstReleaseScope();
 	lcView* CreateView(lcModel* Model);
 	void SetActiveView(lcView* ActiveView);
 	void ToggleDockWidget(QWidget* DockWidget);

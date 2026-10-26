@@ -74,7 +74,7 @@ lcPropertiesDialog::lcPropertiesDialog(QWidget* Parent, lcPropertiesDialogOption
 		if (ColorsUsed[ColorIndex])
 		{
 			ColorColumns[ColorIndex] = ColorCount++;
-			HorizontalLabels.append(gColorList[ColorIndex].Name);
+			HorizontalLabels.append(lcGetColorDisplayName(ColorIndex));
 		}
 	}
 

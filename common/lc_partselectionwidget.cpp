@@ -924,6 +924,23 @@ lcPartSelectionWidget::lcPartSelectionWidget(QWidget* Parent)
 	mPartsWidget = new lcPartSelectionListView(PartsGroupWidget, this);
 	PartsLayout->addWidget(mPartsWidget);
 
+	// Shown instead of an empty list so the user can tell "no parts here" from
+	// "the parts library did not load".
+	//
+	// It overlays the list view rather than joining the vertical layout: adding
+	// it to PartsLayout would shrink the list whenever the message appeared, and
+	// the list would still be visible underneath.
+	//
+	// The parent must be viewport(), not the view itself. QListView derives from
+	// QAbstractScrollArea, so a child of the view is painted outside the scrolling
+	// content area: it would not cover the rows and would not follow scrolling.
+	mEmptyStateLabel = new QLabel(mPartsWidget->viewport());
+	mEmptyStateLabel->setAlignment(Qt::AlignCenter);
+	mEmptyStateLabel->setWordWrap(true);
+	mEmptyStateLabel->setMargin(12);
+	mEmptyStateLabel->setAutoFillBackground(true);
+	mEmptyStateLabel->hide();
+
 	QHBoxLayout* Layout = new QHBoxLayout(this);
 	Layout->setContentsMargins(0, 0, 0, 0);
 	Layout->addWidget(mSplitter);
@@ -1055,6 +1072,13 @@ void lcPartSelectionWidget::resizeEvent(QResizeEvent* Event)
 {
 	QDockWidget* DockWidget = qobject_cast<QDockWidget*>(parent());
 
+	// The empty-state overlay is a child of the list view, so it has to be told
+	// the new area explicitly; a child widget does not follow its parent's size
+	// on its own.
+	if (mEmptyStateLabel && mPartsWidget)
+		mEmptyStateLabel->setGeometry(mPartsWidget->viewport()->rect());
+
+
 	if (DockWidget && DockWidget->isFloating())
 	{
 		if (Event->size().width() > Event->size().height())
@@ -1120,6 +1144,8 @@ void lcPartSelectionWidget::FilterChanged(const QString& Text)
 	}
 
 	mPartsWidget->GetListModel()->SetFilter(Text);
+
+	UpdateEmptyState();
 }
 
 void lcPartSelectionWidget::FilterCategoriesTriggered()
@@ -1149,6 +1175,8 @@ void lcPartSelectionWidget::CategoryChanged(QTreeWidgetItem* Current, QTreeWidge
 	int Index = Current->data(0, static_cast<int>(lcPartCategoryRole::Index)).toInt();
 
 	mPartsWidget->SetCategory(static_cast<lcPartCategoryType>(Type), Index);
+
+	UpdateEmptyState();
 }
 
 void lcPartSelectionWidget::PartViewSelectionChanged(const QModelIndex& Current, const QModelIndex& Previous)
@@ -1460,7 +1488,7 @@ void lcPartSelectionWidget::UpdateCategories()
 
 	for (int CategoryIdx = 0; CategoryIdx < static_cast<int>(gCategories.size()); CategoryIdx++)
 	{
-		QTreeWidgetItem* CategoryItem = new QTreeWidgetItem(mCategoriesWidget, QStringList(gCategories[CategoryIdx].Name));
+		QTreeWidgetItem* CategoryItem = new QTreeWidgetItem(mCategoriesWidget, QStringList(lcGetCategoryDisplayName(gCategories[CategoryIdx].Name)));
 		CategoryItem->setData(0, static_cast<int>(lcPartCategoryRole::Type), static_cast<int>(lcPartCategoryType::Category));
 		CategoryItem->setData(0, static_cast<int>(lcPartCategoryRole::Index), CategoryIdx);
 
@@ -1478,4 +1506,61 @@ void lcPartSelectionWidget::UpdateModels()
 
 	if (CurrentItem && CurrentItem->data(0, static_cast<int>(lcPartCategoryRole::Type)) == static_cast<int>(lcPartCategoryType::Submodels))
 		mPartsWidget->SetCategory(lcPartCategoryType::Submodels, 0);
+}
+
+
+// Which message the parts list needs, if any.
+//
+// Three situations look identical to the user (an empty list) but need different
+// wording: the library never loaded, the library loaded but this category is
+// empty, and the library has parts but the current filter hides them. Telling
+// them apart is what turns "the app is broken" into "adjust the search".
+void lcPartSelectionWidget::UpdateEmptyState()
+{
+	if (!mEmptyStateLabel)
+		return;
+
+	// Keep the overlay exactly on top of the visible rows, both when it appears
+	// and when the panel has been resized since the last update.
+	mEmptyStateLabel->setGeometry(mPartsWidget->viewport()->rect());
+
+	lcPartSelectionListModel* ListModel = mPartsWidget->GetListModel();
+
+	if (ListModel->rowCount() == 0)
+	{
+		// The list model has no rows at all: either the library is missing or
+		// the selected category genuinely has nothing in it.
+		const bool LibraryLoaded = lcGetPiecesLibrary()->mPieces.size() > 0;
+
+		mEmptyStateLabel->setText(LibraryLoaded
+			? tr("No parts in this category.")
+			: tr("No parts library was found. Reinstall the application, or check the application data folder."));
+		mEmptyStateLabel->show();
+		return;
+	}
+
+	if (VisiblePartCount() == 0)
+	{
+		mEmptyStateLabel->setText(mFilterWidget->text().isEmpty()
+			? tr("No parts available.")
+			: tr("No parts match this search. Try a different keyword."));
+		mEmptyStateLabel->show();
+		return;
+	}
+
+	mEmptyStateLabel->hide();
+}
+
+int lcPartSelectionWidget::VisiblePartCount() const
+{
+	// Filtered-out rows are hidden rather than removed, so rowCount() alone
+	// cannot answer "did the filter hide everything".
+	lcPartSelectionListModel* ListModel = mPartsWidget->GetListModel();
+	int Visible = 0;
+
+	for (int Row = 0; Row < ListModel->rowCount(); Row++)
+		if (!mPartsWidget->isRowHidden(Row))
+			Visible++;
+
+	return Visible;
 }
