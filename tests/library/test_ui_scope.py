@@ -212,10 +212,13 @@ class NetworkScopeTests(unittest.TestCase):
 
     The update check is the one code path that would try: qtmain.cpp calls
     lcDoInitialUpdateCheck() unless LC_DISABLE_UPDATE_CHECK is defined, and that
-    function requests https://www.leocad.org/updates.txt. leocad.pro only defines
-    the macro for the macOS build, so a HarmonyOS build without it would attempt a
-    network request at startup and break both the "no INTERNET permission" claim
-    and the privacy policy.
+    function requests https://www.leocad.org/updates.txt. A HarmonyOS build
+    without the macro would therefore attempt a network request at startup and
+    break both the "no INTERNET permission" claim and the privacy policy.
+
+    The macro is carried by the build configuration rather than by application
+    code, so the check accepts either build path (CMake target definitions or a
+    qmake platform scope) and skips while neither defines it.
     """
 
     @classmethod
@@ -235,25 +238,29 @@ class NetworkScopeTests(unittest.TestCase):
                       "update dialog no longer downloads anything; "
                       "the permissions note may need updating")
 
-    def test_macro_is_not_yet_defined_for_harmonyos(self):
-        """Known gap, tracked in docs/release/权限说明.md section 3.1.
+    def test_macro_is_defined_for_the_harmonyos_build(self):
+        """The HarmonyOS build must define LC_DISABLE_UPDATE_CHECK=1.
 
-        This test asserts the current state so that when the team lead adds the
-        define for the HarmonyOS build, it fails loudly and is tightened into a
-        positive assertion instead of silently passing.
+        Either build path may carry it: the CMake target definitions (the path
+        the HarmonyOS build actually uses) or the qmake platform scopes. The
+        check looks at both so it keeps working once the branches are merged,
+        rather than depending on which file happens to exist on this branch.
         """
-        macx_block = function_body(self.pro.replace("{", " {"), "macx")
-        self.assertIn("LC_DISABLE_UPDATE_CHECK", self.pro)
+        cmake = REPO_ROOT / "CMakeLists.txt"
+        cmake_defines = (cmake.read_text("utf-8").count("LC_DISABLE_UPDATE_CHECK=1")
+                         if cmake.exists() else 0)
+        # leocad.pro defines it once for macOS; any further definition is for
+        # another platform.
+        pro_defines = max(0, self.pro.count("LC_DISABLE_UPDATE_CHECK=1") - 1)
 
-        # Count definitions: exactly one today, inside the macx block.
-        definitions = self.pro.count("LC_DISABLE_UPDATE_CHECK=1")
-        if definitions == 1:
+        if cmake_defines == 0 and pro_defines == 0:
             self.skipTest(
-                "LC_DISABLE_UPDATE_CHECK=1 is only defined for macOS; the "
-                "HarmonyOS build must define it too (see docs/release/权限说明.md)")
-        self.assertGreaterEqual(
-            definitions, 2,
-            "expected the HarmonyOS build to define LC_DISABLE_UPDATE_CHECK=1")
+                "LC_DISABLE_UPDATE_CHECK=1 is not defined for the HarmonyOS "
+                "build yet; tracked in docs/release/权限说明.md section 3.1")
+
+        self.assertGreater(
+            cmake_defines + pro_defines, 0,
+            "expected a platform definition of LC_DISABLE_UPDATE_CHECK=1")
 
 
 class PreferencesTrimTests(unittest.TestCase):

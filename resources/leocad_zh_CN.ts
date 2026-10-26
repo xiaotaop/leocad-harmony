@@ -4931,20 +4931,12 @@ Anisotropic: %5
 </translation>
     </message>
     <message>
-        <source>LeoCAD could not find a compatible Parts Library so only a small number of parts will be available.
-
-Please visit https://www.leocad.org for information on how to download and install a library.</source>
-        <translation>LeoCAD 未找到兼容的零件库，因此只能使用少量零件。
-
-有关下载和安装零件库的信息，请访问 https://www.leocad.org。</translation>
+        <source>The built-in parts library could not be loaded, so only a limited set of parts is available. Try reinstalling the application.</source>
+        <translation>内置零件库加载失败，仅能使用少量零件。请尝试重新安装应用。</translation>
     </message>
     <message>
-        <source>LeoCAD could not load Parts Library.
-
-Please visit https://www.leocad.org for information on how to download and install a library.</source>
-        <translation>LeoCAD 无法加载零件库。
-
-有关下载和安装零件库的信息，请访问 https://www.leocad.org。</translation>
+        <source>The parts library could not be loaded. Try reinstalling the application.</source>
+        <translation>零件库加载失败。请尝试重新安装应用。</translation>
     </message>
     <message>
         <source>LeoCAD</source>

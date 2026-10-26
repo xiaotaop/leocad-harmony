@@ -2,6 +2,7 @@
 #include "lc_application.h"
 #include "lc_updatedialog.h"
 #include "lc_profile.h"
+#include "lc_library.h"
 #include "pieceinf.h"
 #include <QApplication>
 #include <locale.h>
@@ -204,6 +205,14 @@ int main(int argc, char *argv[])
 #ifdef LC_LDRAW_LIBRARY_PATH
 	LibraryPaths += qMakePair(QString::fromLatin1(LC_LDRAW_LIBRARY_PATH), false);
 #endif
+
+	// The parts library that ships inside the application package. Placed after
+	// LC_LDRAW_LIBRARY_PATH so an explicitly configured path still takes
+	// precedence, and before Initialize() consumes the list. Marked official so
+	// the piece count is recorded (lcPiecesLibrary::SetOfficialPieces()).
+	const QString BundledLibrary = lcPiecesLibrary::FindBundledLibraryArchive();
+	if (!BundledLibrary.isEmpty())
+		LibraryPaths += qMakePair(BundledLibrary, true);
 
 	setlocale(LC_NUMERIC, "C");
 
