@@ -1,0 +1,55 @@
+# English colour name as stored in ldconfig.ldr -> Simplified Chinese.
+# Display only: the stored lcColor::Name and SafeName are never translated
+# (see lc_colors.h for why). One tab separates the two columns.
+Black	黑色
+Blue	蓝色
+Green	绿色
+Dark Turquoise	深青绿
+Red	红色
+Dark Pink	深粉红
+Brown	棕色
+Light Grey	浅灰
+Dark Grey	深灰
+Light Blue	浅蓝
+Bright Green	亮绿
+Light Turquoise	浅青绿
+Salmon	鲑鱼红
+Pink	粉红
+Yellow	黄色
+White	白色
+Light Green	浅绿
+Light Yellow	浅黄
+Tan	米色
+Light Violet	浅紫
+Purple	紫色
+Light Purple	浅紫罗兰
+Orange	橙色
+Magenta	洋红
+Lime	青柠绿
+Dark Tan	深米色
+Bright Pink	亮粉红
+Medium Blue	中蓝
+Nougat	肉色
+Sand Blue	沙蓝
+Sand Green	沙绿
+Sand Red	沙红
+Dark Red	深红
+Dark Blue	深蓝
+Dark Green	深绿
+Trans Clear	透明
+Trans Black	透明黑
+Trans Red	透明红
+Trans Blue	透明蓝
+Trans Green	透明绿
+Trans Yellow	透明黄
+Trans Orange	透明橙
+Trans Dark Blue	透明深蓝
+Trans Light Blue	透明浅蓝
+Trans Neon Green	透明荧光绿
+Trans Neon Orange	透明荧光橙
+Chrome Silver	镀铬银
+Chrome Gold	镀铬金
+Main Color	主色
+Edge Color	边缘色
+No Color	无色
+Stud Cylinder Color	凸点柱色

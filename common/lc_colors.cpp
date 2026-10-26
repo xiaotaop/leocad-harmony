@@ -441,12 +441,12 @@ QString lcGetColorToolTip(int ColorIndex)
 	if (Color->Code != LC_COLOR_NOCOLOR)
 	{
 		const char* format = "<table><tr><td style=\"vertical-align:middle\"><img src=\"data:image/png;base64,%1\"/></td><td>%2 (%3)</td></tr></table>";
-		Text = QString(format).arg(QString(Buffer.data().toBase64()), gColorList[ColorIndex].Name, QString::number(gColorList[ColorIndex].Code));
+		Text = QString(format).arg(QString(Buffer.data().toBase64()), lcGetColorDisplayName(ColorIndex), QString::number(gColorList[ColorIndex].Code));
 	}
 	else
 	{
 		const char* format = "<table><tr><td style=\"vertical-align:middle\"><img src=\"data:image/png;base64,%1\"/></td><td>%2</td></tr></table>";
-		Text = QString(format).arg(QString(Buffer.data().toBase64()), gColorList[ColorIndex].Name);
+		Text = QString(format).arg(QString(Buffer.data().toBase64()), lcGetColorDisplayName(ColorIndex));
 	}
 
 	return Text;
@@ -492,4 +492,84 @@ void lcDrawNoColorRect(QPainter& Painter, const QRect& Rect)
 
 		Column++;
 	}
+}
+
+QString lcGetColorDisplayName(int ColorIndex)
+{
+	if (ColorIndex < 0 || ColorIndex >= (int)gColorList.size())
+		return QString();
+
+	// The stored name is English on purpose (see lc_colors.h). Only the value
+	// returned here is translated, so exports and the fixed-size buffers stay
+	// untouched.
+	const QString EnglishName = QString::fromUtf8(gColorList[ColorIndex].Name);
+
+	if (EnglishName.isEmpty())
+		return EnglishName;
+
+	const QString Translated = QCoreApplication::translate("Colors", gColorList[ColorIndex].Name);
+
+	// QCoreApplication::translate() returns the input when there is no
+	// translation, which is the fallback we want for custom colour codes.
+	return Translated;
+}
+
+// Extraction source for the colour names that lcGetColorDisplayName()
+// translates at runtime. lupdate cannot see a string built at runtime, so the
+// English names are listed here (generated from resources/color_names_zh.tsv)
+// purely so they appear in the translation files.
+void lcTranslateBuiltInColorNames()
+{
+	QT_TRANSLATE_NOOP("Colors", "Black");
+	QT_TRANSLATE_NOOP("Colors", "Blue");
+	QT_TRANSLATE_NOOP("Colors", "Green");
+	QT_TRANSLATE_NOOP("Colors", "Dark Turquoise");
+	QT_TRANSLATE_NOOP("Colors", "Red");
+	QT_TRANSLATE_NOOP("Colors", "Dark Pink");
+	QT_TRANSLATE_NOOP("Colors", "Brown");
+	QT_TRANSLATE_NOOP("Colors", "Light Grey");
+	QT_TRANSLATE_NOOP("Colors", "Dark Grey");
+	QT_TRANSLATE_NOOP("Colors", "Light Blue");
+	QT_TRANSLATE_NOOP("Colors", "Bright Green");
+	QT_TRANSLATE_NOOP("Colors", "Light Turquoise");
+	QT_TRANSLATE_NOOP("Colors", "Salmon");
+	QT_TRANSLATE_NOOP("Colors", "Pink");
+	QT_TRANSLATE_NOOP("Colors", "Yellow");
+	QT_TRANSLATE_NOOP("Colors", "White");
+	QT_TRANSLATE_NOOP("Colors", "Light Green");
+	QT_TRANSLATE_NOOP("Colors", "Light Yellow");
+	QT_TRANSLATE_NOOP("Colors", "Tan");
+	QT_TRANSLATE_NOOP("Colors", "Light Violet");
+	QT_TRANSLATE_NOOP("Colors", "Purple");
+	QT_TRANSLATE_NOOP("Colors", "Light Purple");
+	QT_TRANSLATE_NOOP("Colors", "Orange");
+	QT_TRANSLATE_NOOP("Colors", "Magenta");
+	QT_TRANSLATE_NOOP("Colors", "Lime");
+	QT_TRANSLATE_NOOP("Colors", "Dark Tan");
+	QT_TRANSLATE_NOOP("Colors", "Bright Pink");
+	QT_TRANSLATE_NOOP("Colors", "Medium Blue");
+	QT_TRANSLATE_NOOP("Colors", "Nougat");
+	QT_TRANSLATE_NOOP("Colors", "Sand Blue");
+	QT_TRANSLATE_NOOP("Colors", "Sand Green");
+	QT_TRANSLATE_NOOP("Colors", "Sand Red");
+	QT_TRANSLATE_NOOP("Colors", "Dark Red");
+	QT_TRANSLATE_NOOP("Colors", "Dark Blue");
+	QT_TRANSLATE_NOOP("Colors", "Dark Green");
+	QT_TRANSLATE_NOOP("Colors", "Trans Clear");
+	QT_TRANSLATE_NOOP("Colors", "Trans Black");
+	QT_TRANSLATE_NOOP("Colors", "Trans Red");
+	QT_TRANSLATE_NOOP("Colors", "Trans Blue");
+	QT_TRANSLATE_NOOP("Colors", "Trans Green");
+	QT_TRANSLATE_NOOP("Colors", "Trans Yellow");
+	QT_TRANSLATE_NOOP("Colors", "Trans Orange");
+	QT_TRANSLATE_NOOP("Colors", "Trans Dark Blue");
+	QT_TRANSLATE_NOOP("Colors", "Trans Light Blue");
+	QT_TRANSLATE_NOOP("Colors", "Trans Neon Green");
+	QT_TRANSLATE_NOOP("Colors", "Trans Neon Orange");
+	QT_TRANSLATE_NOOP("Colors", "Chrome Silver");
+	QT_TRANSLATE_NOOP("Colors", "Chrome Gold");
+	QT_TRANSLATE_NOOP("Colors", "Main Color");
+	QT_TRANSLATE_NOOP("Colors", "Edge Color");
+	QT_TRANSLATE_NOOP("Colors", "No Color");
+	QT_TRANSLATE_NOOP("Colors", "Stud Cylinder Color");
 }

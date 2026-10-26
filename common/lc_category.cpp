@@ -288,3 +288,54 @@ bool lcMatchCategory(const char* PieceName, const char* Expression)
 
 	return true;
 }
+
+// Category names are stored in English (see lc_category.h) and translated only
+// when displayed. The QT_TRANSLATE_NOOP entries below are the extraction source
+// for the translation files: they must list every built-in name in
+// lcResetCategories(), otherwise a category would silently stay English.
+void lcTranslateBuiltInCategoryNames()
+{
+	QT_TRANSLATE_NOOP("Categories", "Animal");
+	QT_TRANSLATE_NOOP("Categories", "Antenna");
+	QT_TRANSLATE_NOOP("Categories", "Arch");
+	QT_TRANSLATE_NOOP("Categories", "Bar");
+	QT_TRANSLATE_NOOP("Categories", "Baseplate");
+	QT_TRANSLATE_NOOP("Categories", "Boat");
+	QT_TRANSLATE_NOOP("Categories", "Brick");
+	QT_TRANSLATE_NOOP("Categories", "Container");
+	QT_TRANSLATE_NOOP("Categories", "Door and Window");
+	QT_TRANSLATE_NOOP("Categories", "Electric");
+	QT_TRANSLATE_NOOP("Categories", "Hinge and Bracket");
+	QT_TRANSLATE_NOOP("Categories", "Hose");
+	QT_TRANSLATE_NOOP("Categories", "Minifig");
+	QT_TRANSLATE_NOOP("Categories", "Miscellaneous");
+	QT_TRANSLATE_NOOP("Categories", "Other");
+	QT_TRANSLATE_NOOP("Categories", "Panel");
+	QT_TRANSLATE_NOOP("Categories", "Plant");
+	QT_TRANSLATE_NOOP("Categories", "Plate");
+	QT_TRANSLATE_NOOP("Categories", "Round");
+	QT_TRANSLATE_NOOP("Categories", "Sign and Flag");
+	QT_TRANSLATE_NOOP("Categories", "Slope");
+	QT_TRANSLATE_NOOP("Categories", "Sticker");
+	QT_TRANSLATE_NOOP("Categories", "Support");
+	QT_TRANSLATE_NOOP("Categories", "Technic");
+	QT_TRANSLATE_NOOP("Categories", "Tile");
+	QT_TRANSLATE_NOOP("Categories", "Train");
+	QT_TRANSLATE_NOOP("Categories", "Tyre and Wheel");
+	QT_TRANSLATE_NOOP("Categories", "Vehicle");
+	QT_TRANSLATE_NOOP("Categories", "Windscreen");
+	QT_TRANSLATE_NOOP("Categories", "Wedge");
+	QT_TRANSLATE_NOOP("Categories", "Wing");
+}
+
+QString lcGetCategoryDisplayName(const QString& CategoryName)
+{
+	if (CategoryName.isEmpty())
+		return CategoryName;
+
+	// QCoreApplication::translate() returns the input unchanged when no
+	// translation exists, which is exactly the desired fallback for categories
+	// the user created or renamed.
+	return QCoreApplication::translate("Categories",
+	                                   CategoryName.toUtf8().constData());
+}

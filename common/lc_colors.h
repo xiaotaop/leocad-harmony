@@ -77,4 +77,21 @@ inline bool lcIsColorRubber(size_t ColorIndex)
 }
 
 QString lcGetColorToolTip(int ColorIndex);
+
+// Localized colour name, for display only.
+//
+// This must never be written back into lcColor::Name or lcColor::SafeName:
+//   * SafeName is used as an identifier by the MTL, COLLADA, POV-Ray and CSV
+//     exporters (common/project.cpp), so CJK characters there would break the
+//     exported files;
+//   * Name is a fixed char[LC_MAX_COLOR_NAME] buffer, so a long translation
+//     would be truncated mid-character and show as garbage.
+// The stored names therefore stay English and are translated here.
+//
+// Falls back to the English name for colours without a translation.
+QString lcGetColorDisplayName(int ColorIndex);
+
+// Extraction source for lcGetColorDisplayName()'s look-up table.
+void lcTranslateBuiltInColorNames();
+
 void lcDrawNoColorRect(QPainter& Painter, const QRect& Rect);
