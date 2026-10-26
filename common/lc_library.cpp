@@ -249,6 +249,40 @@ lcTexture* lcPiecesLibrary::FindTexture(const char* TextureName, Project* Curren
 	return nullptr;
 }
 
+QStringList lcPiecesLibrary::GetBundledLibraryArchiveCandidates()
+{
+	// Ordered from most specific to most generic. Paths that come from outside
+	// the build (a user preference or LC_LDRAW_LIB) are handled by the caller and
+	// take precedence over everything here.
+	const QString RelativePath = QLatin1String("ldraw-lite/library-lite.zip");
+	QStringList Candidates;
+
+	// 1. Application data directory: where the platform layer expands the
+	//    packaged library on first run. Writable, and a new version there is
+	//    picked up without touching the application package.
+	const QString DataPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+	if (!DataPath.isEmpty())
+		Candidates += QDir(DataPath).absoluteFilePath(RelativePath);
+
+	// 2. Next to the binary: the desktop build and simple unpacked layouts.
+	Candidates += QDir(QCoreApplication::applicationDirPath()).absoluteFilePath(RelativePath);
+
+	// 3. Compiled into the binary. Only a few megabytes, avoids a first-run
+	//    unpack step, and still works when both directories above are read-only.
+	Candidates += QLatin1String(":/assets/ldraw-lite/library-lite.zip");
+
+	return Candidates;
+}
+
+QString lcPiecesLibrary::FindBundledLibraryArchive()
+{
+	for (const QString& Candidate : GetBundledLibraryArchiveCandidates())
+		if (QFileInfo::exists(Candidate))
+			return Candidate;
+
+	return QString();
+}
+
 bool lcPiecesLibrary::Load(const QString& LibraryPath, bool ShowProgress)
 {
 	Unload();

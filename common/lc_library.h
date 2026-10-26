@@ -140,6 +140,20 @@ public:
 	void RemoveTemporaryPieces();
 	void RemovePiece(PieceInfo* Info);
 
+	// Location of the parts library shipped inside the application package.
+	// Returns an empty string when no bundled library can be found.
+	//
+	// The curated library is deployed differently per target: HarmonyOS expands
+	// it into the application data directory on first run, desktop builds keep
+	// it next to the binary, and the compiled-in copy acts as a last resort. The
+	// caller only needs a path it can hand to Load().
+	static QString FindBundledLibraryArchive();
+
+	// Where FindBundledLibraryArchive() would look, in priority order. Exposed so
+	// diagnostics and the device-test procedure can report why a library was not
+	// picked up instead of guessing.
+	static QStringList GetBundledLibraryArchiveCandidates();
+
 	void RenamePiece(PieceInfo* Info, const char* NewName);
 	PieceInfo* FindPiece(const char* PieceName, Project* Project, bool CreatePlaceholder, bool SearchProjectFolder);
 	void LoadPieceInfo(PieceInfo* Info, bool Wait, bool Priority);
