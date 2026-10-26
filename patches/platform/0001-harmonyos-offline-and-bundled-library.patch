@@ -19,32 +19,6 @@ index 8bad68d5..27869934 100644
  
  		if (gMainWindow)
  			QMessageBox::information(gMainWindow, tr("LeoCAD"), Message);
-diff --git a/leocad.pro b/leocad.pro
-index c4a8f215..e7a26bac 100644
---- a/leocad.pro
-+++ b/leocad.pro
-@@ -171,6 +171,21 @@ ios {
- 	DEFINES += LC_DISABLE_BLENDER=1
- }
- 
-+# Qt 6.12 ships mkspecs/ohos-clang, whose qmake.conf sets QMAKE_PLATFORM = ohos,
-+# so "ohos" is the scope name qmake matches for HarmonyOS builds.
-+ohos {
-+	# The first release is fully offline and does not request the INTERNET
-+	# permission. Without this define, lcDoInitialUpdateCheck() (qt/qtmain.cpp)
-+	# requests https://www.leocad.org/updates.txt on startup, which would break
-+	# that claim and show a network error on a device with no connectivity.
-+	DEFINES += LC_DISABLE_UPDATE_CHECK=1
-+
-+	# External rendering and the render dialog are out of first-release scope;
-+	# the menu entries are removed by lcMainWindow::ApplyFirstReleaseScope().
-+	DEFINES += LC_DISABLE_RENDER_DIALOG=1
-+	DEFINES += LC_DISABLE_BLENDER=1
-+}
-+
- SOURCES += \
- 	common/camera.cpp \
- 	common/group.cpp \
 diff --git a/qt/qtmain.cpp b/qt/qtmain.cpp
 index ace3239e..debca8d4 100644
 --- a/qt/qtmain.cpp

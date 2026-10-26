@@ -1,7 +1,7 @@
 # 补丁：鸿蒙离线化与内置零件库接入
 
 > 提交者：成员 C（作为修改建议）
-> 目标文件：`leocad.pro`、`qt/qtmain.cpp`、`common/lc_application.cpp`
+> 目标文件：`qt/qtmain.cpp`、`common/lc_application.cpp`、`resources/leocad_zh_CN.ts`
 > 归属依据：分工文档 §3.1 —— 这些文件由组长维护，其他成员**通过小型独立 PR 提交修改建议**
 > 补丁文件：`patches/platform/0001-harmonyos-offline-and-bundled-library.patch`
 
@@ -16,28 +16,42 @@
 同一节又要求「其他人通过小型独立 PR 提交修改建议」。因此本目录存放可直接应用的补丁，
 由组长复核后合入。成员 C 不直接改这三个文件。
 
-## 2. 补丁包含的三项
+## 2. 补丁内容
 
-### 2.1 【P0】`leocad.pro`：新增 `ohos` 构建 scope
+> **重要**：其中「`LC_DISABLE_UPDATE_CHECK`」一项经核实组长已在 CMakeLists.txt 完成，
+> 补丁不再包含（见 §2.1）。补丁实际包含 2 处代码改动 + 1 处译文同步。
 
-**问题**：`LC_DISABLE_UPDATE_CHECK` 目前只在 `macx` 段定义（`leocad.pro:166`）。
-鸿蒙构建不定义该宏时，`qt/qtmain.cpp:222` 会调用 `lcDoInitialUpdateCheck()`，
-后者请求 `https://www.leocad.org/updates.txt`（`common/lc_updatedialog.cpp:42`）。
+### 2.1 【已完成，补丁不再包含】`LC_DISABLE_UPDATE_CHECK`
 
-**后果**：
-- 违反「首发版不申请网络权限」
-- 无网络设备上弹出联网错误
-- 与 `docs/release/隐私政策.md` §2「不发起网络请求」直接矛盾
+**状态更正（2026-10-26，核实组长分支后）**：组长已在
+`feature/leader-platform` 的 `CMakeLists.txt` 中无条件定义：
 
-**做法**：新增 `ohos` scope，定义 `LC_DISABLE_UPDATE_CHECK=1`，
-同时定义 `LC_DISABLE_RENDER_DIALOG=1`、`LC_DISABLE_BLENDER=1`
-（外部渲染不在首发范围，上游 `ios` 段也是这么处理的）。
+```cmake
+target_compile_definitions(leocad PRIVATE
+    LC_DISABLE_UPDATE_CHECK=1
+    LC_DISABLE_RENDER_DIALOG=1
+    LC_DISABLE_BLENDER=1
+)
+```
 
-**为什么 scope 名是 `ohos`**：Qt 6.12 自带 `mkspecs/ohos-clang/qmake.conf`，
-其中 `QMAKE_PLATFORM = ohos`，qmake 会把该值注册为 scope 名。
+因此本补丁**不再包含** `leocad.pro` 的改动——那会变成重复定义。
+原先准备的 `ohos` qmake scope 仅在用 qmake 构建鸿蒙版时才有意义，
+而当前鸿蒙构建走 CMake，属冗余。
 
-**已验证**：桌面构建下 `ohos` 块不生效（`updates.txt` 字符串仍在二进制中，
-`-DLC_DISABLE_UPDATE_CHECK=1` 未出现在 Makefile），确认不会误伤桌面版。
+**需要组长确认的一点**：这三个宏目前是**无条件**定义的，
+意味着桌面 CMake 构建也会关闭更新检查。若本意只针对鸿蒙，可改为：
+
+```cmake
+if(HARMONYOS)
+    target_compile_definitions(leocad PRIVATE
+        LC_DISABLE_UPDATE_CHECK=1
+        LC_DISABLE_RENDER_DIALOG=1
+        LC_DISABLE_BLENDER=1
+    )
+endif()
+```
+
+桌面版是否保留更新检查属产品决策，成员 C 不做判断，仅提示差异。
 
 ### 2.2 【P0】`qt/qtmain.cpp`：接入内置零件库
 
@@ -164,10 +178,12 @@ git apply -R patches/platform/0001-harmonyos-offline-and-bundled-library.patch
 
 | 文件 | 改动 | 归属 |
 |---|---|---|
-| `leocad.pro` | 新增 `ohos` scope，定义 3 个宏 | 组长 |
 | `qt/qtmain.cpp` | `#include "lc_library.h"`；注册内置库到 `LibraryPaths` | 组长 |
 | `common/lc_application.cpp` | 替换两处零件库失败文案 | 组长 |
 | `resources/leocad_zh_CN.ts` | 同步两条新文案的中文译文 | 成员 C |
+
+原先准备的 `leocad.pro` `ohos` scope 已移除：组长在 `CMakeLists.txt` 中
+无条件定义了同样的宏，保留会造成重复（见 §2.1）。
 
 `resources/leocad_zh_CN.ts` 一并放进补丁是必要的：新文案只在源码改动后存在，
 若译文单独留在成员 C 的分支，会造成 ts 与源码不一致（`check_translations.py`
@@ -175,3 +191,17 @@ git apply -R patches/platform/0001-harmonyos-offline-and-bundled-library.patch
 
 `scripts/l10n/fill_zh_cn.py` 中的对应译文条目已在成员 C 分支单独提交，
 用于后续重新生成 ts 时保持幂等。
+
+## 9. 与其他分支的集成情况（已实测）
+
+| 检查 | 结果 |
+|---|---|
+| 补丁应用到 `feature/c-ui-library`（HEAD） | ✅ 干净 |
+| `feature/leader-platform` 合并 `feature/c-ui-library` | ✅ 无冲突 |
+| 补丁应用到上述合并结果 | ✅ 干净 |
+| 合并后的校验套件 | `RESULT: PASSED` |
+| 组长 CMake 的 qrc 正则能否识别精简库条目 | ✅ 能（`alias` 与 `path` 均正确解析） |
+
+**应用顺序**：若先合并 `feature/c-ui-library` 再应用本补丁，`ts` 部分可干净应用；
+直接应用到未合并的 `feature/leader-platform` 时，`ts` 一节会因基线不同而冲突
+（该分支的 ts 尚未重新生成）。因此建议：**先合并成员 C 分支，再应用补丁**。
