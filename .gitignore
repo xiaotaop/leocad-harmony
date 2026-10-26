@@ -51,3 +51,11 @@ build-profile.local.json5
 *.p7b
 *.cer
 *.p12
+
+# Local desktop verification environment (Member C workflow)
+.devtools/
+build/desktop/
+
+# Python bytecode from local checks
+__pycache__/
+*.pyc
