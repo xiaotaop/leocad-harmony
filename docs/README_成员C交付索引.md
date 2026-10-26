@@ -17,6 +17,7 @@
 | 颜色中文 | 显示层翻译、不污染导出 | `lcGetColorDisplayName()` + `resources/color_names_zh.tsv` | 已实现 |
 | 测试 | 库清单检查、界面范围、偏好设置裁剪 | `tests/library/`（66 项） | 全绿 |
 | 发布材料 | 商店/隐私/权限/第三方/源码 | `docs/release/`（6 份） | 初稿完成 |
+| 组长交接 | 离线化与库接入 | `patches/platform/0001-*.patch` | 已出补丁，可直接 `git apply` |
 | 质量材料 | 测试矩阵、已知问题 | `docs/testing/`、`docs/release/已知问题.md` | 完成 |
 
 ## 2. 代码改动清单
@@ -74,9 +75,17 @@
 scripts/ci/run_library_checks.sh
 ```
 
-## 5. 需组长合入的 4 项改动
+## 5. 需组长合入的改动
 
-成员 C 只提供建议，不直接修改这些文件。
+**已整理为可直接应用的补丁**：`patches/platform/0001-harmonyos-offline-and-bundled-library.patch`
+（配套说明：`patches/platform/README.md`）
+
+```bash
+cd /path/to/leocad-harmony
+git apply patches/platform/0001-harmonyos-offline-and-bundled-library.patch
+```
+
+补丁包含 3 项（第 4 项经实测不需要做，见 §5.3）。成员 C 只提供补丁，不直接修改这些文件。
 
 ### 5.1 【P0】鸿蒙构建必须定义 `LC_DISABLE_UPDATE_CHECK=1`
 
@@ -102,7 +111,7 @@ scripts/ci/run_library_checks.sh
 - **降级**：即使不接入，`leocad.qrc` 已把精简库编进二进制，
   可通过 `LEOCAD_LIB` 或应用数据目录覆盖
 
-### 5.3 中文语言回退
+### 5.3 中文语言回退 —— 实测不需要做
 
 - **位置**：`qt/qtmain.cpp` 翻译加载处
 - **建议**：`Translator.load("leocad_" + Locale.name())` 失败且系统语言以 `zh` 开头时，
@@ -142,6 +151,6 @@ done
 | 精简库生效实证 | 通过（用只在精简库中的零件对比渲染） |
 | 中文运行时生效 | 通过（独立 `QTranslator` 探针） |
 | 真机验证 | **待组长**（18 项验收，见测试矩阵 §3） |
-| 5.1–5.4 组长改动 | **待合入** |
+| 组长改动 | **已出补丁，待合入**（`patches/platform/`） |
 | GPLv2/Qt 兼容性裁定 | **待法务** |
 | 商店文案定稿与截图 | **待组长**（D11–D12） |
