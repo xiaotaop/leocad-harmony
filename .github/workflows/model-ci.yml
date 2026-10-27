@@ -1,0 +1,60 @@
+name: Model CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: model-ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows-model:
+    name: Windows build and model tests
+    runs-on: windows-2022
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      # The upstream library lifecycle needs OpenGL even without visible views.
+      QT_OPENGL: software
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Qt and software OpenGL
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          arch: win64_msvc2022_64
+          archives: qtbase qttools qtsvg opengl32sw
+          cache: true
+      - name: Build and run model tests
+        run: ./scripts/Build-MemberB.ps1 -Target Tests -RunTests -QtRoot $env:QT_ROOT_DIR
+      - name: Build desktop application
+        run: ./scripts/Build-MemberB.ps1 -Target App -QtRoot $env:QT_ROOT_DIR
+      - name: Check application startup
+        run: |
+          $app = Start-Process -FilePath .local/build-app/build/release/LeoCAD.exe -ArgumentList '--version' -WindowStyle Hidden -Wait -PassThru -RedirectStandardOutput .local/build-app/version.txt -RedirectStandardError .local/build-app/version-error.txt
+          Get-Content .local/build-app/version.txt
+          Get-Content .local/build-app/version-error.txt
+          if ($app.ExitCode -ne 0) { throw "Version probe failed: $($app.ExitCode)" }
+          if (!(Select-String -Path .local/build-app/version.txt -Pattern 'LeoCAD Version 26\.09' -Quiet)) { throw 'Unexpected version output.' }
+      - name: Upload build and test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-model-${{ github.sha }}
+          include-hidden-files: true
+          retention-days: 14
+          path: |
+            .local/build-tests/build.log
+            .local/build-tests/test-results.txt
+            .local/build-app/build.log
+            .local/build-app/version.txt
+            .local/build-app/version-error.txt
