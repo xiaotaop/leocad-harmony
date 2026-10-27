@@ -71,7 +71,7 @@ qt_add_translations(leocad
     LUPDATE_OPTIONS -no-obsolete
 )
 
-if(HARMONYOS)
+if(OHOS)
     set_target_properties(leocad PROPERTIES
         QT_HARMONYOS_APP_BUNDLE_NAME "io.github.xiaotaop.leocad"
         QT_HARMONYOS_APP_NAME "LeoCAD Harmony"
@@ -82,10 +82,13 @@ if(HARMONYOS)
         QT_HARMONYOS_MODULE_DESCRIPTION "LDraw model editor for HarmonyOS PC"
         QT_HARMONYOS_MODULE_DEVICE_TYPES "2in1;tablet"
         QT_HARMONYOS_TARGET_ARCHS "arm64-v8a"
+        QT_HARMONYOS_TARGET_SDK_VERSION "26.0.0"
+        QT_HARMONYOS_COMPILE_SDK_VERSION "26.0.0"
     )
 endif()
 
 install(TARGETS leocad
     BUNDLE DESTINATION .
+    LIBRARY DESTINATION lib
     RUNTIME DESTINATION bin
 )

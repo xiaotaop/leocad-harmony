@@ -45,6 +45,10 @@ foreach ($tool in $tools) {
 }
 
 $hvigorCandidates = @()
+if ($SdkRoot) {
+    $commandLineToolsRoot = Split-Path $SdkRoot -Parent
+    $hvigorCandidates += Join-Path $commandLineToolsRoot 'bin\hvigorw.bat'
+}
 if ($env:DEVECO_CLI_CLT_PATH) {
     $hvigorCandidates += Join-Path $env:DEVECO_CLI_CLT_PATH 'bin\hvigorw.bat'
     $cliVersionRoot = Split-Path $env:DEVECO_CLI_CLT_PATH -Parent
@@ -54,7 +58,7 @@ if ($env:DEVECO_CLI_CLT_PATH) {
 $hvigor = $hvigorCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
 if ($hvigor) {
     $hvigorVersion = (& $hvigor --version 2>&1 | Select-Object -First 1)
-    Write-Check 'Hvigor' $hvigorVersion $true
+    Write-Check 'Hvigor' "$hvigorVersion ($hvigor)" $true
 } else {
     Write-Check 'Hvigor' 'not found' $false
     $failures.Add('hvigorw.bat not found. Check DEVECO_CLI_CLT_PATH.')
@@ -72,7 +76,7 @@ $qtConfig = $qtCandidates |
 if ($qtConfig) {
     Write-Check 'Qt for HarmonyOS' $qtConfig.FullName $true
 } else {
-    Write-Check 'Qt for HarmonyOS' '6.12.x not found (current blocker)' $false
+    Write-Check 'Qt for HarmonyOS' '6.12.x not found' $false
     if ($RequireQt) {
         $failures.Add('Qt for HarmonyOS is required but was not found.')
     }

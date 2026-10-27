@@ -25,7 +25,7 @@
 | Ninja | 1.13.2 | SDK 内已安装 |
 | Clang | 15.0.4 | SDK 内已安装 |
 | Java | 23.0.2 | 已安装 |
-| Qt for HarmonyOS | 6.12.x | **未安装，当前阻塞项** |
+| Qt for HarmonyOS | 6.12.0 / `ef25002ed292b132d1ed3246bfcee1d24a9cd966` | 已安装，HAP 已构建 |
 
 完整、可提交的版本记录见 `toolchain.lock`；本机绝对路径和签名信息不进入仓库。
 
@@ -38,15 +38,16 @@ cmake -S . -B build/desktop -G Ninja -DCMAKE_PREFIX_PATH=<Qt桌面版目录>
 cmake --build build/desktop
 ```
 
-鸿蒙构建（安装与当前 SDK 匹配的 Qt for HarmonyOS 后）：
+鸿蒙构建：
 
 ```powershell
 $env:OHOS_SDK_ROOT = Join-Path $env:DEVECO_SDK_HOME 'default\openharmony'
+$env:QT_HARMONYOS_HVIGOR = Join-Path (Split-Path $env:DEVECO_SDK_HOME -Parent) 'bin\hvigorw.bat'
 <Qt-for-HarmonyOS>/bin/qt-cmake -S . -B build/harmony -G Ninja
 cmake --build build/harmony --target leocad_make_hap
 ```
 
-实际 Qt 包构建时使用的 SDK 版本必须与本项目 SDK 相同，否则可能出现系统符号缺失。安装后须将 Qt 精确版本和构建提交写回 `toolchain.lock`。
+实际 Qt 包构建时使用的 SDK 版本必须与本项目 SDK 相同，否则可能出现系统符号缺失。本机同时存在多套 command-line tools 时，不要依赖 PATH 中的 `hvigorw`；必须按上例把 `QT_HARMONYOS_HVIGOR` 指向与 `DEVECO_SDK_HOME` 同一套工具。本次已验证 6.26.8 可构建，PATH 中旧版 6.22.9 会错误报告 SDK 组件缺失。
 
 ## D1 验收与阻塞
 
@@ -55,8 +56,10 @@ cmake --build build/harmony --target leocad_make_hap
 - [x] CI 已覆盖 PR 结构检查和桌面 Qt 6.12 编译回归。
 - [x] SDK、编译器和构建工具版本已检测并固定。
 - [x] 上架事项表已建立。
-- [ ] 安装 Qt 6.12 for HarmonyOS，并记录其精确版本和构建提交。
-- [ ] 首次执行 `leocad_make_hap`；该项在 Qt 安装完成前不能伪验收。
+- [x] 安装 Qt 6.12 for HarmonyOS，并记录其精确版本和构建提交。
+- [x] 首次执行 `leocad_make_hap`，生成 `entry-default-unsigned.hap`。
+
+首次完成应用元数据配置后的未签名 HAP 大小为 76,961,582 字节，SHA-256 为 `EE9E0E6712FD2AA6F6148176E0377DD8C4A83FF9AE6B60275388C54E5E44FDDC`。该文件用于证明构建链闭环，不作为真机或上架包；后续须在 DevEco Studio 中配置项目签名后重新构建。
 
 ## 次日接口约定
 
