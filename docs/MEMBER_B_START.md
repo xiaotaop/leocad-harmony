@@ -56,6 +56,8 @@
 
 测试不展示窗口，但上游 `lcPiecesLibrary` 的析构依赖全局图形上下文，因此入口仍初始化和释放桌面 OpenGL。它不是纯无图形环境测试；不应直接承诺可在任意无 GPU CI 上运行。配置使用独立测试名称和临时 INI 文件，不读取正常 LeoCAD 用户配置。
 
+`.github/workflows/model-ci.yml` 在面向 `main` 的 PR、`main` 推送和手动运行时执行 Windows 桌面对照：固定 Qt 6.8.3，使用 Qt 提供的软件 OpenGL，复用上述脚本运行全部模型测试、构建完整应用并检查版本启动。构建和测试日志作为 Actions artifact 保存 14 天。CI 不覆盖鸿蒙 ARM64、真机或实际渲染效果。
+
 ## B 的源码入口和现有边界
 
 | 任务 | 实际入口 | 注意事项 |
