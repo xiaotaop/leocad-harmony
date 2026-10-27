@@ -18,6 +18,7 @@
 #include "lc_bricklink.h"
 #include "lc_string.h"
 #include "lc_colors.h"
+#include <QSaveFile>
 
 lcHTMLExportOptions::lcHTMLExportOptions(const Project* Project)
 {
@@ -493,22 +494,30 @@ bool Project::Load(const QString& FileName, bool ShowErrors)
 
 lcResult<void> Project::Save(const QString& FileName)
 {
-	SetFileName(QString());
-
-	QFile File(FileName);
+	QSaveFile File(FileName);
+	File.setDirectWriteFallback(false);
 
 	if (!File.open(QIODevice::WriteOnly))
 		return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
 
 	QTextStream Stream(&File);
-	bool Success = Save(Stream);
-	File.close();
+	if (!Save(Stream))
+		return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
 
-	if (Success)
+	// Suppress notifications from our own replacement, but retain the old
+	// document identity and dirty state if committing the temporary file fails.
+	const QString PreviousFileName = mFileName;
+	SetFileName(QString());
+	if (!File.commit())
 	{
-		SetFileName(FileName);
-		mModified = false;
+		SetFileName(PreviousFileName);
+		return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
 	}
+
+	SetFileName(FileName);
+	for (const std::unique_ptr<lcModel>& Model : mModels)
+		Model->SetSaved();
+	mModified = false;
 
 	return lcResult<void>();
 }
@@ -523,13 +532,13 @@ bool Project::Save(QTextStream& Stream)
 			Stream << QLatin1String("0 FILE ") << Model->GetProperties().mFileName << QLatin1String("\r\n");
 
 		Model->SaveLDraw(Stream, false, 0);
-		Model->SetSaved();
 
 		if (MPD)
 			Stream << QLatin1String("0 NOFILE\r\n");
 	}
 
-	return true;
+	Stream.flush();
+	return Stream.status() == QTextStream::Ok;
 }
 
 void Project::Merge(Project* Other)

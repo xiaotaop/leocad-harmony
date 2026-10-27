@@ -6,6 +6,22 @@
 #include "lc_model.h"
 #include "piece.h"
 #include "project.h"
+#ifdef Q_OS_WIN
+#include <windows.h>
+#endif
+
+class FailingWriteDevice : public QIODevice
+{
+public:
+    FailingWriteDevice() { open(QIODevice::WriteOnly); }
+protected:
+    qint64 readData(char*, qint64) override { return -1; }
+    qint64 writeData(const char*, qint64) override
+    {
+        setErrorString("Simulated full output device");
+        return -1;
+    }
+};
 
 class ModelIoTest : public QObject
 {
@@ -92,6 +108,79 @@ private slots:
         QVERIFY(!result.has_value());
         QVERIFY(!result.error().isEmpty());
     }
+
+    void failedSaveAsPreservesDocumentState()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        Project project(true);
+        QVERIFY(project.Load(QFINDTESTDATA("../fixtures/two-pieces.ldr"), false));
+        const QString originalName = project.GetFileName();
+        project.MarkAsModified();
+        const auto result = project.Save(dir.path());
+        QVERIFY(!result.has_value());
+        QCOMPARE(project.GetFileName(), originalName);
+        QVERIFY(project.IsModified());
+        QCOMPARE(project.GetMainModel()->GetPieces().size(), size_t(2));
+    }
+
+    void streamWriteFailureIsReported()
+    {
+        Project project(true);
+        FailingWriteDevice device;
+        QTextStream stream(&device);
+        QVERIFY(!project.Save(stream));
+        QCOMPARE(stream.status(), QTextStream::WriteFailed);
+    }
+
+    void successfulOverwriteCanBeReopened()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString path = dir.filePath("existing.ldr");
+        Project project(true);
+        QVERIFY(project.Save(path).has_value());
+        QVERIFY(project.Load(QFINDTESTDATA("../fixtures/two-pieces.ldr"), false));
+        project.MarkAsModified();
+        QVERIFY(project.Save(path).has_value());
+        QCOMPARE(project.GetFileName(), path);
+        QVERIFY(!project.IsModified());
+        Project reopened(true);
+        QVERIFY(reopened.Load(path, false));
+        QCOMPARE(reopened.GetMainModel()->GetPieces().size(), size_t(2));
+    }
+
+#ifdef Q_OS_WIN
+    void failedReplacementPreservesExistingFile()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString path = dir.filePath("locked.ldr");
+        const QByteArray original("0 Original document must survive failed replacement\r\n");
+        QFile file(path);
+        QVERIFY(file.open(QIODevice::WriteOnly));
+        QCOMPARE(file.write(original), qint64(original.size()));
+        file.close();
+        Project project(true);
+        QVERIFY(project.Load(path, false));
+        project.MarkAsModified();
+
+        // Allow reading, but deny writes and replacement of this test-owned file.
+        HANDLE handle = CreateFileW(reinterpret_cast<LPCWSTR>(path.utf16()), GENERIC_READ,
+            FILE_SHARE_READ, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+        QVERIFY(handle != INVALID_HANDLE_VALUE);
+        const auto result = project.Save(path);
+        CloseHandle(handle);
+
+        QVERIFY(!result.has_value());
+        QVERIFY(!result.error().isEmpty());
+        QCOMPARE(project.GetFileName(), path);
+        QVERIFY(project.IsModified());
+        QVERIFY(file.open(QIODevice::ReadOnly));
+        QCOMPARE(file.readAll(), original);
+        QCOMPARE(QDir(dir.path()).entryList(QDir::Files | QDir::Hidden).size(), 1);
+    }
+#endif
 };
 
 int main(int argc, char** argv)

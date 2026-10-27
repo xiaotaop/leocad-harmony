@@ -95,6 +95,7 @@ public:
 
 	bool Load(const QString& FileName, bool ShowErrors);
 	lcResult<void> Save(const QString& FileName);
+	// Serialize and flush without changing the document's saved state.
 	bool Save(QTextStream& Stream);
 	void Merge(Project* Other);
 	bool ImportLDD(const QString& FileName);
