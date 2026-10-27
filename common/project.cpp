@@ -19,6 +19,7 @@
 #include "lc_string.h"
 #include "lc_colors.h"
 #include <QSaveFile>
+#include <cmath>
 
 lcHTMLExportOptions::lcHTMLExportOptions(const Project* Project)
 {
@@ -373,27 +374,116 @@ void Project::SetFileName(const QString& FileName)
 	mFileName = FileName;
 }
 
+lcResult<void> Project::ValidateLDraw(const QByteArray& Data)
+{
+	QBuffer Buffer;
+	Buffer.setData(Data);
+	Buffer.open(QIODevice::ReadOnly);
+	QSet<QString> ModelNames;
+	bool HasContent = false;
+	bool AfterNoFile = false;
+	bool GeometryBeforeFirstFile = false;
+	int LineNumber = 0;
+
+	while (!Buffer.atEnd())
+	{
+		QString Line = QString::fromUtf8(Buffer.readLine()).trimmed();
+		LineNumber++;
+		QTextStream Stream(&Line, QIODevice::ReadOnly);
+		QString Type;
+		Stream >> Type;
+		if (Type.isEmpty())
+			continue;
+
+		auto InvalidLine = [LineNumber](const QString& Reason) -> lcResult<void>
+		{
+			return lcUnexpected(tr("Invalid LDraw data at line %1: %2").arg(LineNumber).arg(Reason));
+		};
+
+		if (Type == QLatin1String("0"))
+		{
+			QString Meta;
+			Stream >> Meta;
+			if (Meta == QLatin1String("FILE"))
+			{
+				QString Name = Stream.readAll().trimmed();
+				if (Name.isEmpty() || Name.toLatin1().size() >= LC_PIECE_NAME_LEN || Name.contains(QChar::Null))
+					return InvalidLine(tr("Invalid submodel name."));
+				Name = Name.replace('\\', '/').toCaseFolded();
+				if (ModelNames.contains(Name))
+					return InvalidLine(tr("Duplicate submodel name."));
+				if (GeometryBeforeFirstFile)
+					return InvalidLine(tr("Geometry appears before the first MPD submodel."));
+				ModelNames.insert(Name);
+				AfterNoFile = false;
+			}
+			else if (Meta == QLatin1String("NOFILE"))
+				AfterNoFile = true;
+			else if (Meta == QLatin1String("!DATA"))
+				return InvalidLine(tr("Embedded binary data is not supported."));
+
+			HasContent = true;
+			continue;
+		}
+
+		// Unknown line types and text outside MPD blocks are ignored by LDraw.
+		if (AfterNoFile || Type.size() != 1 || Type[0] < QLatin1Char('1') || Type[0] > QLatin1Char('5'))
+			continue;
+
+		HasContent = true;
+		GeometryBeforeFirstFile = ModelNames.isEmpty();
+		int ColorCode;
+		Stream >> ColorCode;
+		if (Stream.status() != QTextStream::Ok || ColorCode < 0)
+			return InvalidLine(tr("Invalid color code."));
+
+		const int ValueCount = Type == QLatin1String("2") ? 6 : Type == QLatin1String("3") ? 9 : 12;
+		for (int Index = 0; Index < ValueCount; Index++)
+		{
+			float Value = 0.0f;
+			Stream >> Value;
+			if (Stream.status() != QTextStream::Ok || !std::isfinite(Value))
+				return InvalidLine(tr("Missing or invalid geometry coordinates."));
+		}
+
+		const QString Remainder = Stream.readAll().trimmed();
+		if (Type == QLatin1String("1"))
+		{
+			if (Remainder.isEmpty() || Remainder.toLatin1().size() >= LC_PIECE_NAME_LEN || Remainder.contains(QChar::Null))
+				return InvalidLine(tr("Invalid part reference."));
+		}
+		else if (!Remainder.isEmpty())
+			return InvalidLine(tr("Unexpected data after geometry coordinates."));
+	}
+
+	if (!HasContent)
+		return lcUnexpected(tr("The file contains no LDraw records."));
+	return lcResult<void>();
+}
+
 bool Project::Load(const QString& FileName, bool ShowErrors)
 {
-	QWidget *parent = nullptr;
-	if (!mIsPreview)
-		parent = gMainWindow;
+	const lcResult<void> Result = Load(FileName);
+	if (!Result && ShowErrors)
+		QMessageBox::warning(mIsPreview ? nullptr : gMainWindow, tr("Error"), Result.error());
+	return Result.has_value();
+}
 
+lcResult<void> Project::Load(const QString& FileName)
+{
 	QFile File(FileName);
 
 	if (!File.open(QIODevice::ReadOnly))
-	{
-		if (ShowErrors)
-			QMessageBox::warning(parent, tr("Error"), tr("Error reading file '%1':\n%2").arg(FileName, File.errorString()));
-		return false;
-	}
+		return lcUnexpected(tr("Error reading file '%1':\n%2").arg(FileName, File.errorString()));
 
-	mModels.clear();
-	SetFileName(FileName);
 	QFileInfo FileInfo(FileName);
 	QString Extension = FileInfo.suffix().toLower();
 
 	QByteArray FileData = File.readAll();
+	if (File.error() != QFileDevice::NoError)
+		return lcUnexpected(tr("Error reading file '%1':\n%2").arg(FileName, File.errorString()));
+	if (FileData.startsWith("\xef\xbb\xbf"))
+		FileData.remove(0, 3);
 	bool LoadDAT;
 
 	if (Extension == QLatin1String("dat") || Extension == QLatin1String("ldr") || Extension == QLatin1String("mpd"))
@@ -402,6 +492,29 @@ bool Project::Load(const QString& FileName, bool ShowErrors)
 		LoadDAT = false;
 	else
 		LoadDAT = FileData.size() > 7 && memcmp(FileData, "LeoCAD ", 7);
+
+	std::unique_ptr<lcModel> BinaryModel;
+	if (LoadDAT)
+	{
+		const lcResult<void> Validation = ValidateLDraw(FileData);
+		if (!Validation)
+			return lcUnexpected(tr("Error loading file '%1':\n%2").arg(FileName, Validation.error()));
+	}
+	else
+	{
+		if (FileData.size() < 32 || !FileData.startsWith("LeoCAD "))
+			return lcUnexpected(tr("Error loading file '%1':\nFile format is not recognized.").arg(FileName));
+		lcMemFile MemFile;
+		MemFile.WriteBuffer(FileData.constData(), FileData.size());
+		MemFile.Seek(0, SEEK_SET);
+		BinaryModel = std::make_unique<lcModel>(QString(), this, mIsPreview);
+		if (!BinaryModel->LoadBinary(&MemFile))
+			return lcUnexpected(tr("Error loading file '%1':\nFile format is not recognized.").arg(FileName));
+	}
+
+	// All recoverable input checks precede replacing the current document.
+	mModels.clear();
+	SetFileName(FileName);
 
 	if (LoadDAT)
 	{
@@ -444,27 +557,9 @@ bool Project::Load(const QString& FileName, bool ShowErrors)
 	}
 	else
 	{
-		lcMemFile MemFile;
-		MemFile.WriteBuffer(FileData.constData(), FileData.size());
-		MemFile.Seek(0, SEEK_SET);
-
-		lcModel* Model = new lcModel(QString(), this, mIsPreview);
-
-		if (Model->LoadBinary(&MemFile))
-		{
-			mModels.emplace_back(Model);
-			Model->CreatePieceInfo(this);
-			Model->SetSaved();
-		}
-		else
-			delete Model;
-	}
-
-	if (mModels.empty())
-	{
-		if (ShowErrors)
-			QMessageBox::warning(parent, tr("Error"), tr("Error loading file '%1':\nFile format is not recognized.").arg(FileName));
-		return false;
+		mModels.emplace_back(std::move(BinaryModel));
+		mModels.back()->CreatePieceInfo(this);
+		mModels.back()->SetSaved();
 	}
 
 	if (mModels.size() == 1)
@@ -488,8 +583,9 @@ bool Project::Load(const QString& FileName, bool ShowErrors)
 	}
 
 	mModified = false;
+	mActiveModel = mModels.front().get();
 
-	return true;
+	return lcResult<void>();
 }
 
 lcResult<void> Project::Save(const QString& FileName)

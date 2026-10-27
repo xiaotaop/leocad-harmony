@@ -322,6 +322,74 @@ private slots:
         model->RedoAction();
         QVERIFY(model->IsModified());
     }
+
+    void invalidLDrawPreservesCurrentDocument_data()
+    {
+        QTest::addColumn<QByteArray>("contents");
+        QTest::newRow("empty-file") << QByteArray();
+        QTest::newRow("truncated-reference") << QByteArray("0 Broken\n1 4 0 0 0 1 0\n");
+        QTest::newRow("missing-part-name") << QByteArray("0 Broken\n1 4 0 0 0 1 0 0 0 1 0 0 0 1\n");
+        QTest::newRow("nonfinite-transform") << QByteArray("0 Broken\n1 4 nan 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n");
+        QTest::newRow("duplicate-submodel") << QByteArray("0 FILE main.ldr\n0 First\n0 FILE MAIN.LDR\n0 Duplicate\n");
+        QTest::newRow("unnamed-submodel") << QByteArray("0 FILE\n0 Missing name\n");
+        QTest::newRow("truncated-triangle") << QByteArray("0 Broken\n3 16 0 0 0\n");
+        QTest::newRow("overlong-reference") << (QByteArray("0 Broken\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 ") + QByteArray(256, 'a') + "\n");
+    }
+
+    void invalidLDrawPreservesCurrentDocument()
+    {
+        QFETCH(QByteArray, contents);
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString path = dir.filePath("invalid.mpd");
+        QFile file(path);
+        QVERIFY(file.open(QIODevice::WriteOnly));
+        QCOMPARE(file.write(contents), qint64(contents.size()));
+        file.close();
+        Project project(true);
+        QVERIFY(project.Load(QFINDTESTDATA("../fixtures/two-pieces.ldr"), false));
+        project.MarkAsModified();
+        const QString originalName = project.GetFileName();
+        lcModel* originalModel = project.GetMainModel();
+        QVERIFY(!project.Load(path, false));
+        QCOMPARE(project.GetFileName(), originalName);
+        QCOMPARE(project.GetMainModel(), originalModel);
+        QVERIFY(project.IsModified());
+        QCOMPARE(project.GetMainModel()->GetPieces().size(), size_t(2));
+        const auto result = project.Load(path);
+        QVERIFY(!result.has_value());
+        QVERIFY(!result.error().isEmpty());
+    }
+
+    void loadedActiveModelBelongsToProject()
+    {
+        Project project(true);
+        QVERIFY(project.Load(QFINDTESTDATA("../fixtures/submodel.mpd"), false));
+        QCOMPARE(project.GetActiveModel(), project.GetMainModel());
+    }
+
+    void compatibleLDrawSyntax_data()
+    {
+        QTest::addColumn<QByteArray>("contents");
+        QTest::newRow("bom-and-direct-color") << QByteArray("\xef\xbb\xbf" "0 Valid\n1 0x2FF0000 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n");
+        QTest::newRow("unknown-meta-and-line") << QByteArray("0 !OTHER_VENDOR keep this\n9 ignored\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n");
+        QTest::newRow("mpd-trailing-signature") << QByteArray("0 FILE main.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n0 NOFILE\n1 incomplete text outside a block\n");
+    }
+
+    void compatibleLDrawSyntax()
+    {
+        QFETCH(QByteArray, contents);
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        QFile file(dir.filePath("compatible.ldr"));
+        QVERIFY(file.open(QIODevice::WriteOnly));
+        QCOMPARE(file.write(contents), qint64(contents.size()));
+        file.close();
+        Project project(true);
+        const auto result = project.Load(file.fileName());
+        QVERIFY2(result.has_value(), result.has_value() ? "" : qPrintable(result.error()));
+        QCOMPARE(project.GetMainModel()->GetPieces().size(), size_t(1));
+    }
 };
 
 int main(int argc, char** argv)

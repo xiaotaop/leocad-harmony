@@ -94,6 +94,8 @@ public:
 	void ShowModelListDialog();
 
 	bool Load(const QString& FileName, bool ShowErrors);
+	// Non-interactive entry point for platform file bridges and tests.
+	lcResult<void> Load(const QString& FileName);
 	lcResult<void> Save(const QString& FileName);
 	// Serialize and flush without changing the document's saved state.
 	bool Save(QTextStream& Stream);
@@ -115,6 +117,7 @@ public:
 	void UpdatePieceInfo(PieceInfo* Info) const;
 
 protected:
+	static lcResult<void> ValidateLDraw(const QByteArray& Data);
 	QString GetExportFileName(const QString& FileName, const QString& DefaultExtension, const QString& DialogTitle, const QString& DialogFilter) const;
 
 	std::vector<lcModelPartsEntry> GetModelParts();
