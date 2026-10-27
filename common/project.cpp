@@ -379,7 +379,8 @@ lcResult<void> Project::ValidateLDraw(const QByteArray& Data)
 	QBuffer Buffer;
 	Buffer.setData(Data);
 	Buffer.open(QIODevice::ReadOnly);
-	QSet<QString> ModelNames;
+	QHash<QString, QStringList> ModelReferences;
+	QString CurrentModel;
 	bool HasContent = false;
 	bool AfterNoFile = false;
 	bool GeometryBeforeFirstFile = false;
@@ -399,6 +400,17 @@ lcResult<void> Project::ValidateLDraw(const QByteArray& Data)
 		{
 			return lcUnexpected(tr("Invalid LDraw data at line %1: %2").arg(LineNumber).arg(Reason));
 		};
+		auto ReadFiniteValues = [&Stream](int Count)
+		{
+			for (int Index = 0; Index < Count; Index++)
+			{
+				float Value = 0.0f;
+				Stream >> Value;
+				if (Stream.status() != QTextStream::Ok || !std::isfinite(Value))
+					return false;
+			}
+			return true;
+		};
 
 		if (Type == QLatin1String("0"))
 		{
@@ -410,17 +422,40 @@ lcResult<void> Project::ValidateLDraw(const QByteArray& Data)
 				if (Name.isEmpty() || Name.toLatin1().size() >= LC_PIECE_NAME_LEN || Name.contains(QChar::Null))
 					return InvalidLine(tr("Invalid submodel name."));
 				Name = Name.replace('\\', '/').toCaseFolded();
-				if (ModelNames.contains(Name))
+				if (ModelReferences.contains(Name))
 					return InvalidLine(tr("Duplicate submodel name."));
 				if (GeometryBeforeFirstFile)
 					return InvalidLine(tr("Geometry appears before the first MPD submodel."));
-				ModelNames.insert(Name);
+				ModelReferences.insert(Name, QStringList());
+				CurrentModel = Name;
 				AfterNoFile = false;
 			}
 			else if (Meta == QLatin1String("NOFILE"))
 				AfterNoFile = true;
 			else if (Meta == QLatin1String("!DATA"))
 				return InvalidLine(tr("Embedded binary data is not supported."));
+			else if (!AfterNoFile && Meta == QLatin1String("!LEOCAD"))
+			{
+				QString Object;
+				Stream >> Object;
+				if (Object == QLatin1String("SYNTH"))
+				{
+					QString Command;
+					Stream >> Command;
+					if (Command == QLatin1String("CONTROL_POINT") && !ReadFiniteValues(13))
+						return InvalidLine(tr("Missing or invalid synth control point coordinates."));
+				}
+				else if (Object == QLatin1String("PIECE"))
+				{
+					while (!Stream.atEnd())
+					{
+						QString Command;
+						Stream >> Command;
+						if (Command == QLatin1String("PIVOT") && !ReadFiniteValues(12))
+							return InvalidLine(tr("Missing or invalid piece pivot coordinates."));
+					}
+				}
+			}
 
 			HasContent = true;
 			continue;
@@ -431,26 +466,23 @@ lcResult<void> Project::ValidateLDraw(const QByteArray& Data)
 			continue;
 
 		HasContent = true;
-		GeometryBeforeFirstFile = ModelNames.isEmpty();
+		GeometryBeforeFirstFile = ModelReferences.isEmpty();
 		int ColorCode;
 		Stream >> ColorCode;
 		if (Stream.status() != QTextStream::Ok || ColorCode < 0)
 			return InvalidLine(tr("Invalid color code."));
 
 		const int ValueCount = Type == QLatin1String("2") ? 6 : Type == QLatin1String("3") ? 9 : 12;
-		for (int Index = 0; Index < ValueCount; Index++)
-		{
-			float Value = 0.0f;
-			Stream >> Value;
-			if (Stream.status() != QTextStream::Ok || !std::isfinite(Value))
-				return InvalidLine(tr("Missing or invalid geometry coordinates."));
-		}
+		if (!ReadFiniteValues(ValueCount))
+			return InvalidLine(tr("Missing or invalid geometry coordinates."));
 
 		const QString Remainder = Stream.readAll().trimmed();
 		if (Type == QLatin1String("1"))
 		{
 			if (Remainder.isEmpty() || Remainder.toLatin1().size() >= LC_PIECE_NAME_LEN || Remainder.contains(QChar::Null))
 				return InvalidLine(tr("Invalid part reference."));
+			if (!CurrentModel.isEmpty())
+				ModelReferences[CurrentModel].append(QString(Remainder).replace('\\', '/').toCaseFolded());
 		}
 		else if (!Remainder.isEmpty())
 			return InvalidLine(tr("Unexpected data after geometry coordinates."));
@@ -458,6 +490,33 @@ lcResult<void> Project::ValidateLDraw(const QByteArray& Data)
 
 	if (!HasContent)
 		return lcUnexpected(tr("The file contains no LDraw records."));
+
+	// Validate all MPD components, including unused ones, without recursion.
+	// Otherwise LoadLDraw silently drops cyclic references and loses model data.
+	QHash<QString, int> IncomingReferences;
+	for (auto Model = ModelReferences.cbegin(); Model != ModelReferences.cend(); ++Model)
+		IncomingReferences.insert(Model.key(), 0);
+	for (const QStringList& References : ModelReferences)
+		for (const QString& Reference : References)
+			if (IncomingReferences.contains(Reference))
+				IncomingReferences[Reference]++;
+
+	QStringList Roots;
+	for (auto Model = IncomingReferences.cbegin(); Model != IncomingReferences.cend(); ++Model)
+		if (Model.value() == 0)
+			Roots.append(Model.key());
+	int Visited = 0;
+	while (!Roots.isEmpty())
+	{
+		const QString Name = Roots.takeLast();
+		Visited++;
+		for (const QString& Reference : ModelReferences[Name])
+			if (IncomingReferences.contains(Reference) && --IncomingReferences[Reference] == 0)
+				Roots.append(Reference);
+	}
+	if (Visited != ModelReferences.size())
+		return lcUnexpected(tr("Circular submodel references are not supported."));
+
 	return lcResult<void>();
 }
 
@@ -514,7 +573,7 @@ lcResult<void> Project::Load(const QString& FileName)
 
 	// All recoverable input checks precede replacing the current document.
 	mModels.clear();
-	SetFileName(FileName);
+	SetFileName(FileInfo.absoluteFilePath());
 
 	if (LoadDAT)
 	{
@@ -610,7 +669,7 @@ lcResult<void> Project::Save(const QString& FileName)
 		return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
 	}
 
-	SetFileName(FileName);
+	SetFileName(QFileInfo(FileName).absoluteFilePath());
 	for (const std::unique_ptr<lcModel>& Model : mModels)
 		Model->SetSaved();
 	mModified = false;

@@ -1,5 +1,6 @@
 #include "lc_global.h"
 #include <QtTest>
+#include <QScopeGuard>
 #include "lc_application.h"
 #include "lc_context.h"
 #include "lc_library.h"
@@ -7,6 +8,7 @@
 #include "lc_model.h"
 #include "lc_modelhistory.h"
 #include "piece.h"
+#include "pieceinf.h"
 #include "project.h"
 #ifdef Q_OS_WIN
 #include <windows.h>
@@ -334,6 +336,13 @@ private slots:
         QTest::newRow("unnamed-submodel") << QByteArray("0 FILE\n0 Missing name\n");
         QTest::newRow("truncated-triangle") << QByteArray("0 Broken\n3 16 0 0 0\n");
         QTest::newRow("overlong-reference") << (QByteArray("0 Broken\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 ") + QByteArray(256, 'a') + "\n");
+        QTest::newRow("self-referencing-submodel") << QByteArray("0 FILE self.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 SELF.LDR\n");
+        QTest::newRow("mutually-referencing-submodels") << QByteArray("0 FILE root.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 child.ldr\n0 FILE child.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 ROOT.LDR\n");
+        QTest::newRow("unused-submodel-cycle") << QByteArray("0 FILE root.ldr\n0 Empty root\n0 FILE a.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 b.ldr\n0 FILE b.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 a.ldr\n");
+        QTest::newRow("truncated-synth-control-point") << QByteArray("0 Broken\n0 !LEOCAD SYNTH CONTROL_POINT 0 0\n");
+        QTest::newRow("nonfinite-synth-control-point") << QByteArray("0 Broken\n0 !LEOCAD SYNTH CONTROL_POINT 0 0 0 1 0 0 0 1 0 0 0 1 nan\n");
+        QTest::newRow("truncated-piece-pivot") << QByteArray("0 Broken\n0 !LEOCAD PIECE PIVOT 0 0\n");
+        QTest::newRow("nonfinite-piece-pivot") << QByteArray("0 Broken\n0 !LEOCAD PIECE PIVOT 0 0 0 1 0 0 0 1 0 0 0 inf\n");
     }
 
     void invalidLDrawPreservesCurrentDocument()
@@ -368,12 +377,90 @@ private slots:
         QCOMPARE(project.GetActiveModel(), project.GetMainModel());
     }
 
+    void sharedSubmodelRoundTrip()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        QFile input(dir.filePath("shared.mpd"));
+        QVERIFY(input.open(QIODevice::WriteOnly));
+        const QByteArray contents("0 FILE root.ldr\n"
+            "1 4 0 0 0 1 0 0 0 1 0 0 0 1 left.ldr\n"
+            "1 1 20 0 0 1 0 0 0 1 0 0 0 1 right.ldr\n"
+            "0 FILE left.ldr\n1 16 0 0 0 1 0 0 0 1 0 0 0 1 shared.ldr\n"
+            "0 FILE right.ldr\n1 16 0 0 0 1 0 0 0 1 0 0 0 1 shared.ldr\n"
+            "0 FILE shared.ldr\n1 14 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n");
+        QCOMPARE(input.write(contents), qint64(contents.size()));
+        input.close();
+        Project project(true);
+        QVERIFY(project.Load(input.fileName()).has_value());
+        const QString output = dir.filePath("reopened.mpd");
+        QVERIFY(project.Save(output).has_value());
+        Project reopened(true);
+        QVERIFY(reopened.Load(output).has_value());
+        QCOMPARE(reopened.GetModels().size(), size_t(4));
+        QCOMPARE(reopened.GetMainModel()->GetPieces().size(), size_t(2));
+        lcModel* shared = reopened.GetModel("shared.ldr");
+        QVERIFY(shared);
+        QCOMPARE(shared->GetPieces().size(), size_t(1));
+        QCOMPARE(shared->GetPieces()[0]->GetColorCode(), quint32(14));
+        for (const QString& name : {QString("left.ldr"), QString("right.ldr")})
+        {
+            lcModel* parent = reopened.GetModel(name);
+            QVERIFY(parent);
+            QCOMPARE(parent->GetPieces().size(), size_t(1));
+            QCOMPARE(parent->GetPieces()[0]->mPieceInfo->GetModel(), shared);
+        }
+    }
+
+    void relativeDocumentPathsSurviveWorkingDirectoryChange_data()
+    {
+        QTest::addColumn<bool>("loadFirst");
+        QTest::newRow("load-relative-path") << true;
+        QTest::newRow("save-relative-path") << false;
+    }
+
+    void relativeDocumentPathsSurviveWorkingDirectoryChange()
+    {
+        QFETCH(bool, loadFirst);
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString documents = dir.filePath(QString::fromUtf8("沙箱 Documents"));
+        const QString cache = dir.filePath("cache");
+        QVERIFY(QDir().mkpath(documents));
+        QVERIFY(QDir().mkpath(cache));
+        const QString expectedPath = documents + "/model.ldr";
+        QVERIFY(QFile::copy(QFINDTESTDATA("../fixtures/two-pieces.ldr"), expectedPath));
+        const QString previousDirectory = QDir::currentPath();
+        const auto restoreDirectory = qScopeGuard([&]() { QDir::setCurrent(previousDirectory); });
+        QVERIFY(QDir::setCurrent(documents));
+        Project project(true);
+        if (loadFirst)
+            QVERIFY(project.Load("model.ldr").has_value());
+        else
+        {
+            QVERIFY(project.Load(expectedPath).has_value());
+            QVERIFY(project.Save("model.ldr").has_value());
+        }
+        QCOMPARE(project.GetFileName(), expectedPath);
+        QVERIFY(QDir::setCurrent(cache));
+        project.MarkAsModified();
+        QVERIFY(project.Save(project.GetFileName()).has_value());
+        QVERIFY(!project.IsModified());
+        QVERIFY(!QFile::exists(cache + "/model.ldr"));
+        Project reopened(true);
+        QVERIFY(reopened.Load(project.GetFileName()).has_value());
+        QCOMPARE(reopened.GetMainModel()->GetPieces().size(), size_t(2));
+    }
+
     void compatibleLDrawSyntax_data()
     {
         QTest::addColumn<QByteArray>("contents");
         QTest::newRow("bom-and-direct-color") << QByteArray("\xef\xbb\xbf" "0 Valid\n1 0x2FF0000 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n");
         QTest::newRow("unknown-meta-and-line") << QByteArray("0 !OTHER_VENDOR keep this\n9 ignored\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n");
         QTest::newRow("mpd-trailing-signature") << QByteArray("0 FILE main.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n0 NOFILE\n1 incomplete text outside a block\n");
+        QTest::newRow("piece-pivot") << QByteArray("0 Valid\n0 !LEOCAD PIECE PIVOT 1 2 3 1 0 0 0 1 0 0 0 1 HIDDEN\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n");
+        QTest::newRow("synth-control-point") << QByteArray("0 Valid\n0 !LEOCAD SYNTH BEGIN\n0 !LEOCAD SYNTH CONTROL_POINT 0 0 0 1 0 0 0 1 0 0 0 1 1\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n0 !LEOCAD SYNTH END\n");
+        QTest::newRow("ignored-meta-after-nofile") << QByteArray("0 FILE main.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n0 NOFILE\n0 !LEOCAD PIECE PIVOT 1\n");
     }
 
     void compatibleLDrawSyntax()
