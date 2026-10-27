@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-27",
+  "generated_at": "2026-10-27T12:04:57.006738+08:00",
+  "source_repository": "https://github.com/xiaotaop/leocad-harmony",
+  "baseline_commit": "3e2e15b5bcd6ba87720bd2dfebffd49fd48ee3c0",
+  "baseline_tree": "9e1e8992b398ffcf4015c9cf08304d8c33f7004c",
+  "baseline_commit_and_tree_verified": true,
+  "host": {
+    "os": "macOS 27.0.1",
+    "architecture": "arm64",
+    "gpu": "Apple M4",
+    "qt": "6.12.0",
+    "compiler": "Apple Clang 21.0.0",
+    "cmake": "3.28.2"
+  },
+  "desktop_build": {
+    "exit_code": 0,
+    "source_changes": false,
+    "qmake_overrides": [
+      "CONFIG+=release",
+      "QMAKE_APPLE_DEVICE_ARCHS=arm64",
+      "QMAKE_BUNDLE_DATA-=library",
+      "QMAKE_BUNDLE_DATA-=povray"
+    ],
+    "binary_sha256": "371d3d64f4d5a07dda6e9388410d9c9fabd721b4a2bd41ba69aab1643e0e85c0"
+  },
+  "desktop_model_smoke": {
+    "exit_code": 0,
+    "fixture": "tests/fixtures/render-baseline.ldr",
+    "library": "resources/library.zip",
+    "output_size": [
+      800,
+      600
+    ],
+    "visually_checked": true
+  },
+  "probe": {
+    "build_exit_code": 0,
+    "script_run_exit_code": 0,
+    "dpr2_exit_code": 0,
+    "dpr125_exit_code": 0,
+    "negative_checks": {
+      "gles-unavailable": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      },
+      "report-write-failure": {
+        "exit_code": 1,
+        "expected_exit_code": 1
+      }
+    },
+    "binary_sha256": "8b9a2b03839e558b779ccc94435961a747945895bc1f60553b756dac707f0087"
+  },
+  "source_sha256": {
+    "scripts/Build-MemberA.py": "65a19c035253075d6574fabcd6db9a4c82f29c9ff321cf910dd27b8888b25494",
+    "tests/render/CMakeLists.txt": "91ba6042b843f649d455b02e18ee7c01e277eff73502980bcb23301718116df6",
+    "tests/render/main.cpp": "9e72d1d9e86d0af3ef33fa1165b9ecef684d4e830e6e218740d611ca6279de62",
+    "tests/fixtures/render-baseline.ldr": "2320af444acaddf291b9c04b6557d0756c225fb7f904ff12619c5a33c33dda0f"
+  },
+  "harmonyos_arm64_build": "pending",
+  "physical_device_validation": "pending",
+  "evidence_sha256": {
+    "desktop-build.log": "ab43b0d753509b469d04c8450412a621148a6e01f199dd470a8570f9e4ecb538",
+    "desktop-smoke.log": "847f253367afeed6cf194e50bb8523e4cc3a6d9798e342b7c9b9e9bb3e33994b",
+    "macos-gles-unavailable.json": "34b85d158198c019b5a5e7874f8ada2952367444d634e10390591fe30c3157e9",
+    "macos-model.png": "59f07370430dc599a83e4c4d12af2b18fd622ed8eca7ecae9e0b71e2125e71a7",
+    "macos-probe-dpr125.json": "daa561628c5483fff8f575a88a64bff0d314765c906f3295b50651c56b20a72a",
+    "macos-probe.json": "54287c1c0966c2eeaa4dd57e5a0f4358320b6da5c39ae1e2a70fa8abd808d493",
+    "macos-probe.png": "f37d727145791507a3d2c554be4a406e0607da4e0c88a5412a03b208ca11b6b5",
+    "probe-build-and-run.log": "49190bae4bd7dfcd62f538327c2dc89a84b71de9833f677914c6935ead8c6c47"
+  }
+}

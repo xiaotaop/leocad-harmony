@@ -1,0 +1,19 @@
+{
+    "architecture": "arm64",
+    "error": "No completed widget frame before timeout",
+    "os": "macOS Golden Gate (27.0.1)",
+    "passed": false,
+    "platform": "cocoa",
+    "qt": "6.12.0",
+    "requested_format": {
+        "depth_bits": 24,
+        "major": 3,
+        "minor": 0,
+        "profile": 0,
+        "renderable_type": 2,
+        "samples": 0,
+        "stencil_bits": 8
+    },
+    "schema_version": 1,
+    "scope": "host/device diagnostic; not HarmonyOS release acceptance"
+}
