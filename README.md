@@ -60,9 +60,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and the [two-week development plan](docs/
 ## Build status
 
 The CMake wrapper, desktop Qt 6.12 compile regression and an ARM64 HarmonyOS
-Qt Widgets/OpenGL diagnostic HAP build are available. Physical-device execution
-still requires a trusted Huawei developer debug signature; an unsigned or locally
-self-signed HAP is not proof that the package runs on a commercial device.
+Qt Widgets/OpenGL diagnostic HAP are available. The Huawei-signed probe passed
+two physical-device runs on HAD-W32 / API 23, including all nine LeoCAD shader
+pairs, framebuffer readback, shared textures and high-DPI resizing. See the
+[D2 device acceptance record](docs/D2_DEVICE_ACCEPTANCE.md) for the exact package
+hash, GPU information and original evidence. Full LeoCAD modeling acceptance
+remains part of the subsequent milestones.
 
 Run the local baseline check with:
 
