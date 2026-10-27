@@ -1,0 +1,11 @@
+********* Start testing of ModelIoTest *********
+Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-llp64 shared (dynamic) release build; by MSVC 2022), windows 11
+PASS   : ModelIoTest::initTestCase()
+PASS   : ModelIoTest::emptyModelRoundTrip()
+PASS   : ModelIoTest::ldrRoundTrip()
+PASS   : ModelIoTest::mpdRoundTrip()
+PASS   : ModelIoTest::missingFilePreservesModel()
+PASS   : ModelIoTest::unwritableDestinationReportsError()
+PASS   : ModelIoTest::cleanupTestCase()
+Totals: 7 passed, 0 failed, 0 skipped, 0 blacklisted, 29ms
+********* Finished testing of ModelIoTest *********

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-26",
+  "upstreamCommit": "5196355d4a5adb35f14c97e7672d7a9bfd3af391",
+  "businessSourceUnchanged": true,
+  "desktopAppBuild": "passed",
+  "desktopVersionProbe": {
+    "version": "26.09",
+    "exitCode": 0
+  },
+  "modelIoTests": {
+    "skipped": 0,
+    "processExitCode": 0,
+    "businessCasesPassed": 5,
+    "requiresDesktopOpenGL": true,
+    "failed": 0,
+    "qtTestTotalsPassed": 7
+  },
+  "appSha256": "19b5f68c87697b2d1bfef9c4010c113100f721ef2d99d260795f8c5b23c7d156",
+  "testExeSha256": "31d70fdafd0979eb994c91c41e3ce1b4edecf6015647d6d406f118d073c65f3a",
+  "sourceSha256": {
+    "member-b-tests.pro": "6d4a3ad27b46f3ed79c1e1affd1d78b2131258346b823ee9c53b864c3ff57857",
+    "scripts/Build-MemberB.ps1": "cefa3aaa13e04b330cae83d8ec777e0746b1ddf58457d25a8369e6b975a1998c",
+    "tests/model/tst_model_io.cpp": "7d618417b2a56a136824d4f8ac5e90b5df6ebcba042bdcb48429ae242f6f2ba8",
+    "tests/fixtures/two-pieces.ldr": "3d856e665fd5cc5de6110ec5ddd1197bdca30287dfb335bb2823316933407dda",
+    "tests/fixtures/submodel.mpd": "5b979216c54174248a4498bfbc0ed165b02d338be0bc5b987a677ca99e2b0c1c"
+  },
+  "notVerified": [
+    "Full desktop GUI and rendering",
+    "Editing commands and undo/redo",
+    "Corrupt/truncated input rejection",
+    "Atomic save and failed-save state preservation",
+    "Official LDraw library",
+    "HarmonyOS Qt 6.12 ARM64 build",
+    "HAP installation and physical device acceptance"
+  ]
+}
