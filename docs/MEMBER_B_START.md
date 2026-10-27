@@ -1,6 +1,6 @@
 # 成员 B 开发入口
 
-准备日期：2026-10-26。职责：模型编辑、撤销重做、LDraw 文件读写与数据一致性。
+准备日期：2026-10-26；首批开发：2026-10-27。职责：模型编辑、撤销重做、LDraw 文件读写与数据一致性。
 
 ## 当前基线
 
@@ -9,16 +9,14 @@
 - 团队仓库：`https://github.com/xiaotaop/leocad-harmony.git`，remote 名为 `origin`；本地分支跟踪 `origin/feature/b-model`。
 - 上游：`https://github.com/leozide/leocad.git`，remote 名为 `upstream`。
 - 固定标签：`v26.09`；提交：`5196355d4a5adb35f14c97e7672d7a9bfd3af391`。
-- 已同步团队初始化提交 `959fb4eee3e020e2579fdf7b4196c9856160f759`。团队保留上游根目录布局，无需搬移模型源码或本地工具。B 的准备增量仍在本地，尚未提交、推送或创建 PR。
+- 基于团队初始化提交 `959fb4eee3e020e2579fdf7b4196c9856160f759`。团队保留上游根目录布局；B 的准备和首批修改记录于本分支。
 - 桌面对照：Windows x64、Qt 6.8.3 MSVC2022、MSVC 14.41.34120、Windows SDK 10.0.19041.0。
 - Qt 位于本目录 `.local/Qt/`，下载工具位于 `.local/python/`；没有修改全局 PATH、系统 Python 或全局 Git 配置。
 - HarmonyOS 的 Qt 6.12、ARM64 工具链、HAP 和真机验收尚未配置，桌面基线不能替代这些结果。
 
 组长方案文件的来源与 SHA-256 记录于 `member-b-baseline.json`。该文件只是 B 的准备记录，不取代组长负责的正式 `toolchain.lock`。
 
-本次实测：上游桌面应用构建成功；`--version` 输出 `26.09`、退出码为 0；五项业务测试通过（Qt Test 连同初始化/清理共 7 passed），测试进程退出码为 0。完整 GUI、编辑/撤销、异常文件拒绝与鸿蒙适配尚未验收。可追溯结果见 `member-b-validation.json`、`member-b-test-results.txt`，包含测试源码和产物哈希。
-
-团队初始化仅增加文档、目录说明和忽略规则，未改变上游业务源码或构建入口；本地测试源文件哈希也保持一致，因此沿用上述验证结果，本次仓库同步未重复构建。
+10/27 首批测试：24 个业务用例通过（含初始化/清理共 26 passed），进程退出码为 0。包含实际编辑、撤销/重做、安全保存与基本坏文件保护；不代表完整 GUI 或鸿蒙验收。结果见 `member-b-validation.json`、`member-b-test-results.txt`，包含固定源码与产物哈希。
 
 ## 直接使用
 
@@ -28,7 +26,7 @@
 # 构建并运行真实模型/文件测试
 .\scripts\Build-MemberB.ps1 -Target Tests -RunTests
 
-# 构建未改业务源码的上游桌面应用
+# 构建当前分支桌面应用
 .\scripts\Build-MemberB.ps1 -Target App
 ```
 
@@ -44,9 +42,9 @@
 
 ## 已建立的独立验证入口
 
-上游固定提交**没有 `tests/` 目录或 Qt Test 工程**，其现有 CI 主要负责构建。本次新增 `member-b-tests.pro`，复用 `leocad.pro` 的源文件清单，只替换程序入口并添加 Qt Test；未抽取新的核心库、未改动业务源码和正式构建文件。
+上游固定提交**没有 `tests/` 目录或 Qt Test 工程**，其现有 CI 主要负责构建。新增 `member-b-tests.pro` 复用 `leocad.pro` 的源文件清单，只替换程序入口并添加 Qt Test；未抽取新的核心库、未改动正式构建文件。当前业务修复仅在 `common/project.cpp/.h`。
 
-`tests/model/tst_model_io.cpp` 调用真实 `Project::Load/Save`，包含五项业务测试：
+`tests/model/tst_model_io.cpp` 调用真实 `Project::Load/Save`。最初五项文件测试保留，并增加保存失败、编辑与历史、格式错误和兼容用例：
 
 1. 空模型保存、重开，保持一个模型、零个零件。
 2. 两个零件的 `.ldr` 往返，校验零件 ID、颜色、位置、旋转及中文带空格的输出路径。
@@ -62,21 +60,26 @@
 
 | 任务 | 实际入口 | 注意事项 |
 |---|---|---|
-| 项目读写 | `common/project.cpp`：`Project::Load`、`Save(QString)`、`Save(QTextStream&)` | 文件路径入口已经存在；读取返回 bool，保存使用 `lcResult<void>` |
+| 项目读写 | `common/project.cpp`：`Project::Load`、`Save(QString)`、`Save(QTextStream&)` | 无弹窗读取和文件保存返回 `lcResult<void>`；旧的读取 bool 接口兼容保留 |
 | LDraw/MPD | `common/lc_model.cpp`：`SplitMPD`、`LoadLDraw`、`SaveLDraw` | 不要另写一个解析器替代真实上游测试 |
 | 零件状态 | `common/piece.*` | 位置、旋转、颜色、显示步骤和序列化 |
 | 编辑 | `common/lc_model.cpp`：`AddPiece`、`MoveSelectedObjects`、`RotateSelectedObjects`、`DeleteSelectedObjects`、`SetSelectedPiecesColorIndex` | 多处直接访问 `gMainWindow`；不能当作已有纯核心 API |
 | 历史 | `common/lc_modelhistory.*`，`lcModel::UndoAction/RedoAction` | 原功能已存在，先验证再适配；撤销重做仍有主窗口回调 |
 | 底层文件 | `common/lc_file.*` | 不接管组长的系统文件选择和权限实现 |
 
-## 正式开发时优先处理的缺口
+## 首批交付与后续边界
 
-以下是固定源码检查发现，尚未修复；现有五项测试不代表这些要求已经满足。
+安全保存使用 `QSaveFile`，禁用直接覆盖回退；确认刷写及文件替换成功后才更新保存点。打开文件增加无弹窗的 `lcResult<void> Load(const QString&)`，旧的 `Load(path, ShowErrors)` 保持兼容。平台层可以读取错误文本并自行呈现。
 
-1. **安全保存**：`Project::Save(QString)` 使用 `QFile` 直接打开目标，保存前清空项目文件名；未采用临时文件提交。`Save(QTextStream&)` 无条件返回 true，并在最终落盘确认前调用 `SetSaved()`。应先增加失败保存的回归测试，再修复目标文件保护、写入错误传播与修改标记。
-2. **异常输入**：读取过程清空现有模型后才解析；Type 1 行的数值读取没有完整的流状态校验。需要确定截断、非法数值、重复子模型、缺失零件的策略，不能把所有未知注释行判为损坏。
-3. **编辑/历史测试**：优先使用上游真实命令和最小桌面窗口装配；若确需拆开界面回调，只做与 A/C 对齐后的最小改动，不重构完整模型架构。
-4. **ARM64 编译及鸿蒙路径**：等待组长提供准确 Qt/SDK、工程接入方式及可用构建入口后补做；本次不声称完成。
+已验证：实际插入 20 件、选择/移动/旋转/改色/删除、撤销/重做、保存点恢复、新编辑清除重做；这些通过隐藏的上游主窗口调用真实命令，没有修改原有编辑/历史实现。
+
+格式保护覆盖：空文件、Type 1–5 基本几何字段、非有限数值、过长/缺失引用名、重复/空 MPD 子模型名。未知行和 META 保持兼容，BOM 和直接颜色可读取；`0 !DATA` 内嵌二进制明确返回不支持。参考 [LDraw 基本格式](https://www.ldraw.org/article/218.html)及 [MPD 扩展](https://www.ldraw.org/article/47.html)。
+
+仍待完成：扩展 META（如复杂 SYNTH/相机/灯光）异常输入、外部引用循环/规模限制、真实零件库、完整 UI、ARM64 和鸿蒙系统导入导出。当前不是完整格式验证器或发布放行。
+
+组长接入时建议先在新建 `Project` 上调用无弹窗 Load，成功后通过现有 `SetProject` 切换 UI；取消选择时不要调用 Load。保存返回成功仅表示本地目标提交成功，外部导出仍由平台层确认。
+
+真机请求（待可用集成 HAP）：1. 加载固定 LDR/MPD；2. 编辑并撤销/重做；3. 保存、退出、重开；4. 导入截断文件，确认原文档仍在；5. 模拟不可写目标，确认失败提示及未保存状态；6. 验证同名覆盖。需记录源提交、包哈希、设备/API 和失败日志。回退时按独立主题撤销两个 `fix(model)` 提交，不能将回退后的版本作为安全保存验收通过。
 
 ## 与其他成员的最小协作约定（提议，待团队确认）
 
