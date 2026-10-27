@@ -1,7 +1,23 @@
 #include "lc_global.h"
 #include "lc_http.h"
 
-#ifdef Q_OS_WIN
+#ifdef LC_DISABLE_NETWORK
+
+lcHttpManager::lcHttpManager(QObject* Owner)
+	: QObject(Owner)
+{
+}
+
+lcHttpReply* lcHttpManager::DownloadFile(const QString& Url)
+{
+	Q_UNUSED(Url);
+
+	lcHttpReply* Reply = new lcHttpReply(this);
+	QTimer::singleShot(0, this, [this, Reply]() { emit DownloadFinished(Reply); });
+	return Reply;
+}
+
+#elif defined(Q_OS_WIN)
 
 #include <windows.h>
 #include <wininet.h>

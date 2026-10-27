@@ -44,7 +44,6 @@ LeoCAD-Windows*.exe
 *.snap
 
 # HarmonyOS local toolchain, signing and build outputs
-toolchain.lock
 .hvigor/
 .idea/
 oh_modules/

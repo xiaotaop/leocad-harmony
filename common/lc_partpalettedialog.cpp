@@ -13,7 +13,11 @@ lcPartPaletteDialog::lcPartPaletteDialog(QWidget* Parent, std::vector<lcPartPale
 	connect(ui->NewButton, &QPushButton::clicked, this, &lcPartPaletteDialog::NewButtonClicked);
 	connect(ui->DeleteButton, &QPushButton::clicked, this, &lcPartPaletteDialog::DeleteButtonClicked);
 	connect(ui->RenameButton, &QPushButton::clicked, this, &lcPartPaletteDialog::RenameButtonClicked);
+#ifdef LC_DISABLE_NETWORK
+	ui->ImportButton->setVisible(false);
+#else
 	connect(ui->ImportButton, &QPushButton::clicked, this, &lcPartPaletteDialog::ImportButtonClicked);
+#endif
 	connect(ui->MoveUpButton, &QPushButton::clicked, this, &lcPartPaletteDialog::MoveUpButtonClicked);
 	connect(ui->MoveDownButton, &QPushButton::clicked, this, &lcPartPaletteDialog::MoveDownButtonClicked);
 	connect(ui->PaletteList, QOverload<int>::of(&QListWidget::currentRowChanged), this, &lcPartPaletteDialog::PaletteListCurrentRowChanged);

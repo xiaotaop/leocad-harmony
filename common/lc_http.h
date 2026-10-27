@@ -1,9 +1,51 @@
 #pragma once
 
+#if !defined(LC_DISABLE_NETWORK) && !defined(Q_OS_WIN)
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#endif
 
-#ifdef Q_OS_WIN
+#ifdef LC_DISABLE_NETWORK
+
+class lcHttpReply : public QObject
+{
+	Q_OBJECT
+
+public:
+	explicit lcHttpReply(QObject* Parent = nullptr)
+		: QObject(Parent)
+	{
+	}
+
+	bool error() const
+	{
+		return true;
+	}
+
+	void abort()
+	{
+	}
+
+	QByteArray readAll() const
+	{
+		return {};
+	}
+};
+
+class lcHttpManager : public QObject
+{
+	Q_OBJECT
+
+public:
+	explicit lcHttpManager(QObject* Owner = nullptr);
+
+	lcHttpReply* DownloadFile(const QString& Url);
+
+signals:
+	void DownloadFinished(lcHttpReply* Reply);
+};
+
+#elif defined(Q_OS_WIN)
 
 class lcHttpReply : public QThread
 {
