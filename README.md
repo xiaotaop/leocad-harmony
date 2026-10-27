@@ -59,9 +59,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and the [two-week development plan](docs/
 
 ## Build status
 
-The CMake wrapper and desktop Qt 6.12 compile regression are available. The
-HarmonyOS HAP remains blocked until Qt 6.12 for HarmonyOS is installed; a desktop
-CI success is not proof that the package runs on HarmonyOS.
+The CMake wrapper, desktop Qt 6.12 compile regression and an ARM64 HarmonyOS
+Qt Widgets/OpenGL diagnostic HAP build are available. Physical-device execution
+still requires a trusted Huawei developer debug signature; an unsigned or locally
+self-signed HAP is not proof that the package runs on a commercial device.
 
 Run the local baseline check with:
 
@@ -69,9 +70,11 @@ Run the local baseline check with:
 pwsh -File scripts/check-toolchain.ps1
 ```
 
-Exact committed versions and the known Qt blocker are in
+Exact committed toolchain versions are in
 [`toolchain.lock`](toolchain.lock). See the [D1 baseline](docs/D1_BASELINE.md)
-and [store submission checklist](docs/STORE_SUBMISSION_CHECKLIST.md).
+and [store submission checklist](docs/STORE_SUBMISSION_CHECKLIST.md). The D2
+probe build/sign/run procedure is in
+[`docs/D2_HARMONY_DEVICE_PROBE.md`](docs/D2_HARMONY_DEVICE_PROBE.md).
 
 ## Licensing and trademarks
 
