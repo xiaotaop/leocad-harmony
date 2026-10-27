@@ -1,0 +1,153 @@
+{
+    "architecture": "arm64",
+    "buffer_uploaded": true,
+    "context": {
+        "format": {
+            "depth_bits": 32,
+            "major": 2,
+            "minor": 1,
+            "profile": 0,
+            "renderable_type": 1,
+            "samples": 0,
+            "stencil_bits": 8
+        },
+        "gl_version": "2.1 Metal - 91.7",
+        "glsl_version": "1.20",
+        "is_gles": false,
+        "renderer": "Apple M4",
+        "valid": true,
+        "vendor": "Apple"
+    },
+    "depth_stencil_fbo_readback": true,
+    "error": "",
+    "features": {
+        "buffers": true,
+        "framebuffers": true,
+        "shaders": true,
+        "threaded_gl": false
+    },
+    "final_gl_error": 0,
+    "leocad_shaders": [
+        {
+            "fragment": "unlit_color",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "unlit_color",
+            "vertex_compiled": true
+        },
+        {
+            "fragment": "unlit_color_conditional",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "unlit_color_conditional",
+            "vertex_compiled": true
+        },
+        {
+            "fragment": "unlit_texture_modulate",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "unlit_texture_modulate",
+            "vertex_compiled": true
+        },
+        {
+            "fragment": "text_sdf",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "unlit_texture_modulate",
+            "vertex_compiled": true
+        },
+        {
+            "fragment": "unlit_texture_decal",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "unlit_texture_decal",
+            "vertex_compiled": true
+        },
+        {
+            "fragment": "unlit_vertex_color",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "unlit_vertex_color",
+            "vertex_compiled": true
+        },
+        {
+            "fragment": "unlit_view_sphere",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "unlit_view_sphere",
+            "vertex_compiled": true
+        },
+        {
+            "fragment": "fakelit_color",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "fakelit_color",
+            "vertex_compiled": true
+        },
+        {
+            "fragment": "fakelit_texture_decal",
+            "fragment_compiled": true,
+            "linked": true,
+            "log": "",
+            "vertex": "fakelit_texture_decal",
+            "vertex_compiled": true
+        }
+    ],
+    "offscreen": {
+        "context_created": true,
+        "format": {
+            "depth_bits": 32,
+            "major": 2,
+            "minor": 1,
+            "profile": 0,
+            "renderable_type": 1,
+            "samples": 0,
+            "stencil_bits": 8
+        },
+        "make_current": true,
+        "sharing": true,
+        "surface_valid": true,
+        "texture_visible": true
+    },
+    "os": "macOS Golden Gate (27.0.1)",
+    "passed": true,
+    "platform": "cocoa",
+    "qt": "6.12.0",
+    "requested_api_honored": true,
+    "requested_format": {
+        "depth_bits": 24,
+        "major": 2,
+        "minor": 1,
+        "profile": 0,
+        "renderable_type": 1,
+        "samples": 0,
+        "stencil_bits": 8
+    },
+    "schema_version": 1,
+    "scope": "host/device diagnostic; not HarmonyOS release acceptance",
+    "screenshot_saved": null,
+    "triangle_shader": {
+        "linked": true,
+        "log": ""
+    },
+    "widget": {
+        "default_fbo": 1,
+        "dpr": 1.25,
+        "frames": 6,
+        "logical_height": 501,
+        "logical_width": 800,
+        "pixel_height": 626,
+        "pixel_width": 1000,
+        "resize_completed": true,
+        "size_matches_dpr": true,
+        "triangle_pixel_passed": true
+    }
+}

@@ -1,0 +1,35 @@
+{
+  "preparedOn": "2026-10-26",
+  "role": "B",
+  "branch": "feature/b-model",
+  "team": {
+    "url": "https://github.com/xiaotaop/leocad-harmony.git",
+    "remote": "origin",
+    "trackingBranch": "origin/feature/b-model",
+    "baseCommit": "959fb4eee3e020e2579fdf7b4196c9856160f759"
+  },
+  "upstream": {
+    "url": "https://github.com/leozide/leocad.git",
+    "tag": "v26.09",
+    "commit": "5196355d4a5adb35f14c97e7672d7a9bfd3af391"
+  },
+  "assignment": {
+    "fileName": "LeoCAD_鸿蒙PC首发版_两周分工与技术方案.md",
+    "sha256": "88cff91d8e7b29d930c93b079f755c6136199d00e30e25e35b87ff228f4c9483"
+  },
+  "desktop": {
+    "platform": "windows-x64",
+    "qt": "6.8.3",
+    "qtArchitecture": "win64_msvc2022_64",
+    "qtArchives": ["qtbase", "qttools", "qtsvg"],
+    "msvcToolset": "14.41.34120",
+    "windowsSdk": "10.0.19041.0",
+    "aqtinstall": "3.3.0"
+  },
+  "harmonyos": {
+    "plannedQt": "6.12",
+    "configured": false,
+    "arm64BuildVerified": false,
+    "deviceVerified": false
+  }
+}

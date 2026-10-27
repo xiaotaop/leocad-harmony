@@ -16,6 +16,10 @@
 *.ldr
 *.dat
 *.mpd
+!/tests/fixtures/*.ldr
+!/tests/fixtures/*.mpd
+/.local/
+/aqtinstall.log
 !/resources/*.ldr
 *.dae
 *.3ds

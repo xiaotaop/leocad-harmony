@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-27",
+  "codeCommit": "47b723f97d20890b211d57b726dc60cf53f77364",
+  "upstreamCommit": "5196355d4a5adb35f14c97e7672d7a9bfd3af391",
+  "teamBaseCommit": "3e2e15b5bcd6ba87720bd2dfebffd49fd48ee3c0",
+  "businessSourceUnchanged": false,
+  "changedBusinessFiles": [
+    "common/project.cpp"
+  ],
+  "desktopAppBuild": "passed",
+  "desktopVersionProbe": {
+    "exitCode": 0,
+    "version": "26.09"
+  },
+  "modelIoTests": {
+    "requiresDesktopOpenGL": true,
+    "businessCasesPassed": 37,
+    "failed": 0,
+    "qtTestTotalsPassed": 39,
+    "skipped": 0,
+    "processExitCode": 0
+  },
+  "regressionEvidence": {
+    "inputAndPathTestsFailedBeforeSecondBatchFix": 9,
+    "resultsAfterFix": "all passed",
+    "firstBatchEvidence": "PR #2 and its committed validation record"
+  },
+  "appSha256": "0c9fba136eeed85d7f5e78e2fc43fe45a603afb0fe3886391b5dbca9378ff25e",
+  "testExeSha256": "fee74a7b8a70590d72b19b31ef6d50d156d8861e2195b32619ff9ab7f0b44ba2",
+  "testResultsSha256": "af67ee601d28cb54765e58b41c521c43efb2467b2149b4ab98266302c83fc909",
+  "sourceHashBasis": "Local worktree bytes at build time; Git checkout line-ending conversion may change byte hashes.",
+  "sourceSha256": {
+    "common/project.cpp": "3e84d3b64f1f92cb492141b8ce76a483d75f44884649146736f2a7bbfdaa56b0",
+    "common/project.h": "0a5142298a473f56e2a6ae8f073adf09081c19726ecb4a0edfc92ed1dffa5246",
+    "member-b-tests.pro": "6d4a3ad27b46f3ed79c1e1affd1d78b2131258346b823ee9c53b864c3ff57857",
+    "scripts/Build-MemberB.ps1": "cefa3aaa13e04b330cae83d8ec777e0746b1ddf58457d25a8369e6b975a1998c",
+    "tests/model/tst_model_io.cpp": "1149020231985ec557e294c8a460f0bb3387469f475dd4e0d0fd849d3d777a3a",
+    "tests/fixtures/two-pieces.ldr": "3d856e665fd5cc5de6110ec5ddd1197bdca30287dfb335bb2823316933407dda",
+    "tests/fixtures/submodel.mpd": "5b979216c54174248a4498bfbc0ed165b02d338be0bc5b987a677ca99e2b0c1c"
+  },
+  "notVerified": [
+    "Full desktop GUI and rendering",
+    "Other malformed META including camera/light/keyframe/group records",
+    "External reference cycles and resource limits",
+    "Complete legacy binary format validation",
+    "Official LDraw library and rendered part geometry",
+    "HarmonyOS Qt 6.12 ARM64 build",
+    "HarmonyOS system picker, permissions and external export",
+    "HAP installation and physical device acceptance"
+  ]
+}
