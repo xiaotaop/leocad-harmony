@@ -64,21 +64,66 @@ if ($hvigor) {
     $failures.Add('hvigorw.bat not found. Check DEVECO_CLI_CLT_PATH.')
 }
 
-$qtCandidates = @($QtRoot, $env:QT_HOST_PATH)
-if ($env:CMAKE_PREFIX_PATH) {
-    $qtCandidates += $env:CMAKE_PREFIX_PATH -split [IO.Path]::PathSeparator
+if ($env:QT_HOST_PATH) {
+    $hostQtConfig = Join-Path $env:QT_HOST_PATH 'lib\cmake\Qt6\Qt6Config.cmake'
+    Write-Check 'Qt host tools' $env:QT_HOST_PATH (Test-Path -LiteralPath $hostQtConfig)
 }
-$qtConfig = $qtCandidates |
-    Where-Object { $_ } |
-    ForEach-Object { Get-ChildItem -LiteralPath $_ -Filter Qt6Config.cmake -Recurse -ErrorAction SilentlyContinue } |
-    Select-Object -First 1
 
-if ($qtConfig) {
-    Write-Check 'Qt for HarmonyOS' $qtConfig.FullName $true
+$targetQtErrors = [System.Collections.Generic.List[string]]::new()
+$targetQtConfig = $null
+if (-not $QtRoot) {
+    $targetQtErrors.Add('QT_ROOT is not set. Point it at the HarmonyOS target Qt prefix, not QT_HOST_PATH.')
+} elseif (-not (Test-Path -LiteralPath $QtRoot -PathType Container)) {
+    $targetQtErrors.Add("Qt target prefix does not exist: $QtRoot")
 } else {
-    Write-Check 'Qt for HarmonyOS' '6.12.x not found' $false
+    $QtRoot = (Resolve-Path -LiteralPath $QtRoot).Path
+    $targetQtConfig = Join-Path $QtRoot 'lib\cmake\Qt6\Qt6Config.cmake'
+    $targetQtTargets = Join-Path $QtRoot 'lib\cmake\Qt6\Qt6Targets.cmake'
+    $targetQtToolchain = Join-Path $QtRoot 'lib\cmake\Qt6\qt.toolchain.cmake'
+    $targetQtCore = Join-Path $QtRoot 'lib\libQt6Core.so'
+
+    foreach ($requiredFile in @($targetQtConfig, $targetQtTargets, $targetQtToolchain, $targetQtCore)) {
+        if (-not (Test-Path -LiteralPath $requiredFile -PathType Leaf)) {
+            $targetQtErrors.Add("HarmonyOS Qt file not found: $requiredFile")
+        }
+    }
+
+    if (Test-Path -LiteralPath $targetQtConfig -PathType Leaf) {
+        $qtConfigText = Get-Content -LiteralPath $targetQtConfig -Raw
+        $versionMatch = [regex]::Match(
+            $qtConfigText,
+            'QT_VERSION_MAJOR\s+(\d+).*?QT_VERSION_MINOR\s+(\d+).*?QT_VERSION_PATCH\s+(\d+)',
+            [Text.RegularExpressions.RegexOptions]::Singleline
+        )
+        if (-not $versionMatch.Success) {
+            $targetQtErrors.Add('Could not read the target Qt version from Qt6Config.cmake.')
+        } else {
+            $targetQtVersion = '{0}.{1}.{2}' -f $versionMatch.Groups[1].Value, $versionMatch.Groups[2].Value, $versionMatch.Groups[3].Value
+            if ($versionMatch.Groups[1].Value -ne '6' -or $versionMatch.Groups[2].Value -ne '12') {
+                $targetQtErrors.Add("Target Qt 6.12.x is required; found $targetQtVersion.")
+            }
+        }
+    }
+
+    if ((Test-Path -LiteralPath $targetQtTargets -PathType Leaf) -and
+        -not ((Get-Content -LiteralPath $targetQtTargets -Raw) -match 'OHOS_PLATFORM=OHOS')) {
+        $targetQtErrors.Add('Qt target metadata does not identify a HarmonyOS/OHOS build.')
+    }
+
+    if ((Test-Path -LiteralPath $targetQtToolchain -PathType Leaf) -and
+        -not ((Get-Content -LiteralPath $targetQtToolchain -Raw) -match 'set\(OHOS_ARCH\s+"?arm64-v8a"?')) {
+        $targetQtErrors.Add('Qt target toolchain is not configured for arm64-v8a.')
+    }
+}
+
+if ($targetQtErrors.Count -eq 0) {
+    Write-Check 'Qt for HarmonyOS' "$targetQtVersion / arm64-v8a ($QtRoot)" $true
+} else {
+    Write-Check 'Qt for HarmonyOS' 'target kit validation failed' $false
     if ($RequireQt) {
-        $failures.Add('Qt for HarmonyOS is required but was not found.')
+        foreach ($targetQtError in $targetQtErrors) {
+            $failures.Add($targetQtError)
+        }
     }
 }
 

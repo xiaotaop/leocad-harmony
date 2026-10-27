@@ -59,7 +59,9 @@ cmake --build build/harmony --target leocad_make_hap
 - [x] 安装 Qt 6.12 for HarmonyOS，并记录其精确版本和构建提交。
 - [x] 首次执行 `leocad_make_hap`，生成 `entry-default-unsigned.hap`。
 
-首次完成应用元数据配置后的未签名 HAP 大小为 76,961,582 字节，SHA-256 为 `EE9E0E6712FD2AA6F6148176E0377DD8C4A83FF9AE6B60275388C54E5E44FDDC`。该文件用于证明构建链闭环，不作为真机或上架包；后续须在 DevEco Studio 中配置项目签名后重新构建。
+首次完成应用元数据配置后的未签名 HAP 用于证明构建链闭环，不作为真机或上架包；后续须在 DevEco Studio 中配置项目签名后重新构建。
+
+PR #4 审核修复后重新生成的未签名 HAP 大小为 76,982,078 字节，SHA-256 为 `687F5AA17921A2E9D5AC22567EFDB4BAE67A029F9A2BDD9D9E8A94ED44B62374`。已直接核对包内 `module.json`：`requestPermissions` 不包含 `ohos.permission.INTERNET` 或 `ohos.permission.GET_NETWORK_INFO`。完整验证记录见 `docs/evidence/leader/2026-10-27/pr4-review-fixes.md`。
 
 ## 次日接口约定
 

@@ -67,7 +67,7 @@ void lcUpdateDialog::DownloadFinished(lcHttpReply* Reply)
 {
 	bool UpdateAvailable = false;
 
-	if (Reply->error() == QNetworkReply::NoError)
+	if (!Reply->error())
 	{
 		int MajorVersion, MinorVersion, PatchVersion;
 		int Parts;

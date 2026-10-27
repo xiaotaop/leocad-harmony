@@ -9,10 +9,15 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.12 REQUIRED COMPONENTS
-    Core Gui Widgets OpenGL OpenGLWidgets Network Xml Concurrent PrintSupport
+set(_qt_components
+    Core Gui Widgets OpenGL OpenGLWidgets Xml Concurrent PrintSupport
     LinguistTools
 )
+if(NOT OHOS)
+    list(APPEND _qt_components Network)
+endif()
+
+find_package(Qt6 6.12 REQUIRED COMPONENTS ${_qt_components})
 find_package(ZLIB REQUIRED)
 
 include(cmake/LeoCADSources.cmake)
@@ -55,14 +60,23 @@ target_compile_definitions(leocad PRIVATE
     LC_DISABLE_RENDER_DIALOG=1
     LC_DISABLE_BLENDER=1
 )
+if(OHOS)
+    target_compile_definitions(leocad PRIVATE LC_DISABLE_NETWORK=1)
+endif()
 target_compile_options(leocad PRIVATE
     $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-unused-parameter;-Werror=unused-result>
 )
 target_link_libraries(leocad PRIVATE
     Qt6::Core Qt6::Gui Qt6::Widgets Qt6::OpenGL Qt6::OpenGLWidgets
-    Qt6::Network Qt6::Xml Qt6::Concurrent Qt6::PrintSupport
+    Qt6::Xml Qt6::Concurrent Qt6::PrintSupport
     ZLIB::ZLIB
 )
+if(NOT OHOS)
+    target_link_libraries(leocad PRIVATE Qt6::Network)
+endif()
+if(WIN32)
+    target_link_libraries(leocad PRIVATE wininet)
+endif()
 target_precompile_headers(leocad PRIVATE common/lc_global.h)
 
 qt_add_translations(leocad
