@@ -3,7 +3,9 @@
 #include "lc_application.h"
 #include "lc_context.h"
 #include "lc_library.h"
+#include "lc_mainwindow.h"
 #include "lc_model.h"
+#include "lc_modelhistory.h"
 #include "piece.h"
 #include "project.h"
 #ifdef Q_OS_WIN
@@ -21,6 +23,30 @@ protected:
         setErrorString("Simulated full output device");
         return -1;
     }
+};
+
+// Real upstream UI collaborators, kept hidden. Preview models do not retain undo.
+class EditingSession
+{
+public:
+    EditingSession()
+    {
+        lcLoadDefaultKeyboardShortcuts();
+        lcLoadDefaultMouseShortcuts();
+        window = std::make_unique<lcMainWindow>();
+        window->CreateWidgets();
+        gApplication->SetProject(new Project());
+        window->SetAddKeys(false);
+        window->SetRelativeTransform(false);
+        window->SetSeparateTransform(false);
+    }
+    ~EditingSession()
+    {
+        window.reset();
+        delete gApplication->mProject;
+        gApplication->mProject = nullptr;
+    }
+    std::unique_ptr<lcMainWindow> window;
 };
 
 class ModelIoTest : public QObject
@@ -181,6 +207,121 @@ private slots:
         QCOMPARE(QDir(dir.path()).entryList(QDir::Files | QDir::Hidden).size(), 1);
     }
 #endif
+
+    void editingSequenceUndoRedoAndSave()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        EditingSession session;
+        auto loaded = std::make_unique<Project>();
+        QVERIFY(loaded->Load(QFINDTESTDATA("../fixtures/two-pieces.ldr"), false));
+        gApplication->SetProject(loaded.release());
+        Project* project = lcGetActiveProject();
+        lcModel* model = project->GetActiveModel();
+        lcPiece* first = model->GetPieces()[0].get();
+        model->SetSelectionAndFocusAction({first}, first, LC_PIECE_SECTION_POSITION, lcSelectionMode::Single);
+        QVERIFY(project->Save(dir.filePath("edited.ldr")).has_value());
+
+        model->MoveSelectedObjects(lcVector3(20, 0, 0), lcModelTransformFlag::Checkpoint, lcModelHistoryEditMerge::None);
+        QCOMPARE(first->mModelWorld.GetTranslation(), lcVector3(20, 0, 0));
+        const lcMatrix33 quarterTurn(lcVector3(0, 1, 0), lcVector3(-1, 0, 0), lcVector3(0, 0, 1));
+        model->RotateSelectedObjects(quarterTurn, lcModelTransformFlag::Checkpoint, lcModelHistoryEditMerge::None);
+        QCOMPARE(first->mModelWorld[0], lcVector4(0, 1, 0, 0));
+        QCOMPARE(first->mModelWorld[1], lcVector4(-1, 0, 0, 0));
+        model->SetSelectedPiecesColorIndex(lcGetColorIndex(2));
+        QCOMPARE(first->GetColorCode(), quint32(2));
+        model->DeleteSelectedObjects();
+        QCOMPARE(model->GetPieces().size(), size_t(1));
+
+        model->UndoAction();
+        QCOMPARE(model->GetPieces().size(), size_t(2));
+        model->UndoAction();
+        QCOMPARE(model->GetPieces()[0]->GetColorCode(), quint32(4));
+        model->UndoAction();
+        QCOMPARE(model->GetPieces()[0]->mModelWorld[0], lcVector4(1, 0, 0, 0));
+        model->UndoAction();
+        QCOMPARE(model->GetPieces()[0]->mModelWorld.GetTranslation(), lcVector3(0, 0, 0));
+        QVERIFY(!project->IsModified());
+        for (int i = 0; i < 4; ++i)
+            model->RedoAction();
+        QCOMPARE(model->GetPieces().size(), size_t(1));
+        QVERIFY(project->IsModified());
+        model->UndoAction();
+
+        const QString path = dir.filePath("edited.ldr");
+        QVERIFY(project->Save(path).has_value());
+        QVERIFY(!model->IsModified());
+        Project reopened(true);
+        QVERIFY(reopened.Load(path, false));
+        const auto& pieces = reopened.GetMainModel()->GetPieces();
+        QCOMPARE(pieces.size(), size_t(2));
+        QCOMPARE(pieces[0]->GetColorCode(), quint32(2));
+        QCOMPARE(pieces[0]->mModelWorld.GetTranslation(), lcVector3(20, 0, 0));
+        QCOMPARE(pieces[0]->mModelWorld[0], lcVector4(0, 1, 0, 0));
+
+        model->UndoAction();
+        QVERIFY(model->IsModified());
+        model->RedoAction();
+        QVERIFY(!model->IsModified());
+        model->UndoAction();
+        first = model->GetPieces()[0].get();
+        model->SetSelectionAndFocusAction({first}, first, LC_PIECE_SECTION_POSITION, lcSelectionMode::Single);
+        model->SetSelectedPiecesColorIndex(lcGetColorIndex(14));
+        model->RedoAction();
+        QCOMPARE(model->GetPieces()[0]->GetColorCode(), quint32(14));
+        QVERIFY(model->IsModified());
+    }
+
+    void insertTwentyPiecesUndoRedoAndReopen()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        EditingSession session;
+        Project* project = lcGetActiveProject();
+        lcModel* model = project->GetActiveModel();
+        PieceInfo* info = lcGetPiecesLibrary()->FindPiece("b_fixture_brick.dat", project, true, true);
+        QVERIFY(info);
+        for (int i = 0; i < 20; ++i)
+        {
+            QVERIFY(model->AddPiece(info, LC_PIECE_SECTION_INVALID));
+            QCOMPARE(model->GetPieces().size(), size_t(i + 1));
+        }
+        for (int i = 0; i < 20; ++i)
+            model->UndoAction();
+        QCOMPARE(model->GetPieces().size(), size_t(0));
+        QVERIFY(!project->IsModified());
+        for (int i = 0; i < 20; ++i)
+            model->RedoAction();
+        QCOMPARE(model->GetPieces().size(), size_t(20));
+        const QString path = dir.filePath("twenty.ldr");
+        QVERIFY(project->Save(path).has_value());
+        Project reopened(true);
+        QVERIFY(reopened.Load(path, false));
+        QCOMPARE(reopened.GetMainModel()->GetPieces().size(), size_t(20));
+    }
+
+    void serializationDoesNotClearEditHistoryDirtyState()
+    {
+        EditingSession session;
+        Project* project = lcGetActiveProject();
+        lcModel* model = project->GetActiveModel();
+        PieceInfo* info = lcGetPiecesLibrary()->FindPiece("b_fixture_brick.dat", project, true, true);
+        QVERIFY(model->AddPiece(info, LC_PIECE_SECTION_INVALID));
+        QVERIFY(model->IsModified());
+        FailingWriteDevice failingDevice;
+        QTextStream failingStream(&failingDevice);
+        QVERIFY(!project->Save(failingStream));
+        QVERIFY(model->IsModified());
+        QString text;
+        QTextStream stream(&text);
+        QVERIFY(project->Save(stream));
+        QVERIFY(!text.isEmpty());
+        QVERIFY(model->IsModified());
+        model->UndoAction();
+        QVERIFY(!model->IsModified());
+        model->RedoAction();
+        QVERIFY(model->IsModified());
+    }
 };
 
 int main(int argc, char** argv)
