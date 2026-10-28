@@ -57,7 +57,7 @@ void MenuScopeTest::initTestCase()
 
 	if (!gApplication->mLibrary)
 	{
-		const QString Archive = QFINDTESTDATA("../../assets/ldraw-lite/library-lite.zip");
+		const QString Archive = QFINDTESTDATA("../../../assets/ldraw-lite/library-lite.zip");
 		QVERIFY2(!Archive.isEmpty(), "bundled library not found");
 
 		QList<QPair<QString, bool>> Paths;

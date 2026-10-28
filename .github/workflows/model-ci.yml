@@ -40,6 +40,8 @@ jobs:
           cache: true
       - name: Build and run model tests
         run: ./scripts/Build-MemberB.ps1 -Target Tests -RunTests -QtRoot $env:QT_ROOT_DIR
+      - name: Run D3 integration tests
+        run: ./scripts/Run-D3Tests.ps1 -QtRoot $env:QT_ROOT_DIR
       - name: Build desktop application
         run: ./scripts/Build-MemberB.ps1 -Target App -QtRoot $env:QT_ROOT_DIR
       - name: Check application startup
@@ -63,3 +65,5 @@ jobs:
             .local/build-app/build.log
             .local/build-app/version.txt
             .local/build-app/version-error.txt
+            .local/build-d3-*/build.log
+            .local/build-d3-*/test-results.txt

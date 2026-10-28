@@ -29,6 +29,8 @@ private slots:
 	void goodArchiveIsAccepted();
 	void wrongRootDirectoryIsRejected();
 	void missingColorConfigIsRejected();
+	void emptyColorConfigIsRejected();
+	void colourConfigWithoutColoursIsRejected();
 	void danglingReferenceIsRejected();
 	void truncatedArchiveIsRejected();
 	void missingFileIsRejected();
@@ -40,12 +42,12 @@ private:
 
 void ArchiveValidationTest::initTestCase()
 {
-	const QString Source = QFINDTESTDATA("../../assets/ldraw-lite/library-lite.zip");
+	const QString Source = QFINDTESTDATA("../../../assets/ldraw-lite/library-lite.zip");
 	QVERIFY2(!Source.isEmpty(), "bundled library archive not found");
 
 	// The expected count comes from the shipped manifest, not a literal, so the
 	// test follows the library rather than freezing a number here.
-	const QString Manifest = QFINDTESTDATA("../../assets/ldraw-lite/manifest.json");
+	const QString Manifest = QFINDTESTDATA("../../../assets/ldraw-lite/manifest.json");
 	QVERIFY2(!Manifest.isEmpty(), "manifest not found");
 
 	QFile File(Manifest);
@@ -54,7 +56,11 @@ void ArchiveValidationTest::initTestCase()
 	mExpectedParts = Document.object().value("counts").toObject().value("parts").toInt();
 	QVERIFY2(mExpectedParts > 0, "manifest has no counts.parts");
 
-	mVariantDir = QFileInfo(Source).absolutePath() + "/../../tests/library/d3/variants";
+	// The variants sit next to this test file, not next to the archive. Resolve
+	// from the archive's absolute path (assets/ldraw-lite -> repo root) so the
+	// --check style relative path is not repeated a third way.
+	mVariantDir = QFileInfo(Source).absolutePath()
+		+ QLatin1String("/../../tests/library/d3/variants");
 
 	if (!QFileInfo::exists(mVariantDir + "/wrongroot.zip"))
 		QSKIP("variants missing; run tests/library/d3/prepare_variants.py");
@@ -62,7 +68,7 @@ void ArchiveValidationTest::initTestCase()
 
 void ArchiveValidationTest::goodArchiveIsAccepted()
 {
-	const QString Source = QFINDTESTDATA("../../assets/ldraw-lite/library-lite.zip");
+	const QString Source = QFINDTESTDATA("../../../assets/ldraw-lite/library-lite.zip");
 	const lcPiecesLibrary::ArchiveCheck Check =
 		lcPiecesLibrary::ValidateBundledLibraryArchive(Source, mExpectedParts);
 
@@ -86,6 +92,26 @@ void ArchiveValidationTest::missingColorConfigIsRejected()
 
 	QVERIFY(!Check.Usable);
 	QVERIFY2(Check.Problem.contains("ldconfig"), qPrintable(Check.Problem));
+}
+
+void ArchiveValidationTest::emptyColorConfigIsRejected()
+{
+	const lcPiecesLibrary::ArchiveCheck Check =
+		lcPiecesLibrary::ValidateBundledLibraryArchive(mVariantDir + "/emptycfg.zip", mExpectedParts);
+
+	QVERIFY(!Check.Usable);
+	QVERIFY2(Check.Problem.contains("empty"), qPrintable(Check.Problem));
+}
+
+void ArchiveValidationTest::colourConfigWithoutColoursIsRejected()
+{
+	// Present, readable, non-empty, but defines no colours. LoadColors() would fall
+	// back to the built-in palette without a word.
+	const lcPiecesLibrary::ArchiveCheck Check =
+		lcPiecesLibrary::ValidateBundledLibraryArchive(mVariantDir + "/garbagecfg.zip", mExpectedParts);
+
+	QVERIFY(!Check.Usable);
+	QVERIFY2(Check.Problem.contains("defines no colours"), qPrintable(Check.Problem));
 }
 
 void ArchiveValidationTest::danglingReferenceIsRejected()

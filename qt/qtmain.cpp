@@ -224,20 +224,32 @@ int main(int argc, char *argv[])
 
 	// The curated library that ships inside the application package.
 	//
-	// It is only offered to LoadPartsLibrary() after it has been inspected,
-	// because that function treats "Load() returned true" as success and Load()
-	// cannot tell a usable archive from one the loader silently emptied: a wrong
-	// root directory, a missing ldconfig.ldr or a dangling part reference all
-	// produce a "loaded" library with the parts panel empty or wrong. A failure
-	// here therefore does not abort startup — the path is simply not appended,
-	// LoadPartsLibrary() falls through to the platform paths above, and the
-	// built-in 128-part library remains as the last resort.
+	// It is placed at the FRONT of the list, ahead of every entry appended above,
+	// because LoadPartsLibrary() stops at the first path that loads successfully.
+	// The entries above are package copies — the platform's library.bin and, on
+	// HarmonyOS, :/resources/library.zip — so whichever of them is reached first
+	// wins. With the curated library appended instead of prepended, a HarmonyOS
+	// build that also lists the built-in archive would load the 128-part library
+	// and never reach the 1160-part one.
 	//
-	// ExpectedParts comes from assets/ldraw-lite/manifest.json. Keeping the
-	// number here means a silently truncated archive is caught at startup rather
-	// than discovered by a user looking at an incomplete parts tree; the offline
-	// check in scripts/library/export_part_list.py --check validates the same
-	// figure against the archive at packaging time.
+	// What this does NOT override: LEOCAD_LIB and the "parts library" preference
+	// are checked inside LoadPartsLibrary() before it walks this list at all, so an
+	// explicit user configuration still wins.
+	//
+	// The path is only offered after inspection, because LoadPartsLibrary() treats
+	// "Load() returned true" as success and Load() cannot tell a usable archive
+	// from one the loader silently emptied: a wrong root directory, a missing or
+	// empty ldconfig.ldr and a dangling part reference all produce a "loaded"
+	// library with the parts panel empty, wrong or colourless. A failure here does
+	// not abort startup — nothing is prepended, LoadPartsLibrary() falls through to
+	// the platform paths, and the built-in 128-part library remains as the last
+	// resort.
+	//
+	// ExpectedParts comes from assets/ldraw-lite/manifest.json. Keeping the number
+	// here means a silently truncated archive is caught at startup rather than
+	// discovered by a user looking at an incomplete parts tree; the offline check
+	// in scripts/library/export_part_list.py --check validates the same figure at
+	// packaging time.
 	const QString BundledLibrary = lcPiecesLibrary::FindBundledLibraryArchive();
 
 	if (!BundledLibrary.isEmpty())
@@ -247,9 +259,16 @@ int main(int argc, char *argv[])
 
 		if (Check.Usable)
 		{
+			// No LC_LDRAW_LIBRARY_PATH entry can precede this one: prepend puts it
+			// ahead of every entry added above, including that one. That is the
+			// intended order — a compile-time path baked into a package should not
+			// outrank the library the package is actually shipping. A user's
+			// LEOCAD_LIB or parts-library preference is checked inside
+			// LoadPartsLibrary() before it walks this list, so it still wins.
+			//
 			// Marked official so the piece count is recorded
 			// (lcPiecesLibrary::SetOfficialPieces()).
-			LibraryPaths += qMakePair(BundledLibrary, true);
+			LibraryPaths.prepend(qMakePair(BundledLibrary, true));
 		}
 		else
 		{

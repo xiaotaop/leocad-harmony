@@ -76,6 +76,19 @@ def main() -> int:
     # 4. Half the archive gone: the count check has to catch this.
     write(OUTPUT / "truncated.zip", entries[: len(entries) // 2])
 
+    # 5. ldconfig.ldr present but emptied. The file exists, so an existence-only
+    #    check passes; LoadColors() then silently uses the built-in palette and
+    #    every part renders in the wrong colour.
+    write(OUTPUT / "emptycfg.zip",
+          [(i, b"" if i.filename.lower() == "ldraw/ldconfig.ldr" else d)
+           for i, d in entries])
+
+    # 6. ldconfig.ldr present with content but no colour records at all.
+    write(OUTPUT / "garbagecfg.zip",
+          [(i, b"0 comment only, no colour definitions\n"
+                if i.filename.lower() == "ldraw/ldconfig.ldr" else d)
+           for i, d in entries])
+
     for path in sorted(OUTPUT.iterdir()):
         print(f"  {path.name}: {path.stat().st_size} bytes", file=sys.stderr)
 

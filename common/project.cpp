@@ -284,7 +284,11 @@ lcModel* Project::CreateNewModel(bool ShowModel)
 
 void Project::ShowModelListDialog()
 {
-	lcModelListDialog Dialog(gMainWindow, mModels);
+	// Structure editing is off: the first release keeps this dialog as the second
+	// entry point to submodel switching (the model tab bar is the first). Removing
+	// LC_MODEL_NEW from the menu was not enough on its own, because this dialog
+	// reaches the same Project operations directly.
+	lcModelListDialog Dialog(gMainWindow, mModels, false);
 
 	if (Dialog.exec() != QDialog::Accepted)
 		return;

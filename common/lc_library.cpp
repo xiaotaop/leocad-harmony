@@ -340,6 +340,7 @@ lcPiecesLibrary::ArchiveCheck lcPiecesLibrary::ValidateBundledLibraryArchive(con
 	std::map<std::string, quint32> Parts;
 	std::map<std::string, quint32> Primitives;
 	int TopLevelParts = 0;
+	quint32 ConfigIndex = 0;
 	bool HasConfig = false;
 	QString MisplacedEntry;
 
@@ -366,7 +367,10 @@ lcPiecesLibrary::ArchiveCheck lcPiecesLibrary::ValidateBundledLibraryArchive(con
 		std::string Relative = Name.substr(6);
 
 		if (Relative == "LDCONFIG.LDR")
+		{
 			HasConfig = true;
+			ConfigIndex = FileIdx;
+		}
 
 		if (Relative.size() <= 4 || Relative.compare(Relative.size() - 4, 4, ".DAT") != 0)
 			continue;
@@ -398,11 +402,66 @@ lcPiecesLibrary::ArchiveCheck lcPiecesLibrary::ValidateBundledLibraryArchive(con
 		return Check;
 	}
 
-	// 2. Colour configuration.
+	// 2. Colour configuration: it has to define colours, not merely be present.
+	//
+	// LoadColors() extracts this file and calls lcLoadColorFile(), which falls back
+	// to the built-in palette when the file yields no colours. A present-but-empty
+	// or corrupt ldconfig.ldr therefore produces a library that loads, reports the
+	// right part count, and renders every part in the wrong colours — the failure
+	// is silent, which is exactly why it has to be caught here.
 	if (!HasConfig)
 	{
 		Check.Problem = QStringLiteral("missing ldraw/ldconfig.ldr");
 		return Check;
+	}
+
+	{
+		lcMemFile ConfigFile;
+
+		if (!ZipFile.ExtractFile(ConfigIndex, ConfigFile))
+		{
+			Check.Problem = QStringLiteral("ldraw/ldconfig.ldr cannot be read");
+			return Check;
+		}
+
+		ConfigFile.Seek(0, SEEK_END);
+		const long ConfigLength = ConfigFile.GetPosition();
+		ConfigFile.Seek(0, SEEK_SET);
+
+		if (ConfigLength <= 0)
+		{
+			Check.Problem = QStringLiteral("ldraw/ldconfig.ldr is empty");
+			return Check;
+		}
+
+		std::string ConfigText(static_cast<size_t>(ConfigLength), '\0');
+		ConfigFile.ReadBuffer(&ConfigText[0], ConfigLength);
+
+		// Count "0 !COLOUR" definitions, the same records lcParseColorFile() builds
+		// colours from. Looking for the directive rather than parsing the whole file
+		// keeps this check independent of the colour module's internals.
+		size_t ColourCount = 0;
+		size_t Offset = 0;
+
+		while (Offset < ConfigText.size())
+		{
+			size_t End = ConfigText.find('\n', Offset);
+
+			if (End == std::string::npos)
+				End = ConfigText.size();
+
+			const std::string Line = ConfigText.substr(Offset, End - Offset);
+			Offset = End + 1;
+
+			if (Line.compare(0, 10, "0 !COLOUR ") == 0)
+				ColourCount++;
+		}
+
+		if (ColourCount == 0)
+		{
+			Check.Problem = QStringLiteral("ldraw/ldconfig.ldr defines no colours");
+			return Check;
+		}
 	}
 
 	// 3. Part count.

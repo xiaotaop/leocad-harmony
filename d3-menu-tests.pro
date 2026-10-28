@@ -1,11 +1,11 @@
-# Menu-scope tests for the first-release UI trimming.
+# D3 integration test: menu scope.
 #
-# Separate from d3-tests.pro because QTEST_MAIN opens a real QApplication, which
-# needs a platform plugin; the archive validator deliberately does not.
+# Must sit next to leocad.pro so that file's relative source paths resolve
+# (member-b-tests.pro follows the same convention). Build with:
+#   mkdir -p build/d3-menu && cd build/d3-menu
+#   qmake ../../d3-menu-tests.pro CONFIG+=debug && make -j4
 #
-#   mkdir -p build/d3menu && cd build/d3menu
-#   qmake ../../d3-menu-tests.pro CONFIG+=debug
-#   QT_QPA_PLATFORM=offscreen make -j4 && ./build/debug/leocad-d3-menu
+# Or run all of them with scripts/dev/run-d3-tests.sh.
 
 include(leocad.pro)
 
