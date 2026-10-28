@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.21)
+project(LeoCADRenderContextTests LANGUAGES CXX)
+
+find_package(Qt6 6.5 REQUIRED COMPONENTS Gui Test)
+set(CMAKE_AUTOMOC ON)
+qt_add_executable(leocad-render-context-tests tst_glcontext.cpp)
+target_compile_features(leocad-render-context-tests PRIVATE cxx_std_17)
+target_include_directories(leocad-render-context-tests PRIVATE ../../common)
+target_link_libraries(leocad-render-context-tests PRIVATE Qt6::Gui Qt6::Test)
+set_target_properties(leocad-render-context-tests PROPERTIES MACOSX_BUNDLE FALSE)

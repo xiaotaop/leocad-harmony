@@ -1,6 +1,8 @@
 #include "lc_global.h"
 #include "lc_viewwidget.h"
 #include "lc_glextensions.h"
+#include "lc_glcontext.h"
+#include <QJsonDocument>
 #include "project.h"
 #include "lc_library.h"
 #include "lc_application.h"
@@ -72,6 +74,12 @@ void lcViewWidget::UpdateMousePosition()
 
 void lcViewWidget::initializeGL()
 {
+	QJsonObject Report = lcGLContextInfo(*context(), nullptr, QOpenGLContext::globalShareContext());
+	Report["stage"] = QStringLiteral("view_initialize");
+	Report["dpr"] = GetDeviceScale();
+	Report["logical_width"] = width();
+	Report["logical_height"] = height();
+	qInfo().noquote() << "LEOCAD_GL_CONTEXT" << QString::fromUtf8(QJsonDocument(Report).toJson(QJsonDocument::Compact));
 	mView->mContext->SetGLContext(context(), this);
 }
 

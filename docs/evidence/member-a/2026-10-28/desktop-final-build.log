@@ -1,0 +1,8 @@
+[  0%] Built target leocad_autogen_timestamp_deps
+[  7%] Built target LeoCADHarmony_lrelease
+[  8%] Automatic MOC and UIC for target leocad
+[  8%] Built target leocad_autogen
+[  9%] Building CXX object CMakeFiles/leocad.dir/common/lc_context.cpp.o
+[ 10%] Building CXX object CMakeFiles/leocad.dir/common/lc_viewwidget.cpp.o
+[ 11%] Linking CXX executable leocad
+[100%] Built target leocad
