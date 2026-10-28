@@ -1,6 +1,7 @@
 // Standalone D1 diagnostic. Does not alter LeoCAD's runtime or preferences.
 #include <QApplication>
 #include <QCommandLineParser>
+#include <QDir>
 #include <QFile>
 #include <QImage>
 #include <QJsonArray>
@@ -13,6 +14,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLWidget>
 #include <QSaveFile>
+#include <QStandardPaths>
 #include <QSurfaceFormat>
 #include <QSysInfo>
 #include <QTimer>
@@ -163,7 +165,14 @@ protected:
 		if (mFrames == 1)
 			QTimer::singleShot(0, this, [this]() { resize(800, 500); update(); });
 		else if (mFrames == 2)
-			QTimer::singleShot(100, this, [this]() { Finish({}); });
+		{
+#ifdef Q_OS_HARMONY
+			constexpr int FinishDelayMs = 3000;
+#else
+			constexpr int FinishDelayMs = 100;
+#endif
+			QTimer::singleShot(FinishDelayMs, this, [this]() { Finish({}); });
+		}
 	}
 
 private:
@@ -268,7 +277,11 @@ private:
 int main(int argc, char* argv[])
 {
 	QSurfaceFormat Format;
+#ifdef Q_OS_HARMONY
+	bool GLES = true;
+#else
 	bool GLES = false;
+#endif
 	for (int Index = 1; Index < argc; Index++)
 		GLES = GLES || QByteArray(argv[Index]) == "--gles";
 	Format.setRenderableType(GLES ? QSurfaceFormat::OpenGLES : QSurfaceFormat::OpenGL);
@@ -283,8 +296,18 @@ int main(int argc, char* argv[])
 	Parser.setApplicationDescription("LeoCAD GL / FBO / shader / shared-context capability probe");
 	Parser.addHelpOption();
 	Parser.addOption({"gles", "Request OpenGL ES 3.0; verify actual is_gles in the JSON."});
-	Parser.addOption({"output", "JSON report path (parent directory must exist).", "path", "render-probe.json"});
-	Parser.addOption({"screenshot", "Optional PNG of the widget after resize.", "path"});
+	QString DefaultOutput = "render-probe.json";
+	QString DefaultScreenshot;
+#ifdef Q_OS_HARMONY
+	const QString DataDirectory = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+	if (!DataDirectory.isEmpty() && QDir().mkpath(DataDirectory))
+	{
+		DefaultOutput = DataDirectory + "/render-probe.json";
+		DefaultScreenshot = DataDirectory + "/render-probe.png";
+	}
+#endif
+	Parser.addOption({"output", "JSON report path (parent directory must exist).", "path", DefaultOutput});
+	Parser.addOption({"screenshot", "Optional PNG of the widget after resize.", "path", DefaultScreenshot});
 	Parser.process(Application);
 	RenderProbe Probe(Parser.value("output"), Parser.value("screenshot"));
 	Probe.show();

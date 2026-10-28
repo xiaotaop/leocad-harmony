@@ -9,3 +9,6 @@
 # Denote all files that are truly binary and should not be modified.
 *.png binary
 *.jpg binary
+
+# Preserve original device-evidence bytes so receipt SHA-256 values survive checkout.
+/docs/evidence/leader/2026-10-27/d2-device-pass/* -text whitespace=cr-at-eol

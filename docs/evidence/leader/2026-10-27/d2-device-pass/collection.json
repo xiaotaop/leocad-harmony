@@ -1,0 +1,22 @@
+[
+  {
+    "round": 1,
+    "started_at": "2026-10-27T19:47:44.1345237+08:00",
+    "retrieved_at": "2026-10-27T19:47:50.3114209+08:00",
+    "process_id": 20760,
+    "native_main_exit_code": 0,
+    "passed": true,
+    "json_sha256": "9a11bfe4f9345b8dade642456bf7f3819e4c2b4f8767449985671099ba371531",
+    "png_sha256": "d604972565f370b255dc947ff4ecc29a6986e65a03830caa5cc89493b91adb39"
+  },
+  {
+    "round": 2,
+    "started_at": "2026-10-27T19:47:50.7510099+08:00",
+    "retrieved_at": "2026-10-27T19:47:56.8645259+08:00",
+    "process_id": 20872,
+    "native_main_exit_code": 0,
+    "passed": true,
+    "json_sha256": "9a11bfe4f9345b8dade642456bf7f3819e4c2b4f8767449985671099ba371531",
+    "png_sha256": "d604972565f370b255dc947ff4ecc29a6986e65a03830caa5cc89493b91adb39"
+  }
+]
