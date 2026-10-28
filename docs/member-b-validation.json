@@ -1,51 +1,123 @@
 {
-  "date": "2026-10-27",
-  "codeCommit": "47b723f97d20890b211d57b726dc60cf53f77364",
+  "date": "2026-10-28",
+  "codeCommit": "486f74c9060331246e0e4634185a50ad0791693e",
   "upstreamCommit": "5196355d4a5adb35f14c97e7672d7a9bfd3af391",
-  "teamBaseCommit": "3e2e15b5bcd6ba87720bd2dfebffd49fd48ee3c0",
+  "teamBaseCommit": "cf2adc63b1e6625a366186b39706a6741d586894",
   "businessSourceUnchanged": false,
   "changedBusinessFiles": [
     "common/project.cpp"
   ],
-  "desktopAppBuild": "passed",
+  "desktopAppBuild": "passed (clean, default upstream qmake feature set)",
   "desktopVersionProbe": {
     "exitCode": 0,
     "version": "26.09"
   },
+  "desktopDefaultFormatCompatibility": {
+    "format": "Wavefront OBJ",
+    "exitCode": 0,
+    "fixture": "tests/fixtures/render-baseline.ldr",
+    "vertices": 488,
+    "faces": 440,
+    "bytes": 31158,
+    "sha256": "62fd4466de500ab4205e9c5ca2381beca2ba1bca746fbe87956b77bd2491ec3f"
+  },
   "modelIoTests": {
     "requiresDesktopOpenGL": true,
-    "businessCasesPassed": 37,
+    "businessCasesPassed": 49,
+    "qtTestTotalsPassed": 51,
     "failed": 0,
-    "qtTestTotalsPassed": 39,
     "skipped": 0,
-    "processExitCode": 0
+    "processExitCode": 0,
+    "newD2Cases": 12
+  },
+  "formatIsolation": {
+    "define": "LC_DISABLE_NON_CORE_FORMATS=1",
+    "enabledFor": [
+      "member-b-tests.pro",
+      "CMake OHOS target"
+    ],
+    "disabledFor": "ordinary desktop app",
+    "blockedProjectEntries": [
+      "legacy binary Load",
+      "ImportLDD",
+      "Export3DStudio",
+      "ExportCOLLADA",
+      "ExportCSV",
+      "ExportHTML",
+      "ExportPOVRay",
+      "ExportWavefront",
+      "ExportBrickLink"
+    ],
+    "preserved": "LDraw load/save, edits, history; LDraw step/submodel serialization and image diagnostics"
+  },
+  "networkIsolation": {
+    "define": "LC_DISABLE_NETWORK=1",
+    "testLinkLibrariesExclude": [
+      "Qt Network",
+      "WinInet"
+    ],
+    "testExeDirectNetworkImports": [],
+    "offlineErrorCallback": "passed",
+    "dependencies": [
+      "Qt6PrintSupport.dll",
+      "Qt6OpenGLWidgets.dll",
+      "Qt6Widgets.dll",
+      "Qt6OpenGL.dll",
+      "Qt6Gui.dll",
+      "Qt6Concurrent.dll",
+      "Qt6Test.dll",
+      "Qt6Core.dll",
+      "MSVCP140.dll",
+      "KERNEL32.dll",
+      "VCRUNTIME140.dll",
+      "VCRUNTIME140_1.dll",
+      "api-ms-win-crt-runtime-l1-1-0.dll",
+      "api-ms-win-crt-heap-l1-1-0.dll",
+      "api-ms-win-crt-math-l1-1-0.dll",
+      "api-ms-win-crt-stdio-l1-1-0.dll",
+      "api-ms-win-crt-string-l1-1-0.dll",
+      "api-ms-win-crt-convert-l1-1-0.dll",
+      "api-ms-win-crt-locale-l1-1-0.dll"
+    ],
+    "dependenciesLogSha256": "e70df28b49da7016e1e19798711fb588749f9872c83218bcac963d1f20ad5269"
   },
   "regressionEvidence": {
-    "inputAndPathTestsFailedBeforeSecondBatchFix": 9,
-    "resultsAfterFix": "all passed",
-    "firstBatchEvidence": "PR #2 and its committed validation record"
+    "preIsolationExportCasesUnexpectedlySucceeded": [
+      "3ds",
+      "dae",
+      "csv"
+    ],
+    "preIsolationRunCompleted": false,
+    "preIsolationRunLimit": "Stopped at the old POV-Ray GUI dependency in the preview-only test fixture. No complete pre-fix pass/fail total is claimed.",
+    "resultsAfterFix": "51 passed, 0 failed, 0 skipped",
+    "previousBatches": "PR #2 and PR #5 committed evidence"
   },
-  "appSha256": "0c9fba136eeed85d7f5e78e2fc43fe45a603afb0fe3886391b5dbca9378ff25e",
-  "testExeSha256": "fee74a7b8a70590d72b19b31ef6d50d156d8861e2195b32619ff9ab7f0b44ba2",
-  "testResultsSha256": "af67ee601d28cb54765e58b41c521c43efb2467b2149b4ab98266302c83fc909",
+  "appSha256": "13dd549295a3a2d28f8341774698f3462d1f761963e4862d061bc20b57fe8c7f",
+  "testExeSha256": "85639a97e52f485cf6e603b550c04ed2518ac2162ac269db0f9a132920b3a07a",
+  "testResultsSha256": "7d72891d74fb0d322ec00212c090cc1d6d15c3562ff5a9f71a8ebb4c162340f3",
   "sourceHashBasis": "Local worktree bytes at build time; Git checkout line-ending conversion may change byte hashes.",
   "sourceSha256": {
-    "common/project.cpp": "3e84d3b64f1f92cb492141b8ce76a483d75f44884649146736f2a7bbfdaa56b0",
+    "common/project.cpp": "71d86e7e44650a8e5d1da3145abbea7657c9830c9d14a91a9eba42e703151c5c",
     "common/project.h": "0a5142298a473f56e2a6ae8f073adf09081c19726ecb4a0edfc92ed1dffa5246",
-    "member-b-tests.pro": "6d4a3ad27b46f3ed79c1e1affd1d78b2131258346b823ee9c53b864c3ff57857",
-    "scripts/Build-MemberB.ps1": "cefa3aaa13e04b330cae83d8ec777e0746b1ddf58457d25a8369e6b975a1998c",
-    "tests/model/tst_model_io.cpp": "1149020231985ec557e294c8a460f0bb3387469f475dd4e0d0fd849d3d777a3a",
+    "common/lc_http.cpp": "c8757c7ec2f77cbf8017cb27e4bbcce24a0e25f46abd6b3cd43c7b3b3dfb5fb8",
+    "common/lc_http.h": "d3a30b4e50d58c13fe418218bd55cdb2aa1aeed8bbd5fb9d74070baf87342ef7",
+    "CMakeLists.txt": "140ff51fc8cd0801445f67ae2622172559a3666dffc51a6342fec3ffe9cd938a",
+    "member-b-tests.pro": "bcb9330b341a2e5fe8abc73409f5e134f339adad69b685f6fea83260deda1471",
+    "scripts/Build-MemberB.ps1": "3e2d0626346ab1db5e1238f05c041e0716a569edaf6dbab15f885edf1d281805",
+    ".github/workflows/model-ci.yml": "cdbaa1a8c305ef65a094d075406ef52b639ddd8a4c39b0e121427e74c3b2df71",
+    "tests/model/tst_model_io.cpp": "f6811386958dfae24e4ad6dee41851c092968e386fb4dbfe7afb8517a24bf2f3",
     "tests/fixtures/two-pieces.ldr": "3d856e665fd5cc5de6110ec5ddd1197bdca30287dfb335bb2823316933407dda",
-    "tests/fixtures/submodel.mpd": "5b979216c54174248a4498bfbc0ed165b02d338be0bc5b987a677ca99e2b0c1c"
+    "tests/fixtures/submodel.mpd": "5b979216c54174248a4498bfbc0ed165b02d338be0bc5b987a677ca99e2b0c1c",
+    "tests/fixtures/empty-model.lxf": "877aac77e0aa0b50f8ee4cbe67158dcc50e14a159ad5811d1fc5b3e0930ec784"
   },
   "notVerified": [
     "Full desktop GUI and rendering",
     "Other malformed META including camera/light/keyframe/group records",
     "External reference cycles and resource limits",
-    "Complete legacy binary format validation",
-    "Official LDraw library and rendered part geometry",
-    "HarmonyOS Qt 6.12 ARM64 build",
+    "Legacy binary/LDD behavior in unrestricted desktop builds beyond successful compilation",
+    "Official reduced LDraw library integration",
+    "This patch on HarmonyOS Qt 6.12 ARM64",
     "HarmonyOS system picker, permissions and external export",
-    "HAP installation and physical device acceptance"
+    "HAP installation and physical-device acceptance"
   ]
 }
