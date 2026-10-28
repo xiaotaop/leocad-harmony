@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-28",
+  "generated_at": "2026-10-28T13:58:47.558830+08:00",
+  "baseline_commit": "32ce8425f5fa7f14b7a4a837ead2339a314a66e8",
+  "baseline_tree": "a05d89b974fe9a1246f3c5f1fe131339240d12fa",
+  "baseline_commit_and_tree_verified": true,
+  "host": {
+    "os": "macOS 27.0.1",
+    "architecture": "arm64",
+    "gpu": "Apple M4",
+    "qt": "6.12.0",
+    "compiler": "Apple Clang 21",
+    "cmake": "3.28.2"
+  },
+  "context_tests": {
+    "exit_code": 0,
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "business_cases": 11
+  },
+  "desktop_app": {
+    "configure_exit_code": 0,
+    "build_exit_code": 0,
+    "build_source_matches_working_tree": true,
+    "binary_sha256": "41a1dcc984c66685f385b4dcd2d698b0bf65a6cae85c0f68ed1e4850018ff7a8",
+    "build_location": "ASCII temporary snapshot; Qt Linguist deferred arguments fail in original parentheses path"
+  },
+  "model_smoke": {
+    "exit_code": 0,
+    "image": [
+      800,
+      600
+    ],
+    "visually_checked": true,
+    "fixture": "tests/fixtures/render-baseline.ldr"
+  },
+  "window_smoke": {
+    "view_contexts": 2,
+    "all_valid_current_sharing": true,
+    "dpr": [
+      2,
+      2
+    ],
+    "svg_warnings": false,
+    "shutdown": "test-owned process terminated after five seconds; not clean shutdown verification"
+  },
+  "source_sha256": {
+    "common/lc_context.cpp": "d7f6b471dbb9ce0ba33ee5f7ba2f8772d6a42bd6f78460686952f0b3148c41f0",
+    "common/lc_viewwidget.cpp": "9679eeffdd62a56504d734a57e35cae4663f4957f4130b3c3768845ed59ab18f",
+    "common/lc_glcontext.h": "daa072757e2982daf8ae3062969f92a3b4e20b88715fc8b7f2df49cb4c64486e",
+    "tests/render-context/CMakeLists.txt": "9fba4759ebd91d93798f917b2939c4a8d4ca796ee6fb50c7bbff668e1f4b9ae6",
+    "tests/render-context/tst_glcontext.cpp": "a5dc131cb0e3e2665226dbb7ad078b2ac62782bffb6de948ad16b5b44cc0916f",
+    ".github/workflows/render-context-ci.yml": "28d98abc17d492a62d3301f386f39f5d23b62d60a7ae0e2d6bab7f7fc0fc88a8"
+  },
+  "leader_device_evidence": "Checked two archived probe runs from 2026-10-27; not a new run of these production changes",
+  "harmonyos_build": "pending",
+  "production_patch_device_test": "pending",
+  "evidence_sha256": {
+    "context-tests-build.log": "a8e65de7e766535c60eefffa3430458e82f66a12667324599a608937f7a47610",
+    "context-tests.txt": "b3d14fa832b8003057d26fb99e23093292121eba2318eaf603d1e3eb8c7d0c0e",
+    "context-tests.xml": "eb79b836bb205ec222b741cdedd069e3f283883adfe683dc4b4974498cc8a1a0",
+    "desktop-configure.log": "c3122d1ad6890f901b0917ac3a473be939d284491955fd4dda226c98dc1ddbbe",
+    "desktop-final-build.log": "0647391da09d845f8b6c3c8e42d6208eb2f593f421a4aeb2288f312d534e02ab",
+    "leader-evidence-check.json": "0201f54e80ba16fd54329349293a27e52ab1d018bf025d2a148fb595f32b9cbd",
+    "macos-model.png": "59f07370430dc599a83e4c4d12af2b18fd622ed8eca7ecae9e0b71e2125e71a7",
+    "model-render.log": "0fab5eaeba3181c95c70fa5a997695f56b39b202cdb2420287f8c505c113e0ec",
+    "window-contexts.json": "ca0ce1917177aa86a2fcd5fdf7371d3129edc52e5683ced1782279acbbbf6bd3",
+    "window-startup.log": "35f8a44fd5c4af244b4b18f2165950726fa534bd893d608df6b04dc90e018bcf"
+  },
+  "ci_environment_fix": {
+    "first_run": "https://github.com/xiaotaop/leocad-harmony/actions/runs/40641456459",
+    "failure": "QtCore requires ICU 73; qtbase-only archive selection omitted it",
+    "verified_official_archives": [
+      "qtbase",
+      "icu"
+    ],
+    "production_source_changed": false
+  }
+}
