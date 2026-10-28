@@ -18,6 +18,7 @@ packaging pipeline relies on — a non-zero code stops the release.
 from __future__ import annotations
 
 import contextlib
+import csv
 import importlib.util
 import io
 import json
@@ -41,7 +42,31 @@ PRIMITIVE = "ldraw/p/box.dat"
 
 LICENCE = "0 !LICENSE Licensed under CC BY 4.0 : see CAreadme.txt"
 
+# A second pair of parts used by the indirect-reference tests: the seed part
+# reaches PARENT_VIA_SUBPART only through a subpart, never directly.
+PART_VIA_SUBPART = "ldraw/parts/3101.dat"
+SUBPART_TO_PART = "ldraw/parts/s/3101s01.dat"
+INDIRECT_CHILD = "ldraw/parts/3102.dat"
+
 BODIES = {
+    PART_VIA_SUBPART: "\n".join([
+        "0 Technic Brick  1 x  2",
+        "0 Name: 3101.dat",
+        LICENCE,
+        "1 16 0 0 0 1 0 0 0 1 0 0 0 1 s\\3101s01.dat",
+    ]) + "\n",
+    SUBPART_TO_PART: "\n".join([
+        "0 ~Technic Brick  1 x  2 Subpart",
+        "0 Name: s/3101s01.dat",
+        # The point: a *top-level* part referenced from inside a subpart.
+        "1 16 0 0 0 1 0 0 0 1 0 0 0 1 3102.dat",
+    ]) + "\n",
+    INDIRECT_CHILD: "\n".join([
+        "0 Technic Brick  1 x  4",
+        "0 Name: 3102.dat",
+        LICENCE,
+        "3 16 0 0 0 1 0 0 0 1 0",
+    ]) + "\n",
     PART: "\n".join([
         "0 Brick  2 x  4",
         "0 Name: 3001.dat",
@@ -231,6 +256,44 @@ class ExportPartListTests(unittest.TestCase):
         code, stderr = self.run_script(assets, self.root / "expected.csv")
         self.assertNotEqual(code, 0, "entries outside ldraw/ must fail")
         self.assertIn("3001", stderr)
+
+
+    def test_top_level_part_reached_through_subpart_is_closure(self) -> None:
+        """A top-level part referenced from inside a subpart joins the closure.
+
+        The reference is real: the loader will pull in 3102 when it loads 3101,
+        so 3102 has to be both packaged and recorded as a closure member. A walk
+        that only follows part-to-part edges reads 3102 for existence but never
+        queues it, so build_rows() then rejects it as unreachable.
+        """
+        assets = build_case(
+            self.root / "assets",
+            [PART_VIA_SUBPART, SUBPART_TO_PART, INDIRECT_CHILD],
+            seed_ids=("3101",), manifest_ids=("3101", "3102"))
+
+        output = self.root / "out.csv"
+        code, stderr = self.run_script(assets, output)
+        self.assertEqual(code, 0, f"indirect reference must be accepted: {stderr}")
+
+        with output.open(encoding="utf-8") as handle:
+            rows = {row["part_id"]: row for row in csv.DictReader(handle)}
+        self.assertEqual(rows["3101"]["origin"], "seed")
+        self.assertEqual(rows["3102"]["origin"], "closure")
+        # Provenance must point at the part that references it, not at the
+        # subpart path that happened to be the immediate referrer.
+        self.assertEqual(rows["3102"]["introduced_by"], "3101")
+        self.assertEqual(rows["3102"]["root_seed"], "3101")
+
+    def test_indirect_top_level_part_missing_fails(self) -> None:
+        """The same chain with 3102 omitted must fail, not be silently accepted."""
+        assets = build_case(
+            self.root / "assets",
+            [PART_VIA_SUBPART, SUBPART_TO_PART],      # 3102 left out
+            seed_ids=("3101",), manifest_ids=("3101", "3102"))
+
+        code, stderr = self.run_script(assets, self.root / "out.csv")
+        self.assertNotEqual(code, 0, "missing indirect part must fail the export")
+        self.assertIn("3102.dat", stderr)
 
 
 if __name__ == "__main__":

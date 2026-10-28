@@ -199,12 +199,23 @@ def resolve_reference(reference: str, parts, primitives):
 def referenced_entries(bundle, member: str, parts, primitives):
     """Resolve every type-1 reference in one archive member.
 
-    Returns ``(top_level_parts, library_members)``: the part ids to follow in the
-    dependency closure, and every archive member the file needs in order to
-    render. Raises ``SystemExit`` when a reference cannot be satisfied.
+    Returns ``(top_level_parts, library_members)``. Entries are tuples carrying
+    the referencing file, because a part reached through a chain of subparts
+    still has to record *which* part actually references it — the immediate
+    parent is what ``introduced_by`` reports, and it is not always the top-level
+    part the walk started from.
+
+    ``top_level_parts`` holds ``(part_id, referencing_member)``; the referencing
+    member is a part id when a part references a part, but a subpart or
+    primitive path when the reference came from deeper down.
+
+    ``library_members`` holds ``(archive_member, referencing_member)`` for the
+    subparts and primitives that need their own references followed.
+
+    Raises ``SystemExit`` when a reference cannot be satisfied.
     """
-    top_level: list[str] = []
-    members: list[str] = []
+    top_level: list[tuple[str, str]] = []
+    members: list[tuple[str, str]] = []
     for raw in bundle.read(member).decode("utf-8", "replace").splitlines():
         fields = raw.split()
         if len(fields) < 15 or fields[0] != "1":
@@ -219,12 +230,12 @@ def referenced_entries(bundle, member: str, parts, primitives):
                 f"the subset is incomplete")
         kind, key = resolved
         if kind == "part":
-            top_level.append(key)
-            members.append(parts[key])
+            top_level.append((key, member))
+            members.append((parts[key], member))
         else:
             # Subparts and primitives are library members, not part ids: they
             # never join the closure, but their own references must be followed.
-            members.append(primitives[key])
+            members.append((primitives[key], member))
     return top_level, members
 
 
@@ -247,19 +258,41 @@ def read_selection(path: Path):
 
 
 def walk_closure(seed_order, parts, primitives, bundle):
-    """Breadth-first over part references; record parent and originating seed.
+    """Breadth-first over the whole reference graph; record parent and seed.
 
-    Two things are checked here that a part-id-only walk cannot see:
+    The graph has two kinds of node — top-level parts (tracked in ``root`` and
+    ``parent``) and library members (subparts and primitives, followed for
+    existence checks). They form *one* graph: a subpart can reference a
+    top-level part as easily as the reverse, so a part discovered two levels
+    down through a subpart is as much a closure member as one a seed references
+    directly. Both discovery paths therefore feed the same queue.
 
-    * a seed listed in selection.txt but absent from the archive is an error,
-      not something to skip — the caller asked for a part that will not ship;
-    * subparts and primitives get their own references followed, so a missing
-      primitive underneath a subpart is reported rather than silently accepted.
+    Provenance:
+
+      ``introduced_by``  the part that references this one, resolved to a
+                         part id even when the edge came from a subpart;
+      ``root_seed``      the seed whose budget the part belongs to, so every
+                         closure member traces back to a selection decision.
+
+    A part can be referenced by several others (one is referenced 56 times in
+    the shipped subset), so ``introduced_by`` reports one valid introduction
+    path rather than a unique parent — the column is an audit trail, not a claim
+    of single ownership. A seed referrer is preferred when both are seen, since
+    that lets a reviewer check the budget decision in one hop.
+
+    Cycle and repetition protection:
+      * a part already in ``root`` is never queued again;
+      * ``visited_members`` stops a shared primitive from being re-read and
+        stops a subpart cycle (a -> b -> a) from looping forever.
     """
     parent: dict[str, str] = {}
     root: dict[str, str] = {part_id: part_id for part_id in seed_order}
     queue = deque(seed_order)
     visited_members: set[str] = set()
+    # Archive member -> the top-level part that owns it, used to turn a reference
+    # made from inside a subpart into the part id that introduced the child.
+    member_owner: dict[str, str] = {}
+    seeds = set(seed_order)
 
     missing_seeds = [part_id for part_id in seed_order if part_id not in parts]
     if missing_seeds:
@@ -267,28 +300,85 @@ def walk_closure(seed_order, parts, primitives, bundle):
             f"{len(missing_seeds)} seed parts are listed in selection.txt but "
             f"missing from the archive: {missing_seeds[:5]}")
 
+    def record(part_id: str, referrer: str, seed: str) -> None:
+        """Queue a newly discovered top-level part with its provenance.
+
+        A seed referrer outranks a non-seed one; otherwise first discovery wins.
+        Preferring a seed keeps the trail checkable in one hop and stops the
+        result from depending on which subtree the queue happened to reach
+        first.
+        """
+        if part_id in root:
+            # A part reachable by several paths keeps the first one found: that
+            # is a valid edge, and churning it would rewrite the committed CSV
+            # whenever traversal order changed. The only refinement applied is
+            # upgrading a non-seed referrer to a seed one, which keeps the audit
+            # trail one hop from a budget decision.
+            existing = parent.get(part_id)
+            if existing is not None and existing not in seeds and referrer in seeds:
+                parent[part_id] = referrer
+                root[part_id] = seed
+            return
+        parent[part_id] = referrer
+        root[part_id] = seed
+        queue.append(part_id)
+
+    def part_of(referrer: str) -> str:
+        """The top-level part a referencing archive member belongs to.
+
+        ``introduced_by`` must be a part id, but a part reached through subparts
+        is referenced by ``ldraw/parts/s/...``, not by a part. A member path that
+        is itself a top-level part is its own answer; otherwise walk back up the
+        recorded owner chain.
+        """
+        if referrer.startswith("ldraw/parts/") and "/s/" not in referrer.lower():
+            stem = referrer[len("ldraw/parts/"):-len(".dat")].upper()
+            if stem in parts:
+                return stem
+
+        seen: set[str] = set()
+        cursor = referrer
+        while cursor in member_owner and cursor not in seen:
+            seen.add(cursor)
+            cursor = member_owner[cursor]
+        return cursor
+
+    def walk_members(entries, seed: str) -> None:
+        """Follow the subparts and primitives reachable from one part.
+
+        ``seed`` is the root seed those members belong to, propagated down so a
+        part reached here is still attributed to the right budget.
+        """
+        pending = list(entries)
+        while pending:
+            member, referrer = pending.pop()
+            if member in visited_members:
+                continue
+            visited_members.add(member)
+            member_owner[member] = referrer
+
+            children, sub_members = referenced_entries(
+                bundle, member, parts, primitives)
+
+            for child, child_referrer in children:
+                record(child, part_of(child_referrer), seed)
+
+            pending.extend(sub_members)
+
     while queue:
         part_id = queue.popleft()
         member = parts[part_id]
         visited_members.add(member)
+        # A top-level part owns itself, so part_of() stops here immediately.
+        member_owner[member] = part_id
 
         children, members = referenced_entries(bundle, member, parts, primitives)
-        for child in children:
-            if child in root:
-                continue
-            parent[child] = part_id
-            root[child] = root[part_id]
-            queue.append(child)
 
-        # Follow subparts and primitives too: they can reference further files,
-        # and a dangling reference one level down is just as broken.
-        pending = [m for m in members if m not in visited_members]
-        while pending:
-            sub_member = pending.pop()
-            visited_members.add(sub_member)
-            _children, sub_members = referenced_entries(
-                bundle, sub_member, parts, primitives)
-            pending.extend(m for m in sub_members if m not in visited_members)
+        for child, _referrer in children:
+            # A part referencing a part: the referrer is already a part id.
+            record(child, part_id, root[part_id])
+
+        walk_members(members, root[part_id])
 
     return parent, root
 
