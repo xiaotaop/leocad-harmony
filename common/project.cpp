@@ -561,6 +561,9 @@ lcResult<void> Project::Load(const QString& FileName)
 	}
 	else
 	{
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+		return lcUnexpected(tr("This format is disabled in this build."));
+#else
 		if (FileData.size() < 32 || !FileData.startsWith("LeoCAD "))
 			return lcUnexpected(tr("Error loading file '%1':\nFile format is not recognized.").arg(FileName));
 		lcMemFile MemFile;
@@ -569,6 +572,7 @@ lcResult<void> Project::Load(const QString& FileName)
 		BinaryModel = std::make_unique<lcModel>(QString(), this, mIsPreview);
 		if (!BinaryModel->LoadBinary(&MemFile))
 			return lcUnexpected(tr("Error loading file '%1':\nFile format is not recognized.").arg(FileName));
+#endif
 	}
 
 	// All recoverable input checks precede replacing the current document.
@@ -731,6 +735,10 @@ void Project::Merge(Project* Other)
 
 bool Project::ImportLDD(const QString& FileName)
 {
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+	Q_UNUSED(FileName);
+	return false;
+#else
 	lcZipFile ZipFile;
 
 	if (!ZipFile.OpenRead(FileName))
@@ -763,6 +771,7 @@ bool Project::ImportLDD(const QString& FileName)
 	mModified = false;
 
 	return true;
+#endif
 }
 
 bool Project::ImportInventory(const std::vector<lcSetInventoryItem>& SetInventory, const QString& Name, const QString& Description)
@@ -953,6 +962,10 @@ QString Project::GetExportFileName(const QString& FileName, const QString& Defau
 
 lcResult<void> Project::Export3DStudio(const QString& FileName)
 {
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+	Q_UNUSED(FileName);
+	return lcUnexpected(tr("This format is disabled in this build."));
+#else
 	std::vector<lcModelPartsEntry> ModelParts = GetModelParts();
 
 	if (ModelParts.empty())
@@ -1384,10 +1397,14 @@ lcResult<void> Project::Export3DStudio(const QString& FileName)
 	File.Seek(M3DEnd, SEEK_SET);
 
 	return lcResult<void>();
+#endif
 }
 
 lcResult<void> Project::ExportBrickLink()
 {
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+	return lcUnexpected(tr("This format is disabled in this build."));
+#else
 	lcPartsList PartsList;
 
 	if (!mModels.empty())
@@ -1402,10 +1419,15 @@ lcResult<void> Project::ExportBrickLink()
 		return lcUnexpected(QString());
 
 	return lcExportBrickLink(SaveFileName, PartsList);
+#endif
 }
 
 lcResult<void> Project::ExportCOLLADA(const QString& FileName)
 {
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+	Q_UNUSED(FileName);
+	return lcUnexpected(tr("This format is disabled in this build."));
+#else
 	std::vector<lcModelPartsEntry> ModelParts = GetModelParts();
 
 	if (ModelParts.empty())
@@ -1668,10 +1690,15 @@ lcResult<void> Project::ExportCOLLADA(const QString& FileName)
 	Stream << "</COLLADA>\r\n";
 
 	return lcResult<void>();
+#endif
 }
 
 lcResult<void> Project::ExportCSV(const QString& FileName)
 {
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+	Q_UNUSED(FileName);
+	return lcUnexpected(tr("This format is disabled in this build."));
+#else
 	lcPartsList PartsList;
 
 	if (!mModels.empty())
@@ -1708,6 +1735,7 @@ lcResult<void> Project::ExportCSV(const QString& FileName)
 	}
 
 	return lcResult<void>();
+#endif
 }
 
 lcInstructions* Project::GetInstructions()
@@ -1720,6 +1748,10 @@ lcInstructions* Project::GetInstructions()
 
 lcResult<void> Project::ExportHTML(const lcHTMLExportOptions& Options)
 {
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+	Q_UNUSED(Options);
+	return lcUnexpected(tr("This format is disabled in this build."));
+#else
 	QDir Dir(Options.PathName);
 	Dir.mkpath(QLatin1String("."));
 
@@ -1925,10 +1957,15 @@ lcResult<void> Project::ExportHTML(const lcHTMLExportOptions& Options)
 	}
 
 	return lcResult<void>();
+#endif
 }
 
 lcResult<void> Project::ExportPOVRay(const QString& FileName)
 {
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+	Q_UNUSED(FileName);
+	return lcUnexpected(tr("This format is disabled in this build."));
+#else
 	std::vector<lcModelPartsEntry> ModelParts = GetModelParts();
 
 	if (ModelParts.empty())
@@ -2611,10 +2648,15 @@ lcResult<void> Project::ExportPOVRay(const QString& FileName)
 	}
 
 	return lcResult<void>();
+#endif
 }
 
 lcResult<void> Project::ExportWavefront(const QString& FileName)
 {
+#ifdef LC_DISABLE_NON_CORE_FORMATS
+	Q_UNUSED(FileName);
+	return lcUnexpected(tr("This format is disabled in this build."));
+#else
 	std::vector<lcModelPartsEntry> ModelParts = GetModelParts();
 
 	if (ModelParts.empty())
@@ -2713,6 +2755,7 @@ lcResult<void> Project::ExportWavefront(const QString& FileName)
 	}
 
 	return lcResult<void>();
+#endif
 }
 
 void Project::SaveImage(const lcImageDialogOptions& Options)

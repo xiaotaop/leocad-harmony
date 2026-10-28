@@ -1,7 +1,8 @@
 param(
     [ValidateSet('App', 'Tests')][string]$Target = 'Tests',
     [string]$QtRoot = '',
-    [switch]$RunTests
+    [switch]$RunTests,
+    [switch]$Clean
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
@@ -30,6 +31,11 @@ try {
     Push-Location $build
     try {
         $project = if ($Target -eq 'Tests') { 'member-b-tests.pro' } else { 'leocad.pro' }
+        # qmake does not invalidate existing moc outputs when DEFINES change.
+        if ($Clean -and (Test-Path -LiteralPath 'Makefile')) {
+            & nmake.exe /NOLOGO clean *> (Join-Path $build 'clean.log')
+            if ($LASTEXITCODE -ne 0) { throw "Clean failed; see $build\clean.log" }
+        }
         & $qmake (Join-Path $root $project) 'CONFIG+=release' 'CONFIG-=debug_and_release' 'QMAKE_CXXFLAGS+=/MP8'
         if ($LASTEXITCODE -ne 0) { throw 'qmake failed.' }
         & nmake.exe /NOLOGO *> (Join-Path $build 'build.log')
@@ -38,6 +44,14 @@ try {
             throw "Build failed; see $build\build.log"
         }
         Write-Output "Build passed: $Target; log: $build\build.log"
+        if ($Target -eq 'Tests') {
+            $dependencies = & dumpbin.exe /NOLOGO /DEPENDENTS (Join-Path $build 'build\release\leocad-model-tests.exe')
+            if ($LASTEXITCODE -ne 0) { throw 'Could not inspect model test dependencies.' }
+            $dependencies | Set-Content -LiteralPath (Join-Path $build 'dependencies.txt')
+            if ($dependencies -match '(?i)Qt[56]Network(?:d)?\.dll|WININET\.dll') {
+                throw 'Offline model tests still import a network library.'
+            }
+        }
         if ($RunTests) {
             # No visible window, but upstream library teardown requires desktop GL.
             $env:QT_QPA_PLATFORM = 'windows'

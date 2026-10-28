@@ -7,6 +7,7 @@
 #include "lc_mainwindow.h"
 #include "lc_model.h"
 #include "lc_modelhistory.h"
+#include "lc_http.h"
 #include "piece.h"
 #include "pieceinf.h"
 #include "project.h"
@@ -55,6 +56,126 @@ class ModelIoTest : public QObject
 {
     Q_OBJECT
 private slots:
+    void disabledExportsPreserveFilesAndDocument_data()
+    {
+        QTest::addColumn<QString>("format");
+        for (const char* format : {"3ds", "dae", "csv", "pov", "obj"})
+            QTest::newRow(format) << QString::fromLatin1(format);
+    }
+
+    void disabledExportsPreserveFilesAndDocument()
+    {
+        QFETCH(QString, format);
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        Project project(true);
+        QVERIFY(project.Load(QFINDTESTDATA("../fixtures/two-pieces.ldr"), false));
+        project.MarkAsModified();
+        const QString originalName = project.GetFileName();
+        lcModel* originalModel = project.GetActiveModel();
+        const QString path = dir.filePath("existing." + format);
+        QFile output(path);
+        QVERIFY(output.open(QIODevice::WriteOnly));
+        QCOMPARE(output.write("keep existing data"), qint64(18));
+        output.close();
+        const auto result = format == "3ds" ? project.Export3DStudio(path)
+            : format == "dae" ? project.ExportCOLLADA(path)
+            : format == "csv" ? project.ExportCSV(path)
+            : format == "pov" ? project.ExportPOVRay(path)
+            : project.ExportWavefront(path);
+        QVERIFY(!result.has_value());
+        QCOMPARE(result.error(), QString("This format is disabled in this build."));
+        QVERIFY(output.open(QIODevice::ReadOnly));
+        QCOMPARE(output.readAll(), QByteArray("keep existing data"));
+        QCOMPARE(project.GetFileName(), originalName);
+        QCOMPARE(project.GetActiveModel(), originalModel);
+        QCOMPARE(project.GetMainModel()->GetPieces().size(), size_t(2));
+        QVERIFY(project.IsModified());
+    }
+
+    void offlineDownloadCompletesWithError()
+    {
+        lcHttpManager manager(nullptr);
+        QSignalSpy finished(&manager, &lcHttpManager::DownloadFinished);
+        lcHttpReply* reply = manager.DownloadFile("http://127.0.0.1:1/member-b-offline-check");
+        QVERIFY(reply);
+        QTRY_COMPARE(finished.count(), 1);
+        QCOMPARE(qvariant_cast<lcHttpReply*>(finished.at(0).at(0)), reply);
+        QVERIFY(reply->error());
+        QVERIFY(reply->readAll().isEmpty());
+    }
+
+    void disabledLegacyLoadPreservesDocument_data()
+    {
+        QTest::addColumn<QString>("name");
+        QTest::newRow("lcd") << QString("legacy.LCD");
+        QTest::newRow("leocad") << QString("legacy.leocad");
+        QTest::newRow("sniffed-binary") << QString("imported.bin");
+    }
+
+    void disabledLegacyLoadPreservesDocument()
+    {
+        QFETCH(QString, name);
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        // A recognizable legacy header must be rejected before binary parsing.
+        QFile input(dir.filePath(name));
+        QVERIFY(input.open(QIODevice::WriteOnly));
+        const QByteArray header = QByteArray("LeoCAD ").leftJustified(32, '\0');
+        QCOMPARE(input.write(header), qint64(header.size()));
+        input.close();
+        Project project(true);
+        QVERIFY(project.Load(QFINDTESTDATA("../fixtures/two-pieces.ldr"), false));
+        project.MarkAsModified();
+        const QString originalName = project.GetFileName();
+        lcModel* originalModel = project.GetActiveModel();
+        const auto result = project.Load(input.fileName());
+        QVERIFY(!result.has_value());
+        QCOMPARE(result.error(), QString("This format is disabled in this build."));
+        QCOMPARE(project.GetFileName(), originalName);
+        QCOMPARE(project.GetActiveModel(), originalModel);
+        QCOMPARE(project.GetMainModel()->GetPieces().size(), size_t(2));
+        QVERIFY(project.IsModified());
+    }
+
+    void disabledLddImportPreservesDocument()
+    {
+        Project project(true);
+        QVERIFY(project.Load(QFINDTESTDATA("../fixtures/two-pieces.ldr"), false));
+        project.MarkAsModified();
+        const QString originalName = project.GetFileName();
+        lcModel* originalModel = project.GetActiveModel();
+        QVERIFY(!project.ImportLDD(QFINDTESTDATA("../fixtures/empty-model.lxf")));
+        QCOMPARE(project.GetFileName(), originalName);
+        QCOMPARE(project.GetActiveModel(), originalModel);
+        QCOMPARE(project.GetMainModel()->GetPieces().size(), size_t(2));
+        QVERIFY(project.IsModified());
+    }
+
+    void disabledHtmlExportDoesNotCreateDirectory()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        Project project(true);
+        project.MarkAsModified();
+        lcHTMLExportOptions options(&project);
+        options.PathName = dir.filePath("instructions");
+        const auto result = project.ExportHTML(options);
+        QVERIFY(!result.has_value());
+        QCOMPARE(result.error(), QString("This format is disabled in this build."));
+        QVERIFY(!QFile::exists(options.PathName));
+        QVERIFY(project.IsModified());
+    }
+
+    void disabledBrickLinkExportReturnsError()
+    {
+        Project project(true);
+        const auto result = project.ExportBrickLink();
+        QVERIFY(!result.has_value());
+        QCOMPARE(result.error(), QString("This format is disabled in this build."));
+        QVERIFY(!project.IsModified());
+    }
+
     void emptyModelRoundTrip()
     {
         QTemporaryDir dir;
