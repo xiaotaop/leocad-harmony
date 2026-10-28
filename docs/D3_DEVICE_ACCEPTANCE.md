@@ -86,7 +86,13 @@ Windows 51 项与设备 50 项的差异来自 `#ifdef Q_OS_WIN` 下的 Win32 文
 | D3-FILE-01 | 后续集成 / 组长+B | 系统文件选择、外部导入导出、取消/权限、真实用户路径的完整 UI 闭环尚待验证 |
 | D3-PERM-01 | 发布前 / 组长 | 仍为 Qt 默认调试模板权限；剪贴板未授权日志不影响本次主窗口目标，正式包需按实际功能收敛权限 |
 
-以上已完成本地日志分派记录；没有自动向其他成员发送消息或创建远端 Issue。
+按组长后续要求，以上事项已建立远端跟踪：
+[网格绘制 #12](https://github.com/xiaotaop/leocad-harmony/issues/12)、
+[Ability 生命周期 #13](https://github.com/xiaotaop/leocad-harmony/issues/13)、
+[界面与资源 #14](https://github.com/xiaotaop/leocad-harmony/issues/14)、
+[文件闭环 #15](https://github.com/xiaotaop/leocad-harmony/issues/15)、
+[权限收敛 #16](https://github.com/xiaotaop/leocad-harmony/issues/16)。
+Issue 已按上表分派负责人，并链接固定提交上的证据。
 
 ## 复现与证据
 
@@ -115,4 +121,5 @@ HDC 沙箱传送相对源路径可能保留 `tests/fixtures/` 子路径，使用
 
 原始证据与 SHA-256 收据位于
 [d3-device](evidence/leader/2026-10-28/d3-device/receipt.json)。
-10/27 的 D2 通过证据与签名包未修改。本次代码及证据只在本地提交，未创建 PR。
+10/27 的 D2 通过证据与签名包未修改。代码与证据已推送至
+[PR #11](https://github.com/xiaotaop/leocad-harmony/pull/11)，按组长当前要求不请求审核人。
