@@ -3,10 +3,12 @@ param(
     [string]$SdkRoot = $env:DEVECO_SDK_HOME,
     [Parameter(Mandatory)][string]$Device,
     [string]$OutputDirectory,
-    [ValidateRange(1, 10)][int]$Rounds = 2
+    [ValidateRange(1, 10)][int]$Rounds = 2,
+    [ValidateRange(20, 300)][int]$TimeoutSeconds = 30
 )
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'HarmonyProbeTools.ps1')
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 if (-not $SdkRoot) { throw 'Pass -SdkRoot or set DEVECO_SDK_HOME.' }
 $hdc = Join-Path $SdkRoot 'default\openharmony\toolchains\hdc.exe'
@@ -23,22 +25,21 @@ for ($round = 1; $round -le $Rounds; $round++) {
     if ($LASTEXITCODE -ne 0 -or $launch -notmatch 'start ability successfully') {
         throw "Round ${round}: launch failed: $launch"
     }
-    # The probe keeps the second rendered frame visible for three seconds.
-    Start-Sleep -Seconds 5
-    $afterLog = @(& $hdc -t $Device shell hilog -x -e LEOCAD_GL_PROBE 2>&1)
-    $freshLines = @($afterLog | Where-Object { $_ -match 'LEOCAD_GL_PROBE \{' -and $_ -notin $beforeLog })
-    if ($freshLines.Count -ne 1) {
-        throw "Round ${round}: expected one fresh report, found $($freshLines.Count)."
+    # Allow cold startup and the probe's 15-second timeout; wait for the matching exit too.
+    $completed = Wait-HarmonyGLProbeResult -BeforeLog $beforeLog -TimeoutSeconds $TimeoutSeconds -ReadReportLog {
+        $lines = @(& $hdc -t $Device shell hilog -x -e LEOCAD_GL_PROBE 2>&1)
+        if ($LASTEXITCODE -ne 0 -or ($lines -match '\[Fail\]')) { throw 'Cannot read probe logs.' }
+        $lines
+    } -ReadProcessLog {
+        param($probeId)
+        $lines = @(& $hdc -t $Device shell hilog -x -P $probeId 2>&1)
+        if ($LASTEXITCODE -ne 0 -or ($lines -match '\[Fail\]')) { throw 'Cannot read probe process logs.' }
+        $lines
     }
-    $freshLine = [string]$freshLines[0]
-    if ($freshLine -notmatch '^\S+\s+\S+\s+(\d+)\s+\d+\s+.*LEOCAD_GL_PROBE (\{.*\})$') {
-        throw "Round ${round}: cannot parse report process ID."
-    }
-    $probeProcessId = $Matches[1]
-    $freshReport = $Matches[2] | ConvertFrom-Json
-    $processLog = @(& $hdc -t $Device shell hilog -x -P $probeProcessId 2>&1)
-    $exitLines = @($processLog | Where-Object { $_ -match "'main'.*libleocad-render-probe.so.*returned 0" })
-    if ($exitLines.Count -eq 0) { throw "Round ${round}: no successful native main exit for PID $probeProcessId." }
+    $freshLine = $completed.ReportLine
+    $probeProcessId = $completed.ProcessId
+    $freshReport = $completed.Report
+    $exitLines = $completed.ExitLines
     $jsonPath = Join-Path $OutputDirectory "run-$round.json"
     $pngPath = Join-Path $OutputDirectory "run-$round.png"
     foreach ($file in @(@('render-probe.json', $jsonPath), @('render-probe.png', $pngPath))) {

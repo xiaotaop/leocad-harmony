@@ -18,6 +18,10 @@ pwsh -File scripts/run-harmony-gl-probe.ps1
 build/harmony-render-probe/harmonyos-build/entry/build/default/outputs/default/entry-default-unsigned.hap
 ```
 
+`-SdkRoot`（默认 `DEVECO_SDK_HOME`）应指向 Command Line Tools 内的 `sdk`。
+脚本在工具链检查、Qt/CMake 和 DevEco CLI 阶段统一使用这套 SDK 及其父目录下的
+Command Line Tools；执行期间覆盖旧的 Studio 路径选择，结束或报错后恢复原有进程环境。
+
 ## 自动签名并在真机启动
 
 前置条件：
@@ -38,7 +42,10 @@ pwsh -File scripts/run-harmony-gl-probe.ps1 `
   -GenerateSignature -Run -Device '<设备序列号>'
 ```
 
-签名材料只写入 `build/` 生成目录，不应提交证书、Profile、密码、设备 UDID 或签名后的 HAP。
+DevEco CLI 自动签名将证书、私钥和 Profile 保存在用户目录的 `.ohos/config/`
+（Windows 默认为 `C:\Users\<用户名>\.ohos\config\`）。`build/` 中的生成工程保存
+签名配置和这些文件的路径引用；签名 HAP 也生成在 `build/` 中。不应提交证书、私钥、
+Profile、密码、完整设备 UDID 或签名后的 HAP。
 
 ## 真机通过判据
 
@@ -59,6 +66,16 @@ pwsh -File scripts/collect-harmony-gl-probe.ps1 -Device '<设备序列号>' -Rou
 ```
 
 默认输出到 `build/harmony-render-probe/evidence`。脚本核对每轮新增进程日志和沙箱 JSON 一致，并确认该进程原生 main 返回 0。取回应用沙箱文件使用 `hdc file recv -b <bundleName>`；普通 shell 无权遍历该沙箱。
+
+采集时轮询新报告和同一 PID 的原生 main 退出日志，每轮默认总等待 30 秒，覆盖探针的
+15 秒超时与冷启动时间；可通过 `-TimeoutSeconds 60` 调整。遇到非零退出、多个新报告
+或超时会明确失败，不将旧报告当成新结果。
+
+仅检查宿主脚本时，可执行离线模拟测试，无需连接真机：
+
+```powershell
+pwsh -File scripts/Test-HarmonyProbeTools.ps1
+```
 
 ## 常见阻断
 
