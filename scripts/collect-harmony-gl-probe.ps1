@@ -20,6 +20,9 @@ $results = @()
 
 for ($round = 1; $round -le $Rounds; $round++) {
     $beforeLog = @(& $hdc -t $Device shell hilog -x -e LEOCAD_GL_PROBE 2>&1)
+    if ($LASTEXITCODE -ne 0 -or ($beforeLog -match '\[Fail\]')) {
+        throw "Round ${round}: cannot read initial probe log snapshot; application was not started."
+    }
     $startedAt = [DateTimeOffset]::Now
     $launch = (& $hdc -t $Device shell aa start -a QAbility -b $bundle 2>&1) -join "`n"
     if ($LASTEXITCODE -ne 0 -or $launch -notmatch 'start ability successfully') {

@@ -71,11 +71,18 @@ pwsh -File scripts/collect-harmony-gl-probe.ps1 -Device '<设备序列号>' -Rou
 15 秒超时与冷启动时间；可通过 `-TimeoutSeconds 60` 调整。遇到非零退出、多个新报告
 或超时会明确失败，不将旧报告当成新结果。
 
+每轮启动前必须成功读取旧日志基线：首次 `hilog` 的退出码非零或输出含 `[Fail]`
+时立即停止，不启动应用、不复制证据、不写通过收据；读取成功且无历史日志的空快照允许继续。
+
 仅检查宿主脚本时，可执行离线模拟测试，无需连接真机：
 
 ```powershell
 pwsh -File scripts/Test-HarmonyProbeTools.ps1
+pwsh -File scripts/Test-HarmonyProbeCollector.ps1
 ```
+
+前者覆盖轮询与工具链环境逻辑；后者用临时 SDK 和 HDC 函数替身运行实际采集入口，
+覆盖首次日志读取失败（错误标记/非零退出）、成功空基线和历史/新报告过滤，不访问真实设备。
 
 ## 常见阻断
 

@@ -27,6 +27,10 @@ jobs:
       QT_OPENGL: software
     steps:
       - uses: actions/checkout@v4
+      - name: Test probe host helpers offline
+        run: ./scripts/Test-HarmonyProbeTools.ps1
+      - name: Test probe collector entry offline
+        run: ./scripts/Test-HarmonyProbeCollector.ps1
       - name: Install Qt and software OpenGL
         uses: jurplel/install-qt-action@v4
         with:
