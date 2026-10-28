@@ -17,6 +17,12 @@
 #include "lc_profile.h"
 #include "lc_meshloader.h"
 #include "lc_string.h"
+#include <QCoreApplication>
+#include <QFileInfo>
+#include <QStandardPaths>
+#include <map>
+#include <set>
+#include <string>
 #include <zlib.h>
 #include <QtConcurrent>
 
@@ -247,6 +253,314 @@ lcTexture* lcPiecesLibrary::FindTexture(const char* TextureName, Project* Curren
 	}
 
 	return nullptr;
+}
+
+QStringList lcPiecesLibrary::GetBundledLibraryArchiveCandidates()
+{
+	// Ordered from most specific to most generic. Paths that come from outside
+	// the build (a user preference or LC_LDRAW_LIB) are handled by the caller and
+	// take precedence over everything here.
+	const QString RelativePath = QLatin1String("ldraw-lite/library-lite.zip");
+	QStringList Candidates;
+
+	// 1. Application data directory: where the platform layer expands the
+	//    packaged library on first run. Writable, and a new version there is
+	//    picked up without touching the application package.
+	const QString DataPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+	if (!DataPath.isEmpty())
+		Candidates += QDir(DataPath).absoluteFilePath(RelativePath);
+
+	// 2. Next to the binary: the desktop build and simple unpacked layouts.
+	Candidates += QDir(QCoreApplication::applicationDirPath()).absoluteFilePath(RelativePath);
+
+	// 3. Compiled into the binary. Only a few megabytes, avoids a first-run
+	//    unpack step, and still works when both directories above are read-only.
+	Candidates += QLatin1String(":/assets/ldraw-lite/library-lite.zip");
+
+	return Candidates;
+}
+
+QString lcPiecesLibrary::FindBundledLibraryArchive()
+{
+	for (const QString& Candidate : GetBundledLibraryArchiveCandidates())
+		if (QFileInfo::exists(Candidate))
+			return Candidate;
+
+	return QString();
+}
+
+lcPiecesLibrary::ArchiveCheck lcPiecesLibrary::ValidateBundledLibraryArchive(const QString& FileName, int ExpectedParts)
+{
+	// Why this cannot be "call Load() and look at the return value":
+	//
+	//   OpenArchive() walks the central directory, skips every entry whose name
+	//   does not start with "LDRAW/", and returns true regardless of how many it
+	//   skipped. Load() then takes the archive branch, LoadColors() silently
+	//   falls back to the built-in palette, and the application shows an empty
+	//   parts panel with no error printed anywhere. A wrong root directory and a
+	//   completely empty archive are therefore indistinguishable from success
+	//   when judged by the return value alone.
+	//
+	// So the archive is inspected directly, before anything is loaded:
+	//
+	//   1. every entry sits under "ldraw/";
+	//   2. ldraw/ldconfig.ldr is present (missing it turns colours wrong, quietly);
+	//   3. the top-level part count matches what the manifest promises;
+	//   4. every reference a part makes resolves inside the archive.
+	//
+	// (4) is what actually prevents "part renders incomplete": the loader would
+	// resolve a dangling reference to nullptr and draw nothing.
+	ArchiveCheck Check;
+	QFileInfo Info(FileName);
+
+	if (!Info.exists())
+	{
+		Check.Problem = QStringLiteral("archive not found");
+		return Check;
+	}
+
+	std::unique_ptr<lcDiskFile> File(new lcDiskFile(FileName));
+
+	if (!File->Open(QIODevice::ReadOnly))
+	{
+		Check.Problem = QStringLiteral("archive cannot be opened");
+		return Check;
+	}
+
+	lcZipFile ZipFile;
+
+	if (!ZipFile.OpenRead(std::move(File)))
+	{
+		Check.Problem = QStringLiteral("archive is not a readable zip");
+		return Check;
+	}
+
+	// Collect the entries once; both the structure check and the reference check
+	// walk this map, and building it is O(entries).
+	std::map<std::string, quint32> Parts;
+	std::map<std::string, quint32> Primitives;
+	int TopLevelParts = 0;
+	bool HasConfig = false;
+	QString MisplacedEntry;
+
+	for (quint32 FileIdx = 0; FileIdx < ZipFile.mFiles.size(); FileIdx++)
+	{
+		const lcZipFileInfo& FileInfo = ZipFile.mFiles[FileIdx];
+		std::string Name = FileInfo.file_name;
+
+		if (Name.size() <= 4)
+			continue;
+
+		// Compare case-insensitively, the way OpenArchive() does.
+		for (char& Character : Name)
+			if (Character >= 'a' && Character <= 'z')
+				Character = Character + 'A' - 'a';
+
+		if (Name.compare(0, 6, "LDRAW/") != 0)
+		{
+			if (MisplacedEntry.isEmpty() && Name.size() > 4)
+				MisplacedEntry = QString::fromStdString(FileInfo.file_name);
+			continue;
+		}
+
+		std::string Relative = Name.substr(6);
+
+		if (Relative == "LDCONFIG.LDR")
+			HasConfig = true;
+
+		if (Relative.size() <= 4 || Relative.compare(Relative.size() - 4, 4, ".DAT") != 0)
+			continue;
+
+		const std::string Stem = Relative.substr(0, Relative.size() - 4);
+
+		if (Stem.compare(0, 6, "PARTS/") == 0)
+		{
+			const std::string PartName = Stem.substr(6);
+
+			if (PartName.compare(0, 2, "S/") == 0)
+				Primitives[PartName] = FileIdx;
+			else if (PartName.find('/') == std::string::npos)
+			{
+				Parts[PartName] = FileIdx;
+				TopLevelParts++;
+			}
+			else
+				Primitives[PartName] = FileIdx;
+		}
+		else if (Stem.compare(0, 2, "P/") == 0)
+			Primitives[Stem.substr(2)] = FileIdx;
+	}
+
+	// 1. Root directory.
+	if (!MisplacedEntry.isEmpty())
+	{
+		Check.Problem = QStringLiteral("entry outside ldraw/: %1").arg(MisplacedEntry);
+		return Check;
+	}
+
+	// 2. Colour configuration.
+	if (!HasConfig)
+	{
+		Check.Problem = QStringLiteral("missing ldraw/ldconfig.ldr");
+		return Check;
+	}
+
+	// 3. Part count.
+	if (ExpectedParts > 0 && TopLevelParts != ExpectedParts)
+	{
+		Check.Problem = QStringLiteral("expected %1 parts, archive has %2").arg(ExpectedParts).arg(TopLevelParts);
+		return Check;
+	}
+
+	if (TopLevelParts == 0)
+	{
+		Check.Problem = QStringLiteral("archive contains no parts");
+		return Check;
+	}
+
+	// 4. Reference integrity. Every type-1 line names a file the loader must find;
+	// a name that resolves to nothing draws as missing geometry without an error.
+	//
+	// Only the files this archive ships are walked. A reference may legitimately
+	// point at something outside the subset when the user has a full library
+	// installed, so the check asks "if this file is here, are its dependencies
+	// here too" rather than "is the closure complete" — that stronger question is
+	// answered offline by scripts/library/export_part_list.py.
+	auto Resolve = [&Parts, &Primitives](const std::string& Reference, bool& IsTopLevelPart) -> bool
+	{
+		std::string Name = Reference;
+
+		// LDraw part files use a backslash as the path separator while the archive
+		// stores forward slashes. Normalising here mirrors what OpenArchive() does
+		// when it builds its name table; without it every path-qualified reference
+		// looks missing.
+		for (char& Character : Name)
+		{
+			if (Character == '\\')
+				Character = '/';
+			else if (Character >= 'a' && Character <= 'z')
+				Character = Character + 'A' - 'a';
+		}
+
+		IsTopLevelPart = false;
+
+		// Drop the extension before looking anything up: Parts and Primitives are
+		// keyed by stem, matching how OpenArchive() registers pieces.
+		if (Name.size() <= 4 || Name.compare(Name.size() - 4, 4, ".DAT") != 0)
+			return false;
+
+		Name = Name.substr(0, Name.size() - 4);
+
+		if (Name.compare(0, 6, "PARTS/") == 0)
+		{
+			const std::string Rest = Name.substr(6);
+
+			if (Rest.compare(0, 2, "S/") == 0)
+				return Primitives.find(Rest) != Primitives.end();
+
+			IsTopLevelPart = true;
+			return Parts.find(Rest) != Parts.end();
+		}
+
+		if (Name.compare(0, 2, "P/") == 0)
+			return Primitives.find(Name.substr(2)) != Primitives.end();
+
+		// A subpart referenced without the "parts/" prefix, as part files write it
+		// (a "s" directory followed by the name). OpenArchive() keeps these under
+		// "S/" as well.
+		if (Name.compare(0, 2, "S/") == 0)
+			return Primitives.find(Name) != Primitives.end();
+
+		// A bare name: OpenArchive() looks in the piece map first, then the
+		// primitive map, so a name that only exists as a primitive is not a part.
+		if (Parts.find(Name) != Parts.end())
+		{
+			IsTopLevelPart = true;
+			return true;
+		}
+
+		return Primitives.find(Name) != Primitives.end();
+	};
+
+	std::set<std::string> Visited;
+
+	auto CheckFile = [&](const std::string& Name, quint32 FileIdx) -> bool
+	{
+		lcMemFile Content;
+
+		if (!ZipFile.ExtractFile(FileIdx, Content))
+			return false;
+
+		Content.Seek(0, SEEK_END);
+		const long Length = Content.GetPosition();
+		Content.Seek(0, SEEK_SET);
+
+		std::string Text(static_cast<size_t>(Length), '\0');
+
+		if (Length > 0)
+			Content.ReadBuffer(&Text[0], Length);
+
+		size_t Offset = 0;
+
+		while (Offset < Text.size())
+		{
+			size_t End = Text.find('\n', Offset);
+
+			if (End == std::string::npos)
+				End = Text.size();
+
+			std::string Line = Text.substr(Offset, End - Offset);
+			Offset = End + 1;
+
+			while (!Line.empty() && (Line.back() == '\r' || Line.back() == ' '))
+				Line.pop_back();
+
+			if (Line.size() < 2 || Line[0] != '1' || Line[1] != ' ')
+				continue;
+
+			// Type-1 line: 1 <colour> x y z a b c d e f g h i <file>
+			const size_t LastSpace = Line.find_last_of(' ');
+
+			if (LastSpace == std::string::npos)
+				continue;
+
+			std::string Reference = Line.substr(LastSpace + 1);
+
+			if (Reference.size() < 4)
+				continue;
+
+			bool IsTopLevelPart = false;
+
+			if (!Resolve(Reference, IsTopLevelPart))
+				return false;
+		}
+
+		return true;
+	};
+
+	for (const auto& PartIt : Parts)
+		if (!CheckFile(PartIt.first, PartIt.second))
+		{
+			Check.Problem = QStringLiteral("part %1 references a file that is not in the archive").arg(QString::fromStdString(PartIt.first));
+			return Check;
+		}
+
+	for (const auto& PrimitiveIt : Primitives)
+	{
+		if (!Visited.insert(PrimitiveIt.first).second)
+			continue;
+
+		if (!CheckFile(PrimitiveIt.first, PrimitiveIt.second))
+		{
+			Check.Problem = QStringLiteral("primitive %1 references a file that is not in the archive").arg(QString::fromStdString(PrimitiveIt.first));
+			return Check;
+		}
+	}
+
+	Check.Usable = true;
+	Check.Pieces = TopLevelParts;
+
+	return Check;
 }
 
 bool lcPiecesLibrary::Load(const QString& LibraryPath, bool ShowProgress)

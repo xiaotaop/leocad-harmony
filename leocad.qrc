@@ -96,7 +96,13 @@
         <file>resources/time_next.png</file>
         <file>resources/time_previous.png</file>
         <file>resources/time_stop.png</file>
+        <!-- Application icon. Multiple sizes so Qt can pick one that matches the
+             display scale: a single 64x64 bitmap is visibly soft on the High-DPI
+             screens HarmonyOS PCs use. 64x64 stays first so the historical alias
+             ":/resources/leocad.png" keeps resolving for any other caller. -->
         <file alias="resources/leocad.png">tools/icon/64x64/apps/leocad.png</file>
+        <file alias="resources/leocad-256.png">tools/icon/256x256/apps/leocad.png</file>
+        <file alias="resources/leocad-512.png">tools/icon/512x512/apps/leocad.png</file>
         <file>resources/help_homepage.png</file>
         <file>resources/view_zoomextents.png</file>
         <file>resources/view_split_horizontal.png</file>
@@ -112,6 +118,10 @@
         <file>resources/time_add_keys.png</file>
         <file>resources/archive.png</file>
         <file>resources/library.zip</file>
+        <!-- Curated offline parts library for the first release. Compiled in as the
+             last-resort source in lcPiecesLibrary::FindBundledLibraryArchive();
+             see assets/ldraw-lite/manifest.json for provenance and licensing. -->
+        <file alias="assets/ldraw-lite/library-lite.zip">assets/ldraw-lite/library-lite.zip</file>
         <file>resources/studlogo1.zip</file>
         <file>resources/studlogo2.zip</file>
         <file>resources/studlogo3.zip</file>

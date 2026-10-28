@@ -296,6 +296,12 @@ protected:
 
 	void CreateActions();
 	void CreateMenus();
+
+	// Removes the menu entries for features outside the first-release scope.
+	// See the definition in lc_mainwindow.cpp for what it does and why it only
+	// touches QAction objects.
+	void ApplyFirstReleaseScope();
+
 	void CreateToolBars();
 	void CreateStatusBar();
 	lcView* CreateView(lcModel* Model);

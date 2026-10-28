@@ -1,9 +1,11 @@
 #include "lc_global.h"
 #include "lc_application.h"
+#include "lc_library.h"
 #include "lc_updatedialog.h"
 #include "lc_profile.h"
 #include "pieceinf.h"
 #include <QApplication>
+#include <cstdio>
 #include <locale.h>
 
 #ifdef Q_OS_WIN
@@ -219,6 +221,45 @@ int main(int argc, char *argv[])
 #ifdef LC_LDRAW_LIBRARY_PATH
 	LibraryPaths += qMakePair(QString::fromLatin1(LC_LDRAW_LIBRARY_PATH), false);
 #endif
+
+	// The curated library that ships inside the application package.
+	//
+	// It is only offered to LoadPartsLibrary() after it has been inspected,
+	// because that function treats "Load() returned true" as success and Load()
+	// cannot tell a usable archive from one the loader silently emptied: a wrong
+	// root directory, a missing ldconfig.ldr or a dangling part reference all
+	// produce a "loaded" library with the parts panel empty or wrong. A failure
+	// here therefore does not abort startup — the path is simply not appended,
+	// LoadPartsLibrary() falls through to the platform paths above, and the
+	// built-in 128-part library remains as the last resort.
+	//
+	// ExpectedParts comes from assets/ldraw-lite/manifest.json. Keeping the
+	// number here means a silently truncated archive is caught at startup rather
+	// than discovered by a user looking at an incomplete parts tree; the offline
+	// check in scripts/library/export_part_list.py --check validates the same
+	// figure against the archive at packaging time.
+	const QString BundledLibrary = lcPiecesLibrary::FindBundledLibraryArchive();
+
+	if (!BundledLibrary.isEmpty())
+	{
+		const lcPiecesLibrary::ArchiveCheck Check =
+			lcPiecesLibrary::ValidateBundledLibraryArchive(BundledLibrary, 1160);
+
+		if (Check.Usable)
+		{
+			// Marked official so the piece count is recorded
+			// (lcPiecesLibrary::SetOfficialPieces()).
+			LibraryPaths += qMakePair(BundledLibrary, true);
+		}
+		else
+		{
+			// stderr rather than a dialog: startup must stay unattended-safe, and
+			// this is a packaging defect to report, not a user-actionable error.
+			const QString Message = QStringLiteral("Bundled parts library rejected: %1 (%2)\n")
+				.arg(Check.Problem, BundledLibrary);
+			fprintf(stderr, "%s", Message.toLocal8Bit().constData());
+		}
+	}
 
 	setlocale(LC_NUMERIC, "C");
 
