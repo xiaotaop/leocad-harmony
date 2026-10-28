@@ -1,0 +1,45 @@
+name: Render context CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: render-context-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  context-tests:
+    name: Shared GL context regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install software GL and display
+        run: sudo apt-get update && sudo apt-get install -y libgl1-mesa-dev xvfb libxcb-cursor0 libxkbcommon-x11-0
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.12.0'
+          archives: qtbase
+          cache: true
+      - name: Build context tests
+        run: |
+          cmake -S tests/render-context -B build/render-context -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/render-context --parallel 2
+      - name: Run against Mesa
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          xvfb-run -a build/render-context/leocad-render-context-tests \
+            -o build/render-context/results.xml,junitxml \
+            -o build/render-context/results.txt,txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: render-context-${{ github.sha }}
+          path: build/render-context/results.*

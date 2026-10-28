@@ -1,0 +1,6 @@
+[  0%] Built target leocad-render-context-tests_autogen_timestamp_deps
+[ 25%] Automatic MOC for target leocad-render-context-tests
+[ 25%] Built target leocad-render-context-tests_autogen
+[ 50%] Building CXX object CMakeFiles/leocad-render-context-tests.dir/tst_glcontext.cpp.o
+[ 75%] Linking CXX executable leocad-render-context-tests
+[100%] Built target leocad-render-context-tests

@@ -1,6 +1,8 @@
 #include "lc_global.h"
 #include "lc_context.h"
 #include "lc_glextensions.h"
+#include "lc_glcontext.h"
+#include <QJsonDocument>
 #include "lc_mesh.h"
 #include "lc_texture.h"
 #include "lc_colors.h"
@@ -138,27 +140,33 @@ lcContext* lcContext::GetGlobalOffscreenContext()
 bool lcContext::CreateOffscreenContext()
 {
 	std::unique_ptr<QOpenGLContext> OffscreenContext(new QOpenGLContext());
-
-	if (!OffscreenContext)
-		return false;
-
-	OffscreenContext->setShareContext(QOpenGLContext::globalShareContext());
-
-	if (!OffscreenContext->create() || !OffscreenContext->isValid())
-		return false;
-
 	std::unique_ptr<QOffscreenSurface> OffscreenSurface(new QOffscreenSurface());
+	QOpenGLContext* ShareContext = QOpenGLContext::globalShareContext();
+	QString Error;
+	bool Created = lcCreateOffscreenGLContext(*OffscreenContext, *OffscreenSurface, ShareContext, Error);
 
-	if (!OffscreenSurface)
+#ifdef LC_OPENGLES
+	constexpr bool GLESBuild = true;
+#else
+	constexpr bool GLESBuild = false;
+#endif
+	if (Created)
+		Error = lcGLAPICompatibilityError(GLESBuild, OffscreenContext->isOpenGLES(), OffscreenContext->format().majorVersion());
+
+	QJsonObject Report = lcGLContextInfo(*OffscreenContext, OffscreenSurface.get(), ShareContext);
+	Report["stage"] = QStringLiteral("renderer_offscreen");
+	Report["gles_build"] = GLESBuild;
+	Report["error"] = Error;
+	Report["passed"] = Created && Error.isEmpty();
+	const QString Log = QString::fromUtf8(QJsonDocument(Report).toJson(QJsonDocument::Compact));
+	if (!Created || !Error.isEmpty())
+	{
+		qWarning().noquote() << "LEOCAD_GL_CONTEXT" << Log;
+		if (QOpenGLContext::currentContext() == OffscreenContext.get())
+			OffscreenContext->doneCurrent();
 		return false;
-
-	OffscreenSurface->create();
-
-	if (!OffscreenSurface->isValid())
-		return false;
-
-	if (!OffscreenContext->makeCurrent(OffscreenSurface.get()))
-		return false;
+	}
+	qInfo().noquote() << "LEOCAD_GL_CONTEXT" << Log;
 
 	mOffscreenContext = std::move(OffscreenContext);
 	mOffscreenSurface = std::move(OffscreenSurface);

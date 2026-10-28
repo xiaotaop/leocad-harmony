@@ -1,0 +1,19 @@
+-- The CXX compiler identification is AppleClang 21.0.0.21000334
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Found OpenGL: /Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/System/Library/Frameworks/OpenGL.framework
+-- Found WrapOpenGL: TRUE
+-- Found Cups: /Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/lib/libcups.tbd (found version "2.3.4")
+-- Found ZLIB: /Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/lib/libz.tbd (found version "1.2.12")
+-- Configuring done (0.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: <APP_BUILD>
