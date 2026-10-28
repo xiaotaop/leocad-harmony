@@ -971,10 +971,14 @@ lcStartupMode lcApplication::Initialize(const QList<QPair<QString, bool>>& Libra
 	{
 		QString Message;
 
+		// The first release packages its parts library and does not request the
+		// INTERNET permission, so pointing the user at a download page would be
+		// both unreachable advice and inconsistent with the privacy policy. Tell
+		// them what happened and what can actually be done about it.
 		if (mLibrary->LoadBuiltinPieces())
-			Message = tr("LeoCAD could not find a compatible Parts Library so only a small number of parts will be available.\n\nPlease visit https://www.leocad.org for information on how to download and install a library.");
+			Message = tr("The built-in parts library could not be loaded, so only a limited set of parts is available. Try reinstalling the application.");
 		else
-			Message = tr("LeoCAD could not load Parts Library.\n\nPlease visit https://www.leocad.org for information on how to download and install a library.");
+			Message = tr("The parts library could not be loaded. Try reinstalling the application.");
 
 		if (gMainWindow)
 			QMessageBox::information(gMainWindow, tr("LeoCAD"), Message);

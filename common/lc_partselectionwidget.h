@@ -354,6 +354,9 @@ protected:
 	void LoadPartPalettes();
 	void SavePartPalettes();
 
+	void UpdateEmptyState();
+	int VisiblePartCount() const;
+
 	void resizeEvent(QResizeEvent* Event) override;
 	bool event(QEvent* Event) override;
 
@@ -364,6 +367,7 @@ protected:
 	QLineEdit* mFilterWidget = nullptr;
 	QAction* mFilterAction = nullptr;
 	lcPartSelectionListView* mPartsWidget = nullptr;
+	QLabel* mEmptyStateLabel = nullptr;
 	QSplitter* mSplitter = nullptr;
 	QTreeWidgetItem* mAllPartsCategoryItem = nullptr;
 	std::vector<lcPartPalette> mPartPalettes;

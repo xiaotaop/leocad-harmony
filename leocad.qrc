@@ -112,6 +112,10 @@
         <file>resources/time_add_keys.png</file>
         <file>resources/archive.png</file>
         <file>resources/library.zip</file>
+        <!-- Curated offline parts library for the first release. Kept as the
+             last-resort source in lcPiecesLibrary::FindBundledLibraryArchive();
+             see assets/ldraw-lite/manifest.json for provenance and licensing. -->
+        <file alias="assets/ldraw-lite/library-lite.zip">assets/ldraw-lite/library-lite.zip</file>
         <file>resources/studlogo1.zip</file>
         <file>resources/studlogo2.zip</file>
         <file>resources/studlogo3.zip</file>
