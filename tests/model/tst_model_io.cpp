@@ -14,6 +14,13 @@
 #ifdef Q_OS_WIN
 #include <windows.h>
 #endif
+#ifdef Q_OS_HARMONY
+// Host source paths are unavailable in the device sandbox. The test HAP embeds
+// the same fixtures and extracts writable copies, matching desktop input modes.
+static QString gHarmonyFixtureDirectory;
+#undef QFINDTESTDATA
+#define QFINDTESTDATA(path) (gHarmonyFixtureDirectory + QLatin1Char('/') + QFileInfo(QString::fromUtf8(path)).fileName())
+#endif
 
 class FailingWriteDevice : public QIODevice
 {
@@ -602,6 +609,14 @@ private slots:
 
 int main(int argc, char** argv)
 {
+#ifdef Q_OS_HARMONY
+    QSurfaceFormat format;
+    format.setRenderableType(QSurfaceFormat::OpenGLES);
+    format.setVersion(3, 0);
+    format.setDepthBufferSize(24);
+    format.setStencilBufferSize(8);
+    QSurfaceFormat::setDefaultFormat(format);
+#endif
     QStandardPaths::setTestModeEnabled(true);
     QCoreApplication::setOrganizationName("LeoCAD-MemberB-Tests");
     QCoreApplication::setApplicationName("ModelIo");
@@ -612,6 +627,22 @@ int main(int argc, char** argv)
     QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, settings.path());
     QSettings::setPath(QSettings::IniFormat, QSettings::SystemScope, settings.path());
     lcApplication app(argc, argv);
+#ifdef Q_OS_HARMONY
+    QTemporaryDir fixtureDirectory;
+    if (!fixtureDirectory.isValid())
+        return 2;
+    gHarmonyFixtureDirectory = fixtureDirectory.path();
+    for (const char* name : {"two-pieces.ldr", "submodel.mpd", "empty-model.lxf"})
+    {
+        QFile source(QStringLiteral(":/fixtures/") + QString::fromLatin1(name));
+        QFile destination(fixtureDirectory.filePath(QString::fromLatin1(name)));
+        if (!source.open(QIODevice::ReadOnly) || !destination.open(QIODevice::WriteOnly))
+            return 2;
+        const QByteArray contents = source.readAll();
+        if (destination.write(contents) != contents.size())
+            return 2;
+    }
+#endif
     // The unmodified upstream library releases buffers through its renderer.
     // Initialize it even though these tests do not display or validate a view.
     if (!lcContext::InitializeRenderer())
@@ -625,7 +656,17 @@ int main(int argc, char** argv)
         app.mLibrary = &library;
         library.LoadColors();
         ModelIoTest tests;
+#ifdef Q_OS_HARMONY
+        const QString outputDirectory = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+        if (!QDir().mkpath(outputDirectory))
+            return 2;
+        const QString output = outputDirectory + QStringLiteral("/model-tests.txt");
+        result = QTest::qExec(&tests, QStringList{QStringLiteral("leocad-model-tests"),
+            QStringLiteral("-o"), output + QStringLiteral(",txt")});
+        qInfo().noquote() << "LEOCAD_MODEL_TESTS" << output << "exit" << result;
+#else
         result = QTest::qExec(&tests, argc, argv);
+#endif
     }
     app.mLibrary = nullptr;
     lcContext::ShutdownRenderer();

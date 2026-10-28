@@ -125,6 +125,14 @@ static void lcRegisterShellFileTypes()
 
 static void lcInitializeSurfaceFormat(int argc, char* argv[])
 {
+#ifdef Q_OS_HARMONY
+	QSurfaceFormat Format;
+	Format.setRenderableType(QSurfaceFormat::OpenGLES);
+	Format.setVersion(3, 0);
+	Format.setDepthBufferSize(24);
+	Format.setStencilBufferSize(8);
+	QSurfaceFormat::setDefaultFormat(Format);
+#endif
 	QCoreApplication Application(argc, argv);
 	const lcCommandLineOptions Options = lcApplication::ParseCommandLineOptions();
 
@@ -185,6 +193,13 @@ int main(int argc, char *argv[])
 #endif
 
 	QList<QPair<QString, bool>> LibraryPaths;
+
+#ifdef Q_OS_HARMONY
+	// Use the existing bundled library until the curated library is integrated.
+	// A startup warning dialog would become the first native Ability window;
+	// closing it before showing the main window can terminate that Ability.
+	LibraryPaths += qMakePair(QStringLiteral(":/resources/library.zip"), true);
+#endif
 
 #ifdef Q_OS_WIN
 	lcRegisterShellFileTypes();
