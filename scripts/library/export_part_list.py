@@ -167,33 +167,44 @@ def load_library(archive: Path):
 def resolve_reference(reference: str, parts, primitives):
     """Mirror the loader's lookup order: parts map first, then primitives.
 
-    Returns ``("part", id)`` for a top-level part, ``("primitive", None)`` for a
-    subpart or primitive, or ``None`` when the archive cannot satisfy the
-    reference at all — which is exactly the case that produces a part that
-    silently renders incomplete.
+    Returns ``("part", id)``, ``("subpart", key)`` or ``("primitive", key)``
+    naming the archive member that satisfies the reference, or ``None`` when
+    nothing does — the case that makes a part render incomplete with no error.
+
+    The distinction matters for the closure walk: a reference into ``parts/s/``
+    or ``p/`` still has to exist in the archive, and still has references of its
+    own to follow. Returning only "primitive" and moving on would stop the walk
+    one level too early and miss a missing primitive under a subpart.
     """
     if reference.startswith("LDRAW/PARTS/"):
         rest = reference[len("LDRAW/PARTS/"):]
         if rest.startswith("S/"):
-            return ("primitive", None) if rest in primitives else None
+            return ("subpart", rest) if rest in primitives else None
         part_id = rest[:-4]
         return ("part", part_id) if part_id in parts else None
 
     if reference.startswith("LDRAW/P/"):
         key = reference[len("LDRAW/P/"):]
-        return ("primitive", None) if key in primitives else None
+        return ("primitive", key) if key in primitives else None
 
     part_id = reference[:-4]
     if part_id in parts:
         return "part", part_id
     if reference in primitives:
-        return "primitive", None
+        kind = "subpart" if reference.startswith("S/") else "primitive"
+        return kind, reference
     return None
 
 
-def referenced_parts(bundle, member: str, parts, primitives):
-    """Top-level parts referenced by a model file (type 1 lines)."""
-    out = []
+def referenced_entries(bundle, member: str, parts, primitives):
+    """Resolve every type-1 reference in one archive member.
+
+    Returns ``(top_level_parts, library_members)``: the part ids to follow in the
+    dependency closure, and every archive member the file needs in order to
+    render. Raises ``SystemExit`` when a reference cannot be satisfied.
+    """
+    top_level: list[str] = []
+    members: list[str] = []
     for raw in bundle.read(member).decode("utf-8", "replace").splitlines():
         fields = raw.split()
         if len(fields) < 15 or fields[0] != "1":
@@ -206,9 +217,15 @@ def referenced_parts(bundle, member: str, parts, primitives):
             raise SystemExit(
                 f"{member}: unresolvable reference {fields[14]!r} — "
                 f"the subset is incomplete")
-        if resolved[0] == "part":
-            out.append(resolved[1])
-    return out
+        kind, key = resolved
+        if kind == "part":
+            top_level.append(key)
+            members.append(parts[key])
+        else:
+            # Subparts and primitives are library members, not part ids: they
+            # never join the closure, but their own references must be followed.
+            members.append(primitives[key])
+    return top_level, members
 
 
 def read_selection(path: Path):
@@ -230,22 +247,48 @@ def read_selection(path: Path):
 
 
 def walk_closure(seed_order, parts, primitives, bundle):
-    """Breadth-first over part references; record parent and originating seed."""
+    """Breadth-first over part references; record parent and originating seed.
+
+    Two things are checked here that a part-id-only walk cannot see:
+
+    * a seed listed in selection.txt but absent from the archive is an error,
+      not something to skip — the caller asked for a part that will not ship;
+    * subparts and primitives get their own references followed, so a missing
+      primitive underneath a subpart is reported rather than silently accepted.
+    """
     parent: dict[str, str] = {}
     root: dict[str, str] = {part_id: part_id for part_id in seed_order}
     queue = deque(seed_order)
+    visited_members: set[str] = set()
+
+    missing_seeds = [part_id for part_id in seed_order if part_id not in parts]
+    if missing_seeds:
+        raise SystemExit(
+            f"{len(missing_seeds)} seed parts are listed in selection.txt but "
+            f"missing from the archive: {missing_seeds[:5]}")
 
     while queue:
         part_id = queue.popleft()
-        member = parts.get(part_id)
-        if member is None:
-            continue
-        for child in referenced_parts(bundle, member, parts, primitives):
+        member = parts[part_id]
+        visited_members.add(member)
+
+        children, members = referenced_entries(bundle, member, parts, primitives)
+        for child in children:
             if child in root:
                 continue
             parent[child] = part_id
             root[child] = root[part_id]
             queue.append(child)
+
+        # Follow subparts and primitives too: they can reference further files,
+        # and a dangling reference one level down is just as broken.
+        pending = [m for m in members if m not in visited_members]
+        while pending:
+            sub_member = pending.pop()
+            visited_members.add(sub_member)
+            _children, sub_members = referenced_entries(
+                bundle, sub_member, parts, primitives)
+            pending.extend(m for m in sub_members if m not in visited_members)
 
     return parent, root
 
@@ -296,6 +339,15 @@ def build_rows(assets: Path):
         raise SystemExit(
             f"{len(unreached)} parts are in the archive but not reachable from "
             f"the seed list: {unreached[:5]}")
+
+    # The manifest is the only source of description and licence, so a part that
+    # ships without an entry would otherwise be reported as a bare KeyError.
+    undescribed = [part_id for part_id in list(seed_order) + closure
+                   if part_id not in metadata]
+    if undescribed:
+        raise SystemExit(
+            f"{len(undescribed)} parts have no manifest entry: "
+            f"{undescribed[:5]} — regenerate the manifest")
 
     rows = []
     for part_id in seed_order:
