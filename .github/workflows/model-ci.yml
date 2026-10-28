@@ -59,6 +59,7 @@ jobs:
           path: |
             .local/build-tests/build.log
             .local/build-tests/test-results.txt
+            .local/build-tests/dependencies.txt
             .local/build-app/build.log
             .local/build-app/version.txt
             .local/build-app/version-error.txt

@@ -61,7 +61,7 @@ target_compile_definitions(leocad PRIVATE
     LC_DISABLE_BLENDER=1
 )
 if(OHOS)
-    target_compile_definitions(leocad PRIVATE LC_DISABLE_NETWORK=1)
+    target_compile_definitions(leocad PRIVATE LC_DISABLE_NETWORK=1 LC_DISABLE_NON_CORE_FORMATS=1)
 endif()
 target_compile_options(leocad PRIVATE
     $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-unused-parameter;-Werror=unused-result>
