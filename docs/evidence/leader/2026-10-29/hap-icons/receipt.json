@@ -1,0 +1,49 @@
+{
+  "code_commit": "dbc6f07456d28386fc26b625e34d1db11c1dc92e",
+  "date": "2026-10-29",
+  "device": {
+    "model": "HAD-W32",
+    "api": 23,
+    "arch": "arm64"
+  },
+  "hap": {
+    "sha256": "f3b5716606bce3e9cbc34268c0a942d14a37489a6548e45adb1cc63920f602ff",
+    "bytes": 80056246
+  },
+  "pids": [
+    23220,
+    23711
+  ],
+  "native_exit_codes": [
+    0,
+    0
+  ],
+  "verified_icons": [
+    "startup",
+    "main_window_titlebar",
+    "taskbar",
+    "restart"
+  ],
+  "files": {
+    "ready.jpeg": {
+      "sha256": "68efff14417d9fbc3d203a4b51232f171f8aeb5a818db62c5fa23218669a01ef",
+      "bytes": 319285
+    },
+    "restart.jpeg": {
+      "sha256": "8a887ff3b36ec7d842f42e1d82b2059f8ac38348ea66544949af4fc97c6507f9",
+      "bytes": 318981
+    },
+    "run-1.hilog.txt": {
+      "sha256": "6a97c15add909c240dbf024f130002050024772a8acb5681ed6f3480c5246a88",
+      "bytes": 62740
+    },
+    "run-2.hilog.txt": {
+      "sha256": "a9703aab5454ccef511d6c09300314d637ce991932cdb3a1513b7f31afba266e",
+      "bytes": 179086
+    },
+    "start.jpeg": {
+      "sha256": "a1297d2b1b38fe5986baa470600d0018cf38b798c5065b2d05dcc515e6414ff1",
+      "bytes": 279892
+    }
+  }
+}

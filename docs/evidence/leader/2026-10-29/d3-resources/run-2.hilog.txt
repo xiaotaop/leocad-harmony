@@ -1,0 +1,424 @@
+10-29 21:02:34.848  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.multimedia.image' via napi_load_module()
+10-29 21:04:41.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:04:44.467  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:04:47.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:04:50.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:04:53.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:04:56.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:04:59.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:05:02.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:05:05.467  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:05:08.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:05:11.467  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:05:14.104  9110  9110 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [P:D:596006|247]ac: down: 596006
+10-29 21:05:14.104  9110  9110 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [P:D:596006|649]recv
+10-29 21:05:14.104  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:28,InputId:596006,wid:525,ac:2
+10-29 21:05:14.107  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] ITK Id:596006, fId:10000, T:0, I=0, M=0
+10-29 21:05:14.108  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] ITK Id:596006, TTHNI:fId: 10000{ T: page, D: 6 };{ T: XComponent, D: 12 };
+10-29 21:05:14.108  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] ITK Id:596006, TTHRTI: T PinchRecognizer info: { T: XComponent };T RotationRecognizer info: { T: XComponent };
+10-29 21:05:14.113  9110  9110 I C03919/io.github.xiaotaop.leocad/AceInputTracking: [(100000:100000:scope)] Consumed id:596006, last id:595950
+10-29 21:05:14.113  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: ConsumePointerEventInner: InputId:596006,wid:525,pointId:10000,srcType:2,rect:[0,0,3120,1955],notify:1
+10-29 21:05:14.113  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 361, function: AttachExec,isShowKeyboard 1.
+10-29 21:05:14.120  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 1308, function: OnInputReady,InputMethodController start.
+10-29 21:05:14.120  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 406, function: AttachExec,bind imf successfully.
+10-29 21:05:14.120  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 951, function: OnConfigurationChange,IMC enterKeyType: 1, textInputType: 0.
+10-29 21:05:14.120  9110  9110 E C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 82, function: ErrorCodeConvert,ErrorCode: 0
+10-29 21:05:14.120  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 887, function: OnCursorUpdate,left: 2592, top: 232, height: 16.
+10-29 21:05:14.121  9110  9110 E C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 82, function: ErrorCodeConvert,ErrorCode: 0
+10-29 21:05:14.121  9110  9110 I C01331/io.github.xiaotaop.leocad/Context: [js_ability_context.cpp2156]called
+10-29 21:05:14.121  9110  9110 I C02800/io.github.xiaotaop.leocad/InputManagerImpl: [][SetPointerStyle:1586] enter
+10-29 21:05:14.123  9110  9110 I C02800/io.github.xiaotaop.leocad/InputManagerImpl: [][SetPointerStyle] leave
+10-29 21:05:14.208  9110  9110 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [P:U:596007|247]ac: up: 596007
+10-29 21:05:14.208  9110  9110 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [P:U:596007|649]recv
+10-29 21:05:14.208  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:29,InputId:596007,wid:525,ac:4
+10-29 21:05:14.209  9110  9110 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+10-29 21:05:14.209  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] ITK Id:596007, fId:10000, T:1, I=0, M=0
+10-29 21:05:14.209  9110  9110 I C03934/io.github.xiaotaop.leocad/AceUIEvent: [(100000:100000:scope)] TpFlush end by up event
+10-29 21:05:14.210  9110  9110 I C03919/io.github.xiaotaop.leocad/AceInputTracking: [(100000:100000:scope)] Consumed id:596007, last id:595950
+10-29 21:05:14.210  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: ConsumePointerEventInner: InputId:596007,wid:525,pointId:10000,srcType:2,rect:[0,0,3120,1955],notify:1
+10-29 21:05:14.210  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 433, function: ShowTextInputInner,start.
+10-29 21:05:14.211  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 445, function: ShowTextInputInner,enter editable state.
+10-29 21:05:14.211  9110  9110 E C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 82, function: ErrorCodeConvert,ErrorCode: 0
+10-29 21:05:14.466  9110  9583 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+10-29 21:05:14.718  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:596008|163]The client receives a key, Fd:91
+10-29 21:05:14.718  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596008|576]id:596008 recv
+10-29 21:05:14.718  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:36,InputId:596008,wid:525
+10-29 21:05:14.718  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 1033, function: PrintKeyEventLog,KeyEventCountInPeriod: 28, startTime: 1793279077, endTime: 1793279114
+10-29 21:05:14.719  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596008|601]Key event report keyCode:<private>, id:596008 recv
+10-29 21:05:14.721  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 0) return: 0
+10-29 21:05:14.722  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 0) return: 0
+10-29 21:05:14.722  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 0) return: 0
+10-29 21:05:14.722  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:596009|163]The client receives a key, Fd:91
+10-29 21:05:14.722  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596009|576]id:596009 recv
+10-29 21:05:14.722  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:37,InputId:596009,wid:525
+10-29 21:05:14.722  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596008, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:14.723  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596009|601]Key event report keyCode:<private>, id:596009 recv
+10-29 21:05:14.774  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:596010|163]The client receives a key, Fd:91
+10-29 21:05:14.774  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596010|576]id:596010 recv
+10-29 21:05:14.774  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:38,InputId:596010,wid:525
+10-29 21:05:14.774  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596010|601]Key event report keyCode:<private>, id:596010 recv
+10-29 21:05:14.775  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:596011|163]The client receives a key, Fd:91
+10-29 21:05:14.775  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596011|576]id:596011 recv
+10-29 21:05:14.775  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:39,InputId:596011,wid:525
+10-29 21:05:14.776  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596011|601]Key event report keyCode:<private>, id:596011 recv
+10-29 21:05:14.777  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:596012|163]The client receives a key, Fd:91
+10-29 21:05:14.777  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596012|576]id:596012 recv
+10-29 21:05:14.777  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:40,InputId:596012,wid:525
+10-29 21:05:14.777  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596012|601]Key event report keyCode:<private>, id:596012 recv
+10-29 21:05:14.779  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.779  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.779  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.779  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596010, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:14.780  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.780  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.780  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.780  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596011, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:14.780  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QOhosInputMethodProxy::showTextInput(::InputMethod_RequestKeyboardReason)::(anonymous class)::operator()(QtOhos::JsState &) const: text input already shown, skip showing it again
+10-29 21:05:14.790  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QOhosInputMethodProxy::showTextInput(::InputMethod_RequestKeyboardReason)::(anonymous class)::operator()(QtOhos::JsState &) const: text input already shown, skip showing it again
+10-29 21:05:14.828  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:596013|163]The client receives a key, Fd:91
+10-29 21:05:14.828  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596013|576]id:596013 recv
+10-29 21:05:14.828  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:41,InputId:596013,wid:525
+10-29 21:05:14.828  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596013|601]Key event report keyCode:<private>, id:596013 recv
+10-29 21:05:14.829  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.829  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.829  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.829  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596013, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:14.829  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:596014|163]The client receives a key, Fd:91
+10-29 21:05:14.829  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596014|576]id:596014 recv
+10-29 21:05:14.829  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:42,InputId:596014,wid:525
+10-29 21:05:14.829  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596014|601]Key event report keyCode:<private>, id:596014 recv
+10-29 21:05:14.829  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QOhosInputMethodProxy::showTextInput(::InputMethod_RequestKeyboardReason)::(anonymous class)::operator()(QtOhos::JsState &) const: text input already shown, skip showing it again
+10-29 21:05:14.880  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:596015|163]The client receives a key, Fd:91
+10-29 21:05:14.880  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596015|576]id:596015 recv
+10-29 21:05:14.880  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:43,InputId:596015,wid:525
+10-29 21:05:14.880  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596015|601]Key event report keyCode:<private>, id:596015 recv
+10-29 21:05:14.881  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.881  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.881  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.881  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:596016|163]The client receives a key, Fd:91
+10-29 21:05:14.881  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596016|576]id:596016 recv
+10-29 21:05:14.881  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:44,InputId:596016,wid:525
+10-29 21:05:14.881  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596015, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:14.881  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596016|601]Key event report keyCode:<private>, id:596016 recv
+10-29 21:05:14.881  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QOhosInputMethodProxy::showTextInput(::InputMethod_RequestKeyboardReason)::(anonymous class)::operator()(QtOhos::JsState &) const: text input already shown, skip showing it again
+10-29 21:05:14.932  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:596017|163]The client receives a key, Fd:91
+10-29 21:05:14.932  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596017|576]id:596017 recv
+10-29 21:05:14.932  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:45,InputId:596017,wid:525
+10-29 21:05:14.932  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596017|601]Key event report keyCode:<private>, id:596017 recv
+10-29 21:05:14.933  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.933  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.933  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.933  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596017, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:14.933  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:596018|163]The client receives a key, Fd:91
+10-29 21:05:14.933  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596018|576]id:596018 recv
+10-29 21:05:14.933  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:46,InputId:596018,wid:525
+10-29 21:05:14.933  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596018|601]Key event report keyCode:<private>, id:596018 recv
+10-29 21:05:14.933  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QOhosInputMethodProxy::showTextInput(::InputMethod_RequestKeyboardReason)::(anonymous class)::operator()(QtOhos::JsState &) const: text input already shown, skip showing it again
+10-29 21:05:14.984  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:596019|163]The client receives a key, Fd:91
+10-29 21:05:14.984  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596019|576]id:596019 recv
+10-29 21:05:14.984  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:47,InputId:596019,wid:525
+10-29 21:05:14.984  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596019|601]Key event report keyCode:<private>, id:596019 recv
+10-29 21:05:14.985  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:596020|163]The client receives a key, Fd:91
+10-29 21:05:14.985  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596020|576]id:596020 recv
+10-29 21:05:14.985  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:48,InputId:596020,wid:525
+10-29 21:05:14.985  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596020|601]Key event report keyCode:<private>, id:596020 recv
+10-29 21:05:14.985  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.985  9110 10767 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [|72]Ffrt PE:595884 596020
+10-29 21:05:14.985  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.985  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:14.985  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596019, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:14.985  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QOhosInputMethodProxy::showTextInput(::InputMethod_RequestKeyboardReason)::(anonymous class)::operator()(QtOhos::JsState &) const: text input already shown, skip showing it again
+10-29 21:05:15.036  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:596021|163]The client receives a key, Fd:91
+10-29 21:05:15.036  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596021|576]id:596021 recv
+10-29 21:05:15.036  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:49,InputId:596021,wid:525
+10-29 21:05:15.036  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596021|601]Key event report keyCode:<private>, id:596021 recv
+10-29 21:05:15.036  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:596022|163]The client receives a key, Fd:91
+10-29 21:05:15.036  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596022|576]id:596022 recv
+10-29 21:05:15.036  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:50,InputId:596022,wid:525
+10-29 21:05:15.036  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:D:596022|601]Key event report keyCode:<private>, id:596022 recv
+10-29 21:05:15.036  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:15.037  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:15.037  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:15.037  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596021, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:15.037  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QOhosInputMethodProxy::showTextInput(::InputMethod_RequestKeyboardReason)::(anonymous class)::operator()(QtOhos::JsState &) const: text input already shown, skip showing it again
+10-29 21:05:15.087  9110  9110 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:596023|163]The client receives a key, Fd:91
+10-29 21:05:15.087  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596023|576]id:596023 recv
+10-29 21:05:15.087  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:51,InputId:596023,wid:525
+10-29 21:05:15.088  9110  9110 I C02805/io.github.xiaotaop.leocad/InputManagerImpl: [K:U:596023|601]Key event report keyCode:<private>, id:596023 recv
+10-29 21:05:15.088  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:15.088  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventUser: Node XComponent/47handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:15.088  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] OnKeyEventInteral Node process self: Node page/23handle KeyEvent(secure_field, 1) return: 0
+10-29 21:05:15.089  9110  9609 I C0420C/io.github.xiaotaop.leocad/WMSEvent: DispatchKeyEventCallback: id: 596023, consumed: 0,escTrigger: 0, escDown: 0
+10-29 21:05:15.089  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QOhosInputMethodProxy::showTextInput(::InputMethod_RequestKeyboardReason)::(anonymous class)::operator()(QtOhos::JsState &) const: text input already shown, skip showing it again
+10-29 21:05:15.789  9110  9110 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [P:D:596024|247]ac: down: 596024
+10-29 21:05:15.789  9110  9110 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [P:D:596024|649]recv
+10-29 21:05:15.789  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:30,InputId:596024,wid:525,ac:2
+10-29 21:05:15.790  9110  9110 I C04219/io.github.xiaotaop.leocad/WMSDecor: IsHitTitleBar: hitTitleBar success
+10-29 21:05:15.791  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] ITK Id:596024, fId:10000, T:0, I=0, M=0
+10-29 21:05:15.793  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] ITK Id:596024, TTHNI:fId: 10000{ T: Row, D: 7 };{ T: Button, D: 8 };
+10-29 21:05:15.793  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] ITK Id:596024, TTHRTI: T ClickRecognizer info: { T: Button }; { T: Row };T PanRecognizer info: { T: Row }; { T: Row };
+10-29 21:05:15.793  9110  9110 I C03945/io.github.xiaotaop.leocad/AceStateStyle: [(100000:100000:scope)] Handle TouchDown event node: Button
+10-29 21:05:15.793  9110  9110 I C03919/io.github.xiaotaop.leocad/AceInputTracking: [(100000:100000:scope)] Consumed id:596024, last id:595950
+10-29 21:05:15.793  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: ConsumePointerEventInner: InputId:596024,wid:525,pointId:10000,srcType:2,rect:[0,0,3120,1955],notify:1
+10-29 21:05:15.898  9110  9110 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [P:U:596025|247]ac: up: 596025
+10-29 21:05:15.898  9110  9110 I C02805/io.github.xiaotaop.leocad/InputKeyFlow: [P:U:596025|649]recv
+10-29 21:05:15.898  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: eid:31,InputId:596025,wid:525,ac:4
+10-29 21:05:15.900  9110  9110 I C04219/io.github.xiaotaop.leocad/WMSDecor: IsHitTitleBar: hitTitleBar success
+10-29 21:05:15.900  9110  9110 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+10-29 21:05:15.901  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] ITK Id:596025, fId:10000, T:1, I=0, M=0
+10-29 21:05:15.901  9110  9110 I C03934/io.github.xiaotaop.leocad/AceUIEvent: [(100000:100000:scope)] TpFlush end by up event
+10-29 21:05:15.901  9110  9110 I C03945/io.github.xiaotaop.leocad/AceStateStyle: [(100000:100000:scope)] Handle TouchUp or Cancel event node: Button
+10-29 21:05:15.902  9110  9110 I C0391E/io.github.xiaotaop.leocad/AceGesture: [(100000:100000:scope)] Click try accept Button
+10-29 21:05:15.902  9110  9110 I C03951/io.github.xiaotaop.leocad/InputKeyFlow: [(100000:100000:scope)] CLK RACC, T: Button
+10-29 21:05:15.902  9110  9110 I C03952/io.github.xiaotaop.leocad/AceAppBar: [(100000:100000:scope)] callNative
+10-29 21:05:15.902  9110  9110 I C03952/io.github.xiaotaop.leocad/AceAppBar: [(100000:100000:scope)] CallWindowNative
+10-29 21:05:15.902  9110  9110 I C03952/io.github.xiaotaop.leocad/AceAppBar: [(100000:100000:scope)] CallContainerModalNative name = win_close_event , value = 
+10-29 21:05:15.903  9110  9110 I C04208/io.github.xiaotaop.leocad/WMSLayout: IsStartMoving: id: 525, isMoving: 0
+10-29 21:05:15.903  9110  9110 I C04208/io.github.xiaotaop.leocad/WMSLayout: OnContainerModalEvent: windowId: 525, name: win_close_event, value: 
+10-29 21:05:15.903  9110  9110 I C03952/io.github.xiaotaop.leocad/AceAppBar: [(100000:100000:scope)] callNative
+10-29 21:05:15.903  9110  9110 I C03952/io.github.xiaotaop.leocad/AceAppBar: [(100000:100000:scope)] OnCloseBtnClick
+10-29 21:05:15.903  9110  9110 I C03952/io.github.xiaotaop.leocad/AceAppBar: [(100000:100000:scope)] close button clicked
+10-29 21:05:15.903  9110  9110 I C04208/io.github.xiaotaop.leocad/WMSLayout: IsStartMoving: id: 525, isMoving: 0
+10-29 21:05:15.903  9110  9110 I C03952/io.github.xiaotaop.leocad/AceAppBar: [(100000:100000:scope)] close button click event triggerd
+10-29 21:05:15.903  9110  9110 I C04219/io.github.xiaotaop.leocad/WMSDecor: Close: id: 525
+10-29 21:05:15.903  9110  9110 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Window.windowWillClose: got close request from source 1, id: '0'
+10-29 21:05:15.904  9110  9110 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Window.windowWillClose: returning Promise, id: '0'
+10-29 21:05:15.904  9110  9110 I C04219/io.github.xiaotaop.leocad/WMSDecor: Close: id: 525 will close
+10-29 21:05:15.904  9110  9614 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5ba990d920, M: Window.windowWillClose: calling close(), id: '0'
+10-29 21:05:15.904  9110  9110 I C03919/io.github.xiaotaop.leocad/AceInputTracking: [(100000:100000:scope)] Consumed id:596025, last id:595950
+10-29 21:05:15.904  9110  9110 I C04213/io.github.xiaotaop.leocad/InputKeyFlow: ConsumePointerEventInner: InputId:596025,wid:525,pointId:10000,srcType:2,rect:[0,0,3120,1955],notify:1
+10-29 21:05:15.908  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 291, function: OH_InputMethodController_Detach,detach g_inputMethodProxy
+10-29 21:05:15.908  9110  9110 I C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 520, function: Close,start.
+10-29 21:05:15.909  9110  9110 E C01C10/io.github.xiaotaop.leocad/ImsaKit: line: 82, function: ErrorCodeConvert,ErrorCode: 0
+10-29 21:05:15.909  9110  9110 I C01331/io.github.xiaotaop.leocad/Context: [js_ability_context.cpp2156]called
+10-29 21:05:15.910  9110 10804 E C01331/io.github.xiaotaop.leocad/Context: [ability_context_impl.cpp1301]failed 2097232
+10-29 21:05:15.910  9110  9110 W C01320/io.github.xiaotaop.leocad/JsEnv: [source_map.cpp145]the stack without line info
+10-29 21:05:15.910  9110  9110 E A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: got error from hideAbility(): name='Error', message='The StartOptions check failed.', code='16000067'
+10-29 21:05:15.910  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+10-29 21:05:15.911  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(-1:100000:singleton)] Focus will stop at root scope Stack/26 of focus view page/23
+10-29 21:05:15.911  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(-1:100000:singleton)] Scope(XComponent/28) has no last focusNode.
+10-29 21:05:15.911  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(-1:100000:singleton)] XComponent/secure_fieldtrigger onBlurInternal by 0
+10-29 21:05:15.911  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(-1:100000:singleton)] FocusSwitch end, XComponent/secure_field onBlur, XComponent/secure_field onFocus, start: 5, end: 1, update: 0
+10-29 21:05:15.911  9110  9110 I C03933/io.github.xiaotaop.leocad/AceKeyboard: [(-1:100000:singleton)] current focus node: (XComponent/28). isDynamic: 0
+10-29 21:05:15.911  9110  9110 I C03933/io.github.xiaotaop.leocad/AceKeyboard: [(-1:100000:singleton)] FrameNode(XComponent/28) notNeedSoftKeyboard.
+10-29 21:05:15.911  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+10-29 21:05:15.914  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Unregistering callbacks for xcomponent 0x5b95cedfb8
+10-29 21:05:15.914  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Unregistering gestures for NativeNode 0x5b965d46e0
+10-29 21:05:15.914  9110  9110 I C03931/io.github.xiaotaop.leocad/AceXcomponent: [(-1:100000:singleton)] UninitializeAccessibility
+10-29 21:05:15.914  9110  9110 I C03931/io.github.xiaotaop.leocad/AceXcomponent: [(-1:100000:singleton)] XComponent[RenderXComponent_WIID_MainWindow] DetachFromMainTree
+10-29 21:05:15.914  9110  9110 I C03931/io.github.xiaotaop.leocad/AceXcomponent: [(-1:100000:singleton)] XComponent[RenderXComponent_WIID_MainWindow] native OnSurfaceDestroyed
+10-29 21:05:15.914  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceDestroyed(::OH_NativeXComponent *, void *): xc: 0x5b95cedfb8 window: 0x5b95de8c00
+10-29 21:05:15.914  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Error: xComponent 0x5b95cedfb8 does not have any assigned receiver
+10-29 21:05:15.914  9110  9110 I C01406/io.github.xiaotaop.leocad/OHOS::RS: RSSurfaceNode::~RSSurfaceNode, Node: 39127152066595, Name: Surface
+10-29 21:05:15.915  9110  9110 I C01331/io.github.xiaotaop.leocad/Context: [js_ability_context.cpp2156]called
+10-29 21:05:15.915  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+10-29 21:05:15.915  9110  9110 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Attempting to terminate qAbility with instance id: 0
+10-29 21:05:15.915  9110  9110 I C01331/io.github.xiaotaop.leocad/Context: [js_ability_context.cpp2052]called
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsListener: ~JsWindowListener: [NAPI]
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: Unregister type displayIdChange success! callback map size: 0
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsWindow: OnUnregisterWindowCallback: Unregister end, window [525, leocad0], type=displayIdChange
+10-29 21:05:15.915  9110  9110 I C04204/io.github.xiaotaop.leocad/WMSScb: InitSSMProxy: proxy has been inited
+10-29 21:05:15.915  9110 10804 I C01331/io.github.xiaotaop.leocad/Context: [js_ability_context.cpp2060]async terminate self
+10-29 21:05:15.915  9110 10804 I C01331/io.github.xiaotaop.leocad/Context: [ability_context_impl.cpp708]called
+10-29 21:05:15.915  9110 10804 I C01331/io.github.xiaotaop.leocad/Context: [ability_context_impl.cpp721]scb call, TerminateSelf: QAbility
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsListener: ~JsWindowListener: [NAPI]
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: Unregister type windowVisibilityChange success! callback map size: 0
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsWindow: OnUnregisterWindowCallback: Unregister end, window [525, leocad0], type=windowVisibilityChange
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsListener: ~JsWindowListener: [NAPI]
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: Unregister type windowStatusChange success! callback map size: 0
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsWindow: OnUnregisterWindowCallback: Unregister end, window [525, leocad0], type=windowStatusChange
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsListener: ~JsWindowListener: [NAPI]
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: Unregister type rectChangeInGlobalDisplay success! callback map size: 0
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsWindow: OnUnregisterWindowCallback: Unregister end, window [525, leocad0], type=rectChangeInGlobalDisplay
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsListener: ~JsWindowListener: [NAPI]
+10-29 21:05:15.915  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: Unregister type windowRectChange success! callback map size: 0
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsWindow: OnUnregisterWindowCallback: Unregister end, window [525, leocad0], type=windowRectChange
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsListener: ~JsWindowListener: [NAPI]
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: Unregister type windowEvent success! callback map size: 0
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsWindow: OnUnregisterWindowCallback: Unregister end, window [525, leocad0], type=windowEvent
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: called
+10-29 21:05:15.916  9110  9110 I C0420C/io.github.xiaotaop.leocad/WMSEvent: UnregisterTouchOutsideListener: name=leocad0, id=525
+10-29 21:05:15.916  9110  9110 I C04204/io.github.xiaotaop.leocad/WMSScb: InitSSMProxy: proxy has been inited
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsListener: ~JsWindowListener: [NAPI]
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: Unregister type touchOutside success! callback map size: 0
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsWindow: OnUnregisterWindowCallback: Unregister end, window [525, leocad0], type=touchOutside
+10-29 21:05:15.916  9110  9110 I C04209/io.github.xiaotaop.leocad/WMSImms: UnregisterAvoidAreaChangeListener: win 525
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsListener: ~JsWindowListener: [NAPI]
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsRegisterManager: Unregister type avoidAreaChange success! callback map size: 0
+10-29 21:05:15.916  9110  9110 I C04200/io.github.xiaotaop.leocad/JsWindow: OnUnregisterWindowCallback: Unregister end, window [525, leocad0], type=avoidAreaChange
+10-29 21:05:15.916  9110  9110 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 525.000000
+10-29 21:05:15.916  9110  9110 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 525.000000
+10-29 21:05:15.916  9110  9110 I C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp OH_NativeWindowManager_UnregisterTouchEventFilter: clear touchEventCallback, wid:525
+10-29 21:05:15.916  9110  9110 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 525.000000
+10-29 21:05:15.916  9110  9110 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 525.000000
+10-29 21:05:15.916  9110  9110 I C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp OH_NativeWindowManager_UnregisterMouseEventFilter: clear mouseEventCallback, wid:525
+10-29 21:05:15.916  9110  9614 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5ba990d920, M: auto QtOhos::(anonymous namespace)::QAbilityPeerImpl::setQWindow(Napi::Env, QtOhos::QObjectThreadSafeRef)::(anonymous class)::operator()() const: sending request to resolve QWindow destroy notify Promise if needed: 393377883040/2
+10-29 21:05:15.917  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QtOhos::(anonymous namespace)::QAbilityPeerImpl::setQWindow(Napi::Env, QtOhos::QObjectThreadSafeRef)::(anonymous class)::operator()()::(anonymous class)::operator()(QtOhos::JsState &) const: resolving QWindow destroy notify Promise: 393377883040/2
+10-29 21:05:15.918  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: OnUnregisterDisplayManagerCallback: OnUnregisterDisplayCallback is called
+10-29 21:05:15.918  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: RemoveCallback: jsCallBack size: 0!
+10-29 21:05:15.918  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: ~JsDisplayListener: Destructor
+10-29 21:05:15.918  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: UnRegisterDisplayListenerWithType: unregister display listener with type availableAreaChange  ret: 0
+10-29 21:05:15.919  9110  9609 I C04207/io.github.xiaotaop.leocad/WMSFocus: UpdateFocusState: focus: 0, id: 525
+10-29 21:05:15.919  9110  9609 I C03900/io.github.xiaotaop.leocad/Ace: [(-1:100000:singleton)] [io.github.xiaotaop.leocad][entry][100000]: window unfocus
+10-29 21:05:15.919  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: oh_display_manager.cpp NativeDisplayManager_SetColorSpace: [DMNDK] color spaces count:3.
+10-29 21:05:15.919  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: oh_display_manager.cpp NativeDisplayManager_SetHdrFormat: [DMNDK] hdr format count:3
+10-29 21:05:15.919  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: oh_display_manager.cpp NativeDisplayManager_SetDisplayInfo: [DMNDK] set display id[0] finish.
+10-29 21:05:15.919  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: IsCallbackRegistered: IsCallbackRegistered methodName availableAreaChange not registered!
+10-29 21:05:15.919  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: JsDisplayListener: Constructor
+10-29 21:05:15.919  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Update application state , state: ON_INACTIVE
+10-29 21:05:15.919  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] Window: 525 lost focus.
+10-29 21:05:15.919  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] Scope(Stack/26) has no last focusNode.
+10-29 21:05:15.919  9110  9609 I C04207/io.github.xiaotaop.leocad/WMSFocus: NotifyHighlightChange: windowId: 525, isHighlight: 0,
+10-29 21:05:15.919  9110  9609 I C03900/io.github.xiaotaop.leocad/Ace: [(-1:100000:singleton)] [io.github.xiaotaop.leocad][entry][100000]:window unactive
+10-29 21:05:15.919  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Update application state , state: ON_INACTIVE
+10-29 21:05:15.920  9110  9609 I C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyLifecyclePausedStatus: in
+10-29 21:05:15.920  9110  9609 I C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyAfterLifecyclePaused: in
+10-29 21:05:15.921  9110  9609 I C01332/io.github.xiaotaop.leocad/UIAbility: [ui_ability_thread.cpp321]name:QAbility,targeState:6,isNewWant:0
+10-29 21:05:15.921  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [ui_ability_thread.cpp240]Lifecycle:name QAbility
+10-29 21:05:15.921  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: GoPause: in
+10-29 21:05:15.921  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: Pause: in, isColdStart: 0
+10-29 21:05:15.921  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyAfterLifecyclePaused: in
+10-29 21:05:15.921  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyAfterLifecyclePaused: window has been in noninteractive status
+10-29 21:05:15.921  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2015]JsUIAbility call js, name: onWillBackground
+10-29 21:05:15.921  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2060]end, name: onWillBackground, time: 0
+10-29 21:05:15.924  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2015]JsUIAbility call js, name: onBackground
+10-29 21:05:15.924  9110  9110 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbility::onBackground()
+10-29 21:05:15.924  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2060]end, name: onBackground, time: 0
+10-29 21:05:15.924  9110  9110 I C04202/io.github.xiaotaop.leocad/WMSMain: GoBackground: reason: 4
+10-29 21:05:15.924  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: Hide: Window hide [id:525, type: 1, reason:4, state:2, requestState:2
+10-29 21:05:15.924  9110  9110 W C0420A/io.github.xiaotaop.leocad/WMSLife: GetAttachStateSyncResult: lifecycleCallback is null
+10-29 21:05:15.924  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [ui_ability_impl.cpp478]wnd call, AfterBackground
+10-29 21:05:15.925  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] [io.github.xiaotaop.leocad][entry][100000]: window background
+10-29 21:05:15.926  9110  9609 I C01332/io.github.xiaotaop.leocad/UIAbility: [ui_ability_thread.cpp321]name:QAbility,targeState:0,isNewWant:0
+10-29 21:05:15.926  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Update application state , state: ON_HIDE
+10-29 21:05:15.926  9110  9110 I C01406/io.github.xiaotaop.leocad/OHOS::RS: RSSurfaceNode::SetAbilityState, surfaceNodeId:[39127152066562], ability state: background
+10-29 21:05:15.926  9110  9110 I C03925/io.github.xiaotaop.leocad/AceRouter: [(100000:100000:scope)] window state change to hide
+10-29 21:05:15.926  9110  9110 I C03925/io.github.xiaotaop.leocad/AceRouter: [(100000:100000:scope)] page hide
+10-29 21:05:15.926  9110  9110 I C03922/io.github.xiaotaop.leocad/AceNavigation: [(100000:100000:scope)] can't find inner navigation
+10-29 21:05:15.926  9110  9110 I C04202/io.github.xiaotaop.leocad/WMSMain: SetFrameRateLinkerEnable: rate 0, linkerId 39127152066560
+10-29 21:05:15.927  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyAfterDidBackground: reason: 4
+10-29 21:05:15.927  9110  9110 I C04208/io.github.xiaotaop.leocad/WMSLayout: NotifyWindowStatusChange: id:525, windowMode:1, windowStatus:3, lastWindowStatus:2, skipRedundantWindowStatusNotifications:0
+10-29 21:05:15.927  9110  9110 I C04208/io.github.xiaotaop.leocad/WMSLayout: NotifyWindowStatusDidChange: Id:525, WindowMode:1, windowStatus:3, lastWindowStatus:2, listenerSize:0, rect:[0 0 3120 1955]
+10-29 21:05:15.927  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: Hide: Window hide end, id:525, type: 1
+10-29 21:05:15.928  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyAfterDidBackground execute
+10-29 21:05:15.928  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2015]JsUIAbility call js, name: onDidBackground
+10-29 21:05:15.928  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2060]end, name: onDidBackground, time: 0
+10-29 21:05:15.928  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [ui_ability_thread.cpp240]Lifecycle:name QAbility
+10-29 21:05:15.928  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2015]JsUIAbility call js, name: onWindowStageWillDestroy
+10-29 21:05:15.928  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2060]end, name: onWindowStageWillDestroy, time: 0
+10-29 21:05:15.928  9110  9110 I C04202/io.github.xiaotaop.leocad/WMSMain: GoDestroy: reason: 0
+10-29 21:05:15.928  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: Destroy: Destroy start, id:525, state:3, needNotifyServer:1, needClearListener:1, reason:0
+10-29 21:05:15.928  9110  9110 I C0420C/io.github.xiaotaop.leocad/WMSEvent: RemoveInputWindow: wid: 525
+10-29 21:05:15.928  9110  9110 I C04200/io.github.xiaotaop.leocad/InputChannel: Destroy WindowInputChannel, windowId:525
+10-29 21:05:15.928  9110  9110 I C04200/io.github.xiaotaop.leocad/InputChannel: windowName: leocad0, windowId: 525
+10-29 21:05:15.928  9110  9110 I C04217/io.github.xiaotaop.leocad/WMSAttribute: UnregisterGetWMSWindowListCallback: winId: 525
+10-29 21:05:15.928  9110  9110 E C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyWMSWindowDestroyed: window destroyed listener is nullptr
+10-29 21:05:15.928  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] [io.github.xiaotaop.leocad][entry][100000]: window destroy
+10-29 21:05:15.928  9110  9110 W C03903/io.github.xiaotaop.leocad/AceSubWindow: [(-2:100000:singleton)] Fail to get subwindow in dialogSubwindowMap_, instanceId is 100000
+10-29 21:05:15.928  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] Wait UI thread before destroy...
+10-29 21:05:15.928  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] AceContainer Destroy begin
+10-29 21:05:15.928  9110  9110 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.layout.enabled count 0
+10-29 21:05:15.928  9110  9110 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-29 21:05:15.928  9110  9110 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.inputevent.enabled count 0
+10-29 21:05:15.929  9110  9110 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-29 21:05:15.929  9110  9110 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ const.security.developermode.state count 0
+10-29 21:05:15.929  9110  9110 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-29 21:05:15.929  9110  9110 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.statemgr.enabled count 0
+10-29 21:05:15.929  9110  9110 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-29 21:05:15.929  9110  9110 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.boundary.enabled count 0
+10-29 21:05:15.929  9110  9110 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-29 21:05:15.929  9110  9110 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.performance.monitor.enabled count 0
+10-29 21:05:15.930  9110  9110 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-29 21:05:15.930  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] view: page/23 close
+10-29 21:05:15.930  9110  9110 I C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] View: page/23 lost focus
+10-29 21:05:15.930  9110  9110 W C0391C/io.github.xiaotaop.leocad/AceFocus: [(100000:100000:scope)] viewStack empty
+10-29 21:05:15.930  9110  9110 I C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] UninitializeAccessibility
+10-29 21:05:15.930  9110  9110 I C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] XComponent[__nnMainWindow_0] DetachFromMainTree
+10-29 21:05:15.935  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] root node OnDetachFromFrameNode, id:0
+10-29 21:05:15.936  9110  9110 I C0390D/io.github.xiaotaop.leocad/AceOverlay: [(100000:100000:scope)] OverlayManager destroyed
+10-29 21:05:15.937  9110  9110 I C03905/io.github.xiaotaop.leocad/AceDrag: [(100000:100000:scope)] PipelineContext::Destroy Reset dragDropManager_
+10-29 21:05:15.937  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] RosenWindow destroyed
+10-29 21:05:15.937  9110  9110 I C01406/io.github.xiaotaop.leocad/OHOS::RS: RSUIContext::DetachFromUI. token: 39127152066561 uiPiplineNum: 0
+10-29 21:05:15.937  9110  9110 I C03930/io.github.xiaotaop.leocad/AceAnimation: [(100000:100000:scope)] Pipeline destroyed, 0 finish callbacks unexecuted, count: [ ]
+10-29 21:05:15.937  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Update application state , state: ON_DESTROY
+10-29 21:05:15.937  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] DeclarativeFrontend Destroy begin.
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Declarative engine destroyed
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Declarative instance destroyed
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] DelegateDeclarative destroyed
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] DeclarativeFrontend Destroy end.
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Destroy Frontend on JS thread.
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] DeclarativeFrontend destroyed
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Frontend destroyed
+10-29 21:05:15.938  9110  9110 I C03922/io.github.xiaotaop.leocad/AceNavigation: [(100000:100000:scope)] unregiste plugin change callback
+10-29 21:05:15.938  9110  9110 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] Unregister from watch dog failed with instanceID 100000
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] Wait UI thread...
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] Wait JS thread...
+10-29 21:05:15.938  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] Remove on Platform thread...
+10-29 21:05:15.938  9110  9110 I C04217/io.github.xiaotaop.leocad/WMSAttribute: UnregisterWaterfallModeChangeListener: winId: 525
+10-29 21:05:15.939  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:-1:undefined)] Destroy AceContainer on PLATFORM thread.
+10-29 21:05:15.939  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(-2:-1:undefined)] Container Destroyed
+10-29 21:05:15.939  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyBeforeDestroy: Release uicontent successfully, id: 525.
+10-29 21:05:15.939  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: operator(): Remove window leocad0
+10-29 21:05:15.939  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: operator(): Destroy window leocad0 in js window
+10-29 21:05:15.939  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyBeforeDestroy: successed with id: 525.
+10-29 21:05:15.939  9110  9110 I C04203/io.github.xiaotaop.leocad/WMSSub: RemoveSubWindow: Id: 525, parentId: 0
+10-29 21:05:15.939  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: ClearListenersById: Called id: 525.
+10-29 21:05:15.939  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: ClearListenersById: Clear success, id: 525.
+10-29 21:05:15.939  9110  9110 I C04202/io.github.xiaotaop.leocad/WMSMain: Destroy: id 39127152066562 destroyed
+10-29 21:05:15.939  9110  9110 I C01400/io.github.xiaotaop.leocad/Vsync: RemoveAndCloseFdLocked: RemoveAndCloseFdLocked looper remove fd listener, fd=28
+10-29 21:05:15.939  9110  9110 I C01406/io.github.xiaotaop.leocad/OHOS::RS: RSFrameRateLinker::Destroy id: 39127152066560
+10-29 21:05:15.939  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: SetUIContentComplete: already SetUIContent, persistentId=525
+10-29 21:05:15.939  9110  9110 I C01406/io.github.xiaotaop.leocad/OHOS::RS: RSSurfaceNode::~RSSurfaceNode, Node: 39127152066562, Name: leocad0
+10-29 21:05:15.939  9110  9110 I C0420A/io.github.xiaotaop.leocad/WMSLife: Destroy: Destroy success, id: 525
+10-29 21:05:15.939  9110  9110 E C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2354]null windowStage
+10-29 21:05:15.939  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2015]JsUIAbility call js, name: onWindowStageDestroy
+10-29 21:05:15.939  9110  9110 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbility::onStageDestroy()
+10-29 21:05:15.939  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2060]end, name: onWindowStageDestroy, time: 0
+10-29 21:05:15.939  9110  9110 I C01332/io.github.xiaotaop.leocad/UIAbility: [JUA2015]JsUIAbility call js, name: onDestroy
+10-29 21:05:15.939  9110  9110 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbility::onDestroy()
+10-29 21:05:15.939  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &) begin
+10-29 21:05:15.939  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &): returning Promise for id='0'
+10-29 21:05:15.939  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &) end
+10-29 21:05:15.939  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &) const: initial Promise resolved for id='0'
+10-29 21:05:15.939  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: JsStateImpl: removed QAbilityPeer, instanceId: 0, qwindow: 393377883040/2
+10-29 21:05:15.939  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: quitApplicationFromJsThread begin
+10-29 21:05:15.939  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: quitApplicationFromJsThread end
+10-29 21:05:15.939  9110  9110 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Qt: requested Qt app quit, waiting for the main() function to return
+10-29 21:05:15.940  9110  9110 I C01317/io.github.xiaotaop.leocad/AppKit: [MTHRD2835]start
+10-29 21:05:15.940  9110  9110 I C03F00/io.github.xiaotaop.leocad/ArkCompiler: [gc] app is inBackground
+10-29 21:05:15.940  9110  9110 I C03F01/io.github.xiaotaop.leocad/NAPI: [StopIdleMonitorTimerTask] Get timerMutex_
+10-29 21:05:15.940  9110 10858 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5baaad2920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()() const: waiting for condition 'Qt thread idle'
+10-29 21:05:15.940  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] Destroy Pipeline on UI thread.
+10-29 21:05:15.940  9110  9110 I C0391D/io.github.xiaotaop.leocad/AceMouse: [(100000:100000:scope)] VsyncMouseFormat mouseFormat_ and lastVsyncMouseFormat_ = 0 is same.
+10-29 21:05:15.940  9110  9110 I C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] PipelineBase destroyed
+10-29 21:05:15.940  9110  9110 I C01406/io.github.xiaotaop.leocad/OHOS::RS: RSFrameRateLinker::Destroy id: 39127152066563
+10-29 21:05:15.940  9110  9110 I C01400/io.github.xiaotaop.leocad/Vsync: RemoveAndCloseFdLocked: RemoveAndCloseFdLocked looper remove fd listener, fd=65
+10-29 21:05:15.951  9110  9110 I C01C01/io.github.xiaotaop.leocad/PBC: GetPasteboardService# GetPasteboardService start.
+10-29 21:05:15.951  9110  9110 I C01C01/io.github.xiaotaop.leocad/PBC: GetPasteboardService# Get PasteboardServiceProxy succeed.
+10-29 21:05:15.951  9110  9110 I C01C02/io.github.xiaotaop.leocad/PBS: ~PasteboardObserver# delete Pasteboard Observer.
+10-29 21:05:15.952  9110  9609 I C01C02/io.github.xiaotaop.leocad/PBS: ~PasteboardObserver# delete Pasteboard Observer.
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: OnUnregisterDisplayManagerCallback: OnUnregisterDisplayCallback is called
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: RemoveCallback: jsCallBack size: 0!
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: ~JsDisplayListener: Destructor
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: UnRegisterDisplayListenerWithType: unregister display listener with type availableAreaChange  ret: 0
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: RemoveCallback: jsCallBack size: 0!
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: ~JsDisplayListener: Destructor
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: UnRegisterDisplayListenerWithType: type:remove ret:0
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: RemoveCallback: jsCallBack size: 0!
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: ~JsDisplayListener: Destructor
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: UnRegisterDisplayListenerWithType: type:add ret:0
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: RemoveCallback: jsCallBack size: 0!
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: ~JsDisplayListener: Destructor
+10-29 21:05:15.952  9110  9110 I C04201/io.github.xiaotaop.leocad/DMS: UnRegisterDisplayListenerWithType: type:change ret:0
+10-29 21:05:15.953  9110  9614 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5ba990d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad.so' returned 0
+10-29 21:05:15.953  9110  9614 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5ba990d920, M: Qt: asynchronously terminating remaining QAbility instances, if any
+10-29 21:05:15.953  9110  9614 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5ba990d920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()(bool) const: setting condition 'Qt thread idle' to true
+10-29 21:05:15.953  9110  9614 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5ba990d920, M: startApplicationMainFunction end
+10-29 21:05:15.953  9110  9110 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Qt: force-resolving pending QWindow destroy Promises before termination if needed
+10-29 21:05:15.953  9110 10858 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5baaad2920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()() const: condition 'Qt thread idle' met
+10-29 21:05:15.953  9110  9110 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: Qt: end waiting for Qt app's main() function, returned: true
+10-29 21:05:15.953  9110  9110 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: auto QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(QtOhos::JsState &, bool) const: resolving result Promise for id='0'
+10-29 21:05:15.954  9110  9110 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbilityStage::onDestroy()
+10-29 21:05:15.954  9110  9110 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: AbilityStage::onDestroy: start
+10-29 21:05:15.954  9110  9110 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: AbilityStage::onDestroy: destroying the Qt thread object
+10-29 21:05:15.954  9110  9110 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5af4c4d650, M: AbilityStage::onDestroy: calling _Exit(0)
