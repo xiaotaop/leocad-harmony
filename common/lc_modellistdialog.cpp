@@ -11,23 +11,48 @@ enum class lcModelListRole
 	DuplicateModel
 };
 
-lcModelListDialog::lcModelListDialog(QWidget* Parent, const std::vector<std::unique_ptr<lcModel>>& Models)
+lcModelListDialog::lcModelListDialog(QWidget* Parent, const std::vector<std::unique_ptr<lcModel>>& Models,
+	bool AllowStructureEditing)
 	: QDialog(Parent), ui(new Ui::lcModelListDialog)
 {
 	mActiveModelItem = nullptr;
 
 	ui->setupUi(this);
 
-	connect(ui->NewModel, &QPushButton::clicked, this, &lcModelListDialog::NewModelClicked);
-	connect(ui->DeleteModel, &QPushButton::clicked, this, &lcModelListDialog::DeleteModelClicked);
-	connect(ui->RenameModel, &QPushButton::clicked, this, &lcModelListDialog::RenameModelClicked);
-	connect(ui->ExportModel, &QPushButton::clicked, this, &lcModelListDialog::ExportModelClicked);
-	connect(ui->DuplicateModel, &QPushButton::clicked, this, &lcModelListDialog::DuplicateModelClicked);
+	// The first release keeps this dialog because it is the second entry point to
+	// MPD submodel switching (the model tab bar is the first). Switching is the
+	// only thing it may do, so the structure-editing controls are taken away:
+	//
+	//   New / Delete / Rename / Duplicate / Export   change or duplicate submodels
+	//   InternalMove drag-and-drop                   reorders them
+	//
+	// Removing LC_MODEL_NEW from the menu alone was not enough: this dialog is a
+	// separate path to the same operations, and it still reached Project.
+	if (!AllowStructureEditing)
+	{
+		ui->NewModel->setVisible(false);
+		ui->DeleteModel->setVisible(false);
+		ui->RenameModel->setVisible(false);
+		ui->ExportModel->setVisible(false);
+		ui->DuplicateModel->setVisible(false);
+
+		ui->ModelList->setDragDropMode(QAbstractItemView::DragDropMode::NoDragDrop);
+		ui->ModelList->setDefaultDropAction(Qt::DropAction::IgnoreAction);
+	}
+	else
+	{
+		connect(ui->NewModel, &QPushButton::clicked, this, &lcModelListDialog::NewModelClicked);
+		connect(ui->DeleteModel, &QPushButton::clicked, this, &lcModelListDialog::DeleteModelClicked);
+		connect(ui->RenameModel, &QPushButton::clicked, this, &lcModelListDialog::RenameModelClicked);
+		connect(ui->ExportModel, &QPushButton::clicked, this, &lcModelListDialog::ExportModelClicked);
+		connect(ui->DuplicateModel, &QPushButton::clicked, this, &lcModelListDialog::DuplicateModelClicked);
+
+		ui->ModelList->setDefaultDropAction(Qt::DropAction::MoveAction);
+		ui->ModelList->setDragDropMode(QAbstractItemView::DragDropMode::InternalMove);
+	}
+
 	connect(ui->ModelList, &QListWidget::itemDoubleClicked, this, &lcModelListDialog::ModelListItemDoubleClicked);
 	connect(ui->ModelList, &QListWidget::itemSelectionChanged, this, &lcModelListDialog::ModelListItemSelectionChanged);
-
-	ui->ModelList->setDefaultDropAction(Qt::DropAction::MoveAction);
-	ui->ModelList->setDragDropMode(QAbstractItemView::DragDropMode::InternalMove);
 
 	lcModel* ActiveModel = lcGetActiveProject()->GetActiveModel();
 	int ActiveModelIndex = -1;

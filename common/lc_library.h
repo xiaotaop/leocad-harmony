@@ -135,6 +135,36 @@ public:
 	}
 
 	bool Load(const QString& LibraryPath, bool ShowProgress);
+
+	// Where the curated parts library shipped inside the application package
+	// can be found, in priority order. The caller only needs one path it can
+	// hand to Load(); GetBundledLibraryArchiveCandidates() is exposed so a
+	// diagnostic can report why nothing was picked up instead of guessing.
+	static QString FindBundledLibraryArchive();
+	static QStringList GetBundledLibraryArchiveCandidates();
+
+	// Checks that a parts archive is actually usable. Load() is not enough:
+	// OpenArchive() skips entries whose names do not start with "ldraw/" and
+	// still returns true, so a mis-rooted archive loads "successfully" with zero
+	// parts and no error anywhere. This reports what is wrong instead, and the
+	// caller decides whether to fall back.
+	//
+	// ExpectedParts is the count the shipped manifest promises; zero skips the
+	// count check.
+	struct ArchiveCheck
+	{
+		bool Usable = false;
+		QString Problem;
+		int Pieces = 0;
+	};
+
+	static ArchiveCheck ValidateBundledLibraryArchive(const QString& FileName, int ExpectedParts);
+
+	int GetPieceCount() const
+	{
+		return (int)mPieces.size();
+	}
+
 	void LoadColors();
 	void Unload();
 	void RemoveTemporaryPieces();

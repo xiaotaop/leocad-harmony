@@ -2,6 +2,8 @@
 
 #include "lc_math.h"
 
+class lcFile;
+
 #define LC_MAX_COLOR_NAME 64
 #define LC_COLOR_DIRECT 0x80000000
 #define LC_COLOR_NOCOLOR 0xffffffff
@@ -42,6 +44,19 @@ extern int gDefaultColor;
 
 void lcLoadDefaultColors(lcStudStyle StudStyle);
 bool lcLoadColorFile(lcFile& File, lcStudStyle StudStyle);
+
+// Parses colour definitions out of a file without touching global state.
+//
+// lcLoadColorFile() cannot be used to validate a file before loading it: it writes
+// gColorList, gColorGroups, gDefaultColor and gEdgeColor, and it calls
+// lcAdjustStudStyleColors() which reads the preferences. That makes it destructive
+// and order-dependent — running it to "check" a broken archive would corrupt the
+// colour table the application then keeps using.
+//
+// This returns only the records that actually parsed into a usable colour: a line
+// must yield both a CODE and a VALUE, which is the same test the loader applies
+// before accepting a record.
+std::vector<lcColor> lcParseColorFile(lcFile& File);
 int lcGetColorIndex(quint32 ColorCode);
 
 inline quint32 lcGetColorCodeFromExtendedColor(int Color)

@@ -1,9 +1,11 @@
 #include "lc_global.h"
 #include "lc_application.h"
+#include "lc_library.h"
 #include "lc_updatedialog.h"
 #include "lc_profile.h"
 #include "pieceinf.h"
 #include <QApplication>
+#include <cstdio>
 #include <locale.h>
 
 #ifdef Q_OS_WIN
@@ -195,9 +197,13 @@ int main(int argc, char *argv[])
 	QList<QPair<QString, bool>> LibraryPaths;
 
 #ifdef Q_OS_HARMONY
-	// Use the existing bundled library until the curated library is integrated.
+	// Package copy of the small built-in archive. The curated library is
+	// prepended below, so it is tried first and this entry only takes over if that
+	// one is missing or fails validation.
+	//
 	// A startup warning dialog would become the first native Ability window;
-	// closing it before showing the main window can terminate that Ability.
+	// closing it before showing the main window can terminate that Ability, which
+	// is why the curated library's rejection is reported on stderr instead.
 	LibraryPaths += qMakePair(QStringLiteral(":/resources/library.zip"), true);
 #endif
 
@@ -219,6 +225,64 @@ int main(int argc, char *argv[])
 #ifdef LC_LDRAW_LIBRARY_PATH
 	LibraryPaths += qMakePair(QString::fromLatin1(LC_LDRAW_LIBRARY_PATH), false);
 #endif
+
+	// The curated library that ships inside the application package.
+	//
+	// It is placed at the FRONT of the list, ahead of every entry appended above,
+	// because LoadPartsLibrary() stops at the first path that loads successfully.
+	// The entries above are package copies — the platform's library.bin and, on
+	// HarmonyOS, :/resources/library.zip — so whichever of them is reached first
+	// wins. With the curated library appended instead of prepended, a HarmonyOS
+	// build that also lists the built-in archive would load the 128-part library
+	// and never reach the 1160-part one.
+	//
+	// What this does NOT override: LEOCAD_LIB and the "parts library" preference
+	// are checked inside LoadPartsLibrary() before it walks this list at all, so an
+	// explicit user configuration still wins.
+	//
+	// The path is only offered after inspection, because LoadPartsLibrary() treats
+	// "Load() returned true" as success and Load() cannot tell a usable archive
+	// from one the loader silently emptied: a wrong root directory, a missing or
+	// empty ldconfig.ldr and a dangling part reference all produce a "loaded"
+	// library with the parts panel empty, wrong or colourless. A failure here does
+	// not abort startup — nothing is prepended, LoadPartsLibrary() falls through to
+	// the platform paths, and the built-in 128-part library remains as the last
+	// resort.
+	//
+	// ExpectedParts comes from assets/ldraw-lite/manifest.json. Keeping the number
+	// here means a silently truncated archive is caught at startup rather than
+	// discovered by a user looking at an incomplete parts tree; the offline check
+	// in scripts/library/export_part_list.py --check validates the same figure at
+	// packaging time.
+	const QString BundledLibrary = lcPiecesLibrary::FindBundledLibraryArchive();
+
+	if (!BundledLibrary.isEmpty())
+	{
+		const lcPiecesLibrary::ArchiveCheck Check =
+			lcPiecesLibrary::ValidateBundledLibraryArchive(BundledLibrary, 1160);
+
+		if (Check.Usable)
+		{
+			// No LC_LDRAW_LIBRARY_PATH entry can precede this one: prepend puts it
+			// ahead of every entry added above, including that one. That is the
+			// intended order — a compile-time path baked into a package should not
+			// outrank the library the package is actually shipping. A user's
+			// LEOCAD_LIB or parts-library preference is checked inside
+			// LoadPartsLibrary() before it walks this list, so it still wins.
+			//
+			// Marked official so the piece count is recorded
+			// (lcPiecesLibrary::SetOfficialPieces()).
+			LibraryPaths.prepend(qMakePair(BundledLibrary, true));
+		}
+		else
+		{
+			// stderr rather than a dialog: startup must stay unattended-safe, and
+			// this is a packaging defect to report, not a user-actionable error.
+			const QString Message = QStringLiteral("Bundled parts library rejected: %1 (%2)\n")
+				.arg(Check.Problem, BundledLibrary);
+			fprintf(stderr, "%s", Message.toLocal8Bit().constData());
+		}
+	}
 
 	setlocale(LC_NUMERIC, "C");
 

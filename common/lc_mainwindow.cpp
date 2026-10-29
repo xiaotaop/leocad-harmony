@@ -76,7 +76,31 @@ lcMainWindow::~lcMainWindow()
 void lcMainWindow::CreateWidgets()
 {
 	setAcceptDrops(true);
-	setWindowIcon(QIcon(":/resources/leocad.png"));
+
+	// Build the window icon from the shipped sizes instead of one 64x64 bitmap:
+	// Qt then picks the one that matches the screen's device pixel ratio, so the
+	// taskbar and window icon stay sharp on the High-DPI panels this release
+	// targets. Any size that fails to load is skipped rather than leaving a null
+	// icon.
+	{
+		QIcon ApplicationIcon;
+		for (const char* Resource : { ":/resources/leocad.png", ":/resources/leocad-256.png", ":/resources/leocad-512.png" })
+		{
+			// Braces, not parentheses: with parentheses this parses as a function
+			// declaration ("most vexing parse") and fails to compile.
+			const QIcon Sized{ QLatin1String(Resource) };
+			if (Sized.isNull())
+				continue;
+			for (const QSize& Available : Sized.availableSizes())
+				ApplicationIcon.addPixmap(Sized.pixmap(Available));
+		}
+
+		if (!ApplicationIcon.isNull())
+			setWindowIcon(ApplicationIcon);
+		else
+			setWindowIcon(QIcon(":/resources/leocad.png"));
+	}
+
 	setWindowFilePath(QString());
 
 	CreateActions();
@@ -86,13 +110,23 @@ void lcMainWindow::CreateWidgets()
 
 	mModelTabWidget = new QTabWidget();
 	mModelTabWidget->tabBar()->installEventFilter(this);
-	mModelTabWidget->tabBar()->setMovable(true);
-	mModelTabWidget->tabBar()->setTabsClosable(true);
-	mModelTabWidget->tabBar()->setContextMenuPolicy(Qt::CustomContextMenu);
+	// The model tab bar is the MPD submodel switcher. The first release keeps it
+	// visible and usable but takes away the three ways to change the document
+	// structure through it:
+	//
+	//   setMovable(false)      dragging a tab would reorder submodels;
+	//   setTabsClosable(false) ModelTabClosed() calls NewProject() when the last
+	//                          tab is closed, which is not a single-document
+	//                          interaction (see lc_mainwindow.cpp:1073);
+	//   NoContextMenu          the tab menu offers rename/delete/new submodel.
+	//
+	// This cannot live in ApplyFirstReleaseScope(): that runs from CreateMenus(),
+	// which happens inside CreateWidgets() before this widget is constructed.
+	mModelTabWidget->tabBar()->setMovable(false);
+	mModelTabWidget->tabBar()->setTabsClosable(false);
+	mModelTabWidget->tabBar()->setContextMenuPolicy(Qt::NoContextMenu);
 	setCentralWidget(mModelTabWidget);
 
-	connect(mModelTabWidget->tabBar(), &QTabBar::tabCloseRequested, this, &lcMainWindow::ModelTabClosed);
-	connect(mModelTabWidget->tabBar(), &QTabBar::customContextMenuRequested, this, &lcMainWindow::ModelTabContextMenuRequested);
 	connect(mModelTabWidget, &QTabWidget::currentChanged, this, &lcMainWindow::ModelTabChanged);
 
 	connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &lcMainWindow::ClipboardChanged);
@@ -577,6 +611,132 @@ void lcMainWindow::CreateMenus()
 	HelpMenu->addSeparator();
 #endif
 	HelpMenu->addAction(mActions[LC_HELP_ABOUT]);
+
+	ApplyFirstReleaseScope();
+}
+
+// Removes the menu entries for features the first HarmonyOS release does not
+// ship (docs/LeoCAD_鸿蒙PC首发版_两周分工与技术方案.md section 1.2, and
+// docs/ui/D1_界面清点与首发范围原则.md).
+//
+// Only the QAction* is taken out of its menu. The action object and every dock
+// widget pointer stay alive: UpdateDockWidgetActions() dereferences
+// mPartsToolBar/mColorsToolBar/mPropertiesToolBar/mTimelineToolBar/
+// mPreviewToolBar unconditionally, so nulling one would crash the next time the
+// View menu opens. Keeping the whole decision in one function makes the scope
+// reviewable and lets an unfiltered build behave exactly like upstream.
+//
+// Submodel handling follows D1 section 1.3: the model tab bar stays visible and
+// usable (MPD submodel switching is required for basic .mpd support), only its
+// structural edits and the close box go away. LC_MODEL_LIST is deliberately
+// kept — it is the second entry point to the same switch.
+void lcMainWindow::ApplyFirstReleaseScope()
+{
+	const lcCommandId RemovedCommands[] =
+	{
+		// Printing and documentation output.
+		LC_FILE_PRINT,
+		LC_FILE_PRINT_PREVIEW,
+		LC_FILE_INSTRUCTIONS,
+		LC_FILE_SAVE_IMAGE,
+
+		// Import/export formats outside the first-release scope. Member B's
+		// Project API also rejects these when LC_DISABLE_NON_CORE_FORMATS is set;
+		// removing the menu entry is what stops a user from reaching a dialog that
+		// can only fail.
+		LC_FILE_MERGE,
+		LC_FILE_IMPORT_LDD,
+		LC_FILE_IMPORT_INVENTORY,
+		LC_FILE_EXPORT_3DS,
+		LC_FILE_EXPORT_COLLADA,
+		LC_FILE_EXPORT_HTML,
+		LC_FILE_EXPORT_BRICKLINK,
+		LC_FILE_EXPORT_CSV,
+		LC_FILE_EXPORT_POVRAY,
+		LC_FILE_EXPORT_WAVEFRONT,
+
+		// External renderers.
+		LC_FILE_RENDER_POVRAY,
+		LC_FILE_RENDER_BLENDER,
+		LC_FILE_RENDER_OPEN_IN_BLENDER,
+
+		// Step-level editing and step navigation: the first release has no
+		// instructions or animation workflow.
+		LC_EDIT_PASTE_STEPS,
+		LC_VIEW_TIME_FIRST,
+		LC_VIEW_TIME_PREVIOUS,
+		LC_VIEW_TIME_NEXT,
+		LC_VIEW_TIME_LAST,
+		LC_VIEW_TIME_INSERT_BEFORE,
+		LC_VIEW_TIME_INSERT_AFTER,
+		LC_VIEW_TIME_DELETE,
+		LC_VIEW_TIME_ADD_KEYS,
+		LC_VIEW_FADE_PREVIOUS_STEPS,
+
+		// Find/replace is not reachable in a single-document first release.
+		LC_EDIT_FIND,
+		LC_EDIT_FIND_NEXT,
+		LC_EDIT_FIND_PREVIOUS,
+		LC_EDIT_FIND_ALL,
+		LC_EDIT_REPLACE,
+		LC_EDIT_REPLACE_NEXT,
+		LC_EDIT_REPLACE_ALL,
+
+		// Multi-view layouts.
+		LC_VIEW_SPLIT_HORIZONTAL,
+		LC_VIEW_SPLIT_VERTICAL,
+		LC_VIEW_REMOVE_VIEW,
+		LC_VIEW_RESET_VIEWS,
+
+		// Submodel editing. Switching stays (LC_MODEL_LIST below is kept); only
+		// the commands that change the .mpd structure are removed.
+		LC_PIECE_ARRAY,
+		LC_PIECE_MINIFIG_WIZARD,
+		LC_PIECE_REMOVE_KEY_FRAMES,
+		LC_PIECE_EDIT_SELECTED_SUBMODEL,
+		LC_PIECE_EDIT_END_SUBMODEL,
+		LC_PIECE_VIEW_SELECTED_MODEL,
+		LC_PIECE_INLINE_SELECTED_MODELS,
+		LC_PIECE_MOVE_SELECTION_TO_MODEL,
+		LC_MODEL_NEW,
+
+		// Online update check.
+		LC_HELP_UPDATES,
+	};
+
+	for (const lcCommandId Command : RemovedCommands)
+	{
+		QAction* Action = mActions[Command];
+		if (!Action)
+			continue;
+
+		for (QWidget* Widget : QApplication::allWidgets())
+		{
+			if (QMenu* Menu = qobject_cast<QMenu*>(Widget))
+				Menu->removeAction(Action);
+			else if (QMenuBar* MenuBar = qobject_cast<QMenuBar*>(Widget))
+				MenuBar->removeAction(Action);
+		}
+
+		for (QToolBar* ToolBar : findChildren<QToolBar*>())
+			ToolBar->removeAction(Action);
+
+		Action->setVisible(false);
+		Action->setEnabled(false);
+	}
+
+	// Removals leave trailing separators behind; drop them so no menu ends in a
+	// dangling divider.
+	for (QMenu* Menu : findChildren<QMenu*>())
+	{
+		const QList<QAction*> Actions = Menu->actions();
+		for (int Index = Actions.size() - 1; Index >= 0; --Index)
+		{
+			if (!Actions[Index]->isSeparator())
+				break;
+			Menu->removeAction(Actions[Index]);
+		}
+	}
 }
 
 void lcMainWindow::CreateToolBars()

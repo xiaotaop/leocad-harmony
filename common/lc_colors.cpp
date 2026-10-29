@@ -65,7 +65,7 @@ static void lcAdjustStudStyleColors(std::vector<lcColor>& Colors, lcStudStyle St
 	}
 }
 
-static std::vector<lcColor> lcParseColorFile(lcFile& File)
+std::vector<lcColor> lcParseColorFile(lcFile& File)
 {
 	char Line[1024], Token[1024];
 	std::vector<lcColor> Colors;
