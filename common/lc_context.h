@@ -121,7 +121,7 @@ public:
 	static void ShutdownRenderer();
 	static lcContext* GetGlobalOffscreenContext();
 
-	void CreateResources();
+	bool CreateResources();
 	void DestroyResources();
 
 	void SetDefaultState();
@@ -235,7 +235,7 @@ protected:
 	static bool CreateOffscreenContext();
 	static void DestroyOffscreenContext();
 
-	void CreateShaderPrograms();
+	bool CreateShaderPrograms();
 	void FlushState();
 
 	void SetVertexAttribPointer(lcProgramAttrib Attrib, GLint Size, GLenum Type, GLboolean Normalized, GLsizei Stride, const void* Pointer);

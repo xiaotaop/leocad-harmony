@@ -308,9 +308,11 @@ HEADERS += \
 	common/lc_previewwidget.h \
 	common/lc_profile.h \
 	common/lc_propertieswidget.h \
+	common/lc_renderpolicy.h \
 	common/lc_scene.h \
 	common/lc_selectdialog.h \
 	common/lc_setsdatabasedialog.h \
+	common/lc_shaderprogram.h \
 	common/lc_shortcuts.h \
 	common/lc_string.h \
 	common/lc_stringcache.h \

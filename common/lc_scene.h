@@ -68,10 +68,7 @@ public:
 		return mDrawInsertPreview;
 	}
 
-	void SetShadingMode(lcShadingMode ShadingMode)
-	{
-		mShadingMode = ShadingMode;
-	}
+	void SetShadingMode(lcShadingMode ShadingMode);
 
 	void SetAllowLOD(bool AllowLOD)
 	{

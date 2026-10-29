@@ -28,3 +28,19 @@ See [D1 result](../../docs/MEMBER_A_D1.md) and
 
 See [D2 result](../../docs/MEMBER_A_D2.md) and
 [device handoff / rollback](../../docs/MEMBER_A_D2_DEVICE_HANDOFF.md).
+
+## 2026-10-29: D3 shader failures and basic mode
+
+- Base: `fbcdc5e11be8a9dc46471b8ac0990cb603982740` (includes leader #11).
+- Shared production compiler checks resource/compile/link errors in Release and
+  propagates failure before allocating font/view resources. Keep the original
+  desktop GLSL110 and GLES300ES prefixes and all nine default material pairs.
+- Default-OFF `LEOCAD_SAFE_RENDER` / runtime `LEOCAD_SAFE_RENDER=1` disables
+  optional lighting, conditional edges, step effects and grid; GLES keeps basic
+  shaders. This is an explicit fallback, not the grid-depth fix for issue #12.
+- Real shader tests and complete Release negative cases are host verified.
+  Target GPU validation is still pending; see D3 result and device handoff.
+- Rollback: revert this change; restoring effects alone requires OFF and no runtime 1.
+
+See [D3 result](../../docs/MEMBER_A_D3.md) and
+[device handoff](../../docs/MEMBER_A_D3_DEVICE_HANDOFF.md).
