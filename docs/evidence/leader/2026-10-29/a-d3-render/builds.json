@@ -1,0 +1,16 @@
+{
+  "normal": {
+    "safe_render": false,
+    "compile_commands": 82,
+    "commands_with_safe_render_macro": 0,
+    "hap_bytes": 80076023,
+    "hap_sha256": "a88393354ee7c4e7da2ac17c6c24090c1a68738a633cfdd9c3f43df012002747"
+  },
+  "basic": {
+    "safe_render": true,
+    "compile_commands": 82,
+    "commands_with_safe_render_macro": 82,
+    "hap_bytes": 80036846,
+    "hap_sha256": "5d286143bd2f58652f53381d57ae9eab4404eef5e7f5c1ae90ceabdfbe9e2598"
+  }
+}
