@@ -1,4 +1,5 @@
 #include "lc_global.h"
+#include "lc_renderpolicy.h"
 #include "lc_view.h"
 #include "lc_viewwidget.h"
 #include <stdlib.h>
@@ -1434,6 +1435,9 @@ void lcView::DrawRotateViewOverlay()
 
 void lcView::DrawGrid()
 {
+	if (lcSafeRenderEnabled())
+		return;
+
 	const lcPreferences& Preferences = lcGetPreferences();
 
 	if (!Preferences.mDrawGridStuds && !Preferences.mDrawGridLines && !Preferences.mDrawGridOrigin)

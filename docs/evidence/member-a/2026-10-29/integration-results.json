@@ -1,0 +1,98 @@
+[
+  {
+    "case": "normal",
+    "safe_render": false,
+    "exit": 0,
+    "renderer": {
+      "passed": true,
+      "programs": 9,
+      "safe_render": false,
+      "skipped_programs": 0
+    },
+    "image_sha256": "59f07370430dc599a83e4c4d12af2b18fd622ed8eca7ecae9e0b71e2125e71a7"
+  },
+  {
+    "case": "safe",
+    "safe_render": true,
+    "exit": 0,
+    "renderer": {
+      "passed": true,
+      "programs": 6,
+      "safe_render": true,
+      "skipped_programs": 3
+    },
+    "image_sha256": "24b8e4341904ec6de0777c166efc1da63af1efdb130ba54326d7a02874b4981c"
+  },
+  {
+    "case": "advanced-broken-normal",
+    "safe_render": false,
+    "exit": 1,
+    "renderer": {
+      "driver_log": "ERROR: 0:17: 'invalid' : syntax error: syntax error\n",
+      "error": "shader_compile_failed",
+      "fragment": ":/resources/shaders/fakelit_color_ps.glsl",
+      "material": "FakeLitColor",
+      "passed": false,
+      "safe_render": false,
+      "stage": "fragment",
+      "vertex": ":/resources/shaders/fakelit_color_vs.glsl"
+    },
+    "image_sha256": null
+  },
+  {
+    "case": "advanced-broken-safe",
+    "safe_render": true,
+    "exit": 0,
+    "renderer": {
+      "passed": true,
+      "programs": 6,
+      "safe_render": true,
+      "skipped_programs": 3
+    },
+    "image_sha256": "24b8e4341904ec6de0777c166efc1da63af1efdb130ba54326d7a02874b4981c"
+  },
+  {
+    "case": "basic-broken-normal",
+    "safe_render": false,
+    "exit": 1,
+    "renderer": {
+      "driver_log": "ERROR: 0:17: 'invalid' : syntax error: syntax error\n",
+      "error": "shader_compile_failed",
+      "fragment": ":/resources/shaders/unlit_color_ps.glsl",
+      "material": "UnlitColor",
+      "passed": false,
+      "safe_render": false,
+      "stage": "fragment",
+      "vertex": ":/resources/shaders/unlit_color_vs.glsl"
+    },
+    "image_sha256": null
+  },
+  {
+    "case": "basic-broken-safe",
+    "safe_render": true,
+    "exit": 1,
+    "renderer": {
+      "driver_log": "ERROR: 0:17: 'invalid' : syntax error: syntax error\n",
+      "error": "shader_compile_failed",
+      "fragment": ":/resources/shaders/unlit_color_ps.glsl",
+      "material": "UnlitColor",
+      "passed": false,
+      "safe_render": true,
+      "stage": "fragment",
+      "vertex": ":/resources/shaders/unlit_color_vs.glsl"
+    },
+    "image_sha256": null
+  },
+  {
+    "case": "restored-normal",
+    "safe_render": false,
+    "exit": 0,
+    "renderer": {
+      "passed": true,
+      "programs": 9,
+      "safe_render": false,
+      "skipped_programs": 0
+    },
+    "image_sha256": "59f07370430dc599a83e4c4d12af2b18fd622ed8eca7ecae9e0b71e2125e71a7"
+  }
+]

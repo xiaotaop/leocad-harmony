@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite name="RenderContextTests" timestamp="2026&#x002D;10&#x002D;29T19:59:02" hostname="AlmiradeMacBook&#x002D;Air.local" tests="13" failures="0" errors="0" skipped="0" time="0.070">
+  <properties>
+    <property name="QTestVersion" value="6.12.0"/>
+    <property name="QtVersion" value="6.12.0"/>
+    <property name="QtBuild" value="Qt 6.12.0 (arm64&#x002D;little_endian&#x002D;lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang&#x002D;1700.3.19.1))"/>
+  </properties>
+  <testcase name="initTestCase" classname="RenderContextTests" time="0.066"/>
+  <testcase name="apiCompatibility(desktop&#x002D;compatibility)" classname="RenderContextTests" time="0.000"/>
+  <testcase name="apiCompatibility(desktop&#x002D;modern)" classname="RenderContextTests" time="0.000"/>
+  <testcase name="apiCompatibility(gles3)" classname="RenderContextTests" time="0.000"/>
+  <testcase name="apiCompatibility(gles2&#x002D;rejected)" classname="RenderContextTests" time="0.000"/>
+  <testcase name="apiCompatibility(desktop&#x002D;build&#x002D;gles&#x002D;context)" classname="RenderContextTests" time="0.000"/>
+  <testcase name="apiCompatibility(gles&#x002D;build&#x002D;desktop&#x002D;context)" classname="RenderContextTests" time="0.000"/>
+  <testcase name="sharedTextureReadbackAndActualFormat" classname="RenderContextTests" time="0.002"/>
+  <testcase name="rejectsInvalidShareContext" classname="RenderContextTests" time="0.000"/>
+  <testcase name="rejectsExistingObjects" classname="RenderContextTests" time="0.000"/>
+  <testcase name="rejectsWorkerThreadBeforeNativeCalls" classname="RenderContextTests" time="0.000"/>
+  <testcase name="diagnosticsOnlyQueryCurrentContext" classname="RenderContextTests" time="0.001"/>
+  <testcase name="cleanupTestCase" classname="RenderContextTests" time="0.000"/>
+</testsuite>

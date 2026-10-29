@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-29",
+  "base": "fbcdc5e11be8a9dc46471b8ac0990cb603982740",
+  "host": "macOS 27.0.1 arm64 / Apple M4 / Qt 6.12.0 / AppleClang21 / Release QT_NO_DEBUG",
+  "source_sha256": {
+    ".github/workflows/render-context-ci.yml": "30ebd2ef6b782b63e43ccf5e5b2967f365d2c48c1f4a2cf9325ab16efb7d24bd",
+    "CMakeLists.txt": "2eea004cdb058b0924e9f5d38d7f7c920342ea31b4130ac814fe538a7c3ffada",
+    "common/lc_context.cpp": "44750cd6dc343406d9ffa58830042a2e860052fce3a04798e3969b9979d372d8",
+    "common/lc_context.h": "bea888ec6a360e6ad29df6ef51b502d4c6e344c41a582b333ab740065a0c9597",
+    "common/lc_scene.cpp": "d06249393fee9c3d0495a9a3d181550d8719aa78cec20f6a1eeecc4b609d2ee7",
+    "common/lc_scene.h": "feea09308db52f0b62585d82e7caa639398db500fdf28106be89d094101e2b8b",
+    "common/lc_view.cpp": "0bd90b635a770b6111b27f733aa156166992d3ef9b09bb9ee1119d596450585a",
+    "leocad.pro": "987a502081ce3b0157944bf8236551a92cd0c468abf745cc71c6b2b8908436ea",
+    "common/lc_renderpolicy.h": "b5d4388657f277ef546a0ef1e5ce5b3006637d466b29acf44fe01f1357696731",
+    "common/lc_shaderprogram.h": "669e979643f1a6e1685ba10359031235e329f4db61d870d1b3c69018dfc8fc76",
+    "tests/render-shaders/CMakeLists.txt": "6897bb60403e6122bc8d1e6a0f31da5cd4d6c5f47a7bf079b5c4c0aa9dc8ffe3",
+    "tests/render-shaders/tst_shaders.cpp": "f4fdb11c1d27eb2cfa10cf9dca2dae4c3c9efb34823c51bfea168437cc307e36"
+  },
+  "shader_tests": {
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0
+  },
+  "application_scenarios": 7,
+  "safe_option_compile_commands_verified": 82,
+  "target_device": "Not run for this D3 patch. Previous PR11 evidence f0dfce86 verifies D2 context/Surface; it does not validate these shader or fallback changes.",
+  "context_tests": {
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0
+  }
+}
