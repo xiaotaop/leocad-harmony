@@ -67,6 +67,13 @@ pairs, framebuffer readback, shared textures and high-DPI resizing. See the
 hash, GPU information and original evidence. Full LeoCAD modeling acceptance
 remains part of the subsequent milestones.
 
+The full LeoCAD HarmonyOS main-window HAP now builds and runs on HAD-W32.
+Two independent launches exited normally with native main returning zero; the
+fixed two-brick model and window resizing were exercised. A separate ARM64 test
+HAP passed 50 model/I/O/isolation checks on the same device. See the
+[D3 integration acceptance](docs/D3_DEVICE_ACCEPTANCE.md) for package hashes,
+known rendering issues and the remaining UI/system-file verification scope.
+
 Run the local baseline check with:
 
 ```powershell

@@ -1,0 +1,216 @@
+[
+  {
+    "round": "run-1",
+    "pid": 44809,
+    "native_main_exit": 0,
+    "gl_reports": [
+      {
+        "buffers": true,
+        "context_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "error": "",
+        "framebuffers": true,
+        "gl_version": "OpenGL ES 3.2 B301",
+        "gles_build": true,
+        "glsl_version": "OpenGL ES GLSL ES 3.20",
+        "is_current": true,
+        "is_gles": true,
+        "passed": true,
+        "renderer": "Maleoon 916",
+        "shaders": true,
+        "share_requested": true,
+        "sharing": true,
+        "stage": "renderer_offscreen",
+        "surface_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "surface_requested_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "surface_valid": true,
+        "valid": true,
+        "vendor": "HUAWEI"
+      },
+      {
+        "buffers": true,
+        "context_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "dpr": 1.899999976158142,
+        "framebuffers": true,
+        "gl_version": "OpenGL ES 3.2 B301",
+        "glsl_version": "OpenGL ES GLSL ES 3.20",
+        "is_current": true,
+        "is_gles": true,
+        "logical_height": 173,
+        "logical_width": 200,
+        "renderer": "Maleoon 916",
+        "shaders": true,
+        "share_requested": true,
+        "sharing": true,
+        "stage": "view_initialize",
+        "valid": true,
+        "vendor": "HUAWEI"
+      },
+      {
+        "buffers": true,
+        "context_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "dpr": 1.899999976158142,
+        "framebuffers": true,
+        "gl_version": "OpenGL ES 3.2 B301",
+        "glsl_version": "OpenGL ES GLSL ES 3.20",
+        "is_current": true,
+        "is_gles": true,
+        "logical_height": 500,
+        "logical_width": 514,
+        "renderer": "Maleoon 916",
+        "shaders": true,
+        "share_requested": true,
+        "sharing": true,
+        "stage": "view_initialize",
+        "valid": true,
+        "vendor": "HUAWEI"
+      }
+    ]
+  },
+  {
+    "round": "run-2",
+    "pid": 45162,
+    "native_main_exit": 0,
+    "gl_reports": [
+      {
+        "buffers": true,
+        "context_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "error": "",
+        "framebuffers": true,
+        "gl_version": "OpenGL ES 3.2 B301",
+        "gles_build": true,
+        "glsl_version": "OpenGL ES GLSL ES 3.20",
+        "is_current": true,
+        "is_gles": true,
+        "passed": true,
+        "renderer": "Maleoon 916",
+        "shaders": true,
+        "share_requested": true,
+        "sharing": true,
+        "stage": "renderer_offscreen",
+        "surface_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "surface_requested_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "surface_valid": true,
+        "valid": true,
+        "vendor": "HUAWEI"
+      },
+      {
+        "buffers": true,
+        "context_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "dpr": 1.899999976158142,
+        "framebuffers": true,
+        "gl_version": "OpenGL ES 3.2 B301",
+        "glsl_version": "OpenGL ES GLSL ES 3.20",
+        "is_current": true,
+        "is_gles": true,
+        "logical_height": 173,
+        "logical_width": 200,
+        "renderer": "Maleoon 916",
+        "shaders": true,
+        "share_requested": true,
+        "sharing": true,
+        "stage": "view_initialize",
+        "valid": true,
+        "vendor": "HUAWEI"
+      },
+      {
+        "buffers": true,
+        "context_format": {
+          "depth_bits": 24,
+          "major": 3,
+          "minor": 2,
+          "profile": 0,
+          "renderable_type": 2,
+          "samples": 0,
+          "stencil_bits": 8
+        },
+        "dpr": 1.899999976158142,
+        "framebuffers": true,
+        "gl_version": "OpenGL ES 3.2 B301",
+        "glsl_version": "OpenGL ES GLSL ES 3.20",
+        "is_current": true,
+        "is_gles": true,
+        "logical_height": 500,
+        "logical_width": 514,
+        "renderer": "Maleoon 916",
+        "shaders": true,
+        "share_requested": true,
+        "sharing": true,
+        "stage": "view_initialize",
+        "valid": true,
+        "vendor": "HUAWEI"
+      }
+    ]
+  }
+]

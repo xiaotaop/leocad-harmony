@@ -15,6 +15,8 @@ set(_qt_components
 )
 if(NOT OHOS)
     list(APPEND _qt_components Network)
+else()
+    list(APPEND _qt_components Svg)
 endif()
 
 find_package(Qt6 6.12 REQUIRED COMPONENTS ${_qt_components})
@@ -62,6 +64,7 @@ target_compile_definitions(leocad PRIVATE
 )
 if(OHOS)
     target_compile_definitions(leocad PRIVATE LC_DISABLE_NETWORK=1 LC_DISABLE_NON_CORE_FORMATS=1)
+    target_link_libraries(leocad PRIVATE Qt6::Svg)
 endif()
 target_compile_options(leocad PRIVATE
     $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-unused-parameter;-Werror=unused-result>
@@ -99,6 +102,37 @@ if(OHOS)
         QT_HARMONYOS_TARGET_SDK_VERSION "26.0.0"
         QT_HARMONYOS_COMPILE_SDK_VERSION "26.0.0"
     )
+endif()
+
+option(LEOCAD_BUILD_MODEL_TEST_HAP "Build the separate HarmonyOS model regression HAP" OFF)
+if(OHOS AND LEOCAD_BUILD_MODEL_TEST_HAP)
+    find_package(Qt6 6.12 REQUIRED COMPONENTS Test)
+    set(_model_sources ${LEOCAD_SOURCES})
+    list(REMOVE_ITEM _model_sources qt/qtmain.cpp)
+    qt_add_executable(leocad-model-tests ${_model_sources} ${LEOCAD_HEADERS}
+        ${LEOCAD_FORMS} tests/model/tst_model_io.cpp
+        "${_generated_qrc}" resources/stylesheet/stylesheet.qrc)
+    target_include_directories(leocad-model-tests PRIVATE common qt)
+    target_compile_definitions(leocad-model-tests PRIVATE
+        LC_DISABLE_UPDATE_CHECK=1 LC_DISABLE_NETWORK=1
+        LC_DISABLE_RENDER_DIALOG=1 LC_DISABLE_BLENDER=1 LC_DISABLE_NON_CORE_FORMATS=1)
+    target_link_libraries(leocad-model-tests PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets
+        Qt6::OpenGL Qt6::OpenGLWidgets Qt6::Xml Qt6::Concurrent Qt6::PrintSupport
+        Qt6::Svg Qt6::Test ZLIB::ZLIB)
+    target_precompile_headers(leocad-model-tests PRIVATE common/lc_global.h)
+    qt_add_resources(leocad-model-tests model_fixtures PREFIX "/fixtures"
+        BASE tests/fixtures FILES tests/fixtures/two-pieces.ldr
+        tests/fixtures/submodel.mpd tests/fixtures/empty-model.lxf)
+    set_target_properties(leocad-model-tests PROPERTIES
+        QT_HARMONYOS_APP_BUNDLE_NAME "io.github.xiaotaop.leocad.modeltests"
+        QT_HARMONYOS_APP_NAME "LeoCAD Model Tests"
+        QT_HARMONYOS_APP_LABEL "LeoCAD Model Tests"
+        QT_HARMONYOS_APP_VENDOR "xiaotaop"
+        QT_HARMONYOS_APP_VERSION_CODE 1 QT_HARMONYOS_APP_VERSION_NAME "0.1.0"
+        QT_HARMONYOS_MODULE_DEVICE_TYPES "2in1;tablet"
+        QT_HARMONYOS_TARGET_ARCHS "arm64-v8a"
+        QT_HARMONYOS_TARGET_SDK_VERSION "26.0.0"
+        QT_HARMONYOS_COMPILE_SDK_VERSION "26.0.0")
 endif()
 
 install(TARGETS leocad

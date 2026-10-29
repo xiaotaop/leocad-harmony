@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-28",
+  "source_commit": "f0dfce8651d7d42c8c37629294d8727107c8ce1e",
+  "base_commit": "9f9d7b352dfde4c14a75da01c90d42e96b842f6a",
+  "device": {
+    "model": "HAD-W32",
+    "api": 23,
+    "os": "OpenHarmony 6.1.0.115",
+    "qt": "6.12.0",
+    "gpu": "Maleoon 916"
+  },
+  "packages": {
+    "app": {
+      "path": "build/harmony-d3-evidence/leocad-f0dfce86-signed.hap",
+      "bytes": 75611599,
+      "sha256": "2c25af3d775ca1c17805aa0333aacc7c04c0cc7c49704f1a204f379626160bd7"
+    },
+    "model_tests": {
+      "path": "build/harmony-d3-evidence/modeltests-f0dfce86-signed.hap",
+      "bytes": 75867870,
+      "sha256": "53dd2093fb60528552eb5220fdc182f6173c4f555437ce6bcee75d580800b20a"
+    }
+  },
+  "compile_definitions": {
+    "leocad": {
+      "LC_DISABLE_NETWORK": true,
+      "LC_DISABLE_NON_CORE_FORMATS": true
+    },
+    "leocad-model-tests": {
+      "LC_DISABLE_NETWORK": true,
+      "LC_DISABLE_NON_CORE_FORMATS": true
+    }
+  },
+  "app_runs": [
+    {
+      "pid": 44809,
+      "exit": 0
+    },
+    {
+      "pid": 45162,
+      "exit": 0
+    }
+  ],
+  "device_model_tests": {
+    "pid": 43199,
+    "passed": 50,
+    "failed": 0,
+    "skipped": 0,
+    "exit": 0,
+    "windows_only_case_not_compiled": 1
+  },
+  "scope": "D3 main window and selected D2 device API/context validation; not full UI/file-picker/offline release acceptance",
+  "files": {
+    "format-blocked.jpeg": {
+      "bytes": 326646,
+      "sha256": "045494d8f38cbb750cc42a126a3f74f7d3ff9893af26972f98d15b97122504db"
+    },
+    "gl-contexts.json": {
+      "bytes": 5763,
+      "sha256": "eb391f6f40ddb92d706d470c95372d46db34f8103895536d0eaaaf922250c8fd"
+    },
+    "initial-fixture-readonly-tests.txt": {
+      "bytes": 4110,
+      "sha256": "6ca9306d2d0144b04a7db1e1a7944ac77f7078ab83f22ace42ff5009e94d724f"
+    },
+    "initial-startup-crash.hilog.txt": {
+      "bytes": 85140,
+      "sha256": "c13fa2da6294f3b5b2c1602f286f67f831da3cee214490066444b3fe214ae364"
+    },
+    "model-test-dependencies.txt": {
+      "bytes": 2433,
+      "sha256": "3849034ee8327dd982010917671d34e1357826566749a5067f5bb5c9fd05caf4"
+    },
+    "model-tests.hilog.txt": {
+      "bytes": 123837,
+      "sha256": "b073707cbd13e81593d5352c18290bf40c31f283fabcecba7a5fabdea7620dee"
+    },
+    "model-tests.txt": {
+      "bytes": 3718,
+      "sha256": "710b759ade1b7682799cb773570764312840d68f21c98766c8a42d39e9c8b928"
+    },
+    "restored.jpeg": {
+      "bytes": 458123,
+      "sha256": "4e1b1c110f6eb8d0636b3afdea078adadbeba0466339f7b2ec2cf5d9cf214dff"
+    },
+    "run-1.hilog.txt": {
+      "bytes": 283370,
+      "sha256": "8857f05b197c1f7ef0e75012dd8aef1db04ffbace061498251793102e059101b"
+    },
+    "run-1.jpeg": {
+      "bytes": 324076,
+      "sha256": "6de6d21383cf280ac951e6a51005fb4fff021d4ce654c7d4021e7c009816e567"
+    },
+    "run-2.hilog.txt": {
+      "bytes": 195111,
+      "sha256": "b8033f9cd16be611c1d2effb300c290fce30b36b0506313745407bef167ba642"
+    },
+    "run-2.jpeg": {
+      "bytes": 344883,
+      "sha256": "242bb02ce45e61c2b46fbbbac3502ca4700192ecc15fd5f37dd9d6fbbab35fae"
+    }
+  }
+}
