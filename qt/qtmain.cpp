@@ -197,9 +197,13 @@ int main(int argc, char *argv[])
 	QList<QPair<QString, bool>> LibraryPaths;
 
 #ifdef Q_OS_HARMONY
-	// Use the existing bundled library until the curated library is integrated.
+	// Package copy of the small built-in archive. The curated library is
+	// prepended below, so it is tried first and this entry only takes over if that
+	// one is missing or fails validation.
+	//
 	// A startup warning dialog would become the first native Ability window;
-	// closing it before showing the main window can terminate that Ability.
+	// closing it before showing the main window can terminate that Ability, which
+	// is why the curated library's rejection is reported on stderr instead.
 	LibraryPaths += qMakePair(QStringLiteral(":/resources/library.zip"), true);
 #endif
 
