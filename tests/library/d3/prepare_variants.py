@@ -89,6 +89,22 @@ def main() -> int:
                 if i.filename.lower() == "ldraw/ldconfig.ldr" else d)
            for i, d in entries])
 
+    # 7. The directive is there but the record carries no data: no CODE, no VALUE.
+    #    A prefix scan counts this and calls the archive usable; the real parser
+    #    drops it, so the file yields no colours and LoadColors() silently falls
+    #    back to the built-in palette. This is the case review asked for.
+    write(OUTPUT / "brokencolour.zip",
+          [(i, b"0 !COLOUR Broken\n"
+                if i.filename.lower() == "ldraw/ldconfig.ldr" else d)
+           for i, d in entries])
+
+    # 8. Same shape, but CODE present and VALUE missing. The parser still rejects
+    #    it (a colour without a value is not usable), so this must be refused too.
+    write(OUTPUT / "codeonlycfg.zip",
+          [(i, b"0 !COLOUR HalfDone CODE 4\n"
+                if i.filename.lower() == "ldraw/ldconfig.ldr" else d)
+           for i, d in entries])
+
     for path in sorted(OUTPUT.iterdir()):
         print(f"  {path.name}: {path.stat().st_size} bytes", file=sys.stderr)
 

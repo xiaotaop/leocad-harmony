@@ -17,6 +17,7 @@
 #include <QJsonObject>
 #include <QtTest>
 
+#include "lc_colors.h"
 #include "lc_library.h"
 
 class ArchiveValidationTest : public QObject
@@ -31,9 +32,12 @@ private slots:
 	void missingColorConfigIsRejected();
 	void emptyColorConfigIsRejected();
 	void colourConfigWithoutColoursIsRejected();
+	void colourDirectiveWithoutDataIsRejected();
+	void colourDirectiveWithCodeButNoValueIsRejected();
 	void danglingReferenceIsRejected();
 	void truncatedArchiveIsRejected();
 	void missingFileIsRejected();
+	void validationDoesNotTouchGlobalColours();
 
 private:
 	QString mVariantDir;
@@ -111,7 +115,31 @@ void ArchiveValidationTest::colourConfigWithoutColoursIsRejected()
 		lcPiecesLibrary::ValidateBundledLibraryArchive(mVariantDir + "/garbagecfg.zip", mExpectedParts);
 
 	QVERIFY(!Check.Usable);
-	QVERIFY2(Check.Problem.contains("defines no colours"), qPrintable(Check.Problem));
+	QVERIFY2(Check.Problem.contains("no usable colour definitions"), qPrintable(Check.Problem));
+}
+
+void ArchiveValidationTest::colourDirectiveWithoutDataIsRejected()
+{
+	// "0 !COLOUR Broken" carries the directive but neither CODE nor VALUE. A prefix
+	// scan counts one colour and passes the archive; the loader's parser produces
+	// nothing, so LoadColors() falls back to the built-in palette and every part is
+	// rendered in the wrong colour without a word.
+	const lcPiecesLibrary::ArchiveCheck Check =
+		lcPiecesLibrary::ValidateBundledLibraryArchive(mVariantDir + "/brokencolour.zip", mExpectedParts);
+
+	QVERIFY2(!Check.Usable, "a !COLOUR line without CODE/VALUE must not count as a colour");
+	QVERIFY2(Check.Problem.contains("no usable colour definitions"), qPrintable(Check.Problem));
+}
+
+void ArchiveValidationTest::colourDirectiveWithCodeButNoValueIsRejected()
+{
+	// Half a record: CODE is present, VALUE is not. The parser still drops it,
+	// because a colour with no value cannot be drawn.
+	const lcPiecesLibrary::ArchiveCheck Check =
+		lcPiecesLibrary::ValidateBundledLibraryArchive(mVariantDir + "/codeonlycfg.zip", mExpectedParts);
+
+	QVERIFY2(!Check.Usable, "a !COLOUR line without VALUE must not count as a colour");
+	QVERIFY2(Check.Problem.contains("no usable colour definitions"), qPrintable(Check.Problem));
 }
 
 void ArchiveValidationTest::danglingReferenceIsRejected()
@@ -139,6 +167,36 @@ void ArchiveValidationTest::missingFileIsRejected()
 
 	QVERIFY(!Check.Usable);
 	QVERIFY2(Check.Problem.contains("not found"), qPrintable(Check.Problem));
+}
+
+void ArchiveValidationTest::validationDoesNotTouchGlobalColours()
+{
+	// The check must be safe to run before the application loads a library. The
+	// loader's own lcLoadColorFile() cannot be reused for it: that function writes
+	// gColorList, gColorGroups, gDefaultColor and gEdgeColor, and consults the
+	// preferences, so using it to "test" a broken archive would leave the colour
+	// table holding the broken file's contents.
+	//
+	// Validation goes through lcParseColorFile() instead, which only builds a local
+	// vector. This asserts that: a rejected archive must leave the globals alone.
+	const size_t Before = gColorList.size();
+	const int DefaultBefore = gDefaultColor;
+	const int EdgeBefore = gEdgeColor;
+
+	// A broken archive: the colour file has the directive but no data.
+	const lcPiecesLibrary::ArchiveCheck Rejected =
+		lcPiecesLibrary::ValidateBundledLibraryArchive(mVariantDir + "/brokencolour.zip", mExpectedParts);
+	QVERIFY(!Rejected.Usable);
+
+	// And a good one, so a pass cannot be explained by "nothing was parsed at all".
+	const QString Source = QFINDTESTDATA("../../../assets/ldraw-lite/library-lite.zip");
+	const lcPiecesLibrary::ArchiveCheck Accepted =
+		lcPiecesLibrary::ValidateBundledLibraryArchive(Source, mExpectedParts);
+	QVERIFY2(Accepted.Usable, qPrintable(Accepted.Problem));
+
+	QCOMPARE(gColorList.size(), Before);
+	QCOMPARE(gDefaultColor, DefaultBefore);
+	QCOMPARE(gEdgeColor, EdgeBefore);
 }
 
 QTEST_APPLESS_MAIN(ArchiveValidationTest)

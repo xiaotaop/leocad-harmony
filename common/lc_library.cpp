@@ -434,32 +434,23 @@ lcPiecesLibrary::ArchiveCheck lcPiecesLibrary::ValidateBundledLibraryArchive(con
 			return Check;
 		}
 
-		std::string ConfigText(static_cast<size_t>(ConfigLength), '\0');
-		ConfigFile.ReadBuffer(&ConfigText[0], ConfigLength);
+		// Parse with the loader's own reader, not a text scan of our own.
+		//
+		// Matching a "0 !COLOUR " prefix is not the same question. A line such as
+		// "0 !COLOUR Broken" has the directive but no CODE and no VALUE, so
+		// lcParseColorFile() drops it and the file yields nothing — yet a prefix scan
+		// counts it and calls the archive usable. That archive loads, reports the
+		// right part count, and renders every part in the fallback palette.
+		//
+		// lcParseColorFile() is the side-effect-free half of lcLoadColorFile(): it
+		// builds a local vector and never touches gColorList/gColorGroups, so running
+		// it here cannot corrupt the colour table the application goes on to use.
+		// lcLoadColorFile() would: it writes the globals and reads the preferences.
+		const std::vector<lcColor> Colours = lcParseColorFile(ConfigFile);
 
-		// Count "0 !COLOUR" definitions, the same records lcParseColorFile() builds
-		// colours from. Looking for the directive rather than parsing the whole file
-		// keeps this check independent of the colour module's internals.
-		size_t ColourCount = 0;
-		size_t Offset = 0;
-
-		while (Offset < ConfigText.size())
+		if (Colours.empty())
 		{
-			size_t End = ConfigText.find('\n', Offset);
-
-			if (End == std::string::npos)
-				End = ConfigText.size();
-
-			const std::string Line = ConfigText.substr(Offset, End - Offset);
-			Offset = End + 1;
-
-			if (Line.compare(0, 10, "0 !COLOUR ") == 0)
-				ColourCount++;
-		}
-
-		if (ColourCount == 0)
-		{
-			Check.Problem = QStringLiteral("ldraw/ldconfig.ldr defines no colours");
+			Check.Problem = QStringLiteral("ldraw/ldconfig.ldr has no usable colour definitions");
 			return Check;
 		}
 	}
