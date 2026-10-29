@@ -12,13 +12,24 @@
 - 首批和第二批已通过 PR #2、#5 合入；D2 从 `main` 的 `cf2adc6`（已含 #7、#8、#9）快进同步后继续。团队保留上游根目录布局。
 - 桌面对照：Windows x64、Qt 6.8.3 MSVC2022、MSVC 14.41.34120、Windows SDK 10.0.19041.0。
 - Qt 位于本目录 `.local/Qt/`，下载工具位于 `.local/python/`；没有修改全局 PATH、系统 Python 或全局 Git 配置。
-- HarmonyOS 的 Qt 6.12、ARM64 工具链、HAP 和真机验收尚未配置，桌面基线不能替代这些结果。
+- B 本机仍使用桌面工具链；组长环境已完成固定版本的 HarmonyOS ARM64/HAP 与设备测试，见下方 D3 核验。桌面结果和设备结果分别记录。
 
 组长方案文件的来源与 SHA-256 记录于 `member-b-baseline.json`。该文件只是 B 的准备记录，不取代组长负责的正式 `toolchain.lock`。
 
 10/28 D2 测试：49 个业务用例通过（含初始化/清理共 51 passed），0 failed、0 skipped，进程退出码为 0。保留 10/27 第二批的 37 个业务用例，新增 12 项格式隔离和离线错误回调用例；不代表完整 GUI 或鸿蒙验收。结果见 `member-b-validation.json`、`member-b-test-results.txt`，包含固定源码与产物哈希。
 
-## D2 对照与隔离边界
+## D3 对照与核验（2026-10-29）
+
+原计划 B 的 D3 两项要求已有证据：核心模型通过 ARM64 编译；新建空模型测试通过。PR #10、#11、#17 已合入，B 分支已快进同步到 `37e56526f8842ae4ae9eec31fa33e2a78c1f9c0c`。
+
+- **ARM64**：复核组长提交 `f0dfce8651d7d42c8c37629294d8727107c8ce1e` 的设备报告，Qt 6.12.0 / OHOS Clang 15.0.4 / arm64，50 passed、0 failed、0 skipped（48 个业务用例及初始化/清理）。同 PID 43199 的测试出口和原生 main 返回值均为 0；[收据](evidence/leader/2026-10-28/d3-device/receipt.json)中 12 个证据文件的 SHA-256 全部匹配。本次复核已有记录，没有重新构建或运行设备包，也未取得组长本机 HAP 重算包哈希。
+- **新建空模型**：`emptyModelRoundTrip` 使用真实 `Project(true)`，保存后重开并断言一个模型、零个零件；设备报告与本次桌面回归均通过。复用已有覆盖，不增加重复测试。
+- **合入后的桌面回归**：在上述 `37e5652` 上执行 `scripts/Build-MemberB.ps1 -Target Tests -RunTests`，编译通过，49 个业务用例通过，含初始化/清理共 51 passed、0 failed、0 skipped，退出码 0。记录见 [D3 桌面测试结果](member-b-d3-test-results.txt)。首次受限执行中临时文件创建失败（12 passed、39 failed）；在正常本机权限下使用相同源码和命令复跑通过，未修改断言。
+- **版本边界**：设备证据对应 `f0dfce86`；C 的 #17 后续修改了零件库、菜单及 `Project::ShowModelListDialog`。本次最新集成版只补做桌面模型回归，不将旧设备记录当作 #17 的完整真机验收。
+
+D3 个人任务可按上述范围交付。系统选择器、导入副本/外部导出、取消/权限、物理断网及真实 UI 的保存退出重开，继续由组长+B 在 [Issue #15](https://github.com/xiaotaop/leocad-harmony/issues/15) 的 D7–D8（11/2–11/3）集成阶段验收，不在本次关闭。
+
+## D2 对照与隔离边界（保留原阶段记录）
 
 2026-10-28 组长已在 HAD-W32/API23 上执行独立 ARM64 测试 HAP：50 passed、
 0 failed、0 skipped（Windows 专属文件锁用例不编译）；主程序 3DS 入口亦确认拒绝。
