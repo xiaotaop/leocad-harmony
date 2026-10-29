@@ -2,6 +2,8 @@
 #include "lc_context.h"
 #include "lc_glextensions.h"
 #include "lc_glcontext.h"
+#include "lc_renderpolicy.h"
+#include "lc_shaderprogram.h"
 #include <QJsonDocument>
 #include "lc_mesh.h"
 #include "lc_texture.h"
@@ -91,10 +93,16 @@ bool lcContext::InitializeRenderer()
 
 	lcInitializeGLExtensions(mOffscreenContext.get());
 
+	if (!Context->CreateResources())
+	{
+		Context->DestroyResources();
+		mGlobalOffscreenContext.reset();
+		DestroyOffscreenContext();
+		return false;
+	}
+
 	gStringCache.Initialize(Context);
 	gTexFont.Initialize(Context);
-
-	Context->CreateResources();
 	lcView::CreateResources(Context);
 	lcViewManipulator::CreateResources(Context);
 	lcViewSphere::CreateResources(Context);
@@ -180,147 +188,36 @@ void lcContext::DestroyOffscreenContext()
 	mOffscreenContext.reset();
 }
 
-void lcContext::CreateShaderPrograms()
+bool lcContext::CreateShaderPrograms()
 {
-	const char* ShaderPrefix =
-	{
-#ifndef LC_OPENGLES
-"#version 110\n"
-"#define mediump\n"
-"#define LC_VERTEX_INPUT attribute\n"
-"#define LC_VERTEX_OUTPUT varying\n"
-"#define LC_PIXEL_INPUT varying\n"
-"#define LC_PIXEL_OUTPUT\n"
-"#define LC_SHADER_PRECISION\n"
+	LC_ARRAY_SIZE_CHECK(lcShaderPrograms, lcMaterialType::Count);
+#ifdef LC_OPENGLES
+	const QByteArray Prefix = lcShaderPrefix(true);
 #else
-"#version 300 es\n"
-"#define texture2D texture\n"
-"#define LC_VERTEX_INPUT in\n"
-"#define LC_VERTEX_OUTPUT out\n"
-"#define LC_PIXEL_INPUT in mediump\n"
-"#define gl_FragColor FragColor\n"
-"#define LC_PIXEL_OUTPUT out mediump vec4 gl_FragColor;\n"
-"#define LC_SHADER_PRECISION mediump\n"
+	const QByteArray Prefix = lcShaderPrefix(false);
 #endif
-
-"#define LC_PIXEL_FAKE_LIGHTING \\\n"
-"		LC_SHADER_PRECISION vec3 Normal = normalize(PixelNormal); \\\n"
-"		LC_SHADER_PRECISION vec3 LightDirection = normalize(PixelPosition - LightPosition); \\\n"
-"		LC_SHADER_PRECISION vec3 VertexToEye = normalize(EyePosition - PixelPosition); \\\n"
-"		LC_SHADER_PRECISION vec3 LightReflect = normalize(reflect(-LightDirection, Normal)); \\\n"
-"		LC_SHADER_PRECISION float Specular = abs(dot(VertexToEye, LightReflect)); \\\n"
-"		Specular = min(pow(Specular, 8.0), 1.0) * 0.25; \\\n"
-"		LC_SHADER_PRECISION vec3 SpecularColor = vec3(Specular, Specular, Specular); \\\n"
-"		LC_SHADER_PRECISION float Diffuse = min(abs(dot(Normal, LightDirection)) * 0.6 + 0.65, 1.0);\n"
-	};
-
-	const char* const VertexShaders[] =
-	{
-		":/resources/shaders/unlit_color_vs.glsl",             // UnlitColor
-		":/resources/shaders/unlit_color_conditional_vs.glsl", // UnlitColorConditional
-		":/resources/shaders/unlit_texture_modulate_vs.glsl",  // UnlitTextureModulate
-		":/resources/shaders/unlit_texture_modulate_vs.glsl",  // TextSDF
-		":/resources/shaders/unlit_texture_decal_vs.glsl",     // UnlitTextureDecal
-		":/resources/shaders/unlit_vertex_color_vs.glsl",      // UnlitVertexColor
-		":/resources/shaders/unlit_view_sphere_vs.glsl",       // UnlitViewSphere
-		":/resources/shaders/fakelit_color_vs.glsl",           // FakeLitColor
-		":/resources/shaders/fakelit_texture_decal_vs.glsl"    // FakeLitTextureDecal
-	};
-
-	LC_ARRAY_SIZE_CHECK(VertexShaders, lcMaterialType::Count);
-
-	const char* const FragmentShaders[] =
-	{
-		":/resources/shaders/unlit_color_ps.glsl",             // UnlitColor
-		":/resources/shaders/unlit_color_conditional_ps.glsl", // UnlitColorConditional
-		":/resources/shaders/unlit_texture_modulate_ps.glsl",  // UnlitTextureModulate
-		":/resources/shaders/text_sdf_ps.glsl",                // TextSDF
-		":/resources/shaders/unlit_texture_decal_ps.glsl",     // UnlitTextureDecal
-		":/resources/shaders/unlit_vertex_color_ps.glsl",      // UnlitVertexColor
-		":/resources/shaders/unlit_view_sphere_ps.glsl",       // UnlitViewSphere
-		":/resources/shaders/fakelit_color_ps.glsl",           // FakeLitColor
-		":/resources/shaders/fakelit_texture_decal_ps.glsl"    // FakeLitTextureDecal
-	};
-
-	LC_ARRAY_SIZE_CHECK(FragmentShaders, lcMaterialType::Count);
-
-	const auto LoadShader = [this, ShaderPrefix](const char* FileName, GLuint ShaderType) -> GLuint
-	{
-		QFile ShaderFile(FileName);
-
-		if (!ShaderFile.open(QIODevice::ReadOnly))
-			return 0;
-
-		QByteArray Data = ShaderPrefix + ShaderFile.readAll();
-		const char* Source = Data.constData();
-
-		const GLuint Shader = glCreateShader(ShaderType);
-		glShaderSource(Shader, 1, &Source, nullptr);
-		glCompileShader(Shader);
-
-#ifndef QT_NO_DEBUG
-		GLint ShaderCompiled = 0;
-		glGetShaderiv(Shader, GL_COMPILE_STATUS, &ShaderCompiled);
-
-		if (ShaderCompiled == GL_FALSE)
-		{
-			GLint Length = 0;
-			glGetShaderiv(Shader, GL_INFO_LOG_LENGTH, &Length);
-
-			QByteArray InfoLog;
-			InfoLog.resize(Length);
-			glGetShaderInfoLog(Shader, Length, &Length, InfoLog.data());
-
-			qDebug() << InfoLog;
-		}
-#endif
-
-		return Shader;
-	};
-
+	int Programs = 0;
+	int Skipped = 0;
 	for (int MaterialType = 0; MaterialType < static_cast<int>(lcMaterialType::Count); MaterialType++)
 	{
-		const GLuint VertexShader = LoadShader(VertexShaders[MaterialType], GL_VERTEX_SHADER);
-		const GLuint FragmentShader = LoadShader(FragmentShaders[MaterialType], GL_FRAGMENT_SHADER);
-
-		GLuint Program = glCreateProgram();
-
-		glAttachShader(Program, VertexShader);
-		glAttachShader(Program, FragmentShader);
-
-		glBindAttribLocation(Program, static_cast<int>(lcProgramAttrib::Position), "VertexPosition");
-		glBindAttribLocation(Program, static_cast<int>(lcProgramAttrib::Normal), "VertexNormal");
-		glBindAttribLocation(Program, static_cast<int>(lcProgramAttrib::TexCoord), "VertexTexCoord");
-		glBindAttribLocation(Program, static_cast<int>(lcProgramAttrib::Color), "VertexColor");
-
-		glBindAttribLocation(Program, static_cast<int>(lcProgramAttrib::ControlPoint1), "VertexPosition1");
-		glBindAttribLocation(Program, static_cast<int>(lcProgramAttrib::ControlPoint2), "VertexPosition2");
-		glBindAttribLocation(Program, static_cast<int>(lcProgramAttrib::ControlPoint3), "VertexPosition3");
-		glBindAttribLocation(Program, static_cast<int>(lcProgramAttrib::ControlPoint4), "VertexPosition4");
-
-		glLinkProgram(Program);
-
-		glDetachShader(Program, VertexShader);
-		glDetachShader(Program, FragmentShader);
-		glDeleteShader(VertexShader);
-		glDeleteShader(FragmentShader);
-
-		GLint IsLinked = 0;
-		glGetProgramiv(Program, GL_LINK_STATUS, &IsLinked);
-
-		if (IsLinked == GL_FALSE)
+		const lcShaderProgramSpec& Spec = lcShaderPrograms[MaterialType];
+		if (lcSafeRenderEnabled() && Spec.Advanced)
 		{
-			GLint Length = 0;
-			glGetProgramiv(Program, GL_INFO_LOG_LENGTH, &Length);
-
-			QByteArray InfoLog;
-			InfoLog.resize(Length);
-			glGetProgramInfoLog(Program, Length, &Length, InfoLog.data());
-
-			glDeleteProgram(Program);
-			Program = 0;
+			Skipped++;
+			continue;
 		}
-
+		const lcShaderBuildResult Built = lcBuildShaderProgram(*this, Spec, Prefix);
+		if (!Built.Object)
+		{
+			const QJsonObject Report{{"passed", false}, {"safe_render", lcSafeRenderEnabled()},
+				{"material", Spec.Name}, {"vertex", Spec.Vertex}, {"fragment", Spec.Fragment},
+				{"stage", Built.Stage}, {"error", Built.Error}, {"driver_log", Built.Log}};
+			qCritical().noquote() << "LEOCAD_GL_RENDERER"
+				<< QJsonDocument(Report).toJson(QJsonDocument::Compact);
+			return false;
+		}
+		const GLuint Program = Built.Object;
+		Programs++;
 		mPrograms[MaterialType].Object = Program;
 		mPrograms[MaterialType].WorldViewProjectionMatrixLocation = glGetUniformLocation(Program, "WorldViewProjectionMatrix");
 		mPrograms[MaterialType].WorldMatrixLocation = glGetUniformLocation(Program, "WorldMatrix");
@@ -339,14 +236,22 @@ void lcContext::CreateShaderPrograms()
 			glUseProgram(0);
 		}
 	}
+	const QJsonObject Report{{"passed", true}, {"safe_render", lcSafeRenderEnabled()},
+		{"programs", Programs}, {"skipped_programs", Skipped}};
+	qInfo().noquote() << "LEOCAD_GL_RENDERER" << QJsonDocument(Report).toJson(QJsonDocument::Compact);
+	return true;
 }
 
-void lcContext::CreateResources()
+bool lcContext::CreateResources()
 {
+#ifdef LC_OPENGLES
 	if (!gSupportsShaderObjects)
-		return;
-
-	CreateShaderPrograms();
+	{
+		qCritical("LEOCAD_GL_RENDERER renderer_requires_shaders");
+		return false;
+	}
+#endif
+	return !gSupportsShaderObjects || CreateShaderPrograms();
 }
 
 void lcContext::DestroyResources()

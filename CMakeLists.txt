@@ -24,6 +24,8 @@ find_package(ZLIB REQUIRED)
 
 include(cmake/LeoCADSources.cmake)
 
+option(LEOCAD_SAFE_RENDER "Disable optional render effects for device diagnosis" OFF)
+
 # The upstream resource file names generated .qm files. Translations are handled
 # by qt_add_translations(), so create a build-tree copy without those entries.
 set(_generated_qrc "${CMAKE_CURRENT_BINARY_DIR}/generated/leocad_resources.qrc")
@@ -58,6 +60,7 @@ qt_add_executable(leocad
 
 target_include_directories(leocad PRIVATE common qt)
 target_compile_definitions(leocad PRIVATE
+    $<$<BOOL:${LEOCAD_SAFE_RENDER}>:LC_SAFE_RENDER=1>
     LC_DISABLE_UPDATE_CHECK=1
     LC_DISABLE_RENDER_DIALOG=1
     LC_DISABLE_BLENDER=1
@@ -114,6 +117,7 @@ if(OHOS AND LEOCAD_BUILD_MODEL_TEST_HAP)
         "${_generated_qrc}" resources/stylesheet/stylesheet.qrc)
     target_include_directories(leocad-model-tests PRIVATE common qt)
     target_compile_definitions(leocad-model-tests PRIVATE
+        $<$<BOOL:${LEOCAD_SAFE_RENDER}>:LC_SAFE_RENDER=1>
         LC_DISABLE_UPDATE_CHECK=1 LC_DISABLE_NETWORK=1
         LC_DISABLE_RENDER_DIALOG=1 LC_DISABLE_BLENDER=1 LC_DISABLE_NON_CORE_FORMATS=1)
     target_link_libraries(leocad-model-tests PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets

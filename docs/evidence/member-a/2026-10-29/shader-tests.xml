@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite name="ShaderTests" timestamp="2026&#x002D;10&#x002D;29T19:54:24" hostname="AlmiradeMacBook&#x002D;Air.local" tests="17" failures="0" errors="0" skipped="0" time="0.282">
+  <properties>
+    <property name="QTestVersion" value="6.12.0"/>
+    <property name="QtVersion" value="6.12.0"/>
+    <property name="QtBuild" value="Qt 6.12.0 (arm64&#x002D;little_endian&#x002D;lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang&#x002D;1700.3.19.1))"/>
+  </properties>
+  <testcase name="initTestCase" classname="ShaderTests" time="0.071"/>
+  <testcase name="materials(UnlitColor)" classname="ShaderTests" time="0.007"/>
+  <testcase name="materials(UnlitColorConditional)" classname="ShaderTests" time="0.001"/>
+  <testcase name="materials(UnlitTextureModulate)" classname="ShaderTests" time="0.000"/>
+  <testcase name="materials(TextSDF)" classname="ShaderTests" time="0.000"/>
+  <testcase name="materials(UnlitTextureDecal)" classname="ShaderTests" time="0.000"/>
+  <testcase name="materials(UnlitVertexColor)" classname="ShaderTests" time="0.000"/>
+  <testcase name="materials(UnlitViewSphere)" classname="ShaderTests" time="0.001"/>
+  <testcase name="materials(FakeLitColor)" classname="ShaderTests" time="0.001"/>
+  <testcase name="materials(FakeLitTextureDecal)" classname="ShaderTests" time="0.001"/>
+  <testcase name="rejectsBrokenSource(vertex&#x002D;compile)" classname="ShaderTests" time="0.001"/>
+  <testcase name="rejectsBrokenSource(fragment&#x002D;compile)" classname="ShaderTests" time="0.001"/>
+  <testcase name="rejectsBrokenSource(link&#x002D;interface)" classname="ShaderTests" time="0.001"/>
+  <testcase name="missingResource(vertex)" classname="ShaderTests" time="0.000"/>
+  <testcase name="missingResource(fragment)" classname="ShaderTests" time="0.000"/>
+  <testcase name="basicMaterialDrawsPixels" classname="ShaderTests" time="0.195"/>
+  <testcase name="cleanupTestCase" classname="ShaderTests" time="0.000"/>
+</testsuite>

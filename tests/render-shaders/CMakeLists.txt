@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.21)
+project(LeoCADRenderShaderTests LANGUAGES CXX)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Gui OpenGL Test)
+set(CMAKE_AUTOMOC ON)
+qt_add_executable(leocad-render-shader-tests tst_shaders.cpp)
+target_compile_features(leocad-render-shader-tests PRIVATE cxx_std_17)
+target_compile_definitions(leocad-render-shader-tests PRIVATE QT_NO_DEBUG)
+target_include_directories(leocad-render-shader-tests PRIVATE ../../common)
+target_link_libraries(leocad-render-shader-tests PRIVATE Qt6::Gui Qt6::OpenGL Qt6::Test)
+file(GLOB ShaderFiles CONFIGURE_DEPENDS "../../resources/shaders/*.glsl")
+qt_add_resources(leocad-render-shader-tests shaders
+    PREFIX "/resources" BASE "../../resources" FILES ${ShaderFiles})
+set_target_properties(leocad-render-shader-tests PROPERTIES MACOSX_BUNDLE FALSE)

@@ -1,5 +1,6 @@
 #include "lc_global.h"
 #include "lc_scene.h"
+#include "lc_renderpolicy.h"
 #include "lc_context.h"
 #include "pieceinf.h"
 #include "lc_texture.h"
@@ -10,8 +11,13 @@
 
 lcScene::lcScene()
 {
-	mShadingMode = lcShadingMode::DefaultLights;
+	SetShadingMode(lcShadingMode::DefaultLights);
 	mMeshLODDistance = 250.0f;
+}
+
+void lcScene::SetShadingMode(lcShadingMode ShadingMode)
+{
+	mShadingMode = lcSafeRenderEnabled() ? lcShadingMode::Flat : ShadingMode;
 }
 
 void lcScene::Begin(const lcMatrix44& ViewMatrix)
@@ -59,6 +65,9 @@ void lcScene::End()
 
 void lcScene::AddMesh(lcMesh* Mesh, const lcMatrix44& WorldMatrix, int ColorIndex, lcRenderMeshState State)
 {
+	if (lcSafeRenderEnabled() && (State == lcRenderMeshState::Faded || State == lcRenderMeshState::Highlighted))
+		State = lcRenderMeshState::Default;
+
 	lcRenderMesh& RenderMesh = mRenderMeshes.emplace_back();
 
 	RenderMesh.WorldMatrix = WorldMatrix;
@@ -427,7 +436,7 @@ void lcScene::Draw(lcContext* Context) const
 
 	const lcPreferences& Preferences = lcGetPreferences();
 	const bool DrawLines = Preferences.mDrawEdgeLines && Preferences.mLineWidth > 0.0f;
-	const bool DrawConditional = Preferences.mDrawConditionalLines && Preferences.mLineWidth > 0.0f;
+	const bool DrawConditional = !lcSafeRenderEnabled() && Preferences.mDrawConditionalLines && Preferences.mLineWidth > 0.0f;
 
 //	lcShadingMode ShadingMode = Preferences.mShadingMode;
 //	if (ShadingMode == lcShadingMode::Wireframe && !mAllowWireframe)

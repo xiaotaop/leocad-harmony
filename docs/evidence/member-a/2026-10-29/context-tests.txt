@@ -1,0 +1,17 @@
+********* Start testing of RenderContextTests *********
+Config: Using QtTest library 6.12.0, Qt 6.12.0 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.3.19.1)), macos 27.0.1
+PASS   : RenderContextTests::initTestCase()
+PASS   : RenderContextTests::apiCompatibility(desktop-compatibility)
+PASS   : RenderContextTests::apiCompatibility(desktop-modern)
+PASS   : RenderContextTests::apiCompatibility(gles3)
+PASS   : RenderContextTests::apiCompatibility(gles2-rejected)
+PASS   : RenderContextTests::apiCompatibility(desktop-build-gles-context)
+PASS   : RenderContextTests::apiCompatibility(gles-build-desktop-context)
+PASS   : RenderContextTests::sharedTextureReadbackAndActualFormat()
+PASS   : RenderContextTests::rejectsInvalidShareContext()
+PASS   : RenderContextTests::rejectsExistingObjects()
+PASS   : RenderContextTests::rejectsWorkerThreadBeforeNativeCalls()
+PASS   : RenderContextTests::diagnosticsOnlyQueryCurrentContext()
+PASS   : RenderContextTests::cleanupTestCase()
+Totals: 13 passed, 0 failed, 0 skipped, 0 blacklisted, 70ms
+********* Finished testing of RenderContextTests *********
