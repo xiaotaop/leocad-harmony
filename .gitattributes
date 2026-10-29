@@ -14,3 +14,5 @@
 /docs/evidence/leader/2026-10-27/d2-device-pass/* -text whitespace=cr-at-eol
 # Native log lines include trailing spaces; retain them for the receipt hashes.
 /docs/evidence/leader/2026-10-28/d3-device/* -text whitespace=cr-at-eol,-blank-at-eol
+/docs/evidence/leader/2026-10-29/d3-resources/* -text whitespace=cr-at-eol,-blank-at-eol
+/docs/evidence/leader/2026-10-29/hap-icons/* -text whitespace=cr-at-eol,-blank-at-eol

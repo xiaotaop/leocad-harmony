@@ -1,0 +1,119 @@
+{
+  "source_commit": "fbcdc5e11be8a9dc46471b8ac0990cb603982740",
+  "date": "2026-10-29",
+  "device": {
+    "model": "HAD-W32",
+    "api": 23,
+    "arch": "arm64"
+  },
+  "hap": {
+    "bytes": 79720294,
+    "sha256": "d1a7f94f036087aa10650bc05d9aa9ce84ac6497e01430ba36155f292502daa7"
+  },
+  "pids": [
+    9047,
+    9110,
+    10033
+  ],
+  "normal_exit_codes": [
+    0,
+    0,
+    0
+  ],
+  "wlan_restored_enabled": true,
+  "undo_matches_rotated_document": true,
+  "files": {
+    "about.jpeg": {
+      "bytes": 335686,
+      "sha256": "3218d28eeed487ebcd64c5225c487086899819abe9acc9b9c097e53558f67acf"
+    },
+    "after-delete.mpd": {
+      "bytes": 319,
+      "sha256": "5d40c61a21d2eb1867a87ca05849a995999e34775d3d7f31a8edf8d1d0398ff0"
+    },
+    "after-insert.mpd": {
+      "bytes": 360,
+      "sha256": "fb2d0f250a2d1783b4edbe9945cf343c4b319a75e1802151bd5b3329f4c7f90f"
+    },
+    "after-move.mpd": {
+      "bytes": 362,
+      "sha256": "0dd89aadb46e4ceab1ea78e195e260c58aa0507dfcf43c5d5318102438e9e61d"
+    },
+    "after-rotate.mpd": {
+      "bytes": 381,
+      "sha256": "0d12679de5b1b19b97243aae3ee5dc50fe6ce43248eefe0aa98a79fe7e1b48fa"
+    },
+    "after-undo.mpd": {
+      "bytes": 381,
+      "sha256": "0d12679de5b1b19b97243aae3ee5dc50fe6ce43248eefe0aa98a79fe7e1b48fa"
+    },
+    "curated-device.mpd": {
+      "bytes": 250,
+      "sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742"
+    },
+    "file-menu.jpeg": {
+      "bytes": 335103,
+      "sha256": "1c28079b9b0db5acf7a5966ab7d4dc4590b70cf9a1ef3e337938756ea63e7deb"
+    },
+    "model-list.jpeg": {
+      "bytes": 353323,
+      "sha256": "c91505bc888b24346ea4633833a111c1d87e4f1a4fe9789fdb0f1cc976dddc1b"
+    },
+    "mpd-child-active.jpeg": {
+      "bytes": 395090,
+      "sha256": "17ceca16babf46a5817bfa34179e458cf86780944ab67f968089bbb139cc4606"
+    },
+    "mpd-child.jpeg": {
+      "bytes": 353466,
+      "sha256": "bfabb29a0e04200bb3ae3869a3900b3cb816870bf9c9afd8b3e4efc6ea1ebc69"
+    },
+    "mpd-main.jpeg": {
+      "bytes": 374685,
+      "sha256": "090f548b4a419c7f08b10130decc3cacaeb94f7da1f7d38e6bf60633c5d64ead"
+    },
+    "offline-insert.jpeg": {
+      "bytes": 375622,
+      "sha256": "a6026b9daeeb050a13a57dd22e00a015db7810d3532728e2a5e4f78477940646"
+    },
+    "offline-insert2.jpeg": {
+      "bytes": 378747,
+      "sha256": "8140b48188698dc2e8b0da3724148f68c41b94e174cfddb07b94192105c1724d"
+    },
+    "offline-reopen.jpeg": {
+      "bytes": 372483,
+      "sha256": "dc6805db8f9874bd0455639095b48e2e55e0d146b3eab82de12a75d07f684361"
+    },
+    "ready.jpeg": {
+      "bytes": 319817,
+      "sha256": "f285081703ad74105113214b05183e3eb20ba28e810880d6c1113e84808ff6d1"
+    },
+    "run-1.hilog.txt": {
+      "bytes": 230634,
+      "sha256": "d1317115b88a95a2ad87ace20d1212047107bfdcc9dc13a0d502dedd7c8ea64a"
+    },
+    "run-2.hilog.txt": {
+      "bytes": 63529,
+      "sha256": "843c75a244e383f05c78a673f227a86364d65684478bfcc7a2ff439caa41f6cd"
+    },
+    "run-3.hilog.txt": {
+      "bytes": 66706,
+      "sha256": "884a112db6e90f24597f8115dee69cab14c3e298992fb4ae911d746961dd37bc"
+    },
+    "start.jpeg": {
+      "bytes": 234180,
+      "sha256": "0e906482ae84080bc5f3997a84b925e1f79aa2cd17d9675e52b8e3befcfb5481"
+    },
+    "sticker.jpeg": {
+      "bytes": 375361,
+      "sha256": "7b85d245975087f51e1458e19388c4d03d9e70cdb9df74a45a1ad6872defda34"
+    },
+    "tabs-unchanged.jpeg": {
+      "bytes": 375643,
+      "sha256": "3bedddb36a7e1d99696dc34f80ff86349b335fc9b96b7b020c66ca2e42051800"
+    },
+    "wifi-off.jpeg": {
+      "bytes": 362001,
+      "sha256": "61c219ee47c3763b7d24f7cf3f4a26c315dd6ed0ce8314a3512f7ea2964da6af"
+    }
+  }
+}

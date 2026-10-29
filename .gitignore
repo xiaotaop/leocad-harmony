@@ -18,6 +18,7 @@
 *.mpd
 !/tests/fixtures/*.ldr
 !/tests/fixtures/*.mpd
+!/docs/evidence/leader/2026-10-29/d3-resources/*.mpd
 /.local/
 /aqtinstall.log
 !/resources/*.ldr
