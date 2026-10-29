@@ -89,10 +89,24 @@ qt_add_translations(leocad
 )
 
 if(OHOS)
+    # Qt's APP_ICON sets the app/Ability icons, but its template keeps a separate
+    # startIcon.png. Copy the installed template into the build tree so all
+    # packaging routes use our startup icon without editing the Qt installation.
+    get_filename_component(_harmony_qt_prefix "${Qt6_DIR}/../../.." ABSOLUTE)
+    set(_harmony_template "${_harmony_qt_prefix}/src/harmonyos/templates")
+    if(NOT EXISTS "${_harmony_template}/entry/src/main/module.json5")
+        message(FATAL_ERROR "Missing Qt HarmonyOS package template: ${_harmony_template}")
+    endif()
+    set(_harmony_package "${CMAKE_CURRENT_BINARY_DIR}/leocad-harmony-package")
+    file(COPY "${_harmony_template}/" DESTINATION "${_harmony_package}")
+    configure_file("tools/icon/512x512/apps/leocad.png"
+        "${_harmony_package}/entry/src/main/resources/base/media/startIcon.png" COPYONLY)
     set_target_properties(leocad PROPERTIES
+        QT_HARMONYOS_PACKAGE_SOURCE_DIR "${_harmony_package}"
         QT_HARMONYOS_APP_BUNDLE_NAME "io.github.xiaotaop.leocad"
         QT_HARMONYOS_APP_NAME "LeoCAD Harmony"
         QT_HARMONYOS_APP_LABEL "LeoCAD Harmony"
+        QT_HARMONYOS_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/tools/icon/512x512/apps/leocad.png"
         QT_HARMONYOS_APP_VENDOR "xiaotaop"
         QT_HARMONYOS_APP_VERSION_CODE 1
         QT_HARMONYOS_APP_VERSION_NAME "0.1.0"
