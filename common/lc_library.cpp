@@ -289,6 +289,37 @@ QString lcPiecesLibrary::FindBundledLibraryArchive()
 	return QString();
 }
 
+QList<QPair<QString, bool>> lcPiecesLibrary::PlaceBundledLibraryArchive(
+	const QList<QPair<QString, bool>>& PlatformPaths, const QString& FileName,
+	int ExpectedParts, QString& Problem)
+{
+	// Deliberately a free function on the platform's list rather than a step
+	// inside the entry point: the ordering has to be reachable from a test that
+	// exercises the real code path. See the declaration for why.
+	QList<QPair<QString, bool>> Paths = PlatformPaths;
+	Problem.clear();
+
+	// No separate empty-name guard: ValidateBundledLibraryArchive() already
+	// reports "archive not found" for an empty path, and a guard in front of it
+	// would be a second place to keep that wording in sync.
+	const ArchiveCheck Check = ValidateBundledLibraryArchive(FileName, ExpectedParts);
+
+	if (!Check.Usable)
+	{
+		Problem = Check.Problem;
+		return Paths;
+	}
+
+	// prepend, not +=. LoadPartsLibrary() stops at the first path that loads,
+	// and the platform already registered its own archive; appending would make
+	// the small one win, silently.
+	//
+	// Marked official so the piece count is recorded
+	// (lcPiecesLibrary::SetOfficialPieces()).
+	Paths.prepend(qMakePair(FileName, true));
+	return Paths;
+}
+
 lcPiecesLibrary::ArchiveCheck lcPiecesLibrary::ValidateBundledLibraryArchive(const QString& FileName, int ExpectedParts)
 {
 	// Why this cannot be "call Load() and look at the return value":

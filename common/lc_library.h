@@ -160,6 +160,30 @@ public:
 
 	static ArchiveCheck ValidateBundledLibraryArchive(const QString& FileName, int ExpectedParts);
 
+	// Decides where the curated library goes in the list LoadPartsLibrary()
+	// walks, given the entries the platform layer already registered.
+	//
+	// This lives here, not in the entry point, so the ordering startup really
+	// produces can be tested. The first version of the regression test rebuilt
+	// the list itself and then asserted the order it had just built, which
+	// passed even with the entry point appending instead of prepending — the
+	// bug it was written to catch. Anything that matters must be reachable from
+	// a test without copying it.
+	//
+	// Prepending is the whole point: LoadPartsLibrary() stops at the first path
+	// that loads successfully, and the platform registers its own archive
+	// (:/resources/library.zip, 128 parts) before this runs. Appending leaves
+	// the target build on the small archive with no error anywhere.
+	//
+	// A curated archive that fails validation is never offered; the list comes
+	// back unchanged so startup falls through to the platform paths.
+	//
+	// Returns the rejection reason in Problem when the archive was refused,
+	// so the entry point can report it without re-running the checks.
+	static QList<QPair<QString, bool>> PlaceBundledLibraryArchive(
+		const QList<QPair<QString, bool>>& PlatformPaths, const QString& FileName,
+		int ExpectedParts, QString& Problem);
+
 	int GetPieceCount() const
 	{
 		return (int)mPieces.size();
