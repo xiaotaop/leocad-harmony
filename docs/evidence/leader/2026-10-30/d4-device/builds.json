@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-30",
+  "timezone": "Asia/Shanghai",
+  "device_model": "HAD-W32",
+  "system": "OpenHarmony-6.1.0.115",
+  "arch": "arm64-v8a",
+  "qt": "6.12.0",
+  "sdk": "26.0.0.105",
+  "compiler": "OHOS Clang 15.0.4",
+  "renderer": "Maleoon 916",
+  "builds": [
+    {
+      "file": "leocad-d5aa8b45-normal-signed.hap",
+      "source_commit": "d5aa8b45104ab1bb47e18a54c73fb63005517413",
+      "role": "integrated-main",
+      "bytes": 80056337,
+      "sha256": "907193d1b8e8c1db724ffe93d06231163ec7f5dd82ebc91f9cd0f6104a24727e",
+      "safe_render": false
+    },
+    {
+      "file": "leocad-d5aa8b45-modeltests-signed.hap",
+      "source_commit": "d5aa8b45104ab1bb47e18a54c73fb63005517413",
+      "role": "model-tests",
+      "bytes": 80010487,
+      "sha256": "d731f467917f657d363a237492f9fcdd31682608c75461485b11a085098130e6",
+      "safe_render": false
+    },
+    {
+      "file": "leocad-fcb8fe55-normal-signed.hap",
+      "source_commit": "fcb8fe55f1caa8473f6ceb261f41590ad5c61095",
+      "role": "delivered-resource-diagnostics",
+      "bytes": 80061743,
+      "sha256": "2f44dd2cd6ea0ad0854e36732020856a96895c45a84075ba085e3f6c92d7b4bc",
+      "safe_render": false
+    },
+    {
+      "file": "leocad-local-fixture-restore-signed.hap",
+      "source_commit": null,
+      "role": "temporary-fixture-restore-only",
+      "bytes": 80068226,
+      "sha256": "8af8200d0d44a6a701f54652ae913ad4e64ac378ebda234e598b07faad4a7b2a",
+      "safe_render": false
+    }
+  ],
+  "temporary_patch_sha256": "f0ec01302dcb116c8bab43e5358dd05fc3780e2c0eb895507fd8cda33d79628b"
+}
