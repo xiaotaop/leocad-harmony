@@ -1,0 +1,51 @@
+--- a/qt/qtmain.cpp
++++ b/qt/qtmain.cpp
+@@ -9,0 +10,6 @@
++#include <QTimer>
++#include "lc_mainwindow.h"
++#include "lc_view.h"
++#include "lc_viewwidget.h"
++#include "lc_model.h"
++#include "lc_glframebuffer.h"
+@@ -151,3 +157,3 @@
+-	QCoreApplication::setOrganizationDomain(QLatin1String("leocad.org"));
+-	QCoreApplication::setOrganizationName(QLatin1String("LeoCAD Software"));
+-	QCoreApplication::setApplicationName(QLatin1String("LeoCAD"));
++	QCoreApplication::setOrganizationDomain(QLatin1String("member-a-d4.invalid"));
++	QCoreApplication::setOrganizationName(QLatin1String("MemberA-D4-Validation"));
++	QCoreApplication::setApplicationName(QLatin1String("MemberA-D4-Validation"));
+@@ -279 +285,33 @@
+-		ExecReturn = Application.exec();
++
++        const QString Capture = QString::fromUtf8(qgetenv("MEMBER_A_CAPTURE_DIR"));
++        if (!Capture.isEmpty())
++        {
++            QDir().mkpath(Capture);
++            QTimer::singleShot(300, [&]() { gMainWindow->resize(1000,800); });
++            auto Step = std::make_shared<int>(0);
++            auto CaptureStep = std::make_shared<std::function<void()>>();
++            *CaptureStep = [&, Step, CaptureStep, Capture]() {
++                auto View = gMainWindow->GetActiveView();
++                auto Widget = View->GetWidget();
++                if (*Step == 0)
++                {
++                    lcVector3 Min,Max;
++                    View->GetModel()->GetVisiblePiecesBoundingBox(Min,Max);
++                    qInfo() << "MEMBER_A_BOUNDS" << Min.z << Max.z;
++                }
++                const QString Name = QString("size%1-grid%2.png").arg(*Step / 2).arg(*Step % 2 == 0 ? "on" : "off");
++                if (!Widget->grabFramebuffer().save(Capture + "/" + Name)) Application.exit(3);
++                ++*Step;
++                if (*Step == 4) { gMainWindow->close(); Application.quit(); return; }
++                lcGetPreferences().mGridEnabled = (*Step % 2 == 0);
++                if (*Step == 2) gMainWindow->resize(1200,900);
++                Widget->update();
++                QTimer::singleShot(300, *CaptureStep);
++            };
++            lcGetPreferences().mGridEnabled = true;
++            lcGetPreferences().mDrawGridStuds = true;
++            lcGetPreferences().mDrawGridLines = true;
++            lcGetPreferences().mDrawGridOrigin = true;
++            QTimer::singleShot(1500, *CaptureStep);
++        }
++        ExecReturn = Application.exec();

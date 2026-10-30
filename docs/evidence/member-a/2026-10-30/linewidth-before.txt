@@ -1,0 +1,33 @@
+********* Start testing of ModelIoTest *********
+Config: Using QtTest library 6.12.0, Qt 6.12.0 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.3.19.1)), macos 27.0.1
+PASS   : ModelIoTest::initTestCase()
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width1)
+FAIL!  : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width2) Compared floats are not the same (fuzzy compare)
+   Actual   (Actual): 1 (0x1p+0)
+   Expected (Width) : 2 (0x1p+1)
+   Loc: [../leocad-d4-app-source/tests/model/tst_model_io.cpp(128)]
+FAIL!  : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width3) Compared floats are not the same (fuzzy compare)
+   Actual   (Actual): 1 (0x1p+0)
+   Expected (Width) : 3 (0x1.8p+1)
+   Loc: [../leocad-d4-app-source/tests/model/tst_model_io.cpp(128)]
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width1)
+FAIL!  : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width2) Compared floats are not the same (fuzzy compare)
+   Actual   (Actual): 1 (0x1p+0)
+   Expected (Width) : 2 (0x1p+1)
+   Loc: [../leocad-d4-app-source/tests/model/tst_model_io.cpp(128)]
+FAIL!  : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width3) Compared floats are not the same (fuzzy compare)
+   Actual   (Actual): 1 (0x1p+0)
+   Expected (Width) : 3 (0x1.8p+1)
+   Loc: [../leocad-d4-app-source/tests/model/tst_model_io.cpp(128)]
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width1)
+FAIL!  : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width2) Compared floats are not the same (fuzzy compare)
+   Actual   (Actual): 1 (0x1p+0)
+   Expected (Width) : 2 (0x1p+1)
+   Loc: [../leocad-d4-app-source/tests/model/tst_model_io.cpp(128)]
+FAIL!  : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width3) Compared floats are not the same (fuzzy compare)
+   Actual   (Actual): 1 (0x1p+0)
+   Expected (Width) : 3 (0x1.8p+1)
+   Loc: [../leocad-d4-app-source/tests/model/tst_model_io.cpp(128)]
+PASS   : ModelIoTest::cleanupTestCase()
+Totals: 5 passed, 6 failed, 0 skipped, 0 blacklisted, 97ms
+********* Finished testing of ModelIoTest *********

@@ -1,0 +1,13 @@
+********* Start testing of FramebufferTests *********
+Config: Using QtTest library 6.12.0, Qt 6.12.0 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.3.19.1)), macos 27.0.1
+PASS   : FramebufferTests::initTestCase()
+PASS   : FramebufferTests::leakedStateReproducesGridOverSolid()
+PASS   : FramebufferTests::gridPlaneIntersectingModelIsReferenceOnly()
+PASS   : FramebufferTests::referenceGridRestoresDepthWriteMask()
+PASS   : FramebufferTests::restoresDepthAndOcclusionAcrossResize()
+PASS   : FramebufferTests::translucentForegroundKeepsTexturedBackground()
+PASS   : FramebufferTests::detectsFboWithoutDepthAndRestoresWidgetBinding()
+PASS   : FramebufferTests::recreatedWidgetRetainsDepth()
+PASS   : FramebufferTests::cleanupTestCase()
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 1473ms
+********* Finished testing of FramebufferTests *********
