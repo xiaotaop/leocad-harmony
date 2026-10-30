@@ -189,6 +189,24 @@ public:
 		return (int)mPieces.size();
 	}
 
+	// Why the packaged archive was refused, in the validator's wording; empty
+	// when it loaded or when none was found.
+	//
+	// Static because it describes the package, not a loaded instance: the check
+	// runs in the entry point before any lcPiecesLibrary exists. It used to be
+	// reported on stderr alone, which nobody sees on a device — the application
+	// started with 128 parts instead of 1160 and no surface said why. The parts
+	// panel reads this to show a notice.
+	static void SetBundledLibraryProblem(const QString& Problem)
+	{
+		mBundledLibraryProblem = Problem;
+	}
+
+	static const QString& GetBundledLibraryProblem()
+	{
+		return mBundledLibraryProblem;
+	}
+
 	void LoadColors();
 	void Unload();
 	void RemoveTemporaryPieces();
@@ -303,4 +321,6 @@ protected:
 	std::unique_ptr<lcZipFile> mZipFiles[static_cast<int>(lcZipFileType::Count)];
 	bool mHasUnofficial;
 	bool mCancelLoading;
+
+	static QString mBundledLibraryProblem;
 };

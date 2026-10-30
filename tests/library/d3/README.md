@@ -1,14 +1,15 @@
-# D3 接入测试
+# D3/D4 接入测试
 
-四个套件，覆盖启动时的库发现与校验、库优先级、菜单裁剪和子模型对话框。
-共 33 项断言。
+五个套件，覆盖启动时的库发现与校验、库优先级、菜单裁剪、子模型对话框和零件面板状态。
+共 44 项断言。D4 的 `panel` 套件源文件在 `tests/library/d4/`，工程名不带 `d3` 前缀。
 
 | 套件 | 工程 | 项数 | 覆盖 |
 |---|---|---:|---|
 | archive | `d3-archive-tests.pro` | 13 | `ValidateBundledLibraryArchive()` 的四项检查 |
 | priority | `d3-priority-tests.pro` | 8 | `PlaceBundledLibraryArchive()` 的排序与拒绝 |
-| menu | `d3-menu-tests.pro` | 7 | `ApplyFirstReleaseScope()` 与子模型标签栏 |
+| menu | `d3-menu-tests.pro` | 8 | `ApplyFirstReleaseScope()`、子模型标签栏与空子菜单 |
 | modellist | `d3-modellist-tests.pro` | 5 | `lcModelListDialog` 只保留切换 |
+| panel | `d4-panel-tests.pro` | 10 | 零件面板计数、空态覆盖层与库异常横幅 |
 
 ## 为什么需要这些测试
 
@@ -69,9 +70,13 @@
 
 ```bash
 source .devtools/env.sh          # 或确保 qmake 在 PATH
-JOBS=8 scripts/dev/run-d3-tests.sh            # 四个套件全跑
-JOBS=8 scripts/dev/run-d3-tests.sh priority    # 只跑一个
+JOBS=2 scripts/dev/run-d3-tests.sh            # 五个套件全跑
+JOBS=2 scripts/dev/run-d3-tests.sh priority    # 只跑一个
+JOBS=2 scripts/dev/run-d3-tests.sh panel       # D4 面板套件
 ```
+
+`JOBS=2` 而不是更高：GCC 11 在内存压力下会报 `could not split insn` 或
+`Terminated signal terminated program cc1plus`，与代码无关，降并发即可通过。
 
 Windows / CI 用 `scripts/Run-D3Tests.ps1`。脚本会先生成变体，再逐个 shadow build，
 任何套件打印 `FAIL!` 或退出非零都会让整体失败。
@@ -84,7 +89,7 @@ qmake ../../d3-priority-tests.pro CONFIG+=debug && make -j4
 QT_QPA_PLATFORM=offscreen ./build/debug/leocad-d3-priority
 ```
 
-`menu` 和 `modellist` 要构造真实窗口，没有显示器时必须设 `QT_QPA_PLATFORM=offscreen`。
+`menu`、`modellist` 和 `panel` 要构造真实窗口，没有显示器时必须设 `QT_QPA_PLATFORM=offscreen`。
 
 ## 回归验证
 
@@ -97,3 +102,11 @@ QT_QPA_PLATFORM=offscreen ./build/debug/leocad-d3-priority
 | 颜色只校验存在不校验内容 | 4 |
 | 颜色改用 `!COLOUR` 前缀计数 | 4 |
 | 忽略 `AllowStructureEditing` | 2 |
+| 摘空子菜单的容器（`Import`/`Export`/`Step` 变回可见空框） | 1 |
+| 去掉构造末尾的 All Parts 选择 | 2 |
+| `SetLibraryProblem()` 提前返回 | 5 |
+| 空态忽略 `mLibraryProblem`（库损坏时仍提示"没有匹配的零件"） | 1 |
+| 横幅不走调色板（去掉 `setPalette`） | 1 |
+
+最后一条第一次改坏时**没有失败**：库正常时列表非空，`VisibleCount == 0` 不成立，
+那段代码根本没执行到。用例补上"先搜索到空、再设库异常"之后才真正生效。

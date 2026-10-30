@@ -921,13 +921,60 @@ lcPartSelectionWidget::lcPartSelectionWidget(QWidget* Parent)
 	OptionsButton->setMenu(OptionsMenu);
 	connect(OptionsMenu, &QMenu::aboutToShow, this, &lcPartSelectionWidget::OptionsMenuAboutToShow);
 
+	// Why the packaged library was refused, if it was. Sits above the list and
+	// stays hidden on a healthy install; without it the only trace is a stderr
+	// line nobody sees on a device, and the visible symptom is a panel with far
+	// fewer parts than the package promises.
+	mLibraryProblemLabel = new QLabel(PartsGroupWidget);
+	mLibraryProblemLabel->setObjectName(QStringLiteral("PartsLibraryProblem"));
+	mLibraryProblemLabel->setWordWrap(true);
+	mLibraryProblemLabel->hide();
+
+	// Colours come from the palette, not from a stylesheet. LeoCAD ships a dark
+	// theme, where lcApplication::UpdateStyle() sets near-black window
+	// backgrounds and near-white text; a fixed light background would leave the
+	// inherited light text unreadable on it.
+	//
+	// ToolTipBase/ToolTipText is the pair that exists for exactly this — an
+	// inline notice that has to read on any theme — and the dark palette already
+	// overrides both (light 224,224,244 on dark 58,58,58).
+	{
+		QPalette Palette = mLibraryProblemLabel->palette();
+		Palette.setColor(QPalette::Window, Palette.color(QPalette::ToolTipBase));
+		Palette.setColor(QPalette::WindowText, Palette.color(QPalette::ToolTipText));
+		mLibraryProblemLabel->setAutoFillBackground(true);
+		mLibraryProblemLabel->setPalette(Palette);
+		mLibraryProblemLabel->setContentsMargins(4, 4, 4, 4);
+		mLibraryProblemLabel->setFrameShape(QFrame::StyledPanel);
+	}
+	PartsLayout->addWidget(mLibraryProblemLabel);
+
 	mPartsWidget = new lcPartSelectionListView(PartsGroupWidget, this);
 	PartsLayout->addWidget(mPartsWidget);
+
+	// Count of what is currently listed. Under the list rather than in the
+	// window status bar, because the status bar shows selection and tool hints
+	// and this number belongs to the panel.
+	mCountLabel = new QLabel(PartsGroupWidget);
+	mCountLabel->setObjectName(QStringLiteral("PartsCount"));
+	mCountLabel->setAlignment(Qt::AlignRight);
+	mCountLabel->setContentsMargins(0, 2, 4, 0);
+	PartsLayout->addWidget(mCountLabel);
+
+	// Overlay parented to the viewport, so it covers the list without taking
+	// layout space (D2 section 6.2 records why a layout item is wrong here).
+	mEmptyNotice = new QLabel(mPartsWidget->viewport());
+	mEmptyNotice->setObjectName(QStringLiteral("PartsEmptyNotice"));
+	mEmptyNotice->setAlignment(Qt::AlignCenter);
+	mEmptyNotice->setWordWrap(true);
+	mEmptyNotice->hide();
 
 	QHBoxLayout* Layout = new QHBoxLayout(this);
 	Layout->setContentsMargins(0, 0, 0, 0);
 	Layout->addWidget(mSplitter);
 	setLayout(Layout);
+
+	mPartsWidget->viewport()->installEventFilter(this);
 
 	connect(mPartsWidget, &lcPartSelectionListView::PartPicked, this, &lcPartSelectionWidget::PartViewPartPicked);
 	connect(mPartsWidget->selectionModel(), &QItemSelectionModel::currentChanged, this, &lcPartSelectionWidget::PartViewSelectionChanged);
@@ -937,6 +984,13 @@ lcPartSelectionWidget::lcPartSelectionWidget(QWidget* Parent)
 
 	LoadPartPalettes();
 	UpdateCategories();
+
+	// Start on "All Parts". UpdateCategories() only restores a selection that
+	// already existed, so a freshly built panel selected nothing and listed
+	// nothing: the first thing a new user saw was an empty parts panel next to a
+	// full library. D2 section 6.2 draws the panel with a category chosen.
+	if (mAllPartsCategoryItem)
+		mCategoriesWidget->setCurrentItem(mAllPartsCategoryItem);
 
 	mSplitter->setStretchFactor(0, 0);
 	mSplitter->setStretchFactor(1, 1);
@@ -1064,6 +1118,22 @@ void lcPartSelectionWidget::resizeEvent(QResizeEvent* Event)
 	}
 
 	QWidget::resizeEvent(Event);
+	PositionEmptyNotice();
+}
+
+bool lcPartSelectionWidget::eventFilter(QObject* Watched, QEvent* Event)
+{
+	// The overlay covers the viewport, so it has to follow the viewport's size.
+	// Watching the viewport rather than reacting to this widget's resizeEvent is
+	// what makes it correct when the splitter moves: the panel can be resized
+	// without the parts view being resized by the same amount.
+	if (mPartsWidget && Watched == mPartsWidget->viewport())
+	{
+		if (Event->type() == QEvent::Resize)
+			PositionEmptyNotice();
+	}
+
+	return QWidget::eventFilter(Watched, Event);
 }
 
 void lcPartSelectionWidget::FilterCategoriesChanged(const QString& Text)
@@ -1120,6 +1190,7 @@ void lcPartSelectionWidget::FilterChanged(const QString& Text)
 	}
 
 	mPartsWidget->GetListModel()->SetFilter(Text);
+	RefreshStatus();
 }
 
 void lcPartSelectionWidget::FilterCategoriesTriggered()
@@ -1149,6 +1220,7 @@ void lcPartSelectionWidget::CategoryChanged(QTreeWidgetItem* Current, QTreeWidge
 	int Index = Current->data(0, static_cast<int>(lcPartCategoryRole::Index)).toInt();
 
 	mPartsWidget->SetCategory(static_cast<lcPartCategoryType>(Type), Index);
+	RefreshStatus();
 }
 
 void lcPartSelectionWidget::PartViewSelectionChanged(const QModelIndex& Current, const QModelIndex& Previous)
@@ -1470,6 +1542,91 @@ void lcPartSelectionWidget::UpdateCategories()
 
 	if (CurrentItem)
 		mCategoriesWidget->setCurrentItem(CurrentItem);
+
+	RefreshStatus();
+}
+
+void lcPartSelectionWidget::SetLibraryProblem(const QString& Problem)
+{
+	mLibraryProblem = Problem;
+
+	if (mLibraryProblemLabel == nullptr)
+		return;
+
+	// The validator's wording is a packaging diagnostic ("references a file",
+	// "expected 1160"), not something to put in front of someone placing bricks.
+	// The banner says what the user has; the exact reason stays on stderr and in
+	// the tooltip for a bug report.
+	mLibraryProblemLabel->setText(tr("The bundled parts library could not be loaded, so only a small number of parts are available. Models that use other parts will open with missing pieces."));
+	mLibraryProblemLabel->setToolTip(Problem);
+	mLibraryProblemLabel->setVisible(!Problem.isEmpty());
+
+	RefreshStatus();
+}
+
+void lcPartSelectionWidget::RefreshStatus()
+{
+	lcPartSelectionListView* View = mPartsWidget;
+
+	if (View == nullptr)
+		return;
+
+	int VisibleCount = 0;
+
+	for (int Row = 0; Row < View->GetListModel()->rowCount(); Row++)
+		if (!View->isRowHidden(Row))
+			VisibleCount++;
+
+	// "Parts: 1160" rather than tr("%n part(s)"): the plural form only reads
+	// correctly once a translation supplies the plural rule, and this string is
+	// not translated yet (known issue F-02). Until it is, the untranslated form
+	// of %n is the literal "part(s)", which is worse than avoiding plurals.
+	if (mCountLabel)
+		mCountLabel->setText(tr("Parts: %1").arg(VisibleCount));
+
+	if (mEmptyNotice == nullptr)
+		return;
+
+	// An empty list is only worth explaining when the panel is otherwise
+	// working. A library that failed to load already has the banner above, and
+	// repeating "no matching parts" under it would blame the filter for a
+	// packaging problem.
+	const bool ShowEmpty = VisibleCount == 0 && mLibraryProblem.isEmpty();
+
+	if (ShowEmpty)
+	{
+		const bool Filtering = mFilterWidget && !mFilterWidget->text().isEmpty();
+		mEmptyNotice->setText(Filtering
+			? tr("No parts match this search.\n\nTry a different keyword, or clear the search box.")
+			: tr("There are no parts to show in this category."));
+	}
+
+	mEmptyNotice->setVisible(ShowEmpty);
+
+	// Position after setVisible: the early return in PositionEmptyNotice()
+	// skips hidden overlays, and the first time it is shown the label has not
+	// been laid out yet, so it would keep its 100x30 default size.
+	PositionEmptyNotice();
+}
+
+void lcPartSelectionWidget::PositionEmptyNotice()
+{
+	// isHidden(), not isVisible(): isVisible() is also false while an ancestor is
+	// hidden, so during construction — before the window is shown — every call
+	// would return early and the overlay would keep its default size until
+	// something else resized it.
+	if (mEmptyNotice == nullptr || mPartsWidget == nullptr || mEmptyNotice->isHidden())
+		return;
+
+	// Cover the viewport so it reads as a state of the list rather than a new
+	// row above it.
+	//
+	// Resizing the label rather than setGeometry(rect()) matters: setGeometry
+	// also moves it, and Qt then treats it as explicitly placed, so it stops
+	// following the viewport. Size only, position (0, 0).
+	QWidget* Viewport = mPartsWidget->viewport();
+	mEmptyNotice->resize(Viewport->size());
+	mEmptyNotice->move(0, 0);
 }
 
 void lcPartSelectionWidget::UpdateModels()

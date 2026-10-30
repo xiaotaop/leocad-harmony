@@ -13,7 +13,7 @@
 
 param(
     [string]$QtRoot = '',
-    [string[]]$Suite = @('archive', 'priority', 'menu', 'modellist')
+    [string[]]$Suite = @('archive', 'priority', 'menu', 'modellist', 'panel')
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
@@ -34,7 +34,10 @@ if ($LASTEXITCODE -ne 0) { throw 'Could not generate archive variants.' }
 $failed = @()
 
 foreach ($name in $Suite) {
-    $project = "d3-$name-tests.pro"
+    # The D4 panel suite lives beside the D3 ones but belongs to the next
+    # milestone, so it keeps its own project name rather than being numbered D3.
+    if ($name -eq 'panel') { $project = "d4-$name-tests.pro"; $target = "leocad-d4-$name" }
+    else { $project = "d3-$name-tests.pro"; $target = "leocad-d3-$name" }
     if (!(Test-Path -LiteralPath (Join-Path $root $project))) { throw "No such suite: $name" }
 
     $build = Join-Path $root ".local\build-d3-$name"
@@ -63,7 +66,7 @@ foreach ($name in $Suite) {
         }
         finally { Pop-Location }
 
-        $binary = Join-Path $build "build\release\leocad-d3-$name.exe"
+        $binary = Join-Path $build "build\release\$target.exe"
         if (!(Test-Path -LiteralPath $binary)) { throw "binary not produced for $name" }
 
         & $binary *> (Join-Path $build 'test-results.txt')
