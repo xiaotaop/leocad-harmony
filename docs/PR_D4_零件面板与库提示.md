@@ -1,20 +1,30 @@
 ## Purpose
 
-成员 C 的 D4 阶段交付，外加组长真机反馈的一个缺陷修复。两个提交，各自可独立构建与回退：
+成员 C 的 D4 阶段交付，外加三个缺陷修复。四个提交，主题独立，可分别回退：
 
-- `9dd8395f` — 文件菜单仍显示「导入」「导出」分组（组长反馈，随本 PR 一并提交）
-- `64bd33f7` — 零件面板计数、空态与库异常提示（D4）
+| 提交 | 主题 |
+|---|---|
+| `9dd8395f` | 文件菜单仍显示「导入」「导出」分组（组长真机反馈） |
+| `64bd33f7` | 零件面板计数、空态与库异常提示（D4 主体） |
+| `d2aa6a0f` | 本 PR 描述文档 |
+| `e9726bf2` | 时间线面板的 7 个步骤命令仍可触达（自查发现） |
 
-**缺陷一：菜单裁剪不彻底。** `CreateMenus()` 用 `FileMenu->addMenu()` 建子菜单容器，
-`ApplyFirstReleaseScope()` 只摘 `QAction`。条目全部不可见后，`QMenu` 本身仍是父菜单里
-的可见项，点开是空框。
+**缺陷一：菜单裁剪不彻底（组长反馈）。** `CreateMenus()` 用 `FileMenu->addMenu()` 建
+子菜单容器，`ApplyFirstReleaseScope()` 只摘 `QAction`。条目全部不可见后，`QMenu` 本身
+仍是父菜单里的可见项，点开是空框。
 
-**缺陷二：库被拒只有 stderr。** `PlaceBundledLibraryArchive()` 拒绝归档时只
+**缺陷二：时间线面板的步骤命令没被裁掉（自查发现）。** 这是同一个「裁剪不彻底」的
+第二个面：菜单里的 `LC_VIEW_TIME_*` 被移除了，但时间线面板的右键菜单挂的是**另一套
+命令 ID** —— `lcTimelineWidget::CustomMenuRequested()` 直接 `addAction()` 七个
+`LC_TIMELINE_*`。同一批操作、两套 ID，所以从菜单路径看「步骤功能已经没了」，
+而面板一直提供。面板经 `tabifyDockWidget()` 与属性面板并列，默认存在。
+
+**缺陷三：库被拒只有 stderr。** `PlaceBundledLibraryArchive()` 拒绝归档时只
 `fprintf(stderr)`。D3 §3.3 的理由（启动需可无人值守）对启动流程成立，对**用户可见性**
 不成立：真机看不到 stderr，症状是「面板只有 128 件」而非任何错误。桌面版的
-`LoadPartsLibrary()` 失败弹框走不到这条路径——列表里还有内置库，加载"成功"。
+`LoadPartsLibrary()` 失败弹框走不到这条路径——列表里还有内置库，加载「成功」。
 
-**缺陷三：面板首屏为空**（D4 自查发现）。`UpdateCategories()` 只**恢复**已有选择，
+**缺陷四：面板首屏为空**（D4 自查发现）。`UpdateCategories()` 只**恢复**已有选择，
 从不建立。新建面板无选择 → 列表视图从未收到 `SetCategory()` → 首屏空白，
 而 D2 §6.2 的草图明确画着「分类: [全部 ▼]」且有内容。
 
@@ -28,18 +38,20 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 
 | 文件 | 归属 | 改动 |
 |---|---|---|
-| `common/lc_mainwindow.cpp` | C | 菜单容器摘除；面板接入库异常 |
+| `common/lc_mainwindow.cpp` | C | 菜单容器摘除；7 个时间线命令入移除表；面板接入库异常 |
 | `common/lc_partselectionwidget.{h,cpp}` | C | 计数标签、空态覆盖层、库异常横幅 |
 | `common/lc_library.{h,cpp}` | C（库发现/诊断部分） | 记录拒绝原因（静态成员） |
 | `qt/qtmain.cpp` | 组长 | **仅加 1 行**记录拒绝原因，插入式，不改入口逻辑 |
-| `tests/library/d3/tst_menu_scope.cpp` | C | 新增 `noVisibleEmptySubmenus` |
-| `tests/library/d4/tst_parts_panel.cpp` | C | 新套件，10 个用例 |
+| `tests/library/d3/tst_menu_scope.cpp` | C | 新增 `noVisibleEmptySubmenus`；移除清单加 7 项 |
+| `tests/library/d4/tst_parts_panel.cpp` | C | 新套件，10 项 |
 | `d4-panel-tests.pro` | C | 新测试工程 |
 | `scripts/dev/run-d3-tests.sh`、`scripts/Run-D3Tests.ps1` | C | 接入 `panel` 套件 |
 | `docs/D3_主程序接入.md`、`docs/D4_零件面板与库提示.md`、`tests/library/d3/README.md` | C | 文档 |
 
 未改 `CMakeLists.txt`、`lc_application.*`、平台层。`qt/qtmain.cpp` 的改动需要组长确认，
 见「风险与回退」。
+
+移除命令表由 48 项增至 **55** 项（7 个 `LC_TIMELINE_*`）。
 
 ## Build and tests
 
@@ -55,11 +67,13 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 > `JOBS=2` 而非更高：GCC 11 在并发内存压力下会随机报 `could not split insn` 或
 > `Terminated signal terminated program cc1plus`，与本改动无关，重试即过。
 
+全部五套 **从干净目录重建**（`rm -rf` 后 `make -j1`）后运行：
+
 | 套件 | 项数 | 结果 |
 |---|---:|---|
 | archive | 13 | pass |
 | priority | 8 | pass |
-| menu（7 → 8） | 8 | pass |
+| menu | 8 | pass |
 | modellist | 5 | pass |
 | **panel（新增）** | **10** | **pass** |
 | **合计** | **44** | **44 passed, 0 failed** |
@@ -72,7 +86,7 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 
 | 用例 | 断言 |
 |---|---|
-| `countShowsVisibleParts` | 构造完计数为 1160 |
+| `countShowsVisibleParts` | 构造完计数为 `Parts: 1160` |
 | `healthyLibraryShowsNoBanner` | 健康安装无横幅 |
 | `refusedLibraryShowsBannerAndTooltip` | 横幅出现；正文不含内部措辞；tooltip 保留原文 |
 | `refusedLibraryDoesNotBlameTheFilter` | 库异常且列表空时，空态**不**出现 |
@@ -85,54 +99,64 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 
 | 改坏的行为 | 失败项数 | 报错 |
 |---|---:|---|
-| 撤回菜单容器修复 | 1 | `&Import, &Export, &Render, Ste&p` 四个空框 |
+| 撤回空子菜单容器修复 | 1 | `&Import, &Export, &Render, Ste&p` 四个空框 |
+| 从移除表删掉 7 个时间线命令 | 1 | `Set Current Step is still visible in a menu` |
 | 去掉构造末尾的 All Parts 选择 | 2 | 计数停在 `Parts: 0` |
 | `SetLibraryProblem()` 提前返回 | 5 | 横幅与空态均不出现 |
 | 空态忽略 `mLibraryProblem` | 1 | 库损坏时提示「没有匹配的零件」 |
 | 横幅跳过 `setPalette` | 1 | 背景不是主题的提示色 |
 
-**两处假通过已修正，值得记录：**
+**三处假通过已修正，值得记录：**
 
 1. 空态那条回归**第一次改坏时没有失败**：库正常时列表非空，`VisibleCount == 0`
    不成立，代码根本没执行到。用例补上「先搜索到空、再设库异常」后才生效。
 2. 菜单的子菜单判空最初写成 `actions().isEmpty()`，漏掉 Step 菜单——它两组之间留着
-   一个分隔符，对用户是空的但 `actions()` 非空。测试抓出后才改为「无可见非分隔符条目」。
+   一个分隔符，对用户是空的但 `actions()` 非空。
+3. 时间线遗漏之所以长期未发现：两套命令做同一件事、却是两套 ID。补充一个测量细节——
+   `LC_VIEW_TIME_DELETE` 与 `LC_TIMELINE_DELETE` **共用标签 "Remove Step"**，而
+   `IsCommandVisible()` 按标签查找 QAction，因此这两个命令在测试里**无法区分**：
+   检查前者是否已移除时，若后者仍可见，会得到「仍然可见」的误失败；反之亦然。
+   按标签抽查对这类重名命令不可靠，本次回归因此以 `Set Current Step`（标签唯一）
+   的失败为准。
 
-两处与 D3 的 priority 套件同类：**断言了症状，没断言用户看到的状态**。
-
-干净重建（`rm -rf` 后 `make -j1`）复跑 panel 同样 10/10。
+三处与 D3 的 priority 套件同类：**断言了症状，没断言用户看到的状态**。
 
 另：`python3 scripts/library/check_qrc_resources.py` → 156/156 存在，0 缺失。
-（`export_part_list.py --check` 未受本 PR 影响，D3 已验证。）
 
 ## Physical-device verification
 
-Commit/artifact: **待组长构建**。源码提交 `64bd33f7`（分支 `feature/c-d4-panel`），
-基线 `main@4548f110`。HAP 由组长用 `scripts/build-harmony-app.ps1` 生成，
-本 PR 不提供构建产物。
+Commit/artifact: **待组长构建**。源码提交 `e9726bf2`（分支 `feature/c-d4-panel`），
+基线 `main@1dfc63cf`（已合入 B 的 D4 文档提交）。HAP 由组长用
+`scripts/build-harmony-app.ps1` 生成，本 PR 不提供构建产物。
 
-Steps and expected result（按分工文档 §6.1 的批次提交要求，共 5 项，可分批）：
+Steps and expected result（按分工文档 §6.1 的批次提交要求，共 6 项，可分批）：
 
 | # | 步骤 | 预期结果 | 归属 |
 |---:|---|---|---|
 | 1 | 全新启动，观察零件面板 | 首屏直接显示零件，底部计数为 `Parts: 1160`；**不再是空白** | 本 PR |
 | 2 | 打开文件菜单 | 无「导入」「导出」分组；菜单为 新建/打开/保存/另存为/最近/退出 | 本 PR（D3 遗留） |
-| 3 | 搜索框输入一个不存在的词（如 `zzz`） | 列表区出现覆盖层提示「没有零件匹配此搜索」；计数为 `Parts: 0`；清空后提示消失 | 本 PR |
-| 4 | 点击 Sticker 分类 | 覆盖层提示「此分类没有零件」，文案**不含**「搜索」字样 | 本 PR |
-| 5 | **单独批次**：人为损坏包内 `library-lite.zip` 后启动 | 面板顶部出现横幅，应用仍可用（回退到内置库） | 本 PR |
+| 3 | 右键时间线面板（属性面板标签旁） | 上下文菜单中 **不出现** Set Current Step / Insert Step / Remove Step / Move Selection 各组 | 本 PR（新增） |
+| 4 | 搜索框输入一个不存在的词（如 `zzz`） | 列表区出现覆盖层提示；计数为 `Parts: 0`；清空后提示消失 | 本 PR |
+| 5 | 点击 Sticker 分类 | 覆盖层提示「此分类没有零件」，文案**不含**「搜索」字样 | 本 PR |
+| 6 | **单独批次**：人为损坏包内 `library-lite.zip` 后启动 | 面板顶部出现横幅，应用仍可用（回退到内置库） | 本 PR |
 
-第 5 项需改包，建议单独一批，勿与常规回归混跑。步骤 1–2 可并入常规批次。
+第 6 项需改包，建议单独一批，勿与常规回归混跑。步骤 1–3 可并入常规批次。
 
 > **观感提示**：本 PR 新增文案目前**只有英文**。`leocad_zh_CN.ts` 缺这些串
 > （含既有的 `Filter Parts`、`Change Selection Color`、`Save Project`），属已知问题
-> F-02，统一在 D7 语言阶段处理。因此第 3–5 项在真机上会看到英文提示，**不是缺陷**。
+> F-02，统一在 D7 语言阶段处理。因此第 4–6 项在真机上会看到英文提示，**不是缺陷**。
+
+> **步骤 3 的注意事项**：时间线面板**仍然可见**（本 PR 只移除了它的 7 个步骤命令，
+> 没有隐藏面板）。面板本身用于查看步骤结构，隐藏它属于产品决策。因此步骤 3 验的是
+> 「右键菜单里没有步骤编辑项」，不是「面板不见了」。
 
 Required logs/screenshots:
 
 - 步骤 1：零件面板全景截图，需能看清底部计数
 - 步骤 2：文件菜单展开截图（对应 D3 交接项 4）
-- 步骤 3–4：覆盖层截图，中文/英文字体不截断
-- 步骤 5：横幅截图 + `hilog` 中包含 `Bundled parts library rejected:` 的行
+- 步骤 3：时间线面板右键菜单截图（这是本轮新增的 C 项遗留关闭证据）
+- 步骤 4–5：覆盖层截图，字体不截断
+- 步骤 6：横幅截图 + `hilog` 中含 `Bundled parts library rejected:` 的行
 - 通用：`hilog` 中 `libleocad.so ... returned 0`，确认正常退出
 
 ## Risk and fallback
@@ -141,29 +165,36 @@ Required logs/screenshots:
 
 | 项 | 风险 | 缓解 |
 |---|---|---|
-| `qt/qtmain.cpp` | 属组长责任文件，本 PR 加 1 行 | 插入式单行调用，不改入口逻辑；组长可单独审这一行或要求改为在平台层设置 |
-| 静态成员 | `mBundledLibraryProblem` 是进程级状态 | 只在启动时写一次，无并发写；D3 的 `ValidateBundledLibraryArchive()` 校验本身无副作用（已有测试 `validationDoesNotTouchGlobalColours` 守着） |
-| 横幅配色 | 鸿蒙平台调色板可能与桌面 Fusion 不同 | 用调色板角色而非固定色，跟随主题；若真机显示不佳，只需改 `SetLibraryProblem()` 里的一次配色设置 |
-| 覆盖层定位 | 依赖 viewport 事件过滤器 | 已在 `emptyNoticeCoversViewportNotLayout` 中断言尺寸一致；若鸿蒙下异常，可退回为布局项（会挤小列表，但可用） |
+| `qt/qtmain.cpp` | 属组长责任文件，本 PR 加 1 行 | 插入式单行调用，不改入口逻辑；组长可单独审这一行或要求改在平台层设置 |
+| 时间线命令残留 | `UpdateSelectionUI()` 仍对 3 个 `MOVE_SELECTION` 动作调 `setEnabled()` | `setEnabled()` 不改 visibility，不会让它们回到菜单；该段调用已无意义，建议另开改动删除 |
+| `createPopupMenu()` | 工具栏右键菜单每次弹出时重建，`ApplyFirstReleaseScope()` 影响不到 | 它列的是工具栏开关而非步骤命令，不是同一风险；本 PR 不处理 |
+| 静态成员 | `mBundledLibraryProblem` 是进程级状态 | 只在启动时写一次，无并发写；归档校验本身无副作用（测试 `validationDoesNotTouchGlobalColours` 守着） |
+| 横幅配色 | 鸿蒙平台调色板可能与桌面 Fusion 不同 | 用调色板角色而非固定色，跟随主题；若真机显示不佳，只改 `SetLibraryProblem()` 里一处配色 |
+| 覆盖层定位 | 依赖 viewport 事件过滤器 | 已断言尺寸一致；若鸿蒙下异常，可退回为布局项（会挤小列表，但可用） |
 | 计数标签 | 鸿蒙字体行高可能不同，标签可能被裁切 | 真机步骤 1 专门检查；若裁切，把 `mCountLabel` 从布局移入状态栏 |
 
 **降级开关**：本 PR 没有新增编译期开关。如需整体关闭面板提示：
 
-1. 单点关闭库横幅：在 `lcMainWindow::CreateWidgets()` 删掉
-   `SetLibraryProblem(...)` 那一行，横幅永不出现，其余行为不变。
+1. 单点关闭库横幅：在 `lcMainWindow::CreateWidgets()` 删掉 `SetLibraryProblem(...)`
+   那一行，横幅永不出现，其余行为不变。
 2. 单点关闭空态：把 `RefreshStatus()` 里的 `ShowEmpty` 恒设为 `false`。
-3. 整体回退：两个提交主题独立，可只回退 `64bd33f7` 保留菜单修复（`9dd8395f`），
-   反之亦然。
+3. 回退时间线裁剪：从 `RemovedCommands[]` 删掉 7 个 `LC_TIMELINE_*`，其余不受影响。
+4. 整体回退：四个提交主题独立，可只回退其中一个。
 
-**已知未做**（详见 `docs/D4_零件面板与库提示.md` §9）：
+**已知未做**（详见 `docs/D4_零件面板与库提示.md` §9、`docs/D3_主程序接入.md` §4.5）：
 
+- 隐藏时间线面板本身：属产品决策，需另行确认
+- `UpdateSelectionUI()` 中对已移除动作的 `setEnabled()` 调用未清理
 - 分类名/颜色名中文显示：`lcGetCategoryDisplayName()` / `lcGetColorDisplayName()`
   只在未合入的 `backlog/c-ui-library` 分支，涉及 `lc_colors.h` 固定 `char[64]` 缓冲
   与导出文件名一致性，需单独评审
 - `leocad_zh_CN.ts` 缺本 PR 新增文案（F-02，D7 处理）
-- Sticker 空分类：桌面已断言，真机仍待确认
 
 **顺带确认的非缺陷**：File/Edit/View/Piece 仍存在相邻 `---`。Qt 在布局时把相邻、
 开头、结尾的分隔符折叠成 0 高度（已用最小程序实测：两个连续 separator 中第二个
 `actionGeometry()` 为空、高度 0），屏幕上不出现横线。**没有**为它加断言——那会是一条
 永远无法失败的测试。
+
+**上一版 PR 文档的错误已修正**：`docs/D3_主程序接入.md` 曾写「移除 40 项」，上一轮
+我在 PR 里改成 47 项，两者都错。真实数字是：本 PR 之前 48 项，本 PR 之后 55 项。
+47 的来源是按「以逗号结尾的行」计数，漏掉了数组最后一项。
