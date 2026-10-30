@@ -189,6 +189,50 @@ public:
 		return (int)mPieces.size();
 	}
 
+	// Why the packaged archive was refused, in the validator's wording; empty
+	// when it loaded or when none was found.
+	//
+	// Static because it describes the package, not a loaded instance: the check
+	// runs in the entry point before any lcPiecesLibrary exists. This is a
+	// diagnostic. It says why the bundled archive was skipped, which is not the
+	// same thing as the library the process ended up using — LoadPartsLibrary()
+	// tries LEOCAD_LIB and the parts-library preference first and returns on
+	// success without ever reaching the bundled archive.
+	static void SetBundledLibraryProblem(const QString& Problem)
+	{
+		mBundledLibraryProblem = Problem;
+	}
+
+	static const QString& GetBundledLibraryProblem()
+	{
+		return mBundledLibraryProblem;
+	}
+
+	// Top-level part count the shipped archive promises, from
+	// assets/ldraw-lite/manifest.json (counts.parts). Used both to validate the
+	// archive at startup and to decide whether the library that finally loaded
+	// is worse than that — so the two judgements cannot drift apart.
+	static constexpr int BundledLibraryParts = 1160;
+
+	// Whether the library this process actually loaded is worse than the one
+	// the package ships, which is the only condition under which the user should
+	// be told anything.
+	//
+	// The first version of the banner asked only whether the bundled archive had
+	// been refused. That is wrong whenever an external library wins: with a
+	// corrupt bundled archive and a valid LEOCAD_LIB, the load succeeds with the
+	// full curated library and the panel still claimed only a few parts were
+	// available. Reported in review, with a regression.
+	//
+	// ExpectedParts is what the package promises (the manifest count). A library
+	// with at least that many pieces is not degraded, whatever route produced
+	// it: a user pointing LEOCAD_LIB at a complete LDraw library has more parts
+	// than the package, not fewer.
+	static bool IsLibraryDegraded(int LoadedPieces, int ExpectedParts)
+	{
+		return LoadedPieces < ExpectedParts;
+	}
+
 	void LoadColors();
 	void Unload();
 	void RemoveTemporaryPieces();
@@ -303,4 +347,6 @@ protected:
 	std::unique_ptr<lcZipFile> mZipFiles[static_cast<int>(lcZipFileType::Count)];
 	bool mHasUnofficial;
 	bool mCancelLoading;
+
+	static QString mBundledLibraryProblem;
 };

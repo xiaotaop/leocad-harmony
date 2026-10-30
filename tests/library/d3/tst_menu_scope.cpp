@@ -32,11 +32,25 @@ private slots:
 	void modelTabBarIsNotClosable();
 	void modelTabBarIsNotMovable();
 
+	// Removing every QAction from a submenu leaves the submenu itself behind: an
+	// "&Import" or "&Export" entry that opens an empty box. The command checks
+	// above cannot see this, because the removed actions are invisible as
+	// intended — the container is what is wrong.
+	void noVisibleEmptySubmenus();
+
 private:
 	// True when some visible QAction carrying this command's label exists. The
 	// action objects stay allocated after removal (the dock widgets dereference
 	// them), so visibility is the signal, not existence.
 	bool IsCommandVisible(lcCommandId Command) const;
+
+	// Every menu the user can actually open, in the state CreateMenus() leaves
+	// them. Submenus are descended into through their menu action, so a submenu
+	// whose action was hidden is not reported as an empty box.
+	QList<QMenu*> VisibleMenuTree() const;
+
+	// Titles of the menus in the tree that have no visible entry at all.
+	QStringList EmptyMenus(const QList<QMenu*>& Menus) const;
 
 	lcMainWindow* mWindow = nullptr;
 };
@@ -106,6 +120,19 @@ void MenuScopeTest::removedCommandsAreNotVisible()
 		LC_MODEL_NEW,
 		LC_PIECE_EDIT_SELECTED_SUBMODEL,
 		LC_HELP_UPDATES,
+
+		// The step commands reachable from the timeline panel's context menu.
+		// They are a second set of command ids for the same operations as the
+		// LC_VIEW_TIME_* entries above, and were missed for exactly that reason:
+		// the first version of the scope removed one set and left the other
+		// reachable with two clicks.
+		LC_TIMELINE_SET_CURRENT,
+		LC_TIMELINE_INSERT_BEFORE,
+		LC_TIMELINE_INSERT_AFTER,
+		LC_TIMELINE_DELETE,
+		LC_TIMELINE_MOVE_SELECTION,
+		LC_TIMELINE_MOVE_SELECTION_BEFORE,
+		LC_TIMELINE_MOVE_SELECTION_AFTER,
 	};
 
 	for (const lcCommandId Command : Removed)
@@ -159,6 +186,75 @@ void MenuScopeTest::modelTabBarIsNotMovable()
 
 	// Dragging a tab would reorder the MPD submodels.
 	QVERIFY(!Tabs->isMovable());
+}
+
+QList<QMenu*> MenuScopeTest::VisibleMenuTree() const
+{
+	// Start from the menu bar, not from findChildren<QMenu*>(): that also returns
+	// menus that were never added to the bar, and menus whose parent menu action
+	// is hidden. Walking down from the bar is the same order a user sees.
+	QList<QMenu*> Menus;
+	QList<QMenu*> Pending;
+
+	QMenuBar* Bar = mWindow->menuBar();
+
+	if (Bar == nullptr)
+		return Menus;
+
+	for (QAction* Action : Bar->actions())
+		if (QMenu* Menu = Action->menu())
+			Pending.append(Menu);
+
+	while (!Pending.isEmpty())
+	{
+		QMenu* Menu = Pending.takeFirst();
+		Menus.append(Menu);
+
+		for (QAction* Action : Menu->actions())
+		{
+			QMenu* SubMenu = Action->menu();
+
+			// A submenu reached only through a hidden action cannot be opened,
+			// so it is not part of what the user sees.
+			if (SubMenu && Action->isVisible())
+				Pending.append(SubMenu);
+		}
+	}
+
+	return Menus;
+}
+
+QStringList MenuScopeTest::EmptyMenus(const QList<QMenu*>& Menus) const
+{
+	QStringList Empty;
+
+	for (QMenu* Menu : Menus)
+	{
+		bool HasVisibleEntry = false;
+
+		for (QAction* Action : Menu->actions())
+		{
+			if (Action->isVisible() && !Action->isSeparator())
+			{
+				HasVisibleEntry = true;
+				break;
+			}
+		}
+
+		if (!HasVisibleEntry)
+			Empty.append(Menu->title().isEmpty() ? QStringLiteral("<untitled>") : Menu->title());
+	}
+
+	return Empty;
+}
+
+void MenuScopeTest::noVisibleEmptySubmenus()
+{
+	const QList<QMenu*> Menus = VisibleMenuTree();
+	const QStringList Empty = EmptyMenus(Menus);
+
+	QVERIFY2(Empty.isEmpty(),
+		qPrintable(QStringLiteral("submenus with no visible entry: %1").arg(Empty.join(", "))));
 }
 
 // Custom main rather than QTEST_MAIN: the window needs the LeoCAD application

@@ -28,13 +28,19 @@ python3 tests/library/d3/prepare_variants.py
 
 SUITES=("$@")
 if [ ${#SUITES[@]} -eq 0 ]; then
-    SUITES=(archive priority menu modellist)
+    SUITES=(archive priority menu modellist panel)
 fi
 
 FAILED=0
 
 for SUITE in "${SUITES[@]}"; do
-    PROJECT="d3-${SUITE}-tests.pro"
+    # The D4 panel suite lives beside the D3 ones but is not part of that
+    # milestone, so it keeps its own project name rather than being numbered D3.
+    case "$SUITE" in
+    panel) PROJECT="d4-${SUITE}-tests.pro"; TARGET="leocad-d4-${SUITE}" ;;
+    *)     PROJECT="d3-${SUITE}-tests.pro"; TARGET="leocad-d3-${SUITE}" ;;
+    esac
+
     if [ ! -f "$PROJECT" ]; then
         echo "error: no such suite: $SUITE ($PROJECT)" >&2
         exit 2
@@ -49,7 +55,7 @@ for SUITE in "${SUITES[@]}"; do
         make -j"${JOBS:-4}" >/dev/null
     )
 
-    BINARY="$BUILD/build/debug/leocad-d3-$SUITE"
+    BINARY="$BUILD/build/debug/$TARGET"
     if [ ! -x "$BINARY" ]; then
         echo "FAIL $SUITE: binary not produced" >&2
         FAILED=1
