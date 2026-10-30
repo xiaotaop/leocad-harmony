@@ -929,10 +929,22 @@ void lcMainWindow::CreateToolBars()
 	mPartsToolBar->setWidget(mPartSelectionWidget);
 	addDockWidget(Qt::RightDockWidgetArea, mPartsToolBar);
 
-	// A packaged library that failed validation is only reported on stderr by
-	// the entry point, which is invisible on a device. Hand the reason to the
-	// panel so a degraded install says so where the parts are.
-	mPartSelectionWidget->SetLibraryProblem(lcPiecesLibrary::GetBundledLibraryProblem());
+	// A packaged library that failed validation is reported on stderr by the
+	// entry point, which is invisible on a device. Hand the reason to the panel
+	// so a degraded install says so where the parts are.
+	//
+	// Whether to say anything depends on what LoadPartsLibrary() actually
+	// loaded, not on whether the bundled archive was refused. It tries
+	// LEOCAD_LIB and the parts-library preference first and returns on success,
+	// so a rejected bundled archive alongside a valid external library is a
+	// healthy run — CreateWidgets() only runs after that call, so the piece
+	// count here is the final one.
+	const lcPiecesLibrary* Library = lcGetPiecesLibrary();
+	const int LoadedPieces = Library ? Library->GetPieceCount() : 0;
+
+	mPartSelectionWidget->SetLibraryProblem(
+		lcPiecesLibrary::GetBundledLibraryProblem(),
+		lcPiecesLibrary::IsLibraryDegraded(LoadedPieces, lcPiecesLibrary::BundledLibraryParts));
 
 	connect(mPartsToolBar, &QDockWidget::dockLocationChanged, mPartSelectionWidget, &lcPartSelectionWidget::DockLocationChanged);
 	connect(mPartSelectionWidget, &lcPartSelectionWidget::PartPicked, this, &lcMainWindow::PartListPicked);

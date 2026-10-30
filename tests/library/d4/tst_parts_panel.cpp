@@ -41,6 +41,19 @@ private slots:
 	void emptyNoticeCoversViewportNotLayout();
 	void bannerFollowsTheTheme();
 
+	// Review finding: the banner described a rejected bundled archive even when
+	// an external library had loaded fine and nothing was missing.
+	void rejectedBundleWithWorkingExternalLibraryIsHealthy();
+	void degradedVerdictTracksTheLoadedCount();
+
+	// Review finding 1: the options menu re-filters through the model directly,
+	// so the count label and empty state went stale.
+	void optionToggleRefreshesCountAndEmptyState();
+
+	// Review finding 2: the first screen is Brick, not All Parts. Initialize()
+	// calls SetDefaultPart() after CreateWidgets(), which this test replays.
+	void startupEndsOnTheBrickCategory();
+
 private:
 	QLabel* FindLabel(lcPartSelectionWidget* Panel, const char* Name) const;
 
@@ -94,7 +107,7 @@ void PartsPanelTest::healthyLibraryShowsNoBanner()
 {
 	// A banner on every launch of a healthy install would be noise, so the
 	// default has to be hidden. This is the state the shipped package is in.
-	mPanel->SetLibraryProblem(QString());
+	mPanel->SetLibraryProblem(QString(), false);
 
 	QLabel* Banner = FindLabel(mPanel, "PartsLibraryProblem");
 	QVERIFY2(Banner, "the parts panel has no library-problem label");
@@ -107,7 +120,7 @@ void PartsPanelTest::refusedLibraryShowsBannerAndTooltip()
 	// banner must appear, and the exact reason must stay reachable for a bug
 	// report rather than being thrown away.
 	const QString Problem = QStringLiteral("missing ldraw/ldconfig.ldr");
-	mPanel->SetLibraryProblem(Problem);
+	mPanel->SetLibraryProblem(Problem, true);
 
 	QLabel* Banner = FindLabel(mPanel, "PartsLibraryProblem");
 	QVERIFY2(Banner, "the parts panel has no library-problem label");
@@ -119,7 +132,7 @@ void PartsPanelTest::refusedLibraryShowsBannerAndTooltip()
 		qPrintable(QStringLiteral("the banner shows the internal reason: %1").arg(Banner->text())));
 	QCOMPARE(Banner->toolTip(), Problem);
 
-	mPanel->SetLibraryProblem(QString());
+	mPanel->SetLibraryProblem(QString(), false);
 }
 
 void PartsPanelTest::refusedLibraryDoesNotBlameTheFilter()
@@ -137,7 +150,7 @@ void PartsPanelTest::refusedLibraryDoesNotBlameTheFilter()
 	QVERIFY(Filter);
 
 	Filter->setText(QStringLiteral("zzzz-no-such-part-zzzz"));
-	mPanel->SetLibraryProblem(QStringLiteral("archive not found"));
+	mPanel->SetLibraryProblem(QStringLiteral("archive not found"), true);
 
 	QLabel* Empty = FindLabel(mPanel, "PartsEmptyNotice");
 	QVERIFY2(Empty, "the parts panel has no empty notice");
@@ -149,7 +162,7 @@ void PartsPanelTest::refusedLibraryDoesNotBlameTheFilter()
 	QVERIFY2(!Banner->isHidden(), "a broken library showed no banner while the list was empty");
 
 	Filter->clear();
-	mPanel->SetLibraryProblem(QString());
+	mPanel->SetLibraryProblem(QString(), false);
 }
 
 void PartsPanelTest::filterWithNoMatchShowsSearchNotice()
@@ -260,6 +273,167 @@ void PartsPanelTest::bannerFollowsTheTheme()
 		"the banner background is not the theme's notice colour");
 	QVERIFY2(Banner->palette().color(QPalette::WindowText) == QApplication::palette().color(QPalette::ToolTipText),
 		"the banner text colour is not the theme's notice text colour");
+}
+
+void PartsPanelTest::rejectedBundleWithWorkingExternalLibraryIsHealthy()
+{
+	// The exact situation from review. A corrupt bundled archive is skipped, but
+	// LEOCAD_LIB points at a good library, so LoadPartsLibrary() returns success
+	// from that path and never reaches the bundled one. Before the fix the panel
+	// showed "only a small number of parts are available, models that use other
+	// parts will open with missing pieces" over a perfectly full library.
+	//
+	// What the panel is given is the pair (diagnostic, degraded). The diagnostic
+	// is still there — it explains why the bundled archive was skipped, which a
+	// bug report wants — but the banner must stay hidden.
+	const QString Diagnostic = QStringLiteral("references a file that is not in the archive");
+	mPanel->SetLibraryProblem(Diagnostic, false);
+
+	QLabel* Banner = FindLabel(mPanel, "PartsLibraryProblem");
+	QVERIFY2(Banner, "the parts panel has no library-problem label");
+	QVERIFY2(Banner->isHidden(),
+		qPrintable(QStringLiteral("a healthy external library still showed the degraded banner: %1").arg(Banner->text())));
+
+	// The diagnostic has to survive rather than being dropped along with the
+	// banner text.
+	QCOMPARE(mPanel->GetLibraryProblem(), Diagnostic);
+	QVERIFY2(!mPanel->IsLibraryDegraded(), "the panel recorded a degraded load");
+
+	mPanel->SetLibraryProblem(QString(), false);
+}
+
+void PartsPanelTest::degradedVerdictTracksTheLoadedCount()
+{
+	// The decision itself: the package promises BundledLibraryParts, so anything
+	// below that is degraded and anything at or above it is not. Stated as a
+	// predicate so the two call sites (startup validation and the post-load
+	// check) cannot drift apart.
+	constexpr int BundledLibraryParts = lcPiecesLibrary::BundledLibraryParts;
+
+	QVERIFY2(lcPiecesLibrary::IsLibraryDegraded(BundledLibraryParts - 1, BundledLibraryParts),
+		"one part short was not treated as degraded");
+	QVERIFY2(lcPiecesLibrary::IsLibraryDegraded(128, BundledLibraryParts),
+		"the built-in 128-part fallback was not treated as degraded");
+	QVERIFY2(lcPiecesLibrary::IsLibraryDegraded(0, BundledLibraryParts),
+		"an empty library was not treated as degraded");
+
+	QVERIFY2(!lcPiecesLibrary::IsLibraryDegraded(BundledLibraryParts, BundledLibraryParts),
+		"the packaged library itself was treated as degraded");
+	QVERIFY2(!lcPiecesLibrary::IsLibraryDegraded(BundledLibraryParts * 4, BundledLibraryParts),
+		"a complete external LDraw library was treated as degraded");
+}
+
+void PartsPanelTest::optionToggleRefreshesCountAndEmptyState()
+{
+	// The options menu re-filters through the model, not the filter box. Before
+	// the fix only QLineEdit::textChanged refreshed the panel, so a toggle could
+	// change the visible set while the label kept the old number and the empty
+	// state stayed hidden.
+	//
+	// The refresh now comes from lcPartSelectionListModel::VisibleRowsChanged(),
+	// emitted at the end of SetFilter(), which is the single place visibility is
+	// decided — so this covers every option, the In Use category, submodels and
+	// palettes as well.
+	QListView* View = mPanel->findChild<QListView*>();
+	QVERIFY2(View, "the parts panel has no list view");
+
+	lcPartSelectionListModel* Model = qobject_cast<lcPartSelectionListModel*>(View->model());
+	QVERIFY2(Model, "the list view is not driven by lcPartSelectionListModel");
+
+	QLabel* Count = FindLabel(mPanel, "PartsCount");
+	QLabel* Empty = FindLabel(mPanel, "PartsEmptyNotice");
+	QVERIFY(Count && Empty);
+
+	// Back to All Parts so the numbers below do not depend on the Brick subset.
+	QTreeWidget* Tree = mPanel->findChild<QTreeWidget*>();
+	QVERIFY(Tree);
+
+	for (int Row = 0; Row < Tree->topLevelItemCount(); Row++)
+	{
+		QTreeWidgetItem* Item = Tree->topLevelItem(Row);
+
+		if (Item->text(0) == QLatin1String("All Parts"))
+		{
+			Tree->setCurrentItem(Item);
+			break;
+		}
+	}
+
+	// Part-ID matching on, search for a part that exists: some rows visible.
+	const bool OriginalFileNameFilter = Model->GetFileNameFilter();
+	const bool OriginalDescriptionFilter = Model->GetPartDescriptionFilter();
+
+	Model->SetFileNameFilter(true);
+	Model->SetFilter(QStringLiteral("3001"));
+
+	int Visible = 0;
+	for (int Row = 0; Row < Model->rowCount(); Row++)
+		if (!View->isRowHidden(Row))
+			Visible++;
+
+	QVERIFY2(Visible > 0, "the search matched nothing, so the toggle below cannot change anything");
+	QVERIFY2(Count->text().contains(QString::number(Visible)),
+		qPrintable(QStringLiteral("count did not follow the search: %1 vs %2 visible")
+			.arg(Count->text()).arg(Visible)));
+
+	// Toggling the option off empties the result: the label and the empty state
+	// must both follow, without touching the filter box.
+	Model->SetFileNameFilter(false);
+	Model->SetPartDescriptionFilter(false);
+
+	Visible = 0;
+	for (int Row = 0; Row < Model->rowCount(); Row++)
+		if (!View->isRowHidden(Row))
+			Visible++;
+
+	QVERIFY2(Visible == 0, "the toggle did not change the visible set, so this case proves nothing");
+	QVERIFY2(Count->text().contains(QLatin1String("0")),
+		qPrintable(QStringLiteral("count label went stale after an option toggle: %1").arg(Count->text())));
+	QVERIFY2(!Empty->isHidden(), "the empty state did not appear after the visible set became empty");
+
+	// Restore for the cases that follow.
+	Model->SetFilter(QString());
+	Model->SetFileNameFilter(OriginalFileNameFilter);
+	Model->SetPartDescriptionFilter(OriginalDescriptionFilter);
+}
+
+void PartsPanelTest::startupEndsOnTheBrickCategory()
+{
+	// What the application finally shows, not what the constructor alone leaves
+	// behind. lcApplication::Initialize() calls SetDefaultPart() after
+	// CreateWidgets() and before show(), which switches to Brick — upstream
+	// behaviour that this PR keeps. The earlier version of this suite stopped at
+	// CreateWidgets() and therefore asserted a first screen the user never sees.
+	mPanel->SetDefaultPart();
+
+	QTreeWidget* Tree = mPanel->findChild<QTreeWidget*>();
+	QVERIFY(Tree);
+
+	QTreeWidgetItem* Current = Tree->currentItem();
+	QVERIFY2(Current, "no category is selected after SetDefaultPart()");
+	QCOMPARE(Current->text(0), QStringLiteral("Brick"));
+
+	// The count is the Brick subset, and it must be a sane non-zero number well
+	// below the whole library. Not pinned to an exact figure: the curated
+	// selection can change, and the point here is that the panel is populated
+	// and consistent with the chosen category.
+	QLabel* Count = FindLabel(mPanel, "PartsCount");
+	QVERIFY2(Count, "the parts panel has no count label");
+
+	QVERIFY2(!Count->text().contains(QStringLiteral("Parts: 0")),
+		qPrintable(QStringLiteral("the Brick category is empty: %1").arg(Count->text())));
+
+	// Leave the panel on All Parts so the remaining cases see the full library.
+	for (int Row = 0; Row < Tree->topLevelItemCount(); Row++)
+	{
+		QTreeWidgetItem* Item = Tree->topLevelItem(Row);
+
+		if (Item->text(0) == QLatin1String("All Parts"))
+		{
+			Tree->setCurrentItem(Item);
+			break;
+		}
+	}
 }
 
 int main(int argc, char** argv)

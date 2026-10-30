@@ -162,6 +162,13 @@ public:
 	void SetIconSize(int Size, float DeviceScale);
 	void SetShowPartNames(bool Show);
 
+signals:
+	// Emitted once the visible set has been recomputed, i.e. whenever the list
+	// the user sees may have changed size. SetFilter() is the single place that
+	// decides visibility, so this covers the filter box, the options menu, the
+	// category switch and the In Use / submodel / palette paths alike.
+	void VisibleRowsChanged();
+
 protected slots:
 	void ThumbnailReady(lcPartThumbnailId ThumbnailId, QPixmap Pixmap);
 
@@ -329,13 +336,26 @@ public:
 	// filtered-out list from being reported as a broken library.
 	void RefreshStatus();
 
-	// Reason the packaged library was refused, shown above the list. Empty
-	// clears the banner.
-	void SetLibraryProblem(const QString& Problem);
+	// Turns the banner on or off and attaches the diagnostic behind it.
+	//
+	// Degraded must describe the library that actually loaded, not the packaged
+	// archive's validation result: a valid LEOCAD_LIB or parts-library preference
+	// wins before the bundled archive is even tried, and a banner claiming parts
+	// are missing would then be false.
+	//
+	// Problem is the validator's wording, kept for the tooltip and a bug report.
+	// It is shown only when Degraded is true; a healthy run keeps it as the
+	// explanation of why the bundled archive was skipped, if it was.
+	void SetLibraryProblem(const QString& Problem, bool Degraded);
 
 	const QString& GetLibraryProblem() const
 	{
 		return mLibraryProblem;
+	}
+
+	bool IsLibraryDegraded() const
+	{
+		return mLibraryDegraded;
 	}
 
 	void FocusPartFilterWidget() const
@@ -404,5 +424,6 @@ protected:
 	QLabel* mCountLabel = nullptr;
 
 	QString mLibraryProblem;
+	bool mLibraryDegraded = false;
 	bool mIsPopup = false;
 };

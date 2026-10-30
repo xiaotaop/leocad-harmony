@@ -315,6 +315,14 @@ void lcPartSelectionListModel::SetFilter(const QString& FilterString)
 
 		mListView->setRowHidden((int)PartIdx, !Visible);
 	}
+
+	// The visible set is the only thing the panel's count label and empty-state
+	// notice describe, so announce it here rather than at the call sites: there
+	// are fourteen of them and the ones that are easy to miss are the ones that
+	// hurt. The options menu (ToggleFileNameFilter and friends), the In Use
+	// category, submodels and palettes all end up in this function, and none of
+	// them went through the filter box that used to refresh the panel.
+	emit VisibleRowsChanged();
 }
 
 int lcPartSelectionListModel::rowCount(const QModelIndex& Parent) const
@@ -978,6 +986,7 @@ lcPartSelectionWidget::lcPartSelectionWidget(QWidget* Parent)
 
 	connect(mPartsWidget, &lcPartSelectionListView::PartPicked, this, &lcPartSelectionWidget::PartViewPartPicked);
 	connect(mPartsWidget->selectionModel(), &QItemSelectionModel::currentChanged, this, &lcPartSelectionWidget::PartViewSelectionChanged);
+	connect(mPartsWidget->GetListModel(), &lcPartSelectionListModel::VisibleRowsChanged, this, &lcPartSelectionWidget::RefreshStatus);
 	connect(mFilterWidget, &QLineEdit::textChanged, this, &lcPartSelectionWidget::FilterChanged);
 	connect(mCategoriesWidget, &QTreeWidget::currentItemChanged, this, &lcPartSelectionWidget::CategoryChanged);
 	connect(mFilterCategoriesWidget, &QLineEdit::textChanged, this, &lcPartSelectionWidget::FilterCategoriesChanged);
@@ -985,10 +994,15 @@ lcPartSelectionWidget::lcPartSelectionWidget(QWidget* Parent)
 	LoadPartPalettes();
 	UpdateCategories();
 
-	// Start on "All Parts". UpdateCategories() only restores a selection that
-	// already existed, so a freshly built panel selected nothing and listed
-	// nothing: the first thing a new user saw was an empty parts panel next to a
-	// full library. D2 section 6.2 draws the panel with a category chosen.
+	// Start on "All Parts" so a freshly built panel lists something.
+	// UpdateCategories() only restores a selection that already existed, so
+	// without this the view listed nothing until the user clicked a category.
+	//
+	// This is not the state the application finally shows. lcApplication::
+	// Initialize() calls SetDefaultPart() after CreateWidgets() and before
+	// show(), which switches to Brick — upstream behaviour, kept as-is. The
+	// count a user sees on the first screen is therefore the Brick count
+	// (~156), not the full library. See docs/D4_零件面板与库提示.md section 3.1.
 	if (mAllPartsCategoryItem)
 		mCategoriesWidget->setCurrentItem(mAllPartsCategoryItem);
 
@@ -1189,8 +1203,10 @@ void lcPartSelectionWidget::FilterChanged(const QString& Text)
 		}
 	}
 
+	// RefreshStatus() is not called here: SetFilter() announces the result
+	// through VisibleRowsChanged(), which the constructor connects. Refreshing
+	// from both places would run the same recount twice for every keystroke.
 	mPartsWidget->GetListModel()->SetFilter(Text);
-	RefreshStatus();
 }
 
 void lcPartSelectionWidget::FilterCategoriesTriggered()
@@ -1219,8 +1235,10 @@ void lcPartSelectionWidget::CategoryChanged(QTreeWidgetItem* Current, QTreeWidge
 	int Type = Current->data(0, static_cast<int>(lcPartCategoryRole::Type)).toInt();
 	int Index = Current->data(0, static_cast<int>(lcPartCategoryRole::Index)).toInt();
 
+	// Category switches end in lcPartSelectionListModel::SetFilter(), which emits
+	// VisibleRowsChanged() — the count and empty state follow from that, not
+	// from here.
 	mPartsWidget->SetCategory(static_cast<lcPartCategoryType>(Type), Index);
-	RefreshStatus();
 }
 
 void lcPartSelectionWidget::PartViewSelectionChanged(const QModelIndex& Current, const QModelIndex& Previous)
@@ -1546,20 +1564,31 @@ void lcPartSelectionWidget::UpdateCategories()
 	RefreshStatus();
 }
 
-void lcPartSelectionWidget::SetLibraryProblem(const QString& Problem)
+void lcPartSelectionWidget::SetLibraryProblem(const QString& Problem, bool Degraded)
 {
 	mLibraryProblem = Problem;
+	mLibraryDegraded = Degraded;
 
 	if (mLibraryProblemLabel == nullptr)
 		return;
 
-	// The validator's wording is a packaging diagnostic ("references a file",
-	// "expected 1160"), not something to put in front of someone placing bricks.
-	// The banner says what the user has; the exact reason stays on stderr and in
-	// the tooltip for a bug report.
-	mLibraryProblemLabel->setText(tr("The bundled parts library could not be loaded, so only a small number of parts are available. Models that use other parts will open with missing pieces."));
-	mLibraryProblemLabel->setToolTip(Problem);
-	mLibraryProblemLabel->setVisible(!Problem.isEmpty());
+	// Only a degraded load is worth telling the user about. Problem may be set
+	// while the process is fine: a corrupt bundled archive is skipped, an
+	// external library loads instead, and nothing is missing. Reporting the
+	// bundled archive's rejection then would describe a state the user is not in.
+	const bool Show = Degraded && !Problem.isEmpty();
+
+	if (Show)
+	{
+		// The validator's wording is a packaging diagnostic ("references a file",
+		// "expected 1160"), not something to put in front of someone placing
+		// bricks. The banner says what the user has; the exact reason stays in
+		// the tooltip for a bug report and on stderr.
+		mLibraryProblemLabel->setText(tr("Only a small number of parts are available, so models that use other parts will open with missing pieces."));
+		mLibraryProblemLabel->setToolTip(Problem);
+	}
+
+	mLibraryProblemLabel->setVisible(Show);
 
 	RefreshStatus();
 }
@@ -1588,10 +1617,14 @@ void lcPartSelectionWidget::RefreshStatus()
 		return;
 
 	// An empty list is only worth explaining when the panel is otherwise
-	// working. A library that failed to load already has the banner above, and
-	// repeating "no matching parts" under it would blame the filter for a
-	// packaging problem.
-	const bool ShowEmpty = VisibleCount == 0 && mLibraryProblem.isEmpty();
+	// working. A degraded library already has the banner above, and repeating
+	// "no matching parts" under it would blame the filter for a packaging
+	// problem.
+	//
+	// Gated on mLibraryDegraded, not on mLibraryProblem being non-empty: the
+	// problem string is present whenever the bundled archive was skipped, which
+	// also happens on a perfectly healthy run that loaded an external library.
+	const bool ShowEmpty = VisibleCount == 0 && !mLibraryDegraded;
 
 	if (ShowEmpty)
 	{
