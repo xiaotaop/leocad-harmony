@@ -2,6 +2,7 @@
 #include "lc_viewwidget.h"
 #include "lc_glextensions.h"
 #include "lc_glcontext.h"
+#include "lc_glframebuffer.h"
 #include <QJsonDocument>
 #include "project.h"
 #include "lc_library.h"
@@ -74,6 +75,7 @@ void lcViewWidget::UpdateMousePosition()
 
 void lcViewWidget::initializeGL()
 {
+	mFramebufferSignature.clear();
 	QJsonObject Report = lcGLContextInfo(*context(), nullptr, QOpenGLContext::globalShareContext());
 	Report["stage"] = QStringLiteral("view_initialize");
 	Report["dpr"] = GetDeviceScale();
@@ -92,6 +94,28 @@ void lcViewWidget::resizeGL(int Width, int Height)
 
 void lcViewWidget::paintGL()
 {
+	// paintGL, rather than initializeGL, is where Qt guarantees its widget FBO
+	// is bound. Resize/DPR changes can replace that FBO without a new context.
+	QJsonObject Key{{"fbo", int(defaultFramebufferObject())}, {"width", width()},
+		{"height", height()}, {"dpr", GetDeviceScale()}};
+	const QByteArray Signature = QJsonDocument(Key).toJson(QJsonDocument::Compact);
+	if (Signature != mFramebufferSignature)
+	{
+		QJsonObject Report = lcGLFramebufferInfo(*context()->functions());
+		Report["stage"] = QStringLiteral("view_framebuffer");
+		Report["logical_width"] = width();
+		Report["logical_height"] = height();
+		Report["dpr"] = GetDeviceScale();
+		Report["qt_framebuffer"] = int(defaultFramebufferObject());
+		Report["passed"] = Report["passed"].toBool()
+			&& Report["framebuffer"].toInt() == int(defaultFramebufferObject());
+		const QByteArray Log = QJsonDocument(Report).toJson(QJsonDocument::Compact);
+		if (Report["passed"].toBool())
+			qInfo().noquote() << "LEOCAD_GL_FRAMEBUFFER" << Log;
+		else
+			qWarning().noquote() << "LEOCAD_GL_FRAMEBUFFER" << Log;
+		mFramebufferSignature = Signature;
+	}
 	mView->OnDraw();
 }
 

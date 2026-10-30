@@ -44,3 +44,20 @@ See [D2 result](../../docs/MEMBER_A_D2.md) and
 
 See [D3 result](../../docs/MEMBER_A_D3.md) and
 [device handoff](../../docs/MEMBER_A_D3_DEVICE_HANDOFF.md).
+
+## 2026-10-30: D4 reference grid / depth and framebuffer
+
+- Base: `1dfc63cfbc855fb524097a42f7a8d252708e338d`.
+- The fixed model spans Z=-24..4 while the grid is Z=0. Drawing the reference
+  grid after solids lets it cover the body. Draw it once as background, with no
+  depth writes; preserve the original mask and construction/picking coordinates.
+- Restore complete frame depth mapping/clear state. This is a separate guard;
+  the host repro does not attribute the device bug to leaked driver state.
+- Log actual widget FBO/depth on first paint and resize/DPR/FBO changes, rather
+  than treating the context format as proof of attached depth.
+- Host real-widget regression: 9/9. Full application two-size comparison shows
+  zero changed model interior pixels after repair, with the grid still visible.
+- New normal-mode HarmonyOS validation is pending; do not auto-close #12.
+
+See [D4 result](../../docs/MEMBER_A_D4.md) and
+[device handoff](../../docs/MEMBER_A_D4_DEVICE_HANDOFF.md).

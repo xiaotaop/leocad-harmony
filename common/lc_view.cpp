@@ -879,7 +879,7 @@ void lcView::OnDraw()
 	mModel->GetScene(mScene.get(), mCamera, Preferences.mHighlightNewParts, Preferences.mFadeSteps);
 
 	if (DrawInterface)
-		mScene->SetPreTranslucentCallback([this]() { DrawGrid(); });
+		mScene->SetBackgroundCallback([this]() { DrawGrid(); });
 
 	mScene->End();
 
@@ -1601,7 +1601,6 @@ void lcView::DrawGrid()
 	if (Preferences.mDrawGridStuds)
 	{
 		mContext->BindTexture2D(gGridTexture);
-		mContext->SetDepthWrite(false);
 		mContext->EnableColorBlend(true);
 
 		mContext->SetMaterial(lcMaterialType::UnlitTextureModulate);
@@ -1611,7 +1610,6 @@ void lcView::DrawGrid()
 		mContext->DrawPrimitives(GL_TRIANGLE_STRIP, 0, 4);
 
 		mContext->EnableColorBlend(false);
-		mContext->SetDepthWrite(true);
 
 		BufferOffset = 4 * 5 * sizeof(float);
 	}

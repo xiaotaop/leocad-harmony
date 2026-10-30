@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-30",
+  "base": "1dfc63cfbc855fb524097a42f7a8d252708e338d",
+  "host": "macOS27.0.1 ARM64 / Apple M4 / Qt6.12 / AppleClang21 / Release",
+  "source_sha256": {
+    "common/lc_glframebuffer.h": "4ef34124dc1ae71f0af215361cf3d1bf9dd580e3fa33e3ffc9737dffcef93734",
+    "tests/render-framebuffer/tst_framebuffer.cpp": "6e58916d3aeb134110e4cde110e531f7087f9bb3a6e62662227dd77f4c470974",
+    "tests/render-framebuffer/CMakeLists.txt": "1d6405d198ae28e2eec6915dfc99239529eb3741ef0a08fe63b61625213e2a24",
+    "tests/render-framebuffer/compare_grid_pixels.py": "53cbd520d394fb1a7a1725c1538cb62741ea6af5b50b4fd014a21669653d4372",
+    ".github/workflows/render-context-ci.yml": "59a380fe314c6d6b7ccaa4a3e41a3538a86b3bd04df417f20569fef5c2678e7e",
+    "common/lc_context.cpp": "575202b101ca1729078b0c642da984d0bd0eac5dc9eef1f09cb63675bef9bbf9",
+    "common/lc_scene.cpp": "bea924d52ea507b5de546c9be106d7409690b8dd747184150e418d0b93d9d25e",
+    "common/lc_scene.h": "f8609ab14978a309842f82213b799b69ff1c558aa4bd03a36018dbd2e866c349",
+    "common/lc_view.cpp": "50ec07817ff30eb8477af9a5b3e0fb42e393c68c5b80c512c4e57fa2657163be",
+    "common/lc_viewwidget.cpp": "121333c98f7c2cf215523d304be4e763207eb5233d85bc9ce440cd1ed1739104",
+    "common/lc_viewwidget.h": "f67ff13b2dc494884651367f16317a6ad800888afe313f4420fc03402d576673",
+    "leocad.pro": "8bd6784d87a14b3fd3f6f3cc175a312e764905b9479942052b65ab2d47d4f58b"
+  },
+  "framebuffer_tests": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0
+  },
+  "full_view_capture": {
+    "original_grid_flow": {
+      "model_changed_pixels": [
+        36102,
+        45659
+      ]
+    },
+    "reference_background": {
+      "model_changed_pixels": [
+        0,
+        0
+      ]
+    },
+    "physical_sizes": [
+      [
+        1468,
+        1426
+      ],
+      [
+        1868,
+        1608
+      ]
+    ],
+    "dpr": 2,
+    "actual_depth_bits": 24,
+    "actual_stencil_bits": 8,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "instrumentation": "host-capture-main.patch applied only to ASCII /tmp snapshot, isolated settings namespace; final build restores original qtmain.cpp",
+    "negative_control": "old lc_scene.* and lc_view.cpp grid flow with new frame-depth reset and FBO diagnostics; not an unmodified main binary"
+  },
+  "target_device": "Not run for this patch. Issue12 stays open until leader runs the new normal-mode HAP.",
+  "final_original_entry_exports": {
+    "normal_exit": 0,
+    "safe_exit": 0,
+    "sizes": [
+      800,
+      600
+    ]
+  }
+}

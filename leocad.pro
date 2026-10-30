@@ -281,6 +281,7 @@ HEADERS += \
 	common/lc_file.h \
 	common/lc_filter.h \
 	common/lc_findreplacewidget.h \
+	common/lc_glframebuffer.h \
 	common/lc_glextensions.h \
 	common/lc_global.h \
 	common/lc_groupdialog.h \

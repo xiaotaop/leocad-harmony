@@ -47,4 +47,5 @@ protected:
 	std::unique_ptr<lcView> mView;
 	QSize mPreferredSize;
 	int mWheelAccumulator = 0;
+	QByteArray mFramebufferSignature;
 };
