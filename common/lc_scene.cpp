@@ -2,6 +2,7 @@
 #include "lc_scene.h"
 #include "lc_renderpolicy.h"
 #include "lc_context.h"
+#include "lc_glframebuffer.h"
 #include "pieceinf.h"
 #include "lc_texture.h"
 #include "lc_library.h"
@@ -24,7 +25,7 @@ void lcScene::Begin(const lcMatrix44& ViewMatrix)
 {
 	mViewMatrix = ViewMatrix;
 	mActiveSubmodelInstance = nullptr;
-	mPreTranslucentCallback = nullptr;
+	mBackgroundCallback = nullptr;
 	mRenderMeshes.clear();
 	mOpaqueMeshes.clear();
 	mTranslucentMeshes.clear();
@@ -434,6 +435,13 @@ void lcScene::Draw(lcContext* Context) const
 
 	Context->SetViewMatrix(mViewMatrix);
 
+	if (mBackgroundCallback)
+	{
+		lcDrawReferenceGrid(*Context, mBackgroundCallback);
+		// The grid uses 1px lines; restore model state through the context cache.
+		Context->SetLineWidth(lcGetPreferences().mLineWidth);
+	}
+
 	const lcPreferences& Preferences = lcGetPreferences();
 	const bool DrawLines = Preferences.mDrawEdgeLines && Preferences.mLineWidth > 0.0f;
 	const bool DrawConditional = !lcSafeRenderEnabled() && Preferences.mDrawConditionalLines && Preferences.mLineWidth > 0.0f;
@@ -449,8 +457,6 @@ void lcScene::Draw(lcContext* Context) const
 		if (DrawConditional)
 			DrawOpaqueMeshes(Context, false, LC_MESH_CONDITIONAL_LINES, true, true);
 
-		if (mPreTranslucentCallback)
-			mPreTranslucentCallback();
 	}
 	else if (mShadingMode == lcShadingMode::Flat)
 	{
@@ -459,9 +465,6 @@ void lcScene::Draw(lcContext* Context) const
 		if (mTranslucentFade && mHasFadedParts)
 		{
 			DrawOpaqueMeshes(Context, false, SolidPrimitiveTypes, false, true);
-
-			if (mPreTranslucentCallback)
-				mPreTranslucentCallback();
 
 			DrawTranslucentMeshes(Context, false, true, true, false);
 
@@ -480,9 +483,6 @@ void lcScene::Draw(lcContext* Context) const
 			if (DrawConditional)
 				DrawOpaqueMeshes(Context, false, LC_MESH_CONDITIONAL_LINES, true, true);
 
-			if (mPreTranslucentCallback)
-				mPreTranslucentCallback();
-
 			DrawTranslucentMeshes(Context, false, false, true, true);
 		}
 	}
@@ -497,9 +497,6 @@ void lcScene::Draw(lcContext* Context) const
 
 			if (DrawConditional)
 				DrawOpaqueMeshes(Context, false, LC_MESH_CONDITIONAL_LINES, false, true);
-
-			if (mPreTranslucentCallback)
-				mPreTranslucentCallback();
 
 			DrawTranslucentMeshes(Context, false, true, true, false);
 
@@ -520,9 +517,6 @@ void lcScene::Draw(lcContext* Context) const
 				DrawOpaqueMeshes(Context, false, LC_MESH_CONDITIONAL_LINES, true, true);
 
 			DrawOpaqueMeshes(Context, true, LC_MESH_TRIANGLES | LC_MESH_TEXTURED_TRIANGLES, true, true);
-
-			if (mPreTranslucentCallback)
-				mPreTranslucentCallback();
 
 			DrawTranslucentMeshes(Context, true, false, true, true);
 		}

@@ -36,6 +36,8 @@
 #define LC_LIBRARY_CACHE_ARCHIVE   0x0001
 #define LC_LIBRARY_CACHE_DIRECTORY 0x0002
 
+QString lcPiecesLibrary::mBundledLibraryProblem;
+
 lcPiecesLibrary::lcPiecesLibrary()
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
 	: mLoadMutex(QMutex::Recursive)

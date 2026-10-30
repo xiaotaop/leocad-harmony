@@ -162,6 +162,13 @@ public:
 	void SetIconSize(int Size, float DeviceScale);
 	void SetShowPartNames(bool Show);
 
+signals:
+	// Emitted once the visible set has been recomputed, i.e. whenever the list
+	// the user sees may have changed size. SetFilter() is the single place that
+	// decides visibility, so this covers the filter box, the options menu, the
+	// category switch and the In Use / submodel / palette paths alike.
+	void VisibleRowsChanged();
+
 protected slots:
 	void ThumbnailReady(lcPartThumbnailId ThumbnailId, QPixmap Pixmap);
 
@@ -322,6 +329,35 @@ public:
 		mPartsWidget->setDragEnabled(Enabled);
 	}
 
+	// The empty-state notice and the count label are driven from the model, not
+	// from the category code, because the same "nothing to show" state arrives
+	// three ways: an empty category, a filter that matches nothing, and a parts
+	// library that failed to load. Updating them in one place is what keeps a
+	// filtered-out list from being reported as a broken library.
+	void RefreshStatus();
+
+	// Turns the banner on or off and attaches the diagnostic behind it.
+	//
+	// Degraded must describe the library that actually loaded, not the packaged
+	// archive's validation result: a valid LEOCAD_LIB or parts-library preference
+	// wins before the bundled archive is even tried, and a banner claiming parts
+	// are missing would then be false.
+	//
+	// Problem is the validator's wording, kept for the tooltip and a bug report.
+	// It is shown only when Degraded is true; a healthy run keeps it as the
+	// explanation of why the bundled archive was skipped, if it was.
+	void SetLibraryProblem(const QString& Problem, bool Degraded);
+
+	const QString& GetLibraryProblem() const
+	{
+		return mLibraryProblem;
+	}
+
+	bool IsLibraryDegraded() const
+	{
+		return mLibraryDegraded;
+	}
+
 	void FocusPartFilterWidget() const
 	{
 		mFilterWidget->setFocus();
@@ -354,8 +390,14 @@ protected:
 	void LoadPartPalettes();
 	void SavePartPalettes();
 
+	// Keeps the empty-state overlay the size of the viewport. Done from an event
+	// filter rather than by subclassing the view: the overlay is the panel's
+	// concern, and the view is shared with the popup picker.
+	void PositionEmptyNotice();
+
 	void resizeEvent(QResizeEvent* Event) override;
 	bool event(QEvent* Event) override;
+	bool eventFilter(QObject* Watched, QEvent* Event) override;
 
 	QTreeWidget* mCategoriesWidget = nullptr;
 	QLineEdit* mFilterCategoriesWidget = nullptr;
@@ -367,5 +409,21 @@ protected:
 	QSplitter* mSplitter = nullptr;
 	QTreeWidgetItem* mAllPartsCategoryItem = nullptr;
 	std::vector<lcPartPalette> mPartPalettes;
+
+	// Shown above the list when the packaged library was refused. Hidden in the
+	// normal case so the panel looks unchanged on a healthy install.
+	QLabel* mLibraryProblemLabel = nullptr;
+
+	// Overlay on the parts viewport, not a layout item: adding it to the layout
+	// would shrink the list every time it appeared (the trap recorded in
+	// docs/library/D2_精简零件库与资源部署方案.md section 6.2).
+	QLabel* mEmptyNotice = nullptr;
+
+	// "1160 parts" under the list. The count is of what is currently visible,
+	// so filtering tells the user how much of the library matched.
+	QLabel* mCountLabel = nullptr;
+
+	QString mLibraryProblem;
+	bool mLibraryDegraded = false;
 	bool mIsPopup = false;
 };

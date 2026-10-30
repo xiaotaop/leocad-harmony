@@ -249,7 +249,12 @@ int main(int argc, char *argv[])
 	const QString BundledLibrary = lcPiecesLibrary::FindBundledLibraryArchive();
 	QString Rejection;
 	LibraryPaths = lcPiecesLibrary::PlaceBundledLibraryArchive(
-		LibraryPaths, BundledLibrary, 1160, Rejection);
+		LibraryPaths, BundledLibrary, lcPiecesLibrary::BundledLibraryParts, Rejection);
+
+	// Keep the reason where the parts panel can read it. stderr alone is not
+	// enough: on a device nobody sees it, and the visible symptom is a panel
+	// with 128 parts instead of 1160 and no explanation.
+	lcPiecesLibrary::SetBundledLibraryProblem(Rejection);
 
 	if (!Rejection.isEmpty())
 	{

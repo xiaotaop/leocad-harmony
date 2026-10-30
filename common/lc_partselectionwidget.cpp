@@ -315,6 +315,14 @@ void lcPartSelectionListModel::SetFilter(const QString& FilterString)
 
 		mListView->setRowHidden((int)PartIdx, !Visible);
 	}
+
+	// The visible set is the only thing the panel's count label and empty-state
+	// notice describe, so announce it here rather than at the call sites: there
+	// are fourteen of them and the ones that are easy to miss are the ones that
+	// hurt. The options menu (ToggleFileNameFilter and friends), the In Use
+	// category, submodels and palettes all end up in this function, and none of
+	// them went through the filter box that used to refresh the panel.
+	emit VisibleRowsChanged();
 }
 
 int lcPartSelectionListModel::rowCount(const QModelIndex& Parent) const
@@ -921,22 +929,82 @@ lcPartSelectionWidget::lcPartSelectionWidget(QWidget* Parent)
 	OptionsButton->setMenu(OptionsMenu);
 	connect(OptionsMenu, &QMenu::aboutToShow, this, &lcPartSelectionWidget::OptionsMenuAboutToShow);
 
+	// Why the packaged library was refused, if it was. Sits above the list and
+	// stays hidden on a healthy install; without it the only trace is a stderr
+	// line nobody sees on a device, and the visible symptom is a panel with far
+	// fewer parts than the package promises.
+	mLibraryProblemLabel = new QLabel(PartsGroupWidget);
+	mLibraryProblemLabel->setObjectName(QStringLiteral("PartsLibraryProblem"));
+	mLibraryProblemLabel->setWordWrap(true);
+	mLibraryProblemLabel->hide();
+
+	// Colours come from the palette, not from a stylesheet. LeoCAD ships a dark
+	// theme, where lcApplication::UpdateStyle() sets near-black window
+	// backgrounds and near-white text; a fixed light background would leave the
+	// inherited light text unreadable on it.
+	//
+	// ToolTipBase/ToolTipText is the pair that exists for exactly this — an
+	// inline notice that has to read on any theme — and the dark palette already
+	// overrides both (light 224,224,244 on dark 58,58,58).
+	{
+		QPalette Palette = mLibraryProblemLabel->palette();
+		Palette.setColor(QPalette::Window, Palette.color(QPalette::ToolTipBase));
+		Palette.setColor(QPalette::WindowText, Palette.color(QPalette::ToolTipText));
+		mLibraryProblemLabel->setAutoFillBackground(true);
+		mLibraryProblemLabel->setPalette(Palette);
+		mLibraryProblemLabel->setContentsMargins(4, 4, 4, 4);
+		mLibraryProblemLabel->setFrameShape(QFrame::StyledPanel);
+	}
+	PartsLayout->addWidget(mLibraryProblemLabel);
+
 	mPartsWidget = new lcPartSelectionListView(PartsGroupWidget, this);
 	PartsLayout->addWidget(mPartsWidget);
+
+	// Count of what is currently listed. Under the list rather than in the
+	// window status bar, because the status bar shows selection and tool hints
+	// and this number belongs to the panel.
+	mCountLabel = new QLabel(PartsGroupWidget);
+	mCountLabel->setObjectName(QStringLiteral("PartsCount"));
+	mCountLabel->setAlignment(Qt::AlignRight);
+	mCountLabel->setContentsMargins(0, 2, 4, 0);
+	PartsLayout->addWidget(mCountLabel);
+
+	// Overlay parented to the viewport, so it covers the list without taking
+	// layout space (D2 section 6.2 records why a layout item is wrong here).
+	mEmptyNotice = new QLabel(mPartsWidget->viewport());
+	mEmptyNotice->setObjectName(QStringLiteral("PartsEmptyNotice"));
+	mEmptyNotice->setAlignment(Qt::AlignCenter);
+	mEmptyNotice->setWordWrap(true);
+	mEmptyNotice->hide();
 
 	QHBoxLayout* Layout = new QHBoxLayout(this);
 	Layout->setContentsMargins(0, 0, 0, 0);
 	Layout->addWidget(mSplitter);
 	setLayout(Layout);
 
+	mPartsWidget->viewport()->installEventFilter(this);
+
 	connect(mPartsWidget, &lcPartSelectionListView::PartPicked, this, &lcPartSelectionWidget::PartViewPartPicked);
 	connect(mPartsWidget->selectionModel(), &QItemSelectionModel::currentChanged, this, &lcPartSelectionWidget::PartViewSelectionChanged);
+	connect(mPartsWidget->GetListModel(), &lcPartSelectionListModel::VisibleRowsChanged, this, &lcPartSelectionWidget::RefreshStatus);
 	connect(mFilterWidget, &QLineEdit::textChanged, this, &lcPartSelectionWidget::FilterChanged);
 	connect(mCategoriesWidget, &QTreeWidget::currentItemChanged, this, &lcPartSelectionWidget::CategoryChanged);
 	connect(mFilterCategoriesWidget, &QLineEdit::textChanged, this, &lcPartSelectionWidget::FilterCategoriesChanged);
 
 	LoadPartPalettes();
 	UpdateCategories();
+
+	// Start on "All Parts" so a freshly built panel lists something.
+	// UpdateCategories() only restores a selection that already existed, so
+	// without this the view listed nothing until the user clicked a category.
+	//
+	// This is not the state the application finally shows. lcApplication::
+	// Initialize() calls SetDefaultPart() after CreateWidgets() and before
+	// show(), which switches to Brick — upstream behaviour, kept as-is. The
+	// count a user sees on the first screen is therefore the Brick count
+	// (~156), not the full library. See docs/D4_零件面板与库提示.md section 3.1.
+	if (mAllPartsCategoryItem)
+		mCategoriesWidget->setCurrentItem(mAllPartsCategoryItem);
 
 	mSplitter->setStretchFactor(0, 0);
 	mSplitter->setStretchFactor(1, 1);
@@ -1064,6 +1132,22 @@ void lcPartSelectionWidget::resizeEvent(QResizeEvent* Event)
 	}
 
 	QWidget::resizeEvent(Event);
+	PositionEmptyNotice();
+}
+
+bool lcPartSelectionWidget::eventFilter(QObject* Watched, QEvent* Event)
+{
+	// The overlay covers the viewport, so it has to follow the viewport's size.
+	// Watching the viewport rather than reacting to this widget's resizeEvent is
+	// what makes it correct when the splitter moves: the panel can be resized
+	// without the parts view being resized by the same amount.
+	if (mPartsWidget && Watched == mPartsWidget->viewport())
+	{
+		if (Event->type() == QEvent::Resize)
+			PositionEmptyNotice();
+	}
+
+	return QWidget::eventFilter(Watched, Event);
 }
 
 void lcPartSelectionWidget::FilterCategoriesChanged(const QString& Text)
@@ -1119,6 +1203,9 @@ void lcPartSelectionWidget::FilterChanged(const QString& Text)
 		}
 	}
 
+	// RefreshStatus() is not called here: SetFilter() announces the result
+	// through VisibleRowsChanged(), which the constructor connects. Refreshing
+	// from both places would run the same recount twice for every keystroke.
 	mPartsWidget->GetListModel()->SetFilter(Text);
 }
 
@@ -1148,6 +1235,9 @@ void lcPartSelectionWidget::CategoryChanged(QTreeWidgetItem* Current, QTreeWidge
 	int Type = Current->data(0, static_cast<int>(lcPartCategoryRole::Type)).toInt();
 	int Index = Current->data(0, static_cast<int>(lcPartCategoryRole::Index)).toInt();
 
+	// Category switches end in lcPartSelectionListModel::SetFilter(), which emits
+	// VisibleRowsChanged() — the count and empty state follow from that, not
+	// from here.
 	mPartsWidget->SetCategory(static_cast<lcPartCategoryType>(Type), Index);
 }
 
@@ -1470,6 +1560,114 @@ void lcPartSelectionWidget::UpdateCategories()
 
 	if (CurrentItem)
 		mCategoriesWidget->setCurrentItem(CurrentItem);
+
+	RefreshStatus();
+}
+
+void lcPartSelectionWidget::SetLibraryProblem(const QString& Problem, bool Degraded)
+{
+	mLibraryProblem = Problem;
+	mLibraryDegraded = Degraded;
+
+	if (mLibraryProblemLabel == nullptr)
+		return;
+
+	// Only a degraded load is worth telling the user about. Problem may be set
+	// while the process is fine: a corrupt bundled archive is skipped, an
+	// external library loads instead, and nothing is missing. Reporting the
+	// bundled archive's rejection then would describe a state the user is not in.
+	//
+	// A degraded load does not always come with a diagnostic, so the banner
+	// cannot require one. The case that forced this: the bundled archive is
+	// intact (Problem empty) while LEOCAD_LIB points at a small but valid
+	// library (resources/library.zip, 128 parts). The load succeeds at a
+	// degraded count and there is no rejection reason to quote.
+	if (Degraded)
+	{
+		// The validator's wording is a packaging diagnostic ("references a file",
+		// "expected 1160"), not something to put in front of someone placing
+		// bricks. The banner says what the user has; the exact reason, when
+		// there is one, stays in the tooltip for a bug report and on stderr.
+		mLibraryProblemLabel->setText(tr("Only a small number of parts are available, so models that use other parts will open with missing pieces."));
+		mLibraryProblemLabel->setToolTip(Problem);
+	}
+
+	mLibraryProblemLabel->setVisible(Degraded);
+
+	RefreshStatus();
+}
+
+void lcPartSelectionWidget::RefreshStatus()
+{
+	lcPartSelectionListView* View = mPartsWidget;
+
+	if (View == nullptr)
+		return;
+
+	int VisibleCount = 0;
+
+	for (int Row = 0; Row < View->GetListModel()->rowCount(); Row++)
+		if (!View->isRowHidden(Row))
+			VisibleCount++;
+
+	// "Parts: 1160" rather than tr("%n part(s)"): the plural form only reads
+	// correctly once a translation supplies the plural rule, and this string is
+	// not translated yet (known issue F-02). Until it is, the untranslated form
+	// of %n is the literal "part(s)", which is worse than avoiding plurals.
+	if (mCountLabel)
+		mCountLabel->setText(tr("Parts: %1").arg(VisibleCount));
+
+	if (mEmptyNotice == nullptr)
+		return;
+
+	// An empty list is only worth explaining when nothing above already
+	// explained it. The test is whether the banner is actually on screen, not a
+	// second copy of the rule that decides it: an earlier version gated this on
+	// mLibraryDegraded while the banner also required a non-empty diagnostic, so
+	// a degraded load with no rejection reason (bundled archive intact,
+	// LEOCAD_LIB pointing at a small but valid library) showed neither the
+	// banner nor the notice — Parts: 0 and a blank area with no explanation at
+	// all. Read the banner's state instead, and the two cannot disagree.
+	// isHidden(), not isVisible(): isVisible() is also false while an ancestor
+	// is hidden, so before the window is shown this would claim the banner is
+	// not explaining anything and let the notice through on a degraded load.
+	const bool BannerExplains = mLibraryProblemLabel != nullptr && !mLibraryProblemLabel->isHidden();
+	const bool ShowEmpty = VisibleCount == 0 && !BannerExplains;
+
+	if (ShowEmpty)
+	{
+		const bool Filtering = mFilterWidget && !mFilterWidget->text().isEmpty();
+		mEmptyNotice->setText(Filtering
+			? tr("No parts match this search.\n\nTry a different keyword, or clear the search box.")
+			: tr("There are no parts to show in this category."));
+	}
+
+	mEmptyNotice->setVisible(ShowEmpty);
+
+	// Position after setVisible: the early return in PositionEmptyNotice()
+	// skips hidden overlays, and the first time it is shown the label has not
+	// been laid out yet, so it would keep its 100x30 default size.
+	PositionEmptyNotice();
+}
+
+void lcPartSelectionWidget::PositionEmptyNotice()
+{
+	// isHidden(), not isVisible(): isVisible() is also false while an ancestor is
+	// hidden, so during construction — before the window is shown — every call
+	// would return early and the overlay would keep its default size until
+	// something else resized it.
+	if (mEmptyNotice == nullptr || mPartsWidget == nullptr || mEmptyNotice->isHidden())
+		return;
+
+	// Cover the viewport so it reads as a state of the list rather than a new
+	// row above it.
+	//
+	// Resizing the label rather than setGeometry(rect()) matters: setGeometry
+	// also moves it, and Qt then treats it as explicitly placed, so it stops
+	// following the viewport. Size only, position (0, 0).
+	QWidget* Viewport = mPartsWidget->viewport();
+	mEmptyNotice->resize(Viewport->size());
+	mEmptyNotice->move(0, 0);
 }
 
 void lcPartSelectionWidget::UpdateModels()
