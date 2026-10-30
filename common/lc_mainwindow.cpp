@@ -704,6 +704,11 @@ void lcMainWindow::ApplyFirstReleaseScope()
 		LC_HELP_UPDATES,
 	};
 
+	// Menus an action was actually removed from. A QMenu that held one of the
+	// removed actions may be left with nothing to show; the ones never touched
+	// keep whatever they had, including menus filled later from aboutToShow.
+	QList<QMenu*> ParentMenus;
+
 	for (const lcCommandId Command : RemovedCommands)
 	{
 		QAction* Action = mActions[Command];
@@ -713,7 +718,15 @@ void lcMainWindow::ApplyFirstReleaseScope()
 		for (QWidget* Widget : QApplication::allWidgets())
 		{
 			if (QMenu* Menu = qobject_cast<QMenu*>(Widget))
+			{
+				if (!Menu->actions().contains(Action))
+					continue;
+
 				Menu->removeAction(Action);
+
+				if (!ParentMenus.contains(Menu))
+					ParentMenus.append(Menu);
+			}
 			else if (QMenuBar* MenuBar = qobject_cast<QMenuBar*>(Widget))
 				MenuBar->removeAction(Action);
 		}
@@ -723,6 +736,59 @@ void lcMainWindow::ApplyFirstReleaseScope()
 
 		Action->setVisible(false);
 		Action->setEnabled(false);
+	}
+
+	// Removing every entry of a submenu leaves the submenu behind, and Qt keeps
+	// drawing it: "&Import" and "&Export" stayed in the File menu as boxes that
+	// open onto nothing (reported on device in
+	// docs/D3_RESOURCES_DEVICE_ACCEPTANCE.md). Dropping the last entry has to
+	// drop the container too.
+	//
+	// Only menus an action was actually taken out of are re-checked. Sweeping
+	// every QMenu in the window would also catch menus that are empty by
+	// construction and filled from an aboutToShow handler; there is none today,
+	// and this keeps it that way without a rule someone has to remember.
+	//
+	// Emptiness is "no visible entry other than a separator", not
+	// actions().isEmpty(): the Step menu keeps a separator between its two
+	// groups, so it is empty to a user while still holding one QAction.
+	QList<QMenu*> EmptiedMenus;
+
+	for (QMenu* Menu : ParentMenus)
+	{
+		bool HasVisibleEntry = false;
+
+		for (QAction* Action : Menu->actions())
+		{
+			if (Action->isVisible() && !Action->isSeparator())
+			{
+				HasVisibleEntry = true;
+				break;
+			}
+		}
+
+		if (!HasVisibleEntry)
+			EmptiedMenus.append(Menu);
+	}
+
+	// Taking out the menu action is enough: it is the parent's entry and it owns
+	// the submenu. The QMenu object itself stays allocated, because it is a child
+	// of this window and nothing dereferences it after this point.
+	for (QMenu* Menu : EmptiedMenus)
+	{
+		QAction* MenuAction = Menu->menuAction();
+
+		if (MenuAction == nullptr)
+			continue;
+
+		for (QMenu* ParentMenu : ParentMenus)
+			ParentMenu->removeAction(MenuAction);
+
+		if (QMenuBar* Bar = menuBar())
+			Bar->removeAction(MenuAction);
+
+		MenuAction->setVisible(false);
+		MenuAction->setEnabled(false);
 	}
 
 	// Removals leave trailing separators behind; drop them so no menu ends in a
@@ -847,6 +913,11 @@ void lcMainWindow::CreateToolBars()
 	mPartSelectionWidget = new lcPartSelectionWidget(mPartsToolBar);
 	mPartsToolBar->setWidget(mPartSelectionWidget);
 	addDockWidget(Qt::RightDockWidgetArea, mPartsToolBar);
+
+	// A packaged library that failed validation is only reported on stderr by
+	// the entry point, which is invisible on a device. Hand the reason to the
+	// panel so a degraded install says so where the parts are.
+	mPartSelectionWidget->SetLibraryProblem(lcPiecesLibrary::GetBundledLibraryProblem());
 
 	connect(mPartsToolBar, &QDockWidget::dockLocationChanged, mPartSelectionWidget, &lcPartSelectionWidget::DockLocationChanged);
 	connect(mPartSelectionWidget, &lcPartSelectionWidget::PartPicked, this, &lcMainWindow::PartListPicked);
