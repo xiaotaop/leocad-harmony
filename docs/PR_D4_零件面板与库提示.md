@@ -47,7 +47,7 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 | `common/lc_library.{h,cpp}` | C（库发现/诊断部分） | 记录拒绝原因（静态成员） |
 | `qt/qtmain.cpp` | 组长 | **仅加 1 行**记录拒绝原因，插入式，不改入口逻辑 |
 | `tests/library/d3/tst_menu_scope.cpp` | C | 新增 `noVisibleEmptySubmenus`；移除清单加 7 项 |
-| `tests/library/d4/tst_parts_panel.cpp` | C | 新套件，14 项 |
+| `tests/library/d4/tst_parts_panel.cpp` | C | 新套件，15 项 |
 | `d4-panel-tests.pro` | C | 新测试工程 |
 | `scripts/dev/run-d3-tests.sh`、`scripts/Run-D3Tests.ps1` | C | 接入 `panel` 套件 |
 | `docs/D3_主程序接入.md`、`docs/D4_零件面板与库提示.md`、`tests/library/d3/README.md` | C | 文档 |
@@ -79,11 +79,11 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 | priority | 8 | pass |
 | menu | 8 | pass |
 | modellist | 5 | pass |
-| **panel（新增）** | **14** | **pass** |
-| **合计** | **48** | **48 passed, 0 failed** |
+| **panel（新增）** | **15** | **pass** |
+| **合计** | **49** | **49 passed, 0 failed** |
 
 项数为 QtTest 的 `Totals`，含 `initTestCase`/`cleanupTestCase`；panel 套件是
-12 个业务用例 + 初始化/清理共 14 项。
+13 个业务用例 + 初始化/清理共 15 项。
 
 新增 `tests/library/d4/tst_parts_panel.cpp`（工程 `d4-panel-tests.pro`），
 在真实 `lcMainWindow` 里操作真实面板：
@@ -102,6 +102,7 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 | `degradedVerdictTracksTheLoadedCount` | 降级谓词边界：1159/128/0 降级，1160/4640 不降级 |
 | `optionToggleRefreshesCountAndEmptyState` | 选项开关改变可见集合后，计数与空态同步 |
 | `startupEndsOnTheBrickCategory` | 复现真实启动序列，最终分类为 Brick 且非空 |
+| `degradedWithoutDiagnosticStillExplainsAnEmptyList` | 无诊断的降级仍显示横幅；空列表至少有一个说明 |
 
 **回归验证** —— 每条断言都实际改坏并确认失败：
 
@@ -116,6 +117,7 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 | 去掉 `VisibleRowsChanged()` 信号 | 5 | `Parts: 0 vs 4 visible`，空态不出现 |
 | 恢复「只看包内归档是否被拒」的判据 | 1 | 正常外部库仍显示缺件横幅 |
 | 启动用例的期望改成 All Parts | 1 | 与实际启动序列不符 |
+| 横幅重新要求非空诊断（两条旧判据） | 1 | 无诊断降级时两条提示都不出现 |
 
 **三处假通过已修正，值得记录：**
 
@@ -147,7 +149,7 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 ## Physical-device verification
 
 Commit/artifact: **待组长构建**。业务提交 `e9726bf2`（分支 `feature/c-d4-panel`，最新 `e0946057`），
-基线 `main@1dfc63cf`（已合入 B 的 D4 文档提交）。HAP 由组长用
+基线 `main@4302927f`（已合入 A 的 D4 渲染修复与 B 的文档提交）。HAP 由组长用
 `scripts/build-harmony-app.ps1` 生成，本 PR 不提供构建产物。
 
 Steps and expected result（按分工文档 §6.1 的批次提交要求，共 8 项，可分批）：
