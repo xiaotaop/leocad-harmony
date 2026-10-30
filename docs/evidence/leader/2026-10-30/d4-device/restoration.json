@@ -1,0 +1,13 @@
+{
+  "preferences_before_sha256": "2135688da790e15525d5a5f1e29bc5f8a5aa86ddf654235d5b7798b9df5e6419",
+  "preferences_after_sha256": "2135688da790e15525d5a5f1e29bc5f8a5aa86ddf654235d5b7798b9df5e6419",
+  "preferences_restored": true,
+  "active_bundled_archive": ":/assets/ldraw-lite/library-lite.zip",
+  "active_bundled_problem": "",
+  "installed_package_sha256": "2f44dd2cd6ea0ad0854e36732020856a96895c45a84075ba085e3f6c92d7b4bc",
+  "application_closed": true,
+  "invalid_fixtures": "Renamed by a temporary app-owned cleanup build after matching all 37 bytes; no active override remains.",
+  "cleanup_native_returns": [
+    0
+  ]
+}

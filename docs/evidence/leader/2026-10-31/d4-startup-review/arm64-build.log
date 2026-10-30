@@ -1,0 +1,12 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+-- Configuring done (0.6s)
+-- Generating done (0.5s)
+-- Build files have been written to: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4
+[0/4] Re-checking globbed directories...
+[1/11] Automatic MOC and UIC for target leocad
+[2/10] Running AUTOMOC file extraction for target leocad
+[3/9] Automatic RCC for generated/leocad_resources.qrc
+[4/9] Building CXX object CMakeFiles/leocad.dir/qt/qtmain.cpp.o
+[5/9] Building CXX object CMakeFiles/leocad.dir/leocad_autogen/WEMFWQQXNA/qrc_leocad_resources.cpp.o
+[6/9] Linking CXX shared module libleocad.so

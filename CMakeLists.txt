@@ -25,6 +25,7 @@ find_package(ZLIB REQUIRED)
 include(cmake/LeoCADSources.cmake)
 
 option(LEOCAD_SAFE_RENDER "Disable optional render effects for device diagnosis" OFF)
+option(LEOCAD_TEST_RESOURCE_PATHS "Exercise Harmony resource diagnostics in host startup tests" OFF)
 
 # The upstream resource file names generated .qm files. Translations are handled
 # by qt_add_translations(), so create a build-tree copy without those entries.
@@ -59,6 +60,18 @@ qt_add_executable(leocad
 )
 
 target_include_directories(leocad PRIVATE common qt)
+if(LEOCAD_TEST_RESOURCE_PATHS AND NOT OHOS)
+    # Compile the production diagnostic block into the real host entry point.
+    # Do not define Q_OS_HARMONY or change any other platform startup logic.
+    target_compile_definitions(leocad PRIVATE LC_TEST_RESOURCE_PATHS=1)
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    enable_testing()
+    add_test(NAME resource-paths-early-exit
+        COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/startup/test_early_exit.py"
+            --app $<TARGET_FILE:leocad>
+            --output "${CMAKE_CURRENT_BINARY_DIR}/startup-results.json")
+    set_tests_properties(resource-paths-early-exit PROPERTIES TIMEOUT 60)
+endif()
 target_compile_definitions(leocad PRIVATE
     $<$<BOOL:${LEOCAD_SAFE_RENDER}>:LC_SAFE_RENDER=1>
     LC_DISABLE_UPDATE_CHECK=1

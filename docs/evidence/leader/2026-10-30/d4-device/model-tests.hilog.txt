@@ -1,0 +1,301 @@
+10-30 20:57:38.389 39458 39458 I C02C02/PARAM: ResetParamSecurityLabel Fd:18
+10-30 20:57:38.390 39458 39458 E C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: [appspawn_isolate.c:215]ioctl ADD_ISOLATE_DIR_CMD fail, errno 22
+10-30 20:57:38.390 39458 39458 E C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: [appspawn_isolate.c:245]Failed to set isolate dir, ret 218103808
+10-30 20:57:38.396 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: errno:2 bind mount /chip_prod/lib64/passthrough to /mnt/sandbox/100/io.github.xiaotaop.leocad.modeltests/chip_prod/lib64/passthrough
+10-30 20:57:38.397 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: check dir /data/app/el1/public/aot_compiler/ark_cache/io.github.xiaotaop.leocad.modeltests failed,strerror:No such file or directory
+10-30 20:57:38.397 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: errno:2 bind mount /data/app/el1/bundle/100/hnppublic to /mnt/sandbox/100/io.github.xiaotaop.leocad.modeltests/data/service/hnp
+10-30 20:57:38.397 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: check dir /data/app/el1/bundle/100/hnppublic failed,strerror:No such file or directory
+10-30 20:57:38.398 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: errno:2 bind mount /data/app/el1/bundle/100/hnp/io.github.xiaotaop.leocad.modeltests to /mnt/sandbox/100/io.github.xiaotaop.leocad.modeltests/data/app
+10-30 20:57:38.398 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: check dir /data/app/el1/bundle/100/hnp/ failed,strerror:No such file or directory
+10-30 20:57:38.398 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: errno:2 bind mount /data/preload/app to /mnt/sandbox/100/io.github.xiaotaop.leocad.modeltests/data/preload/app
+10-30 20:57:38.398 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: errno:2 bind mount /data/app/el1/bundle/100/hnppublic to /mnt/sandbox/100/io.github.xiaotaop.leocad.modeltests/data/service/hnp
+10-30 20:57:38.398 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: check dir /data/app/el1/bundle/100/hnppublic failed,strerror:No such file or directory
+10-30 20:57:38.399 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: errno:2 bind mount /data/app/el1/bundle/100/hnp/io.github.xiaotaop.leocad.modeltests to /mnt/sandbox/100/io.github.xiaotaop.leocad.modeltests/data/app
+10-30 20:57:38.399 39458 39458 W C02C11/hub.xiaotaop.leocad.modeltests/APPSPAWN: check dir /data/app/el1/bundle/100/hnp/ failed,strerror:No such file or directory
+10-30 20:57:38.401 39458 39458 E C05A06/hub.xiaotaop.leocad.modeltests/CODE_SIGN: [XpmIoctl]:Ioctl cmd 40087803 failed: Invalid argument (ignore)
+10-30 20:57:38.404 39458 39557 W C057C1/hub.xiaotaop.leocad.modeltests/IPCWorkThread: ThreadHandler: proto:0 policy:1 name:OS_IPC_0_39557 invoker:1929503744
+10-30 20:57:38.404 39458 39558 W C057C1/hub.xiaotaop.leocad.modeltests/IPCWorkThread: ThreadHandler: proto:0 policy:0 name:OS_IPC_1_39558 invoker:1834686464
+10-30 20:57:38.405 39458 39559 W C057C1/hub.xiaotaop.leocad.modeltests/IPCWorkThread: ThreadHandler: proto:0 policy:0 name:OS_IPC_2_39559 invoker:1929505024
+10-30 20:57:38.413 39458 39458 E C01321/hub.xiaotaop.leocad.modeltests/JsRuntime: [js_runtime.cpp961]verify access token failed: -1
+10-30 20:57:38.416 39458 39458 W C01305/hub.xiaotaop.leocad.modeltests/Base: [zip_file.cpp(ExtractToBufByName:966)]GetEntry from pkgContextInfo.json err
+10-30 20:57:38.417 39458 39458 W C01321/hub.xiaotaop.leocad.modeltests/JsRuntime: [CSM161]not Connected
+10-30 20:57:38.420 39458 39458 W C01E00/hub.xiaotaop.leocad.modeltests/ResourceManager: update userId, currentUserId_= 0, userId= 100
+10-30 20:57:38.422 39458 39562 W C01653/hub.xiaotaop.leocad.modeltests/NativePreferences: LoadFromDisk: The settingXml /***/el1/***/i18*** load failed.
+10-30 20:57:38.422 39458 39571 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.hdc.jdwp remoteWatcherId 186 success
+10-30 20:57:38.427 39458 39458 W C01301/hub.xiaotaop.leocad.modeltests/Ability: [resource_config_helper.cpp183]invalid source:
+10-30 20:57:38.427 39458 39458 W C01301/hub.xiaotaop.leocad.modeltests/Ability: [resource_config_helper.cpp183]invalid source:
+10-30 20:57:38.430 39458 39458 E C01700/hub.xiaotaop.leocad.modeltests/RSS: ResSchedClient::ReportData type not subscribed.
+10-30 20:57:38.432 39458 39458 W C03F07/MUSL-LDSO: load libdeviceinfo_ndk.z.so failed, namespace=default no inherits, errno=2
+10-30 20:57:38.446 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: qohosjsmain Init begin
+10-30 20:57:38.446 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: qohosjsmain Init end
+10-30 20:57:38.449 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbilityStage::onCreate()
+10-30 20:57:38.449 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: AbilityStage::onCreate: hot start enabled: false
+10-30 20:57:38.450 39458 39458 E C01317/hub.xiaotaop.leocad.modeltests/AppKit: [JAS809]get 'onAcceptWantAsync' object failed
+10-30 20:57:38.450 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbilityStage::onAcceptWant: want.parameters: {"io.qt.appArgsJson":"[]","isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":39510,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.ability.param.realCallerKey":"39510:2000","ohos.abilityRuntime.pageConfig":"","ohos.dlp.params.sandbox":false,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0}
+10-30 20:57:38.450 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbilityStage::initQtAppContextImpl: init
+10-30 20:57:38.451 39458 39458 E C01317/hub.xiaotaop.leocad.modeltests/AppKit: [context_impl.cpp359]hapModuleInfo null
+10-30 20:57:38.451 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: void QtOhos::(anonymous namespace)::setupQtApplicationImpl(QtOhos::JsState &, QNapi::Object, QtOhos::QtRunMode): setting up Qt in Normal mode
+10-30 20:57:38.451 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: Registered pending auto-started Ability instance, id='0'
+10-30 20:57:38.451 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.deviceInfo' via napi_load_module()
+10-30 20:57:38.451 39458 39458 E C057C2/hub.xiaotaop.leocad.modeltests/IPCObjectProxy: PrintErrorDetailedInfo: failed, handle:6 error:-14700103 desc:*.IDeviceInfo proxy:1838125696 time:8676779083894
+10-30 20:57:38.451 39458 39458 E C02C08/hub.xiaotaop.leocad.modeltests/DeviceInfoKits: [nodict]Send request failed! result = -14700103
+10-30 20:57:38.451 39458 39458 I C02C08/DeviceInfoKits: [device_info_kits.cpp:167]GetSerialID from remote ret = -14700103
+10-30 20:57:38.452 39458 39458 E C02C08/hub.xiaotaop.leocad.modeltests/DeviceInfoKits: [nodict]Send request failed! result = -14700103
+10-30 20:57:38.452 39458 39458 I C02C08/DeviceInfoKits: [device_info_kits.cpp:142]GetUdid from remote ret = -14700103
+10-30 20:57:38.452 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.intl' via napi_load_module()
+10-30 20:57:38.452 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.i18n' via napi_load_module()
+10-30 20:57:38.453 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.app.ability.ConfigurationConstant' via napi_load_module()
+10-30 20:57:38.453 39458 39458 W C01317/hub.xiaotaop.leocad.modeltests/AppKit: [OH_APP1150]fontSize empty
+10-30 20:57:38.453 39458 39458 W C01317/hub.xiaotaop.leocad.modeltests/AppKit: [OH_APP1185]language empty
+10-30 20:57:38.453 39458 39458 W C01317/hub.xiaotaop.leocad.modeltests/AppKit: [OH_APP1204]language and locale empty
+10-30 20:57:38.453 39458 39458 E C04217/hub.xiaotaop.leocad.modeltests/WMSAttribute: UpdateConfigurationSyncForAll: root is null
+10-30 20:57:38.453 39458 39458 E C04217/hub.xiaotaop.leocad.modeltests/WMSAttribute: UpdateConfigurationForAll: root is null
+10-30 20:57:38.453 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: setupQtApplication() - sharedLibraryName: libleocad-model-tests.so
+10-30 20:57:38.453 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: setupQtApplication() - bundleCodeDir: /data/storage/el1/bundle
+10-30 20:57:38.453 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: setupQtApplication() - Shared libraries directory: /data/storage/el1/bundle/libs/arm64
+10-30 20:57:38.453 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: AbilityStage::onAcceptWant: input Want: {"deviceId":"","bundleName":"io.github.xiaotaop.leocad.modeltests","abilityName":"QAbility","moduleName":"entry","uri":"","type":"","flags":0,"action":"","parameters":{"io.qt.appArgsJson":"[]","isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":39510,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.ability.param.realCallerKey":"39510:2000","ohos.abilityRuntime.pageConfig":"","ohos.dlp.params.sandbox":false,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0},"fds":{},"entities":[]}
+10-30 20:57:38.453 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: AbilityStage::onAcceptWant: returning instanceId='0'
+10-30 20:57:38.453 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbilityStage::onAcceptWant: instanceKey: "0"
+10-30 20:57:38.458 39458 39458 W C03F00/hub.xiaotaop.leocad.modeltests/ArkCompiler: [debugger] DebuggerImpl::NotifyScriptParsed: Script already been parsed: url: entry|entry|1.0.0|src/main/ets/qability/QAbility.ts fileName: /data/storage/el1/bundle/entry/ets/modules.abc
+10-30 20:57:38.461 39458 39458 W C04201/hub.xiaotaop.leocad.modeltests/DMS: RegisterClientDeathListener: regis reverse death
+10-30 20:57:38.462 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbility::onCreate(): want.parameters: {"component.startup.newRules":true,"io.qt.appArgsJson":"[]","isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":39510,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.dlp.params.sandbox":false,"ohos.param.callerAppCloneIndex":0}
+10-30 20:57:38.462 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbilityStage::initQtAppContextImpl: already initialized
+10-30 20:57:38.462 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: void QtOhos::(anonymous namespace)::handleAbilityOnCreate(const QtOhos::CallbackInfo &) begin
+10-30 20:57:38.462 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: void QtOhos::(anonymous namespace)::handleAbilityOnCreate(const QtOhos::CallbackInfo &) end
+10-30 20:57:38.462 39458 39458 E C01332/hub.xiaotaop.leocad.modeltests/UIAbility: [ui_ability_impl.cpp314]hasSaveData_: false
+10-30 20:57:38.462 39458 39458 W C01332/hub.xiaotaop.leocad.modeltests/UIAbility: [JUA1203]formatRegex: []
+10-30 20:57:38.464 39458 39458 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.sys.graphic.animationscale remoteWatcherId 186 success
+10-30 20:57:38.465 39458 39458 W C01409/hub.xiaotaop.leocad.modeltests/APS_MANAGER: redo Connect
+10-30 20:57:38.466 39458 39458 E C04200/hub.xiaotaop.leocad.modeltests/WMS: SetWindowType: permission denied!
+10-30 20:57:38.466 39458 39458 W C0420A/hub.xiaotaop.leocad.modeltests/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 0 state_: 0
+10-30 20:57:38.466 39458 39458 W C04200/hub.xiaotaop.leocad.modeltests/WindowSceneSessionImpl: AdjustWindowAnimationFlag: session invalid!
+10-30 20:57:38.468 39458 39580 W C057C1/hub.xiaotaop.leocad.modeltests/IPCWorkThread: ThreadHandler: proto:0 policy:0 name:OS_IPC_3_39580 invoker:1930289536
+10-30 20:57:38.468 39458 39559 W C04208/hub.xiaotaop.leocad.modeltests/WMSLayout: NotifySingleHandTransformChange: id:89, uiContent is nullptr
+10-30 20:57:38.474 39458 39458 W C04217/hub.xiaotaop.leocad.modeltests/WMSAttribute: RegisterGetWMSWindowListCallback: callback has registered
+10-30 20:57:38.474 39458 39458 W C04218/hub.xiaotaop.leocad.modeltests/WMSPc: UpdateSidebarBlurStyleWhenColorModeChange: RSAnimatableProperty is null
+10-30 20:57:38.474 39458 39458 E C04200/hub.xiaotaop.leocad.modeltests/WMS: singleton_container.cpp GetSingleton: cant get OHOS::Rosen::WindowInfoReporter
+10-30 20:57:38.474 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbility::onWindowStageCreate(): this.launchWant.parameters: {"component.startup.newRules":true,"io.qt.appArgsJson":"[]","isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":39510,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.dlp.params.sandbox":false,"ohos.param.callerAppCloneIndex":0}
+10-30 20:57:38.474 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaEtsFactoryOrFail(const QNapi::Function &, const std::string &): loading napi module 'LocalStorage' via ets factory
+10-30 20:57:38.475 39458 39458 W C04200/hub.xiaotaop.leocad.modeltests/WindowSessionImpl: UpdateViewportConfig: uiContent is null!
+10-30 20:57:38.475 39458 39458 W C0420A/hub.xiaotaop.leocad.modeltests/WMSLife: GetAttachStateSyncResult: lifecycleCallback is null
+10-30 20:57:38.476 39458 39559 E C0420A/hub.xiaotaop.leocad.modeltests/WMSLife: NotifyUIExtHostRectChangeInGlobalDisplayListeners: uiContent is null
+10-30 20:57:38.476 39458 39559 W C04208/hub.xiaotaop.leocad.modeltests/WMSLayout: NotifySingleHandTransformChange: id:89, uiContent is nullptr
+10-30 20:57:38.477 39458 39458 W C04201/hub.xiaotaop.leocad.modeltests/DMS: OnDisplayInfoChange: data is not changed.
+10-30 20:57:38.478 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbility::onForeground()
+10-30 20:57:38.479 39458 39458 W C0391F/hub.xiaotaop.leocad.modeltests/AceImage: [(-2:-1:undefined)] mkdir cache file path failed.
+10-30 20:57:38.480 39458 39458 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.sys.arkui.animationscale remoteWatcherId 186 success
+10-30 20:57:38.480 39458 39458 E C03900/hub.xiaotaop.leocad.modeltests/Ace: [(-2:-1:undefined)] ConfigParserBase read system file failed
+10-30 20:57:38.480 39458 39458 W C03900/hub.xiaotaop.leocad.modeltests/Ace: [(-2:-1:undefined)] ArkUiFeatureParamManager failed to load xml file
+10-30 20:57:38.480 39458 39458 E C03900/hub.xiaotaop.leocad.modeltests/Ace: [(-2:-1:undefined)] ConfigParserBase read system UI correction config file failed
+10-30 20:57:38.480 39458 39458 W C03900/hub.xiaotaop.leocad.modeltests/Ace: [(-2:-1:undefined)] ArkUiFeatureParamManager failed to load UI correction config file
+10-30 20:57:38.486 39458 39458 W C03900/hub.xiaotaop.leocad.modeltests/Ace: [(100000:100000:scope)] Invalid config:zh_CN-long-notround-horizontal-light-tablet-xhdpi
+10-30 20:57:38.487 39458 39458 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libtransform_interaction_ext.z.so: check ns accessible failed namespace=ndk.
+10-30 20:57:38.487 39458 39458 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=ndk no inherits, errno=2
+10-30 20:57:38.487 39458 39458 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=default, errno=2
+10-30 20:57:38.487 39458 39458 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libtransform_interaction_ext.z.so
+10-30 20:57:38.487 39458 39458 E C03934/hub.xiaotaop.leocad.modeltests/AceUIEvent: [(100000:100000:scope)] AceTransform load failed: Error loading shared library /system/lib64/libtransform_interaction_ext.z.so: No such file or directory
+10-30 20:57:38.487 39458 39458 W C03900/hub.xiaotaop.leocad.modeltests/Ace: [(100000:100000:scope)] not found systemTheme in HapModuleInfo, loading default OHOS_THEME
+10-30 20:57:38.487 39458 39458 W C03900/hub.xiaotaop.leocad.modeltests/Ace: [(100000:100000:scope)] GetAsset failed: resources/styles/default.json
+10-30 20:57:38.493 39458 39458 W C01406/hub.xiaotaop.leocad.modeltests/OHOS::RS: RSNodeMap::UnregisterNode: node id 169470819565570 not found
+10-30 20:57:38.494 39458 39458 E C03952/hub.xiaotaop.leocad.modeltests/AceAppBar: [(100000:100000:scope)] read abc file success!
+10-30 20:57:38.498 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains icon_primary!
+10-30 20:57:38.498 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains icon_on_primary!
+10-30 20:57:38.498 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains interactive_hover!
+10-30 20:57:38.498 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains interactive_click!
+10-30 20:57:38.498 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains warning!
+10-30 20:57:38.498 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains window_left_screen!
+10-30 20:57:38.498 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains window_right_screen!
+10-30 20:57:38.498 39458 39458 E C03952/hub.xiaotaop.leocad.modeltests/AceAppBar: [(100000:100000:scope)] read abc file success!
+10-30 20:57:38.500 39458 39458 E C03952/hub.xiaotaop.leocad.modeltests/AceAppBar: [(100000:100000:scope)] read abc file success!
+10-30 20:57:38.508 39458 39458 W C01406/hub.xiaotaop.leocad.modeltests/OHOS::RS: RSNodeMap::UnregisterNode: node id 169470819565570 not found
+10-30 20:57:38.508 39458 39458 E C01D02/hub.xiaotaop.leocad.modeltests/accessibility_asacfwk: [(AccessibilitySystemAbilityClientImpl:78)]accessibility service is ready.
+10-30 20:57:38.510 39458 39458 I C02C03/PARAM_WATCHER: Add watcher keyPrefix debug.graphic.frame remoteWatcherId 186 success
+10-30 20:57:38.511 39458 39458 E C04200/hub.xiaotaop.leocad.modeltests/IMockSessionManager: [nodict]Read result failed, code is: 4.
+10-30 20:57:38.511 39458 39458 E C04200/hub.xiaotaop.leocad.modeltests/IMockSessionManager: [nodict]Read result failed, code is: 4.
+10-30 20:57:38.511 39458 39558 E C0420A/hub.xiaotaop.leocad.modeltests/WMSLife: NotifyUIExtHostRectChangeInGlobalDisplayListeners: uiContent is null
+10-30 20:57:38.516 39458 39458 W C03900/hub.xiaotaop.leocad.modeltests/Ace: [(100000:100000:scope)] GetAsset failed: manifest.json
+10-30 20:57:38.516 39458 39586 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.layout.enabled remoteWatcherId 186 success
+10-30 20:57:38.517 39458 39586 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.inputevent.enabled remoteWatcherId 186 success
+10-30 20:57:38.517 39458 39586 I C02C03/PARAM_WATCHER: Add watcher keyPrefix const.security.developermode.state remoteWatcherId 186 success
+10-30 20:57:38.517 39458 39586 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.statemgr.enabled remoteWatcherId 186 success
+10-30 20:57:38.517 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: auto QtOhos::(anonymous namespace)::loadWindowStageContentPage(QtOhos::JsState &, QNapi::Object &, const QNapi::Object &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &) const: launchWant: {"deviceId":"","bundleName":"io.github.xiaotaop.leocad.modeltests","abilityName":"QAbility","moduleName":"entry","uri":"","type":"","flags":0,"action":"","parameters":{"component.startup.newRules":true,"io.qt.appArgsJson":"[]","isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":39510,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.dlp.params.sandbox":false,"ohos.param.callerAppCloneIndex":0},"fds":{},"entities":[]}
+10-30 20:57:38.518 39458 39586 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.boundary.enabled remoteWatcherId 186 success
+10-30 20:57:38.518 39458 39586 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.performance.monitor.enabled remoteWatcherId 186 success
+10-30 20:57:38.518 39458 39458 W C0391C/hub.xiaotaop.leocad.modeltests/AceFocus: [(100000:100000:scope)] Current focus view can not found!
+10-30 20:57:38.520 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: qohosjsmain Init begin
+10-30 20:57:38.520 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: qohosjsmain Init end
+10-30 20:57:38.521 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: JsStateImpl: appLaunchParam set from Ability with instanceId='0'
+10-30 20:57:38.521 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: JsStateImpl: added QAbilityPeer, instanceId: 0, qwindow: 
+10-30 20:57:38.521 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: std::size_t QtOhos::(anonymous namespace)::getPreferredStackSizeForQtThread(): preferred stack size for Qt Thread: 8388608
+10-30 20:57:38.521 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()(bool) const: setting condition 'Qt thread idle' to false
+10-30 20:57:38.521 39458 39590 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a8210d920, M: startApplicationMainFunction begin
+10-30 20:57:38.530 39458 39590 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a8210d920, M: std::function<int (std::vector<std::string>)> QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &): opened library '/data/storage/el1/bundle/libs/arm64/libleocad-model-tests.so' with main function
+10-30 20:57:38.530 39458 39590 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a8210d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: calling 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad-model-tests.so' (argc=1)
+10-30 20:57:38.530 39458 39590 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a8210d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function argv[0]='/data/storage/el1/bundle/libs/arm64/libleocad-model-tests.so'
+10-30 20:57:38.531 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: XComponentId: __nnMainWindow_0 onAppear
+10-30 20:57:38.532 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style 125829872 not contains image_pattern!
+10-30 20:57:38.532 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style 125829872 not contains app_theme_pattern!
+10-30 20:57:38.532 39458 39458 E C01E00/hub.xiaotaop.leocad.modeltests/ResourceManager: ref <private> id not found
+10-30 20:57:38.532 39458 39458 E C01E00/hub.xiaotaop.leocad.modeltests/ResourceManager: ref <private> id not found
+10-30 20:57:38.532 39458 39458 W C03937/hub.xiaotaop.leocad.modeltests/AceResource: [(100000:100000:scope)] Get pattern by name error, name=app_theme_pattern
+10-30 20:57:38.532 39458 39458 E C01E00/hub.xiaotaop.leocad.modeltests/ResourceManager: ref <private> id not found
+10-30 20:57:38.532 39458 39458 E C01E00/hub.xiaotaop.leocad.modeltests/ResourceManager: ref <private> id not found
+10-30 20:57:38.532 39458 39458 W C03937/hub.xiaotaop.leocad.modeltests/AceResource: [(100000:100000:scope)] Get pattern by name error, name=app_theme_pattern
+10-30 20:57:38.532 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style app_theme_pattern not contains app_theme_drag_distancethreshold!
+10-30 20:57:38.532 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style text_pattern not contains linear_split_child_min_size!
+10-30 20:57:38.532 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style text_pattern not contains menu_celia_ask_is_support!
+10-30 20:57:38.536 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style select_pattern not contains text_font_family_regular!
+10-30 20:57:38.536 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style select_pattern not contains menu_default_width!
+10-30 20:57:38.536 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style select_pattern not contains menu_min_width!
+10-30 20:57:38.536 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style select_pattern not contains menu_max_width!
+10-30 20:57:38.536 39458 39458 W C03926/hub.xiaotaop.leocad.modeltests/AceTheme: [(100000:100000:scope)] style select_pattern not contains menu_max_width_ratio!
+10-30 20:57:38.543 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.bundle.bundleManager' via napi_load_module()
+10-30 20:57:38.550 39458 39590 I C02C03/PARAM_WATCHER: Add watcher keyPrefix debug.graphic.debug_layer remoteWatcherId 186 success
+10-30 20:57:38.550 39458 39590 E C01400/hub.xiaotaop.leocad.modeltests/OpenGLWrapper: Failed to find system config path
+10-30 20:57:38.550 39458 39590 E C01400/hub.xiaotaop.leocad.modeltests/OpenGLWrapper: LoadLayers failed.
+10-30 20:57:38.550 39458 39590 E C01400/hub.xiaotaop.leocad.modeltests/OpenGLWrapper: EglWrapperLayer Init Failed.
+10-30 20:57:38.550 39458 39590 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libiGraphicsCore.z.so: check ns accessible failed namespace=ndk.
+10-30 20:57:38.550 39458 39590 W C03F07/MUSL-LDSO: load /system/lib64/libiGraphicsCore.z.so failed, namespace=ndk no inherits, errno=2
+10-30 20:57:38.550 39458 39590 W C03F07/MUSL-LDSO: load /system/lib64/libiGraphicsCore.z.so failed, namespace=default, errno=2
+10-30 20:57:38.550 39458 39590 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libiGraphicsCore.z.so
+10-30 20:57:38.550 39458 39590 E C01400/hub.xiaotaop.leocad.modeltests/OpenGLWrapper: Failed to dlopen /system/lib64/libiGraphicsCore.z.so. error: Error loading shared library /system/lib64/libiGraphicsCore.z.so: No such file or directory.
+10-30 20:57:38.550 39458 39590 E C01400/hub.xiaotaop.leocad.modeltests/OpenGLWrapper: EglWrapperHookLayer init Failed!
+10-30 20:57:38.551 39458 39590 W C01409/hub.xiaotaop.leocad.modeltests/APS_MANAGER: redo Connect
+10-30 20:57:38.551 39458 39590 E C057C2/hub.xiaotaop.leocad.modeltests/IPCObjectProxy: PrintErrorDetailedInfo: failed, handle:27 error:29201 desc:(subErr:4 SubErrDesc:outer:operation not permitted) *.IApsManager proxy:1929654144 time:8676878923737
+10-30 20:57:38.551 39458 39590 E C01409/hub.xiaotaop.leocad.modeltests/APS_MANAGER: [ApsManagerProxy::RegCommonCallback] SendRequest is failed, error code: <private>
+10-30 20:57:38.551 39458 39590 W C01409/hub.xiaotaop.leocad.modeltests/APS_MANAGER: RegCommonCallbackInner Register callback failed, delete callback
+10-30 20:57:38.551 39458 39590 W C01409/hub.xiaotaop.leocad.modeltests/APS_MANAGER: [ApsManagerProxy::RegisterGameFpsListener] Send Request faild code = 29201
+10-30 20:57:38.551 39458 39590 E C01409/hub.xiaotaop.leocad.modeltests/APS_MANAGER: ApsGameFpsController::RegisterGameFpsListener delete callback
+10-30 20:57:38.555 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.display' via napi_load_module()
+10-30 20:57:38.556 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.multimodalInput.inputDevice' via napi_load_module()
+10-30 20:57:38.560 39458 39458 E C01C07/hub.xiaotaop.leocad.modeltests/PBCA: OH_Pasteboard_Subscribe# subscribe observer failed
+10-30 20:57:38.561 39458 39458 E C01C07/hub.xiaotaop.leocad.modeltests/PBCA: OH_Pasteboard_Subscribe# subscribe observer failed
+10-30 20:57:38.563 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.font' via napi_load_module()
+10-30 20:57:38.564 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: GetFileData: Path or realPath is nullptr
+10-30 20:57:38.564 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: CheckConfigFile: Null data
+10-30 20:57:38.564 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseConfig: Failed to check config file
+10-30 20:57:38.564 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: FontConfig: Failed to parse config, ret 1
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: GetFileData: Path or realPath is nullptr
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: CheckConfigFile: Null data
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseConfig: Failed to check config file
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: FontConfig: Failed to parse config, ret 1
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseConfig: File name is null
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: FontConfig: Failed to parse config, ret 1
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: GetFileData: Path or realPath is nullptr
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: CheckConfigFile: Null data
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseConfig: Failed to check config file
+10-30 20:57:38.570 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseConfig: File name is null
+10-30 20:57:38.571 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseConfig: File name is null
+10-30 20:57:38.572 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseFontDescriptor: Failed to find font name FZYaYiHei GB18030L2 R
+10-30 20:57:38.585 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseFontDescriptor: Failed to find font name FT AeroSans
+10-30 20:57:38.586 39458 39458 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseFontDescriptor: Failed to find font name FT ChariSans
+10-30 20:57:38.591 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.graphics.text' via napi_load_module()
+10-30 20:57:38.592 39458 39570 E C01408/hub.xiaotaop.leocad.modeltests/Text: ParseInstallConfig: Failed to check config file
+10-30 20:57:38.592 39458 39570 E C01408/hub.xiaotaop.leocad.modeltests/Text: GetInstallFontList: Failed to parser install fonts path list
+10-30 20:57:38.607 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/ModelIo: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"error":"","framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","gles_build":true,"glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"passed":true,"renderer":"Maleoon 916","shaders":true,"share_requested":false,"sharing":false,"stage":"renderer_offscreen","surface_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"surface_requested_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"surface_valid":true,"valid":true,"vendor":"HUAWEI"}
+10-30 20:57:38.609 39458 39611 E C01490/hub.xiaotaop.leocad.modeltests/HW_GPU_CPL: [nodict]sched_setscheduler set FIFO failed!
+10-30 20:57:38.690 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/ModelIo: LEOCAD_GL_RENDERER {"passed":true,"programs":9,"safe_render":false,"skipped_programs":0}
+10-30 20:57:38.715 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: ********* Start testing of ModelIoTest *********
+10-30 20:57:38.715 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: Config: Using QtTest library 6.12.0, Qt 6.12.0 (arm64-little_endian-lp64 shared (dynamic) release build; by OHOS (dev) Clang 15.0.4 (llvm-project b3ff6d5a4891642fe4ab487a8077f076b9f34ea0)), harmonyos 6.1.0
+10-30 20:57:38.715 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::initTestCase()
+10-30 20:57:38.716 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(3ds)
+10-30 20:57:38.717 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(dae)
+10-30 20:57:38.718 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(csv)
+10-30 20:57:38.718 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(pov)
+10-30 20:57:38.719 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(obj)
+10-30 20:57:38.719 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::offlineDownloadCompletesWithError()
+10-30 20:57:38.719 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(lcd)
+10-30 20:57:38.720 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(leocad)
+10-30 20:57:38.720 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(sniffed-binary)
+10-30 20:57:38.721 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledLddImportPreservesDocument()
+10-30 20:57:38.721 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledHtmlExportDoesNotCreateDirectory()
+10-30 20:57:38.721 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::disabledBrickLinkExportReturnsError()
+10-30 20:57:38.724 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::emptyModelRoundTrip()
+10-30 20:57:38.729 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::ldrRoundTrip()
+10-30 20:57:38.733 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::mpdRoundTrip()
+10-30 20:57:38.733 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::missingFilePreservesModel()
+10-30 20:57:38.734 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::unwritableDestinationReportsError()
+10-30 20:57:38.734 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::failedSaveAsPreservesDocumentState()
+10-30 20:57:38.734 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::streamWriteFailureIsReported()
+10-30 20:57:38.738 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::successfulOverwriteCanBeReopened()
+10-30 20:57:38.762 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.abilityAccessCtrl' via napi_load_module()
+10-30 20:57:38.762 39458 39458 E A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: auto QOhosClipboardObject::getPasteboardDataWithLazyFetch()::(anonymous class)::operator()(QtOhos::JsState &, QOhosTaskPromise<std::pair<std::optional<QOhosClipboardObject::PasteboardDataSource>, std::function<std::unique_ptr<QMimeData> ()>>>)::(anonymous class)::operator()(auto &, bool) const [auto:1 = QtOhos::JsState]: ohos.permission.READ_PASTEBOARD hasn't been granted by user. Cannot read pasteboard data.
+10-30 20:57:38.772 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::editingSequenceUndoRedoAndSave()
+10-30 20:57:38.788 39458 39458 E A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: auto QOhosClipboardObject::getPasteboardDataWithLazyFetch()::(anonymous class)::operator()(QtOhos::JsState &, QOhosTaskPromise<std::pair<std::optional<QOhosClipboardObject::PasteboardDataSource>, std::function<std::unique_ptr<QMimeData> ()>>>)::(anonymous class)::operator()(auto &, bool) const [auto:1 = QtOhos::JsState]: ohos.permission.READ_PASTEBOARD hasn't been granted by user. Cannot read pasteboard data.
+10-30 20:57:38.806 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::insertTwentyPiecesUndoRedoAndReopen()
+10-30 20:57:38.822 39458 39458 E A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: auto QOhosClipboardObject::getPasteboardDataWithLazyFetch()::(anonymous class)::operator()(QtOhos::JsState &, QOhosTaskPromise<std::pair<std::optional<QOhosClipboardObject::PasteboardDataSource>, std::function<std::unique_ptr<QMimeData> ()>>>)::(anonymous class)::operator()(auto &, bool) const [auto:1 = QtOhos::JsState]: ohos.permission.READ_PASTEBOARD hasn't been granted by user. Cannot read pasteboard data.
+10-30 20:57:38.828 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::serializationDoesNotClearEditHistoryDirtyState()
+10-30 20:57:38.829 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(empty-file)
+10-30 20:57:38.829 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-reference)
+10-30 20:57:38.830 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(missing-part-name)
+10-30 20:57:38.830 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-transform)
+10-30 20:57:38.831 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(duplicate-submodel)
+10-30 20:57:38.831 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(unnamed-submodel)
+10-30 20:57:38.832 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-triangle)
+10-30 20:57:38.832 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(overlong-reference)
+10-30 20:57:38.833 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(self-referencing-submodel)
+10-30 20:57:38.833 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(mutually-referencing-submodels)
+10-30 20:57:38.834 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(unused-submodel-cycle)
+10-30 20:57:38.834 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-synth-control-point)
+10-30 20:57:38.835 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-synth-control-point)
+10-30 20:57:38.835 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-piece-pivot)
+10-30 20:57:38.836 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-piece-pivot)
+10-30 20:57:38.836 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::loadedActiveModelBelongsToProject()
+10-30 20:57:38.841 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::sharedSubmodelRoundTrip()
+10-30 20:57:38.845 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::relativeDocumentPathsSurviveWorkingDirectoryChange(load-relative-path)
+10-30 20:57:38.849 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::relativeDocumentPathsSurviveWorkingDirectoryChange(save-relative-path)
+10-30 20:57:38.849 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::compatibleLDrawSyntax(bom-and-direct-color)
+10-30 20:57:38.849 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::compatibleLDrawSyntax(unknown-meta-and-line)
+10-30 20:57:38.850 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::compatibleLDrawSyntax(mpd-trailing-signature)
+10-30 20:57:38.850 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::compatibleLDrawSyntax(piece-pivot)
+10-30 20:57:38.851 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::compatibleLDrawSyntax(synth-control-point)
+10-30 20:57:38.851 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::compatibleLDrawSyntax(ignored-meta-after-nofile)
+10-30 20:57:38.851 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: PASS   : ModelIoTest::cleanupTestCase()
+10-30 20:57:38.851 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 136ms
+10-30 20:57:38.851 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/QTestLib: ********* Finished testing of ModelIoTest *********
+10-30 20:57:38.851 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/ModelIo: LEOCAD_MODEL_TESTS /data/storage/el2/base/files/.qttest/model-tests.txt exit 0
+10-30 20:57:38.855 39458 39590 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a8210d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad-model-tests.so' returned 0
+10-30 20:57:38.855 39458 39590 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a8210d920, M: Qt: asynchronously terminating remaining QAbility instances, if any
+10-30 20:57:38.855 39458 39590 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a8210d920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()(bool) const: setting condition 'Qt thread idle' to true
+10-30 20:57:38.855 39458 39590 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a8210d920, M: startApplicationMainFunction end
+10-30 20:57:38.855 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: Qt: force-resolving pending QWindow destroy Promises before termination if needed
+10-30 20:57:38.855 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: Qt: terminating QAbility with instanceId='0'
+10-30 20:57:38.855 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: Tagging JS Window as closing (from: Qt main() exit)
+10-30 20:57:38.864 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbility::onBackground()
+10-30 20:57:38.864 39458 39458 W C0420A/hub.xiaotaop.leocad.modeltests/WMSLife: GetAttachStateSyncResult: lifecycleCallback is null
+10-30 20:57:38.867 39458 39458 E C0420A/hub.xiaotaop.leocad.modeltests/WMSLife: NotifyWMSWindowDestroyed: window destroyed listener is nullptr
+10-30 20:57:38.867 39458 39458 W C03903/hub.xiaotaop.leocad.modeltests/AceSubWindow: [(-2:100000:singleton)] Fail to get subwindow in dialogSubwindowMap_, instanceId is 100000
+10-30 20:57:38.867 39458 39458 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.layout.enabled count 0
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.inputevent.enabled count 0
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ const.security.developermode.state count 0
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.statemgr.enabled count 0
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.boundary.enabled count 0
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.performance.monitor.enabled count 0
+10-30 20:57:38.869 39458 39458 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+10-30 20:57:38.870 39458 39458 W C0391C/hub.xiaotaop.leocad.modeltests/AceFocus: [(100000:100000:scope)] viewStack empty
+10-30 20:57:38.874 39458 39458 W C03913/hub.xiaotaop.leocad.modeltests/AceText: [(100000:100000:scope)] destroy TxtParagraph with placeholderCnt_ 0, textAlign_ 0, count 0
+10-30 20:57:38.876 39458 39458 W C03900/hub.xiaotaop.leocad.modeltests/Ace: [(-2:100000:singleton)] Unregister from watch dog failed with instanceID 100000
+10-30 20:57:38.877 39458 39458 E C01332/hub.xiaotaop.leocad.modeltests/UIAbility: [JUA2354]null windowStage
+10-30 20:57:38.877 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbility::onStageDestroy()
+10-30 20:57:38.877 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbility::onDestroy()
+10-30 20:57:38.877 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &) begin
+10-30 20:57:38.877 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &): returning Promise for id='0'
+10-30 20:57:38.877 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &) end
+10-30 20:57:38.877 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: auto QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &) const: initial Promise resolved for id='0'
+10-30 20:57:38.877 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: JsStateImpl: removed QAbilityPeer, instanceId: 0, qwindow: 
+10-30 20:57:38.878 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: quitApplicationFromJsThread begin
+10-30 20:57:38.878 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: quitApplicationFromJsThread end
+10-30 20:57:38.878 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: Qt: requested Qt app quit, waiting for the main() function to return
+10-30 20:57:38.878 39458 39623 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a85320920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()() const: waiting for condition 'Qt thread idle'
+10-30 20:57:38.878 39458 39623 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x5a85320920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()() const: condition 'Qt thread idle' met
+10-30 20:57:38.878 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: Qt: end waiting for Qt app's main() function, returned: true
+10-30 20:57:38.878 39458 39458 D A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: auto QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(QtOhos::JsState &, bool) const: resolving result Promise for id='0'
+10-30 20:57:38.880 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/ohosQtTemplate: QAbilityStage::onDestroy()
+10-30 20:57:38.880 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: AbilityStage::onDestroy: start
+10-30 20:57:38.880 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: AbilityStage::onDestroy: destroying the Qt thread object
+10-30 20:57:38.880 39458 39458 I A00000/hub.xiaotaop.leocad.modeltests/OHOS plugin: [QtForOhos]: T: 0x59cd58a650, M: AbilityStage::onDestroy: calling _Exit(0)

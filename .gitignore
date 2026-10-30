@@ -20,6 +20,7 @@
 !/tests/fixtures/*.mpd
 !/docs/evidence/leader/2026-10-29/d3-resources/*.mpd
 !/docs/evidence/leader/2026-10-29/a-d3-render/*.ldr
+!/docs/evidence/leader/2026-10-30/d4-device/*.ldr
 /.local/
 /aqtinstall.log
 !/resources/*.ldr

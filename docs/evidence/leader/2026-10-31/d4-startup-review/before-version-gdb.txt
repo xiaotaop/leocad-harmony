@@ -1,0 +1,9 @@
+[New Thread 11108.0x6a54]
+[New Thread 11108.0x3b4c]
+[New Thread 11108.0x56b0]
+LeoCAD Version 26.09
+Compiled Oct 31 2026
+
+Thread 1 received signal SIGSEGV, Segmentation fault.
+0x00007ff7abe1b4cd in main ()
+#0  0x00007ff7abe1b4cd in main ()

@@ -1,0 +1,29 @@
+[
+  {
+    "number": 23,
+    "title": "PR-c-d4-panel",
+    "url": "https://github.com/xiaotaop/leocad-harmony/pull/23",
+    "merged": true,
+    "merge_commit_sha": "88f2836683abfbb64f3f14ed92edcf5acf7b97d0",
+    "head": "38c5dd74759aac5b012985eeac55614bc32740f0",
+    "merged_at": "2026-10-30T11:27:55Z"
+  },
+  {
+    "number": 24,
+    "title": "成员 A D4：修正网格遮挡并补齐实际 FBO 与深度回归",
+    "url": "https://github.com/xiaotaop/leocad-harmony/pull/24",
+    "merged": true,
+    "merge_commit_sha": "4302927f5ceb0ca115052745f98d2f448dcbbb26",
+    "head": "209580150b0c1b7db7de7232d3712f8f3eb23030",
+    "merged_at": "2026-10-30T10:32:17Z"
+  },
+  {
+    "number": 25,
+    "title": "成员 B D4：补齐日志溯源并澄清剩余真机验收",
+    "url": "https://github.com/xiaotaop/leocad-harmony/pull/25",
+    "merged": true,
+    "merge_commit_sha": "d5aa8b45104ab1bb47e18a54c73fb63005517413",
+    "head": "78329e185cebfc4e84f1d7f731a6bd9efd65cbd1",
+    "merged_at": "2026-10-30T12:38:34Z"
+  }
+]

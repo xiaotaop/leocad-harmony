@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-31",
+  "timezone": "Asia/Shanghai",
+  "reviewed_commit": "101ed8268b3c63698b937ae334dffa3d5327bc6c",
+  "corrected_code_commit": "5b79fdd6d2e2a64f8baa06d7be0bae699b60d1e3",
+  "sources": [
+    {
+      "file": "qt/qtmain.cpp",
+      "git_blob_sha256": "84d7bc7d00f0c2aac80fd82a3a3b6189c591f9784db37ec8555b14c150692abd"
+    },
+    {
+      "file": "CMakeLists.txt",
+      "git_blob_sha256": "7ef0aad74d27ac3f4e27f4b30befb8d6a3168b1fbbbac292b0b559574e933d04"
+    },
+    {
+      "file": "tests/startup/test_early_exit.py",
+      "git_blob_sha256": "0d6ac5d20535d8b14149d8726ca50951df47449deb86494d99b014abf9a9169c"
+    },
+    {
+      "file": "tests/startup/README.md",
+      "git_blob_sha256": "1ba1d2cf9006402fc7c726f1e33c4d3b262bd86905ad1d62ad3271dd8c301458"
+    },
+    {
+      "file": ".github/workflows/continuous.yml",
+      "git_blob_sha256": "e16b1b7341742347d280dd81f74510c64d6a5d76c71fd36e4b3fe9514f908afa"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "build/d4-startup-unsafe.exe",
+      "role": "host-original-unsafe-diagnostic-with-test-macro",
+      "bytes": 8646362,
+      "sha256": "5c94fa88d1978685601bb267936657ab899b924eb11e0a4fa4ae388e0b1d6350"
+    },
+    {
+      "file": "build/windows-review/leocad.exe",
+      "role": "corrected-host-entry-with-test-macro",
+      "bytes": 8647062,
+      "sha256": "60a685e12c9c2712f425e6f6eb6ca80a30e374ea0380a532a80558666555d2eb"
+    },
+    {
+      "file": "build/harmony-d4/libleocad.so",
+      "role": "corrected-arm64-application-target-not-a-hap",
+      "bytes": 8337368,
+      "sha256": "bdac0423d5975ae5a3633c34aa7d96c6177d59815f45dc2d8c5c34bb80d524dd"
+    }
+  ],
+  "unsafe_qtmain_worktree_crlf_sha256": "51cc2b670d5c22ca32a59f6014a659c78ddf62818a934dd297e0ad8e369d427f",
+  "host": {
+    "system": "Windows x64",
+    "qt": "6.12.0",
+    "compiler": "MinGW GCC 13.1.0",
+    "test_resource_paths": true,
+    "other_harmony_startup_enabled": false,
+    "before": "GDB stopped both commands at SIGSEGV; its own process return is not an application exit code.",
+    "after": "CTest 1/1 passed; three subprocess cases passed (0, 0, 1)."
+  },
+  "arm64": {
+    "qt": "6.12.0",
+    "compiler": "OHOS Clang 15.0.4",
+    "test_resource_paths": false,
+    "target": "leocad",
+    "build_exit": 0,
+    "repackaged": false,
+    "signed": false,
+    "device_run": false
+  },
+  "original_device_package_commit": "fcb8fe55f1caa8473f6ceb261f41590ad5c61095",
+  "original_device_evidence_unchanged": true
+}
