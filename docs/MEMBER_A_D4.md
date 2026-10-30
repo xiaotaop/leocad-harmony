@@ -53,3 +53,19 @@ A 的PR按分工由 B 审核、组长合入。本次不自行合并，也不自�
 [真机交接](MEMBER_A_D4_DEVICE_HANDOFF.md) 指定正常模式、两种尺寸、重启及原始日志判据。
 必须由组长以新提交构建HAP复验；旧#21的基础模式隐藏网格不能替代新正常模式的修正验收。
 上下文重建、全部纹理/透明材质、性能和长期稳定性仍按后续计划继续。
+
+## 成员 B 审核后的线宽修正
+
+B 指出网格前移会把模型线宽改为1。已在背景回调后通过 `Context->SetLineWidth`
+恢复用户模型线宽，同时保持GL与lcContext缓存一致，没有靠原生glLineWidth绕过缓存。
+
+新增宿主回归直接运行实际 `lcScene::Draw` 和带边线的box网格，复用现有model suite的
+真实renderer/library生命周期，覆盖线宽1/2/3、Flat/DefaultLights/Wireframe三种模式，
+每组都验证网格开/关和后续缓存切换。原代码6组非默认线宽失败；修正后9组全过。
+这些是host测试，`Q_OS_HARMONY` 下不新增这9组，原设备model suite范围不变。
+测试不改变既有模型业务断言，Windows Model CI自动覆盖新增场景路径。
+
+完整宿主套件初次57通过/2失败：既有相对路径断言在macOS `/var` 与 `/private/var`
+符号链接下文本不同。保持原断言，设置 `TMPDIR=/private/tmp/leocad-d4-model-runtime`
+后重跑为59通过/0失败/0跳过；初次结果也归档，未将其计为通过。
+完整应用在该线宽修正后再次构建通过。默认线宽1时的既有像素对照结论不变。

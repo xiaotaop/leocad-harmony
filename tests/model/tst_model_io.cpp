@@ -3,6 +3,10 @@
 #include <QScopeGuard>
 #include "lc_application.h"
 #include "lc_context.h"
+#include "lc_scene.h"
+#ifndef Q_OS_HARMONY
+#include <QOpenGLFramebufferObject>
+#endif
 #include "lc_library.h"
 #include "lc_mainwindow.h"
 #include "lc_model.h"
@@ -63,6 +67,77 @@ class ModelIoTest : public QObject
 {
     Q_OBJECT
 private slots:
+#ifndef Q_OS_HARMONY
+    // Reuse this host suite's real production renderer/library lifecycle. The
+    // standalone quad tests do not exercise lcScene's state changes or cache.
+    void referenceGridPreservesModelLineWidth_data()
+    {
+        QTest::addColumn<float>("Width");
+        QTest::addColumn<int>("Mode");
+        for (const auto Mode : {lcShadingMode::Flat, lcShadingMode::DefaultLights, lcShadingMode::Wireframe})
+            for (float Width : {1.0f, 2.0f, 3.0f})
+                QTest::newRow(qPrintable(QString("mode%1-width%2").arg(int(Mode)).arg(Width))) << Width << int(Mode);
+    }
+
+    void referenceGridPreservesModelLineWidth()
+    {
+        QFETCH(float, Width);
+        QFETCH(int, Mode);
+        lcContext* Context = lcContext::GetGlobalOffscreenContext();
+        QVERIFY(Context);
+        Context->MakeCurrent();
+        GLint PreviousFBO = 0;
+        Context->glGetIntegerv(GL_FRAMEBUFFER_BINDING, &PreviousFBO);
+        auto& Preferences = lcGetPreferences();
+        const float SavedWidth = Preferences.mLineWidth;
+        const bool SavedEdges = Preferences.mDrawEdgeLines, SavedConditional = Preferences.mDrawConditionalLines;
+        auto Restore = qScopeGuard([&]() {
+            Preferences.mLineWidth = SavedWidth;
+            Preferences.mDrawEdgeLines = SavedEdges;
+            Preferences.mDrawConditionalLines = SavedConditional;
+            Context->glBindFramebuffer(GL_FRAMEBUFFER, GLuint(PreviousFBO));
+            Context->SetDefaultState();
+            Context->SetLineWidth(SavedWidth);
+        });
+        Preferences.mLineWidth = Width;
+        Preferences.mDrawEdgeLines = true;
+        Preferences.mDrawConditionalLines = false;
+        QOpenGLFramebufferObject FBO(64, 64, QOpenGLFramebufferObject::CombinedDepthStencil);
+        QVERIFY(FBO.isValid());
+        lcMesh Mesh;
+        Mesh.CreateBox();
+        for (bool Grid : {false, true})
+        {
+            QVERIFY(FBO.bind());
+            Context->SetDefaultState();
+            Context->SetViewport(0, 0, 64, 64);
+            Context->SetProjectionMatrix(lcMatrix44Ortho(-20, 20, -20, 20, -100, 100));
+            Context->ClearColorAndDepth(lcVector4(0, 0, 0, 1));
+            Context->SetLineWidth(Width);
+            lcScene Scene;
+            Scene.SetShadingMode(static_cast<lcShadingMode>(Mode));
+            Scene.SetAllowLOD(false);
+            Scene.Begin(lcMatrix44Identity());
+            if (Grid)
+                Scene.SetBackgroundCallback([&]() { Context->SetLineWidth(1.0f); });
+            Scene.AddMesh(&Mesh, lcMatrix44Identity(), lcGetColorIndex(4), lcRenderMeshState::Default);
+            Scene.End();
+            Scene.Draw(Context); // Actual opaque/wireframe production draw path.
+            GLfloat Actual = 0;
+            Context->glGetFloatv(GL_LINE_WIDTH, &Actual);
+            QCOMPARE(Actual, Width);
+            // Verify the lcContext cache agrees with GL after scene drawing too.
+            Context->SetLineWidth(1.0f);
+            Context->glGetFloatv(GL_LINE_WIDTH, &Actual);
+            QCOMPARE(Actual, 1.0f);
+            Context->SetLineWidth(Width);
+            Context->glGetFloatv(GL_LINE_WIDTH, &Actual);
+            QCOMPARE(Actual, Width);
+            QCOMPARE(Context->glGetError(), GLenum(GL_NO_ERROR));
+        }
+    }
+#endif
+
     void disabledExportsPreserveFilesAndDocument_data()
     {
         QTest::addColumn<QString>("format");

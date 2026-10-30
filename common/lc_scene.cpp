@@ -439,6 +439,8 @@ void lcScene::Draw(lcContext* Context) const
 		lcDrawReferenceGrid(*Context, mBackgroundCallback);
 
 	const lcPreferences& Preferences = lcGetPreferences();
+	// The grid uses 1px lines; restore model state through the context cache.
+	Context->SetLineWidth(Preferences.mLineWidth);
 	const bool DrawLines = Preferences.mDrawEdgeLines && Preferences.mLineWidth > 0.0f;
 	const bool DrawConditional = !lcSafeRenderEnabled() && Preferences.mDrawConditionalLines && Preferences.mLineWidth > 0.0f;
 

@@ -32,3 +32,10 @@ captures provide a separate integration check; see D4 evidence. The Pillow helpe
 `compare_grid_pixels.py` checks two sizes of the fixed red/blue model, with a
 5x5 erosion to exclude silhouettes and an 8/255 channel tolerance. It is not a
 general model/image classifier and is not used as a cross-GPU golden image.
+
+The host model suite also calls the real `lcScene::Draw` with a box mesh and
+widths 1/2/3 in Flat/DefaultLights/Wireframe modes. It checks grid on/off and the
+lcContext line-width cache, catching a state regression that quad-only tests
+cannot detect. Run `member-b-tests.pro`; these nine rows are excluded from the
+HarmonyOS model HAP. On macOS use a canonical TMPDIR to avoid the pre-existing
+`/var` versus `/private/var` path-text assertion difference.

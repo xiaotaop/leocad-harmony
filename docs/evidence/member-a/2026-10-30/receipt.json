@@ -5,6 +5,10 @@
       "bytes": 786,
       "sha256": "22a7284116a2c4e2323606deb6bf368e74b64643b958ab95974df401712cf214"
     },
+    "model-tests.txt": {
+      "bytes": 4330,
+      "sha256": "74f3050896cfd55b8464f8a5efe587e228eaa1d657fb60ac1127046210a54e52"
+    },
     "before-size1-gridoff.png": {
       "bytes": 64319,
       "sha256": "cde0ef0f581d6cd94d2b8aa271a8f25a1a4b36a657ead05ef6788b277b122a45"
@@ -20,6 +24,10 @@
     "after-size1-gridoff.png": {
       "bytes": 64319,
       "sha256": "cde0ef0f581d6cd94d2b8aa271a8f25a1a4b36a657ead05ef6788b277b122a45"
+    },
+    "model-tests.xml": {
+      "bytes": 6998,
+      "sha256": "560207d2e17137767e441c2030b1dde63d1b5c9e968d6ab3fbc4685f49460999"
     },
     "framebuffer-tests.xml": {
       "bytes": 1405,
@@ -57,13 +65,21 @@
       "bytes": 262448,
       "sha256": "3d802ce808f0db5ff6879a7866cbc6b12f1312db9e4f479ce6e30545254772f5"
     },
+    "model-tests-precanonical.txt": {
+      "bytes": 5092,
+      "sha256": "0d7cb571af618826bb91103fcdcaf07c9e6c63440f2e0dbaa6b1227c1008572b"
+    },
+    "linewidth-before.txt": {
+      "bytes": 2159,
+      "sha256": "db9cc9b85b9ee5396c6309a286c688f6d7471b0aa32e828d68d7c5defdaec1db"
+    },
     "after-graphics.log": {
       "bytes": 3286,
       "sha256": "1937472d1f1976e86d95d6ce954c937729c466a8886a280556a0554938363887"
     },
     "build-record.json": {
-      "bytes": 2502,
-      "sha256": "8cfd7b50c22bb034cef705229ddc819f1f5521d90826f4a2a83b59c6913df971"
+      "bytes": 3201,
+      "sha256": "da871ad0f6a1b119dbe6d6ebcd635fbeb6f74c9c6cd7d003984377af4ed3daa7"
     },
     "before-graphics.log": {
       "bytes": 3286,
