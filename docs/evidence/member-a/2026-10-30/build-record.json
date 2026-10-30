@@ -14,7 +14,7 @@
     "common/lc_view.cpp": "50ec07817ff30eb8477af9a5b3e0fb42e393c68c5b80c512c4e57fa2657163be",
     "common/lc_viewwidget.cpp": "121333c98f7c2cf215523d304be4e763207eb5233d85bc9ce440cd1ed1739104",
     "common/lc_viewwidget.h": "f67ff13b2dc494884651367f16317a6ad800888afe313f4420fc03402d576673",
-    "leocad.pro": "8bd6784d87a14b3fd3f6f3cc175a312e764905b9479942052b65ab2d47d4f58b"
+    "leocad.pro": "3ff883814a3d1e6792fe05352e7571e0107db578e9e7ab6dcc5ff1b41e9629fb"
   },
   "framebuffer_tests": {
     "passed": 9,
