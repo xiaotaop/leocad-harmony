@@ -7,7 +7,7 @@
 #include <QApplication>
 #include <cstdio>
 #include <locale.h>
-#ifdef Q_OS_HARMONY
+#if defined(Q_OS_HARMONY) || defined(LC_TEST_RESOURCE_PATHS)
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -279,12 +279,15 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-#ifdef Q_OS_HARMONY
+#if defined(Q_OS_HARMONY) || defined(LC_TEST_RESOURCE_PATHS)
 	// Record the paths Qt actually supplies on this device. A sandbox path
 	// guessed from the host layout can silently miss the library override.
 	QJsonArray LibraryCandidates;
 	for (const QString& Candidate : lcPiecesLibrary::GetBundledLibraryArchiveCandidates())
 		LibraryCandidates.append(Candidate);
+	// --help/--version return Success before Initialize() creates the library.
+	// Null distinguishes that lifecycle state from an initialized empty library.
+	const lcPiecesLibrary* Library = lcGetPiecesLibrary();
 	const QJsonObject ResourceReport{
 		{QStringLiteral("app_data"), QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)},
 		{QStringLiteral("app_local_data"), QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)},
@@ -292,7 +295,7 @@ int main(int argc, char *argv[])
 		{QStringLiteral("bundled_candidates"), LibraryCandidates},
 		{QStringLiteral("bundled_archive"), BundledLibrary},
 		{QStringLiteral("bundled_problem"), Rejection},
-		{QStringLiteral("loaded_parts"), int(lcGetPiecesLibrary()->GetPieceCount())}
+		{QStringLiteral("loaded_parts"), Library ? QJsonValue(Library->GetPieceCount()) : QJsonValue(QJsonValue::Null)}
 	};
 	qInfo().noquote() << "LEOCAD_RESOURCE_PATHS" << QJsonDocument(ResourceReport).toJson(QJsonDocument::Compact);
 #endif

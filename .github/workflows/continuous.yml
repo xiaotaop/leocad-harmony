@@ -58,9 +58,19 @@ jobs:
           version: "6.12.*"
           cache: true
       - name: Configure
-        run: cmake -S . -B build/desktop -G Ninja -DCMAKE_BUILD_TYPE=Release
+        run: cmake -S . -B build/desktop -G Ninja -DCMAKE_BUILD_TYPE=Release -DLEOCAD_TEST_RESOURCE_PATHS=ON
       - name: Build
         run: cmake --build build/desktop --parallel 2
+      - name: Test help/version with Harmony resource diagnostics enabled
+        run: ctest --test-dir build/desktop --output-on-failure
+      - name: Upload startup regression evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: startup-regression-${{ github.sha }}
+          path: |
+            build/desktop/startup-results.json
+            build/desktop/Testing/Temporary/LastTest.log
 
   harmony-toolchain-note:
     name: HarmonyOS packaging gate
