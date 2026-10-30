@@ -1,0 +1,42 @@
+[
+  {
+    "phase": "before",
+    "size": 0,
+    "pixels": [
+      1468,
+      1426
+    ],
+    "model_interior_pixels": 554080,
+    "changed_model_pixels": 36102
+  },
+  {
+    "phase": "before",
+    "size": 1,
+    "pixels": [
+      1868,
+      1608
+    ],
+    "model_interior_pixels": 710660,
+    "changed_model_pixels": 45659
+  },
+  {
+    "phase": "after",
+    "size": 0,
+    "pixels": [
+      1468,
+      1426
+    ],
+    "model_interior_pixels": 554080,
+    "changed_model_pixels": 0
+  },
+  {
+    "phase": "after",
+    "size": 1,
+    "pixels": [
+      1868,
+      1608
+    ],
+    "model_interior_pixels": 710660,
+    "changed_model_pixels": 0
+  }
+]

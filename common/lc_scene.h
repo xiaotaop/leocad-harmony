@@ -80,9 +80,9 @@ public:
 		mMeshLODDistance = Distance;
 	}
 
-	void SetPreTranslucentCallback(std::function<void()> Callback)
+	void SetBackgroundCallback(std::function<void()> Callback)
 	{
-		mPreTranslucentCallback = Callback;
+		mBackgroundCallback = Callback;
 	}
 
 	lcMatrix44 ApplyActiveSubmodelTransform(const lcMatrix44& WorldMatrix) const
@@ -121,7 +121,7 @@ protected:
 	bool mHasFadedParts = false;
 	bool mTranslucentFade = false;
 
-	std::function<void()> mPreTranslucentCallback = nullptr;
+	std::function<void()> mBackgroundCallback = nullptr;
 	std::vector<lcRenderMesh> mRenderMeshes;
 	std::vector<int> mOpaqueMeshes;
 	std::vector<lcTranslucentMeshInstance> mTranslucentMeshes;

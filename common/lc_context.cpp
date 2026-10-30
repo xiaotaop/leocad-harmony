@@ -2,6 +2,7 @@
 #include "lc_context.h"
 #include "lc_glextensions.h"
 #include "lc_glcontext.h"
+#include "lc_glframebuffer.h"
 #include "lc_renderpolicy.h"
 #include "lc_shaderprogram.h"
 #include <QJsonDocument>
@@ -295,11 +296,10 @@ void lcContext::SetDefaultState()
 		glEnable(GL_LINE_SMOOTH);
 #endif
 
-	glEnable(GL_DEPTH_TEST);
+	lcResetFrameDepthState(*this);
 	mDepthTest = true;
-
-	glDepthFunc(GL_LEQUAL);
 	mDepthFunction = lcDepthFunction::LessEqual;
+	mDepthWrite = true;
 
 	mColorWrite = true;
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -347,9 +347,6 @@ void lcContext::SetDefaultState()
 
 	glDisable(GL_POLYGON_OFFSET_FILL);
 	mPolygonOffset = lcPolygonOffset::None;
-
-	mDepthWrite = true;
-	glDepthMask(GL_TRUE);
 
 	glDisable(GL_CULL_FACE);
 	mCullFace = false;

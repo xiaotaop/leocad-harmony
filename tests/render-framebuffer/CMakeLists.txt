@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 3.21)
+project(LeoCADFramebufferTests LANGUAGES CXX)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets OpenGL OpenGLWidgets Test)
+set(CMAKE_AUTOMOC ON)
+qt_add_executable(leocad-framebuffer-tests tst_framebuffer.cpp)
+target_compile_features(leocad-framebuffer-tests PRIVATE cxx_std_17)
+target_include_directories(leocad-framebuffer-tests PRIVATE ../../common)
+target_link_libraries(leocad-framebuffer-tests PRIVATE Qt6::Widgets Qt6::OpenGL Qt6::OpenGLWidgets Qt6::Test)
+file(GLOB ShaderFiles CONFIGURE_DEPENDS "../../resources/shaders/*.glsl")
+qt_add_resources(leocad-framebuffer-tests shaders
+    PREFIX "/resources" BASE "../../resources" FILES ${ShaderFiles})
+set_target_properties(leocad-framebuffer-tests PROPERTIES MACOSX_BUNDLE FALSE)
