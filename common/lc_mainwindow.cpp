@@ -673,6 +673,21 @@ void lcMainWindow::ApplyFirstReleaseScope()
 		LC_VIEW_TIME_ADD_KEYS,
 		LC_VIEW_FADE_PREVIOUS_STEPS,
 
+		// The same step commands again, from the timeline panel's context menu
+		// (common/lc_timelinewidget.cpp, CustomMenuRequested()). These are a
+		// separate set of command ids that act on the same steps, so removing
+		// only the LC_VIEW_TIME_* entries above left every one of them reachable
+		// with two clicks — which is what the first release scope exists to
+		// prevent. Reported against the D3 device acceptance; see
+		// docs/D3_主程序接入.md section 4.5.
+		LC_TIMELINE_SET_CURRENT,
+		LC_TIMELINE_INSERT_BEFORE,
+		LC_TIMELINE_INSERT_AFTER,
+		LC_TIMELINE_DELETE,
+		LC_TIMELINE_MOVE_SELECTION,
+		LC_TIMELINE_MOVE_SELECTION_BEFORE,
+		LC_TIMELINE_MOVE_SELECTION_AFTER,
+
 		// Find/replace is not reachable in a single-document first release.
 		LC_EDIT_FIND,
 		LC_EDIT_FIND_NEXT,

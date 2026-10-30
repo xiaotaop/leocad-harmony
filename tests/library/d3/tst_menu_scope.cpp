@@ -120,6 +120,19 @@ void MenuScopeTest::removedCommandsAreNotVisible()
 		LC_MODEL_NEW,
 		LC_PIECE_EDIT_SELECTED_SUBMODEL,
 		LC_HELP_UPDATES,
+
+		// The step commands reachable from the timeline panel's context menu.
+		// They are a second set of command ids for the same operations as the
+		// LC_VIEW_TIME_* entries above, and were missed for exactly that reason:
+		// the first version of the scope removed one set and left the other
+		// reachable with two clicks.
+		LC_TIMELINE_SET_CURRENT,
+		LC_TIMELINE_INSERT_BEFORE,
+		LC_TIMELINE_INSERT_AFTER,
+		LC_TIMELINE_DELETE,
+		LC_TIMELINE_MOVE_SELECTION,
+		LC_TIMELINE_MOVE_SELECTION_BEFORE,
+		LC_TIMELINE_MOVE_SELECTION_AFTER,
 	};
 
 	for (const lcCommandId Command : Removed)
