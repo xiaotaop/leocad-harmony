@@ -54,6 +54,10 @@ private slots:
 	// calls SetDefaultPart() after CreateWidgets(), which this test replays.
 	void startupEndsOnTheBrickCategory();
 
+	// Second review round: a degraded load with no diagnostic used to show
+	// neither the banner nor the empty-state notice.
+	void degradedWithoutDiagnosticStillExplainsAnEmptyList();
+
 private:
 	QLabel* FindLabel(lcPartSelectionWidget* Panel, const char* Name) const;
 
@@ -434,6 +438,42 @@ void PartsPanelTest::startupEndsOnTheBrickCategory()
 			break;
 		}
 	}
+}
+
+void PartsPanelTest::degradedWithoutDiagnosticStillExplainsAnEmptyList()
+{
+	// Reachable on the real load path and missed by the first fix: the bundled
+	// archive is intact (no diagnostic to quote) while LEOCAD_LIB points at a
+	// small but valid library, so the load succeeds at a degraded count.
+	//
+	// The banner used to require a non-empty diagnostic as well as Degraded,
+	// while the empty-state notice was suppressed on Degraded alone. With an
+	// empty result the panel then showed "Parts: 0", no banner and no notice:
+	// an unexplained blank area.
+	const QString NoDiagnostic;
+	mPanel->SetLibraryProblem(NoDiagnostic, true);
+
+	QLabel* Banner = FindLabel(mPanel, "PartsLibraryProblem");
+	QVERIFY2(Banner, "the parts panel has no library-problem label");
+
+	// A degraded load must say so even without a packaging reason to quote.
+	QVERIFY2(!Banner->isHidden(),
+		"a degraded load with no diagnostic produced no banner, so nothing explains the smaller library");
+
+	// And when the list is empty, exactly one of the two surfaces must speak.
+	QLineEdit* Filter = mPanel->findChild<QLineEdit*>();
+	QVERIFY(Filter);
+
+	Filter->setText(QStringLiteral("zzzz-no-such-part-zzzz"));
+
+	QLabel* Empty = FindLabel(mPanel, "PartsEmptyNotice");
+	QVERIFY2(Empty, "the parts panel has no empty notice");
+
+	QVERIFY2(!Banner->isHidden() || !Empty->isHidden(),
+		"neither the banner nor the empty notice explained an empty list");
+
+	Filter->clear();
+	mPanel->SetLibraryProblem(QString(), false);
 }
 
 int main(int argc, char** argv)

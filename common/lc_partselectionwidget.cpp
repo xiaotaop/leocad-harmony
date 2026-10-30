@@ -1576,19 +1576,23 @@ void lcPartSelectionWidget::SetLibraryProblem(const QString& Problem, bool Degra
 	// while the process is fine: a corrupt bundled archive is skipped, an
 	// external library loads instead, and nothing is missing. Reporting the
 	// bundled archive's rejection then would describe a state the user is not in.
-	const bool Show = Degraded && !Problem.isEmpty();
-
-	if (Show)
+	//
+	// A degraded load does not always come with a diagnostic, so the banner
+	// cannot require one. The case that forced this: the bundled archive is
+	// intact (Problem empty) while LEOCAD_LIB points at a small but valid
+	// library (resources/library.zip, 128 parts). The load succeeds at a
+	// degraded count and there is no rejection reason to quote.
+	if (Degraded)
 	{
 		// The validator's wording is a packaging diagnostic ("references a file",
 		// "expected 1160"), not something to put in front of someone placing
-		// bricks. The banner says what the user has; the exact reason stays in
-		// the tooltip for a bug report and on stderr.
+		// bricks. The banner says what the user has; the exact reason, when
+		// there is one, stays in the tooltip for a bug report and on stderr.
 		mLibraryProblemLabel->setText(tr("Only a small number of parts are available, so models that use other parts will open with missing pieces."));
 		mLibraryProblemLabel->setToolTip(Problem);
 	}
 
-	mLibraryProblemLabel->setVisible(Show);
+	mLibraryProblemLabel->setVisible(Degraded);
 
 	RefreshStatus();
 }
@@ -1616,15 +1620,19 @@ void lcPartSelectionWidget::RefreshStatus()
 	if (mEmptyNotice == nullptr)
 		return;
 
-	// An empty list is only worth explaining when the panel is otherwise
-	// working. A degraded library already has the banner above, and repeating
-	// "no matching parts" under it would blame the filter for a packaging
-	// problem.
-	//
-	// Gated on mLibraryDegraded, not on mLibraryProblem being non-empty: the
-	// problem string is present whenever the bundled archive was skipped, which
-	// also happens on a perfectly healthy run that loaded an external library.
-	const bool ShowEmpty = VisibleCount == 0 && !mLibraryDegraded;
+	// An empty list is only worth explaining when nothing above already
+	// explained it. The test is whether the banner is actually on screen, not a
+	// second copy of the rule that decides it: an earlier version gated this on
+	// mLibraryDegraded while the banner also required a non-empty diagnostic, so
+	// a degraded load with no rejection reason (bundled archive intact,
+	// LEOCAD_LIB pointing at a small but valid library) showed neither the
+	// banner nor the notice — Parts: 0 and a blank area with no explanation at
+	// all. Read the banner's state instead, and the two cannot disagree.
+	// isHidden(), not isVisible(): isVisible() is also false while an ancestor
+	// is hidden, so before the window is shown this would claim the banner is
+	// not explaining anything and let the notice through on a degraded load.
+	const bool BannerExplains = mLibraryProblemLabel != nullptr && !mLibraryProblemLabel->isHidden();
+	const bool ShowEmpty = VisibleCount == 0 && !BannerExplains;
 
 	if (ShowEmpty)
 	{
