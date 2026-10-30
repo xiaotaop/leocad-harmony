@@ -129,7 +129,7 @@ UI/零件库（成员 C 责任范围）。逐项对照分工文档 §3.1：
 
 ## Physical-device verification
 
-Commit/artifact: **待组长构建**。源码提交 `e9726bf2`（分支 `feature/c-d4-panel`），
+Commit/artifact: **待组长构建**。业务提交 `e9726bf2`（分支 `feature/c-d4-panel`，最新 `e0946057`），
 基线 `main@1dfc63cf`（已合入 B 的 D4 文档提交）。HAP 由组长用
 `scripts/build-harmony-app.ps1` 生成，本 PR 不提供构建产物。
 
@@ -183,7 +183,7 @@ Required logs/screenshots:
    那一行，横幅永不出现，其余行为不变。
 2. 单点关闭空态：把 `RefreshStatus()` 里的 `ShowEmpty` 恒设为 `false`。
 3. 回退时间线裁剪：从 `RemovedCommands[]` 删掉 7 个 `LC_TIMELINE_*`，其余不受影响。
-4. 整体回退：四个提交主题独立，可只回退其中一个。
+4. 整体回退：三个业务提交主题独立，可只回退其中一个。
 
 **已知未做**（详见 `docs/D4_零件面板与库提示.md` §9、`docs/D3_主程序接入.md` §4.5）：
 
