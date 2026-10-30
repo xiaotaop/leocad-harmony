@@ -1,3 +1,8 @@
+# Provenance added after PR #22 review from the recorded D4 run; not emitted by QtTest.
+# Run date: 2026-10-30 (Asia/Shanghai)
+# Source commit: 4548f110d83390043b201375cb17ac855fcbd878
+# Command: scripts/Build-MemberB.ps1 -Target Tests -RunTests
+# Result: model test build succeeded; process exit 0; original QtTest output follows unchanged.
 ********* Start testing of ModelIoTest *********
 Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-llp64 shared (dynamic) release build; by MSVC 2022), windows 11
 PASS   : ModelIoTest::initTestCase()
