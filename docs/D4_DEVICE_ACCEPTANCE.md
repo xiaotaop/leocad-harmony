@@ -111,3 +111,9 @@ CacheLocation        /data/storage/el2/base/cache
 系统文件选择、外部授权/导出/取消与失败、完整GUI文件闭环、长时间稳定性、正式签名及许可/上架材料仍按原计划处理。没有因为本次出现原生文件选择窗口就关闭#15，也没有关闭#13/#14/#16。
 
 全部原始证据：[d4-device](evidence/leader/2026-10-30/d4-device/)。[reports.json](evidence/leader/2026-10-30/d4-device/reports.json) 从原始hilog抽取；[receipt.json](evidence/leader/2026-10-30/d4-device/receipt.json) 固定证据字节与哈希，不包含自己。
+
+## 8. GitHub 交付与跟踪
+
+工作分支 `feature/leader-d4-device` 已推送并创建 [PR #26](https://github.com/xiaotaop/leocad-harmony/pull/26)。新增 [#27 缩略图颜色异常](https://github.com/xiaotaop/leocad-harmony/issues/27)（A主责、C配合，D5优先）与 [#28 中文文案及文字省略](https://github.com/xiaotaop/leocad-harmony/issues/28)（C，D7）；偏好设置裁剪继续使用 [#14](https://github.com/xiaotaop/leocad-harmony/issues/14)，没有重复建单。
+
+#12 补充正常模式真机通过、待 A 核对；#13 补充异常偏好准备过程和恢复边界；#15 补充同一集成基线的50项回归及剩余系统闭环。以上 issue 继续开放，#16 保持原安排。本次没有主动指定 PR 审核人或执行合并，仓库分支保护继续生效。

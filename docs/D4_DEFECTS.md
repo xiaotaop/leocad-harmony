@@ -2,7 +2,7 @@
 
 记录日期：2026-10-30。源码、设备、包哈希和复现边界以 [D4真机报告](D4_DEVICE_ACCEPTANCE.md) 为准。
 
-下表是组长本地交接和责任安排；本次未创建远端issue、发送通知或自动关闭已有issue。P0/P1指本轮新观察到的集成问题，不取代发布门槛或许可事项审查。
+下表是组长交接和责任安排，已随 [PR #26](https://github.com/xiaotaop/leocad-harmony/pull/26) 推送到 GitHub。新增 [#27 缩略图颜色](https://github.com/xiaotaop/leocad-harmony/issues/27)（A主责、C配合）和 [#28 D7文案与布局](https://github.com/xiaotaop/leocad-harmony/issues/28)（C）；#12/#13/#14/#15 已补充 D4 状态，保留历史记录且继续开放，#16 保持原发布阶段安排。未自动关闭 issue。P0/P1指本轮新观察到的集成问题，不取代发布门槛或许可事项审查。
 
 | 编号 / 级别 | 事实与复现 | 负责人 | 下一步 / 截止阶段 | 状态 |
 |---|---|---|---|---|
@@ -17,5 +17,7 @@
 **本轮新P0=0、新P1=0；存在上述P2。** 可以提交D4阶段记录，不能宣称全量质量验收或发布通过。偏好裁剪尚未收口，#14本次不关闭；#12的关闭需A核对。
 
 颜色缺陷定位线索：`lcView::BeginRenderToImage()`建立`Format_ARGB32`目标；`OnDraw()`取`GetRenderFramebufferImage()`后直接`memcpy`；缩略图随后才`convertToFormat(Format_ARGB32)`。建议A验证真机`toImage()`返回格式是否与目标一致。这里是代码线索，尚未在修复版证明，不应只在最终缩略图上盲目交换颜色。
+
+远端对应关系：D4-01 → [#27](https://github.com/xiaotaop/leocad-harmony/issues/27)，D4-02 → [#14](https://github.com/xiaotaop/leocad-harmony/issues/14)，D4-03/F-02 → [#28](https://github.com/xiaotaop/leocad-harmony/issues/28)。#14 标题已更新为偏好设置剩余裁剪，零件库、初版图标和文件菜单的接入不再被描述为未完成。
 
 本次恢复了用户原偏好文件，两个受控坏归档已改名、不再命中资源发现，最终包回到qrc正常库；原始模型与用户数据保留。详细恢复证据和未覆盖范围见真机报告。
