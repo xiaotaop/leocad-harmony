@@ -19,3 +19,5 @@
 /docs/evidence/leader/2026-10-29/a-d3-render/* -text whitespace=cr-at-eol,-blank-at-eol
 /docs/evidence/leader/2026-10-30/d4-device/* -text whitespace=cr-at-eol,-blank-at-eol
 /docs/evidence/leader/2026-10-31/d4-startup-review/* -text whitespace=cr-at-eol,-blank-at-eol
+# Unified patches prefix context lines with a space before source indentation.
+/docs/evidence/leader/2026-10-31/d4-startup-review/*.patch -text whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
