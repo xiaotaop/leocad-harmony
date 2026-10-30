@@ -1,0 +1,20 @@
+--- a/qt/qtmain.cpp
++++ b/qt/qtmain.cpp
+@@ -7,7 +7,7 @@
+ #include <QApplication>
+ #include <cstdio>
+ #include <locale.h>
+-#ifdef Q_OS_HARMONY
++#if defined(Q_OS_HARMONY) || defined(LC_TEST_RESOURCE_PATHS)
+ #include <QJsonArray>
+ #include <QJsonDocument>
+ #include <QJsonObject>
+@@ -279,7 +279,7 @@
+ 		return 1;
+ 	}
+ 
+-#ifdef Q_OS_HARMONY
++#if defined(Q_OS_HARMONY) || defined(LC_TEST_RESOURCE_PATHS)
+ 	// Record the paths Qt actually supplies on this device. A sandbox path
+ 	// guessed from the host layout can silently miss the library override.
+ 	QJsonArray LibraryCandidates;

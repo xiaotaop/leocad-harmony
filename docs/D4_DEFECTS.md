@@ -20,4 +20,6 @@
 
 远端对应关系：D4-01 → [#27](https://github.com/xiaotaop/leocad-harmony/issues/27)，D4-02 → [#14](https://github.com/xiaotaop/leocad-harmony/issues/14)，D4-03/F-02 → [#28](https://github.com/xiaotaop/leocad-harmony/issues/28)。#14 标题已更新为偏好设置剩余裁剪，零件库、初版图标和文件菜单的接入不再被描述为未完成。
 
+2026-10-31 PR审核追加：A发现入口日志在 `--version` / `--help` 提前成功退出时解引用空库（P2），已由组长在 `5b79fdd6` 修正为 `loaded_parts:null`，完成真实宿主子进程回归及ARM64编译，并接入CI。此项直接在PR #26修复，未另建重复待办；没有重跑真机或更改原D4证据，详见 [真机报告§9](D4_DEVICE_ACCEPTANCE.md#9-审核修正提前成功退出)。
+
 本次恢复了用户原偏好文件，两个受控坏归档已改名、不再命中资源发现，最终包回到qrc正常库；原始模型与用户数据保留。详细恢复证据和未覆盖范围见真机报告。

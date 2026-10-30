@@ -1,0 +1,63 @@
+{
+  "app": "D:\\codex\\2026-10-26\\winhttrack-website-copier-colorhug-leocad-olive\\work\\leocad-harmony\\build\\windows-review\\leocad.exe",
+  "results": [
+    {
+      "option": "--version",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "stdout": "LeoCAD Version 26.09\r\nCompiled Oct 31 2026\r\n",
+      "stderr": "LEOCAD_RESOURCE_PATHS {\"app_data\":\"C:/Users/pxt/AppData/Roaming/LeoCAD Software/LeoCAD\",\"app_local_data\":\"C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD\",\"bundled_archive\":\":/assets/ldraw-lite/library-lite.zip\",\"bundled_candidates\":[\"C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD/ldraw-lite/library-lite.zip\",\"D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/windows-review/ldraw-lite/library-lite.zip\",\":/assets/ldraw-lite/library-lite.zip\"],\"bundled_problem\":\"\",\"cache\":\"C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD/cache\",\"loaded_parts\":null}\r\n",
+      "reports": [
+        {
+          "app_data": "C:/Users/pxt/AppData/Roaming/LeoCAD Software/LeoCAD",
+          "app_local_data": "C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD",
+          "bundled_archive": ":/assets/ldraw-lite/library-lite.zip",
+          "bundled_candidates": [
+            "C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD/ldraw-lite/library-lite.zip",
+            "D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/windows-review/ldraw-lite/library-lite.zip",
+            ":/assets/ldraw-lite/library-lite.zip"
+          ],
+          "bundled_problem": "",
+          "cache": "C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD/cache",
+          "loaded_parts": null
+        }
+      ],
+      "passed": true,
+      "errors": []
+    },
+    {
+      "option": "--help",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "stdout": "Usage: leocad [options] [file]\r\n  [options] can be:\r\n  -l, --libpath <path>: Set the Parts Library location to path.\r\n  -i, --image <outfile.ext>: Save a picture in the format specified by ext and exit.\r\n  -w, --width <width>: Set the picture width.\r\n  -h, --height <height>: Set the picture height.\r\n  -f, --from <step>: Set the first step to save pictures.\r\n  -t, --to <step>: Set the last step to save pictures.\r\n  -s, --submodel <submodel>: Set the active submodel.\r\n  -c, --camera <camera name>: Set the active camera.\r\n  --viewpoint <viewpoint>: Set the view to one of the preset viewpoints (front, back, left, right, top, bottom, home).\r\n  --camera-angles <latitude> <longitude>: Set the camera angles in degrees around the model.\r\n  --camera-position <x> <y> <z> <tx> <ty> <tz> <ux> <uy> <uz>: Set the camera position, target and up vector.\r\n  --camera-position-ldraw <x> <y> <z> <tx> <ty> <tz> <ux> <uy> <uz>: Set the camera position, target and up vector using LDraw coordinates.\r\n  --orthographic: Render images using an orthographic projection.\r\n  --fov <degrees>: Set the vertical field of view used to render images (< 180).\r\n  --zplanes <near> <far>: Set the near and far clipping planes used to render images (1 <= <near> < <far>).\r\n  --fade-steps: Render parts from prior steps faded.\r\n  --no-fade-steps: Do not render parts from prior steps faded.\r\n  --fade-steps-color <#AARRGGBB>: Renderinng color for prior step parts.\r\n  --highlight: Highlight parts in the steps they appear.\r\n  --no-highlight: Do not highlight parts in the steps they appear.\r\n  --highlight-color <#AARRGGBB>: Rendering color for highlighted parts.\r\n  --shading <mode>: Select shading mode for rendering (wireframe, flat, default, full).\r\n  --line-width <width>: Set the width of the edge lines.\r\n  --aa-samples <samples>: AntiAliasing sample size (1, 2, 4, or 8).\r\n  -ss, --stud-style <style>: Set the stud style (0=No style, 1=LDraw single wire, 2=LDraw double wire, 3=LDraw raised floating, 4=LDraw raised rounded, 5=LDraw subtle rounded, 6=LEGO no logo, 7=LEGO single wire).\r\n  -nscc, --disable-stud-cylinder-color: Disable high contrast stud cylinder color.\r\n  -scc, --stud-cylinder-color <#AARRGGBB>: High contrast stud cylinder color.\r\n  -nec, --disable-edge-color: Disable high contrast edge color.\r\n  -ec, --edge-color <#AARRGGBB>: High contrast edge color.\r\n  -nbec, --disable-black-edge-color: Disable high contrast edge color for black parts.\r\n  -bec, --black-edge-color <#AARRGGBB>: High contrast edge color for black parts.\r\n  -ndec, --disable-dark-edge-color: Disable high contrast edge color for dark color parts.\r\n  -dec, --dark-edge-color <#AARRGGBB>: High contrast edge color for dark color parts.\r\n  -aec, --automate-edge-color: Enable automatically adjusted edge colors.\r\n  -cc, --color-contrast <contrast>: Color contrast value between 0.0 and 1.0.\r\n  -ldv, --light-dark-value <value>: Light/Dark color value between 0.0 and 1.0.\r\n  -obj, --export-wavefront <outfile.obj>: Export the model to Wavefront OBJ format.\r\n  -3ds, --export-3ds <outfile.3ds>: Export the model to 3D Studio 3DS format.\r\n  -dae, --export-collada <outfile.dae>: Export the model to COLLADA DAE format.\r\n  -csv, --export-csv <outfile.csv>: Export the list of parts used in csv format.\r\n  -html, --export-html <folder>: Create an HTML page for the model.\r\n  -v, --version: Output version information and exit.\r\n  -?, --help: Display this help message and exit.\r\n\r\n",
+      "stderr": "LEOCAD_RESOURCE_PATHS {\"app_data\":\"C:/Users/pxt/AppData/Roaming/LeoCAD Software/LeoCAD\",\"app_local_data\":\"C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD\",\"bundled_archive\":\":/assets/ldraw-lite/library-lite.zip\",\"bundled_candidates\":[\"C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD/ldraw-lite/library-lite.zip\",\"D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/windows-review/ldraw-lite/library-lite.zip\",\":/assets/ldraw-lite/library-lite.zip\"],\"bundled_problem\":\"\",\"cache\":\"C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD/cache\",\"loaded_parts\":null}\r\n",
+      "reports": [
+        {
+          "app_data": "C:/Users/pxt/AppData/Roaming/LeoCAD Software/LeoCAD",
+          "app_local_data": "C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD",
+          "bundled_archive": ":/assets/ldraw-lite/library-lite.zip",
+          "bundled_candidates": [
+            "C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD/ldraw-lite/library-lite.zip",
+            "D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/windows-review/ldraw-lite/library-lite.zip",
+            ":/assets/ldraw-lite/library-lite.zip"
+          ],
+          "bundled_problem": "",
+          "cache": "C:/Users/pxt/AppData/Local/LeoCAD Software/LeoCAD/cache",
+          "loaded_parts": null
+        }
+      ],
+      "passed": true,
+      "errors": []
+    },
+    {
+      "option": "--lc-invalid-option-for-regression",
+      "expected_exit": 1,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Unknown option: '--lc-invalid-option-for-regression'.\r\n",
+      "reports": [],
+      "passed": true,
+      "errors": []
+    }
+  ]
+}

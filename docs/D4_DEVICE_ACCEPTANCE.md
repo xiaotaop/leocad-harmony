@@ -4,10 +4,12 @@
 
 **D4 组长交付完成，核心集成出口通过，带 P2 缺陷记录验收。** 包内零件库、模型和界面已在同一 HAP 可用；颜色缩略图有真实缺陷，不能声明全部 UI 无问题或达到发布验收。责任和后续安排见 [D4 缺陷表](D4_DEFECTS.md)。
 
+2026-10-31 审查补记：原诊断入口在 `--version` / `--help` 提前成功退出时存在空库解引用，已由 `5b79fdd6` 修正，并完成宿主回归及 ARM64 编译。下列真机证据仍对应原包，未重写为修正提交的上机结果；范围见 [§9](#9-审核修正提前成功退出)。
+
 ## 1. 集成源码与包
 
 - 三模块基线：`d5aa8b45104ab1bb47e18a54c73fb63005517413`，包含 A #24、C #23、B #25（以及先前的 B #22）。合并信息固定于 [merged-prs.json](evidence/leader/2026-10-30/d4-device/merged-prs.json)。没有将未合并分支叠入测试。
-- 组长补丁：`fcb8fe55f1caa8473f6ceb261f41590ad5c61095`，仅在鸿蒙入口新增 `LEOCAD_RESOURCE_PATHS` JSON 日志，记录 Qt 实际资源路径、归档诊断和当前零件对象数；未修改业务或渲染行为。
+- D4 真机补丁：`fcb8fe55f1caa8473f6ceb261f41590ad5c61095`，仅在鸿蒙入口新增 `LEOCAD_RESOURCE_PATHS` JSON 日志，记录 Qt 实际资源路径、归档诊断和当前零件对象数。正常启动的设备记录如下；其提前退出回归与修正单列于§9。
 - HAD-W32 / ARM64 / API23，OpenHarmony-6.1.0.115，Qt6.12.0，SDK26.0.0.105，OHOS Clang15.0.4，Maleoon916 / GLES3.2 B301 / GLSL ES3.20，DPR约1.9。
 - 正常模式 `LEOCAD_SAFE_RENDER=OFF`；每轮 shader 均为 9 个、跳过 0 个。没有用隐藏网格的基础模式代替遮挡修复验收。
 - 复用 `scripts/build-harmony-app.ps1 -GenerateSignature` 和现有官方调试签名；覆盖安装保留应用数据，未卸载或清空数据。
@@ -16,7 +18,7 @@
 |---|---|---:|---|
 | 首轮集成主程序 | `d5aa8b45` | 80,056,337 | `907193d1b8e8c1db724ffe93d06231163ec7f5dd82ebc91f9cd0f6104a24727e` |
 | 模型回归 HAP | `d5aa8b45` | 80,010,487 | `d731f467917f657d363a237492f9fcdd31682608c75461485b11a085098130e6` |
-| 最终资源诊断主程序 | `fcb8fe55` | 80,061,743 | `2f44dd2cd6ea0ad0854e36732020856a96895c45a84075ba085e3f6c92d7b4bc` |
+| D4 真机资源诊断包（审查修正前） | `fcb8fe55` | 80,061,743 | `2f44dd2cd6ea0ad0854e36732020856a96895c45a84075ba085e3f6c92d7b4bc` |
 
 本地固定副本在 `build/harmony-d4-evidence/`；包和签名材料不提交。机器可读记录见 [builds.json](evidence/leader/2026-10-30/d4-device/builds.json)。
 
@@ -117,3 +119,13 @@ CacheLocation        /data/storage/el2/base/cache
 工作分支 `feature/leader-d4-device` 已推送并创建 [PR #26](https://github.com/xiaotaop/leocad-harmony/pull/26)。新增 [#27 缩略图颜色异常](https://github.com/xiaotaop/leocad-harmony/issues/27)（A主责、C配合，D5优先）与 [#28 中文文案及文字省略](https://github.com/xiaotaop/leocad-harmony/issues/28)（C，D7）；偏好设置裁剪继续使用 [#14](https://github.com/xiaotaop/leocad-harmony/issues/14)，没有重复建单。
 
 #12 补充正常模式真机通过、待 A 核对；#13 补充异常偏好准备过程和恢复边界；#15 补充同一集成基线的50项回归及剩余系统闭环。以上 issue 继续开放，#16 保持原安排。本次没有主动指定 PR 审核人或执行合并，仓库分支保护继续生效。
+
+## 9. 审核修正：提前成功退出
+
+成员 A 对 `101ed826` 的[审核](https://github.com/xiaotaop/leocad-harmony/pull/26#pullrequestreview-5715021051)指出：`Initialize()` 遇 `Options.Exit` 返回 `Success` 时尚未创建零件库，旧日志无条件读取对象数会崩溃。`5b79fdd6d2e2a64f8baa06d7be0bae699b60d1e3` 先读取库指针，存在时保留原计数，不存在时将 `loaded_parts` 记为 JSON `null`。无效参数的错误出口保持返回1。
+
+宿主验证只通过默认关闭的 `LEOCAD_TEST_RESOURCE_PATHS=ON` 启用生产日志块及其 includes，未定义 `Q_OS_HARMONY` 或启用其他鸿蒙窗口/GL逻辑。修复前完整应用在 GDB 下执行 `--version`、`--help`，均输出请求文本后发生 SIGSEGV；修复后完整应用 CTest 的三条子进程检查均通过：两条成功出口返回0、各有一条 `loaded_parts:null` 日志，无效参数返回1且无该日志。CI桌面构建现已执行同一回归，必须存在日志才能通过，避免因未编译鸿蒙诊断块而假通过。
+
+另外完成正常 `Q_OS_HARMONY` 分支的 ARM64 `leocad` 目标编译/链接，测试开关为OFF。**本次没有重新打包、签名、安装或执行真机**；新 `.so` 哈希不能作为新HAP哈希。原D4的64项证据和收据保持不变，宿主测试不替代修正版的真机生命周期结果。模型业务/渲染未改，#27/#14/#28等问题继续独立跟进。
+
+本次复现、构建、回归原始记录与源码/产物哈希：[d4-startup-review](evidence/leader/2026-10-31/d4-startup-review/)。复现命令与边界见 [启动回归说明](../tests/startup/README.md)。
