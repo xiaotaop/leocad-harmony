@@ -7,6 +7,12 @@
 #include <QApplication>
 #include <cstdio>
 #include <locale.h>
+#ifdef Q_OS_HARMONY
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QStandardPaths>
+#endif
 
 #ifdef Q_OS_WIN
 
@@ -272,6 +278,24 @@ int main(int argc, char *argv[])
 		Application.Shutdown();
 		return 1;
 	}
+
+#ifdef Q_OS_HARMONY
+	// Record the paths Qt actually supplies on this device. A sandbox path
+	// guessed from the host layout can silently miss the library override.
+	QJsonArray LibraryCandidates;
+	for (const QString& Candidate : lcPiecesLibrary::GetBundledLibraryArchiveCandidates())
+		LibraryCandidates.append(Candidate);
+	const QJsonObject ResourceReport{
+		{QStringLiteral("app_data"), QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)},
+		{QStringLiteral("app_local_data"), QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation)},
+		{QStringLiteral("cache"), QStandardPaths::writableLocation(QStandardPaths::CacheLocation)},
+		{QStringLiteral("bundled_candidates"), LibraryCandidates},
+		{QStringLiteral("bundled_archive"), BundledLibrary},
+		{QStringLiteral("bundled_problem"), Rejection},
+		{QStringLiteral("loaded_parts"), int(lcGetPiecesLibrary()->GetPieceCount())}
+	};
+	qInfo().noquote() << "LEOCAD_RESOURCE_PATHS" << QJsonDocument(ResourceReport).toJson(QJsonDocument::Compact);
+#endif
 
 	int ExecReturn = 0;
 
