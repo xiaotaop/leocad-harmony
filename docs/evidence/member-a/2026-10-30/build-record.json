@@ -9,13 +9,13 @@
     "tests/render-framebuffer/compare_grid_pixels.py": "53cbd520d394fb1a7a1725c1538cb62741ea6af5b50b4fd014a21669653d4372",
     ".github/workflows/render-context-ci.yml": "59a380fe314c6d6b7ccaa4a3e41a3538a86b3bd04df417f20569fef5c2678e7e",
     "common/lc_context.cpp": "575202b101ca1729078b0c642da984d0bd0eac5dc9eef1f09cb63675bef9bbf9",
-    "common/lc_scene.cpp": "9396bb44a8df0b3250ac286d29111921c1a1efaf6e42a01c2977128d3c4a8538",
+    "common/lc_scene.cpp": "ed7b7d8627f6cce9558959c98b9de1659c4263ef19eb4b7bde3839e3ba2e3580",
     "common/lc_scene.h": "f8609ab14978a309842f82213b799b69ff1c558aa4bd03a36018dbd2e866c349",
     "common/lc_view.cpp": "50ec07817ff30eb8477af9a5b3e0fb42e393c68c5b80c512c4e57fa2657163be",
     "common/lc_viewwidget.cpp": "121333c98f7c2cf215523d304be4e763207eb5233d85bc9ce440cd1ed1739104",
     "common/lc_viewwidget.h": "f67ff13b2dc494884651367f16317a6ad800888afe313f4420fc03402d576673",
     "leocad.pro": "3ff883814a3d1e6792fe05352e7571e0107db578e9e7ab6dcc5ff1b41e9629fb",
-    "tests/model/tst_model_io.cpp": "b7a59d8a37eed90e96ac4753deb2c4d72155ee71ca412425bcd2bc5ffcec8de1"
+    "tests/model/tst_model_io.cpp": "7df6163e21bbad4dc756928278a149ce905b8088b07b04bf37a0154b8e05c3af"
   },
   "framebuffer_tests": {
     "passed": 9,
@@ -83,6 +83,7 @@
     },
     "tmpdir": "/private/tmp/leocad-d4-model-runtime",
     "target_hap_rows_unchanged": true,
-    "full_app_rebuilt": true
+    "full_app_rebuilt": true,
+    "preserves_explicit_width_without_background": true
   }
 }

@@ -7,7 +7,7 @@
     },
     "model-tests.txt": {
       "bytes": 4330,
-      "sha256": "74f3050896cfd55b8464f8a5efe587e228eaa1d657fb60ac1127046210a54e52"
+      "sha256": "8c7619048e67fa14bf7a5cbcac1d7fa19f58e734cf0399296948043b03a016ab"
     },
     "before-size1-gridoff.png": {
       "bytes": 64319,
@@ -27,7 +27,7 @@
     },
     "model-tests.xml": {
       "bytes": 6998,
-      "sha256": "560207d2e17137767e441c2030b1dde63d1b5c9e968d6ab3fbc4685f49460999"
+      "sha256": "4be7b9bcef9d0bcfea390f09874a57f8095b7067c14226c2d0a0d5bd57e4d7ac"
     },
     "framebuffer-tests.xml": {
       "bytes": 1405,
@@ -78,8 +78,8 @@
       "sha256": "1937472d1f1976e86d95d6ce954c937729c466a8886a280556a0554938363887"
     },
     "build-record.json": {
-      "bytes": 3201,
-      "sha256": "da871ad0f6a1b119dbe6d6ebcd635fbeb6f74c9c6cd7d003984377af4ed3daa7"
+      "bytes": 3258,
+      "sha256": "72777a88ec9cf106dfb298e74bfcabc14ca689941f616c9b1cbae0e7331269fb"
     },
     "before-graphics.log": {
       "bytes": 3286,

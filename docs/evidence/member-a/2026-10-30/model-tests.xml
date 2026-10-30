@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite name="ModelIoTest" timestamp="2026&#x002D;10&#x002D;30T18:18:04" hostname="AlmiradeMacBook&#x002D;Air.local" tests="59" failures="0" errors="0" skipped="0" time="0.340">
+<testsuite name="ModelIoTest" timestamp="2026&#x002D;10&#x002D;30T18:21:59" hostname="AlmiradeMacBook&#x002D;Air.local" tests="59" failures="0" errors="0" skipped="0" time="0.365">
   <properties>
     <property name="QTestVersion" value="6.12.0"/>
     <property name="QtVersion" value="6.12.0"/>
     <property name="QtBuild" value="Qt 6.12.0 (arm64&#x002D;little_endian&#x002D;lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang&#x002D;1700.3.19.1))"/>
   </properties>
   <testcase name="initTestCase" classname="ModelIoTest" time="0.000"/>
-  <testcase name="referenceGridPreservesModelLineWidth(mode1&#x002D;width1)" classname="ModelIoTest" time="0.002"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode1&#x002D;width1)" classname="ModelIoTest" time="0.003"/>
   <testcase name="referenceGridPreservesModelLineWidth(mode1&#x002D;width2)" classname="ModelIoTest" time="0.000"/>
   <testcase name="referenceGridPreservesModelLineWidth(mode1&#x002D;width3)" classname="ModelIoTest" time="0.000"/>
   <testcase name="referenceGridPreservesModelLineWidth(mode2&#x002D;width1)" classname="ModelIoTest" time="0.000"/>
@@ -20,7 +20,7 @@
   <testcase name="disabledExportsPreserveFilesAndDocument(csv)" classname="ModelIoTest" time="0.000"/>
   <testcase name="disabledExportsPreserveFilesAndDocument(pov)" classname="ModelIoTest" time="0.000"/>
   <testcase name="disabledExportsPreserveFilesAndDocument(obj)" classname="ModelIoTest" time="0.000"/>
-  <testcase name="offlineDownloadCompletesWithError" classname="ModelIoTest" time="0.022"/>
+  <testcase name="offlineDownloadCompletesWithError" classname="ModelIoTest" time="0.027"/>
   <testcase name="disabledLegacyLoadPreservesDocument(lcd)" classname="ModelIoTest" time="0.001"/>
   <testcase name="disabledLegacyLoadPreservesDocument(leocad)" classname="ModelIoTest" time="0.000"/>
   <testcase name="disabledLegacyLoadPreservesDocument(sniffed&#x002D;binary)" classname="ModelIoTest" time="0.000"/>
@@ -35,9 +35,9 @@
   <testcase name="failedSaveAsPreservesDocumentState" classname="ModelIoTest" time="0.000"/>
   <testcase name="streamWriteFailureIsReported" classname="ModelIoTest" time="0.000"/>
   <testcase name="successfulOverwriteCanBeReopened" classname="ModelIoTest" time="0.001"/>
-  <testcase name="editingSequenceUndoRedoAndSave" classname="ModelIoTest" time="0.119"/>
-  <testcase name="insertTwentyPiecesUndoRedoAndReopen" classname="ModelIoTest" time="0.089"/>
-  <testcase name="serializationDoesNotClearEditHistoryDirtyState" classname="ModelIoTest" time="0.090"/>
+  <testcase name="editingSequenceUndoRedoAndSave" classname="ModelIoTest" time="0.147"/>
+  <testcase name="insertTwentyPiecesUndoRedoAndReopen" classname="ModelIoTest" time="0.091"/>
+  <testcase name="serializationDoesNotClearEditHistoryDirtyState" classname="ModelIoTest" time="0.077"/>
   <testcase name="invalidLDrawPreservesCurrentDocument(empty&#x002D;file)" classname="ModelIoTest" time="0.001"/>
   <testcase name="invalidLDrawPreservesCurrentDocument(truncated&#x002D;reference)" classname="ModelIoTest" time="0.000"/>
   <testcase name="invalidLDrawPreservesCurrentDocument(missing&#x002D;part&#x002D;name)" classname="ModelIoTest" time="0.000"/>

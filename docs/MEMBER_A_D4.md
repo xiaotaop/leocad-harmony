@@ -58,6 +58,7 @@ A 的PR按分工由 B 审核、组长合入。本次不自行合并，也不自�
 
 B 指出网格前移会把模型线宽改为1。已在背景回调后通过 `Context->SetLineWidth`
 恢复用户模型线宽，同时保持GL与lcContext缓存一致，没有靠原生glLineWidth绕过缓存。
+恢复只在存在背景回调时发生；无背景的缩略图等调用保留其显式线宽，回归也覆盖该边界。
 
 新增宿主回归直接运行实际 `lcScene::Draw` 和带边线的box网格，复用现有model suite的
 真实renderer/library生命周期，覆盖线宽1/2/3、Flat/DefaultLights/Wireframe三种模式，

@@ -126,6 +126,16 @@ private slots:
             GLfloat Actual = 0;
             Context->glGetFloatv(GL_LINE_WIDTH, &Actual);
             QCOMPARE(Actual, Width);
+            if (!Grid)
+            {
+                // Callers without a background (e.g. thumbnails) retain their
+                // explicit width even when it differs from the user preference.
+                Context->SetLineWidth(Width + 1.0f);
+                Scene.Draw(Context);
+                Context->glGetFloatv(GL_LINE_WIDTH, &Actual);
+                QCOMPARE(Actual, Width + 1.0f);
+                Context->SetLineWidth(Width);
+            }
             // Verify the lcContext cache agrees with GL after scene drawing too.
             Context->SetLineWidth(1.0f);
             Context->glGetFloatv(GL_LINE_WIDTH, &Actual);
