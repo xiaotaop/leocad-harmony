@@ -27,7 +27,7 @@
 | 插入 | `insertTwentyPiecesUndoRedoAndReopen` 调用 `AddPiece` 连续插入 20 件，逐次核对数量，并验证撤销、重做及保存重开后的 20 件 |
 | 选择 | `editingSequenceUndoRedoAndSave` 调用 `SetSelectionAndFocusAction` 选择首件，随后通过该件移动、旋转、改色及选中删除的结果验证选择生效；不替代鼠标拾取精度验收 |
 | 移动 | `MoveSelectedObjects` 后断言首件位置为 `(20,0,0)`，撤销恢复原位，保存重开保留新位置 |
-| 旋转 | `RotateSelectedObjects` 应用固定 90 度矩阵，断言旋转矩阵前两列，并验证撤销恢复及重开保留 |
+| 旋转 | `RotateSelectedObjects` 应用固定 90 度矩阵，断言 `mModelWorld[0]` 为 `(0,1,0,0)`、`mModelWorld[1]` 为 `(-1,0,0,0)`，并验证撤销恢复及重开保留 |
 | 删除 | `DeleteSelectedObjects` 后由两件变一件，撤销恢复两件，重做回到一件 |
 
 上述用例位于 [模型测试](../tests/model/tst_model_io.cpp)，使用隐藏的真实 Qt 主窗口和模型命令；桌面合成零件不证明正式几何或鼠标操作。
