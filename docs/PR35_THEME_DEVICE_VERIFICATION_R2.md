@@ -1,5 +1,7 @@
 # PR #35 最新主题修复真机复验 R2
 
+更新：`1fa1adee` 的 [R3 复验](PR35_THEME_DEVICE_VERIFICATION_R3.md)已确认菜单及重启后的颜色名恢复，仅切换当下的颜色名仍难辨；以下保留 `a439bf20` 历史结果。
+
 日期：2026-10-31（Asia/Shanghai）。组长执行。关联 [PR #35](https://github.com/xiaotaop/leocad-harmony/pull/35)、[缺陷 #33](https://github.com/xiaotaop/leocad-harmony/issues/33)。
 
 **未通过，当前版本仍不建议作为 #33 的修复合并。** Windows/offscreen 的 10 项测试通过，但真机 No/Yes 保存和重启四项仍显示主菜单文字、当前颜色名不可见或近乎不可辨。深色恢复后文字正常。没有合并 PR 或关闭 issue。
