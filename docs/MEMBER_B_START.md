@@ -1,6 +1,6 @@
 # 成员 B 开发入口
 
-准备日期：2026-10-26；首批开发：2026-10-27；D2 隔离补齐：2026-10-28；D4 核心调用核验：2026-10-30。职责：模型编辑、撤销重做、LDraw 文件读写与数据一致性。
+准备日期：2026-10-26；首批开发：2026-10-27；D2 隔离补齐：2026-10-28；D4 核心调用核验：2026-10-30；D5 桌面序列与状态回归：2026-10-31。职责：模型编辑、撤销重做、LDraw 文件读写与数据一致性。
 
 ## 当前基线
 
@@ -17,6 +17,26 @@
 组长方案文件的来源与 SHA-256 记录于 `member-b-baseline.json`。该文件只是 B 的准备记录，不取代组长负责的正式 `toolchain.lock`。
 
 10/28 D2 测试：49 个业务用例通过（含初始化/清理共 51 passed），0 failed、0 skipped，进程退出码为 0。保留 10/27 第二批的 37 个业务用例，新增 12 项格式隔离和离线错误回调用例；不代表完整 GUI 或鸿蒙验收。结果见 `member-b-validation.json`、`member-b-test-results.txt`，包含固定源码与产物哈希。
+
+## D5 桌面编辑序列与模型状态（2026-10-31）
+
+原计划 B 的 D5 要求为“在桌面测试核心编辑序列及模型状态；交首批固定测试”。本次复用已提交的 [模型测试](../tests/model/tst_model_io.cpp) 和固定夹具，不新增重复用例或业务补丁。
+
+**执行版本与结果**：在 PR #29 的 `55e3f4283e4cc64c0a4565c459eb24c64128f695` 上执行 `scripts/Build-MemberB.ps1 -Target Tests -RunTests`，Windows x64 / Qt 6.8.3 / MSVC2022 构建成功，**65 passed、0 failed、0 skipped**（63 个用例/数据行及初始化、清理），命令退出码 0。结果见 [D5 测试输出](member-b-d5-test-results.txt)；日志头是运行后补记的溯源信息，正文仅统一为 LF 换行。随后 #29 合入 `main@afd250f545a6940a3752408f8e48c664917256a8`，与测试提交的完整文件树相同，复用该结果。
+
+| D5 固定测试 | 已验证的行为与状态 |
+|---|---|
+| `editingSequenceUndoRedoAndSave` | 从两件固定模型开始，选择、移动、90 度旋转、改色、删除；逐步撤销恢复数量/颜色/矩阵/位置，重做恢复编辑；保存重开保持结果；回到保存点时未修改状态恢复，撤销后新编辑使旧重做失效 |
+| `insertTwentyPiecesUndoRedoAndReopen` | 连续插入 20 件，逐次核对数量；20 次撤销回到零件数 0 且未修改，20 次重做恢复 20 件，保存重开仍为 20 件 |
+| `serializationDoesNotClearEditHistoryDirtyState` | 失败和成功的内存序列化均不错误清除编辑历史中的未保存状态；撤销/重做仍更新该状态 |
+| `ldrRoundTrip`、`mpdRoundTrip`、`sharedSubmodelRoundTrip` | 固定 LDR 的零件、颜色及坐标转换，MPD 的主/子模型关系及共享引用，保存重开后保持 |
+| `failedSaveAsPreservesDocumentState`、`failedReplacementPreservesExistingFile`、`invalidLDrawPreservesCurrentDocument` | 保存失败保留文件名、未保存状态和模型；Windows 锁定目标保留原文件；截断、非有限值、循环引用和坏 META 等输入不覆盖当前文档 |
+
+固定输入已入库：[两件 LDR](../tests/fixtures/two-pieces.ldr)、[子模型 MPD](../tests/fixtures/submodel.mpd)；20 件插入和错误输入由测试生成，不依赖个人文档。用例使用真实模型命令和隔离的临时设置/目录；合成零件不证明正式零件库完整性或实际鼠标操作。
+
+**A 的 D5 审核**：[PR #29 已批准并合并](https://github.com/xiaotaop/leocad-harmony/pull/29#pullrequestreview-5721525388)。复核复制前的像素格式转换、实际行跨度与分块边界，6 项源码及 29 项证据 SHA-256 全匹配；当前提交 8 项 CI 全绿，原始图形 CI 合计 89 passed（含 desktop/GLES 读回各 12 项），Windows 模型 65 passed、基础模式子集 7 passed，均无失败或跳过。上述本机 65 项还覆盖 A 的颜色/相机/分块和已有线宽回归；未在本机重复构建完整应用或独立图形套件。
+
+**交付边界**：B 的 D5 桌面任务已完成。未生成新 HAP、未操作鸿蒙设备；[#27](https://github.com/xiaotaop/leocad-harmony/issues/27) 由 A/组长按 [D5 真机交接](MEMBER_A_D5_DEVICE_HANDOFF.md) 复验新正常包颜色、相机和窗口后关闭；[#15](https://github.com/xiaotaop/leocad-harmony/issues/15) 的系统文件选择、权限、导入导出及 UI 完整闭环仍待 D7–D8。桌面回归不等于团队 D5 真机出口或发布放行。
 
 ## D4 核心编辑调用（2026-10-30）
 
