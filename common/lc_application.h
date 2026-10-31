@@ -209,6 +209,12 @@ public:
 	// device.
 	static QPalette EnsureReadablePalette(const QPalette& Source);
 
+	// Logs what the menu bar and the colour-name button actually resolve, so a
+	// device can show where the theme stops reaching. Application-level palette
+	// values were not enough to explain #33: the device reported readable
+	// application colours while menu text stayed invisible.
+	static void LogThemeWidgetState();
+
 	// Test seam: when valid, the System branch uses this instead of the platform
 	// style's standardPalette(). Lets the repair be checked through the real
 	// UpdateStyle() rather than only in isolation. Never set in production.

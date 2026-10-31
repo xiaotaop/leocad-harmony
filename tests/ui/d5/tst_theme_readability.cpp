@@ -87,6 +87,12 @@ private slots:
 	// different claims.
 	void brokenStylePaletteIsRepaired();
 	void readablePaletteIsLeftAlone();
+
+	// The device showed readable application colours while widgets drew
+	// invisible text, so the widget's own resolution is what has to be
+	// inspected. This pins that the widget state is reachable and sane on a
+	// healthy host, which is the baseline the device reading is compared with.
+	void widgetStateReportsWhatAWidgetResolves();
 	void themeSwitchAppliesTheRepair();
 
 	// The repair is worthless if the stylesheet teardown then overwrites the
@@ -397,6 +403,42 @@ void ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown()
 	gApplication->SetStylePaletteOverride(QPalette());
 	ApplyTheme(lcColorTheme::System);
 	delete Menu;
+}
+
+void ThemeReadabilityTest::widgetStateReportsWhatAWidgetResolves()
+{
+	// #33 breaks between the application palette and the widget that paints, so
+	// the properties that decide whether a widget follows the application at all
+	// are what a device reading has to expose. On a healthy host they are all
+	// benign; the case exists so the diagnostic cannot silently stop sampling.
+	QWidget Host;
+	QMenuBar* Menu = new QMenuBar(&Host);
+	Menu->addMenu(QStringLiteral("&File"));
+
+	// A widget that has its own palette stops inheriting, which is exactly the
+	// state a device can be in without any code of ours calling setPalette.
+	QVERIFY2(!Menu->testAttribute(Qt::WA_SetPalette), "a fresh menu bar already carries its own palette");
+
+	QPalette Own = Menu->palette();
+	Own.setColor(QPalette::WindowText, QColor(240, 240, 240));
+	Menu->setPalette(Own);
+
+	QVERIFY2(Menu->testAttribute(Qt::WA_SetPalette),
+		"setting a palette did not mark the widget as having its own");
+
+	// And that state really does block an application palette change: this is the
+	// mechanism the diagnostic reports as has_own_palette.
+	QPalette App = QApplication::palette();
+	App.setColor(QPalette::WindowText, QColor(0, 0, 0));
+	QApplication::setPalette(App);
+
+	QVERIFY2(Menu->palette().color(QPalette::WindowText) == QColor(240, 240, 240),
+		"a widget with its own palette followed the application palette after all");
+
+	delete Menu;
+
+	// Leave the application palette in the state the other cases expect.
+	ApplyTheme(lcColorTheme::System);
 }
 
 int main(int argc, char** argv)

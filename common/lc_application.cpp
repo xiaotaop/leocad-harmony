@@ -260,6 +260,68 @@ double Contrast(const QColor& A, const QColor& B)
 constexpr double MinimumContrast = 3.0;
 }
 
+void lcApplication::LogThemeWidgetState()
+{
+	// Two widgets stand for the two surfaces the report names: the menu bar for
+	// menu text, and the colour-name tool button for the current colour name.
+	// Both are sampled from the live window, not reconstructed.
+	struct Target
+	{
+		const char* What;
+		QWidget* Widget;
+	};
+
+	QList<Target> Targets;
+	const QStyle* AppStyle = QApplication::style();
+
+	if (gMainWindow != nullptr)
+	{
+		if (QMenuBar* MenuBar = gMainWindow->menuBar())
+			Targets.append({ "menubar", MenuBar });
+
+		// The colour name lives on a QToolButton inside the Colors dock. Finding
+		// it by position in the window would be fragile, so pick the tool button
+		// that carries the current colour's text.
+		for (QToolButton* Button : gMainWindow->findChildren<QToolButton*>())
+		{
+			if (Button->text().trimmed().isEmpty() || Button->icon().isNull())
+				continue;
+
+			Targets.append({ "colorbutton", Button });
+			break;
+		}
+	}
+
+	for (const Target& Item : Targets)
+	{
+		if (Item.Widget == nullptr)
+			continue;
+
+		const QPalette WidgetPalette = Item.Widget->palette();
+		const QPalette::ColorGroup Group = Item.Widget->isEnabled() ? QPalette::Active : QPalette::Disabled;
+		const QStyle* WidgetStyle = Item.Widget->style();
+
+		// WA_SetPalette is the switch that decides whether a widget follows the
+		// application palette at all: once a widget has its own palette it stops
+		// inheriting, and clearing the application stylesheet does not reset it.
+		qInfo().noquote() << "LEOCAD_THEME_WIDGET"
+			<< QStringLiteral("{\"widget\":\"%1\",\"enabled\":%2,\"has_own_palette\":%3,\"own_style\":%4,\"style_class\":\"%5\",\"app_style\":\"%6\",\"windowtext\":\"%7\",\"buttontext\":\"%8\",\"text\":\"%9\",\"window\":\"%10\",\"button\":\"%11\",\"base\":\"%12\",\"has_stylesheet\":%13}")
+				.arg(QLatin1String(Item.What),
+					Item.Widget->isEnabled() ? QStringLiteral("true") : QStringLiteral("false"),
+					Item.Widget->testAttribute(Qt::WA_SetPalette) ? QStringLiteral("true") : QStringLiteral("false"),
+					WidgetStyle != AppStyle ? QStringLiteral("true") : QStringLiteral("false"),
+					WidgetStyle ? QString::fromLatin1(WidgetStyle->metaObject()->className()) : QString(),
+					AppStyle ? QString::fromLatin1(AppStyle->metaObject()->className()) : QString(),
+					WidgetPalette.color(Group, QPalette::WindowText).name(),
+					WidgetPalette.color(Group, QPalette::ButtonText).name(),
+					WidgetPalette.color(Group, QPalette::Text).name(),
+					WidgetPalette.color(Group, QPalette::Window).name(),
+					WidgetPalette.color(Group, QPalette::Button).name(),
+					WidgetPalette.color(Group, QPalette::Base).name(),
+					Item.Widget->styleSheet().isEmpty() ? QStringLiteral("false") : QStringLiteral("true"));
+	}
+}
+
 QPalette lcApplication::EnsureReadablePalette(const QPalette& Source)
 {
 	QPalette Result = Source;
@@ -400,11 +462,15 @@ void lcApplication::UpdateStyle()
 		}
 
 		// The platform style's own palette is the intended source here, but it is
-		// not guaranteed to be self-consistent: a style can hand back a palette
-		// whose text roles do not contrast with its own surfaces, which reads as
-		// "theme applied, nothing visible". The device evidence for #33 is exactly
-		// that shape — Window #ffffff applied, menu and colour-name text still
-		// invisible — so the palette is repaired rather than trusted.
+		// not guaranteed to be self-consistent, so it is checked rather than
+		// trusted.
+		//
+		// This is a guard, not the fix for #33. Device retest of a439bf20 showed
+		// the application palette already readable (windowtext #182431 on window
+		// #ffffff) while the menu still drew invisible text, so the application
+		// palette is not where #33 breaks. Nothing here fires in that state; it
+		// stays because a style handing back unreadable text roles is still a real
+		// failure mode, just not this one.
 		// A test can substitute the palette a style would return, so the repair can
 		// be exercised on the real UpdateStyle() path. Production never sets this.
 		QPalette Restored = mHasStylePaletteOverride
@@ -437,6 +503,17 @@ void lcApplication::UpdateStyle()
 					Applied.color(QPalette::Button).name(),
 					Applied.color(QPalette::Base).name());
 		}
+
+		// Application-level values were not the problem: on the device the
+		// restored palette measured readable (windowtext #182431 on window
+		// #ffffff) while the menu still drew invisible text. Whatever goes wrong
+		// happens between that palette and the widget that paints.
+		//
+		// So sample the widgets themselves. What matters is what they resolve, not
+		// what the application holds: a widget can carry its own palette
+		// (WA_SetPalette) and then ignore application palette changes entirely,
+		// and it can be painted by a style other than QApplication::style().
+		LogThemeWidgetState();
 	}
 }
 
