@@ -1,5 +1,7 @@
 # PR #35 System 主题真机复验
 
+后续提交 `a439bf20` 的第二轮复验见 [R2 报告](PR35_THEME_DEVICE_VERIFICATION_R2.md)，No/Yes 保存及重启仍失败。本文件保留 `ba36110b` 的历史结果。
+
 日期：2026-10-31，Asia/Shanghai。执行：组长。关联 [PR #35](https://github.com/xiaotaop/leocad-harmony/pull/35)、[缺陷 #33](https://github.com/xiaotaop/leocad-harmony/issues/33)。
 
 **结论：未通过。No、Yes 两条路径保存后和重启后，主菜单文字、当前颜色名均仍不可见。暂不建议将此版本作为 #33 的修复合并，#33 应继续开放。** 先前代码复审认可了防御分支及测试改进，但该结论不能替代本轮真机结果。不能以构建成功、测试通过、ColorTheme 写盘或正常退出认定问题已修复。
