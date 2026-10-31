@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite name="ReadbackTests" timestamp="2026&#x002D;10&#x002D;31T13:22:00" hostname="AlmiradeMacBook&#x002D;Air.local" tests="12" failures="0" errors="0" skipped="0" time="0.173">
+  <properties>
+    <property name="QTestVersion" value="6.12.0"/>
+    <property name="QtVersion" value="6.12.0"/>
+    <property name="QtBuild" value="Qt 6.12.0 (arm64&#x002D;little_endian&#x002D;lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang&#x002D;1700.3.19.1))"/>
+  </properties>
+  <testcase name="initTestCase" classname="ReadbackTests" time="0.000"/>
+  <testcase name="copyFormats(5)" classname="ReadbackTests" time="0.000"/>
+  <testcase name="copyFormats(17)" classname="ReadbackTests" time="0.000"/>
+  <testcase name="copyFormats(6)" classname="ReadbackTests" time="0.000"/>
+  <testcase name="copyFormats(18)" classname="ReadbackTests" time="0.000"/>
+  <testcase name="copyFormats(13)" classname="ReadbackTests" time="0.000"/>
+  <testcase name="oldRawCopySwapsRedAndBlue" classname="ReadbackTests" time="0.000"/>
+  <testcase name="alphaIsPreserved(rgba)" classname="ReadbackTests" time="0.000"/>
+  <testcase name="alphaIsPreserved(premultiplied)" classname="ReadbackTests" time="0.000"/>
+  <testcase name="actualFramebufferReadback(single&#x002D;sample)" classname="ReadbackTests" time="0.092">
+    <system-out>
+      <![CDATA[actual readback QSurfaceFormat(version 2.1, options QFlags<QSurfaceFormat::FormatOption>(DeprecatedFunctions), depthBufferSize 32, redBufferSize 8, greenBufferSize 8, blueBufferSize 8, alphaBufferSize -1, stencilBufferSize 0, samples 0, swapBehavior QSurfaceFormat::DoubleBuffer, swapInterval 1, colorSpace QColorSpace(), profile  QSurfaceFormat::NoProfile) QImage::Format_ARGB32_Premultiplied 28 samples 0]]>
+    </system-out>
+  </testcase>
+  <testcase name="actualFramebufferReadback(multisample)" classname="ReadbackTests" time="0.080">
+    <system-out>
+      <![CDATA[actual readback QSurfaceFormat(version 2.1, options QFlags<QSurfaceFormat::FormatOption>(DeprecatedFunctions), depthBufferSize 32, redBufferSize 8, greenBufferSize 8, blueBufferSize 8, alphaBufferSize -1, stencilBufferSize 0, samples 0, swapBehavior QSurfaceFormat::DoubleBuffer, swapInterval 1, colorSpace QColorSpace(), profile  QSurfaceFormat::NoProfile) QImage::Format_ARGB32_Premultiplied 28 samples 4]]>
+    </system-out>
+  </testcase>
+  <testcase name="cleanupTestCase" classname="ReadbackTests" time="0.000"/>
+</testsuite>

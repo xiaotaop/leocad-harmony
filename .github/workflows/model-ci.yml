@@ -40,6 +40,14 @@ jobs:
           cache: true
       - name: Build and run model tests
         run: ./scripts/Build-MemberB.ps1 -Target Tests -RunTests -QtRoot $env:QT_ROOT_DIR
+      - name: Check thumbnail colors and camera fitting in basic mode
+        run: |
+          $env:LEOCAD_SAFE_RENDER = '1'
+          try {
+            & .local/build-tests/build/release/leocad-model-tests.exe thumbnailAndCameraColors tiledRenderKeepsColorAndOrientation -o '.local/build-tests/basic-render-results.txt,txt'
+            if ($LASTEXITCODE -ne 0) { throw 'Basic render regression failed.' }
+            Get-Content .local/build-tests/basic-render-results.txt
+          } finally { Remove-Item Env:LEOCAD_SAFE_RENDER }
       - name: Run D3 integration tests
         run: ./scripts/Run-D3Tests.ps1 -QtRoot $env:QT_ROOT_DIR
       - name: Build desktop application
@@ -61,6 +69,7 @@ jobs:
           path: |
             .local/build-tests/build.log
             .local/build-tests/test-results.txt
+            .local/build-tests/basic-render-results.txt
             .local/build-tests/dependencies.txt
             .local/build-app/build.log
             .local/build-app/version.txt

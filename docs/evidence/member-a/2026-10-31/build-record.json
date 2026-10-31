@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-31",
+  "base": "9210a20d93c7bdfb689c85d29e4c78d6e6acd3cb",
+  "host": "macOS 27.0.1 arm64 / Apple M4 / Qt 6.12.0 / Release / QT_NO_DEBUG",
+  "source_sha256": {
+    "common/lc_renderimage.h": "03c192423edea06e215deb05d8b1bb6115cb49d6d2f4cfe593e89b25b7d103c8",
+    "common/lc_view.cpp": "e5cb3314dd3f0f3e4278bff22697659f76712097d0f0c00f86ccc73068f6e8b1",
+    "leocad.pro": "ab34daf0da8f5d396a31334dcd0513a802019aec1b2a07ae1e9b8a9ffe33f5d7",
+    "tests/model/tst_model_io.cpp": "5c03f1d160a6b5d2d32613a644f41340bab6234e5b64c05b9cf9ac74b8db38d3",
+    "tests/render-readback/tst_readback.cpp": "ec56c653325f215a27f10708756b600f63ece0a74b719f0f327884cb14997379",
+    "tests/render-readback/CMakeLists.txt": "d6cfe201e426a9210b619869e814c6629c18e8aaa479d8df6643d42c4a68f0c6"
+  },
+  "readback": {
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "actual_format": "ARGB32_Premultiplied (6)",
+    "destination_format": "ARGB32 (5)",
+    "single_and_multisample": true
+  },
+  "model_suite": {
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0
+  },
+  "basic_mode_subset": {
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0
+  },
+  "startup_ctest": {
+    "passed": 1,
+    "cases": [
+      "--version:0",
+      "--help:0",
+      "--invalid:1"
+    ]
+  },
+  "app_build": {
+    "source": "/private/tmp/leocad-d5-source",
+    "build": "/private/tmp/leocad-d5-app-build",
+    "Release": true,
+    "LEOCAD_TEST_RESOURCE_PATHS": "ON",
+    "LEOCAD_SAFE_RENDER": "OFF",
+    "binary_sha256": "347adf21d07965a8130c6aec9ff6d59e9093c02656a72643ba0c8b3ae925c98b"
+  },
+  "commands": [
+    "cmake -S tests/render-readback -B <readback-build> -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=<Qt6.12> && cmake --build <readback-build> --parallel 4",
+    "<readback-build>/leocad-readback-tests -o readback-tests.txt,txt -o readback-tests.xml,junitxml",
+    "qmake <ASCII-source>/member-b-tests.pro CONFIG+=release && make -j4",
+    "TMPDIR=/private/tmp/leocad-d5-model-runtime LEOCAD_TEST_EVIDENCE_DIR=<captures> <model-build>/build/release/leocad-model-tests -o model-tests.txt,txt -o model-tests.xml,junitxml",
+    "TMPDIR=/private/tmp/leocad-d5-model-runtime LEOCAD_SAFE_RENDER=1 <model-build>/build/release/leocad-model-tests thumbnailAndCameraColors tiledRenderKeepsColorAndOrientation -o basic-render-tests.txt,txt",
+    "cmake -S <ASCII-source> -B <app-build> -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=<Qt6.12> -DLEOCAD_TEST_RESOURCE_PATHS=ON && cmake --build <app-build> --parallel 4",
+    "QT_QPA_PLATFORM=offscreen ctest --test-dir <app-build> --output-on-failure"
+  ],
+  "limitations": [
+    "No new Harmony HAP build or physical device run by Member A. GLES Mesa CI results are retained as PR workflow artifacts.",
+    "Readback-format negative control uses a controlled RGBA8888 image; macOS native readback is ARGB32_Premultiplied. Device source_format must be collected before claiming device confirmation.",
+    "Camera and resize tests call the production offscreen lcView path; native window maximize/restore and inserted part consistency remain leader device checks."
+  ]
+}

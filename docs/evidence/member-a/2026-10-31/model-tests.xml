@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite name="ModelIoTest" timestamp="2026&#x002D;10&#x002D;31T13:26:38" hostname="AlmiradeMacBook&#x002D;Air.local" tests="64" failures="0" errors="0" skipped="0" time="0.402">
+  <properties>
+    <property name="QTestVersion" value="6.12.0"/>
+    <property name="QtVersion" value="6.12.0"/>
+    <property name="QtBuild" value="Qt 6.12.0 (arm64&#x002D;little_endian&#x002D;lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang&#x002D;1700.3.19.1))"/>
+  </properties>
+  <testcase name="initTestCase" classname="ModelIoTest" time="0.000"/>
+  <testcase name="thumbnailAndCameraColors(red)" classname="ModelIoTest" time="0.026">
+    <system-out>
+      <![CDATA[LEOCAD_GL_READBACK {"destination_format":5,"height":72,"source_depth":32,"source_format":6,"source_stride":288,"width":72}]]>
+    </system-out>
+  </testcase>
+  <testcase name="thumbnailAndCameraColors(blue)" classname="ModelIoTest" time="0.012"/>
+  <testcase name="thumbnailAndCameraColors(light&#x002D;blue)" classname="ModelIoTest" time="0.012"/>
+  <testcase name="tiledRenderKeepsColorAndOrientation(horizontal)" classname="ModelIoTest" time="0.008"/>
+  <testcase name="tiledRenderKeepsColorAndOrientation(vertical)" classname="ModelIoTest" time="0.002"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode1&#x002D;width1)" classname="ModelIoTest" time="0.002"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode1&#x002D;width2)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode1&#x002D;width3)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode2&#x002D;width1)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode2&#x002D;width2)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode2&#x002D;width3)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode0&#x002D;width1)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode0&#x002D;width2)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="referenceGridPreservesModelLineWidth(mode0&#x002D;width3)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="disabledExportsPreserveFilesAndDocument(3ds)" classname="ModelIoTest" time="0.001"/>
+  <testcase name="disabledExportsPreserveFilesAndDocument(dae)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="disabledExportsPreserveFilesAndDocument(csv)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="disabledExportsPreserveFilesAndDocument(pov)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="disabledExportsPreserveFilesAndDocument(obj)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="offlineDownloadCompletesWithError" classname="ModelIoTest" time="0.025"/>
+  <testcase name="disabledLegacyLoadPreservesDocument(lcd)" classname="ModelIoTest" time="0.001"/>
+  <testcase name="disabledLegacyLoadPreservesDocument(leocad)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="disabledLegacyLoadPreservesDocument(sniffed&#x002D;binary)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="disabledLddImportPreservesDocument" classname="ModelIoTest" time="0.000"/>
+  <testcase name="disabledHtmlExportDoesNotCreateDirectory" classname="ModelIoTest" time="0.000"/>
+  <testcase name="disabledBrickLinkExportReturnsError" classname="ModelIoTest" time="0.000"/>
+  <testcase name="emptyModelRoundTrip" classname="ModelIoTest" time="0.000"/>
+  <testcase name="ldrRoundTrip" classname="ModelIoTest" time="0.001"/>
+  <testcase name="mpdRoundTrip" classname="ModelIoTest" time="0.001"/>
+  <testcase name="missingFilePreservesModel" classname="ModelIoTest" time="0.000"/>
+  <testcase name="unwritableDestinationReportsError" classname="ModelIoTest" time="0.000"/>
+  <testcase name="failedSaveAsPreservesDocumentState" classname="ModelIoTest" time="0.000"/>
+  <testcase name="streamWriteFailureIsReported" classname="ModelIoTest" time="0.000"/>
+  <testcase name="successfulOverwriteCanBeReopened" classname="ModelIoTest" time="0.001"/>
+  <testcase name="editingSequenceUndoRedoAndSave" classname="ModelIoTest" time="0.123"/>
+  <testcase name="insertTwentyPiecesUndoRedoAndReopen" classname="ModelIoTest" time="0.095"/>
+  <testcase name="serializationDoesNotClearEditHistoryDirtyState" classname="ModelIoTest" time="0.079"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(empty&#x002D;file)" classname="ModelIoTest" time="0.001"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(truncated&#x002D;reference)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(missing&#x002D;part&#x002D;name)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(nonfinite&#x002D;transform)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(duplicate&#x002D;submodel)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(unnamed&#x002D;submodel)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(truncated&#x002D;triangle)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(overlong&#x002D;reference)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(self&#x002D;referencing&#x002D;submodel)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(mutually&#x002D;referencing&#x002D;submodels)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(unused&#x002D;submodel&#x002D;cycle)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(truncated&#x002D;synth&#x002D;control&#x002D;point)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(nonfinite&#x002D;synth&#x002D;control&#x002D;point)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(truncated&#x002D;piece&#x002D;pivot)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="invalidLDrawPreservesCurrentDocument(nonfinite&#x002D;piece&#x002D;pivot)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="loadedActiveModelBelongsToProject" classname="ModelIoTest" time="0.000"/>
+  <testcase name="sharedSubmodelRoundTrip" classname="ModelIoTest" time="0.001"/>
+  <testcase name="relativeDocumentPathsSurviveWorkingDirectoryChange(load&#x002D;relative&#x002D;path)" classname="ModelIoTest" time="0.001"/>
+  <testcase name="relativeDocumentPathsSurviveWorkingDirectoryChange(save&#x002D;relative&#x002D;path)" classname="ModelIoTest" time="0.001"/>
+  <testcase name="compatibleLDrawSyntax(bom&#x002D;and&#x002D;direct&#x002D;color)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="compatibleLDrawSyntax(unknown&#x002D;meta&#x002D;and&#x002D;line)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="compatibleLDrawSyntax(mpd&#x002D;trailing&#x002D;signature)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="compatibleLDrawSyntax(piece&#x002D;pivot)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="compatibleLDrawSyntax(synth&#x002D;control&#x002D;point)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="compatibleLDrawSyntax(ignored&#x002D;meta&#x002D;after&#x002D;nofile)" classname="ModelIoTest" time="0.000"/>
+  <testcase name="cleanupTestCase" classname="ModelIoTest" time="0.000"/>
+</testsuite>

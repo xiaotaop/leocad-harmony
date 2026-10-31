@@ -1,4 +1,5 @@
 #include "lc_global.h"
+#include "lc_renderimage.h"
 #include "lc_renderpolicy.h"
 #include "lc_view.h"
 #include "lc_viewwidget.h"
@@ -832,7 +833,18 @@ void lcView::UnbindRenderFramebuffer()
 
 QImage lcView::GetRenderFramebufferImage() const
 {
-	return mRenderFramebuffer->toImage();
+	QImage Image = mRenderFramebuffer->toImage();
+	static QImage::Format PreviousFormat = QImage::Format_Invalid;
+	if (Image.format() != PreviousFormat)
+	{
+		PreviousFormat = Image.format();
+		qInfo().noquote() << "LEOCAD_GL_READBACK" << QJsonDocument(QJsonObject{
+			{"source_format", int(Image.format())}, {"source_depth", Image.depth()},
+			{"source_stride", int(Image.bytesPerLine())}, {"width", Image.width()}, {"height", Image.height()},
+			{"destination_format", int(QImage::Format_ARGB32)}
+		}).toJson(QJsonDocument::Compact);
+	}
+	return Image;
 }
 
 void lcView::OnDraw()
@@ -943,8 +955,6 @@ void lcView::OnDraw()
 				UnbindRenderFramebuffer();
 				QImage TileImage = GetRenderFramebufferImage();
 				BindRenderFramebuffer();
-				quint8* Buffer = TileImage.bits();
-				uchar* ImageBuffer = mRenderImage.bits();
 
 				quint32 TileY = 0, SrcY = 0;
 				if (CurrentTileRow != TotalTileRows - 1)
@@ -952,15 +962,8 @@ void lcView::OnDraw()
 				else if (TotalTileRows > 1)
 					SrcY = (mHeight - mRenderImage.height() % mHeight) % mHeight;
 
-				quint32 TileStart = ((CurrentTileColumn * mWidth) + (TileY * mRenderImage.width())) * 4;
-
-				for (int y = 0; y < CurrentTileHeight; y++)
-				{
-					quint8* src = Buffer + (SrcY + y) * mWidth * 4;
-					quint8* dst = ImageBuffer + TileStart + y * mRenderImage.width() * 4;
-
-					memcpy(dst, src, CurrentTileWidth * 4);
-				}
+				lcCopyRenderImageTile(TileImage, mRenderImage,
+					QRect(0, SrcY, CurrentTileWidth, CurrentTileHeight), QPoint(CurrentTileColumn * mWidth, TileY));
 			}
 		}
 	}

@@ -35,6 +35,8 @@ jobs:
           cmake --build build/render-shaders --parallel 2
           cmake -S tests/render-framebuffer -B build/render-framebuffer -DCMAKE_BUILD_TYPE=Release
           cmake --build build/render-framebuffer --parallel 2
+          cmake -S tests/render-readback -B build/render-readback -DCMAKE_BUILD_TYPE=Release
+          cmake --build build/render-readback --parallel 2
       - name: Run against Mesa
         env:
           LIBGL_ALWAYS_SOFTWARE: '1'
@@ -54,6 +56,12 @@ jobs:
           LEOCAD_TEST_GLES=1 xvfb-run -a build/render-framebuffer/leocad-framebuffer-tests \
             -o build/render-framebuffer/gles-results.xml,junitxml \
             -o build/render-framebuffer/gles-results.txt,txt
+          xvfb-run -a build/render-readback/leocad-readback-tests \
+            -o build/render-readback/results.xml,junitxml \
+            -o build/render-readback/results.txt,txt
+          LEOCAD_TEST_GLES=1 xvfb-run -a build/render-readback/leocad-readback-tests \
+            -o build/render-readback/gles-results.xml,junitxml \
+            -o build/render-readback/gles-results.txt,txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -62,3 +70,4 @@ jobs:
             build/render-context/results.*
             build/render-shaders/*results.*
             build/render-framebuffer/*results.*
+            build/render-readback/*results.*
