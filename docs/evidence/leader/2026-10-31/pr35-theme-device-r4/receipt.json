@@ -1,0 +1,101 @@
+{
+  "algorithm": "SHA-256",
+  "excludes": "receipt.json itself",
+  "files": [
+    {
+      "name": "dark-before-yes.jpeg",
+      "bytes": 276429,
+      "sha256": "0f62496d0b4912c2136756c0e7c534fabebdd75af479cc111a9586e600540749"
+    },
+    {
+      "name": "dark-start.jpeg",
+      "bytes": 276422,
+      "sha256": "3cc9133f7cb73f70aa79c4eda4619ccefd094734a37f839f15c476fac2774ca8"
+    },
+    {
+      "name": "host-qt-results.txt",
+      "bytes": 7313,
+      "sha256": "c57acd67aef1b7089060c4d6e3e1dba7509feb4836a3730585caad4f203e7422"
+    },
+    {
+      "name": "no-applied-delayed.jpeg",
+      "bytes": 316134,
+      "sha256": "1ac46955c3a48f477747f5a09ce8cb389879949e61eb89a6bb3d2a1cd2de31f6"
+    },
+    {
+      "name": "no-applied.jpeg",
+      "bytes": 316134,
+      "sha256": "1ac46955c3a48f477747f5a09ce8cb389879949e61eb89a6bb3d2a1cd2de31f6"
+    },
+    {
+      "name": "no-reset-prompt.jpeg",
+      "bytes": 313684,
+      "sha256": "a33fdaa4e2ae6704918a025ff2f060197b8b01a559120cb571feeaaf27cb6ed9"
+    },
+    {
+      "name": "no-restart.hilog.txt",
+      "bytes": 63733,
+      "sha256": "382e3d02c08f730367f62e17894daf9b7f4d01a32b8af90665304d387f511c0a"
+    },
+    {
+      "name": "no-restarted.jpeg",
+      "bytes": 318488,
+      "sha256": "8de434ed7d1dfbd07946de4e21cb2e22a0977ee97bab0bd25a71c54a8ebb964b"
+    },
+    {
+      "name": "no-run.hilog.txt",
+      "bytes": 138866,
+      "sha256": "31ac86e61c02023bc1a2de63bb9dff415d388743cf9c95fc1c6d8dd1b3cd2441"
+    },
+    {
+      "name": "preferences-before-no.jpeg",
+      "bytes": 303160,
+      "sha256": "65c1494f70de4e39816e774d2f3870a1e75f15ad0df13071322af6e32d84b627"
+    },
+    {
+      "name": "restored-dark.hilog.txt",
+      "bytes": 62490,
+      "sha256": "e59987aef077db5d8dfedad0e44dfaff12fc5cc095bc69680180bbb5fcdea7e6"
+    },
+    {
+      "name": "restored-dark.jpeg",
+      "bytes": 276641,
+      "sha256": "2830424209b69a654a6cbdc07c1884cceec9bafdc5c3588acb97ce07aac70abd"
+    },
+    {
+      "name": "result.json",
+      "bytes": 7064,
+      "sha256": "3fad0b36c3799a166ac1751a5c2d56d4e2ac8c101220a44b66d563e91f4d6ed3"
+    },
+    {
+      "name": "yes-applied-delayed.jpeg",
+      "bytes": 354728,
+      "sha256": "aff10be0af4f8ef62d7358b3ea77d31349de08e9d5f3623f56f86dcd8a1c7993"
+    },
+    {
+      "name": "yes-applied.jpeg",
+      "bytes": 354728,
+      "sha256": "aff10be0af4f8ef62d7358b3ea77d31349de08e9d5f3623f56f86dcd8a1c7993"
+    },
+    {
+      "name": "yes-reset-prompt.jpeg",
+      "bytes": 313510,
+      "sha256": "b31bb7272e202cd9c6a1ec6f4da6f2ded3fe67db47c1e89b9e6dbf5a41b42b76"
+    },
+    {
+      "name": "yes-restart.hilog.txt",
+      "bytes": 63886,
+      "sha256": "b3f5b4fe5ef03afdc9ff4e9e33bb9370f03d7d737cd237117a652d4e3fc441fc"
+    },
+    {
+      "name": "yes-restarted.jpeg",
+      "bytes": 357630,
+      "sha256": "a1fb2553de99ee3727bd94b53bf8fe15e818ca85a79056d3e5b3c1a349c179a2"
+    },
+    {
+      "name": "yes-run.hilog.txt",
+      "bytes": 138964,
+      "sha256": "9913d3dd850a92db009ea2340e9edee2cad509b172b9c4be2eef43f9c18b34d8"
+    }
+  ]
+}

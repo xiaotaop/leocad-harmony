@@ -1,0 +1,167 @@
+{
+  "date": "2026-10-31",
+  "timezone": "Asia/Shanghai",
+  "pr": 35,
+  "issue": 33,
+  "source_sha": "a439bf20eb7e9375426a3e363f11a6b69d730eb1",
+  "verdict": "FAIL",
+  "system_save_restart_no_yes_all_failed": true,
+  "package": {
+    "name": "leocad-a439bf20-signed.hap",
+    "bytes": 80080203,
+    "sha256": "192f9bee3ef6e367ead540ec2eeacfc247e2f43d16a8f5242e39341f1eeaecee"
+  },
+  "runs": [
+    {
+      "name": "no-run",
+      "pid": 40324,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [
+        {
+          "default": "ohos",
+          "active_before": "",
+          "class_before": "QStyleSheetStyle"
+        },
+        {
+          "active_after": "ohos",
+          "class_after": "QOhosStyle",
+          "window": "#ffffff",
+          "windowtext": "#182431",
+          "text": "#182431",
+          "buttontext": "#ffffff",
+          "button": "#000000",
+          "base": "#e4e4e4"
+        }
+      ],
+      "menu_and_color_name_readable": false
+    },
+    {
+      "name": "no-restart",
+      "pid": 40999,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [
+        {
+          "default": "ohos",
+          "active_before": "ohos",
+          "class_before": "QOhosStyle"
+        },
+        {
+          "active_after": "ohos",
+          "class_after": "QOhosStyle",
+          "window": "#ffffff",
+          "windowtext": "#182431",
+          "text": "#182431",
+          "buttontext": "#ffffff",
+          "button": "#000000",
+          "base": "#e4e4e4"
+        }
+      ],
+      "menu_and_color_name_readable": false
+    },
+    {
+      "name": "yes-run",
+      "pid": 41157,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [
+        {
+          "default": "ohos",
+          "active_before": "",
+          "class_before": "QStyleSheetStyle"
+        },
+        {
+          "active_after": "ohos",
+          "class_after": "QOhosStyle",
+          "window": "#ffffff",
+          "windowtext": "#182431",
+          "text": "#182431",
+          "buttontext": "#ffffff",
+          "button": "#000000",
+          "base": "#e4e4e4"
+        }
+      ],
+      "menu_and_color_name_readable": false
+    },
+    {
+      "name": "yes-restart",
+      "pid": 41446,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [
+        {
+          "default": "ohos",
+          "active_before": "ohos",
+          "class_before": "QOhosStyle"
+        },
+        {
+          "active_after": "ohos",
+          "class_after": "QOhosStyle",
+          "window": "#ffffff",
+          "windowtext": "#182431",
+          "text": "#182431",
+          "buttontext": "#ffffff",
+          "button": "#000000",
+          "base": "#e4e4e4"
+        }
+      ],
+      "menu_and_color_name_readable": false
+    },
+    {
+      "name": "restored-dark",
+      "pid": 41617,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [],
+      "menu_and_color_name_readable": true
+    }
+  ],
+  "host_tests": {
+    "passed": 10,
+    "failed": 0,
+    "skipped": 0
+  },
+  "preferences_restored": {
+    "bytes": 5420,
+    "sha256": "5575996fecc88dc99bb3513e4d8d5a68da11521b04685dfc3c6c65fa66a13631"
+  },
+  "fixture_unchanged_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+  "app_running_after_test": false,
+  "device_package_retained": "a439bf20"
+}
