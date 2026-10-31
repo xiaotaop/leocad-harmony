@@ -190,7 +190,31 @@ lcApplication::lcApplication(int& Argc, char** Argv)
 	setApplicationDisplayName(QLatin1String("LeoCAD"));
 
 	gApplication = this;
+
+	// The name UpdateStyle() restores when the theme goes back to System.
+	//
+	// style()->objectName() is not always a usable key: on the HarmonyOS platform
+	// plugin it is empty, and QApplication::setStyle("") returns false without
+	// changing anything. Storing the class name in that case keeps a value that
+	// setStyle() accepts. Left empty, "system" meant "leave whatever style the
+	// dark theme installed", so the palette was reset against Fusion while the
+	// dark stylesheet had already been cleared.
 	mDefaultStyle = style()->objectName();
+
+	if (mDefaultStyle.isEmpty())
+		mDefaultStyle = QString::fromLatin1(style()->metaObject()->className());
+
+	// "QFusionStyle" is a class name, not a key. Strip the decoration so
+	// setStyle() can resolve it from QStyleFactory::keys(), which holds "Fusion".
+	// The check is only reached when the object name was empty, so a plugin that
+	// does provide a real key keeps it untouched.
+	if (mDefaultStyle.endsWith(QLatin1String("Style")))
+	{
+		mDefaultStyle.chop(5);
+
+		if (mDefaultStyle.startsWith(QLatin1Char('Q')))
+			mDefaultStyle.remove(0, 1);
+	}
 
 	lcProfileInit();
 
@@ -249,8 +273,37 @@ void lcApplication::UpdateStyle()
 	}
 	else
 	{
-		QApplication::setStyle(mDefaultStyle);
-		QApplication::setPalette(qApp->style()->standardPalette());
+		// Restore the platform style first, then take the palette FROM the style
+		// that is actually active. Applying the dark palette earlier means
+		// "standardPalette()" is the only thing that can undo it, so a style that
+		// failed to restore would leave dark colours behind the light palette —
+		// which is the D5-02 shape: menu text and colour names unreadable after
+		// switching to System.
+		//
+		// setStyle() returns null when the key does not resolve. Falling back to
+		// the style the platform started with keeps the restore meaningful
+		// instead of silently keeping the dark theme's style.
+		if (QApplication::setStyle(mDefaultStyle) == nullptr)
+		{
+			// Nothing to restore from. Say so, and make sure the palette below is
+			// not taken from the style the dark theme left installed:
+			// standardPalette() would then come from Fusion while the dark
+			// stylesheet has already been cleared, which is the state D5-02
+			// describes.
+			qWarning("Could not restore the default widget style \"%s\".", qPrintable(mDefaultStyle));
+
+			const QStringList KnownStyles = QStyleFactory::keys();
+			const QString Fallback = KnownStyles.contains(QLatin1String("Fusion"), Qt::CaseInsensitive)
+				? QLatin1String("Fusion") : KnownStyles.value(0);
+
+			if (QApplication::setStyle(Fallback) != nullptr)
+			{
+				// Remember it, so a later switch does not have to guess again.
+				mDefaultStyle = Fallback;
+			}
+		}
+
+		QApplication::setPalette(QApplication::style()->standardPalette());
 		qApp->setStyleSheet(QString());
 	}
 }

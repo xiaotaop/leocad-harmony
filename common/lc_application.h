@@ -193,13 +193,31 @@ public:
 	void SetClipboard(const QByteArray& Clipboard);
 	void ExportClipboard(const QByteArray& Clipboard);
 
+	// Applies the colour theme to the application: style, palette and the dark
+	// stylesheet. Public so a regression test can drive it on the real
+	// application object; the theme decides menu and text colours, which is what
+	// D5-02 is about, and it cannot be checked without applying it.
+	void UpdateStyle();
+
+	// The style name UpdateStyle() restores for the System theme. Exposed for the
+	// theme regression: the device case is precisely a platform where this value
+	// came out empty, and a test has to be able to produce that state.
+	QString GetDefaultStyleName() const
+	{
+		return mDefaultStyle;
+	}
+
+	void SetDefaultStyleName(const QString& Name)
+	{
+		mDefaultStyle = Name;
+	}
+
 	Project* mProject = nullptr;
 	lcPiecesLibrary* mLibrary = nullptr;
 	lcPreferences mPreferences;
 	QByteArray mClipboard;
 
 protected:
-	void UpdateStyle();
 	QString GetTabLayoutKey() const;
 
 	QString mDefaultStyle;
