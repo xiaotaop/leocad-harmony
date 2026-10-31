@@ -6,6 +6,9 @@
 #include "lc_scene.h"
 #ifndef Q_OS_HARMONY
 #include <QOpenGLFramebufferObject>
+#include "lc_thumbnailmanager.h"
+#include "lc_view.h"
+#include "camera.h"
 #endif
 #include "lc_library.h"
 #include "lc_mainwindow.h"
@@ -68,6 +71,125 @@ class ModelIoTest : public QObject
     Q_OBJECT
 private slots:
 #ifndef Q_OS_HARMONY
+    void thumbnailAndCameraColors_data()
+    {
+        QTest::addColumn<int>("ColorCode");
+        QTest::newRow("red") << 4;
+        QTest::newRow("blue") << 1;
+        QTest::newRow("light-blue") << 9;
+    }
+
+    void thumbnailAndCameraColors()
+    {
+        QFETCH(int, ColorCode);
+        auto& Preferences = lcGetPreferences();
+        const auto Saved = Preferences;
+        auto Restore = qScopeGuard([&]() { Preferences = Saved; });
+        Preferences.mShadingMode = lcShadingMode::Flat;
+        Preferences.mDrawEdgeLines = false;
+        Preferences.mDrawConditionalLines = false;
+        Preferences.mHighlightNewParts = false;
+        Preferences.mFadeSteps = false;
+        PieceInfo Info;
+        Info.CreatePlaceholder("readback-color-fixture.dat"); // Actual production box mesh.
+        Info.mState = lcPieceInfoState::Loaded;
+        Info.AddRef(); // Keep its mesh alive across preview/cache releases.
+        const int ColorIndex = lcGetColorIndex(ColorCode);
+        const lcVector4 Value = gColorList[ColorIndex].Value;
+        const QColor Expected = QColor::fromRgbF(Value[0], Value[1], Value[2]);
+        auto Matches = [&](QColor Pixel) {
+            return qAbs(Pixel.red()-Expected.red())<=2 && qAbs(Pixel.green()-Expected.green())<=2
+                && qAbs(Pixel.blue()-Expected.blue())<=2 && Pixel.alpha()>250;
+        };
+        const QString Evidence = qEnvironmentVariable("LEOCAD_TEST_EVIDENCE_DIR");
+        if (!Evidence.isEmpty()) QVERIFY(QDir().mkpath(Evidence));
+        {
+            lcThumbnailManager Manager(lcGetPiecesLibrary());
+            for (float Scale : {1.0f,2.0f}) for (int Size : {36,52,36})
+            {
+                // Exercise the real manager, lcView::OnDraw, FBO readback,
+                // color/size/DPR cache key and final QPixmap conversion.
+                const auto [Id, Pixmap] = Manager.RequestThumbnail(&Info,ColorIndex,Size,Scale);
+                QVERIFY(!Pixmap.isNull());
+                QCOMPARE(Pixmap.size(),QSize(int(Size*Scale),int(Size*Scale)));
+                QCOMPARE(Pixmap.devicePixelRatio(),qreal(Scale));
+                const QImage Image = Pixmap.toImage();
+                QVERIFY2(Matches(Image.pixelColor(Image.width()/2,Image.height()/2)),qPrintable(Image.pixelColor(Image.width()/2,Image.height()/2).name()));
+                QCOMPARE(Image.pixelColor(0,0).alpha(),0);
+                if(!Evidence.isEmpty()) QVERIFY(Image.save(Evidence+QString("/thumbnail-%1-%2-%3.png").arg(ColorCode).arg(Scale).arg(Size)));
+                Q_UNUSED(Id); // Keep entries cached through the repeated size.
+            }
+        }
+        lcModel Model(QString(),nullptr,true);
+        Model.SetPreviewPieceInfo(&Info,ColorIndex);
+        lcView View(lcViewType::PartsList,&Model);
+        View.SetOffscreenContext(); View.MakeCurrent();
+        View.SetBackgroundColorOverride(LC_RGBA(0,0,0,0));
+        for (lcViewpoint Point : {lcViewpoint::Home,lcViewpoint::Front,lcViewpoint::Top})
+            for (QSize Size : {QSize(157,113),QSize(113,197),QSize(157,113)})
+            {
+                View.SetSize(Size.width(),Size.height());
+                QVERIFY(View.BeginRenderToImage(Size.width(),Size.height()));
+                auto End = qScopeGuard([&]() { View.UnbindRenderFramebuffer(); View.EndRenderToImage(); });
+                View.SetViewpoint(Point); View.ZoomExtents();
+                const auto Bounds = Info.GetBoundingBox();
+                for (int Corner=0;Corner<8;Corner++)
+                {
+                    const lcVector3 Position((Corner&1)?Bounds.Max[0]:Bounds.Min[0],
+                        (Corner&2)?Bounds.Max[1]:Bounds.Min[1], (Corner&4)?Bounds.Max[2]:Bounds.Min[2]);
+                    const lcVector3 Screen = View.ProjectPoint(Position);
+                    QVERIFY(std::isfinite(Screen[0]) && std::isfinite(Screen[1]) && std::isfinite(Screen[2]));
+                    QVERIFY(Screen[0]>=-1 && Screen[0]<=Size.width()+1 && Screen[1]>=-1 && Screen[1]<=Size.height()+1);
+                    QVERIFY(Screen[2]>0 && Screen[2]<1);
+                }
+                View.OnDraw();
+                const QImage Image = View.GetRenderImage();
+                QCOMPARE(Image.size(),Size);
+                QVERIFY(Matches(Image.pixelColor(Image.width()/2,Image.height()/2)));
+                int Colored=0;
+                for(int y=0;y<Image.height();y++) for(int x=0;x<Image.width();x++) if(Matches(Image.pixelColor(x,y))) Colored++;
+                QVERIFY(Colored>Size.width()*Size.height()/15);
+                if(!Evidence.isEmpty() && ColorCode==4) QVERIFY(Image.save(Evidence+QString("/camera-%1-%2x%3.png").arg(int(Point)).arg(Size.width()).arg(Size.height())));
+            }
+    }
+
+    void tiledRenderKeepsColorAndOrientation_data()
+    {
+        QTest::addColumn<QSize>("Size");
+        // Production limits tiles to 2048: the seam crosses the visible box,
+        // and the last tile is deliberately partial in both orientations.
+        QTest::newRow("horizontal") << QSize(4091,133);
+        QTest::newRow("vertical") << QSize(133,4091);
+    }
+    void tiledRenderKeepsColorAndOrientation()
+    {
+        QFETCH(QSize, Size);
+        auto& Preferences = lcGetPreferences(); const auto Saved = Preferences;
+        auto Restore = qScopeGuard([&]() { Preferences=Saved; });
+        Preferences.mShadingMode=lcShadingMode::Flat;
+        Preferences.mDrawEdgeLines=false; Preferences.mDrawConditionalLines=false;
+        Preferences.mHighlightNewParts=false; Preferences.mFadeSteps=false;
+        PieceInfo Info; Info.CreatePlaceholder("readback-tiled-fixture.dat");
+        Info.mState=lcPieceInfoState::Loaded; Info.AddRef();
+        lcModel Model(QString(),nullptr,true); Model.SetPreviewPieceInfo(&Info,lcGetColorIndex(4));
+        lcView View(lcViewType::PartsList,&Model); View.SetOffscreenContext(); View.MakeCurrent();
+        View.SetSize(Size.width(),Size.height()); View.SetViewpoint(lcViewpoint::Front); View.ZoomExtents();
+        View.SetBackgroundColorOverride(LC_RGBA(0,0,0,0));
+        // Zoom before BeginRenderToImage changes the view dimensions to a tile.
+        QVERIFY(View.BeginRenderToImage(Size.width(),Size.height()));
+        auto End=qScopeGuard([&]() { View.UnbindRenderFramebuffer(); View.EndRenderToImage(); });
+        View.OnDraw(); const QImage Image=View.GetRenderImage(); QCOMPARE(Image.size(),Size);
+        const lcVector4 Value=gColorList[lcGetColorIndex(4)].Value;
+        const QColor Expected=QColor::fromRgbF(Value[0],Value[1],Value[2]);
+        for(int Offset=-8;Offset<=8;Offset++)
+        {
+            const QPoint Position=Size.width()>Size.height()?QPoint(2048+Offset,Size.height()/2):QPoint(Size.width()/2,2048+Offset);
+            QCOMPARE(Image.pixelColor(Position).rgba(),Expected.rgba());
+        }
+        QCOMPARE(Image.pixelColor(0,0).alpha(),0);
+        QCOMPARE(Image.pixelColor(Size.width()-1,Size.height()-1).alpha(),0);
+    }
+
     // Reuse this host suite's real production renderer/library lifecycle. The
     // standalone quad tests do not exercise lcScene's state changes or cache.
     void referenceGridPreservesModelLineWidth_data()
