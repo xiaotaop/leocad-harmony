@@ -106,4 +106,4 @@ GL诊断通过，日志中未检出 `FATAL`、`SIGSEGV`、`GL_INVALID` 或 `GL_O
 
 本次仅增加组长验收资料、缺陷交接及录屏要求调整，没有修改 A/C 业务代码，没有重跑或冒认 B 的宿主65项或D4 ARM64模型50项为今日新设备结果。系统选择器、外部授权读写、完整GUI保存重开、全部材质、休眠恢复及发布权限仍按原阶段推进。
 
-今天的组长任务可以交付；后续由A修复前视适应窗口、C处理System主题。远端PR创建、issue更新/关闭未在本次执行。
+今天的组长任务可以交付；后续由A修复前视适应窗口、C处理System主题。组长后续要求提交远端：已建立 [#32 前视裁切](https://github.com/xiaotaop/leocad-harmony/issues/32) 并指派A（zycAlmira），建立 [#33 System主题](https://github.com/xiaotaop/leocad-harmony/issues/33) 并指派C（Leaf-21）；本次资料通过组长D5验收PR提交，没有自动关闭旧issue。
