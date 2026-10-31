@@ -1,0 +1,470 @@
+{
+  "date": "2026-10-31",
+  "timezone": "Asia/Shanghai",
+  "pr": 35,
+  "issue": 33,
+  "source_sha": "3c2d08dc1138cec21d8e5a83e195fd195481923c",
+  "latest_remote_sha": "ce2012bc0fdfd84d66213ac17f5de4b761c17668",
+  "latest_changes": [
+    "docs/D5_偏好设置裁剪.md"
+  ],
+  "verdict": "PASS_TESTED_THEME_PATHS",
+  "package": {
+    "name": "leocad-3c2d08dc-signed.hap",
+    "bytes": 80094152,
+    "sha256": "9121cb3500aba55488a369ff05289c7fe04740b3d7db71364135b7a29788e6ab"
+  },
+  "device": {
+    "model": "HAD-W32",
+    "os": "OpenHarmony 6.1.0.115",
+    "api": 23,
+    "resolution": [
+      3120,
+      2080
+    ],
+    "qt": "6.12.0"
+  },
+  "runs": [
+    {
+      "name": "no-run",
+      "pid": 59659,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [
+        {
+          "default": "ohos",
+          "active_before": "",
+          "class_before": "QStyleSheetStyle"
+        },
+        {
+          "active_after": "ohos",
+          "class_after": "QOhosStyle",
+          "window": "#ffffff",
+          "windowtext": "#182431",
+          "text": "#182431",
+          "buttontext": "#1e1e1e",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4"
+        }
+      ],
+      "widget_samples": [
+        {
+          "widget": "menubar",
+          "enabled": true,
+          "has_own_palette": true,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        },
+        {
+          "widget": "colorbutton",
+          "enabled": true,
+          "has_own_palette": true,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        },
+        {
+          "widget": "menubar",
+          "enabled": true,
+          "has_own_palette": true,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        },
+        {
+          "widget": "colorbutton",
+          "enabled": true,
+          "has_own_palette": true,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        }
+      ],
+      "delayed_markers": [
+        {
+          "stage": "post_event_loop"
+        }
+      ]
+    },
+    {
+      "name": "no-restart-and-return-dark",
+      "pid": 60447,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [
+        {
+          "default": "ohos",
+          "active_before": "ohos",
+          "class_before": "QOhosStyle"
+        },
+        {
+          "active_after": "ohos",
+          "class_after": "QOhosStyle",
+          "window": "#ffffff",
+          "windowtext": "#182431",
+          "text": "#182431",
+          "buttontext": "#1e1e1e",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4"
+        }
+      ],
+      "widget_samples": [
+        {
+          "widget": "menubar",
+          "enabled": true,
+          "has_own_palette": false,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        },
+        {
+          "widget": "colorbutton",
+          "enabled": true,
+          "has_own_palette": false,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        }
+      ],
+      "delayed_markers": [
+        {
+          "stage": "post_event_loop"
+        }
+      ]
+    },
+    {
+      "name": "yes-run",
+      "pid": 61417,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [
+        {
+          "default": "ohos",
+          "active_before": "",
+          "class_before": "QStyleSheetStyle"
+        },
+        {
+          "active_after": "ohos",
+          "class_after": "QOhosStyle",
+          "window": "#ffffff",
+          "windowtext": "#182431",
+          "text": "#182431",
+          "buttontext": "#1e1e1e",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4"
+        }
+      ],
+      "widget_samples": [
+        {
+          "widget": "menubar",
+          "enabled": true,
+          "has_own_palette": true,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        },
+        {
+          "widget": "colorbutton",
+          "enabled": true,
+          "has_own_palette": true,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        },
+        {
+          "widget": "menubar",
+          "enabled": true,
+          "has_own_palette": true,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        },
+        {
+          "widget": "colorbutton",
+          "enabled": true,
+          "has_own_palette": true,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        }
+      ],
+      "delayed_markers": [
+        {
+          "stage": "post_event_loop"
+        }
+      ]
+    },
+    {
+      "name": "yes-restart",
+      "pid": 61623,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [
+        {
+          "default": "ohos",
+          "active_before": "ohos",
+          "class_before": "QOhosStyle"
+        },
+        {
+          "active_after": "ohos",
+          "class_after": "QOhosStyle",
+          "window": "#ffffff",
+          "windowtext": "#182431",
+          "text": "#182431",
+          "buttontext": "#1e1e1e",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4"
+        }
+      ],
+      "widget_samples": [
+        {
+          "widget": "menubar",
+          "enabled": true,
+          "has_own_palette": false,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        },
+        {
+          "widget": "colorbutton",
+          "enabled": true,
+          "has_own_palette": false,
+          "own_style": false,
+          "style_class": "QOhosStyle",
+          "app_style": "QOhosStyle",
+          "windowtext": "#182431",
+          "buttontext": "#1e1e1e",
+          "text": "#182431",
+          "window": "#ffffff",
+          "button": "#f2f2f2",
+          "base": "#e4e4e4",
+          "has_stylesheet": false,
+          "active_wt_bt": "#182431/#1e1e1e",
+          "inactive_wt_bt": "#182431/#1e1e1e",
+          "disabled_wt_bt": "#182431/#1e1e1e"
+        }
+      ],
+      "delayed_markers": [
+        {
+          "stage": "post_event_loop"
+        }
+      ]
+    },
+    {
+      "name": "restored-dark",
+      "pid": 62181,
+      "main_exit": 0,
+      "renderer": [
+        {
+          "passed": true,
+          "programs": 9,
+          "safe_render": false,
+          "skipped_programs": 0
+        }
+      ],
+      "theme_style": [],
+      "widget_samples": [],
+      "delayed_markers": []
+    }
+  ],
+  "visual_checks": [
+    {
+      "stage": "no-applied",
+      "menu_readable": true,
+      "current_color_name_readable": true
+    },
+    {
+      "stage": "no-restarted",
+      "menu_readable": true,
+      "current_color_name_readable": true
+    },
+    {
+      "stage": "yes-applied",
+      "menu_readable": true,
+      "current_color_name_readable": true
+    },
+    {
+      "stage": "yes-restarted",
+      "menu_readable": true,
+      "current_color_name_readable": true
+    },
+    {
+      "stage": "system-startup-to-dark-no",
+      "menu_readable": true,
+      "current_color_name_readable": true
+    },
+    {
+      "stage": "restored-dark",
+      "menu_readable": true,
+      "current_color_name_readable": true
+    }
+  ],
+  "extra_wait_seconds": {
+    "no_applied": 5,
+    "yes_applied": 5,
+    "return_dark": 3
+  },
+  "saved_color_themes": {
+    "no-saved": 1,
+    "no-restarted": 1,
+    "yes-saved": 1,
+    "yes-restarted": 1,
+    "return-dark": 0
+  },
+  "host_tests": {
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0
+  },
+  "original_preferences": {
+    "bytes": 5420,
+    "sha256": "5575996fecc88dc99bb3513e4d8d5a68da11521b04685dfc3c6c65fa66a13631",
+    "restored_exactly": true
+  },
+  "fixture_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+  "limitations": [
+    "No uninterrupted same-process Dark-to-System-to-Dark sequence tested.",
+    "Widget diagnostic selector is not a unique current-color-button identifier.",
+    "Early return-to-dark failure impression was withdrawn after original-image comparison; not a confirmed defect.",
+    "Not a full application or store acceptance."
+  ]
+}

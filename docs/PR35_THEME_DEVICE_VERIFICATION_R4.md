@@ -1,5 +1,7 @@
 # PR #35 最新提交 b2d1163a 真机复验 R4
 
+后续最新结果见 [R5](PR35_THEME_DEVICE_VERIFICATION_R5.md)：3c2d08dc 的四项 System 路径及回切 Dark 检查通过。本页保留 b2d1163a 的历史结果。
+
 日期：2026-10-31，Asia/Shanghai。提交 `b2d1163ae37caf1c1ba926693bd345a0a1f64895`，四路径执行完毕及收尾时核对远端仍相同。关联 [PR #35](https://github.com/xiaotaop/leocad-harmony/pull/35)、[#33](https://github.com/xiaotaop/leocad-harmony/issues/33)。
 
 **部分修复，尚不能作为 #33 完整修复批准。** 菜单和重启后的颜色名均已恢复；No、Yes 切换后不重启，Light Grey 颜色名仍近白难辨，两条路径额外等待 5 秒均未恢复。认可修复进展，不再沿用旧版“菜单及重启均失败”的判断。
