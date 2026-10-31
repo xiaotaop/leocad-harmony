@@ -1,0 +1,63 @@
+{
+  "app": "/private/tmp/leocad-d5-app-build/leocad",
+  "results": [
+    {
+      "option": "--version",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "stdout": "LeoCAD Version 26.09\nCompiled Oct 31 2026\n",
+      "stderr": "Detected locale \"C\" with character encoding \"US-ASCII\", which is not UTF-8.\nQt depends on a UTF-8 locale, and has switched to \"UTF-8\" instead.\nIf this causes problems, reconfigure your locale. See the locale(1) manual\nfor more information.\nLEOCAD_RESOURCE_PATHS {\"app_data\":\"/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD\",\"app_local_data\":\"/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD\",\"bundled_archive\":\":/assets/ldraw-lite/library-lite.zip\",\"bundled_candidates\":[\"/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD/ldraw-lite/library-lite.zip\",\"/private/tmp/leocad-d5-app-build/ldraw-lite/library-lite.zip\",\":/assets/ldraw-lite/library-lite.zip\"],\"bundled_problem\":\"\",\"cache\":\"/Users/almiraethan/Library/Caches/LeoCAD Software/LeoCAD\",\"loaded_parts\":null}\n",
+      "reports": [
+        {
+          "app_data": "/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD",
+          "app_local_data": "/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD",
+          "bundled_archive": ":/assets/ldraw-lite/library-lite.zip",
+          "bundled_candidates": [
+            "/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD/ldraw-lite/library-lite.zip",
+            "/private/tmp/leocad-d5-app-build/ldraw-lite/library-lite.zip",
+            ":/assets/ldraw-lite/library-lite.zip"
+          ],
+          "bundled_problem": "",
+          "cache": "/Users/almiraethan/Library/Caches/LeoCAD Software/LeoCAD",
+          "loaded_parts": null
+        }
+      ],
+      "passed": true,
+      "errors": []
+    },
+    {
+      "option": "--help",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "stdout": "Usage: leocad [options] [file]\n  [options] can be:\n  -l, --libpath <path>: Set the Parts Library location to path.\n  -i, --image <outfile.ext>: Save a picture in the format specified by ext and exit.\n  -w, --width <width>: Set the picture width.\n  -h, --height <height>: Set the picture height.\n  -f, --from <step>: Set the first step to save pictures.\n  -t, --to <step>: Set the last step to save pictures.\n  -s, --submodel <submodel>: Set the active submodel.\n  -c, --camera <camera name>: Set the active camera.\n  --viewpoint <viewpoint>: Set the view to one of the preset viewpoints (front, back, left, right, top, bottom, home).\n  --camera-angles <latitude> <longitude>: Set the camera angles in degrees around the model.\n  --camera-position <x> <y> <z> <tx> <ty> <tz> <ux> <uy> <uz>: Set the camera position, target and up vector.\n  --camera-position-ldraw <x> <y> <z> <tx> <ty> <tz> <ux> <uy> <uz>: Set the camera position, target and up vector using LDraw coordinates.\n  --orthographic: Render images using an orthographic projection.\n  --fov <degrees>: Set the vertical field of view used to render images (< 180).\n  --zplanes <near> <far>: Set the near and far clipping planes used to render images (1 <= <near> < <far>).\n  --fade-steps: Render parts from prior steps faded.\n  --no-fade-steps: Do not render parts from prior steps faded.\n  --fade-steps-color <#AARRGGBB>: Renderinng color for prior step parts.\n  --highlight: Highlight parts in the steps they appear.\n  --no-highlight: Do not highlight parts in the steps they appear.\n  --highlight-color <#AARRGGBB>: Rendering color for highlighted parts.\n  --shading <mode>: Select shading mode for rendering (wireframe, flat, default, full).\n  --line-width <width>: Set the width of the edge lines.\n  --aa-samples <samples>: AntiAliasing sample size (1, 2, 4, or 8).\n  -ss, --stud-style <style>: Set the stud style (0=No style, 1=LDraw single wire, 2=LDraw double wire, 3=LDraw raised floating, 4=LDraw raised rounded, 5=LDraw subtle rounded, 6=LEGO no logo, 7=LEGO single wire).\n  -nscc, --disable-stud-cylinder-color: Disable high contrast stud cylinder color.\n  -scc, --stud-cylinder-color <#AARRGGBB>: High contrast stud cylinder color.\n  -nec, --disable-edge-color: Disable high contrast edge color.\n  -ec, --edge-color <#AARRGGBB>: High contrast edge color.\n  -nbec, --disable-black-edge-color: Disable high contrast edge color for black parts.\n  -bec, --black-edge-color <#AARRGGBB>: High contrast edge color for black parts.\n  -ndec, --disable-dark-edge-color: Disable high contrast edge color for dark color parts.\n  -dec, --dark-edge-color <#AARRGGBB>: High contrast edge color for dark color parts.\n  -aec, --automate-edge-color: Enable automatically adjusted edge colors.\n  -cc, --color-contrast <contrast>: Color contrast value between 0.0 and 1.0.\n  -ldv, --light-dark-value <value>: Light/Dark color value between 0.0 and 1.0.\n  -obj, --export-wavefront <outfile.obj>: Export the model to Wavefront OBJ format.\n  -3ds, --export-3ds <outfile.3ds>: Export the model to 3D Studio 3DS format.\n  -dae, --export-collada <outfile.dae>: Export the model to COLLADA DAE format.\n  -csv, --export-csv <outfile.csv>: Export the list of parts used in csv format.\n  -html, --export-html <folder>: Create an HTML page for the model.\n  -v, --version: Output version information and exit.\n  -?, --help: Display this help message and exit.\n\n",
+      "stderr": "Detected locale \"C\" with character encoding \"US-ASCII\", which is not UTF-8.\nQt depends on a UTF-8 locale, and has switched to \"UTF-8\" instead.\nIf this causes problems, reconfigure your locale. See the locale(1) manual\nfor more information.\nLEOCAD_RESOURCE_PATHS {\"app_data\":\"/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD\",\"app_local_data\":\"/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD\",\"bundled_archive\":\":/assets/ldraw-lite/library-lite.zip\",\"bundled_candidates\":[\"/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD/ldraw-lite/library-lite.zip\",\"/private/tmp/leocad-d5-app-build/ldraw-lite/library-lite.zip\",\":/assets/ldraw-lite/library-lite.zip\"],\"bundled_problem\":\"\",\"cache\":\"/Users/almiraethan/Library/Caches/LeoCAD Software/LeoCAD\",\"loaded_parts\":null}\n",
+      "reports": [
+        {
+          "app_data": "/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD",
+          "app_local_data": "/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD",
+          "bundled_archive": ":/assets/ldraw-lite/library-lite.zip",
+          "bundled_candidates": [
+            "/Users/almiraethan/Library/Application Support/LeoCAD Software/LeoCAD/ldraw-lite/library-lite.zip",
+            "/private/tmp/leocad-d5-app-build/ldraw-lite/library-lite.zip",
+            ":/assets/ldraw-lite/library-lite.zip"
+          ],
+          "bundled_problem": "",
+          "cache": "/Users/almiraethan/Library/Caches/LeoCAD Software/LeoCAD",
+          "loaded_parts": null
+        }
+      ],
+      "passed": true,
+      "errors": []
+    },
+    {
+      "option": "--lc-invalid-option-for-regression",
+      "expected_exit": 1,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Detected locale \"C\" with character encoding \"US-ASCII\", which is not UTF-8.\nQt depends on a UTF-8 locale, and has switched to \"UTF-8\" instead.\nIf this causes problems, reconfigure your locale. See the locale(1) manual\nfor more information.\nUnknown option: '--lc-invalid-option-for-regression'.\n",
+      "reports": [],
+      "passed": true,
+      "errors": []
+    }
+  ]
+}
