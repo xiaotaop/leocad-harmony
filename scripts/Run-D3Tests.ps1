@@ -13,7 +13,7 @@
 
 param(
     [string]$QtRoot = '',
-    [string[]]$Suite = @('archive', 'priority', 'menu', 'modellist', 'panel')
+    [string[]]$Suite = @('archive', 'priority', 'menu', 'modellist', 'panel', 'preferences')
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
@@ -37,6 +37,7 @@ foreach ($name in $Suite) {
     # The D4 panel suite lives beside the D3 ones but belongs to the next
     # milestone, so it keeps its own project name rather than being numbered D3.
     if ($name -eq 'panel') { $project = "d4-$name-tests.pro"; $target = "leocad-d4-$name" }
+    elseif ($name -eq 'preferences') { $project = "d5-$name-tests.pro"; $target = "leocad-d5-$name" }
     else { $project = "d3-$name-tests.pro"; $target = "leocad-d3-$name" }
     if (!(Test-Path -LiteralPath (Join-Path $root $project))) { throw "No such suite: $name" }
 
