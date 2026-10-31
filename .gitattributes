@@ -22,3 +22,4 @@
 # Unified patches prefix context lines with a space before source indentation.
 /docs/evidence/leader/2026-10-31/d4-startup-review/*.patch -text whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
 /docs/evidence/leader/2026-10-31/d5-device/* -text whitespace=cr-at-eol,-blank-at-eol
+/docs/evidence/leader/2026-10-31/pr35-theme-device/* -text whitespace=cr-at-eol,-blank-at-eol
