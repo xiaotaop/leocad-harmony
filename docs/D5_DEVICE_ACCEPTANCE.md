@@ -2,7 +2,9 @@
 
 日期：2026-10-31（北京时间），正式操作约 15:24–15:40。
 
-**组长 D5 验证与记录工作完成；固定模型稳定显示的阶段出口通过。** 本轮没有录屏，按组长要求保留截图、原始日志和哈希。颜色修复与偏好设置裁剪已上机。组长亲手复现后，将前视适应窗口裁切作为已接受的非阻断已知缺陷，关闭#32，本期不要求修复；System主题#33继续跟进。本次不代表上架验收通过。责任与复现见 [D5 缺陷表](D5_DEFECTS.md)。
+**组长 D5 验证与记录工作完成；固定模型稳定显示的阶段出口通过。** 没有录屏，按组长要求保留截图、原始日志和哈希。颜色修复与偏好设置裁剪已上机。前视适应窗口裁切按组长决定作为已接受的非阻断已知缺陷关闭 #32；System 主题经后续 [R5 真机复验](PR35_THEME_DEVICE_VERIFICATION_R5.md)通过，修复 [PR #35](https://github.com/xiaotaop/leocad-harmony/pull/35) 已合入 main，#33 已按 completed 关闭。本次不代表上架验收通过。责任与复现见 [D5 缺陷表](D5_DEFECTS.md)。
+
+以下 §1–§7 保留 15:24–15:40、源码 f7a83c5e 的首轮实测及当时交接状态；主题最新结果及后续包版本见 §8，不将首轮失败截图改写为通过。
 
 ## 1. 源码、设备与安装包
 
@@ -107,3 +109,21 @@ GL诊断通过，日志中未检出 `FATAL`、`SIGSEGV`、`GL_INVALID` 或 `GL_O
 本次仅增加组长验收资料、缺陷交接及录屏要求调整，没有修改 A/C 业务代码，没有重跑或冒认 B 的宿主65项或D4 ARM64模型50项为今日新设备结果。系统选择器、外部授权读写、完整GUI保存重开、全部材质、休眠恢复及发布权限仍按原阶段推进。
 
 今天的组长任务可以交付。最初建立的 [#32 前视裁切](https://github.com/xiaotaop/leocad-harmony/issues/32) 按组长亲手复现后的决定，以“接受非阻断已知缺陷、本期不计划修复”关闭，未作代码修复声明；[#33 System主题](https://github.com/xiaotaop/leocad-harmony/issues/33)继续开放并由C（Leaf-21）处理。本次资料通过[组长D5验收PR #34](https://github.com/xiaotaop/leocad-harmony/pull/34)提交，其他旧issue保持原状态。
+
+## 8. 后续主题修复复验与当前状态
+
+首轮发现 #33 后，组长逐轮检出 C 的更新，重新构建、签名、安装并采集证据；历史失败及部分修复均保留，不能把旧包测试结论套给新提交。
+
+| 轮次 / 实际源码 | 真机结果 | 主机测试 |
+|---|---|---:|
+| [R1 / ba36110b](PR35_THEME_DEVICE_VERIFICATION.md) | No/Yes 切换后及重启后四路径仍失败 | 见该轮报告 |
+| [R2 / a439bf20](PR35_THEME_DEVICE_VERIFICATION_R2.md) | 四路径仍失败 | 10 项通过 |
+| [R3 / 1fa1adee](PR35_THEME_DEVICE_VERIFICATION_R3.md) | 菜单、重启后恢复；实时颜色名仍浅 | 12 项通过 |
+| [R4 / b2d1163a](PR35_THEME_DEVICE_VERIFICATION_R4.md) | 部分修复；No/Yes 额外等待 5 秒仍有颜色名残留 | 13 项通过 |
+| [R5 / 3c2d08dc](PR35_THEME_DEVICE_VERIFICATION_R5.md) | **四路径菜单及颜色名均可读**；System 启动后切回 Dark 也正常 | **14 项通过** |
+
+R5 测试完成后远端 ce2012bc 仅补文档，功能代码及测试与实际被测 3c2d08dc 一致。新签名 HAP 为 80,094,152 字节，SHA-256 `9121cb3500aba55488a369ff05289c7fe04740b3d7db71364135b7a29788e6ab`；不将该包说成 main 合并提交重构建。两条 System 路径分别从同一原始 Dark 配置开始，保存后及新进程重启均覆盖；即时、延时截图及完整日志见 R5。
+
+R5 五个进程正常退出，renderer 均通过 9 programs、0 skipped，safe_render=false；原配置完整恢复，备份及恢复读回均为 5,420 字节、SHA-256 `5575996fecc88dc99bb3513e4d8d5a68da11521b04685dfc3c6c65fa66a13631`。这是后续复验的备份，与 §5 首轮 3,357 字节备份分别核对，未混用。固定模型哈希未变。
+
+已在 [PR #35 发布批准意见](https://github.com/xiaotaop/leocad-harmony/pull/35#pullrequestreview-5722573926)。随后 PR #35 合入 main，合并提交 `297341e3c8c3476135557e3ab7c148b46b158443`，#33 已按 completed 关闭。本验收分支已同步该 main；更新文档无需重复已通过的真机操作。本轮之外的文件选择器、发布权限及其他阶段任务仍按原计划推进。

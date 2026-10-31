@@ -2,6 +2,8 @@
 
 日期：2026-10-31，Asia/Shanghai。关联 [PR #35](https://github.com/xiaotaop/leocad-harmony/pull/35)、[#33](https://github.com/xiaotaop/leocad-harmony/issues/33)。
 
+后续状态：PR #35 已合入 main（297341e3），#33 已按 completed 关闭。以下保留实际被测源码、包及复验完成时的记录；没有把合并提交当作重新构建验证。
+
 **本轮主题复验通过，先前阻断意见已满足，可以合并该修复。** Dark → System 的 No、Yes 两条路径，切换后及重启后，菜单和 Light Grey 当前颜色名全部可读；额外覆盖 System 启动后改回 Dark，也可读。整理时曾误判回切深色菜单为深字深底，重新逐张对照原始截图后已撤回；原图实际为浅字深底，没有证据支持该失败判断。
 
 ## 被测版本及包
