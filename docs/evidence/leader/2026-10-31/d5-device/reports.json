@@ -1,0 +1,964 @@
+{
+  "date": "2026-10-31",
+  "timezone": "Asia/Shanghai",
+  "source_commit": "f7a83c5eff03c5289ea60d7bac83caf92ba6210d",
+  "bundle": "io.github.xiaotaop.leocad",
+  "safe_render": false,
+  "test_resource_paths": false,
+  "recording": "omitted_at_leader_request",
+  "hap": {
+    "sha256": "f02b9fbc36e308a33b17f7ccd3f0093961020a281b7be9c849e211d5a1a6aeb8",
+    "name": "leocad-f7a83c5e-normal-signed.hap",
+    "bytes": 80064963
+  },
+  "device": {
+    "api": 23,
+    "native_display": [
+      3120,
+      2080
+    ],
+    "os": "OpenHarmony-6.1.0.115",
+    "model": "HAD-W32"
+  },
+  "fixture": {
+    "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "final_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "path": "tests/fixtures/render-baseline.ldr",
+    "bytes": 267,
+    "unchanged": true
+  },
+  "preferences": {
+    "restored": true,
+    "before_sha256": "452a53ac671c264a8232d2f33c8c996204e6f0ad80696f7fe7caa8d17c6d8a8a",
+    "theme_saved_and_restarted": 1,
+    "raw_contents_committed": false,
+    "final_sha256": "452a53ac671c264a8232d2f33c8c996204e6f0ad80696f7fe7caa8d17c6d8a8a",
+    "bytes": 3357
+  },
+  "results": {
+    "fps": "not_measured",
+    "preferences_scope": "pass",
+    "colors_three_both_window_sizes": "pass",
+    "insert_undo": "pass",
+    "theme_persistence": "pass",
+    "front_zoom_extents": "fail",
+    "system_theme_usability": "fail",
+    "top_home_zoom_extents": "pass",
+    "gui_system_picker_loop": "not_in_scope",
+    "fixed_model": "pass",
+    "normal_exit_restart": "pass"
+  },
+  "runs": [
+    {
+      "pid": 10733,
+      "reports": [
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "error": "",
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "gles_build": true,
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "passed": true,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "renderer_offscreen",
+            "surface_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "surface_requested_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "surface_valid": true,
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "passed": true,
+            "programs": 9,
+            "safe_render": false,
+            "skipped_programs": 0
+          },
+          "kind": "GL_RENDERER"
+        },
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "dpr": 1.899999976158142,
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "logical_height": 173,
+            "logical_width": 200,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "view_initialize",
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 513,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": false,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 173,
+            "logical_width": 200,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "dpr": 1.899999976158142,
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "logical_height": 501,
+            "logical_width": 514,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "view_initialize",
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 513,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": false,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 501,
+            "logical_width": 514,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "app_data": "/data/storage/el2/base/files",
+            "app_local_data": "/data/storage/el2/base/preferences",
+            "bundled_archive": ":/assets/ldraw-lite/library-lite.zip",
+            "bundled_candidates": [
+              "/data/storage/el2/base/preferences/ldraw-lite/library-lite.zip",
+              "/data/storage/el1/bundle/libs/arm64/ldraw-lite/library-lite.zip",
+              ":/assets/ldraw-lite/library-lite.zip"
+            ],
+            "bundled_problem": "",
+            "cache": "/data/storage/el2/base/cache",
+            "loaded_parts": 1162
+          },
+          "kind": "RESOURCE_PATHS"
+        },
+        {
+          "data": {
+            "destination_format": 5,
+            "height": 243,
+            "source_depth": 32,
+            "source_format": 18,
+            "source_stride": 972,
+            "width": 243
+          },
+          "kind": "GL_READBACK"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 893,
+            "logical_width": 1356,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 501,
+            "logical_width": 514,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 893,
+            "logical_width": 1356,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 501,
+            "logical_width": 514,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 893,
+            "logical_width": 1356,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 886,
+            "logical_width": 1286,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 191,
+            "logical_width": 200,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        }
+      ],
+      "native_main_return_0": true,
+      "log": "normal-main.hilog.txt"
+    },
+    {
+      "pid": 14319,
+      "reports": [
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "error": "",
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "gles_build": true,
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "passed": true,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "renderer_offscreen",
+            "surface_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "surface_requested_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "surface_valid": true,
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "passed": true,
+            "programs": 9,
+            "safe_render": false,
+            "skipped_programs": 0
+          },
+          "kind": "GL_RENDERER"
+        },
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "dpr": 1.899999976158142,
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "logical_height": 175,
+            "logical_width": 200,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "view_initialize",
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 513,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": false,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 175,
+            "logical_width": 200,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "dpr": 1.899999976158142,
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "logical_height": 495,
+            "logical_width": 426,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "view_initialize",
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 513,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": false,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 495,
+            "logical_width": 426,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "app_data": "/data/storage/el2/base/files",
+            "app_local_data": "/data/storage/el2/base/preferences",
+            "bundled_archive": ":/assets/ldraw-lite/library-lite.zip",
+            "bundled_candidates": [
+              "/data/storage/el2/base/preferences/ldraw-lite/library-lite.zip",
+              "/data/storage/el1/bundle/libs/arm64/ldraw-lite/library-lite.zip",
+              ":/assets/ldraw-lite/library-lite.zip"
+            ],
+            "bundled_problem": "",
+            "cache": "/data/storage/el2/base/cache",
+            "loaded_parts": 1162
+          },
+          "kind": "RESOURCE_PATHS"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 494,
+            "logical_width": 426,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 494,
+            "logical_width": 444,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "destination_format": 5,
+            "height": 243,
+            "source_depth": 32,
+            "source_format": 18,
+            "source_stride": 972,
+            "width": 243
+          },
+          "kind": "GL_READBACK"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 886,
+            "logical_width": 1286,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        }
+      ],
+      "native_main_return_0": true,
+      "log": "restart-system.hilog.txt"
+    },
+    {
+      "pid": 14905,
+      "reports": [
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "error": "",
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "gles_build": true,
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "passed": true,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "renderer_offscreen",
+            "surface_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "surface_requested_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "surface_valid": true,
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "passed": true,
+            "programs": 9,
+            "safe_render": false,
+            "skipped_programs": 0
+          },
+          "kind": "GL_RENDERER"
+        },
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "dpr": 1.899999976158142,
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "logical_height": 173,
+            "logical_width": 200,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "view_initialize",
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 513,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": false,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 173,
+            "logical_width": 200,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "buffers": true,
+            "context_format": {
+              "depth_bits": 24,
+              "major": 3,
+              "minor": 2,
+              "profile": 0,
+              "renderable_type": 2,
+              "samples": 0,
+              "stencil_bits": 8
+            },
+            "dpr": 1.899999976158142,
+            "framebuffers": true,
+            "gl_version": "OpenGL ES 3.2 B301",
+            "glsl_version": "OpenGL ES GLSL ES 3.20",
+            "is_current": true,
+            "is_gles": true,
+            "logical_height": 501,
+            "logical_width": 514,
+            "renderer": "Maleoon 916",
+            "shaders": true,
+            "share_requested": true,
+            "sharing": true,
+            "stage": "view_initialize",
+            "valid": true,
+            "vendor": "HUAWEI"
+          },
+          "kind": "GL_CONTEXT"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 513,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": false,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 501,
+            "logical_width": 514,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "app_data": "/data/storage/el2/base/files",
+            "app_local_data": "/data/storage/el2/base/preferences",
+            "bundled_archive": ":/assets/ldraw-lite/library-lite.zip",
+            "bundled_candidates": [
+              "/data/storage/el2/base/preferences/ldraw-lite/library-lite.zip",
+              "/data/storage/el1/bundle/libs/arm64/ldraw-lite/library-lite.zip",
+              ":/assets/ldraw-lite/library-lite.zip"
+            ],
+            "bundled_problem": "",
+            "cache": "/data/storage/el2/base/cache",
+            "loaded_parts": 1162
+          },
+          "kind": "RESOURCE_PATHS"
+        },
+        {
+          "data": {
+            "destination_format": 5,
+            "height": 243,
+            "source_depth": 32,
+            "source_format": 18,
+            "source_stride": 972,
+            "width": 243
+          },
+          "kind": "GL_READBACK"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 893,
+            "logical_width": 1356,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        },
+        {
+          "data": {
+            "clear_depth": 1,
+            "depth_bits": 24,
+            "depth_func": 515,
+            "depth_range_far": 1,
+            "depth_range_near": 0,
+            "depth_test": true,
+            "depth_write": true,
+            "dpr": 1.899999976158142,
+            "framebuffer": 1,
+            "framebuffer_status": 36053,
+            "logical_height": 501,
+            "logical_width": 514,
+            "passed": true,
+            "qt_framebuffer": 1,
+            "stage": "view_framebuffer",
+            "stencil_bits": 8
+          },
+          "kind": "GL_FRAMEBUFFER"
+        }
+      ],
+      "native_main_return_0": true,
+      "log": "restart-dark.hilog.txt"
+    }
+  ],
+  "performance_samples": [
+    {
+      "raw_process_rows": [
+        " 10733 20020151     RT -10  11G 311M 163M S  0.0   0.9   0:00.68 io.github.xiaotaop.leocad",
+        " 10733 20020151     RT -10  11G 311M 163M S  0.0   0.9   0:00.68 io.github.xiaotaop.leocad",
+        " 10733 20020151     RT -10  11G 312M 164M S  1.0   0.9   0:00.68 io.github.xiaotaop.leocad"
+      ],
+      "pss_kb": 303208,
+      "name": "baseline-idle",
+      "pss_mib": 296.1,
+      "top_cpu_percent": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "raw_process_rows": [
+        " 10733 20020151     RT -10  11G 293M 173M S  3.8   0.9   0:06.95 io.github.xiaotaop.leocad",
+        " 10733 20020151     RT -10  11G 293M 173M S  0.0   0.9   0:06.96 io.github.xiaotaop.leocad",
+        " 10733 20020151     RT -10  11G 293M 173M S  1.0   0.9   0:06.96 io.github.xiaotaop.leocad"
+      ],
+      "pss_kb": 276334,
+      "name": "after-colors-restored",
+      "pss_mib": 269.9,
+      "top_cpu_percent": [
+        3.8,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "raw_process_rows": [
+        " 10733 20020151     RT -10  11G 317M 176M S  0.0   0.9   0:08.23 io.github.xiaotaop.leocad",
+        " 10733 20020151     RT -10  11G 317M 176M S  0.9   0.9   0:08.23 io.github.xiaotaop.leocad",
+        " 10733 20020151     RT -10  11G 317M 176M S  0.0   0.9   0:08.24 io.github.xiaotaop.leocad"
+      ],
+      "pss_kb": 374410,
+      "name": "preferences-open",
+      "pss_mib": 365.6,
+      "top_cpu_percent": [
+        0.0,
+        0.9,
+        0.0
+      ]
+    },
+    {
+      "raw_process_rows": [
+        " 14905 20020151     RT -10  11G 295M 144M S  0.0   0.9   0:01.85 io.github.xiaotaop.leocad",
+        " 14905 20020151     RT -10  11G 295M 144M S  1.0   0.9   0:01.85 io.github.xiaotaop.leocad",
+        " 14905 20020151     RT -10  11G 295M 144M S  0.0   0.9   0:01.86 io.github.xiaotaop.leocad"
+      ],
+      "pss_kb": 324513,
+      "name": "restart-idle",
+      "pss_mib": 316.9,
+      "top_cpu_percent": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "raw_process_rows": [
+        " 14905 20020151     RT -10  11G 274M 152M S  0.0   0.8   0:02.91 io.github.xiaotaop.leocad",
+        " 14905 20020151     RT -10  11G 274M 152M S  0.0   0.8   0:02.91 io.github.xiaotaop.leocad",
+        " 14905 20020151     RT -10  11G 274M 152M S  0.0   0.8   0:02.91 io.github.xiaotaop.leocad"
+      ],
+      "pss_kb": 281174,
+      "name": "final-restored",
+      "pss_mib": 274.6,
+      "top_cpu_percent": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

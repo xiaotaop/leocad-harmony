@@ -2,6 +2,8 @@
 
 记录日期：2026-10-30。源码、设备、包哈希和复现边界以 [D4真机报告](D4_DEVICE_ACCEPTANCE.md) 为准。
 
+2026-10-31 后续：下表保留D4当日状态。D5新包的颜色、偏好裁剪复验与新增相机/主题问题见 [D5真机报告](D5_DEVICE_ACCEPTANCE.md) 和 [D5缺陷表](D5_DEFECTS.md)，不要将下表的“待修”误读为最新验证结果。
+
 下表是组长交接和责任安排，已随 [PR #26](https://github.com/xiaotaop/leocad-harmony/pull/26) 推送到 GitHub。新增 [#27 缩略图颜色](https://github.com/xiaotaop/leocad-harmony/issues/27)（A主责、C配合）和 [#28 D7文案与布局](https://github.com/xiaotaop/leocad-harmony/issues/28)（C）；#12/#13/#14/#15 已补充 D4 状态，保留历史记录且继续开放，#16 保持原发布阶段安排。未自动关闭 issue。P0/P1指本轮新观察到的集成问题，不取代发布门槛或许可事项审查。
 
 | 编号 / 级别 | 事实与复现 | 负责人 | 下一步 / 截止阶段 | 状态 |

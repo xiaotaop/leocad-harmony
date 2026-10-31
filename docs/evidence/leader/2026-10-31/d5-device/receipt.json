@@ -1,0 +1,298 @@
+{
+  "date": "2026-10-31",
+  "source_commit": "f7a83c5eff03c5289ea60d7bac83caf92ba6210d",
+  "hash_algorithm": "SHA-256",
+  "scope": "all files in this directory except receipt.json",
+  "files": [
+    {
+      "name": "after-colors-restored.memory.txt",
+      "bytes": 3894,
+      "sha256": "dcc929124fd28b5e07c4465b1c0bfe8a4373dcbd3854cdf90d9ac7092c8d780e"
+    },
+    {
+      "name": "after-colors-restored.top.txt",
+      "bytes": 1413,
+      "sha256": "12c528031c49c5e0ba508853896ae421ef3b1d1231df7922fa717b5f99bde33a"
+    },
+    {
+      "name": "baseline-idle.memory.txt",
+      "bytes": 3893,
+      "sha256": "ecb0aa075fa5707f7e4e034b44b137b2bc6a731c4409d4a73d5e7d9c9a338654"
+    },
+    {
+      "name": "baseline-idle.top.txt",
+      "bytes": 1413,
+      "sha256": "c828044ca24f77cec9f91572cbba8b170afba125246835cfd50336b6996c20ed"
+    },
+    {
+      "name": "baseline-maximized.jpeg",
+      "bytes": 320834,
+      "sha256": "099d00afd5cf033184ffafa782d31b9ca718fb9ebcfa0d25ef7a50f94f96059d"
+    },
+    {
+      "name": "blue-inserted-maximized.jpeg",
+      "bytes": 297641,
+      "sha256": "bd7ae966242ab7a89dd000bdfd4940e5644dfb79feb0ae8304d428664e4cfbba"
+    },
+    {
+      "name": "blue-inserted-restored.jpeg",
+      "bytes": 442446,
+      "sha256": "4cc993be8a86bfa7795137ede05541e787f3dff13fef1e3ffb80030e4d8c3f6f"
+    },
+    {
+      "name": "blue-undone-maximized.jpeg",
+      "bytes": 303973,
+      "sha256": "520f19b2439d37a879fb3e4fe121b79f02609d9db479b3f1ef84f2219940b75a"
+    },
+    {
+      "name": "blue-undone-restored.jpeg",
+      "bytes": 445936,
+      "sha256": "819fcaa9a323f7e8edebf0d587f648071541d5156734dd0c8150050cb0d7153e"
+    },
+    {
+      "name": "final-restored.jpeg",
+      "bytes": 445242,
+      "sha256": "d711ed4066597e08828b4d3888c97af062e4f2ac73ca488bf337692cab12f403"
+    },
+    {
+      "name": "final-restored.memory.txt",
+      "bytes": 3894,
+      "sha256": "2359f86b82ba237627d3a8cf27e176f98fc6c92a12e3d4caaf9d8b587f23ea16"
+    },
+    {
+      "name": "final-restored.top.txt",
+      "bytes": 1413,
+      "sha256": "d7e49ba55c689528ba90c01794ba1d2b2222cad6de71d7b581ccf06f0a43a67b"
+    },
+    {
+      "name": "front-fit-maximized.jpeg",
+      "bytes": 260990,
+      "sha256": "6a6a6850e3a49134c4c4125bff28e55e6d6a760e13192fe10bab2bab417bb513"
+    },
+    {
+      "name": "front-fit-restored.jpeg",
+      "bytes": 430459,
+      "sha256": "f5671a3adfc8e6395dc78832b95d01f96e9584bb3478520ca83f704c394b05f4"
+    },
+    {
+      "name": "home-fit-maximized.jpeg",
+      "bytes": 304006,
+      "sha256": "e601008f971ad9b7376ded4c068857201c333fa4c8440face08bfc0f0e71119c"
+    },
+    {
+      "name": "home-fit-restored.jpeg",
+      "bytes": 445720,
+      "sha256": "c255b181ae085088af3c59629715dab2a29c0c39e11f17b98cc33397f3171ce3"
+    },
+    {
+      "name": "lightblue-inserted-maximized.jpeg",
+      "bytes": 312263,
+      "sha256": "58819f9cb00521725e0f2374455754b1a2e9fff08f83474722a49f18206b4559"
+    },
+    {
+      "name": "lightblue-inserted-restored.jpeg",
+      "bytes": 450388,
+      "sha256": "a370ed73bd9f306d0830d1b2ff523c6696d86b784f63e5fc372ad048be60038c"
+    },
+    {
+      "name": "lightblue-selected-maximized.jpeg",
+      "bytes": 305378,
+      "sha256": "6143854c5d28d3ac50ffd87f4315d7b9e6c6dbaaaa63f48e28964e31a1f77583"
+    },
+    {
+      "name": "lightblue-undone-maximized.jpeg",
+      "bytes": 306300,
+      "sha256": "e4dd689a1f3e20e3c316e4da2c9b6c141a34d78267d37021cd59837060dec430"
+    },
+    {
+      "name": "lightblue-undone-restored.jpeg",
+      "bytes": 447764,
+      "sha256": "7281a9c2dbf168487d692d1ccc61f7985d965263a0bf7213fe80f3da7ce85a6b"
+    },
+    {
+      "name": "normal-main.hilog.txt",
+      "bytes": 155782,
+      "sha256": "b2eceacf12ff7f72e00e104ea377d68ced350c45064069d1552c933533f762c2"
+    },
+    {
+      "name": "preferences-general.jpeg",
+      "bytes": 311864,
+      "sha256": "c119001dbe68d6be2a456733a1e4be5d837846bd46555b050bea43d6a3bfdaea"
+    },
+    {
+      "name": "preferences-open.memory.txt",
+      "bytes": 3894,
+      "sha256": "8897b4807aeb85790a4e5035a8ceb5aa6facf66ed20b91bd57a1eb2d0c72806b"
+    },
+    {
+      "name": "preferences-open.top.txt",
+      "bytes": 1413,
+      "sha256": "bf4af8224e6802a227ff79439e637e7951e7e0bd11c80609769ae102850dd87d"
+    },
+    {
+      "name": "preferences-rendering.jpeg",
+      "bytes": 308604,
+      "sha256": "833f6457c8efc102257ff054e5eebe263e239e2803002725901233181a09504c"
+    },
+    {
+      "name": "preferences-reopened-dark.jpeg",
+      "bytes": 384170,
+      "sha256": "203e920f0bf55b0fccde2cacf90bbf05713472a0844ea3921c261581027319c3"
+    },
+    {
+      "name": "preferences-theme-changed.jpeg",
+      "bytes": 322676,
+      "sha256": "b0b21965998604189b611dc35018056dfd513e43e59ab9f80607402a63bea4f5"
+    },
+    {
+      "name": "preferences-theme-system.jpeg",
+      "bytes": 311906,
+      "sha256": "41fe108669fac20c9f8157fbd0d9b4c4605734cf04798d445db77d6fa4cda4c2"
+    },
+    {
+      "name": "README.md",
+      "bytes": 3620,
+      "sha256": "5f45d0d4a9951bdc7d50900f2b04a98f2b32a70eb78b1970adc1852c67055742"
+    },
+    {
+      "name": "red-inserted-maximized.jpeg",
+      "bytes": 291651,
+      "sha256": "e919f4a56db0a70c747e187b35134abb9a729eb436c6e798c7eed5e7661e94f0"
+    },
+    {
+      "name": "red-inserted-restored.jpeg",
+      "bytes": 439452,
+      "sha256": "a7a294dd61b739d13ccb83bce5a791a1635a9e4bb685dff4e7636d221b693ae6"
+    },
+    {
+      "name": "red-selected-maximized.jpeg",
+      "bytes": 302209,
+      "sha256": "5d695ba659b2cf436921037c7b9106ccf6ed5827db70072fd51f45b0d76fe05a"
+    },
+    {
+      "name": "red-undone-maximized.jpeg",
+      "bytes": 303136,
+      "sha256": "1d8953a4e11be09fee547369a4a5750180d880b02c6f292dc35e2dc4b5868e9f"
+    },
+    {
+      "name": "red-undone-restored.jpeg",
+      "bytes": 445158,
+      "sha256": "3d86a9d1b27c999db99269fb675e06972068269a64f014ebf32bc354b5f08691"
+    },
+    {
+      "name": "reports.json",
+      "bytes": 29988,
+      "sha256": "a295547fd593db1eb898ffb0291c9c1446c7f498d967f8e0d845f2dd1054fae4"
+    },
+    {
+      "name": "restart-blue-maximized.jpeg",
+      "bytes": 302078,
+      "sha256": "9879c36aff081c8f8be7236b5b64007662971f82dadecbacb155a6a8c5cbe627"
+    },
+    {
+      "name": "restart-dark.hilog.txt",
+      "bytes": 191648,
+      "sha256": "4b6a7c04e76072b55d6ced684f50c038f879e916beccfaf3edc2d95cadc075b3"
+    },
+    {
+      "name": "restart-dark.jpeg",
+      "bytes": 320818,
+      "sha256": "967225a5e9f9fd9edc2fdb8ea77ced686ee1ccd59d454ccbe1eb31ba0d220696"
+    },
+    {
+      "name": "restart-front-fit-maximized.jpeg",
+      "bytes": 276774,
+      "sha256": "56285483e989e8c1d62d61a409c149f1df5f5592292fbfebc088086869297f77"
+    },
+    {
+      "name": "restart-front-fit-restored.jpeg",
+      "bytes": 429945,
+      "sha256": "842d831655cef3a76c3c143d535ce99b65ad872aac76d88b7f7024cae87a35f9"
+    },
+    {
+      "name": "restart-home-fit-maximized.jpeg",
+      "bytes": 319965,
+      "sha256": "b7172b7c2b809d7396faeec4ba68b06d0f289ad350c2a7ab82a56168b0a6b70b"
+    },
+    {
+      "name": "restart-home-fit-restored.jpeg",
+      "bytes": 445210,
+      "sha256": "98ae6ec74493003dca8666ed52945040532af83b4140d6780e9c39a4231be46f"
+    },
+    {
+      "name": "restart-idle.memory.txt",
+      "bytes": 3893,
+      "sha256": "0df4b08c92956cf65919f40134d771abd6c8f92c2144967ba3eb8044177f2818"
+    },
+    {
+      "name": "restart-idle.top.txt",
+      "bytes": 1413,
+      "sha256": "7c7cd85f289229d762a7c9ed8c87263ffffdeb3c2539123f6355f02cc524d06a"
+    },
+    {
+      "name": "restart-lightblue-maximized.jpeg",
+      "bytes": 304304,
+      "sha256": "4fc742d36ba63d57532da1bf931e4ed2b43595f59a2aeee04e690f343b76548e"
+    },
+    {
+      "name": "restart-red-maximized.jpeg",
+      "bytes": 301417,
+      "sha256": "a037da8a1a6de472151a2a2a9ef9907cc18e394fa461de0769a7a7d45f60544e"
+    },
+    {
+      "name": "restart-restored.jpeg",
+      "bytes": 444675,
+      "sha256": "fa922f815fedcfb9ae715b751d07781aecbbee88c3177dfdde4358fe5e79cec1"
+    },
+    {
+      "name": "restart-system.hilog.txt",
+      "bytes": 63288,
+      "sha256": "5b7166b73e4f2ea6460072cff3ecdc18771833d9416c502683ffcfd9d7327f0e"
+    },
+    {
+      "name": "restart-system.jpeg",
+      "bytes": 354381,
+      "sha256": "5941ebe94d1f2e6980b3b8faca03782eab6cf6be277752252a8e5683e3eed4b8"
+    },
+    {
+      "name": "restart-top-fit-maximized.jpeg",
+      "bytes": 288020,
+      "sha256": "2fe2637b965337a293683ffe23f3615ac8e25185c6fc3aa20c45ed857b41019f"
+    },
+    {
+      "name": "restart-top-fit-restored.jpeg",
+      "bytes": 436464,
+      "sha256": "92d74eb86ab3fc80985a6de1a28e7dcd142bb866bb1a6b097da988e2503dce87"
+    },
+    {
+      "name": "restored-baseline.jpeg",
+      "bytes": 447358,
+      "sha256": "280967c04b3517d36b8c6cba6a925715abdac5535feb4880adab765956672365"
+    },
+    {
+      "name": "system-theme-applied.jpeg",
+      "bytes": 325572,
+      "sha256": "6a019904c17bca61be4fe97517452e9eb94d9471d3bff7c7a80908b947110a7f"
+    },
+    {
+      "name": "top-fit-maximized.jpeg",
+      "bytes": 272365,
+      "sha256": "8e2fdd8a93788df936601bac57ac75d451c33553d177c603976ea6be057ee7f3"
+    },
+    {
+      "name": "top-fit-restored.jpeg",
+      "bytes": 436870,
+      "sha256": "d4263c8aa6c8fd730c36b72aeddb49c939cb4872ff091dc2c6eee1ab095bff46"
+    },
+    {
+      "name": "view-menu-recheck.jpeg",
+      "bytes": 328973,
+      "sha256": "5e388c347b03c8b8feee5038e2972a509463f04065792ad8cb3f2bb9c7241d62"
+    },
+    {
+      "name": "view-menu-restored.jpeg",
+      "bytes": 437147,
+      "sha256": "4a11e1cc97e402ee5b55fa9cf3d71864f4edc8044d4e68ff9071086b7e5de16a"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+Tasks: 1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+  Mem:    31914M total,    10372M used,    21542M free,        0M buffers
+ Swap:    51200M total,      389M used,    50810M free,     5078M cached
+2000%cpu   15%user    0%nice   35%sys 1946%idle    4%iow    0%irq    0%sirq    0%host
+   PID USER         PR  NI VIRT  RES  SHR S[%CPU] %MEM     TIME+ ARGS
+ 14905 20020151     RT -10  11G 295M 144M S  0.0   0.9   0:01.85 io.github.xiaotaop.leocad
+
+
+
+Tasks: 1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+  Mem:    31914M total,    10379M used,    21535M free,        0M buffers
+ Swap:    51200M total,      392M used,    50807M free,     5078M cached
+2000%cpu   32%user    0%nice   43%sys 1922%idle    0%iow    3%irq    0%sirq    0%host
+   PID USER         PR  NI VIRT  RES  SHR S[%CPU] %MEM     TIME+ ARGS
+ 14905 20020151     RT -10  11G 295M 144M S  1.0   0.9   0:01.85 io.github.xiaotaop.leocad
+
+
+
+Tasks: 1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+  Mem:    31914M total,    10381M used,    21533M free,        0M buffers
+ Swap:    51200M total,      391M used,    50808M free,     5078M cached
+2000%cpu   25%user    0%nice   34%sys 1939%idle    1%iow    1%irq    0%sirq    0%host
+   PID USER         PR  NI VIRT  RES  SHR S[%CPU] %MEM     TIME+ ARGS
+ 14905 20020151     RT -10  11G 295M 144M S  0.0   0.9   0:01.86 io.github.xiaotaop.leocad
