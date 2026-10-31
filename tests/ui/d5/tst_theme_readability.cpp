@@ -57,6 +57,7 @@ double ContrastRatio(const QColor& A, const QColor& B)
 }
 
 constexpr double MinimumReadableContrast = 4.5;
+
 }
 
 class ThemeReadabilityTest : public QObject
@@ -159,39 +160,68 @@ void ThemeReadabilityTest::systemAfterDarkIsReadable()
 
 void ThemeReadabilityTest::systemAfterDarkIsReadableWithoutAStyleObjectName()
 {
-	// On the HarmonyOS platform plugin style()->objectName() is empty, so the
-	// name captured at construction is empty too. Before the fix, setStyle("")
-	// returned null, the style stayed as the dark theme left it, and
-	// standardPalette() came from that style while the stylesheet was cleared.
+	// The platform the device reports: style()->objectName() is empty, so the name
+	// captured at construction is empty too and setStyle("") cannot restore
+	// anything.
+	//
+	// Two traps this case has to avoid, both found in review:
+	//
+	//   * On this host the default style is Fusion, which is also what the
+	//     fallback picks, so "the style is Fusion afterwards" passes whether or
+	//     not the fallback was applied. A distinguishable style has to be in
+	//     place first.
+	//
+	//   * Comparing style class names does not work either. Once the dark
+	//     stylesheet is installed Qt wraps the style in QStyleSheetStyle, whose
+	//     class name is the same whatever sits underneath, so the comparison is
+	//     blind for exactly the window where the switch happens.
+	//
+	// What is observable regardless of wrapping is the palette the style
+	// produces. Windows and Fusion have different standard palettes (measured:
+	// Window #d4d0c8 vs #efefef), so the window colour after the switch tells
+	// which style is actually feeding it.
+	const QStringList KnownStyles = QStyleFactory::keys();
+
+	if (!KnownStyles.contains(QLatin1String("Windows"), Qt::CaseInsensitive))
+		QSKIP("needs the Windows style to build a distinguishable state");
+
 	ApplyTheme(lcColorTheme::Dark);
+
+	// Put Windows in place: that is the stale style the fallback must replace.
+	QVERIFY2(QApplication::setStyle(QLatin1String("Windows")) != nullptr, "could not install the Windows style");
+
+	// Confirm the injected style really is feeding the palette, otherwise the
+	// check at the end would have nothing to distinguish.
+	const QColor InjectedWindow = QApplication::style()->standardPalette().color(QPalette::Window);
+	QVERIFY2(InjectedWindow != QColor(0xef, 0xef, 0xef),
+		qPrintable(QStringLiteral("the injected style already behaves like Fusion (Window %1); the case could not tell an applied fallback from a stale one")
+			.arg(InjectedWindow.name())));
 
 	const QString Saved = gApplication->GetDefaultStyleName();
 	gApplication->SetDefaultStyleName(QString());
 
 	ApplyTheme(lcColorTheme::System);
 
-	VerifyPaletteReadable("System after Dark, empty default style");
-
-	// The assertion that actually pins the fix. Contrast alone cannot: on this
-	// host standardPalette() is taken from whatever style happens to be active,
-	// so even a failed restore leaves a light palette and the ratios look fine —
-	// which is why the first version of this case passed with the fix reverted.
-	//
-	// What went wrong on the device is that the restore never happened: the
-	// application kept the style the dark theme installed while its stylesheet
-	// was cleared. So the property to assert is that the style name is no longer
-	// the dark one, i.e. that the captured empty name was replaced by something
-	// setStyle() can resolve.
-	QVERIFY2(!gApplication->GetDefaultStyleName().isEmpty(),
+	// 1. The captured name must have been backfilled to a key the factory knows.
+	//    The earlier version accepted any non-empty name via "!empty || known",
+	//    which never checked recognisability.
+	const QString Restored = gApplication->GetDefaultStyleName();
+	QVERIFY2(!Restored.isEmpty(),
 		"the default style name is empty, so switching to System cannot restore any style");
+	QVERIFY2(KnownStyles.contains(Restored, Qt::CaseInsensitive),
+		qPrintable(QStringLiteral("the backfilled style name \"%1\" is not a style the factory knows").arg(Restored)));
 
-	QVERIFY2(QApplication::style() != nullptr, "no widget style after restoring with an empty default name");
+	// 2. The palette must no longer come from the injected style. This is the
+	//    assertion the leader's mutation cannot survive: with the fallback
+	//    skipped and only the name written back, Windows stays installed and the
+	//    window colour stays #d4d0c8.
+	const QColor ActiveWindow = QApplication::palette().color(QPalette::Window);
+	QVERIFY2(ActiveWindow != InjectedWindow,
+		qPrintable(QStringLiteral("the window colour is still %1, the value the injected style produces; the fallback was recorded but not applied")
+			.arg(ActiveWindow.name())));
 
-	// And it must be a style the factory knows, not merely a non-null object.
-	QVERIFY2(!QApplication::style()->objectName().isEmpty() ||
-		QStyleFactory::keys().contains(QApplication::style()->objectName(), Qt::CaseInsensitive),
-		qPrintable(QStringLiteral("the active style \"%1\" is not a known style; the restore did not resolve one")
-			.arg(QApplication::style()->objectName())));
+	// 3. And the result must be readable, which is the user-visible property.
+	VerifyPaletteReadable("System after Dark, empty default style");
 
 	gApplication->SetDefaultStyleName(Saved);
 	ApplyTheme(lcColorTheme::System);

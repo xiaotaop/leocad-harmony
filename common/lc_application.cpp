@@ -283,6 +283,16 @@ void lcApplication::UpdateStyle()
 		// setStyle() returns null when the key does not resolve. Falling back to
 		// the style the platform started with keeps the restore meaningful
 		// instead of silently keeping the dark theme's style.
+		// Diagnostic for the device: the whole theme path depends on values this
+		// host cannot see — the platform style's object name, its class, and
+		// whether the restore resolves. D5-02's root cause is currently a
+		// HYPOTHESIS (an empty object name on the HarmonyOS plugin, inferred from
+		// the host experiment plus the failure shape). This line is what turns it
+		// into evidence: one line per theme switch, greppable in hilog.
+		qInfo().noquote() << "LEOCAD_THEME_STYLE" << QStringLiteral("{\"default\":\"%1\",\"active_before\":\"%2\",\"class_before\":\"%3\"}")
+			.arg(mDefaultStyle, QApplication::style() ? QApplication::style()->objectName() : QString(),
+				QApplication::style() ? QString::fromLatin1(QApplication::style()->metaObject()->className()) : QString());
+
 		if (QApplication::setStyle(mDefaultStyle) == nullptr)
 		{
 			// Nothing to restore from. Say so, and make sure the palette below is
@@ -296,15 +306,26 @@ void lcApplication::UpdateStyle()
 			const QString Fallback = KnownStyles.contains(QLatin1String("Fusion"), Qt::CaseInsensitive)
 				? QLatin1String("Fusion") : KnownStyles.value(0);
 
-			if (QApplication::setStyle(Fallback) != nullptr)
+			const bool Applied = QApplication::setStyle(Fallback) != nullptr;
+
+			if (Applied)
 			{
 				// Remember it, so a later switch does not have to guess again.
 				mDefaultStyle = Fallback;
 			}
+
+			qInfo().noquote() << "LEOCAD_THEME_STYLE" << QStringLiteral("{\"fallback\":\"%1\",\"applied\":%2,\"known\":[%3]}")
+				.arg(Fallback, Applied ? QStringLiteral("true") : QStringLiteral("false"),
+					QStyleFactory::keys().join(QStringLiteral(",")));
 		}
 
 		QApplication::setPalette(QApplication::style()->standardPalette());
 		qApp->setStyleSheet(QString());
+
+		qInfo().noquote() << "LEOCAD_THEME_STYLE" << QStringLiteral("{\"active_after\":\"%1\",\"class_after\":\"%2\",\"window\":\"%3\"}")
+			.arg(QApplication::style() ? QApplication::style()->objectName() : QString(),
+				QApplication::style() ? QString::fromLatin1(QApplication::style()->metaObject()->className()) : QString(),
+				QApplication::palette().color(QPalette::Window).name());
 	}
 }
 
