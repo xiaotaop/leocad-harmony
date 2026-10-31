@@ -28,7 +28,7 @@ python3 tests/library/d3/prepare_variants.py
 
 SUITES=("$@")
 if [ ${#SUITES[@]} -eq 0 ]; then
-    SUITES=(archive priority menu modellist panel preferences)
+    SUITES=(archive priority menu modellist panel preferences theme)
 fi
 
 FAILED=0
@@ -38,7 +38,7 @@ for SUITE in "${SUITES[@]}"; do
     # milestone, so it keeps its own project name rather than being numbered D3.
     case "$SUITE" in
     panel)       PROJECT="d4-${SUITE}-tests.pro"; TARGET="leocad-d4-${SUITE}" ;;
-    preferences) PROJECT="d5-${SUITE}-tests.pro"; TARGET="leocad-d5-${SUITE}" ;;
+    preferences|theme) PROJECT="d5-${SUITE}-tests.pro"; TARGET="leocad-d5-${SUITE}" ;;
     *)           PROJECT="d3-${SUITE}-tests.pro"; TARGET="leocad-d3-${SUITE}" ;;
     esac
 
