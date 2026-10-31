@@ -24,14 +24,6 @@ lcPreferencesDialog::lcPreferencesDialog(QWidget* Parent, lcPreferencesDialogOpt
 {
 	ui->setupUi(this);
 
-#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
-	ui->povrayLabel->hide();
-	ui->povrayExecutable->hide();
-	ui->povrayExecutableBrowse->hide();
-	delete ui->povrayLabel;
-	delete ui->povrayLayout;
-#endif
-
 	// First-release scope (docs/library/D2_精简零件库与资源部署方案.md section 6.4,
 	// docs/D4_DEFECTS.md D4-02). The plan is to hide controls rather than edit the
 	// .ui, so an unfiltered build still matches upstream and the file keeps its
@@ -46,7 +38,21 @@ lcPreferencesDialog::lcPreferencesDialog(QWidget* Parent, lcPreferencesDialogOpt
 	// What stays: language, theme, the parts author name, the colour and minifig
 	// configuration files (both are local files the app needs), the keyboard and
 	// mouse pages, and every display option — those are in scope.
+	//
+	// Runs BEFORE the platform cleanup below, not after: that block deletes
+	// ui->povrayLabel on Windows and macOS, and a name the scope list hides would
+	// then no longer exist. Review caught this — with the call after the cleanup,
+	// findChild() returned null for povrayLabel and the assertion below aborted
+	// every Debug build on those platforms as soon as Preferences opened.
 	ApplyFirstReleasePreferencesScope();
+
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
+	ui->povrayLabel->hide();
+	ui->povrayExecutable->hide();
+	ui->povrayExecutableBrowse->hide();
+	delete ui->povrayLabel;
+	delete ui->povrayLayout;
+#endif
 
 	ui->Language->addItem("\u010cesky");
 	ui->Language->addItem("Deutsch");
@@ -506,18 +512,47 @@ int lcPreferencesDialog::ScopedWidgets::KeptCount()
 	return int(sizeof(FirstReleaseKeptWidgets) / sizeof(FirstReleaseKeptWidgets[0]));
 }
 
-void lcPreferencesDialog::ApplyFirstReleasePreferencesScope()
+// The hiding itself, without the dialog: takes any container that holds the
+// preference widgets and returns how many names did not resolve.
+//
+// Separate from ApplyFirstReleasePreferencesScope() so a test can run it against
+// a bare Ui::lcPreferencesDialog built from the real .ui, without constructing
+// the dialog — whose constructor queries the GL context and needs a live view.
+// That is also what makes the ordering bug from review reachable in a test: the
+// function can be run on the object tree before and after a platform-style
+// delete, and the "missing" count is observable instead of aborting.
+int lcPreferencesDialog::HideFirstReleaseWidgets(QWidget* Container)
 {
+	int Missing = 0;
+
 	for (int Index = 0; Index < ScopedWidgets::HiddenCount(); Index++)
 	{
-		QWidget* Widget = findChild<QWidget*>(QLatin1String(ScopedWidgets::Hidden()[Index]));
+		QWidget* Widget = Container->findChild<QWidget*>(QLatin1String(ScopedWidgets::Hidden()[Index]));
 
-		// A rename in the .ui would otherwise hide nothing and say nothing.
-		Q_ASSERT_X(Widget, "ApplyFirstReleasePreferencesScope", ScopedWidgets::Hidden()[Index]);
+		if (Widget == nullptr)
+		{
+			// Counted, not asserted here: see the caller.
+			Missing++;
+			continue;
+		}
 
-		if (Widget)
-			Widget->hide();
+		Widget->hide();
 	}
+
+	return Missing;
+}
+
+void lcPreferencesDialog::ApplyFirstReleasePreferencesScope()
+{
+	const int Missing = HideFirstReleaseWidgets(this);
+
+	// A rename in the .ui would otherwise hide nothing and say nothing, so a
+	// name that does not resolve is a defect. The count is returned rather than
+	// asserted inside the loop so the same code can run against a container that
+	// legitimately lacks some of these widgets — a test builds the .ui directly,
+	// and the dialog itself runs this before its platform cleanup.
+	Q_ASSERT_X(Missing == 0, "ApplyFirstReleasePreferencesScope",
+		"a name in FirstReleaseHiddenWidgets does not resolve; the .ui was renamed");
 }
 
 void lcPreferencesDialog::BlenderAddonSettingsButtonClicked()

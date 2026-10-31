@@ -75,6 +75,20 @@ public:
 		static int KeptCount();
 	};
 
+	// Hides the first-release-excluded widgets inside Container and returns how
+	// many names did not resolve.
+	//
+	// Static and container-based so a test can run the real hiding code against a
+	// bare Ui::lcPreferencesDialog built from the .ui, without constructing this
+	// dialog (whose constructor queries the GL context). It also makes the
+	// ordering requirement testable: the same call can be made on a tree before
+	// and after a platform-style delete, and the count is observable instead of
+	// aborting.
+	static int HideFirstReleaseWidgets(QWidget* Container);
+
+	// Called from the constructor. Must run before the platform cleanup that
+	// deletes ui->povrayLabel on Windows and macOS, or that name no longer
+	// resolves and the assertion fires on every Debug build there.
 	void ApplyFirstReleasePreferencesScope();
 
 public slots:

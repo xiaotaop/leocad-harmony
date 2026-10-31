@@ -24,12 +24,14 @@
 // parts library path (out of scope) *and* the colour and minifig configuration
 // files (in scope), so hiding the group looks tidy and takes two needed rows.
 
+#include <QDialog>
 #include <QFile>
 #include <QSet>
 #include <QXmlStreamReader>
 #include <QtTest>
 
 #include "lc_qpreferencesdialog.h"
+#include "ui_lc_qpreferencesdialog.h"
 
 class PreferencesScopeTest : public QObject
 {
@@ -54,6 +56,16 @@ private slots:
 	// The trap: the colour and minifig rows share a group box with the hidden
 	// parts-library path.
 	void keptRowsInThePathsGroupAreNotHidden();
+
+	// Runs the real hiding code against a real widget tree built from the .ui.
+	// Checking the name lists against the file cannot catch a name that resolves
+	// at review time and not at runtime — which is exactly the review finding.
+	void scopeActuallyHidesOnARealTree();
+
+	// The review finding itself: on Windows/macOS the constructor deletes
+	// ui->povrayLabel before the scope runs, so a scope that requires every name
+	// to resolve aborts there. This pins the ordering requirement.
+	void scopeMustRunBeforeThePlatformCleanup();
 
 private:
 	// Widget names present in the .ui, read directly rather than through uic:
@@ -209,6 +221,126 @@ void PreferencesScopeTest::keptRowsInThePathsGroupAreNotHidden()
 			qPrintable(QStringLiteral("%1 is not kept, but it is a local settings file the app reads")
 				.arg(QLatin1String(Name))));
 	}
+}
+
+namespace
+{
+// A dialog-shaped host holding the real preference widgets, built by the same
+// uic-generated setupUi() the dialog uses. This is the container the review
+// asked for: it exercises the actual object tree without the dialog
+// constructor's GL query.
+class PreferencesHost : public QDialog
+{
+public:
+	PreferencesHost()
+	{
+		mUi.setupUi(this);
+	}
+
+	QWidget* Widget(const char* Name) const
+	{
+		return findChild<QWidget*>(QLatin1String(Name));
+	}
+
+private:
+	Ui_lcPreferencesDialog mUi;
+};
+}
+
+void PreferencesScopeTest::scopeActuallyHidesOnARealTree()
+{
+	PreferencesHost Host;
+
+	// Record which kept widgets were already hidden before the scope runs, so
+	// the check below is about what the function changed rather than about the
+	// host's initial state.
+	QSet<QString> BeforeHidden;
+
+	for (int Index = 0; Index < lcPreferencesDialog::ScopedWidgets::KeptCount(); Index++)
+	{
+		QWidget* Widget = Host.Widget(lcPreferencesDialog::ScopedWidgets::Kept()[Index]);
+
+		if (Widget && Widget->isHidden())
+			BeforeHidden.insert(QLatin1String(lcPreferencesDialog::ScopedWidgets::Kept()[Index]));
+	}
+
+	// The real hiding path, no assertions bypassed.
+	const int Missing = lcPreferencesDialog::HideFirstReleaseWidgets(&Host);
+
+	QVERIFY2(Missing == 0,
+		qPrintable(QStringLiteral("%1 hidden names did not resolve on the real tree").arg(Missing)));
+
+	// Every hidden name must actually be hidden now.
+	QStringList StillShown;
+
+	for (int Index = 0; Index < lcPreferencesDialog::ScopedWidgets::HiddenCount(); Index++)
+	{
+		const QString Name = QLatin1String(lcPreferencesDialog::ScopedWidgets::Hidden()[Index]);
+		QWidget* Widget = Host.Widget(lcPreferencesDialog::ScopedWidgets::Hidden()[Index]);
+
+		if (!Widget || !Widget->isHidden())
+			StillShown.append(Name);
+	}
+
+	QVERIFY2(StillShown.isEmpty(),
+		qPrintable(QStringLiteral("still visible after hiding: %1").arg(StillShown.join(QLatin1String(", ")))));
+
+	// And the kept list must still be visible on the same tree, so this proves
+	// the hiding ran rather than the widgets being absent for another reason.
+	//
+	// Tab pages other than the current one are hidden by QTabWidget itself, so
+	// they are not evidence of anything. Comparing against the state before the
+	// call is the honest test: what matters is that this function did not change
+	// them, not that they happen to be visible in a freshly built host.
+	QStringList HiddenByMistake;
+
+	for (int Index = 0; Index < lcPreferencesDialog::ScopedWidgets::KeptCount(); Index++)
+	{
+		QWidget* Widget = Host.Widget(lcPreferencesDialog::ScopedWidgets::Kept()[Index]);
+
+		if (Widget && Widget->isHidden() && !BeforeHidden.contains(QLatin1String(lcPreferencesDialog::ScopedWidgets::Kept()[Index])))
+			HiddenByMistake.append(QLatin1String(lcPreferencesDialog::ScopedWidgets::Kept()[Index]));
+	}
+
+	QVERIFY2(HiddenByMistake.isEmpty(),
+		qPrintable(QStringLiteral("in-scope widgets were hidden: %1").arg(HiddenByMistake.join(QLatin1String(", ")))));
+}
+
+void PreferencesScopeTest::scopeMustRunBeforeThePlatformCleanup()
+{
+	// Reproduces the review finding. On Windows and macOS the constructor does
+	// "delete ui->povrayLabel" during platform cleanup; if the scope ran after
+	// that, this is the state it would see — the name no longer resolves.
+	PreferencesHost Host;
+
+	QWidget* PovrayLabel = Host.Widget("povrayLabel");
+	QVERIFY2(PovrayLabel, "povrayLabel missing from the .ui; the test below would be vacuous");
+	delete PovrayLabel;
+
+	const int Missing = lcPreferencesDialog::HideFirstReleaseWidgets(&Host);
+
+	// Run after the cleanup, one name legitimately does not resolve. The point of
+	// the case is that the count reports it instead of aborting: with the dialog
+	// asserting on a non-zero count, running the scope in this order would abort
+	// every Debug build on those platforms, which is what review reproduced.
+	QVERIFY2(Missing == 1,
+		qPrintable(QStringLiteral("expected exactly the deleted name to be reported, got %1").arg(Missing)));
+
+	// The constructor must therefore call the scope before the platform cleanup.
+	// Checked against the source rather than by constructing the dialog, which
+	// needs a GL context.
+	QFile Source(QFINDTESTDATA("../../../qt/lc_qpreferencesdialog.cpp"));
+	QVERIFY2(Source.open(QIODevice::ReadOnly), "cannot read lc_qpreferencesdialog.cpp");
+
+	const QString Text = QString::fromUtf8(Source.readAll());
+	const int ScopeIndex = Text.indexOf(QLatin1String("ApplyFirstReleasePreferencesScope();"));
+	const int DeleteIndex = Text.indexOf(QLatin1String("delete ui->povrayLabel;"));
+
+	QVERIFY2(ScopeIndex >= 0, "the constructor no longer calls ApplyFirstReleasePreferencesScope()");
+	QVERIFY2(DeleteIndex >= 0, "the platform cleanup no longer deletes ui->povrayLabel");
+
+	QVERIFY2(ScopeIndex < DeleteIndex,
+		"ApplyFirstReleasePreferencesScope() runs after the platform cleanup, so povrayLabel is already deleted and Debug builds abort");
 }
 
 int main(int argc, char** argv)
