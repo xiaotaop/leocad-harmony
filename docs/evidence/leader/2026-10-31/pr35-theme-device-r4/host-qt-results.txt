@@ -1,0 +1,49 @@
+********* Start testing of ThemeReadabilityTest *********
+Config: Using QtTest library 6.12.0, Qt 6.12.0 (x86_64-little_endian-llp64 shared (dynamic) release build; by GCC 15.1.0), windows 11
+PASS   : ThemeReadabilityTest::initTestCase()
+PASS   : ThemeReadabilityTest::darkThemeIsReadable()
+QINFO  : ThemeReadabilityTest::systemAfterDarkIsReadable() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"","class_before":"QStyleSheetStyle"}
+QINFO  : ThemeReadabilityTest::systemAfterDarkIsReadable() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#efefef","windowtext":"#000000","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+PASS   : ThemeReadabilityTest::systemAfterDarkIsReadable()
+QINFO  : ThemeReadabilityTest::systemAfterDarkIsReadableWithoutAStyleObjectName() LEOCAD_THEME_STYLE {"default":"","active_before":"","class_before":"QStyleSheetStyle"}
+QWARN  : ThemeReadabilityTest::systemAfterDarkIsReadableWithoutAStyleObjectName() Could not restore the default widget style "".
+QINFO  : ThemeReadabilityTest::systemAfterDarkIsReadableWithoutAStyleObjectName() LEOCAD_THEME_STYLE {"fallback":"Fusion","applied":true,"known":[windows11,windowsvista,Windows,Fusion]}
+QINFO  : ThemeReadabilityTest::systemAfterDarkIsReadableWithoutAStyleObjectName() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#efefef","windowtext":"#000000","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+QINFO  : ThemeReadabilityTest::systemAfterDarkIsReadableWithoutAStyleObjectName() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"fusion","class_before":"QFusionStyle"}
+QINFO  : ThemeReadabilityTest::systemAfterDarkIsReadableWithoutAStyleObjectName() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#efefef","windowtext":"#000000","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+PASS   : ThemeReadabilityTest::systemAfterDarkIsReadableWithoutAStyleObjectName()
+QINFO  : ThemeReadabilityTest::menuAndColourNameTextUseReadableRoles() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"","class_before":"QStyleSheetStyle"}
+QINFO  : ThemeReadabilityTest::menuAndColourNameTextUseReadableRoles() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#efefef","windowtext":"#000000","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+PASS   : ThemeReadabilityTest::menuAndColourNameTextUseReadableRoles()
+QWARN  : ThemeReadabilityTest::brokenStylePaletteIsRepaired() Palette role WindowText (#ffffff) has contrast 1.00 against Window (#ffffff); using #1e1e1e.
+QWARN  : ThemeReadabilityTest::brokenStylePaletteIsRepaired() Palette role Text (#fafafa) has contrast 1.04 against Base (#ffffff); using #1e1e1e.
+QWARN  : ThemeReadabilityTest::brokenStylePaletteIsRepaired() Palette role ButtonText (#ffffff) has contrast 1.00 against Button (#ffffff); using #1e1e1e.
+PASS   : ThemeReadabilityTest::brokenStylePaletteIsRepaired()
+PASS   : ThemeReadabilityTest::readablePaletteIsLeftAlone()
+QINFO  : ThemeReadabilityTest::widgetStateReportsWhatAWidgetResolves() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"fusion","class_before":"QFusionStyle"}
+QINFO  : ThemeReadabilityTest::widgetStateReportsWhatAWidgetResolves() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#efefef","windowtext":"#000000","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+PASS   : ThemeReadabilityTest::widgetStateReportsWhatAWidgetResolves()
+QWARN  : ThemeReadabilityTest::deviceOhosPaletteIsRepaired() Palette surface role 1 is dark while Window is light; using #f2f2f2 so text colours can be chosen once.
+PASS   : ThemeReadabilityTest::deviceOhosPaletteIsRepaired()
+QINFO  : ThemeReadabilityTest::everyColourGroupIsReadableAfterThemeSwitch() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"","class_before":"QStyleSheetStyle"}
+QINFO  : ThemeReadabilityTest::everyColourGroupIsReadableAfterThemeSwitch() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#efefef","windowtext":"#000000","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+PASS   : ThemeReadabilityTest::everyColourGroupIsReadableAfterThemeSwitch()
+QINFO  : ThemeReadabilityTest::themeSwitchAppliesTheRepair() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"","class_before":"QStyleSheetStyle"}
+QWARN  : ThemeReadabilityTest::themeSwitchAppliesTheRepair() Palette role WindowText (#ffffff) has contrast 1.00 against Window (#ffffff); using #1e1e1e.
+QWARN  : ThemeReadabilityTest::themeSwitchAppliesTheRepair() Palette role Text (#fcfcfc) has contrast 1.03 against Base (#ffffff); using #1e1e1e.
+QWARN  : ThemeReadabilityTest::themeSwitchAppliesTheRepair() Palette role ButtonText (#ffffff) has contrast 1.00 against Button (#ffffff); using #1e1e1e.
+QINFO  : ThemeReadabilityTest::themeSwitchAppliesTheRepair() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#ffffff","windowtext":"#1e1e1e","text":"#1e1e1e","buttontext":"#1e1e1e","button":"#ffffff","base":"#ffffff"}
+QINFO  : ThemeReadabilityTest::themeSwitchAppliesTheRepair() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"fusion","class_before":"QFusionStyle"}
+QINFO  : ThemeReadabilityTest::themeSwitchAppliesTheRepair() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#efefef","windowtext":"#000000","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+PASS   : ThemeReadabilityTest::themeSwitchAppliesTheRepair()
+QWARN  : ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown() QFontDatabase: Cannot find font directory D:/qt/6.12.0/mingw_64/lib/fonts.
+Note that Qt no longer ships fonts. Deploy some (from https://dejavu-fonts.github.io/ for example) or switch to fontconfig.
+QINFO  : ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"","class_before":"QStyleSheetStyle"}
+QWARN  : ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown() Palette role WindowText (#ffffff) has contrast 1.00 against Window (#ffffff); using #1e1e1e.
+QINFO  : ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#ffffff","windowtext":"#1e1e1e","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+QINFO  : ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown() LEOCAD_THEME_STYLE {"default":"fusion","active_before":"fusion","class_before":"QFusionStyle"}
+QINFO  : ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown() LEOCAD_THEME_STYLE {"active_after":"fusion","class_after":"QFusionStyle","window":"#efefef","windowtext":"#000000","text":"#000000","buttontext":"#000000","button":"#efefef","base":"#ffffff"}
+PASS   : ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown()
+PASS   : ThemeReadabilityTest::cleanupTestCase()
+Totals: 13 passed, 0 failed, 0 skipped, 0 blacklisted, 13ms
+********* Finished testing of ThemeReadabilityTest *********

@@ -1,5 +1,7 @@
 # PR #35 主题真机复验 R3：部分修复
 
+执行后 C 又提交 `b2d1163a`，已追加构建安装和四路径真机复验，见 [R4 最新报告](PR35_THEME_DEVICE_VERIFICATION_R4.md)。本文件保留 1fa1adee 的历史结果。
+
 2026-10-31，Asia/Shanghai。被测提交 `1fa1adeed1cb03eddc8b24b2f105e7d2669c49bf`；结束时核对 [PR #35](https://github.com/xiaotaop/leocad-harmony/pull/35)远端 HEAD 未改变。
 
 **结论：菜单及重启后的颜色名已恢复；未重启时当前颜色名仍极浅难辨，#33 尚未完整修复。** 当前不建议作为完整修复批准合并。[R2](PR35_THEME_DEVICE_VERIFICATION_R2.md)的“四项均失败”只适用于旧提交，不能用于描述本版本。
