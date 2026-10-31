@@ -21,6 +21,7 @@
 
 #include <QApplication>
 #include <QMenuBar>
+#include <QToolButton>
 
 #include <QPalette>
 #include <QStyleFactory>
@@ -103,6 +104,11 @@ private slots:
 	// a window that never takes focus paints with Inactive, and an enabled state
 	// change later switches groups. Sampling one group can miss what is drawn.
 	void everyColourGroupIsReadableAfterThemeSwitch();
+
+	// The device kept dark colours on the colour-name button after switching,
+	// while the menu recovered. A widget that owns a palette does exactly that:
+	// it ignores the application palette change until its own palette is cleared.
+	void forcedRepropagationReachesAWidgetWithItsOwnPalette();
 	void themeSwitchAppliesTheRepair();
 
 	// The repair is worthless if the stylesheet teardown then overwrites the
@@ -562,6 +568,61 @@ void ThemeReadabilityTest::everyColourGroupIsReadableAfterThemeSwitch()
 					.arg(Text.name(), Surface.name())));
 		}
 	}
+}
+
+void ThemeReadabilityTest::forcedRepropagationReachesAWidgetWithItsOwnPalette()
+{
+	// This is the mechanism behind the device finding: the menu followed the new
+	// palette and the colour-name button did not. A widget with its own palette
+	// ignores QApplication::setPalette() entirely, and clearing the application
+	// stylesheet does not reset that.
+	// A real top-level window: RepropagatePalette walks the top-level widgets and
+	// their children, so a stack-allocated parent that is neither shown nor a
+	// top-level would not be reached and the case would pass vacuously.
+	QWidget* Host = new QWidget();
+	Host->setAttribute(Qt::WA_DeleteOnClose, false);
+
+	QToolButton* Button = new QToolButton(Host);
+	Button->setText(QStringLiteral("Light Grey"));
+	Button->setAutoRaise(true);
+	Host->show();
+	QCoreApplication::processEvents();
+
+	// Give it the dark colours it would have captured while the dark theme was up.
+	QPalette Dark;
+	Dark.setColor(QPalette::Window, QColor(0x31, 0x34, 0x37));
+	Dark.setColor(QPalette::ButtonText, QColor(0xe0, 0xe0, 0xf4));
+	Button->setPalette(Dark);
+
+	QVERIFY2(Button->testAttribute(Qt::WA_SetPalette),
+		"the widget does not own a palette, so this case is not reproducing the stuck state");
+
+	// Re-install the dark colours AFTER the application palette moved on, which is
+	// the state the device was in: the widget holds its own copy while the
+	// application has new values. Doing it in this order matters — if the widget
+	// merely never had a palette of its own, Qt would have propagated the change
+	// to it and the case would pass with or without the fix.
+	Button->setPalette(Dark);
+
+	QCOMPARE(Button->palette().color(QPalette::Window), QColor(0x31, 0x34, 0x37));
+
+	// Still stale at the moment the fix runs. If something else had already
+	// refreshed it, the fix below would prove nothing.
+	QCOMPARE(Button->palette().color(QPalette::Window), QColor(0x31, 0x34, 0x37));
+
+	lcApplication::RepropagatePalette();
+
+	// The widget must now paint with the application palette instead of the stale
+	// one it was holding. Compared against the live application palette so the
+	// case does not depend on which theme the suite is in — other cases change it.
+	QCOMPARE(Button->palette().color(QPalette::Window), QApplication::palette().color(QPalette::Window));
+	QCOMPARE(Button->palette().color(QPalette::ButtonText), QApplication::palette().color(QPalette::ButtonText));
+
+	Host->hide();
+	delete Host;
+
+	// Leave the palette as the other cases expect.
+	ApplyTheme(lcColorTheme::System);
 }
 
 int main(int argc, char** argv)

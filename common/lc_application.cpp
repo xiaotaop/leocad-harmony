@@ -14,6 +14,7 @@
 #include "camera.h"
 #include "lc_previewwidget.h"
 #include "lc_colors.h"
+#include <QTimer>
 
 #ifdef Q_OS_WIN
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
@@ -258,6 +259,95 @@ double Contrast(const QColor& A, const QColor& B)
 // by Qt's bundled styles measure far above it, so a value under this means the
 // pair is broken, not merely tight.
 constexpr double MinimumContrast = 3.0;
+}
+
+void lcApplication::RepropagatePalette()
+{
+	// Make every widget re-resolve its palette from the application one.
+	//
+	// Why this is not redundant with QApplication::setPalette(): that call is
+	// supposed to propagate, and on this host it does. On the device it did not —
+	// after a Dark -> System switch the menu recovered while the colour-name button
+	// kept reporting the dark palette, in the same process and the same event
+	// loop. Relying on propagation therefore leaves the outcome to a platform
+	// detail; this makes it explicit.
+	//
+	// Two parts, each doing distinct work:
+	//
+	//   setPalette(QPalette())  clears a palette the widget owns, so it inherits
+	//                           again. Harmless when it owns nothing.
+	//   unpolish/polish         makes the style recompute the roles it resolved
+	//                           during the previous polish and cached.
+	//
+	// update() is queued rather than painted immediately: the point is to get the
+	// widgets to repaint with the new palette, not to block the theme switch.
+	// allWidgets() only reports widgets that have been created and registered, so
+	// a widget built but not shown yet is invisible to it — which is exactly the
+	// state a dialog or a freshly created dock is in while the theme changes.
+	// Walk the object trees of the top-level widgets as well, so those are
+	// covered too.
+	QSet<QWidget*> Widgets;
+
+	for (QWidget* Widget : QApplication::allWidgets())
+		if (Widget != nullptr)
+			Widgets.insert(Widget);
+
+	const QWidgetList TopLevels = QApplication::topLevelWidgets();
+
+	for (QWidget* Top : TopLevels)
+	{
+		if (Top == nullptr)
+			continue;
+
+		Widgets.insert(Top);
+
+		for (QWidget* Child : Top->findChildren<QWidget*>())
+			if (Child != nullptr)
+				Widgets.insert(Child);
+	}
+
+	for (QWidget* Widget : Widgets)
+	{
+
+		// Order matters: unpolish/polish first, then clear.
+		//
+		// polish() is where a style resolves and stores the palette it intends to
+		// paint with. Clearing the widget's palette before that lets the polish
+		// re-install the style's own choice, and the widget ends up on the style's
+		// standard palette rather than the application's — measured on the host as
+		// #efefef when the application said #ffffff. Doing the clear last leaves
+		// nothing to overwrite it.
+		if (QStyle* Style = Widget->style())
+		{
+			Style->unpolish(Widget);
+			Style->polish(Widget);
+		}
+
+		// Give the widget the application palette explicitly rather than hoping
+		// that clearing its own makes it inherit.
+		//
+		// The clearing approach works on this host in isolation, but inside the
+		// application the polish immediately re-resolves from the style, and the
+		// widget ends up on the style's standard palette (#efefef measured) while
+		// the application holds the restored one (#ffffff). Setting the value is
+		// deterministic; the inherited value is whatever the style decides.
+		Widget->setPalette(QApplication::palette());
+
+		Widget->update();
+	}
+}
+
+void lcApplication::ScheduleDelayedThemeSample()
+{
+	// One sample after the event loop has drained, so "the widget had not been
+	// updated yet" and "the widget is permanently stale" can be told apart. The
+	// device log alone could not: the immediate reading showed pre-switch colours
+	// in both cases.
+	QTimer::singleShot(1000, this, []()
+	{
+		qInfo().noquote() << "LEOCAD_THEME_DELAYED" << QStringLiteral("{\"stage\":\"post_event_loop\"}");
+		lcApplication::LogThemeWidgetState();
+	});
 }
 
 void lcApplication::LogThemeWidgetState()
@@ -596,11 +686,30 @@ void lcApplication::UpdateStyle()
 		// #ffffff) while the menu still drew invisible text. Whatever goes wrong
 		// happens between that palette and the widget that paints.
 		//
+		// Device evidence: right after the switch the widgets still reported the
+		// dark theme's colours (Window #313437, Button #2d3033) while the
+		// application palette already held the light ones. The menu recovered and
+		// the colour name did not, in the same process, so the propagation from
+		// the application palette to the widgets is not reliable on that platform.
+		//
+		// Force it rather than rely on it. Clearing a widget's own palette makes
+		// it inherit again — that is the mechanism, verified on the host — and an
+		// explicit re-polish makes the style re-resolve the roles it cached. Both
+		// steps are cheap and are no-ops on a platform where propagation already
+		// worked.
+		RepropagatePalette();
+
 		// So sample the widgets themselves. What matters is what they resolve, not
 		// what the application holds: a widget can carry its own palette
 		// (WA_SetPalette) and then ignore application palette changes entirely,
 		// and it can be painted by a style other than QApplication::style().
 		LogThemeWidgetState();
+
+		// And sample again once the event loop has run. The immediate reading above
+		// can legitimately show pre-switch values if the platform defers the
+		// palette event; the leader asked for the delayed reading precisely because
+		// the immediate one cannot distinguish "not yet" from "never".
+		ScheduleDelayedThemeSample();
 	}
 }
 

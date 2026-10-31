@@ -215,6 +215,16 @@ public:
 	// application colours while menu text stayed invisible.
 	static void LogThemeWidgetState();
 
+	// Forces every widget to re-resolve its palette from the application one, and
+	// re-polishes it so the style recomputes cached roles. Called after a theme
+	// switch because relying on QApplication::setPalette() to propagate left the
+	// colour-name button on the dark palette on device while the menu recovered.
+	static void RepropagatePalette();
+
+	// Logs one more widget sample after the event loop has run, so a deferred
+	// platform update can be distinguished from a permanently stale widget.
+	void ScheduleDelayedThemeSample();
+
 	// Test seam: when valid, the System branch uses this instead of the platform
 	// style's standardPalette(). Lets the repair be checked through the real
 	// UpdateStyle() rather than only in isolation. Never set in production.
