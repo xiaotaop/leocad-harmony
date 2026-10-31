@@ -55,6 +55,42 @@ public:
 
 	bool eventFilter(QObject* Object, QEvent* Event) override;
 
+	// Hides the settings for features the first HarmonyOS release does not ship.
+	//
+	// Split in two because the dialog cannot be constructed without a live GL
+	// context: its constructor calls gMainWindow->GetActiveView()->GetWidget()->
+	// context()->functions() to query the line-width range, which dereferences a
+	// null context on an offscreen platform. The list of names is therefore
+	// exposed separately, so a test can check the scope itself without building
+	// the dialog — and so the two lists cannot drift apart.
+	struct ScopedWidgets
+	{
+		// Out of scope: hidden.
+		static const char* const* Hidden();
+		static int HiddenCount();
+
+		// In scope: must stay visible. Listed explicitly because the two lists
+		// live in the same pages and a group-level hide would take them too.
+		static const char* const* Kept();
+		static int KeptCount();
+	};
+
+	// Hides the first-release-excluded widgets inside Container and returns how
+	// many names did not resolve.
+	//
+	// Static and container-based so a test can run the real hiding code against a
+	// bare Ui::lcPreferencesDialog built from the .ui, without constructing this
+	// dialog (whose constructor queries the GL context). It also makes the
+	// ordering requirement testable: the same call can be made on a tree before
+	// and after a platform-style delete, and the count is observable instead of
+	// aborting.
+	static int HideFirstReleaseWidgets(QWidget* Container);
+
+	// Called from the constructor. Must run before the platform cleanup that
+	// deletes ui->povrayLabel on Windows and macOS, or that name no longer
+	// resolves and the assertion fires on every Debug build there.
+	void ApplyFirstReleasePreferencesScope();
+
 public slots:
 	void accept() override;
 

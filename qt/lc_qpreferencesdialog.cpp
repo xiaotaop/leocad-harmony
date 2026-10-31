@@ -24,6 +24,28 @@ lcPreferencesDialog::lcPreferencesDialog(QWidget* Parent, lcPreferencesDialogOpt
 {
 	ui->setupUi(this);
 
+	// First-release scope (docs/library/D2_精简零件库与资源部署方案.md section 6.4,
+	// docs/D4_DEFECTS.md D4-02). The plan is to hide controls rather than edit the
+	// .ui, so an unfiltered build still matches upstream and the file keeps its
+	// original widget names for the code that reads them.
+	//
+	// Reported on device: View > Preferences > General still offered the update
+	// check, POV-Ray, LGEO and the external parts library path, and the Rendering
+	// page still offered the Blender addon settings. Removing the menu entries
+	// that lead to those features does not remove the settings that configure
+	// them, and the first release ships none of them.
+	//
+	// What stays: language, theme, the parts author name, the colour and minifig
+	// configuration files (both are local files the app needs), the keyboard and
+	// mouse pages, and every display option — those are in scope.
+	//
+	// Runs BEFORE the platform cleanup below, not after: that block deletes
+	// ui->povrayLabel on Windows and macOS, and a name the scope list hides would
+	// then no longer exist. Review caught this — with the call after the cleanup,
+	// findChild() returned null for povrayLabel and the assertion below aborted
+	// every Debug build on those platforms as soon as Preferences opened.
+	ApplyFirstReleasePreferencesScope();
+
 #if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
 	ui->povrayLabel->hide();
 	ui->povrayExecutable->hide();
@@ -422,6 +444,115 @@ void lcPreferencesDialog::PartsArchiveBrowseClicked()
 
 	if (!Result.isEmpty())
 		ui->partsLibrary->setText(QDir::toNativeSeparators(Result));
+}
+
+// One place decides what the first-release preferences show. The dialog applies
+// this list; the test reads the same list. Keeping the names in one array is
+// what stops the two from disagreeing, and it is also why the list is a
+// function rather than a comment above a block of hide() calls.
+//
+// Captions are paired with their fields deliberately: hiding a field and
+// leaving its caption behind makes the caption read as a label for the row
+// below it.
+static const char* const FirstReleaseHiddenWidgets[] =
+{
+	// General page: the update check. The menu entry is already gone, so this
+	// only configures something the user cannot run.
+	"label_10", "checkForUpdates",
+
+	// General page: the external paths. The release is fully offline with a
+	// library compiled into the package and ships neither external renderer.
+	//
+	// Control by control, not by hiding CustomPathsGroup: that group also holds
+	// the colour configuration and minifig settings files, which stay in scope.
+	"label_5", "partsLibrary", "partsLibraryBrowse", "partsArchiveBrowse",
+	"povrayLabel", "povrayExecutable", "povrayExecutableBrowse",
+	"label_9", "lgeoPath", "lgeoPathBrowse",
+
+	// Rendering page: the Blender addon settings, row 15 of that page's grid.
+	"label_39", "BlenderAddonSettingsButton",
+};
+
+// What must survive, checked by the test so a future edit to the list above
+// cannot quietly take a needed setting with it. Not used by the dialog: it
+// hides by name and never enumerates the rest.
+static const char* const FirstReleaseKeptWidgets[] =
+{
+	// General page, inside the same group box as the hidden parts-library path.
+	"Language", "ColorTheme", "authorName",
+	"ColorConfigEdit", "ColorConfigBrowseButton",
+	"MinifigSettingsEdit", "MinifigSettingsBrowseButton",
+	"RestoreTabLayout",
+
+	// Display options.
+	"antiAliasing", "ShadingMode", "gridStuds", "gridLines",
+	"LineWidthSlider", "MeshLOD", "FadeSteps", "HighlightNewParts",
+
+	// The pages themselves.
+	"tabWidget", "tabKeyboard", "tabMouse", "tabCategories",
+};
+
+const char* const* lcPreferencesDialog::ScopedWidgets::Hidden()
+{
+	return FirstReleaseHiddenWidgets;
+}
+
+int lcPreferencesDialog::ScopedWidgets::HiddenCount()
+{
+	return int(sizeof(FirstReleaseHiddenWidgets) / sizeof(FirstReleaseHiddenWidgets[0]));
+}
+
+const char* const* lcPreferencesDialog::ScopedWidgets::Kept()
+{
+	return FirstReleaseKeptWidgets;
+}
+
+int lcPreferencesDialog::ScopedWidgets::KeptCount()
+{
+	return int(sizeof(FirstReleaseKeptWidgets) / sizeof(FirstReleaseKeptWidgets[0]));
+}
+
+// The hiding itself, without the dialog: takes any container that holds the
+// preference widgets and returns how many names did not resolve.
+//
+// Separate from ApplyFirstReleasePreferencesScope() so a test can run it against
+// a bare Ui::lcPreferencesDialog built from the real .ui, without constructing
+// the dialog — whose constructor queries the GL context and needs a live view.
+// That is also what makes the ordering bug from review reachable in a test: the
+// function can be run on the object tree before and after a platform-style
+// delete, and the "missing" count is observable instead of aborting.
+int lcPreferencesDialog::HideFirstReleaseWidgets(QWidget* Container)
+{
+	int Missing = 0;
+
+	for (int Index = 0; Index < ScopedWidgets::HiddenCount(); Index++)
+	{
+		QWidget* Widget = Container->findChild<QWidget*>(QLatin1String(ScopedWidgets::Hidden()[Index]));
+
+		if (Widget == nullptr)
+		{
+			// Counted, not asserted here: see the caller.
+			Missing++;
+			continue;
+		}
+
+		Widget->hide();
+	}
+
+	return Missing;
+}
+
+void lcPreferencesDialog::ApplyFirstReleasePreferencesScope()
+{
+	const int Missing = HideFirstReleaseWidgets(this);
+
+	// A rename in the .ui would otherwise hide nothing and say nothing, so a
+	// name that does not resolve is a defect. The count is returned rather than
+	// asserted inside the loop so the same code can run against a container that
+	// legitimately lacks some of these widgets — a test builds the .ui directly,
+	// and the dialog itself runs this before its platform cleanup.
+	Q_ASSERT_X(Missing == 0, "ApplyFirstReleasePreferencesScope",
+		"a name in FirstReleaseHiddenWidgets does not resolve; the .ui was renamed");
 }
 
 void lcPreferencesDialog::BlenderAddonSettingsButtonClicked()
