@@ -1,4 +1,6 @@
 #include "lc_global.h"
+#include <cmath>
+#include <algorithm>
 #include <stdio.h>
 #include "lc_application.h"
 #include "lc_library.h"
@@ -12,6 +14,7 @@
 #include "camera.h"
 #include "lc_previewwidget.h"
 #include "lc_colors.h"
+#include <QTimer>
 
 #ifdef Q_OS_WIN
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
@@ -190,7 +193,31 @@ lcApplication::lcApplication(int& Argc, char** Argv)
 	setApplicationDisplayName(QLatin1String("LeoCAD"));
 
 	gApplication = this;
+
+	// The name UpdateStyle() restores when the theme goes back to System.
+	//
+	// style()->objectName() is not always a usable key: on the HarmonyOS platform
+	// plugin it is empty, and QApplication::setStyle("") returns false without
+	// changing anything. Storing the class name in that case keeps a value that
+	// setStyle() accepts. Left empty, "system" meant "leave whatever style the
+	// dark theme installed", so the palette was reset against Fusion while the
+	// dark stylesheet had already been cleared.
 	mDefaultStyle = style()->objectName();
+
+	if (mDefaultStyle.isEmpty())
+		mDefaultStyle = QString::fromLatin1(style()->metaObject()->className());
+
+	// "QFusionStyle" is a class name, not a key. Strip the decoration so
+	// setStyle() can resolve it from QStyleFactory::keys(), which holds "Fusion".
+	// The check is only reached when the object name was empty, so a plugin that
+	// does provide a real key keeps it untouched.
+	if (mDefaultStyle.endsWith(QLatin1String("Style")))
+	{
+		mDefaultStyle.chop(5);
+
+		if (mDefaultStyle.startsWith(QLatin1Char('Q')))
+			mDefaultStyle.remove(0, 1);
+	}
 
 	lcProfileInit();
 
@@ -200,6 +227,322 @@ lcApplication::lcApplication(int& Argc, char** Argv)
 lcApplication::~lcApplication()
 {
 	gApplication = nullptr;
+}
+
+namespace
+{
+// WCAG 2.1 relative luminance and contrast, used to decide whether a palette's
+// text is actually visible on the surface it is drawn over.
+double Luminance(const QColor& Colour)
+{
+	auto Channel = [](double Value)
+	{
+		Value /= 255.0;
+		return Value <= 0.03928 ? Value / 12.92 : std::pow((Value + 0.055) / 1.055, 2.4);
+	};
+
+	return 0.2126 * Channel(Colour.red()) + 0.7152 * Channel(Colour.green()) + 0.0722 * Channel(Colour.blue());
+}
+
+double Contrast(const QColor& A, const QColor& B)
+{
+	double Lighter = Luminance(A);
+	double Darker = Luminance(B);
+
+	if (Lighter < Darker)
+		std::swap(Lighter, Darker);
+
+	return (Lighter + 0.05) / (Darker + 0.05);
+}
+
+// 3.0 is the AA threshold for large text and UI components. The palettes shipped
+// by Qt's bundled styles measure far above it, so a value under this means the
+// pair is broken, not merely tight.
+constexpr double MinimumContrast = 3.0;
+}
+
+void lcApplication::RepropagatePalette()
+{
+	// Make every widget re-resolve its palette from the application one.
+	//
+	// Why this is not redundant with QApplication::setPalette(): that call is
+	// supposed to propagate, and on this host it does. On the device it did not —
+	// after a Dark -> System switch the menu recovered while the colour-name button
+	// kept reporting the dark palette, in the same process and the same event
+	// loop. Relying on propagation therefore leaves the outcome to a platform
+	// detail; this makes it explicit.
+	//
+	// Two parts, each doing distinct work:
+	//
+	//   setPalette(QPalette())  clears a palette the widget owns, so it inherits
+	//                           again. Harmless when it owns nothing.
+	//   unpolish/polish         makes the style recompute the roles it resolved
+	//                           during the previous polish and cached.
+	//
+	// update() is queued rather than painted immediately: the point is to get the
+	// widgets to repaint with the new palette, not to block the theme switch.
+	// allWidgets() only reports widgets that have been created and registered, so
+	// a widget built but not shown yet is invisible to it — which is exactly the
+	// state a dialog or a freshly created dock is in while the theme changes.
+	// Walk the object trees of the top-level widgets as well, so those are
+	// covered too.
+	QSet<QWidget*> Widgets;
+
+	for (QWidget* Widget : QApplication::allWidgets())
+		if (Widget != nullptr)
+			Widgets.insert(Widget);
+
+	const QWidgetList TopLevels = QApplication::topLevelWidgets();
+
+	for (QWidget* Top : TopLevels)
+	{
+		if (Top == nullptr)
+			continue;
+
+		Widgets.insert(Top);
+
+		for (QWidget* Child : Top->findChildren<QWidget*>())
+			if (Child != nullptr)
+				Widgets.insert(Child);
+	}
+
+	for (QWidget* Widget : Widgets)
+	{
+
+		// Order matters: unpolish/polish first, then clear.
+		//
+		// polish() is where a style resolves and stores the palette it intends to
+		// paint with. Clearing the widget's palette before that lets the polish
+		// re-install the style's own choice, and the widget ends up on the style's
+		// standard palette rather than the application's — measured on the host as
+		// #efefef when the application said #ffffff. Doing the clear last leaves
+		// nothing to overwrite it.
+		if (QStyle* Style = Widget->style())
+		{
+			Style->unpolish(Widget);
+			Style->polish(Widget);
+		}
+
+		// Give the widget the application palette explicitly rather than hoping
+		// that clearing its own makes it inherit.
+		//
+		// The clearing approach works on this host in isolation, but inside the
+		// application the polish immediately re-resolves from the style, and the
+		// widget ends up on the style's standard palette (#efefef measured) while
+		// the application holds the restored one (#ffffff). Setting the value is
+		// deterministic; the inherited value is whatever the style decides.
+		Widget->setPalette(QApplication::palette());
+
+		Widget->update();
+	}
+}
+
+void lcApplication::ScheduleDelayedThemeSample()
+{
+	// One sample after the event loop has drained, so "the widget had not been
+	// updated yet" and "the widget is permanently stale" can be told apart. The
+	// device log alone could not: the immediate reading showed pre-switch colours
+	// in both cases.
+	QTimer::singleShot(1000, this, []()
+	{
+		qInfo().noquote() << "LEOCAD_THEME_DELAYED" << QStringLiteral("{\"stage\":\"post_event_loop\"}");
+		lcApplication::LogThemeWidgetState();
+	});
+}
+
+void lcApplication::LogThemeWidgetState()
+{
+	// Two widgets stand for the two surfaces the report names: the menu bar for
+	// menu text, and the colour-name tool button for the current colour name.
+	// Both are sampled from the live window, not reconstructed.
+	struct Target
+	{
+		const char* What;
+		QWidget* Widget;
+	};
+
+	QList<Target> Targets;
+	const QStyle* AppStyle = QApplication::style();
+
+	if (gMainWindow != nullptr)
+	{
+		if (QMenuBar* MenuBar = gMainWindow->menuBar())
+			Targets.append({ "menubar", MenuBar });
+
+		// The colour name lives on a QToolButton inside the Colors dock. Finding
+		// it by position in the window would be fragile, so pick the tool button
+		// that carries the current colour's text.
+		for (QToolButton* Button : gMainWindow->findChildren<QToolButton*>())
+		{
+			if (Button->text().trimmed().isEmpty() || Button->icon().isNull())
+				continue;
+
+			Targets.append({ "colorbutton", Button });
+			break;
+		}
+	}
+
+	for (const Target& Item : Targets)
+	{
+		if (Item.Widget == nullptr)
+			continue;
+
+		const QPalette WidgetPalette = Item.Widget->palette();
+		const QStyle* WidgetStyle = Item.Widget->style();
+
+		// All three groups, not just the one the widget happens to be in now. A
+		// window that never gets focus draws with Inactive, and a widget whose
+		// enabled state changes later will draw with the group it did not have
+		// when this sample was taken. Sampling one group can therefore miss the
+		// colours a user actually sees.
+		const QPalette::ColorGroup NowGroup =
+			Item.Widget->isEnabled() ? QPalette::Active : QPalette::Disabled;
+
+		auto GroupText = [&WidgetPalette](QPalette::ColorGroup Group) -> QString
+		{
+			return QStringLiteral("%1/%2")
+				.arg(WidgetPalette.color(Group, QPalette::WindowText).name(),
+					WidgetPalette.color(Group, QPalette::ButtonText).name());
+		};
+
+		// WA_SetPalette is the switch that decides whether a widget follows the
+		// application palette at all: once a widget has its own palette it stops
+		// inheriting, and clearing the application stylesheet does not reset it.
+		qInfo().noquote() << "LEOCAD_THEME_WIDGET"
+			<< QStringLiteral("{\"widget\":\"%1\",\"enabled\":%2,\"has_own_palette\":%3,\"own_style\":%4,\"style_class\":\"%5\",\"app_style\":\"%6\",\"windowtext\":\"%7\",\"buttontext\":\"%8\",\"text\":\"%9\",\"window\":\"%10\",\"button\":\"%11\",\"base\":\"%12\",\"has_stylesheet\":%13,\"active_wt_bt\":\"%14\",\"inactive_wt_bt\":\"%15\",\"disabled_wt_bt\":\"%16\"}")
+				.arg(QLatin1String(Item.What),
+					Item.Widget->isEnabled() ? QStringLiteral("true") : QStringLiteral("false"),
+					Item.Widget->testAttribute(Qt::WA_SetPalette) ? QStringLiteral("true") : QStringLiteral("false"),
+					WidgetStyle != AppStyle ? QStringLiteral("true") : QStringLiteral("false"),
+					WidgetStyle ? QString::fromLatin1(WidgetStyle->metaObject()->className()) : QString(),
+					AppStyle ? QString::fromLatin1(AppStyle->metaObject()->className()) : QString(),
+					// The group the widget is in right now, which is what it paints with
+					// this instant. The three-group fields below cover the rest.
+					WidgetPalette.color(NowGroup, QPalette::WindowText).name(),
+					WidgetPalette.color(NowGroup, QPalette::ButtonText).name(),
+					WidgetPalette.color(NowGroup, QPalette::Text).name(),
+					WidgetPalette.color(NowGroup, QPalette::Window).name(),
+					WidgetPalette.color(NowGroup, QPalette::Button).name(),
+					WidgetPalette.color(NowGroup, QPalette::Base).name(),
+					Item.Widget->styleSheet().isEmpty() ? QStringLiteral("false") : QStringLiteral("true"),
+					GroupText(QPalette::Active), GroupText(QPalette::Inactive), GroupText(QPalette::Disabled));
+	}
+}
+
+QPalette lcApplication::EnsureReadablePalette(const QPalette& Source)
+{
+	QPalette Result = Source;
+
+	// Which surface each text role is drawn over. WindowText is the menu bar and
+	// the colour list's group names; Text is the parts panel and item views;
+	// ButtonText is the colour-name tool button.
+	struct Pair
+	{
+		QPalette::ColorRole Text;
+		QPalette::ColorRole Surface;
+		const char* TextName;
+		const char* SurfaceName;
+	};
+
+	const Pair Pairs[] =
+	{
+		{ QPalette::WindowText, QPalette::Window, "WindowText", "Window" },
+		{ QPalette::Text, QPalette::Base, "Text", "Base" },
+		{ QPalette::ButtonText, QPalette::Button, "ButtonText", "Button" },
+	};
+
+	for (const Pair& Item : Pairs)
+	{
+		const QColor Text = Result.color(Item.Text);
+		const QColor Surface = Result.color(Item.Surface);
+
+		if (Contrast(Text, Surface) >= MinimumContrast)
+			continue;
+
+		// Derive the replacement from the surface rather than hardcoding black or
+		// white: whatever a platform style puts behind the text, the fix has to
+		// work on that colour. 0x1e is the near-black the light themes already use
+		// and keeps a visible step from pure white.
+		const QColor Replacement = Luminance(Surface) > 0.5 ? QColor(0x1e, 0x1e, 0x1e) : QColor(0xf0, 0xf0, 0xf0);
+
+		// Held in locals: .name() returns a temporary QString, and its buffer is
+		// gone by the time qWarning reads the varargs. Passing .constData()
+		// straight through printed a bare "#".
+		const QByteArray TextName = Text.name().toLatin1();
+		const QByteArray SurfaceName = Surface.name().toLatin1();
+		const QByteArray ReplacementName = Replacement.name().toLatin1();
+
+		qWarning("Palette role %s (%s) has contrast %.2f against %s (%s); using %s.",
+			Item.TextName, TextName.constData(), Contrast(Text, Surface),
+			Item.SurfaceName, SurfaceName.constData(), ReplacementName.constData());
+
+		Result.setColor(Item.Text, Replacement);
+	}
+
+	// Second pass: the surfaces themselves have to agree.
+	//
+	// The device palette for #33 is the reason this exists:
+	//
+	//   window #ffffff (light)   button #000000 (dark)   base #e4e4e4 (light)
+	//
+	// No text colour is readable on both a white and a black surface, so no
+	// amount of text-role fixing can rescue that palette — as long as Button is
+	// black, some widget painting ButtonText on a window or base surface will be
+	// unreadable whichever colour ButtonText takes. The surfaces have to be
+	// brought to one side first, then the text can be chosen once.
+	//
+	// Window is the reference: it is the surface most of the window shows, and
+	// the style clearly intended a light theme (two of three surfaces are light).
+	const QPalette::ColorRole Surfaces[] =
+	{
+		QPalette::Window, QPalette::Base, QPalette::Button, QPalette::AlternateBase,
+	};
+
+	const bool WindowIsLight = Luminance(Result.color(QPalette::Window)) > 0.5;
+
+	bool SurfacesChanged = false;
+
+	for (const QPalette::ColorRole SurfaceRole : Surfaces)
+	{
+		const QColor Surface = Result.color(SurfaceRole);
+		const bool SurfaceIsLight = Luminance(Surface) > 0.5;
+
+		if (SurfaceIsLight == WindowIsLight)
+			continue;
+
+		// Recolour the odd surface instead of changing the text, or the roles that
+		// already read correctly would have to move too.
+		const QColor Aligned = WindowIsLight ? QColor(0xf2, 0xf2, 0xf2) : QColor(0x2d, 0x30, 0x33);
+
+		const QByteArray AlignedName = Aligned.name().toLatin1();
+
+		qWarning("Palette surface role %d is %s while Window is %s; using %s so text colours can be chosen once.",
+			int(SurfaceRole), SurfaceIsLight ? "light" : "dark", WindowIsLight ? "light" : "dark",
+			AlignedName.constData());
+
+		Result.setColor(SurfaceRole, Aligned);
+		SurfacesChanged = true;
+	}
+
+	if (SurfacesChanged)
+	{
+		// The first pass ran against the original surfaces, so its decisions are
+		// stale for any role whose surface just moved.
+		for (const Pair& Item : Pairs)
+		{
+			const QColor Text = Result.color(Item.Text);
+			const QColor Surface = Result.color(Item.Surface);
+
+			if (Contrast(Text, Surface) >= MinimumContrast)
+				continue;
+
+			const QColor Replacement = Luminance(Surface) > 0.5 ? QColor(0x1e, 0x1e, 0x1e) : QColor(0xf0, 0xf0, 0xf0);
+
+			Result.setColor(Item.Text, Replacement);
+		}
+	}
+
+	return Result;
 }
 
 void lcApplication::UpdateStyle()
@@ -249,9 +592,124 @@ void lcApplication::UpdateStyle()
 	}
 	else
 	{
-		QApplication::setStyle(mDefaultStyle);
-		QApplication::setPalette(qApp->style()->standardPalette());
+		// Restore the platform style first, then take the palette FROM the style
+		// that is actually active. Applying the dark palette earlier means
+		// "standardPalette()" is the only thing that can undo it, so a style that
+		// failed to restore would leave dark colours behind the light palette —
+		// which is the D5-02 shape: menu text and colour names unreadable after
+		// switching to System.
+		//
+		// setStyle() returns null when the key does not resolve. Falling back to
+		// the style the platform started with keeps the restore meaningful
+		// instead of silently keeping the dark theme's style.
+		// Diagnostic for the device: the whole theme path depends on values this
+		// host cannot see — the platform style's object name, its class, and
+		// whether the restore resolves. D5-02's root cause is currently a
+		// HYPOTHESIS (an empty object name on the HarmonyOS plugin, inferred from
+		// the host experiment plus the failure shape). This line is what turns it
+		// into evidence: one line per theme switch, greppable in hilog.
+		qInfo().noquote() << "LEOCAD_THEME_STYLE" << QStringLiteral("{\"default\":\"%1\",\"active_before\":\"%2\",\"class_before\":\"%3\"}")
+			.arg(mDefaultStyle, QApplication::style() ? QApplication::style()->objectName() : QString(),
+				QApplication::style() ? QString::fromLatin1(QApplication::style()->metaObject()->className()) : QString());
+
+		if (QApplication::setStyle(mDefaultStyle) == nullptr)
+		{
+			// Nothing to restore from. Say so, and make sure the palette below is
+			// not taken from the style the dark theme left installed:
+			// standardPalette() would then come from Fusion while the dark
+			// stylesheet has already been cleared, which is the state D5-02
+			// describes.
+			qWarning("Could not restore the default widget style \"%s\".", qPrintable(mDefaultStyle));
+
+			const QStringList KnownStyles = QStyleFactory::keys();
+			const QString Fallback = KnownStyles.contains(QLatin1String("Fusion"), Qt::CaseInsensitive)
+				? QLatin1String("Fusion") : KnownStyles.value(0);
+
+			const bool Applied = QApplication::setStyle(Fallback) != nullptr;
+
+			if (Applied)
+			{
+				// Remember it, so a later switch does not have to guess again.
+				mDefaultStyle = Fallback;
+			}
+
+			qInfo().noquote() << "LEOCAD_THEME_STYLE" << QStringLiteral("{\"fallback\":\"%1\",\"applied\":%2,\"known\":[%3]}")
+				.arg(Fallback, Applied ? QStringLiteral("true") : QStringLiteral("false"),
+					QStyleFactory::keys().join(QStringLiteral(",")));
+		}
+
+		// The platform style's own palette is the intended source here, but it is
+		// not guaranteed to be self-consistent, so it is checked rather than
+		// trusted.
+		//
+		// This is a guard, not the fix for #33. Device retest of a439bf20 showed
+		// the application palette already readable (windowtext #182431 on window
+		// #ffffff) while the menu still drew invisible text, so the application
+		// palette is not where #33 breaks. Nothing here fires in that state; it
+		// stays because a style handing back unreadable text roles is still a real
+		// failure mode, just not this one.
+		// A test can substitute the palette a style would return, so the repair can
+		// be exercised on the real UpdateStyle() path. Production never sets this.
+		QPalette Restored = mHasStylePaletteOverride
+			? mStylePaletteOverride : QApplication::style()->standardPalette();
+
+		Restored = EnsureReadablePalette(Restored);
+
+		// Clear the stylesheet first, then apply the palette to the style that is
+		// actually in use. While the dark stylesheet is installed Qt's
+		// QStyleSheetStyle is the active style; clearing removes that layer, so the
+		// palette has to be set on what remains. On this host the opposite order
+		// happens to work as well, so the order is chosen for correctness rather
+		// than because a test can tell the difference.
 		qApp->setStyleSheet(QString());
+		QApplication::setPalette(Restored);
+
+		// The text roles matter as much as the window colour: a style can return a
+		// white Window and a white WindowText in the same palette, which reads as
+		// "theme applied, nothing visible". Reporting only Window hid that.
+		{
+			const QPalette Applied = QApplication::palette();
+
+			qInfo().noquote() << "LEOCAD_THEME_STYLE" << QStringLiteral("{\"active_after\":\"%1\",\"class_after\":\"%2\",\"window\":\"%3\",\"windowtext\":\"%4\",\"text\":\"%5\",\"buttontext\":\"%6\",\"button\":\"%7\",\"base\":\"%8\"}")
+				.arg(QApplication::style() ? QApplication::style()->objectName() : QString(),
+					QApplication::style() ? QString::fromLatin1(QApplication::style()->metaObject()->className()) : QString(),
+					Applied.color(QPalette::Window).name(),
+					Applied.color(QPalette::WindowText).name(),
+					Applied.color(QPalette::Text).name(),
+					Applied.color(QPalette::ButtonText).name(),
+					Applied.color(QPalette::Button).name(),
+					Applied.color(QPalette::Base).name());
+		}
+
+		// Application-level values were not the problem: on the device the
+		// restored palette measured readable (windowtext #182431 on window
+		// #ffffff) while the menu still drew invisible text. Whatever goes wrong
+		// happens between that palette and the widget that paints.
+		//
+		// Device evidence: right after the switch the widgets still reported the
+		// dark theme's colours (Window #313437, Button #2d3033) while the
+		// application palette already held the light ones. The menu recovered and
+		// the colour name did not, in the same process, so the propagation from
+		// the application palette to the widgets is not reliable on that platform.
+		//
+		// Force it rather than rely on it. Clearing a widget's own palette makes
+		// it inherit again — that is the mechanism, verified on the host — and an
+		// explicit re-polish makes the style re-resolve the roles it cached. Both
+		// steps are cheap and are no-ops on a platform where propagation already
+		// worked.
+		RepropagatePalette();
+
+		// So sample the widgets themselves. What matters is what they resolve, not
+		// what the application holds: a widget can carry its own palette
+		// (WA_SetPalette) and then ignore application palette changes entirely,
+		// and it can be painted by a style other than QApplication::style().
+		LogThemeWidgetState();
+
+		// And sample again once the event loop has run. The immediate reading above
+		// can legitimately show pre-switch values if the platform defers the
+		// palette event; the leader asked for the delayed reading precisely because
+		// the immediate one cannot distinguish "not yet" from "never".
+		ScheduleDelayedThemeSample();
 	}
 }
 
