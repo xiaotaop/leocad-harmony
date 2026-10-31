@@ -1,4 +1,6 @@
 #include "lc_global.h"
+#include <cmath>
+#include <algorithm>
 #include <stdio.h>
 #include "lc_application.h"
 #include "lc_library.h"
@@ -226,6 +228,84 @@ lcApplication::~lcApplication()
 	gApplication = nullptr;
 }
 
+namespace
+{
+// WCAG 2.1 relative luminance and contrast, used to decide whether a palette's
+// text is actually visible on the surface it is drawn over.
+double Luminance(const QColor& Colour)
+{
+	auto Channel = [](double Value)
+	{
+		Value /= 255.0;
+		return Value <= 0.03928 ? Value / 12.92 : std::pow((Value + 0.055) / 1.055, 2.4);
+	};
+
+	return 0.2126 * Channel(Colour.red()) + 0.7152 * Channel(Colour.green()) + 0.0722 * Channel(Colour.blue());
+}
+
+double Contrast(const QColor& A, const QColor& B)
+{
+	double Lighter = Luminance(A);
+	double Darker = Luminance(B);
+
+	if (Lighter < Darker)
+		std::swap(Lighter, Darker);
+
+	return (Lighter + 0.05) / (Darker + 0.05);
+}
+
+// 3.0 is the AA threshold for large text and UI components. The palettes shipped
+// by Qt's bundled styles measure far above it, so a value under this means the
+// pair is broken, not merely tight.
+constexpr double MinimumContrast = 3.0;
+}
+
+QPalette lcApplication::EnsureReadablePalette(const QPalette& Source)
+{
+	QPalette Result = Source;
+
+	// Which surface each text role is drawn over. WindowText is the menu bar and
+	// the colour list's group names; Text is the parts panel and item views;
+	// ButtonText is the colour-name tool button.
+	struct Pair
+	{
+		QPalette::ColorRole Text;
+		QPalette::ColorRole Surface;
+		const char* TextName;
+		const char* SurfaceName;
+	};
+
+	const Pair Pairs[] =
+	{
+		{ QPalette::WindowText, QPalette::Window, "WindowText", "Window" },
+		{ QPalette::Text, QPalette::Base, "Text", "Base" },
+		{ QPalette::ButtonText, QPalette::Button, "ButtonText", "Button" },
+	};
+
+	for (const Pair& Item : Pairs)
+	{
+		const QColor Text = Result.color(Item.Text);
+		const QColor Surface = Result.color(Item.Surface);
+
+		if (Contrast(Text, Surface) >= MinimumContrast)
+			continue;
+
+		// Derive the replacement from the surface rather than hardcoding black or
+		// white: whatever a platform style puts behind the text, the fix has to
+		// work on that colour. 0x1e is the near-black the light themes already use
+		// and keeps a visible step from pure white.
+		const QColor Replacement = Luminance(Surface) > 0.5 ? QColor(0x1e, 0x1e, 0x1e) : QColor(0xf0, 0xf0, 0xf0);
+
+		qWarning("Palette role %s (%s) has contrast %.2f against %s (%s); using %s.",
+			Item.TextName, Text.name().constData(), Contrast(Text, Surface),
+			Item.SurfaceName, Surface.name().constData(), Replacement.name().constData());
+
+		Result.setColor(Item.Text, Replacement);
+	}
+
+	return Result;
+}
+
 void lcApplication::UpdateStyle()
 {
 	if (mPreferences.mColorTheme == lcColorTheme::Dark)
@@ -319,13 +399,38 @@ void lcApplication::UpdateStyle()
 					QStyleFactory::keys().join(QStringLiteral(",")));
 		}
 
-		QApplication::setPalette(QApplication::style()->standardPalette());
+		// The platform style's own palette is the intended source here, but it is
+		// not guaranteed to be self-consistent: a style can hand back a palette
+		// whose text roles do not contrast with its own surfaces, which reads as
+		// "theme applied, nothing visible". The device evidence for #33 is exactly
+		// that shape — Window #ffffff applied, menu and colour-name text still
+		// invisible — so the palette is repaired rather than trusted.
+		// A test can substitute the palette a style would return, so the repair can
+		// be exercised on the real UpdateStyle() path. Production never sets this.
+		QPalette Restored = mHasStylePaletteOverride
+			? mStylePaletteOverride : QApplication::style()->standardPalette();
+
+		Restored = EnsureReadablePalette(Restored);
+
+		QApplication::setPalette(Restored);
 		qApp->setStyleSheet(QString());
 
-		qInfo().noquote() << "LEOCAD_THEME_STYLE" << QStringLiteral("{\"active_after\":\"%1\",\"class_after\":\"%2\",\"window\":\"%3\"}")
-			.arg(QApplication::style() ? QApplication::style()->objectName() : QString(),
-				QApplication::style() ? QString::fromLatin1(QApplication::style()->metaObject()->className()) : QString(),
-				QApplication::palette().color(QPalette::Window).name());
+		// The text roles matter as much as the window colour: a style can return a
+		// white Window and a white WindowText in the same palette, which reads as
+		// "theme applied, nothing visible". Reporting only Window hid that.
+		{
+			const QPalette Applied = QApplication::palette();
+
+			qInfo().noquote() << "LEOCAD_THEME_STYLE" << QStringLiteral("{\"active_after\":\"%1\",\"class_after\":\"%2\",\"window\":\"%3\",\"windowtext\":\"%4\",\"text\":\"%5\",\"buttontext\":\"%6\",\"button\":\"%7\",\"base\":\"%8\"}")
+				.arg(QApplication::style() ? QApplication::style()->objectName() : QString(),
+					QApplication::style() ? QString::fromLatin1(QApplication::style()->metaObject()->className()) : QString(),
+					Applied.color(QPalette::Window).name(),
+					Applied.color(QPalette::WindowText).name(),
+					Applied.color(QPalette::Text).name(),
+					Applied.color(QPalette::ButtonText).name(),
+					Applied.color(QPalette::Button).name(),
+					Applied.color(QPalette::Base).name());
+		}
 	}
 }
 

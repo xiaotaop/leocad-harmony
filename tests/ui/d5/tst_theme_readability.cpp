@@ -80,6 +80,14 @@ private slots:
 	// What the two surfaces the report named actually read from.
 	void menuAndColourNameTextUseReadableRoles();
 
+	// The device shape from #33: a style palette that applies Window #ffffff
+	// while a text role stays the same colour as that surface. The repair has to
+	// catch it, because "the theme was applied" and "the text can be read" are
+	// different claims.
+	void brokenStylePaletteIsRepaired();
+	void readablePaletteIsLeftAlone();
+	void themeSwitchAppliesTheRepair();
+
 private:
 	// Sets the theme and applies it through the real code path.
 	void ApplyTheme(lcColorTheme Theme);
@@ -250,6 +258,101 @@ void ThemeReadabilityTest::menuAndColourNameTextUseReadableRoles()
 // A custom main rather than QTEST_MAIN: UpdateStyle() lives on lcApplication and
 // reads gApplication->mPreferences, so the test needs the real application
 // object, not a plain QApplication.
+void ThemeReadabilityTest::brokenStylePaletteIsRepaired()
+{
+	// Built from the device evidence: the palette ended up with a white window
+	// and text that could not be seen against it. A style is free to return such
+	// a palette; the application has to notice before using it.
+	QPalette Broken = QApplication::style()->standardPalette();
+
+	Broken.setColor(QPalette::Window, QColor(255, 255, 255));
+	Broken.setColor(QPalette::WindowText, QColor(255, 255, 255));	// invisible
+	Broken.setColor(QPalette::Base, QColor(255, 255, 255));
+	Broken.setColor(QPalette::Text, QColor(250, 250, 250));			// nearly invisible
+	Broken.setColor(QPalette::Button, QColor(255, 255, 255));
+	Broken.setColor(QPalette::ButtonText, QColor(255, 255, 255));
+
+	QVERIFY2(ContrastRatio(Broken.color(QPalette::WindowText), Broken.color(QPalette::Window)) < 3.0,
+		"the synthetic palette is not actually broken, so the repair below proves nothing");
+
+	const QPalette Fixed = lcApplication::EnsureReadablePalette(Broken);
+
+	struct Pair { QPalette::ColorRole Text; QPalette::ColorRole Surface; const char* What; };
+	const Pair Pairs[] =
+	{
+		{ QPalette::WindowText, QPalette::Window, "WindowText" },
+		{ QPalette::Text, QPalette::Base, "Text" },
+		{ QPalette::ButtonText, QPalette::Button, "ButtonText" },
+	};
+
+	for (const Pair& Item : Pairs)
+	{
+		const double Ratio = ContrastRatio(Fixed.color(Item.Text), Fixed.color(Item.Surface));
+		QVERIFY2(Ratio >= 3.0,
+			qPrintable(QStringLiteral("%1 still has contrast %2 against %3 (%4) after repair")
+				.arg(QLatin1String(Item.What)).arg(Ratio, 0, 'f', 2)
+				.arg(Fixed.color(Item.Surface).name(), Fixed.color(Item.Text).name())));
+	}
+
+	// The surfaces themselves must not be touched: this repairs text, it does not
+	// repaint the style.
+	QCOMPARE(Fixed.color(QPalette::Window), Broken.color(QPalette::Window));
+	QCOMPARE(Fixed.color(QPalette::Base), Broken.color(QPalette::Base));
+	QCOMPARE(Fixed.color(QPalette::Button), Broken.color(QPalette::Button));
+}
+
+void ThemeReadabilityTest::themeSwitchAppliesTheRepair()
+{
+	// The case above proves the repair works in isolation; this one proves
+	// UpdateStyle() actually runs it. Without this, removing the call site leaves
+	// the other cases green while the device keeps showing invisible text —
+	// exactly the class of false pass this PR has already been caught on twice.
+	//
+	// A broken style palette is injected through the test seam, so the switch has
+	// something to repair on any host, not just on a platform whose style happens
+	// to be broken.
+	QPalette Broken = QApplication::style()->standardPalette();
+	Broken.setColor(QPalette::Window, QColor(255, 255, 255));
+	Broken.setColor(QPalette::WindowText, QColor(255, 255, 255));
+	Broken.setColor(QPalette::Base, QColor(255, 255, 255));
+	Broken.setColor(QPalette::Text, QColor(252, 252, 252));
+	Broken.setColor(QPalette::Button, QColor(255, 255, 255));
+	Broken.setColor(QPalette::ButtonText, QColor(255, 255, 255));
+
+	gApplication->SetStylePaletteOverride(Broken);
+
+	ApplyTheme(lcColorTheme::Dark);
+	ApplyTheme(lcColorTheme::System);
+
+	// The palette in force must be the repaired one, not the injected copy.
+	const QPalette Applied = QApplication::palette();
+
+	QVERIFY2(Applied.color(QPalette::WindowText) != Broken.color(QPalette::WindowText),
+		qPrintable(QStringLiteral("WindowText is still %1, the injected value; UpdateStyle() did not repair the palette")
+			.arg(Applied.color(QPalette::WindowText).name())));
+
+	const double Ratio = ContrastRatio(Applied.color(QPalette::WindowText), Applied.color(QPalette::Window));
+	QVERIFY2(Ratio >= 3.0,
+		qPrintable(QStringLiteral("WindowText contrast against Window is %1 after the switch").arg(Ratio, 0, 'f', 2)));
+
+	// Surfaces stay as the style supplied them; only the unreadable text role
+	// changes.
+	QCOMPARE(Applied.color(QPalette::Window), Broken.color(QPalette::Window));
+
+	gApplication->SetStylePaletteOverride(QPalette());
+	ApplyTheme(lcColorTheme::System);
+}
+
+void ThemeReadabilityTest::readablePaletteIsLeftAlone()
+{
+	// The repair must be a no-op on a palette that is already fine, or every
+	// theme switch would quietly restyle the application.
+	const QPalette Healthy = QApplication::style()->standardPalette();
+	const QPalette Result = lcApplication::EnsureReadablePalette(Healthy);
+
+	QVERIFY2(Result == Healthy, "a readable palette was modified");
+}
+
 int main(int argc, char** argv)
 {
 	lcApplication Application(argc, argv);

@@ -199,6 +199,25 @@ public:
 	// D5-02 is about, and it cannot be checked without applying it.
 	void UpdateStyle();
 
+	// Repairs text roles whose contrast against their own surface is too low.
+	//
+	// A platform style's standardPalette() is not guaranteed to be
+	// self-consistent. The device evidence for #33 is a palette that applied
+	// Window #ffffff while the menu and colour-name text stayed invisible, which
+	// is the shape of a text role that does not differ from its surface. Static
+	// and pure so the rule can be tested against synthetic palettes without a
+	// device.
+	static QPalette EnsureReadablePalette(const QPalette& Source);
+
+	// Test seam: when valid, the System branch uses this instead of the platform
+	// style's standardPalette(). Lets the repair be checked through the real
+	// UpdateStyle() rather than only in isolation. Never set in production.
+	void SetStylePaletteOverride(const QPalette& Palette)
+	{
+		mStylePaletteOverride = Palette;
+		mHasStylePaletteOverride = Palette.color(QPalette::Window).isValid();
+	}
+
 	// The style name UpdateStyle() restores for the System theme. Exposed for the
 	// theme regression: the device case is precisely a platform where this value
 	// came out empty, and a test has to be able to produce that state.
@@ -221,6 +240,8 @@ protected:
 	QString GetTabLayoutKey() const;
 
 	QString mDefaultStyle;
+	QPalette mStylePaletteOverride;
+	bool mHasStylePaletteOverride = false;
 };
 
 extern lcApplication* gApplication;
