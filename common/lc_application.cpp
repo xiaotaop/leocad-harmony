@@ -412,8 +412,14 @@ void lcApplication::UpdateStyle()
 
 		Restored = EnsureReadablePalette(Restored);
 
-		QApplication::setPalette(Restored);
+		// Clear the stylesheet first, then apply the palette to the style that is
+		// actually in use. While the dark stylesheet is installed Qt's
+		// QStyleSheetStyle is the active style; clearing removes that layer, so the
+		// palette has to be set on what remains. On this host the opposite order
+		// happens to work as well, so the order is chosen for correctness rather
+		// than because a test can tell the difference.
 		qApp->setStyleSheet(QString());
+		QApplication::setPalette(Restored);
 
 		// The text roles matter as much as the window colour: a style can return a
 		// white Window and a white WindowText in the same palette, which reads as

@@ -21,6 +21,7 @@
 
 #include <QApplication>
 #include <QMenuBar>
+
 #include <QPalette>
 #include <QStyleFactory>
 #include <QtTest>
@@ -87,6 +88,10 @@ private slots:
 	void brokenStylePaletteIsRepaired();
 	void readablePaletteIsLeftAlone();
 	void themeSwitchAppliesTheRepair();
+
+	// The repair is worthless if the stylesheet teardown then overwrites the
+	// palette. Ordering is the property, so it gets its own case.
+	void appliedPaletteSurvivesTheStylesheetTeardown();
 
 private:
 	// Sets the theme and applies it through the real code path.
@@ -351,6 +356,47 @@ void ThemeReadabilityTest::readablePaletteIsLeftAlone()
 	const QPalette Result = lcApplication::EnsureReadablePalette(Healthy);
 
 	QVERIFY2(Result == Healthy, "a readable palette was modified");
+}
+
+void ThemeReadabilityTest::appliedPaletteSurvivesTheStylesheetTeardown()
+{
+	// A widget-level check that the repaired role reaches something that draws,
+	// rather than only QApplication::palette().
+	//
+	// Scope, stated plainly: on this host the palette survives either ordering of
+	// setPalette() and setStyleSheet(), so this case does NOT prove that the
+	// ordering in UpdateStyle() is required. It checks the end state a menu bar
+	// sees. The ordering there is chosen for correctness — clearing the stylesheet
+	// removes the QStyleSheetStyle layer, so the palette must be applied after —
+	// and the device is what can confirm it.
+	QWidget Host;
+	QMenuBar* Menu = new QMenuBar(&Host);
+	Menu->addMenu(QStringLiteral("&File"));
+
+	QPalette Broken = QApplication::style()->standardPalette();
+	Broken.setColor(QPalette::Window, QColor(255, 255, 255));
+	Broken.setColor(QPalette::WindowText, QColor(255, 255, 255));
+
+	gApplication->SetStylePaletteOverride(Broken);
+
+	ApplyTheme(lcColorTheme::Dark);
+	ApplyTheme(lcColorTheme::System);
+
+	// The widget must resolve a readable window text after the switch, not the
+	// injected white.
+	const QColor MenuText = Menu->palette().color(QPalette::WindowText);
+
+	QVERIFY2(MenuText != QColor(255, 255, 255),
+		qPrintable(QStringLiteral("the menu bar still resolves WindowText to the injected white (%1) after the theme switch")
+			.arg(MenuText.name())));
+
+	const double Ratio = ContrastRatio(MenuText, Menu->palette().color(QPalette::Window));
+	QVERIFY2(Ratio >= 3.0,
+		qPrintable(QStringLiteral("menu bar contrast is %1 after the theme switch").arg(Ratio, 0, 'f', 2)));
+
+	gApplication->SetStylePaletteOverride(QPalette());
+	ApplyTheme(lcColorTheme::System);
+	delete Menu;
 }
 
 int main(int argc, char** argv)
