@@ -93,6 +93,11 @@ private slots:
 	// inspected. This pins that the widget state is reachable and sane on a
 	// healthy host, which is the baseline the device reading is compared with.
 	void widgetStateReportsWhatAWidgetResolves();
+
+	// The palette an ohos device actually reported for #33. Its nominal pairs
+	// read fine, so the earlier per-pair check passed and nothing was repaired —
+	// while a text role that is only wrong on OTHER surfaces stayed invisible.
+	void deviceOhosPaletteIsRepaired();
 	void themeSwitchAppliesTheRepair();
 
 	// The repair is worthless if the stylesheet teardown then overwrites the
@@ -439,6 +444,69 @@ void ThemeReadabilityTest::widgetStateReportsWhatAWidgetResolves()
 
 	// Leave the application palette in the state the other cases expect.
 	ApplyTheme(lcColorTheme::System);
+}
+
+void ThemeReadabilityTest::deviceOhosPaletteIsRepaired()
+{
+	// Verbatim from the device retest of a439bf20:
+	//
+	//   {"active_after":"ohos","class_after":"QOhosStyle","window":"#ffffff",
+	//    "windowtext":"#182431","text":"#182431",
+	//    "buttontext":"#ffffff","button":"#000000","base":"#e4e4e4"}
+	//
+	// Per nominal pair this is readable: windowtext on window, text on base,
+	// buttontext on button. That is why the first repair never fired. What it
+	// misses is that buttontext is pure white while window and base are both
+	// light, so any widget drawing ButtonText on a window-coloured surface writes
+	// white on white.
+	QPalette Device;
+	Device.setColor(QPalette::Window, QColor(0xff, 0xff, 0xff));
+	Device.setColor(QPalette::WindowText, QColor(0x18, 0x24, 0x31));
+	Device.setColor(QPalette::Text, QColor(0x18, 0x24, 0x31));
+	Device.setColor(QPalette::ButtonText, QColor(0xff, 0xff, 0xff));
+	Device.setColor(QPalette::Button, QColor(0x00, 0x00, 0x00));
+	Device.setColor(QPalette::Base, QColor(0xe4, 0xe4, 0xe4));
+	Device.setColor(QPalette::AlternateBase, QColor(0xe4, 0xe4, 0xe4));
+
+	// Establish the gap: the nominal pair is fine, so a per-pair check would let
+	// this palette through.
+	QVERIFY2(ContrastRatio(Device.color(QPalette::ButtonText), Device.color(QPalette::Button)) >= 3.0,
+		"the device palette's nominal buttontext/button pair is not readable, so this case is not reproducing the trap");
+
+	// And the cross-surface hole is real: white text on the white window.
+	QCOMPARE(Device.color(QPalette::WindowText), Device.color(QPalette::WindowText));
+	QVERIFY2(ContrastRatio(Device.color(QPalette::ButtonText), Device.color(QPalette::Window)) < 3.0,
+		"buttontext happens to be readable on window, so this palette has no cross-surface problem");
+
+	const QPalette Fixed = lcApplication::EnsureReadablePalette(Device);
+
+	// After repair, every text role must be readable on every surface it can be
+	// drawn over, which is the property the device needed.
+	struct Pair { QPalette::ColorRole Text; QPalette::ColorRole Surface; const char* What; };
+	const Pair Pairs[] =
+	{
+		{ QPalette::WindowText, QPalette::Window, "WindowText/Window" },
+		{ QPalette::WindowText, QPalette::Base, "WindowText/Base" },
+		{ QPalette::Text, QPalette::Base, "Text/Base" },
+		{ QPalette::Text, QPalette::Window, "Text/Window" },
+		{ QPalette::ButtonText, QPalette::Button, "ButtonText/Button" },
+		{ QPalette::ButtonText, QPalette::Window, "ButtonText/Window" },
+		{ QPalette::ButtonText, QPalette::Base, "ButtonText/Base" },
+	};
+
+	for (const Pair& Item : Pairs)
+	{
+		const double Ratio = ContrastRatio(Fixed.color(Item.Text), Fixed.color(Item.Surface));
+		QVERIFY2(Ratio >= 3.0,
+			qPrintable(QStringLiteral("%1 is still %2 after repair (text %3, surface %4)")
+				.arg(QLatin1String(Item.What)).arg(Ratio, 0, 'f', 2)
+				.arg(Fixed.color(Item.Text).name(), Fixed.color(Item.Surface).name())));
+	}
+
+	// The light surfaces the style supplied must survive: this changes text, not
+	// the style's own background choices.
+	QCOMPARE(Fixed.color(QPalette::Window), Device.color(QPalette::Window));
+	QCOMPARE(Fixed.color(QPalette::Base), Device.color(QPalette::Base));
 }
 
 int main(int argc, char** argv)

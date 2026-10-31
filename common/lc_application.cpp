@@ -358,11 +358,81 @@ QPalette lcApplication::EnsureReadablePalette(const QPalette& Source)
 		// and keeps a visible step from pure white.
 		const QColor Replacement = Luminance(Surface) > 0.5 ? QColor(0x1e, 0x1e, 0x1e) : QColor(0xf0, 0xf0, 0xf0);
 
+		// Held in locals: .name() returns a temporary QString, and its buffer is
+		// gone by the time qWarning reads the varargs. Passing .constData()
+		// straight through printed a bare "#".
+		const QByteArray TextName = Text.name().toLatin1();
+		const QByteArray SurfaceName = Surface.name().toLatin1();
+		const QByteArray ReplacementName = Replacement.name().toLatin1();
+
 		qWarning("Palette role %s (%s) has contrast %.2f against %s (%s); using %s.",
-			Item.TextName, Text.name().constData(), Contrast(Text, Surface),
-			Item.SurfaceName, Surface.name().constData(), Replacement.name().constData());
+			Item.TextName, TextName.constData(), Contrast(Text, Surface),
+			Item.SurfaceName, SurfaceName.constData(), ReplacementName.constData());
 
 		Result.setColor(Item.Text, Replacement);
+	}
+
+	// Second pass: the surfaces themselves have to agree.
+	//
+	// The device palette for #33 is the reason this exists:
+	//
+	//   window #ffffff (light)   button #000000 (dark)   base #e4e4e4 (light)
+	//
+	// No text colour is readable on both a white and a black surface, so no
+	// amount of text-role fixing can rescue that palette — as long as Button is
+	// black, some widget painting ButtonText on a window or base surface will be
+	// unreadable whichever colour ButtonText takes. The surfaces have to be
+	// brought to one side first, then the text can be chosen once.
+	//
+	// Window is the reference: it is the surface most of the window shows, and
+	// the style clearly intended a light theme (two of three surfaces are light).
+	const QPalette::ColorRole Surfaces[] =
+	{
+		QPalette::Window, QPalette::Base, QPalette::Button, QPalette::AlternateBase,
+	};
+
+	const bool WindowIsLight = Luminance(Result.color(QPalette::Window)) > 0.5;
+
+	bool SurfacesChanged = false;
+
+	for (const QPalette::ColorRole SurfaceRole : Surfaces)
+	{
+		const QColor Surface = Result.color(SurfaceRole);
+		const bool SurfaceIsLight = Luminance(Surface) > 0.5;
+
+		if (SurfaceIsLight == WindowIsLight)
+			continue;
+
+		// Recolour the odd surface instead of changing the text, or the roles that
+		// already read correctly would have to move too.
+		const QColor Aligned = WindowIsLight ? QColor(0xf2, 0xf2, 0xf2) : QColor(0x2d, 0x30, 0x33);
+
+		const QByteArray AlignedName = Aligned.name().toLatin1();
+
+		qWarning("Palette surface role %d is %s while Window is %s; using %s so text colours can be chosen once.",
+			int(SurfaceRole), SurfaceIsLight ? "light" : "dark", WindowIsLight ? "light" : "dark",
+			AlignedName.constData());
+
+		Result.setColor(SurfaceRole, Aligned);
+		SurfacesChanged = true;
+	}
+
+	if (SurfacesChanged)
+	{
+		// The first pass ran against the original surfaces, so its decisions are
+		// stale for any role whose surface just moved.
+		for (const Pair& Item : Pairs)
+		{
+			const QColor Text = Result.color(Item.Text);
+			const QColor Surface = Result.color(Item.Surface);
+
+			if (Contrast(Text, Surface) >= MinimumContrast)
+				continue;
+
+			const QColor Replacement = Luminance(Surface) > 0.5 ? QColor(0x1e, 0x1e, 0x1e) : QColor(0xf0, 0xf0, 0xf0);
+
+			Result.setColor(Item.Text, Replacement);
+		}
 	}
 
 	return Result;
