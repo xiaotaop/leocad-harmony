@@ -298,27 +298,44 @@ void lcApplication::LogThemeWidgetState()
 			continue;
 
 		const QPalette WidgetPalette = Item.Widget->palette();
-		const QPalette::ColorGroup Group = Item.Widget->isEnabled() ? QPalette::Active : QPalette::Disabled;
 		const QStyle* WidgetStyle = Item.Widget->style();
+
+		// All three groups, not just the one the widget happens to be in now. A
+		// window that never gets focus draws with Inactive, and a widget whose
+		// enabled state changes later will draw with the group it did not have
+		// when this sample was taken. Sampling one group can therefore miss the
+		// colours a user actually sees.
+		const QPalette::ColorGroup NowGroup =
+			Item.Widget->isEnabled() ? QPalette::Active : QPalette::Disabled;
+
+		auto GroupText = [&WidgetPalette](QPalette::ColorGroup Group) -> QString
+		{
+			return QStringLiteral("%1/%2")
+				.arg(WidgetPalette.color(Group, QPalette::WindowText).name(),
+					WidgetPalette.color(Group, QPalette::ButtonText).name());
+		};
 
 		// WA_SetPalette is the switch that decides whether a widget follows the
 		// application palette at all: once a widget has its own palette it stops
 		// inheriting, and clearing the application stylesheet does not reset it.
 		qInfo().noquote() << "LEOCAD_THEME_WIDGET"
-			<< QStringLiteral("{\"widget\":\"%1\",\"enabled\":%2,\"has_own_palette\":%3,\"own_style\":%4,\"style_class\":\"%5\",\"app_style\":\"%6\",\"windowtext\":\"%7\",\"buttontext\":\"%8\",\"text\":\"%9\",\"window\":\"%10\",\"button\":\"%11\",\"base\":\"%12\",\"has_stylesheet\":%13}")
+			<< QStringLiteral("{\"widget\":\"%1\",\"enabled\":%2,\"has_own_palette\":%3,\"own_style\":%4,\"style_class\":\"%5\",\"app_style\":\"%6\",\"windowtext\":\"%7\",\"buttontext\":\"%8\",\"text\":\"%9\",\"window\":\"%10\",\"button\":\"%11\",\"base\":\"%12\",\"has_stylesheet\":%13,\"active_wt_bt\":\"%14\",\"inactive_wt_bt\":\"%15\",\"disabled_wt_bt\":\"%16\"}")
 				.arg(QLatin1String(Item.What),
 					Item.Widget->isEnabled() ? QStringLiteral("true") : QStringLiteral("false"),
 					Item.Widget->testAttribute(Qt::WA_SetPalette) ? QStringLiteral("true") : QStringLiteral("false"),
 					WidgetStyle != AppStyle ? QStringLiteral("true") : QStringLiteral("false"),
 					WidgetStyle ? QString::fromLatin1(WidgetStyle->metaObject()->className()) : QString(),
 					AppStyle ? QString::fromLatin1(AppStyle->metaObject()->className()) : QString(),
-					WidgetPalette.color(Group, QPalette::WindowText).name(),
-					WidgetPalette.color(Group, QPalette::ButtonText).name(),
-					WidgetPalette.color(Group, QPalette::Text).name(),
-					WidgetPalette.color(Group, QPalette::Window).name(),
-					WidgetPalette.color(Group, QPalette::Button).name(),
-					WidgetPalette.color(Group, QPalette::Base).name(),
-					Item.Widget->styleSheet().isEmpty() ? QStringLiteral("false") : QStringLiteral("true"));
+					// The group the widget is in right now, which is what it paints with
+					// this instant. The three-group fields below cover the rest.
+					WidgetPalette.color(NowGroup, QPalette::WindowText).name(),
+					WidgetPalette.color(NowGroup, QPalette::ButtonText).name(),
+					WidgetPalette.color(NowGroup, QPalette::Text).name(),
+					WidgetPalette.color(NowGroup, QPalette::Window).name(),
+					WidgetPalette.color(NowGroup, QPalette::Button).name(),
+					WidgetPalette.color(NowGroup, QPalette::Base).name(),
+					Item.Widget->styleSheet().isEmpty() ? QStringLiteral("false") : QStringLiteral("true"),
+					GroupText(QPalette::Active), GroupText(QPalette::Inactive), GroupText(QPalette::Disabled));
 	}
 }
 

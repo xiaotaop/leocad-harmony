@@ -98,6 +98,11 @@ private slots:
 	// read fine, so the earlier per-pair check passed and nothing was repaired —
 	// while a text role that is only wrong on OTHER surfaces stayed invisible.
 	void deviceOhosPaletteIsRepaired();
+
+	// A widget can draw with a colour group other than the one it is in now:
+	// a window that never takes focus paints with Inactive, and an enabled state
+	// change later switches groups. Sampling one group can miss what is drawn.
+	void everyColourGroupIsReadableAfterThemeSwitch();
 	void themeSwitchAppliesTheRepair();
 
 	// The repair is worthless if the stylesheet teardown then overwrites the
@@ -507,6 +512,56 @@ void ThemeReadabilityTest::deviceOhosPaletteIsRepaired()
 	// the style's own background choices.
 	QCOMPARE(Fixed.color(QPalette::Window), Device.color(QPalette::Window));
 	QCOMPARE(Fixed.color(QPalette::Base), Device.color(QPalette::Base));
+}
+
+void ThemeReadabilityTest::everyColourGroupIsReadableAfterThemeSwitch()
+{
+	// The device image shows invisible text with an application palette that reads
+	// fine, so the palette a widget paints with may not be the group that was
+	// inspected. This covers all three groups rather than the current one.
+	ApplyTheme(lcColorTheme::Dark);
+	ApplyTheme(lcColorTheme::System);
+
+	const QPalette Applied = QApplication::palette();
+
+	struct Pair { QPalette::ColorRole Text; QPalette::ColorRole Surface; const char* What; };
+	const Pair Pairs[] =
+	{
+		{ QPalette::WindowText, QPalette::Window, "WindowText/Window" },
+		{ QPalette::Text, QPalette::Base, "Text/Base" },
+		{ QPalette::ButtonText, QPalette::Button, "ButtonText/Button" },
+	};
+
+	const QPalette::ColorGroup Groups[] =
+	{
+		QPalette::Active, QPalette::Inactive, QPalette::Disabled,
+	};
+
+	const char* const GroupNames[] = { "Active", "Inactive", "Disabled" };
+
+	for (int GroupIdx = 0; GroupIdx < 3; GroupIdx++)
+	{
+		for (const Pair& Item : Pairs)
+		{
+			const QColor Text = Applied.color(Groups[GroupIdx], Item.Text);
+			const QColor Surface = Applied.color(Groups[GroupIdx], Item.Surface);
+
+			// Disabled text is meant to be dim, and Qt's own styles sit around 1.6
+			// for it (#bebebe on #efefef with Fusion). Holding it to a readability
+			// threshold would fail on a stock palette, which is not a defect to
+			// report. What matters for Disabled is only that the text is not the
+			// same colour as its surface — anything at or above 1.0 is drawn, and
+			// exactly 1.0 is invisible.
+			const double Required = GroupIdx == 2 ? 1.2 : 3.0;
+			const double Ratio = ContrastRatio(Text, Surface);
+
+			QVERIFY2(Ratio >= Required,
+				qPrintable(QStringLiteral("%1 in the %2 group has contrast %3 (needs %4): text %5 on surface %6")
+					.arg(QLatin1String(Item.What), QLatin1String(GroupNames[GroupIdx]))
+					.arg(Ratio, 0, 'f', 2).arg(Required)
+					.arg(Text.name(), Surface.name())));
+		}
+	}
 }
 
 int main(int argc, char** argv)
