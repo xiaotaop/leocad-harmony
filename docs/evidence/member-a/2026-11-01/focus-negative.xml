@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite name="ViewInputTests" timestamp="2026&#x002D;11&#x002D;01T13:12:23" hostname="AlmiradeMacBook&#x002D;Air.local" tests="9" failures="4" errors="0" skipped="0" time="1.019">
+  <properties>
+    <property name="QTestVersion" value="6.12.0"/>
+    <property name="QtVersion" value="6.12.0"/>
+    <property name="QtBuild" value="Qt 6.12.0 (arm64&#x002D;little_endian&#x002D;lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang&#x002D;1700.3.19.1))"/>
+  </properties>
+  <testcase name="initTestCase" classname="ViewInputTests" time="0.000"/>
+  <testcase name="navigation(orbit)" classname="ViewInputTests" time="0.308">
+    <system-out>
+      <![CDATA[LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}]]>
+      <![CDATA[LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}]]>
+      <![CDATA[INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396]]>
+    </system-out>
+    <system-err>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75f987ea80) does not belong to <QCocoaNSMenu: 0x75f983dd10>
+    Title: Edit
+    Supermenu: 0x75f8ede140 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f8e37c00, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e37cc0 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75f98d83c0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da5bb0, reps:(\n    \"NSBitmapImageRep 0x75f98510a0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d99a40>\",\n    \"NSBitmapImageRep 0x75f9851110 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d99cc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e37d80 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75f98d8000 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da6ae0, reps:(\n    \"NSBitmapImageRep 0x75f9851420 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d99f40>\",\n    \"NSBitmapImageRep 0x75f9851490 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d9a1c0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e37e40 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75f98d88c0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da6ac0, reps:(\n    \"NSBitmapImageRep 0x75f9851340 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d9a440>\",\n    \"NSBitmapImageRep 0x75f98513b0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d9a6c0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c000, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c480, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c540 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7cc00, separator>",
+        "<QCocoaNSMenuItem: 0x75f7c7d080 Transform, non-symbol image: <NSImage 0x75f9253160 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da5ce0, reps:(\n    \"NSBitmapImageRep 0x75f98516c0 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d9abc0>\"\n)>>, submenu: 0x75f983ddb0 (Untitled)>",
+        "<QCocoaNSMenuItem: 0x75f7c7df80 Tools, submenu: 0x75f983de00 (Untitled)>",
+        "<NSMenuItem: 0x75f98da940, separator>",
+        "<NSMenuItem: 0x75f9a3c1e0 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f7cc7f40 ()>",
+        "<NSMenuItem: 0x75f9a3c320 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75f9a3c3c0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f9a3c460 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75f9a3c5a0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75f9a3c640 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75f987f100) does not belong to <QCocoaNSMenu: 0x75f983dd10>
+    Title: Edit
+    Supermenu: 0x75f8ede140 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f8e37c00, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e37cc0 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75f98d83c0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da5bb0, reps:(\n    \"NSBitmapImageRep 0x75f98510a0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d99a40>\",\n    \"NSBitmapImageRep 0x75f9851110 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d99cc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e37d80 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75f98d8000 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da6ae0, reps:(\n    \"NSBitmapImageRep 0x75f9851420 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d99f40>\",\n    \"NSBitmapImageRep 0x75f9851490 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d9a1c0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e37e40 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75f98d88c0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da6ac0, reps:(\n    \"NSBitmapImageRep 0x75f9851340 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d9a440>\",\n    \"NSBitmapImageRep 0x75f98513b0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d9a6c0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c000, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c480, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c540 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7cc00, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7df80 Tools, submenu: 0x75f983de00 (Untitled)>",
+        "<NSMenuItem: 0x75f98da940, separator>",
+        "<NSMenuItem: 0x75f9a3c1e0 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f7cc7f40 ()>",
+        "<NSMenuItem: 0x75f9a3c320 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75f9a3c3c0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f9a3c460 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75f9a3c5a0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75f9a3c640 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+    </system-err>
+  </testcase>
+  <testcase name="navigation(pan)" classname="ViewInputTests" time="0.130">
+    <system-out>
+      <![CDATA[LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}]]>
+      <![CDATA[LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}]]>
+      <![CDATA[INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396]]>
+    </system-out>
+    <system-err>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75f98aa800) does not belong to <QCocoaNSMenu: 0x75f9a8be80>
+    Title: Edit
+    Supermenu: 0x75f7eea700 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f7c99140, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c99080 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa0b0500 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da7020, reps:(\n    \"NSBitmapImageRep 0x75fa040230 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c8a940>\",\n    \"NSBitmapImageRep 0x75fa0402a0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c8abc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98fc0 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa0b08c0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da5fd0, reps:(\n    \"NSBitmapImageRep 0x75fa0400e0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c8a800>\",\n    \"NSBitmapImageRep 0x75fa040070 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d98f00>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98f00 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa0b0960 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da77e0, reps:(\n    \"NSBitmapImageRep 0x75fa040460 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d98c80>\",\n    \"NSBitmapImageRep 0x75fa0403f0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7e85cc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98a80, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98cc0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c99740 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98240, separator>",
+        "<QCocoaNSMenuItem: 0x75f7ca4c00 Transform, non-symbol image: <NSImage 0x75fa0b0aa0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da74d0, reps:(\n    \"NSBitmapImageRep 0x75fa0416c0 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7e86e40>\"\n)>>, submenu: 0x75f9a8bf20 (Untitled)>",
+        "<QCocoaNSMenuItem: 0x75f7c7fb40 Tools, submenu: 0x75f9a8bf70 (Untitled)>",
+        "<NSMenuItem: 0x75f9252940, separator>",
+        "<NSMenuItem: 0x75f9252a80 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f7dccd80 ()>",
+        "<NSMenuItem: 0x75f9253980 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa0b0fa0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f9252800 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f900f840 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa0b1040 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b10e0 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b0000 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b00a0 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75f98a9300) does not belong to <QCocoaNSMenu: 0x75f9a8be80>
+    Title: Edit
+    Supermenu: 0x75f7eea700 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f7c99140, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c99080 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa0b0500 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da7020, reps:(\n    \"NSBitmapImageRep 0x75fa040230 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c8a940>\",\n    \"NSBitmapImageRep 0x75fa0402a0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c8abc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98fc0 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa0b08c0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da5fd0, reps:(\n    \"NSBitmapImageRep 0x75fa0400e0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c8a800>\",\n    \"NSBitmapImageRep 0x75fa040070 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d98f00>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98f00 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa0b0960 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f8da77e0, reps:(\n    \"NSBitmapImageRep 0x75fa040460 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7d98c80>\",\n    \"NSBitmapImageRep 0x75fa0403f0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7e85cc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98a80, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98cc0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c99740 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c98240, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7fb40 Tools, submenu: 0x75f9a8bf70 (Untitled)>",
+        "<NSMenuItem: 0x75f9252940, separator>",
+        "<NSMenuItem: 0x75f9252a80 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f7dccd80 ()>",
+        "<NSMenuItem: 0x75f9253980 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa0b0fa0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f9252800 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f900f840 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa0b1040 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b10e0 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b0000 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b00a0 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+    </system-err>
+  </testcase>
+  <testcase name="navigation(zoom)" classname="ViewInputTests" time="0.111">
+    <system-out>
+      <![CDATA[LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}]]>
+      <![CDATA[LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}]]>
+      <![CDATA[INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396]]>
+    </system-out>
+    <system-err>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75f987c100) does not belong to <QCocoaNSMenu: 0x75fa0dadf0>
+    Title: Edit
+    Supermenu: 0x75f7f913c0 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f7f36580, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f36640 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa0b26c0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff80c0, reps:(\n    \"NSBitmapImageRep 0x75fa140930 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c76bc0>\",\n    \"NSBitmapImageRep 0x75fa1408c0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c77480>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f36700 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa0b3de0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff80d0, reps:(\n    \"NSBitmapImageRep 0x75fa140310 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c77980>\",\n    \"NSBitmapImageRep 0x75fa1402a0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c77840>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f367c0 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa0b3d40 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff80e0, reps:(\n    \"NSBitmapImageRep 0x75fa1403f0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c76f80>\",\n    \"NSBitmapImageRep 0x75fa140380 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7fd0b40>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f373c0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f37780, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f37840 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f37f00, separator>",
+        "<QCocoaNSMenuItem: 0x75f7ca4480 Transform, non-symbol image: <NSImage 0x75f98d9b80 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8060, reps:(\n    \"NSBitmapImageRep 0x75fa140460 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7fd0000>\"\n)>>, submenu: 0x75fa0dae90 (Untitled)>",
+        "<QCocoaNSMenuItem: 0x75f8e36d00 Tools, submenu: 0x75fa0daee0 (Untitled)>",
+        "<NSMenuItem: 0x75fa0b3ca0, separator>",
+        "<NSMenuItem: 0x75f98d8fa0 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f7f935c0 ()>",
+        "<NSMenuItem: 0x75f98db660 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75f9a3ec60 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f98dbd40 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f98dbde0 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75f9a3eb20 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75f9a3ee40 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75f98d9e00 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75f98d9360 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75f987ef00) does not belong to <QCocoaNSMenu: 0x75fa0dadf0>
+    Title: Edit
+    Supermenu: 0x75f7f913c0 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f7f36580, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f36640 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa0b26c0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff80c0, reps:(\n    \"NSBitmapImageRep 0x75fa140930 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c76bc0>\",\n    \"NSBitmapImageRep 0x75fa1408c0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c77480>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f36700 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa0b3de0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff80d0, reps:(\n    \"NSBitmapImageRep 0x75fa140310 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c77980>\",\n    \"NSBitmapImageRep 0x75fa1402a0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c77840>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f367c0 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa0b3d40 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff80e0, reps:(\n    \"NSBitmapImageRep 0x75fa1403f0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7c76f80>\",\n    \"NSBitmapImageRep 0x75fa140380 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7fd0b40>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f373c0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f37780, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f37840 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7f37f00, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e36d00 Tools, submenu: 0x75fa0daee0 (Untitled)>",
+        "<NSMenuItem: 0x75fa0b3ca0, separator>",
+        "<NSMenuItem: 0x75f98d8fa0 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f7f935c0 ()>",
+        "<NSMenuItem: 0x75f98db660 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75f9a3ec60 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f98dbd40 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75f98dbde0 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75f9a3eb20 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75f9a3ee40 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75f98d9e00 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75f98d9360 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+    </system-err>
+  </testcase>
+  <testcase name="focusLossStopsTracking(focus)" classname="ViewInputTests" time="0.119">
+    <failure type="fail" message="&apos;!View&#x002D;&gt;IsTracking()&apos; returned FALSE. ()"/>
+    <system-out>
+      <![CDATA[LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}]]>
+      <![CDATA[LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}]]>
+      <![CDATA[INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396]]>
+    </system-out>
+    <system-err>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75fa071680) does not belong to <QCocoaNSMenu: 0x75fa1d95e0>
+    Title: Edit
+    Supermenu: 0x75f640fec0 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f7fdae80, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdaf40 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa24d9a0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8510, reps:(\n    \"NSBitmapImageRep 0x75fa140770 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6454140>\",\n    \"NSBitmapImageRep 0x75fa140700 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6455180>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb000 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa24cbe0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8790, reps:(\n    \"NSBitmapImageRep 0x75fa140f50 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6454c80>\",\n    \"NSBitmapImageRep 0x75fa143e20 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6454280>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb0c0 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa24cd20 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8f00, reps:(\n    \"NSBitmapImageRep 0x75fa040000 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7f76080>\",\n    \"NSBitmapImageRep 0x75fa043560 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7f77480>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb240, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb6c0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb780 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdbe40, separator>",
+        "<QCocoaNSMenuItem: 0x75f7ca40c0 Transform, non-symbol image: <NSImage 0x75fa24ce60 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8b50, reps:(\n    \"NSBitmapImageRep 0x75fa0418f0 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7f74f00>\"\n)>>, submenu: 0x75fa1d9680 (Untitled)>",
+        "<QCocoaNSMenuItem: 0x75f8e37f00 Tools, submenu: 0x75fa1d96d0 (Untitled)>",
+        "<NSMenuItem: 0x75fa24d180, separator>",
+        "<NSMenuItem: 0x75fa24d400 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f6431cc0 ()>",
+        "<NSMenuItem: 0x75fa24d540 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa24dfe0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa24d5e0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa24d680 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa24e080 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa24e120 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa24d7c0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa24d860 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75fa071f00) does not belong to <QCocoaNSMenu: 0x75fa1d95e0>
+    Title: Edit
+    Supermenu: 0x75f640fec0 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f7fdae80, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdaf40 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa24d9a0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8510, reps:(\n    \"NSBitmapImageRep 0x75fa140770 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6454140>\",\n    \"NSBitmapImageRep 0x75fa140700 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6455180>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb000 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa24cbe0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8790, reps:(\n    \"NSBitmapImageRep 0x75fa140f50 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6454c80>\",\n    \"NSBitmapImageRep 0x75fa143e20 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6454280>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb0c0 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa24cd20 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8f00, reps:(\n    \"NSBitmapImageRep 0x75fa040000 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7f76080>\",\n    \"NSBitmapImageRep 0x75fa043560 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f7f77480>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb240, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb6c0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdb780 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7fdbe40, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e37f00 Tools, submenu: 0x75fa1d96d0 (Untitled)>",
+        "<NSMenuItem: 0x75fa24d180, separator>",
+        "<NSMenuItem: 0x75fa24d400 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f6431cc0 ()>",
+        "<NSMenuItem: 0x75fa24d540 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa24dfe0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa24d5e0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa24d680 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa24e080 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa24e120 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa24d7c0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa24d860 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+    </system-err>
+  </testcase>
+  <testcase name="focusLossStopsTracking(deactivate)" classname="ViewInputTests" time="0.115">
+    <failure type="fail" message="&apos;!View&#x002D;&gt;IsTracking()&apos; returned FALSE. ()"/>
+    <system-out>
+      <![CDATA[LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}]]>
+      <![CDATA[LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}]]>
+      <![CDATA[INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396]]>
+    </system-out>
+    <system-err>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75fa14e300) does not belong to <QCocoaNSMenu: 0x75fa1d8640>
+    Title: Edit
+    Supermenu: 0x75f6431c40 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f7c7f000, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7f0c0 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa0b3660 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff96b0, reps:(\n    \"NSBitmapImageRep 0x75fa2fb480 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6456e40>\",\n    \"NSBitmapImageRep 0x75fa2fba30 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6455e00>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7f180 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa0b24e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8150, reps:(\n    \"NSBitmapImageRep 0x75fa2f9810 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6457ac0>\",\n    \"NSBitmapImageRep 0x75fa2f97a0 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6457840>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7f6c0 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75f92524e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9650, reps:(\n    \"NSBitmapImageRep 0x75fa2fa3e0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64c9f40>\",\n    \"NSBitmapImageRep 0x75fa2fa370 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64c9cc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7d800, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c840, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c780 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7f780, separator>",
+        "<QCocoaNSMenuItem: 0x75f7c7e580 Transform, non-symbol image: <NSImage 0x75fa0b2120 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9340, reps:(\n    \"NSBitmapImageRep 0x75fa2fb640 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64ca6c0>\"\n)>>, submenu: 0x75fa1da760 (Untitled)>",
+        "<QCocoaNSMenuItem: 0x75f8e37180 Tools, submenu: 0x75fa1dab20 (Untitled)>",
+        "<NSMenuItem: 0x75fa0b3200, separator>",
+        "<NSMenuItem: 0x75fa0b2f80 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f64b5380 ()>",
+        "<NSMenuItem: 0x75fa0b0320 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa0b2440 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa0b2d00 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa0b0e60 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa0b28a0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b03c0 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b3980 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b38e0 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75fa14fc80) does not belong to <QCocoaNSMenu: 0x75fa1d8640>
+    Title: Edit
+    Supermenu: 0x75f6431c40 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f7c7f000, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7f0c0 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa0b3660 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff96b0, reps:(\n    \"NSBitmapImageRep 0x75fa2fb480 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6456e40>\",\n    \"NSBitmapImageRep 0x75fa2fba30 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6455e00>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7f180 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa0b24e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8150, reps:(\n    \"NSBitmapImageRep 0x75fa2f9810 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6457ac0>\",\n    \"NSBitmapImageRep 0x75fa2f97a0 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6457840>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7f6c0 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75f92524e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9650, reps:(\n    \"NSBitmapImageRep 0x75fa2fa3e0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64c9f40>\",\n    \"NSBitmapImageRep 0x75fa2fa370 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64c9cc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7d800, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c840, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7c780 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c7f780, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e37180 Tools, submenu: 0x75fa1dab20 (Untitled)>",
+        "<NSMenuItem: 0x75fa0b3200, separator>",
+        "<NSMenuItem: 0x75fa0b2f80 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f64b5380 ()>",
+        "<NSMenuItem: 0x75fa0b0320 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa0b2440 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa0b2d00 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa0b0e60 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa0b28a0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b03c0 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b3980 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa0b38e0 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+    </system-err>
+  </testcase>
+  <testcase name="focusLossStopsTracking(hide)" classname="ViewInputTests" time="0.120">
+    <failure type="fail" message="&apos;!View&#x002D;&gt;IsTracking()&apos; returned FALSE. ()"/>
+    <system-out>
+      <![CDATA[LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}]]>
+      <![CDATA[LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}]]>
+      <![CDATA[INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396]]>
+    </system-out>
+    <system-err>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75fa070c80) does not belong to <QCocoaNSMenu: 0x75fa397de0>
+    Title: Edit
+    Supermenu: 0x75f64dab80 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f64a6f40, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7000 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa3b2620 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9120, reps:(\n    \"NSBitmapImageRep 0x75fa3f1420 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6564640>\",\n    \"NSBitmapImageRep 0x75fa3f1490 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6565b80>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a70c0 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa3b0aa0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8960, reps:(\n    \"NSBitmapImageRep 0x75fa3f0e00 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6565680>\",\n    \"NSBitmapImageRep 0x75fa3f0e70 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6564a00>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7180 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa3b0640 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9dc0, reps:(\n    \"NSBitmapImageRep 0x75fa3f0a10 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f4140>\",\n    \"NSBitmapImageRep 0x75fa3f09a0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f4dc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7300, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7780, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7840 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7f00, separator>",
+        "<QCocoaNSMenuItem: 0x75f7ca4900 Transform, non-symbol image: <NSImage 0x75fa3b06e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9a50, reps:(\n    \"NSBitmapImageRep 0x75fa3f0a80 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f43c0>\"\n)>>, submenu: 0x75fa397e80 (Untitled)>",
+        "<QCocoaNSMenuItem: 0x75f8e36640 Tools, submenu: 0x75fa397ed0 (Untitled)>",
+        "<NSMenuItem: 0x75fa3b19a0, separator>",
+        "<NSMenuItem: 0x75fa3b1fe0 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f6534640 ()>",
+        "<NSMenuItem: 0x75fa3b2120 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa3b2b20 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa3b21c0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa3b2260 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa3b2bc0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b2c60 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b23a0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b2440 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75fa070900) does not belong to <QCocoaNSMenu: 0x75fa397de0>
+    Title: Edit
+    Supermenu: 0x75f64dab80 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f64a6f40, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7000 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa3b2620 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9120, reps:(\n    \"NSBitmapImageRep 0x75fa3f1420 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6564640>\",\n    \"NSBitmapImageRep 0x75fa3f1490 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6565b80>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a70c0 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa3b0aa0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8960, reps:(\n    \"NSBitmapImageRep 0x75fa3f0e00 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6565680>\",\n    \"NSBitmapImageRep 0x75fa3f0e70 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6564a00>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7180 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa3b0640 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9dc0, reps:(\n    \"NSBitmapImageRep 0x75fa3f0a10 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f4140>\",\n    \"NSBitmapImageRep 0x75fa3f09a0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f4dc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7300, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7780, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7840 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64a7f00, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f8e36640 Tools, submenu: 0x75fa397ed0 (Untitled)>",
+        "<NSMenuItem: 0x75fa3b19a0, separator>",
+        "<NSMenuItem: 0x75fa3b1fe0 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f6534640 ()>",
+        "<NSMenuItem: 0x75fa3b2120 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa3b2b20 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa3b21c0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa3b2260 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa3b2bc0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b2c60 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b23a0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b2440 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+    </system-err>
+  </testcase>
+  <testcase name="focusLossStopsTracking(ungrab)" classname="ViewInputTests" time="0.115">
+    <failure type="fail" message="&apos;!View&#x002D;&gt;IsTracking()&apos; returned FALSE. ()"/>
+    <system-out>
+      <![CDATA[LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}]]>
+      <![CDATA[LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}]]>
+      <![CDATA[INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396]]>
+    </system-out>
+    <system-err>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75fa30ff80) does not belong to <QCocoaNSMenu: 0x75fa467200>
+    Title: Edit
+    Supermenu: 0x75f654a580 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f64fadc0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fae80 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa521a40 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ffa630, reps:(\n    \"NSBitmapImageRep 0x75fa5190a0 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6598000>\",\n    \"NSBitmapImageRep 0x75fa518a10 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6598dc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64faf40 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa5205a0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9ce0, reps:(\n    \"NSBitmapImageRep 0x75fa518620 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6598c80>\",\n    \"NSBitmapImageRep 0x75fa5185b0 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6598280>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fb000 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa5206e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8fc0, reps:(\n    \"NSBitmapImageRep 0x75fa518770 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f4c80>\",\n    \"NSBitmapImageRep 0x75fa5187e0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f6440>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fb180, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fb600, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fb6c0 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fbd80, separator>",
+        "<QCocoaNSMenuItem: 0x75f7ca43c0 Transform, non-symbol image: <NSImage 0x75fa520820 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ffa140, reps:(\n    \"NSBitmapImageRep 0x75fa5188c0 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f4640>\"\n)>>, submenu: 0x75fa4672a0 (Untitled)>",
+        "<QCocoaNSMenuItem: 0x75f7c99500 Tools, submenu: 0x75fa4672f0 (Untitled)>",
+        "<NSMenuItem: 0x75fa0b2940, separator>",
+        "<NSMenuItem: 0x75fa3b3e80 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f6537540 ()>",
+        "<NSMenuItem: 0x75fa3b35c0 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa520d20 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa3b3520 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa3b0460 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa520dc0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa520e60 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b3ca0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b3700 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+      <![CDATA[qt.qpa.menus: QPlatformMenuItem(0x75fa30f900) does not belong to <QCocoaNSMenu: 0x75fa467200>
+    Title: Edit
+    Supermenu: 0x75f654a580 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x75f64fadc0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fae80 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x75fa521a40 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ffa630, reps:(\n    \"NSBitmapImageRep 0x75fa5190a0 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6598000>\",\n    \"NSBitmapImageRep 0x75fa518a10 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6598dc0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64faf40 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x75fa5205a0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff9ce0, reps:(\n    \"NSBitmapImageRep 0x75fa518620 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6598c80>\",\n    \"NSBitmapImageRep 0x75fa5185b0 Size={16, 16} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f6598280>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fb000 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x75fa5206e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x75f7ff8fc0, reps:(\n    \"NSBitmapImageRep 0x75fa518770 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f4c80>\",\n    \"NSBitmapImageRep 0x75fa5187e0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x75f64f6440>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fb180, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fb600, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fb6c0 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x75f64fbd80, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x75f7c99500 Tools, submenu: 0x75fa4672f0 (Untitled)>",
+        "<NSMenuItem: 0x75fa0b2940, separator>",
+        "<NSMenuItem: 0x75fa3b3e80 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x75f6537540 ()>",
+        "<NSMenuItem: 0x75fa3b35c0 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x75fa520d20 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa3b3520 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x75fa3b0460 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x75fa520dc0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa520e60 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b3ca0 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x75fa3b3700 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )]]>
+    </system-err>
+  </testcase>
+  <testcase name="cleanupTestCase" classname="ViewInputTests" time="0.000"/>
+</testsuite>

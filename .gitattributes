@@ -27,3 +27,6 @@
 /docs/evidence/leader/2026-10-31/pr35-theme-device-r3/* -text whitespace=cr-at-eol,-blank-at-eol
 /docs/evidence/leader/2026-10-31/pr35-theme-device-r4/* -text whitespace=cr-at-eol,-blank-at-eol
 /docs/evidence/leader/2026-10-31/pr35-theme-device-r5/* -text whitespace=cr-at-eol,-blank-at-eol
+
+# Preserve D6 input-test evidence bytes across platform checkouts.
+/docs/evidence/member-a/2026-11-01/* -text whitespace=cr-at-eol,-blank-at-eol
