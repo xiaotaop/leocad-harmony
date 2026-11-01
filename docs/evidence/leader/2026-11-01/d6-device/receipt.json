@@ -1,0 +1,221 @@
+{
+  "algorithm": "SHA-256",
+  "scope": "Raw evidence and reports.json; receipt excludes itself",
+  "files": [
+    {
+      "name": "allparts-restored.jpeg",
+      "bytes": 326322,
+      "sha256": "a5edd86125dc531364edfcc256493b143dc71a98d69074de526e72e3d3bee0ca"
+    },
+    {
+      "name": "baseline-start.jpeg",
+      "bytes": 276279,
+      "sha256": "702c36e0852550ee8a092a106a288ff5e5d56f1181f6448193e6fb47a7d16ba4"
+    },
+    {
+      "name": "blue-select-tool.jpeg",
+      "bytes": 309804,
+      "sha256": "a5c0d15d32c0e485aed5610a075e8fadd0dc948c060a91deac6ca3a2d97408ec"
+    },
+    {
+      "name": "close-unsaved-prompt.jpeg",
+      "bytes": 311746,
+      "sha256": "c7f0970e59907a70532169259469536ce96d28cb78f95e572d003259dc7e5caa"
+    },
+    {
+      "name": "color-green.jpeg",
+      "bytes": 312482,
+      "sha256": "6be9a0d72537d214a77f48aa50a563543196ed299e08bc4a7d19891f2442158d"
+    },
+    {
+      "name": "edit-menu-after-move.jpeg",
+      "bytes": 307866,
+      "sha256": "4823786287ba76cbd33464fa17f9f31c69b2b34c99b2401a1ae01ff16ef02e8f"
+    },
+    {
+      "name": "focus2-cancel-return.jpeg",
+      "bytes": 334577,
+      "sha256": "674765c96bc592b144058cacef9578cb675940e054289d9b0104e2443e1d7b9f"
+    },
+    {
+      "name": "focus2-move-preview.jpeg",
+      "bytes": 332682,
+      "sha256": "34d667992d4dd38cbc98f95f2bce37e5141d600f2adf45ddff7b4586c0ce5fc9"
+    },
+    {
+      "name": "focus2-new-move.jpeg",
+      "bytes": 334072,
+      "sha256": "1b0ccfcbe1bec1ba3c70f4313c728452447a8729ae3ee5bd156ba8bb984b18ac"
+    },
+    {
+      "name": "focus2-undo.jpeg",
+      "bytes": 334532,
+      "sha256": "e7935049202506dcfb7708d3fdf7da1d79075e6eb66bd7f790ce196e48702fab"
+    },
+    {
+      "name": "green-insert-full.jpeg",
+      "bytes": 315718,
+      "sha256": "aa92f49a756170ce0fda03e87252e153644251d145ae1709cdb85acd157887d2"
+    },
+    {
+      "name": "input-restart.hilog.txt",
+      "bytes": 254188,
+      "sha256": "53335f28d0bd9257ae03065de9acb03584937a3ebdb4989fdf7d274fab9392b0"
+    },
+    {
+      "name": "insert-menu-before-click.jpeg",
+      "bytes": 311964,
+      "sha256": "36d46531ac05f0df71a8520a11a67d9dcd9a7ade8188c847e525d9b479e277ea"
+    },
+    {
+      "name": "inserted-green-confirm.jpeg",
+      "bytes": 292418,
+      "sha256": "5559191f7f06b126daaa5fdd326d5b7b8286939790767055b068673e6023ddc0"
+    },
+    {
+      "name": "integrated-run.hilog.txt",
+      "bytes": 155423,
+      "sha256": "7e1b68f95c6f8103c51f5f127280a05916440b076abd37675dc0ffdec6e7175a"
+    },
+    {
+      "name": "move-green.jpeg",
+      "bytes": 294945,
+      "sha256": "72441dd73dab8a78795e35e31d023bdb04952495234f212c9eed8aa15c0e42cb"
+    },
+    {
+      "name": "move-redo.jpeg",
+      "bytes": 294945,
+      "sha256": "72441dd73dab8a78795e35e31d023bdb04952495234f212c9eed8aa15c0e42cb"
+    },
+    {
+      "name": "move-undo.jpeg",
+      "bytes": 292731,
+      "sha256": "bb30af7c13d8d4ae48e9a04c4210acf21e9180930e373d2ee4b2baceb05a03a7"
+    },
+    {
+      "name": "navigation-orbit.jpeg",
+      "bytes": 301488,
+      "sha256": "97cfe2468c49a8a72f51d3a2a5a211236eb59bd49b022fbaae377c1103f41305"
+    },
+    {
+      "name": "navigation-released.jpeg",
+      "bytes": 301488,
+      "sha256": "97cfe2468c49a8a72f51d3a2a5a211236eb59bd49b022fbaae377c1103f41305"
+    },
+    {
+      "name": "orbit-interrupt-free-move.jpeg",
+      "bytes": 294736,
+      "sha256": "ebb50134119a45f9928e970c583725ac487744a480d58996b5c82d9fa2bee4f8"
+    },
+    {
+      "name": "orbit-interrupt-return.jpeg",
+      "bytes": 294736,
+      "sha256": "ebb50134119a45f9928e970c583725ac487744a480d58996b5c82d9fa2bee4f8"
+    },
+    {
+      "name": "pan-tool-after.jpeg",
+      "bytes": 320273,
+      "sha256": "9b9a01071eea593fa4fc913e5508ff4cf3e3eb8f9c7798840d2018ef07f5ef91"
+    },
+    {
+      "name": "pan-tool-before.jpeg",
+      "bytes": 318977,
+      "sha256": "f8c35fb19f27991bc8782860071d98ee9321908591de4424365a3d6dd77f9b51"
+    },
+    {
+      "name": "part-3003-search.jpeg",
+      "bytes": 300646,
+      "sha256": "32e37b2f2cdbbd1f1ba89a846f908ca716d7511b7de54be502777dd8b50c2d0b"
+    },
+    {
+      "name": "README.md",
+      "bytes": 1311,
+      "sha256": "86ec6520c304cfb742f3737d26dc1956d1e9da8c9a6a73802611d49ad983c30f"
+    },
+    {
+      "name": "region-before.jpeg",
+      "bytes": 319269,
+      "sha256": "592e1d2ffbfa373aeaa494c12a85dd9de0fb9128add14a015d7ae0aeda9d9d90"
+    },
+    {
+      "name": "region-cancel-return.jpeg",
+      "bytes": 319269,
+      "sha256": "592e1d2ffbfa373aeaa494c12a85dd9de0fb9128add14a015d7ae0aeda9d9d90"
+    },
+    {
+      "name": "region-preview.jpeg",
+      "bytes": 320078,
+      "sha256": "71702bc40cd44357a8df496050561d419a905b941a0fd8a933507cdbf07dc91b"
+    },
+    {
+      "name": "reports.json",
+      "bytes": 3614,
+      "sha256": "270cd95486b68c17625c657de8acbc4612d871ee27396d8c3dfd232eb96e30da"
+    },
+    {
+      "name": "restart-pick-red.jpeg",
+      "bytes": 334478,
+      "sha256": "c6133a14a01c77a3183002a9386a2325df1ddce461a44a5ca9d6eb7a6870bd0b"
+    },
+    {
+      "name": "restored-blue-undo.jpeg",
+      "bytes": 473035,
+      "sha256": "497e06b9a68fe4c28cae0768c9dbf6a75da3c5726f04787321f4428ad2a87d4d"
+    },
+    {
+      "name": "restored-final-blue.jpeg",
+      "bytes": 466388,
+      "sha256": "51678a9f2b31db1fb6f54f97d8bd100ed896b74be24c1970ad653f3c2c70b971"
+    },
+    {
+      "name": "restored-final-red.jpeg",
+      "bytes": 470282,
+      "sha256": "d3545c0ba07476d61839a95cca27a9349846329ae414014503f7c2c4fbada3ba"
+    },
+    {
+      "name": "restored-orbit.jpeg",
+      "bytes": 470638,
+      "sha256": "84e3c25beeb5e17750146f8537a490f6bb2c7a9e22098abd5031b8a9b28f5300"
+    },
+    {
+      "name": "right-click-menu.jpeg",
+      "bytes": 294736,
+      "sha256": "ebb50134119a45f9928e970c583725ac487744a480d58996b5c82d9fa2bee4f8"
+    },
+    {
+      "name": "search-10172.jpeg",
+      "bytes": 312808,
+      "sha256": "11fe3a84dc6969772b3e1d9267ab878feab7cf7647e10ea037b6bf60c87939f2"
+    },
+    {
+      "name": "search-no-match.jpeg",
+      "bytes": 318590,
+      "sha256": "13a0bec57a85e7e70c644172a1445f248b45dd4dd24906f5a5ff4dbffe867797"
+    },
+    {
+      "name": "sphere-cancel-return.jpeg",
+      "bytes": 319269,
+      "sha256": "592e1d2ffbfa373aeaa494c12a85dd9de0fb9128add14a015d7ae0aeda9d9d90"
+    },
+    {
+      "name": "sphere-free-move.jpeg",
+      "bytes": 319269,
+      "sha256": "592e1d2ffbfa373aeaa494c12a85dd9de0fb9128add14a015d7ae0aeda9d9d90"
+    },
+    {
+      "name": "sticker-empty.jpeg",
+      "bytes": 313245,
+      "sha256": "0b4809121005f9fdad97d99a067750efb1a2bc8c62ca4e55e5468de559e46431"
+    },
+    {
+      "name": "sticker-with-search.jpeg",
+      "bytes": 312976,
+      "sha256": "cde369de57f0360b43770d35de936342ea99a15624950c81e70e48fee30db4a2"
+    },
+    {
+      "name": "zoom-tool-after.jpeg",
+      "bytes": 319269,
+      "sha256": "592e1d2ffbfa373aeaa494c12a85dd9de0fb9128add14a015d7ae0aeda9d9d90"
+    }
+  ]
+}

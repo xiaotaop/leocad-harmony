@@ -30,3 +30,4 @@
 
 # Preserve D6 input-test evidence bytes across platform checkouts.
 /docs/evidence/member-a/2026-11-01/* -text whitespace=cr-at-eol,-blank-at-eol
+/docs/evidence/leader/2026-11-01/d6-device/* -text whitespace=cr-at-eol,-blank-at-eol

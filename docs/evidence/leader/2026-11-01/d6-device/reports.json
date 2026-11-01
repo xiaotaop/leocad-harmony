@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-01",
+  "timezone": "Asia/Shanghai",
+  "source_commit": "5ade519591bf6931b5631593d34455882c10f490",
+  "integrated_prs": [
+    36,
+    38,
+    37
+  ],
+  "core_exit": "passed",
+  "complete_member_a_handoff": "partially_verified",
+  "input_method": "HDC UITest/uinput on physical device; physical mouse/keyboard combinations not confirmed",
+  "device": {
+    "system": "6.1.0.117(SP68C00E100R13P3)",
+    "dpr": 1.899999976158142,
+    "physical_screen": [
+      3120,
+      2080
+    ],
+    "model": "HAD-W24",
+    "api": 23
+  },
+  "build": {
+    "hap_sha256": "6448cf5f3118ae26b860525b621863cfd61800dd3aa16848f7c33c197f53f68a",
+    "test_resource_paths": false,
+    "deveco_cli": "26.0.0.851",
+    "configuration": "Release",
+    "hap_bytes": 80094554,
+    "safe_render": false,
+    "qt": "6.12.0"
+  },
+  "runs": [
+    {
+      "pid": 20566,
+      "log": "integrated-run.hilog.txt",
+      "renderer": {
+        "passed": true,
+        "programs": 9,
+        "safe_render": false,
+        "skipped_programs": 0
+      },
+      "normal_exit": true,
+      "exit_timestamp": "11-01 20:01:33.426",
+      "selected_crash_gl_error_matches": 0
+    },
+    {
+      "pid": 23172,
+      "log": "input-restart.hilog.txt",
+      "renderer": {
+        "passed": true,
+        "programs": 9,
+        "safe_render": false,
+        "skipped_programs": 0
+      },
+      "normal_exit": true,
+      "exit_timestamp": "11-01 20:15:04.769",
+      "selected_crash_gl_error_matches": 0
+    }
+  ],
+  "editing": {
+    "inserted_position": [
+      30,
+      0,
+      24
+    ],
+    "undo_position": [
+      30,
+      0,
+      24
+    ],
+    "saved": false,
+    "moved_position": [
+      40,
+      0,
+      24
+    ],
+    "piece": "3003.dat",
+    "redo_position": [
+      40,
+      0,
+      24
+    ]
+  },
+  "focus_cancel": {
+    "before": [
+      -30,
+      0,
+      0
+    ],
+    "undo": [
+      -30,
+      0,
+      0
+    ],
+    "first_new_move": [
+      -30,
+      10,
+      0
+    ],
+    "preview": [
+      -30,
+      10,
+      0
+    ],
+    "cancelled": [
+      -30,
+      0,
+      0
+    ],
+    "method": "switch to Settings using Dock, release outside, return same PID"
+  },
+  "panel": {
+    "non_matching_query": "search message",
+    "new_piece_colour": "Green",
+    "all_parts_count": 1161,
+    "startup_brick_count": 156,
+    "query_10172_count": 1,
+    "empty_category_with_query": "category message"
+  },
+  "restore": {
+    "app_running": false,
+    "fixture_bytes": 267,
+    "config_before_sha256": "5575996fecc88dc99bb3513e4d8d5a68da11521b04685dfc3c6c65fa66a13631",
+    "fixture_before_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "fixture_after_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "config_bytes": 5420,
+    "config_after_sha256": "5575996fecc88dc99bb3513e4d8d5a68da11521b04685dfc3c6c65fa66a13631"
+  },
+  "pending": [
+    "Physical Shift/Alt + right drag",
+    "Precise edge picking repetitions",
+    "Minimize/Hide path",
+    "Same-process Brick to All Parts dedicated roundtrip",
+    "Ordinary right-click menu not observed",
+    "Sphere interruption lacks activation evidence"
+  ],
+  "excluded_attempts": [
+    "Alt+Tab without confirmed focus change",
+    "Independent key/mouse modifier injection",
+    "Clicks while region zoom tool remained active",
+    "Incorrect initial menu/window coordinates"
+  ],
+  "recording": false,
+  "remote_pr_created": false,
+  "remote_issues_changed": false
+}
