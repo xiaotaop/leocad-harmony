@@ -369,17 +369,12 @@ void lcApplication::LogThemeWidgetState()
 		if (QMenuBar* MenuBar = gMainWindow->menuBar())
 			Targets.append({ "menubar", MenuBar });
 
-		// The colour name lives on a QToolButton inside the Colors dock. Finding
-		// it by position in the window would be fragile, so pick the tool button
-		// that carries the current colour's text.
-		for (QToolButton* Button : gMainWindow->findChildren<QToolButton*>())
-		{
-			if (Button->text().trimmed().isEmpty() || Button->icon().isNull())
-				continue;
-
-			Targets.append({ "colorbutton", Button });
-			break;
-		}
+		// By objectName. The earlier version took "the first QToolButton with text
+		// and an icon", which the leader could not verify and which depends on
+		// construction order — the parts panel builds several buttons before this
+		// one. The name is set where the button is created.
+		if (QToolButton* ColorButton = gMainWindow->findChild<QToolButton*>(QStringLiteral("SelectionColorButton")))
+			Targets.append({ "colorbutton", ColorButton });
 	}
 
 	for (const Target& Item : Targets)

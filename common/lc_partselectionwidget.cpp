@@ -884,6 +884,7 @@ lcPartSelectionWidget::lcPartSelectionWidget(QWidget* Parent)
 	CategoriesLayout->addLayout(FilterCategoriesLayout);
 
 	mFilterCategoriesWidget = new QLineEdit(CategoriesGroupWidget);
+	mFilterCategoriesWidget->setObjectName(QStringLiteral("CategoryFilter"));
 	mFilterCategoriesWidget->setPlaceholderText(tr("Filter Categories"));
 	FilterCategoriesLayout->addWidget(mFilterCategoriesWidget);
 
@@ -916,6 +917,7 @@ lcPartSelectionWidget::lcPartSelectionWidget(QWidget* Parent)
 	PartsLayout->addLayout(SearchLayout);
 
 	mFilterWidget = new QLineEdit(PartsGroupWidget);
+	mFilterWidget->setObjectName(QStringLiteral("PartsFilter"));
 	mFilterWidget->setPlaceholderText(tr("Filter Parts"));
 	SearchLayout->addWidget(mFilterWidget);
 
@@ -1636,7 +1638,24 @@ void lcPartSelectionWidget::RefreshStatus()
 
 	if (ShowEmpty)
 	{
-		const bool Filtering = mFilterWidget && !mFilterWidget->text().isEmpty();
+		// Blame the search only when clearing it would actually show something.
+		//
+		// The first version asked "is the filter box non-empty", which is not the
+		// same question: Sticker is empty by decision (the curated subset excludes
+		// sticker parts), so with a search typed into that category the notice
+		// said "no parts match this search, try a different keyword" — advice that
+		// cannot work, because the category has nothing in it either way.
+		//
+		// Counting with the filter lifted answers what the user would get by
+		// following the advice.
+		const bool HasSearch = mFilterWidget && !mFilterWidget->text().isEmpty();
+
+		// rowCount() is the number of parts in the current category; the filter
+		// does not shrink it, it hides rows. So this is exactly "how many parts
+		// would appear if the search were cleared", with no side effects.
+		const bool CategoryHasParts = View->GetListModel()->rowCount() > 0;
+		const bool Filtering = HasSearch && CategoryHasParts;
+
 		mEmptyNotice->setText(Filtering
 			? tr("No parts match this search.\n\nTry a different keyword, or clear the search box.")
 			: tr("There are no parts to show in this category."));

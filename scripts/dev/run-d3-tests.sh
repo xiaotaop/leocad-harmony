@@ -28,7 +28,7 @@ python3 tests/library/d3/prepare_variants.py
 
 SUITES=("$@")
 if [ ${#SUITES[@]} -eq 0 ]; then
-    SUITES=(archive priority menu modellist panel preferences theme)
+    SUITES=(archive priority menu modellist panel preferences theme chain)
 fi
 
 FAILED=0
@@ -39,6 +39,7 @@ for SUITE in "${SUITES[@]}"; do
     case "$SUITE" in
     panel)       PROJECT="d4-${SUITE}-tests.pro"; TARGET="leocad-d4-${SUITE}" ;;
     preferences|theme) PROJECT="d5-${SUITE}-tests.pro"; TARGET="leocad-d5-${SUITE}" ;;
+    chain)       PROJECT="d6-${SUITE}-tests.pro"; TARGET="leocad-d6-${SUITE}" ;;
     *)           PROJECT="d3-${SUITE}-tests.pro"; TARGET="leocad-d3-${SUITE}" ;;
     esac
 
