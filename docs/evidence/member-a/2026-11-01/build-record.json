@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-01",
+  "base": "c52d3e1588f1cbca027a2d3212e69ec5eb494b8f",
+  "host": "macOS 27.0.1 arm64 / Apple M4 / Qt6.12.0 / Release QT_NO_DEBUG",
+  "source_sha256": {
+    "common/lc_math.h": "a9c1c3a0948c4a76f7ff4c1060923b5438cc02ecb156e99a2fbfb3582c8c1cc2",
+    "common/lc_view.cpp": "80bf925eb76d34dd204a0e9dde6325e46e71fdaec1ad8d863611f599dab639fb",
+    "common/lc_view.h": "aa39c20464e919cbcb496ac0e8ab93650983667c69931647742c855bbe2473ea",
+    "common/lc_viewwidget.cpp": "da46c644307bad38d384658a6c0ab723979a1413cc7d42b644a1f7bc9fc80710",
+    "common/lc_viewwidget.h": "db83519ec9979702e0709e91752eb85f298434aa6db003b2d0a6c987ba9f53a4",
+    "common/lc_viewsphere.cpp": "77f53f60217ee5fb330b473743ca2efbab85b2c7b191af338655333017cc18b2",
+    "common/lc_viewsphere.h": "c760c4d01be1910ab2b81c40a05dec139824832f4b105f7ddb83c118e593a978",
+    "member-a-input-tests.pro": "49ffba98205572fcd3d5e8ae419eb2272a939b424f2b5fac789adb5fd715aa67",
+    "tests/input/tst_view_input.cpp": "3bc41037d2b517f0a86599dda65fdda05a1be451f45545668bea2c02427e41a6",
+    "scripts/Run-MemberAInputTests.ps1": "2d3d5d912f71d8450cb11449a2c1a5d5f6629c07c6ae45a2e5a8d37ddf7a5cf4",
+    ".github/workflows/view-input-ci.yml": "e9638a2eae4ea3ab708b24abf974d16eb632db682b7ee5e84f1847d2c36f2014"
+  },
+  "input_matrix": {
+    "normal_dpr2": {
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0
+    },
+    "basic_dpr2": {
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0
+    },
+    "normal_effective_dpr1": {
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0,
+      "QT_SCALE_FACTOR": "0.5 (native screen DPR2)"
+    }
+  },
+  "negative_controls": {
+    "original_main_focus": {
+      "passed": 5,
+      "failed": 4,
+      "exit": 4,
+      "command": "leocad-input-tests navigation focusLossStopsTracking",
+      "note": "Original production sources, same real curated-part widget fixture; all four interruption rows retain tracking."
+    },
+    "float_box_before_precision_fix": {
+      "exit": 1,
+      "command": "QT_SCALE_FACTOR=0.5 leocad-input-tests pickingAcrossResize",
+      "note": "Focus fixes already applied, original main lc_math.h; 900x700 window ray is rejected by box broad phase."
+    }
+  },
+  "model_tests": {
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0
+  },
+  "startup_ctest": {
+    "passed": 1,
+    "cases": [
+      "--help:0",
+      "--version:0",
+      "--invalid:1"
+    ]
+  },
+  "binaries_sha256": {
+    "input-tests": "cc3c761872aad540c7d3fec7a3b89582af8679814655ece118ca2c4babc8a4af",
+    "model-tests": "1c7a57a390aef96223a02705893b720fa898e64f1de18464e3580ff4c3a65e7e",
+    "app": "272a2f5444bdf29a445e09025a26d98d216532cbf0b7f2af88b75d997fc86d3e"
+  },
+  "commands": [
+    "qmake <ASCII-source>/member-a-input-tests.pro CONFIG+=release && make -j4",
+    "TMPDIR=/private/tmp/leocad-d6-runtime <input-binary> -o input-normal.txt,txt -o input-normal.xml,junitxml",
+    "LEOCAD_SAFE_RENDER=1 TMPDIR=/private/tmp/leocad-d6-runtime <input-binary> -o input-basic.txt,txt",
+    "QT_SCALE_FACTOR=0.5 TMPDIR=/private/tmp/leocad-d6-runtime <input-binary> -o input-dpr1.txt,txt",
+    "qmake <ASCII-source>/member-b-tests.pro CONFIG+=release && make -j4",
+    "TMPDIR=/private/tmp/leocad-d6-runtime <model-binary> -o model-tests.txt,txt",
+    "cmake -S <ASCII-source> -B <app-build> -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=<Qt6.12> -DLEOCAD_TEST_RESOURCE_PATHS=ON && cmake --build <app-build> --parallel 4",
+    "QT_QPA_PLATFORM=offscreen ctest --test-dir <app-build> --output-on-failure"
+  ],
+  "limitations": [
+    "Qt event injection and QWindow delivery on host, not physical mouse/device acceptance.",
+    "No new Harmony HAP or device execution by Member A.",
+    "Known accepted front ZoomExtents limitation #32 is outside this input fix."
+  ]
+}

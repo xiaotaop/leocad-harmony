@@ -1963,7 +1963,10 @@ inline bool lcBoundingBoxRayIntersectDistance(const lcVector3& Min, const lcVect
 	bool MiddleQuadrant[3];
 	bool Inside = true;
 	float CandidatePlane[3];
-	float MaxT[3];
+	// Nearly equal entry times at a box edge must not round to the same
+	// float and select the wrong face. Keep the interval arithmetic in double;
+	// input/output coordinates and the exact box boundary remain unchanged.
+	double MaxT[3];
 	int i;
 
 	// Find candidate planes.
@@ -2008,7 +2011,7 @@ inline bool lcBoundingBoxRayIntersectDistance(const lcVector3& Min, const lcVect
 	for (i = 0; i < 3; i++)
 	{
 		if (!MiddleQuadrant[i] && Dir[i] != 0.0f)
-			MaxT[i] = (CandidatePlane[i] - Start[i]) / Dir[i];
+			MaxT[i] = (double(CandidatePlane[i]) - double(Start[i])) / double(Dir[i]);
 		else
 			MaxT[i] = -1.0f;
 	}

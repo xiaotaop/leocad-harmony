@@ -1,0 +1,42 @@
+name: View input CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: view-input-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows-input:
+    name: Real view input and focus regression
+    runs-on: windows-2022
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Qt and software OpenGL
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          arch: win64_msvc2022_64
+          archives: qtbase qttools qtsvg opengl32sw
+          cache: true
+      - name: Build and exercise production widgets at DPR1 and DPR2
+        run: ./scripts/Run-MemberAInputTests.ps1 -QtRoot $env:QT_ROOT_DIR
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: view-input-${{ github.sha }}
+          include-hidden-files: true
+          path: |
+            .local/build-input/build.log
+            .local/build-input/*results.*
+            .local/build-input/*renderer.log

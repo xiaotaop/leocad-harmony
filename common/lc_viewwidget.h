@@ -25,6 +25,7 @@ public:
 	}
 
 protected:
+	void CancelInput();
 	void initializeGL() override;
 	void resizeGL(int Width, int Height) override;
 	void paintGL() override;
@@ -47,5 +48,6 @@ protected:
 	std::unique_ptr<lcView> mView;
 	QSize mPreferredSize;
 	int mWheelAccumulator = 0;
+	Qt::MouseButtons mPressedButtons = Qt::NoButton;
 	QByteArray mFramebufferSignature;
 };

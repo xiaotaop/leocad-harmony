@@ -119,8 +119,18 @@ void lcViewWidget::paintGL()
 	mView->OnDraw();
 }
 
+void lcViewWidget::CancelInput()
+{
+	mPressedButtons = Qt::NoButton;
+	mWheelAccumulator = 0;
+	if (mView)
+		mView->SetFocus(false);
+}
+
 bool lcViewWidget::event(QEvent* Event)
 {
+	if (Event->type() == QEvent::WindowDeactivate || Event->type() == QEvent::Hide || Event->type() == QEvent::UngrabMouse)
+		CancelInput();
 	if (Event->type() == QEvent::NativeGesture)
 	{
 		QNativeGestureEvent* GestureEvent = static_cast<QNativeGestureEvent*>(Event);
@@ -153,8 +163,7 @@ void lcViewWidget::focusInEvent(QFocusEvent* FocusEvent)
 
 void lcViewWidget::focusOutEvent(QFocusEvent* FocusEvent)
 {
-	if (mView)
-		mView->SetFocus(false);
+	CancelInput();
 
 	QOpenGLWidget::focusOutEvent(FocusEvent);
 }
@@ -183,10 +192,18 @@ void lcViewWidget::keyReleaseEvent(QKeyEvent* KeyEvent)
 
 void lcViewWidget::mousePressEvent(QMouseEvent* MouseEvent)
 {
+	if (focusPolicy() != Qt::NoFocus)
+		setFocus(Qt::MouseFocusReason);
+	mView->EndPanGesture(false);
+	mPressedButtons |= MouseEvent->button();
 	float DeviceScale = GetDeviceScale();
 
 	mView->SetMousePosition(MouseEvent->x() * DeviceScale, mView->GetHeight() - MouseEvent->y() * DeviceScale - 1);
 	mView->SetMouseModifiers(MouseEvent->modifiers());
+	// After focus returns there may be a press with no intervening move.
+	// Resolve the tool/pick target at this press position before starting it.
+	if (!mView->IsTracking())
+		mView->OnMouseMove();
 
 	switch (MouseEvent->button())
 	{
@@ -217,6 +234,14 @@ void lcViewWidget::mousePressEvent(QMouseEvent* MouseEvent)
 
 void lcViewWidget::mouseReleaseEvent(QMouseEvent* MouseEvent)
 {
+	// A release left over from an aborted drag must not commit an edit or
+	// open the right-button context menu after focus returns.
+	if (!(mPressedButtons & MouseEvent->button()))
+	{
+		MouseEvent->accept();
+		return;
+	}
+	mPressedButtons.setFlag(MouseEvent->button(), false);
 	float DeviceScale = GetDeviceScale();
 
 	mView->SetMousePosition(MouseEvent->x() * DeviceScale, mView->GetHeight() - MouseEvent->y() * DeviceScale - 1);
@@ -251,6 +276,9 @@ void lcViewWidget::mouseReleaseEvent(QMouseEvent* MouseEvent)
 
 void lcViewWidget::mouseDoubleClickEvent(QMouseEvent* MouseEvent)
 {
+	if (focusPolicy() != Qt::NoFocus)
+		setFocus(Qt::MouseFocusReason);
+	mPressedButtons |= MouseEvent->button();
 	float DeviceScale = GetDeviceScale();
 
 	mView->SetMousePosition(MouseEvent->x() * DeviceScale, mView->GetHeight() - MouseEvent->y() * DeviceScale - 1);
@@ -269,6 +297,8 @@ void lcViewWidget::mouseDoubleClickEvent(QMouseEvent* MouseEvent)
 
 void lcViewWidget::mouseMoveEvent(QMouseEvent* MouseEvent)
 {
+	if ((mPressedButtons & MouseEvent->buttons()) != mPressedButtons)
+		CancelInput();
 	float DeviceScale = GetDeviceScale();
 
 	mView->SetMousePosition(MouseEvent->x() * DeviceScale, mView->GetHeight() - MouseEvent->y() * DeviceScale - 1);
@@ -287,6 +317,8 @@ void lcViewWidget::wheelEvent(QWheelEvent* WheelEvent)
 			break;
 
 		case Qt::ScrollBegin:
+			mPressedButtons = Qt::NoButton;
+			mWheelAccumulator = 0;
 			mView->StartPanGesture();
 			WheelEvent->accept();
 			return;

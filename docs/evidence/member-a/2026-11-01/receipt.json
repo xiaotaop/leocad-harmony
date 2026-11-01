@@ -1,0 +1,32 @@
+{
+  "sha256": {
+    "build-record.json": "1a5b7a122c621a7e6745e30f5b38e969f4d5152745356860de8931fef3d6974a",
+    "focus-negative-renderer.log": "701a5d165fb2e6a63b458a48315174fb207d21d3b3f6418c7017249895e54418",
+    "focus-negative.txt": "81e3b8326628c88894f5e74d88927bc7ffd3f2dd580ff7adbe59939e2f23ebf7",
+    "focus-negative.xml": "b763f7bb299bb57c945cbf4accc1de10538e07dabe1d364822aa074789a28f6c",
+    "fresh-move-after-cancel.png": "e7020f78b475ee97584cedd093d174226de420567505db9c641de94c36e2e6e9",
+    "input-basic-renderer.log": "d59af30915d801e3bf78b211c1c49fef63fc5bed7a0ee7e6661481a40b6b16cb",
+    "input-basic.txt": "5bbb85b348d57368fd0ee93e254354892b656343aacd3371503a7205169e67ea",
+    "input-basic.xml": "25c2da8f71f646bdcb327806b6bb3744d662db7428619e56e8441095c3cf6b74",
+    "input-dpr1-renderer.log": "73e29d6c4845a713377fe67e580cf605bda8265a26642cda0cbcf4e055d0eb81",
+    "input-dpr1.txt": "61d361a3b2b71149e93427148b0b56f362a5c5958718a0bc50afec8a83eb27b0",
+    "input-dpr1.xml": "084b9deac4069ee2ea679c1aa9e1eda539e0762f4137be1f885f7789836331e5",
+    "input-normal-renderer.log": "d070d6d5e7a37533564941086809a1c2946d2dd0d5dcf8e1cec227869e712a02",
+    "input-normal.txt": "786220112d479a57d17c2302a87805f085c1ea4d67586d25407a1c2cbc4a5861",
+    "input-normal.xml": "d8cc66064d18710eb274684f271d696ec78980ec501f394f5eaa81b8fec036af",
+    "model-renderer.log": "2e3073488652c697e5abc1f10d475d4702ab6c97df5b44515f7d15144d35ce85",
+    "model-tests.txt": "68c2321d66a1295fe52715c9729578678652e60c9bc5e2907092862615e4c871",
+    "model-tests.xml": "eb02aeb874c073d30953ace20372dbd5926b434c5bc0cbce5b680e66b7e15b72",
+    "navigation-12.png": "8138d117eadebd0f0e08b0b21cb7f9fcff38e3971f9cdd0f5b36367daa1cedf6",
+    "navigation-13.png": "4cc18a5a0d9bbf9081a19ac6d3e05a552c9cc112df525db0533dd13bedaceb99",
+    "navigation-14.png": "156a1ba7ade2e7fc61ce4aa9cf394471202eb399ad62df8e7563d7837cd6db86",
+    "pick-1100-800.png": "4dd1489556f196f6def28ebd728f4a40bd852093d62b9bedf32708f2f3912ef2",
+    "pick-1300-850.png": "b18651a5d2e1c7fc04a1cb27bf8e050c6e1c56ae067c250fd8b5d173d969791c",
+    "pick-900-700.png": "2925620bec74e43e0ac549859b8bfeb0ad14782a66dbda188f9295726e758af0",
+    "pick-negative-renderer.log": "9e313f3a1fd1de3ed3fd3394c96b4f2c6404b6225c4b2115ef99a1e21e990819",
+    "pick-negative.txt": "9ab4939302f8e9e142c3fdc3ed608c99efc3b07aceafde5dd44d82d4bc99dd2e",
+    "picked-resized-restored.png": "7058c4880cb594be1f46983e89a96aecb52f17fe372ba9cac031246b3f73796c",
+    "startup-results.json": "2240e2e4759e117d1ae1fd500769d8c18bf33496245bf842a4df73d111d5776e",
+    "startup-tests.txt": "ef6f121ff4f39969cf3baa8f7cbbb39af31ff32e86d9b184ed8f00e16042f698"
+  }
+}

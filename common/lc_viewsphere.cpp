@@ -389,6 +389,12 @@ bool lcViewSphere::OnMouseMove()
 	return mIntersectionFlags.any();
 }
 
+void lcViewSphere::CancelTracking()
+{
+	mMouseDown = false;
+	mIntersectionFlags.reset();
+}
+
 bool lcViewSphere::IsDragging() const
 {
 	int InputStateX = mView->GetMouseX();

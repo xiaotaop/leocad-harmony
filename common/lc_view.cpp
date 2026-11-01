@@ -127,6 +127,25 @@ void lcView::SetFocus(bool Focus)
 
 		emit FocusReceived();
 	}
+	else
+	{
+		// Losing focus can consume the native button-up/gesture-end event.
+		// Cancel the transaction; do not use the Escape action, which clears
+		// the selection when no drag is active.
+		if (gMainWindow && GetActiveModel())
+		{
+			StopTracking(false);
+			EndPanGesture(false);
+		}
+		mTrackButton = lcTrackButton::None;
+		mPanGestureActive = false;
+		mViewSphere->CancelTracking();
+		mMouseModifiers = Qt::NoModifier;
+		mTrackTool = lcTrackTool::None;
+		mTrackToolFromOverlay = false;
+		UpdateCursor();
+		Redraw();
+	}
 }
 
 void lcView::SetMousePosition(int MouseX, int MouseY)
@@ -2283,6 +2302,10 @@ void lcView::StartOrbitTracking()
 
 void lcView::StartPanGesture()
 {
+	if (mPanGestureActive)
+		return;
+	StopTracking(false);
+	mPanGestureActive = true;
 	lcModel* ActiveModel = GetActiveModel();
 
 	StartPan(mWidth / 2, mHeight / 2);
@@ -2291,6 +2314,8 @@ void lcView::StartPanGesture()
 
 void lcView::UpdatePanGesture(int dx, int dy)
 {
+	if (!mPanGestureActive)
+		return;
 	UpdatePan(mPanX + dx, mPanY + dy);
 }
 
@@ -2344,6 +2369,9 @@ void lcView::UpdatePan(int x, int y)
 
 void lcView::EndPanGesture(bool Accept)
 {
+	if (!mPanGestureActive)
+		return;
+	mPanGestureActive = false;
 	lcModel* ActiveModel = GetActiveModel();
 
 	ActiveModel->EndMouseTool(lcTool::Pan, this, Accept);
@@ -2501,7 +2529,7 @@ void lcView::StopTracking(bool Accept)
 
 	case lcTool::ZoomRegion:
 		{
-			if (mMouseX == mMouseDownX || mMouseY == mMouseDownY)
+			if (!Accept || mMouseX == mMouseDownX || mMouseY == mMouseDownY)
 				break;
 
 			lcVector3 Points[6] =
