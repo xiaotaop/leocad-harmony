@@ -967,6 +967,10 @@ void lcMainWindow::CreateToolBars()
 	ColorLayout->addLayout(ColorButtonLayout);
 
 	mColorButton = new QToolButton(ColorWidget);
+	// Named so the theme diagnostic and the tests can find this button instead of
+	// guessing at "the first QToolButton with an icon", which picks a different
+	// widget depending on construction order. Review asked for exactly that.
+	mColorButton->setObjectName(QStringLiteral("SelectionColorButton"));
 	mColorButton->setAutoRaise(true);
 	mColorButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 	mColorButton->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Maximum);
