@@ -22,6 +22,7 @@ public:
 	bool OnLeftButtonUp();
 	bool OnLeftButtonDown();
 	bool IsDragging() const;
+	void CancelTracking();
 
 	static void CreateResources(lcContext* Context);
 	static void DestroyResources(lcContext* Context);

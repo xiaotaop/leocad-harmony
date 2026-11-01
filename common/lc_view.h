@@ -366,6 +366,7 @@ protected:
 	quint32 mTrackToolSection = ~0U;
 	lcMatrix44 mMouseDownTransform;
 	lcPiece* mMouseDownPiece = nullptr;
+	bool mPanGestureActive = false;
 	int mPanX = 0;
 	int mPanY = 0;
 
