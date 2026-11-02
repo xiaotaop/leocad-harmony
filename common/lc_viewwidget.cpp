@@ -354,12 +354,14 @@ void lcViewWidget::wheelEvent(QWheelEvent* WheelEvent)
 	mView->SetMouseModifiers(WheelEvent->modifiers());
 
 	mWheelAccumulator += WheelEvent->angleDelta().y();
-	int Steps = mWheelAccumulator / 8;
+	// Keep sub-notch deltas until a complete wheel step is available.
+	// Dividing by 8 first consumed high-resolution events before /15.
+	int Steps = mWheelAccumulator / 120;
 
 	if (Steps)
 	{
-		mView->OnMouseWheel(Steps / 15);
-		mWheelAccumulator -= Steps * 8;
+		mView->OnMouseWheel(Steps);
+		mWheelAccumulator -= Steps * 120;
 	}
 
 	WheelEvent->accept();
