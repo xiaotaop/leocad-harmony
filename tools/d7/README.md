@@ -62,6 +62,13 @@ diagnostics with `framebuffer_status: 36053`, which is
 so a blank viewport costs nothing here — but do not read these files as evidence
 that rendering works.
 
+For the same reason, `narrow-1280x800-window.png` is **not byte-reproducible**.
+Thumbnails in the parts list are rendered offscreen and arrive asynchronously, so
+two runs can differ inside the thumbnail grid (measured: everything outside
+`(841, 215)-(1241, 389)` is identical). If a future run changes only that one file,
+it is the thumbnail timing and not a regression — check the other files verify
+against their recorded hashes, and do not compare that one byte-for-byte.
+
 **Menus are filled by emitting `aboutToShow`, not by popping them up.** The options
 menu is emptied and refilled in that handler, and the width fix lives in it, so a
 capture has to run it. Real popups under Wayland are `xdg_popup` surfaces, and
