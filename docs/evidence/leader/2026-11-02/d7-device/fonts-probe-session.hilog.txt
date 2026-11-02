@@ -1,0 +1,239 @@
+11-02 21:49:50.836 33284 33284 I C02C02/PARAM: ResetParamSecurityLabel Fd:18
+11-02 21:49:50.836 33284 33284 E C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: [appspawn_isolate.c:215]ioctl ADD_ISOLATE_DIR_CMD fail, errno 22
+11-02 21:49:50.836 33284 33284 E C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: [appspawn_isolate.c:245]Failed to set isolate dir, ret 218103808
+11-02 21:49:50.842 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: errno:2 bind mount /chip_prod/lib64/passthrough to /mnt/sandbox/100/io.github.xiaotaop.leocad.fontprobe/chip_prod/lib64/passthrough
+11-02 21:49:50.843 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: check dir /data/app/el1/public/aot_compiler/ark_cache/io.github.xiaotaop.leocad.fontprobe failed,strerror:No such file or directory
+11-02 21:49:50.843 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: errno:2 bind mount /data/app/el1/bundle/100/hnppublic to /mnt/sandbox/100/io.github.xiaotaop.leocad.fontprobe/data/service/hnp
+11-02 21:49:50.843 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: check dir /data/app/el1/bundle/100/hnppublic failed,strerror:No such file or directory
+11-02 21:49:50.843 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: errno:2 bind mount /data/app/el1/bundle/100/hnp/io.github.xiaotaop.leocad.fontprobe to /mnt/sandbox/100/io.github.xiaotaop.leocad.fontprobe/data/app
+11-02 21:49:50.843 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: check dir /data/app/el1/bundle/100/hnp/ failed,strerror:No such file or directory
+11-02 21:49:50.844 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: errno:2 bind mount /data/preload/app to /mnt/sandbox/100/io.github.xiaotaop.leocad.fontprobe/data/preload/app
+11-02 21:49:50.844 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: errno:2 bind mount /data/app/el1/bundle/100/hnppublic to /mnt/sandbox/100/io.github.xiaotaop.leocad.fontprobe/data/service/hnp
+11-02 21:49:50.844 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: check dir /data/app/el1/bundle/100/hnppublic failed,strerror:No such file or directory
+11-02 21:49:50.844 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: errno:2 bind mount /data/app/el1/bundle/100/hnp/io.github.xiaotaop.leocad.fontprobe to /mnt/sandbox/100/io.github.xiaotaop.leocad.fontprobe/data/app
+11-02 21:49:50.844 33284 33284 W C02C11/thub.xiaotaop.leocad.fontprobe/APPSPAWN: check dir /data/app/el1/bundle/100/hnp/ failed,strerror:No such file or directory
+11-02 21:49:50.847 33284 33284 E C05A06/thub.xiaotaop.leocad.fontprobe/CODE_SIGN: [XpmIoctl]:Ioctl cmd 40087803 failed: Invalid argument (ignore)
+11-02 21:49:50.853 33284 33343 W C057C1/thub.xiaotaop.leocad.fontprobe/IPCWorkThread: ThreadHandler: proto:0 policy:1 name:OS_IPC_0_33343 invoker:1393664640
+11-02 21:49:50.854 33284 33344 W C057C1/thub.xiaotaop.leocad.fontprobe/IPCWorkThread: ThreadHandler: proto:0 policy:0 name:OS_IPC_1_33344 invoker:1297819392
+11-02 21:49:50.863 33284 33284 E C01321/thub.xiaotaop.leocad.fontprobe/JsRuntime: [js_runtime.cpp961]verify access token failed: -1
+11-02 21:49:50.866 33284 33284 W C01305/thub.xiaotaop.leocad.fontprobe/Base: [zip_file.cpp(ExtractToBufByName:966)]GetEntry from pkgContextInfo.json err
+11-02 21:49:50.868 33284 33284 W C01321/thub.xiaotaop.leocad.fontprobe/JsRuntime: [CSM161]not Connected
+11-02 21:49:50.871 33284 33284 W C01E00/thub.xiaotaop.leocad.fontprobe/ResourceManager: update userId, currentUserId_= 0, userId= 100
+11-02 21:49:50.871 33284 33361 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.hdc.jdwp remoteWatcherId 768 success
+11-02 21:49:50.872 33284 33347 W C01653/thub.xiaotaop.leocad.fontprobe/NativePreferences: LoadFromDisk: The settingXml /***/el1/***/i18*** load failed.
+11-02 21:49:50.877 33284 33284 W C01301/thub.xiaotaop.leocad.fontprobe/Ability: [resource_config_helper.cpp183]invalid source:
+11-02 21:49:50.877 33284 33284 W C01301/thub.xiaotaop.leocad.fontprobe/Ability: [resource_config_helper.cpp183]invalid source:
+11-02 21:49:50.880 33284 33284 E C01700/thub.xiaotaop.leocad.fontprobe/RSS: ResSchedClient::ReportData type not subscribed.
+11-02 21:49:50.882 33284 33284 W C03F07/MUSL-LDSO: load libdeviceinfo_ndk.z.so failed, namespace=default no inherits, errno=2
+11-02 21:49:50.896 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init begin
+11-02 21:49:50.897 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init end
+11-02 21:49:50.900 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbilityStage::onCreate()
+11-02 21:49:50.900 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onCreate: hot start enabled: false
+11-02 21:49:50.901 33284 33284 E C01317/thub.xiaotaop.leocad.fontprobe/AppKit: [JAS809]get 'onAcceptWantAsync' object failed
+11-02 21:49:50.901 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbilityStage::onAcceptWant: want.parameters: {"isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":33294,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.ability.param.realCallerKey":"33294:2000","ohos.abilityRuntime.pageConfig":"","ohos.dlp.params.sandbox":false,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0}
+11-02 21:49:50.901 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbilityStage::initQtAppContextImpl: init
+11-02 21:49:50.901 33284 33284 E C01317/thub.xiaotaop.leocad.fontprobe/AppKit: [context_impl.cpp359]hapModuleInfo null
+11-02 21:49:50.901 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QtOhos::(anonymous namespace)::setupQtApplicationImpl(QtOhos::JsState &, QNapi::Object, QtOhos::QtRunMode): setting up Qt in Normal mode
+11-02 21:49:50.901 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Registered pending auto-started Ability instance, id='0'
+11-02 21:49:50.901 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.deviceInfo' via napi_load_module()
+11-02 21:49:50.902 33284 33284 E C057C2/thub.xiaotaop.leocad.fontprobe/IPCObjectProxy: PrintErrorDetailedInfo: failed, handle:6 error:-14700103 desc:*.IDeviceInfo proxy:1301205248 time:37768089207323
+11-02 21:49:50.902 33284 33284 E C02C08/thub.xiaotaop.leocad.fontprobe/DeviceInfoKits: [nodict]Send request failed! result = -14700103
+11-02 21:49:50.902 33284 33284 I C02C08/DeviceInfoKits: [device_info_kits.cpp:167]GetSerialID from remote ret = -14700103
+11-02 21:49:50.902 33284 33284 E C02C08/thub.xiaotaop.leocad.fontprobe/DeviceInfoKits: [nodict]Send request failed! result = -14700103
+11-02 21:49:50.902 33284 33284 I C02C08/DeviceInfoKits: [device_info_kits.cpp:142]GetUdid from remote ret = -14700103
+11-02 21:49:50.902 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.intl' via napi_load_module()
+11-02 21:49:50.902 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.i18n' via napi_load_module()
+11-02 21:49:50.903 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.app.ability.ConfigurationConstant' via napi_load_module()
+11-02 21:49:50.903 33284 33284 W C01317/thub.xiaotaop.leocad.fontprobe/AppKit: [OH_APP1150]fontSize empty
+11-02 21:49:50.903 33284 33284 W C01317/thub.xiaotaop.leocad.fontprobe/AppKit: [OH_APP1185]language empty
+11-02 21:49:50.903 33284 33284 W C01317/thub.xiaotaop.leocad.fontprobe/AppKit: [OH_APP1204]language and locale empty
+11-02 21:49:50.904 33284 33284 E C04217/thub.xiaotaop.leocad.fontprobe/WMSAttribute: UpdateConfigurationSyncForAll: root is null
+11-02 21:49:50.904 33284 33284 E C04217/thub.xiaotaop.leocad.fontprobe/WMSAttribute: UpdateConfigurationForAll: root is null
+11-02 21:49:50.904 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: setupQtApplication() - sharedLibraryName: libleocad-d7-font-probe.so
+11-02 21:49:50.904 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: setupQtApplication() - bundleCodeDir: /data/storage/el1/bundle
+11-02 21:49:50.904 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: setupQtApplication() - Shared libraries directory: /data/storage/el1/bundle/libs/arm64
+11-02 21:49:50.904 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onAcceptWant: input Want: {"deviceId":"","bundleName":"io.github.xiaotaop.leocad.fontprobe","abilityName":"QAbility","moduleName":"entry","uri":"","type":"","flags":0,"action":"","parameters":{"isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":33294,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.ability.param.realCallerKey":"33294:2000","ohos.abilityRuntime.pageConfig":"","ohos.dlp.params.sandbox":false,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0},"fds":{},"entities":[]}
+11-02 21:49:50.904 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onAcceptWant: returning instanceId='0'
+11-02 21:49:50.904 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbilityStage::onAcceptWant: instanceKey: "0"
+11-02 21:49:50.908 33284 33284 W C03F00/thub.xiaotaop.leocad.fontprobe/ArkCompiler: [debugger] DebuggerImpl::NotifyScriptParsed: Script already been parsed: url: entry|entry|1.0.0|src/main/ets/qability/QAbility.ts fileName: /data/storage/el1/bundle/entry/ets/modules.abc
+11-02 21:49:50.913 33284 33284 W C04201/thub.xiaotaop.leocad.fontprobe/DMS: RegisterClientDeathListener: regis reverse death
+11-02 21:49:50.914 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbility::onCreate(): want.parameters: {"component.startup.newRules":true,"isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":33294,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.dlp.params.sandbox":false,"ohos.param.callerAppCloneIndex":0}
+11-02 21:49:50.914 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbilityStage::initQtAppContextImpl: already initialized
+11-02 21:49:50.914 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QtOhos::(anonymous namespace)::handleAbilityOnCreate(const QtOhos::CallbackInfo &) begin
+11-02 21:49:50.914 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QtOhos::(anonymous namespace)::handleAbilityOnCreate(const QtOhos::CallbackInfo &) end
+11-02 21:49:50.914 33284 33284 E C01332/thub.xiaotaop.leocad.fontprobe/UIAbility: [ui_ability_impl.cpp314]hasSaveData_: false
+11-02 21:49:50.914 33284 33284 W C01332/thub.xiaotaop.leocad.fontprobe/UIAbility: [JUA1203]formatRegex: []
+11-02 21:49:50.916 33284 33284 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.sys.graphic.animationscale remoteWatcherId 768 success
+11-02 21:49:50.917 33284 33284 W C01409/thub.xiaotaop.leocad.fontprobe/APS_MANAGER: redo Connect
+11-02 21:49:50.918 33284 33284 E C04200/thub.xiaotaop.leocad.fontprobe/WMS: SetWindowType: permission denied!
+11-02 21:49:50.918 33284 33284 W C0420A/thub.xiaotaop.leocad.fontprobe/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 0 state_: 0
+11-02 21:49:50.918 33284 33284 W C04200/thub.xiaotaop.leocad.fontprobe/WindowSceneSessionImpl: AdjustWindowAnimationFlag: session invalid!
+11-02 21:49:50.920 33284 33384 W C057C1/thub.xiaotaop.leocad.fontprobe/IPCWorkThread: ThreadHandler: proto:0 policy:0 name:OS_IPC_2_33384 invoker:1314068480
+11-02 21:49:50.920 33284 33344 W C04208/thub.xiaotaop.leocad.fontprobe/WMSLayout: NotifySingleHandTransformChange: id:317, uiContent is nullptr
+11-02 21:49:50.926 33284 33284 W C04217/thub.xiaotaop.leocad.fontprobe/WMSAttribute: RegisterGetWMSWindowListCallback: callback has registered
+11-02 21:49:50.926 33284 33284 W C04218/thub.xiaotaop.leocad.fontprobe/WMSPc: UpdateSidebarBlurStyleWhenColorModeChange: RSAnimatableProperty is null
+11-02 21:49:50.927 33284 33284 E C04200/thub.xiaotaop.leocad.fontprobe/WMS: singleton_container.cpp GetSingleton: cant get OHOS::Rosen::WindowInfoReporter
+11-02 21:49:50.927 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbility::onWindowStageCreate(): this.launchWant.parameters: {"component.startup.newRules":true,"isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":33294,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.dlp.params.sandbox":false,"ohos.param.callerAppCloneIndex":0}
+11-02 21:49:50.927 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaEtsFactoryOrFail(const QNapi::Function &, const std::string &): loading napi module 'LocalStorage' via ets factory
+11-02 21:49:50.928 33284 33284 W C04200/thub.xiaotaop.leocad.fontprobe/WindowSessionImpl: UpdateViewportConfig: uiContent is null!
+11-02 21:49:50.928 33284 33284 W C0420A/thub.xiaotaop.leocad.fontprobe/WMSLife: GetAttachStateSyncResult: lifecycleCallback is null
+11-02 21:49:50.930 33284 33344 E C0420A/thub.xiaotaop.leocad.fontprobe/WMSLife: NotifyUIExtHostRectChangeInGlobalDisplayListeners: uiContent is null
+11-02 21:49:50.930 33284 33344 W C04208/thub.xiaotaop.leocad.fontprobe/WMSLayout: NotifySingleHandTransformChange: id:317, uiContent is nullptr
+11-02 21:49:50.930 33284 33390 W C057C1/thub.xiaotaop.leocad.fontprobe/IPCWorkThread: ThreadHandler: proto:0 policy:0 name:OS_IPC_3_33390 invoker:1314075520
+11-02 21:49:50.931 33284 33284 W C04201/thub.xiaotaop.leocad.fontprobe/DMS: OnDisplayInfoChange: data is not changed.
+11-02 21:49:50.931 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbility::onForeground()
+11-02 21:49:50.934 33284 33284 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.sys.arkui.animationscale remoteWatcherId 768 success
+11-02 21:49:50.934 33284 33284 E C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(-2:-1:undefined)] ConfigParserBase read system file failed
+11-02 21:49:50.934 33284 33284 W C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(-2:-1:undefined)] ArkUiFeatureParamManager failed to load xml file
+11-02 21:49:50.934 33284 33284 E C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(-2:-1:undefined)] ConfigParserBase read system UI correction config file failed
+11-02 21:49:50.934 33284 33284 W C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(-2:-1:undefined)] ArkUiFeatureParamManager failed to load UI correction config file
+11-02 21:49:50.940 33284 33284 W C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(100000:100000:scope)] Invalid config:zh_CN-long-notround-horizontal-light-tablet-xhdpi
+11-02 21:49:50.941 33284 33284 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libtransform_interaction_ext.z.so: check ns accessible failed namespace=ndk.
+11-02 21:49:50.941 33284 33284 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=ndk no inherits, errno=2
+11-02 21:49:50.941 33284 33284 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=default, errno=2
+11-02 21:49:50.941 33284 33284 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libtransform_interaction_ext.z.so
+11-02 21:49:50.941 33284 33284 E C03934/thub.xiaotaop.leocad.fontprobe/AceUIEvent: [(100000:100000:scope)] AceTransform load failed: Error loading shared library /system/lib64/libtransform_interaction_ext.z.so: No such file or directory
+11-02 21:49:50.942 33284 33284 W C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(100000:100000:scope)] not found systemTheme in HapModuleInfo, loading default OHOS_THEME
+11-02 21:49:50.942 33284 33284 W C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(100000:100000:scope)] GetAsset failed: resources/styles/default.json
+11-02 21:49:50.948 33284 33284 W C01406/thub.xiaotaop.leocad.fontprobe/OHOS::RS: RSNodeMap::UnregisterNode: node id 142953691480066 not found
+11-02 21:49:50.949 33284 33284 E C03952/thub.xiaotaop.leocad.fontprobe/AceAppBar: [(100000:100000:scope)] read abc file success!
+11-02 21:49:50.953 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains icon_primary!
+11-02 21:49:50.953 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains icon_on_primary!
+11-02 21:49:50.953 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains interactive_hover!
+11-02 21:49:50.953 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains interactive_click!
+11-02 21:49:50.953 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains warning!
+11-02 21:49:50.953 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains window_left_screen!
+11-02 21:49:50.953 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style container_modal_pattern not contains window_right_screen!
+11-02 21:49:50.953 33284 33284 E C03952/thub.xiaotaop.leocad.fontprobe/AceAppBar: [(100000:100000:scope)] read abc file success!
+11-02 21:49:50.955 33284 33284 E C03952/thub.xiaotaop.leocad.fontprobe/AceAppBar: [(100000:100000:scope)] read abc file success!
+11-02 21:49:50.963 33284 33284 W C01406/thub.xiaotaop.leocad.fontprobe/OHOS::RS: RSNodeMap::UnregisterNode: node id 142953691480066 not found
+11-02 21:49:50.964 33284 33284 E C01D02/thub.xiaotaop.leocad.fontprobe/accessibility_asacfwk: [(AccessibilitySystemAbilityClientImpl:78)]accessibility service is ready.
+11-02 21:49:50.966 33284 33284 I C02C03/PARAM_WATCHER: Add watcher keyPrefix debug.graphic.frame remoteWatcherId 768 success
+11-02 21:49:50.967 33284 33284 E C04200/thub.xiaotaop.leocad.fontprobe/IMockSessionManager: [nodict]Read result failed, code is: 4.
+11-02 21:49:50.967 33284 33284 E C04200/thub.xiaotaop.leocad.fontprobe/IMockSessionManager: [nodict]Read result failed, code is: 4.
+11-02 21:49:50.967 33284 33344 E C0420A/thub.xiaotaop.leocad.fontprobe/WMSLife: NotifyUIExtHostRectChangeInGlobalDisplayListeners: uiContent is null
+11-02 21:49:50.975 33284 33284 W C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(100000:100000:scope)] GetAsset failed: manifest.json
+11-02 21:49:50.976 33284 33395 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.layout.enabled remoteWatcherId 768 success
+11-02 21:49:50.976 33284 33395 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.inputevent.enabled remoteWatcherId 768 success
+11-02 21:49:50.977 33284 33395 I C02C03/PARAM_WATCHER: Add watcher keyPrefix const.security.developermode.state remoteWatcherId 768 success
+11-02 21:49:50.977 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QtOhos::(anonymous namespace)::loadWindowStageContentPage(QtOhos::JsState &, QNapi::Object &, const QNapi::Object &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &) const: launchWant: {"deviceId":"","bundleName":"io.github.xiaotaop.leocad.fontprobe","abilityName":"QAbility","moduleName":"entry","uri":"","type":"","flags":0,"action":"","parameters":{"component.startup.newRules":true,"isCallBySCB":false,"isShellCall":true,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"","ohos.aafwk.param.callerNativeName":"_hdcd","ohos.aafwk.param.callerPid":33294,"ohos.aafwk.param.callerToken":805902894,"ohos.aafwk.param.callerUid":2000,"ohos.aafwk.param.displayId":0,"ohos.dlp.params.sandbox":false,"ohos.param.callerAppCloneIndex":0},"fds":{},"entities":[]}
+11-02 21:49:50.977 33284 33395 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.statemgr.enabled remoteWatcherId 768 success
+11-02 21:49:50.977 33284 33284 W C0391C/thub.xiaotaop.leocad.fontprobe/AceFocus: [(100000:100000:scope)] Current focus view can not found!
+11-02 21:49:50.977 33284 33395 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.boundary.enabled remoteWatcherId 768 success
+11-02 21:49:50.978 33284 33395 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.performance.monitor.enabled remoteWatcherId 768 success
+11-02 21:49:50.979 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init begin
+11-02 21:49:50.979 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init end
+11-02 21:49:50.980 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: JsStateImpl: appLaunchParam set from Ability with instanceId='0'
+11-02 21:49:50.980 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: JsStateImpl: added QAbilityPeer, instanceId: 0, qwindow: 
+11-02 21:49:50.980 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: std::size_t QtOhos::(anonymous namespace)::getPreferredStackSizeForQtThread(): preferred stack size for Qt Thread: 8388608
+11-02 21:49:50.980 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()(bool) const: setting condition 'Qt thread idle' to false
+11-02 21:49:50.980 33284 33397 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a621cd920, M: startApplicationMainFunction begin
+11-02 21:49:50.984 33284 33397 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a621cd920, M: std::function<int (std::vector<std::string>)> QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &): opened library '/data/storage/el1/bundle/libs/arm64/libleocad-d7-font-probe.so' with main function
+11-02 21:49:50.984 33284 33397 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a621cd920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: calling 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad-d7-font-probe.so' (argc=1)
+11-02 21:49:50.984 33284 33397 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a621cd920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function argv[0]='/data/storage/el1/bundle/libs/arm64/libleocad-d7-font-probe.so'
+11-02 21:49:50.985 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: XComponentId: __nnMainWindow_0 onAppear
+11-02 21:49:50.985 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.bundle.bundleManager' via napi_load_module()
+11-02 21:49:50.992 33284 33397 I C02C03/PARAM_WATCHER: Add watcher keyPrefix debug.graphic.debug_layer remoteWatcherId 768 success
+11-02 21:49:50.992 33284 33397 E C01400/thub.xiaotaop.leocad.fontprobe/OpenGLWrapper: Failed to find system config path
+11-02 21:49:50.992 33284 33397 E C01400/thub.xiaotaop.leocad.fontprobe/OpenGLWrapper: LoadLayers failed.
+11-02 21:49:50.992 33284 33397 E C01400/thub.xiaotaop.leocad.fontprobe/OpenGLWrapper: EglWrapperLayer Init Failed.
+11-02 21:49:50.992 33284 33397 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libiGraphicsCore.z.so: check ns accessible failed namespace=ndk.
+11-02 21:49:50.992 33284 33397 W C03F07/MUSL-LDSO: load /system/lib64/libiGraphicsCore.z.so failed, namespace=ndk no inherits, errno=2
+11-02 21:49:50.992 33284 33397 W C03F07/MUSL-LDSO: load /system/lib64/libiGraphicsCore.z.so failed, namespace=default, errno=2
+11-02 21:49:50.992 33284 33397 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libiGraphicsCore.z.so
+11-02 21:49:50.992 33284 33397 E C01400/thub.xiaotaop.leocad.fontprobe/OpenGLWrapper: Failed to dlopen /system/lib64/libiGraphicsCore.z.so. error: Error loading shared library /system/lib64/libiGraphicsCore.z.so: No such file or directory.
+11-02 21:49:50.992 33284 33397 E C01400/thub.xiaotaop.leocad.fontprobe/OpenGLWrapper: EglWrapperHookLayer init Failed!
+11-02 21:49:50.993 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style 125829872 not contains image_pattern!
+11-02 21:49:50.993 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style 125829872 not contains app_theme_pattern!
+11-02 21:49:50.993 33284 33284 E C01E00/thub.xiaotaop.leocad.fontprobe/ResourceManager: ref <private> id not found
+11-02 21:49:50.993 33284 33284 E C01E00/thub.xiaotaop.leocad.fontprobe/ResourceManager: ref <private> id not found
+11-02 21:49:50.993 33284 33284 W C03937/thub.xiaotaop.leocad.fontprobe/AceResource: [(100000:100000:scope)] Get pattern by name error, name=app_theme_pattern
+11-02 21:49:50.993 33284 33284 E C01E00/thub.xiaotaop.leocad.fontprobe/ResourceManager: ref <private> id not found
+11-02 21:49:50.993 33284 33284 E C01E00/thub.xiaotaop.leocad.fontprobe/ResourceManager: ref <private> id not found
+11-02 21:49:50.993 33284 33284 W C03937/thub.xiaotaop.leocad.fontprobe/AceResource: [(100000:100000:scope)] Get pattern by name error, name=app_theme_pattern
+11-02 21:49:50.993 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style app_theme_pattern not contains app_theme_drag_distancethreshold!
+11-02 21:49:50.993 33284 33397 W C01409/thub.xiaotaop.leocad.fontprobe/APS_MANAGER: redo Connect
+11-02 21:49:50.993 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style text_pattern not contains linear_split_child_min_size!
+11-02 21:49:50.994 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style text_pattern not contains menu_celia_ask_is_support!
+11-02 21:49:50.994 33284 33397 E C057C2/thub.xiaotaop.leocad.fontprobe/IPCObjectProxy: PrintErrorDetailedInfo: failed, handle:26 error:29201 desc:(subErr:4 SubErrDesc:outer:operation not permitted) *.IApsManager proxy:1394847488 time:37768181170292
+11-02 21:49:50.994 33284 33397 E C01409/thub.xiaotaop.leocad.fontprobe/APS_MANAGER: [ApsManagerProxy::RegCommonCallback] SendRequest is failed, error code: <private>
+11-02 21:49:50.994 33284 33397 W C01409/thub.xiaotaop.leocad.fontprobe/APS_MANAGER: RegCommonCallbackInner Register callback failed, delete callback
+11-02 21:49:50.994 33284 33397 W C01409/thub.xiaotaop.leocad.fontprobe/APS_MANAGER: [ApsManagerProxy::RegisterGameFpsListener] Send Request faild code = 29201
+11-02 21:49:50.994 33284 33397 E C01409/thub.xiaotaop.leocad.fontprobe/APS_MANAGER: ApsGameFpsController::RegisterGameFpsListener delete callback
+11-02 21:49:50.997 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style select_pattern not contains text_font_family_regular!
+11-02 21:49:50.997 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style select_pattern not contains menu_default_width!
+11-02 21:49:50.997 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style select_pattern not contains menu_min_width!
+11-02 21:49:50.997 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style select_pattern not contains menu_max_width!
+11-02 21:49:50.997 33284 33284 W C03926/thub.xiaotaop.leocad.fontprobe/AceTheme: [(100000:100000:scope)] style select_pattern not contains menu_max_width_ratio!
+11-02 21:49:51.005 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.display' via napi_load_module()
+11-02 21:49:51.006 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.multimodalInput.inputDevice' via napi_load_module()
+11-02 21:49:51.013 33284 33284 E C01C07/thub.xiaotaop.leocad.fontprobe/PBCA: OH_Pasteboard_Subscribe# subscribe observer failed
+11-02 21:49:51.014 33284 33284 E C01C07/thub.xiaotaop.leocad.fontprobe/PBCA: OH_Pasteboard_Subscribe# subscribe observer failed
+11-02 21:49:51.015 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.font' via napi_load_module()
+11-02 21:49:51.016 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: GetFileData: Path or realPath is nullptr
+11-02 21:49:51.016 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: CheckConfigFile: Null data
+11-02 21:49:51.016 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseConfig: Failed to check config file
+11-02 21:49:51.016 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: FontConfig: Failed to parse config, ret 1
+11-02 21:49:51.023 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: GetFileData: Path or realPath is nullptr
+11-02 21:49:51.023 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: CheckConfigFile: Null data
+11-02 21:49:51.023 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseConfig: Failed to check config file
+11-02 21:49:51.023 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: FontConfig: Failed to parse config, ret 1
+11-02 21:49:51.023 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseConfig: File name is null
+11-02 21:49:51.023 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: FontConfig: Failed to parse config, ret 1
+11-02 21:49:51.024 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: GetFileData: Path or realPath is nullptr
+11-02 21:49:51.024 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: CheckConfigFile: Null data
+11-02 21:49:51.024 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseConfig: Failed to check config file
+11-02 21:49:51.024 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseConfig: File name is null
+11-02 21:49:51.024 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseConfig: File name is null
+11-02 21:49:51.026 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseFontDescriptor: Failed to find font name FZYaYiHei GB18030L2 R
+11-02 21:49:51.040 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseFontDescriptor: Failed to find font name FT AeroSans
+11-02 21:49:51.040 33284 33284 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseFontDescriptor: Failed to find font name FT ChariSans
+11-02 21:49:51.046 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.graphics.text' via napi_load_module()
+11-02 21:49:51.047 33284 33358 E C01408/thub.xiaotaop.leocad.fontprobe/Text: ParseInstallConfig: Failed to check config file
+11-02 21:49:51.047 33284 33358 E C01408/thub.xiaotaop.leocad.fontprobe/Text: GetInstallFontList: Failed to parser install fonts path list
+11-02 21:49:51.202 33284 33397 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a621cd920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad-d7-font-probe.so' returned 0
+11-02 21:49:51.202 33284 33397 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a621cd920, M: Qt: asynchronously terminating remaining QAbility instances, if any
+11-02 21:49:51.202 33284 33397 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a621cd920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()(bool) const: setting condition 'Qt thread idle' to true
+11-02 21:49:51.202 33284 33397 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a621cd920, M: startApplicationMainFunction end
+11-02 21:49:51.202 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Qt: force-resolving pending QWindow destroy Promises before termination if needed
+11-02 21:49:51.202 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Qt: terminating QAbility with instanceId='0'
+11-02 21:49:51.202 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Tagging JS Window as closing (from: Qt main() exit)
+11-02 21:49:51.210 33284 33430 W C057C1/thub.xiaotaop.leocad.fontprobe/IPCWorkThread: ThreadHandler: proto:0 policy:0 name:OS_IPC_4_33430 invoker:1317812736
+11-02 21:49:51.212 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbility::onBackground()
+11-02 21:49:51.212 33284 33284 W C0420A/thub.xiaotaop.leocad.fontprobe/WMSLife: GetAttachStateSyncResult: lifecycleCallback is null
+11-02 21:49:51.214 33284 33284 E C0420A/thub.xiaotaop.leocad.fontprobe/WMSLife: NotifyWMSWindowDestroyed: window destroyed listener is nullptr
+11-02 21:49:51.214 33284 33284 W C03903/thub.xiaotaop.leocad.fontprobe/AceSubWindow: [(-2:100000:singleton)] Fail to get subwindow in dialogSubwindowMap_, instanceId is 100000
+11-02 21:49:51.214 33284 33284 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.layout.enabled count 0
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.inputevent.enabled count 0
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ const.security.developermode.state count 0
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.statemgr.enabled count 0
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.boundary.enabled count 0
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+11-02 21:49:51.215 33284 33284 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.performance.monitor.enabled count 0
+11-02 21:49:51.216 33284 33284 I C02C03/PARAM_WATCHER: [watcher_manager_kits.cpp:241]ParamWatcher destructor start
+11-02 21:49:51.216 33284 33284 W C0391C/thub.xiaotaop.leocad.fontprobe/AceFocus: [(100000:100000:scope)] viewStack empty
+11-02 21:49:51.220 33284 33284 W C03913/thub.xiaotaop.leocad.fontprobe/AceText: [(100000:100000:scope)] destroy TxtParagraph with placeholderCnt_ 0, textAlign_ 0, count 0
+11-02 21:49:51.222 33284 33284 W C03900/thub.xiaotaop.leocad.fontprobe/Ace: [(-2:100000:singleton)] Unregister from watch dog failed with instanceID 100000
+11-02 21:49:51.223 33284 33284 E C01332/thub.xiaotaop.leocad.fontprobe/UIAbility: [JUA2354]null windowStage
+11-02 21:49:51.223 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbility::onStageDestroy()
+11-02 21:49:51.223 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbility::onDestroy()
+11-02 21:49:51.224 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &) begin
+11-02 21:49:51.224 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &): returning Promise for id='0'
+11-02 21:49:51.224 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Value QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &) end
+11-02 21:49:51.224 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &) const: initial Promise resolved for id='0'
+11-02 21:49:51.224 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: JsStateImpl: removed QAbilityPeer, instanceId: 0, qwindow: 
+11-02 21:49:51.224 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: quitApplicationFromJsThread begin
+11-02 21:49:51.224 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: quitApplicationFromJsThread end
+11-02 21:49:51.224 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Qt: requested Qt app quit, waiting for the main() function to return
+11-02 21:49:51.224 33284 33431 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a6405d920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()() const: waiting for condition 'Qt thread idle'
+11-02 21:49:51.224 33284 33431 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x5a6405d920, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()() const: condition 'Qt thread idle' met
+11-02 21:49:51.225 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Qt: end waiting for Qt app's main() function, returned: true
+11-02 21:49:51.225 33284 33284 D A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QtOhos::(anonymous namespace)::handleAbilityOnDestroy(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &)::(anonymous class)::operator()(QtOhos::JsState &, bool) const: resolving result Promise for id='0'
+11-02 21:49:51.227 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/ohosQtTemplate: QAbilityStage::onDestroy()
+11-02 21:49:51.227 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onDestroy: start
+11-02 21:49:51.227 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onDestroy: destroying the Qt thread object
+11-02 21:49:51.228 33284 33284 I A00000/thub.xiaotaop.leocad.fontprobe/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onDestroy: calling _Exit(0)

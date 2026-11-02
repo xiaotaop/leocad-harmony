@@ -1,0 +1,83 @@
+Qt 6.12.0, platform ohos
+
+# Chinese-capable families present (255 families total)
+  Noto Sans CJK HK
+  Noto Sans CJK JP
+  Noto Sans CJK KR
+  Noto Sans CJK SC
+  Noto Sans CJK TC
+  Noto Sans Mono CJK HK
+  Noto Sans Mono CJK JP
+  Noto Sans Mono CJK KR
+  Noto Sans Mono CJK SC
+  Noto Sans Mono CJK TC
+  Noto Serif CJK HK
+  Noto Serif CJK JP
+  Noto Serif CJK KR
+  Noto Serif CJK SC
+  Noto Serif CJK TC
+  书宋-简
+  仿宋-简
+  方正中等线-简
+  方正中行楷-简
+  方正书宋-简
+  方正仿宋-简
+  方正仿宋-繁
+  方正喵呜-简
+  方正喵體-繁
+  方正圆体-简
+  方正圓體-繁
+  方正小标宋-简
+  方正小標宋-繁
+  方正手书-简
+  方正手書-繁
+  方正新魏-简
+  方正書宋-繁
+  方正楷体-简
+  方正楷體-繁
+  方正正中黑简体
+  方正正准黑简体
+  方正正大黑简体
+  方正正楷-简
+  方正正粗黑简体
+  方正正纤黑简体
+  方正正黑简体
+  方正等线-简
+  方正粗宋简体
+  方正舒体-简
+  方正行楷-简
+  方正行楷-繁
+  方正隶书-简
+  方正隶体-简
+  方正隸書-繁
+  方正隸變-繁
+  方正雅意黑 GB18030L2
+  方正魏碑简体
+  方正黑体-简
+  方正黑體-繁
+  楷体-简
+  鴻蒙黑體
+  鸿蒙黑体
+  黑体-简
+58 of 255 families offer Simplified Chinese
+
+# Glyph coverage
+default	resolved=HarmonyOS Sans	missing=0
+  HarmonyOS Sans SC	resolved=鸿蒙黑体	missing=0
+  HarmonyOS Sans	resolved=HarmonyOS Sans	missing=0
+  Noto Sans CJK SC	resolved=Noto Sans CJK SC	missing=0
+  Noto Sans SC	resolved=HarmonyOS Sans	missing=0
+  Source Han Sans SC	resolved=HarmonyOS Sans	missing=0
+  WenQuanYi Zen Hei	resolved=HarmonyOS Sans	missing=0
+  DejaVu Sans	resolved=HarmonyOS Sans	missing=0
+
+# Layout metrics (default font)
+  height=14 ascent=11 descent=3
+  筛选零件 = 48 px
+  Filter Parts = 59 px
+  Regular Expression = 104 px
+  正则表达式 = 60 px
+
+# Longest menu entry per menu, as drawn
+  options menu: 68 px
+  filter menu:  60 px

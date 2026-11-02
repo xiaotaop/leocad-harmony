@@ -1,0 +1,210 @@
+{
+  "authorized-save-tests.txt": {
+    "bytes": 959,
+    "sha256": "59c28edbd0b2bada79bf37b80a4432f045d95475b33e481506c2a0aebe5c5390"
+  },
+  "baseline-before-fix.hilog.txt": {
+    "bytes": 94816,
+    "sha256": "7027f85d357201f2e053a79461265f34455be639dc85b26a995763eff3ed602c"
+  },
+  "build-receipt.json": {
+    "bytes": 1336,
+    "sha256": "efcae72a9e911589363fd42e8ca6f87c5abac668249c1cf9302e59aaf4ca7ff0"
+  },
+  "chinese-save-target.jpeg": {
+    "bytes": 314578,
+    "sha256": "9535b7b629229877fd866943a751bdf1d5a32ab0272146971d6fe94d2d8dea69"
+  },
+  "cycle-rejected-dirty-preserved.jpeg": {
+    "bytes": 337487,
+    "sha256": "c8e24ee7f9f2dfa27833a5dbc82a22f1a0040daeda49e87766edfb0793e56a8d"
+  },
+  "cycle.mpd": {
+    "bytes": 53,
+    "sha256": "468c20455fcda4ce47362a1ac465619e8b6bc9f0251188f7f4c02caa87081438"
+  },
+  "d7-fonts-device.txt": {
+    "bytes": 1954,
+    "sha256": "f2626d7212a21f3a3a405f1d54b1d8db4ce6c5d982cfaaa50c04a80b6890ca3d"
+  },
+  "external-ldr-after-save.ldr": {
+    "bytes": 269,
+    "sha256": "2d2f8a26b4d4aaeb370a5a7d2a36f8a6fc8bf203491552659326e40c3780c7bf"
+  },
+  "external-ldr-reopened.jpeg": {
+    "bytes": 327096,
+    "sha256": "280f9a40ce44a2da8cdfcc2c37d30d5be523fac9768eb566a5bc68026ff9e132"
+  },
+  "external-ldr-saved.jpeg": {
+    "bytes": 340179,
+    "sha256": "748bc18a0c5cf26ffb59b525dd99f4b82c86a5cee1f1777b417d87922b2a9656"
+  },
+  "external-mpd-after-save.mpd": {
+    "bytes": 319,
+    "sha256": "5d40c61a21d2eb1867a87ca05849a995999e34775d3d7f31a8edf8d1d0398ff0"
+  },
+  "final-external-ldr.ldr": {
+    "bytes": 269,
+    "sha256": "349dc4f05c304fdcf2eb5369c777bbb053920a587ccfda7bf181474465839d7e"
+  },
+  "final-external-overwrite-success.jpeg": {
+    "bytes": 327710,
+    "sha256": "1006bc8a4f1af0e594868eca6ac4e316f41bba08aef566a5af63f0cf3601947e"
+  },
+  "final-external-save-success.jpeg": {
+    "bytes": 325901,
+    "sha256": "ae763e7d4fc05ddfc8e37ce2903f83ca33632507bf2f5be65a7bcc19b3712892"
+  },
+  "final-first-session.hilog.txt": {
+    "bytes": 95758,
+    "sha256": "1b0bc5de12cab890cf61d1da13401b8266ba79213400e4916deaedbff3de57cd"
+  },
+  "final-reopen-session.hilog.txt": {
+    "bytes": 108222,
+    "sha256": "d53167ab920362d0a659157a0eec9a5b54b5c69b129f4ed0cff7b0a237d2aa77"
+  },
+  "final-reopened-coordinates.jpeg": {
+    "bytes": 324835,
+    "sha256": "2e907520c493f563d14af1adccd11dc8684e00f533a6742243e2d738b6dcfc6f"
+  },
+  "final-unicode-save-target.jpeg": {
+    "bytes": 321261,
+    "sha256": "eb39b41cad70d79de94874dcc074832916a5c1f87eb9d83f0883fa71a11e52b4"
+  },
+  "fixed-first-session.hilog.txt": {
+    "bytes": 106561,
+    "sha256": "c21c9be62f4bfd582d75926af8fafbca2aabc4aeabc37e51a6e6fd6650b37cf4"
+  },
+  "fixed-save-result.jpeg": {
+    "bytes": 313933,
+    "sha256": "f9036bb9c9f2b983fef70bd0b32cdd296cede6e75005754a22621d99d09ab756"
+  },
+  "font-probe-CMakeLists.txt": {
+    "bytes": 859,
+    "sha256": "ba952d4d123e7f9f9f9a7586448afa0934086cae36bfa5372025c513b773363b"
+  },
+  "font-probe-wrapper.cpp": {
+    "bytes": 259,
+    "sha256": "976b0bfd7829e044c086c6033bc5b59dd507ed30ebd88c4ecfa079ed7ad98e07"
+  },
+  "fonts-probe-session.hilog.txt": {
+    "bytes": 41722,
+    "sha256": "464aaa16c75461fb6fae16d8b4cd07097723cdef185c30b9ab0cd5816188f950"
+  },
+  "fresh-mpd-menu.jpeg": {
+    "bytes": 393935,
+    "sha256": "26d8e94952596e43e8314bcf71b3bc975fef833da3e67345fd463f482b3bb62e"
+  },
+  "fresh-mpd-save-picker.jpeg": {
+    "bytes": 335150,
+    "sha256": "dac4b737e5fdcf69abe055c29f50e22b690fb07e08f800284585b63f5d9bda2f"
+  },
+  "input-curated-device.mpd": {
+    "bytes": 250,
+    "sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742"
+  },
+  "input-render-baseline.ldr": {
+    "bytes": 267,
+    "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b"
+  },
+  "maximized-options-menu.jpeg": {
+    "bytes": 353226,
+    "sha256": "3a4b883f66956b308edde8559400d710e9be38c345311428bc27a0a2549a4e32"
+  },
+  "model-tests.txt": {
+    "bytes": 4913,
+    "sha256": "949535772a5a60e6fc3d943c50ce148b97be0af8ab65fa77853f0ab9b85b94be"
+  },
+  "mpd-focus-check.jpeg": {
+    "bytes": 337637,
+    "sha256": "e6fc4e4b6d901d4a5ada5f65491d55bd82eb90ab65b8a0d11ef1e747d9561850"
+  },
+  "mpd-hang-session.hilog.txt": {
+    "bytes": 81977,
+    "sha256": "ad79b1aed7a8b13d63d838bb8e9ea3bd57c108fd79f00050284d0dd571c09668"
+  },
+  "mpd-move-redo.jpeg": {
+    "bytes": 358244,
+    "sha256": "619fbe1cbf5f03d7156db632a2ad5b633e4e8a2c4fdadcf816fd8d4b7eee6d8e"
+  },
+  "mpd-move-undo.jpeg": {
+    "bytes": 358016,
+    "sha256": "d8ae7045e63a6a65cf0fb241699f27284963396f1a7aec79b254e4eb680d4973"
+  },
+  "mpd-reopened-submodels.jpeg": {
+    "bytes": 353299,
+    "sha256": "c21d3007da3ae2a7320f9741934c3010a9b88570a6807abd11b0ef4888f6cd39"
+  },
+  "mpd-retested-session.hilog.txt": {
+    "bytes": 168842,
+    "sha256": "ee0b456b0bec57cffd24e980e3175915c878b21a17d56633b9cc36dac3a318b0"
+  },
+  "narrow-filter-menu.jpeg": {
+    "bytes": 558260,
+    "sha256": "3fedfd674e5496ae90dc85b3dcf95006934fb08ca48b5397aec4f8869c97a814"
+  },
+  "narrow-options-menu.jpeg": {
+    "bytes": 553379,
+    "sha256": "1c2f148ddc20e1b8a0d7171f3104fa6e8f404295137281956a11ed43a2a78fab"
+  },
+  "network-scope-tests.txt": {
+    "bytes": 1676,
+    "sha256": "3586fd5e40296609e0835b49fc3947e10daa448614f062b279e28cebc9f7f63b"
+  },
+  "packaged-app.json5": {
+    "bytes": 261,
+    "sha256": "d460244a29bd5a61f48b27ac5747195735c4c9477e88288b295ff877c3042e8b"
+  },
+  "packaged-module.json5": {
+    "bytes": 2491,
+    "sha256": "f2ba341d3ec18165f8847da7ab44b01c1d71a6bbefb8c67b44d5c524b3cd0014"
+  },
+  "physical-keyboard-after.jpeg": {
+    "bytes": 328808,
+    "sha256": "230aed775ce5c34885c7dfca2fe9ea82195948683acea3ab69587ecb8763dbcd"
+  },
+  "physical-keyboard-start.jpeg": {
+    "bytes": 327386,
+    "sha256": "1e729864016c045e30b9ef4c6c0b1e162046d0f5cc567fe70763d2e32843f6ae"
+  },
+  "save-cancel-dirty-preserved.jpeg": {
+    "bytes": 326706,
+    "sha256": "a3e95564eb65736e128a8c5cd190e733e3cc2b9fb30997c659e828675073c975"
+  },
+  "startup.jpeg": {
+    "bytes": 269608,
+    "sha256": "c31d3e6b9f17b83ec0f495eeb8c78d9f1279a2d487e3cd07c78d4788911dff95"
+  },
+  "system-open-dialog.jpeg": {
+    "bytes": 330888,
+    "sha256": "4928762c111db2ae8daa6d8cbc4c3de8bda54c14c261ce8f3711815f013f378a"
+  },
+  "truncated-file-rejected.jpeg": {
+    "bytes": 283657,
+    "sha256": "295936c4135ec967ae2eb446305f5d1d650ec7191a7daddcad941f9987ef4664"
+  },
+  "truncated.ldr": {
+    "bytes": 23,
+    "sha256": "d5c108f49a09c75a5cd2b910e8532d930e06ed8735937837915dfb8fc7b7b171"
+  },
+  "verified-mpd-saved.jpeg": {
+    "bytes": 350532,
+    "sha256": "657e05a141fb055484d3ca7794c84bcba0d5c0b986b7cd562222b5488822bec3"
+  },
+  "window-after-minimize.jpeg": {
+    "bytes": 504590,
+    "sha256": "02adc224cab6e362af49f95db323ce0f903e416781c7fedbe433b6cc7519bcda"
+  },
+  "window-minimized.jpeg": {
+    "bytes": 590594,
+    "sha256": "f7279dd0d3c3bda42d0fbc951284f80272b1285457cef576f26da89b07a0a6e8"
+  },
+  "window-narrow.jpeg": {
+    "bytes": 548394,
+    "sha256": "b5eadd9528cb1368135866b686e161e0f4a1523bb832f390c421222c7d20d0c6"
+  },
+  "window-restored.jpeg": {
+    "bytes": 504632,
+    "sha256": "16f54c8b8d4256c6d6a77ad1d60b9bce6c6a51fc4c16ef1242255c13ff1c13ff"
+  }
+}
