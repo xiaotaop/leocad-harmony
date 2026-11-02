@@ -1,12 +1,12 @@
 # 成员 B 开发入口
 
-准备日期：2026-10-26；首批开发：2026-10-27；D2 隔离补齐：2026-10-28；D4 核心调用核验：2026-10-30；D5 桌面序列与状态回归：2026-10-31；D6 基础编辑与历史集成核验：2026-11-01。职责：模型编辑、撤销重做、LDraw 文件读写与数据一致性。
+准备日期：2026-10-26；首批开发：2026-10-27；D2 隔离补齐：2026-10-28；D4 核心调用核验：2026-10-30；D5 桌面序列与状态回归：2026-10-31；D6 基础编辑与历史集成核验：2026-11-01；D7 历史与文件往返交接：2026-11-02。职责：模型编辑、撤销重做、LDraw 文件读写与数据一致性。
 
 ## 当前基线
 
 - 本地目录：`F:\codes\LiteX_trans\leocad-harmony-b`
-- 分支：`feature/b-model`
-- 团队仓库：`https://github.com/xiaotaop/leocad-harmony.git`，remote 名为 `origin`；本地分支跟踪 `origin/feature/b-model`。
+- 当前 D7 交付分支：`feature/b-model-d7`；此前交付使用 `feature/b-model`。
+- 团队仓库：`https://github.com/xiaotaop/leocad-harmony.git`，remote 名为 `origin`；D7 交付推送至 `origin/feature/b-model-d7`。
 - 上游：`https://github.com/leozide/leocad.git`，remote 名为 `upstream`。
 - 固定标签：`v26.09`；提交：`5196355d4a5adb35f14c97e7672d7a9bfd3af391`。
 - 首批和第二批已通过 PR #2、#5 合入；D2 从 `main` 的 `cf2adc6`（已含 #7、#8、#9）快进同步后继续。团队保留上游根目录布局。
@@ -17,6 +17,29 @@
 组长方案文件的来源与 SHA-256 记录于 `member-b-baseline.json`。该文件只是 B 的准备记录，不取代组长负责的正式 `toolchain.lock`。
 
 10/28 D2 测试：49 个业务用例通过（含初始化/清理共 51 passed），0 failed、0 skipped，进程退出码为 0。保留 10/27 第二批的 37 个业务用例，新增 12 项格式隔离和离线错误回调用例；不代表完整 GUI 或鸿蒙验收。结果见 `member-b-validation.json`、`member-b-test-results.txt`，包含固定源码与产物哈希。
+
+## D7 撤销重做与 LDR/MPD 往返（2026-11-02）
+
+原计划 B 的 D7 要求为“完成撤销重做；开始 `.ldr/.mpd` 打开、保存和往返测试”。已有实现和固定用例覆盖这些行为，本次复核当前集成结果并提供 [D7–D8 文件与历史设备交接](MEMBER_B_D7_DEVICE_HANDOFF.md)，不新增重复实现或测试。
+
+**D6 进度更新**：B 的 #38、C 的 #37 和组长设备报告 #39 均已合并；本次交付分支基于 `main@7d887f0507be0d123973fed1df1c8a11098848a0`。组长在 `5ade519591bf6931b5631593d34455882c10f490` 的正常 HAP 上记录了选件→插入→移动→保存前状态通过，详见 [D6 真机报告](D6_DEVICE_ACCEPTANCE.md)。其中移动 `(30,0,24)→(40,0,24)`、Ctrl+Z 恢复及 Ctrl+Y 重做，以及失活取消预览、返回后首次新移动和撤销均有设备注入输入证据。B 本次重算该目录收据中的 **43 个文件**字节数和 SHA-256，全部匹配，并核对 PID20566、23172 的原生 main 返回 0。未重新操作设备、取得 HAP 重算包哈希或将输入注入视为物理键鼠验收。
+
+**D7 宿主验证**：[A 的 #40](https://github.com/xiaotaop/leocad-harmony/pull/40) head 为 `629ed2bb90ef1f4b15287410831e4f58f8533404`，B 已正式批准。合并状态以远端 PR 为准，本记录不声称已合入。复核其当前 9 项 checks 全通过；下载 [模型 CI](https://github.com/xiaotaop/leocad-harmony/actions/runs/41374196474) 与 [输入 CI](https://github.com/xiaotaop/leocad-harmony/actions/runs/41374196526) 原始产物：Windows 模型 **65 passed、0 failed、0 skipped**，基础子集 **7/7**；正常 DPR1、DPR1.5、DPR2、基础 DPR2 各 **38 passed、0 failed、0 skipped**，实际日志 DPR 为 1/1.5/2/2。CI 检出 `1e00144528a20bdacffcc08362e51489baa9ccb0` 与 #40 head 的完整 tree 均为 `2181582bb5ce11067ee978843ab4038449315abb`。B 重算 #40 的 4 项源码及 17 项证据哈希，均匹配；此次复用有效 CI，没有另跑 B 本机测试。模型日志归档于 [D7 测试结果](member-b-d7-test-results.txt)，注明真实 CI 来源和原始文件 SHA-256。
+
+| D7 要求 | 现有用例及已核对预期 |
+|---|---|
+| 撤销重做、保存点 | `editingSequenceUndoRedoAndSave` 验证移动/旋转/颜色/删除的撤销重做、返回保存点清除修改标记、新编辑清除旧重做；`insertTwentyPiecesUndoRedoAndReopen` 验证连续 20 件插入与历史恢复 |
+| 键盘进入同一历史链 | #40 的 `keyboardMoveUndoRedo` 经真实控件和 QAction 发出 Right、Ctrl+Z、Ctrl+Y，核对位置改变、恢复、重做及修改状态；宿主注入不能替代设备物理按键 |
+| LDR 往返 | `ldrRoundTrip` 保存并重开中文带空格路径，保留两件的 ID、颜色、内部坐标和旋转矩阵；`emptyModelRoundTrip` 保留一个空模型 |
+| MPD 往返 | `mpdRoundTrip` 保留两个模型的名称、子模型引用、数量和颜色；`sharedSubmodelRoundTrip` 保留四个模型及两父模型对同一子模型的引用关系 |
+| 安全保存与路径 | `successfulOverwriteCanBeReopened`、`failedSaveAsPreservesDocumentState`、`failedReplacementPreservesExistingFile`、`streamWriteFailureIsReported` 覆盖覆盖保存及失败保留；`relativeDocumentPathsSurviveWorkingDirectoryChange` 验证打开/保存后切换工作目录不会改写到缓存目录。文件锁失败用例仅适用于 Windows |
+| 坏输入保护 | `invalidLDrawPreservesCurrentDocument` 的 15 行覆盖空/截断/非有限数据、重复子模型、引用环和坏 SYNTH/PIVOT；失败保留原项目身份、活动模型、数量与修改状态，并返回非空错误 |
+
+模型测试使用合成零件与真实核心 API，不能用它们声明正式几何、系统选择器或权限通过。交接直接复用 `render-baseline.ldr` 和已有 `curated-device.mpd` 正式零件样例，提供明确结构预期、两份最小异常输入及 9 步设备请求，不重复创建一套样例或测试框架。
+
+**交付结论**：B 的 D7 核心历史与文件往返要求已具备验证；设备上的系统选择器、导入副本/外部导出、取消/授权失败、真实 UI 保存退出重开及物理断网闭环仍按 [Issue #15](https://github.com/xiaotaop/leocad-harmony/issues/15) 由组长+B 完成。本次保持该 Issue 开放。A 的物理组合键、滚轮、精确棱线、最小化、右键菜单及视角球中断仍按其交接补测，不因宿主全绿而关闭。
+
+本次 B 仅修改交付记录与证据，可撤销对应文档提交；没有改动生产代码、构建或测试断言。D8 依据实际新包结果处理数据阻断项，保存成功与外部导出成功继续分开报告。
 
 ## D6 基础编辑、对象状态与撤销重做（2026-11-01）
 
