@@ -29,8 +29,8 @@ try {
         & nmake.exe /NOLOGO *>> build.log
         if ($LASTEXITCODE -ne 0) { Get-Content build.log -Tail 40; throw 'Input test build failed.' }
         $binary = Join-Path $build 'build\release\leocad-input-tests.exe'
-        foreach ($mode in @('normal', 'dpr2', 'basic-dpr2')) {
-            $env:QT_SCALE_FACTOR = if ($mode -eq 'normal') { '1' } else { '2' }
+        foreach ($mode in @('normal', 'fractional', 'dpr2', 'basic-dpr2')) {
+            $env:QT_SCALE_FACTOR = if ($mode -eq 'normal') { '1' } elseif ($mode -eq 'fractional') { '1.5' } else { '2' }
             $env:LEOCAD_SAFE_RENDER = if ($mode -eq 'basic-dpr2') { '1' } else { '0' }
             & $binary -o "$mode-results.txt,txt" -o "$mode-results.xml,junitxml" *> "$mode-renderer.log"
             $testExit = $LASTEXITCODE

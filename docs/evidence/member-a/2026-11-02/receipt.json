@@ -1,0 +1,91 @@
+{
+  "algorithm": "SHA-256",
+  "scope": "All files in this directory except receipt.json",
+  "files": [
+    {
+      "name": "basic-dpr2-renderer.log",
+      "bytes": 1017,
+      "sha256": "e661e2ec42dfc015715126fdd61a754775344052c1c2026f488ddcda6b15dc40"
+    },
+    {
+      "name": "basic-dpr2.txt",
+      "bytes": 255924,
+      "sha256": "a23fc32073261f47fe1f89c94c9e1dbbd95fb814d31e22866aa6537105b69e85"
+    },
+    {
+      "name": "basic-dpr2.xml",
+      "bytes": 254355,
+      "sha256": "103d7c9186dd2b13ec45a7479d5d34970c30ccbfaef68a952511a0c5463a2156"
+    },
+    {
+      "name": "build-record.json",
+      "bytes": 2474,
+      "sha256": "916ec98c9676aaebfd1b2203b1e92475946dd3ff9bf1e4d1fb3db00cba354e67"
+    },
+    {
+      "name": "build.log",
+      "bytes": 9057,
+      "sha256": "a537f5182a77279b47b0659d76e53626f073301ca7fff2d6be76288c0efd80d9"
+    },
+    {
+      "name": "fractional-dpr1_5-renderer.log",
+      "bytes": 1018,
+      "sha256": "123655e30c14fcd3a63bd80b1aa090f930016dd5b82331c80e603ae9c2350ee2"
+    },
+    {
+      "name": "fractional-dpr1_5.txt",
+      "bytes": 257143,
+      "sha256": "0c7a6a7c711972a040214d1c8cdfaa819a86319aaa76e656c30b17a7f7cce343"
+    },
+    {
+      "name": "fractional-dpr1_5.xml",
+      "bytes": 255545,
+      "sha256": "8def57ce012fcf8711b42609622c8bd747b0f2b00b56b39f2d142dbf554f0a45"
+    },
+    {
+      "name": "negative-renderer.log",
+      "bytes": 1018,
+      "sha256": "d2eaf09a95793006b74cd6bead6df6178dd451d22f45283213114c174953e624"
+    },
+    {
+      "name": "negative.txt",
+      "bytes": 84864,
+      "sha256": "807239656b4e66ac4b7fc29ea73d2c47057d8c2a814ccfcb2cfce3bc67f597a7"
+    },
+    {
+      "name": "negative.xml",
+      "bytes": 84442,
+      "sha256": "75a9647eb4146f6b9f506e51eaf10a4ef197d2baa0eb4040740462fac5a3fb6e"
+    },
+    {
+      "name": "normal-dpr1-renderer.log",
+      "bytes": 1018,
+      "sha256": "a5000a3565bcfb06ee4c2a8660f09b7d02ba3341e43cb03c40fdd99166453478"
+    },
+    {
+      "name": "normal-dpr1.txt",
+      "bytes": 257808,
+      "sha256": "6ee08f4300ed30a1ce9f5ae8b1bd61c140a92d39e5a0bc1af27997a54c78724c"
+    },
+    {
+      "name": "normal-dpr1.xml",
+      "bytes": 256239,
+      "sha256": "ea2e8a05713ab5dfde2f923d2110411ac11677266c48a442d7920d104dc1b075"
+    },
+    {
+      "name": "normal-dpr2-renderer.log",
+      "bytes": 1018,
+      "sha256": "cd9fc4fb53ec5ae3917d744b9536d6822eaccdba880c7d00d72c6dbd0d46a5e2"
+    },
+    {
+      "name": "normal-dpr2.txt",
+      "bytes": 255924,
+      "sha256": "81fe6ed879a6b2627dce21edb5ea268668408098c784f431b460bb46813f8b7d"
+    },
+    {
+      "name": "normal-dpr2.xml",
+      "bytes": 254355,
+      "sha256": "da6c9c54bcb6f765b901c24c7d6087acca0b684c76a5580d6dba88138235ed6f"
+    }
+  ]
+}
