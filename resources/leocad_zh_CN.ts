@@ -5141,6 +5141,31 @@
         <source>8B</source>
         <translation>8B</translation>
     </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Change Selection Color</source>
+        <translation>更改选中颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>&amp;Render</source>
+        <translation>渲染(&amp;R)</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Export HTML</source>
+        <translation>导出 HTML</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Export 3DS</source>
+        <translation>导出 3DS</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Save Project</source>
+        <translation>保存项目</translation>
+    </message>
 </context>
 <context>
     <name>lcMinifigDialog</name>

@@ -1671,10 +1671,11 @@ void lcPartSelectionWidget::RefreshStatus()
 		if (!View->isRowHidden(Row))
 			VisibleCount++;
 
-	// "Parts: 1160" rather than tr("%n part(s)"): the plural form only reads
-	// correctly once a translation supplies the plural rule, and this string is
-	// not translated yet (known issue F-02). Until it is, the untranslated form
-	// of %n is the literal "part(s)", which is worse than avoiding plurals.
+	// "零件: 1160" rather than tr("%n part(s)"): the plural form only reads
+	// correctly once a translation supplies a plural rule for the language, and
+	// Chinese has one form, so %n would buy nothing and cost a second string to
+	// keep in sync. The placeholder form works in every language that has been
+	// translated so far ("Parts: %1", "零件: %1").
 	if (mCountLabel)
 		mCountLabel->setText(tr("Parts: %1").arg(VisibleCount));
 

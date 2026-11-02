@@ -59,6 +59,11 @@ private slots:
 	void emptyStatesAreTranslated();
 	void libraryProblemBannerIsTranslated();
 
+	// Strings outside the parts panel that sit on the same chain this change
+	// touches: the colour button's tooltip, and the File menu entry that the
+	// device screenshots showed in English next to translated neighbours.
+	void mainWindowStringsAroundThePanelAreTranslated();
+
 	// Menu width: the elision the device showed as "Regular...ression".
 	void optionsMenuFitsItsLongestEntry();
 	void filterSubmenuFitsItsLongestEntry();
@@ -66,6 +71,15 @@ private slots:
 	// Nothing above is worth anything if the panel stopped agreeing with the
 	// model, so re-check the two counts the chain test also owns.
 	void panelStillListsPartsAfterTranslation();
+
+	// Acceptance item 4: search, the Part ID toggle and the zero/non-zero
+	// transition must not regress. These do not touch translation at all, which
+	// is exactly why they are here — the display change runs through the same
+	// filter path, and a translated label is worth nothing if the list behind it
+	// stopped responding.
+	void partIdFilterStillDrivesTheList();
+	void zeroAndNonZeroResultsStillSwapTheNotice();
+	void searchWithNoMatchesStillReportsZero();
 
 private:
 	lcMainWindow* mWindow = nullptr;
@@ -400,6 +414,26 @@ void LocalizationTest::libraryProblemBannerIsTranslated()
 	QVERIFY(!Banner.contains(QStringLiteral("parts")));
 }
 
+// The panel is not the only place the review looked at, and two of the strings on
+// this chain live in the main window: the tooltip of the colour button (whose text
+// this change translates) and the File menu entry that appeared in English beside
+// translated ones.
+void LocalizationTest::mainWindowStringsAroundThePanelAreTranslated()
+{
+	// The colour button's text is translated (asserted above); if its tooltip were
+	// not, hovering the button would explain it in English.
+	QCOMPARE(QCoreApplication::translate("lcMainWindow", "Change Selection Color"), QStringLiteral("更改选中颜色"));
+
+	// Menu mnemonics survive translation: the & marks the Alt shortcut, and a
+	// translation that drops it silently removes keyboard access.
+	const QString Render = QCoreApplication::translate("lcMainWindow", "&Render");
+	QVERIFY2(Render.contains(QLatin1Char('&')), qPrintable(QStringLiteral("the Render mnemonic was lost: \"%1\"").arg(Render)));
+	QVERIFY(!Render.contains(QStringLiteral("Render")));
+
+	// Dialog titles the user meets while saving.
+	QCOMPARE(QCoreApplication::translate("lcMainWindow", "Save Project"), QStringLiteral("保存项目"));
+}
+
 // The device showed "Regular...ression": the menu was wider than the text in its
 // neighbours but narrower than this entry, because it was sized before the
 // handler refilled it.
@@ -459,6 +493,119 @@ void LocalizationTest::panelStillListsPartsAfterTranslation()
 	// to agree, which is the property the D6 suite also pins. Cheap, but it fails
 	// loudly if a display change accidentally filtered something out.
 	QVERIFY(CountVisibleRows() > 0);
+}
+
+// Acceptance item 4, first half: "Part ID" is the toggle whose translated label
+// this change also touches, and it is the one filter that searches the LDraw
+// file name instead of the description. If the label moved but the behaviour did
+// not, a user searching 3001 would find nothing.
+void LocalizationTest::partIdFilterStillDrivesTheList()
+{
+	lcPartSelectionListView* View = mPanel->findChild<lcPartSelectionListView*>();
+	QVERIFY(View);
+
+	lcPartSelectionListModel* Model = View->GetListModel();
+	QVERIFY(Model);
+
+	// The defaults belong to the profile, not to this test: whatever they are,
+	// put them back at the end so a later case does not inherit a list filtered
+	// down to nothing. (Getting this wrong is how the first version of this case
+	// broke the two after it.)
+	const bool WasDescription = Model->GetPartDescriptionFilter();
+	const bool WasFileName = Model->GetFileNameFilter();
+	const QString WasFilter = PartsFilter()->text();
+
+	// Neither search on: nothing can match, so the list is empty.
+	Model->SetPartDescriptionFilter(false);
+	Model->SetFileNameFilter(false);
+	Model->SetFilter(QStringLiteral("3001"));
+	QCoreApplication::processEvents();
+	QCOMPARE(CountVisibleRows(), 0);
+
+	// Part ID on: the same string now matches by file name.
+	Model->SetFileNameFilter(true);
+	QCoreApplication::processEvents();
+	QVERIFY2(CountVisibleRows() > 0, "the Part ID toggle no longer searches file names");
+
+	// Part ID back off: empty again, i.e. it is still a toggle and not a
+	// one-way switch.
+	Model->SetFileNameFilter(false);
+	QCoreApplication::processEvents();
+	QCOMPARE(CountVisibleRows(), 0);
+
+	Model->SetFilter(WasFilter);
+	Model->SetPartDescriptionFilter(WasDescription);
+	Model->SetFileNameFilter(WasFileName);
+	QCoreApplication::processEvents();
+
+	QVERIFY2(CountVisibleRows() > 0, "the list did not come back after the filters were restored");
+}
+
+// Acceptance item 4, second half: the switch between "0 parts" and "some parts"
+// has to keep working, and the two notices must not both show at once.
+void LocalizationTest::zeroAndNonZeroResultsStillSwapTheNotice()
+{
+	QLineEdit* Filter = PartsFilter();
+	QVERIFY(Filter);
+
+	QList<QLabel*> Notices;
+
+	for (QLabel* Label : mPanel->findChildren<QLabel*>())
+		if (Label->text().contains(QStringLiteral("没有匹配此搜索的零件")) ||
+			Label->text().contains(QStringLiteral("此分类下没有可显示的零件")))
+		{
+			Notices += Label;
+		}
+
+	QVERIFY2(!Notices.isEmpty(), "no empty-state notice in the panel at all");
+
+	// Something that cannot match: exactly one notice, and it is visible.
+	Filter->setText(QStringLiteral("zzzz-no-such-part"));
+	QCoreApplication::processEvents();
+
+	int Visible = 0;
+
+	for (QLabel* Label : Notices)
+		if (!Label->isHidden())
+			Visible++;
+
+	QCOMPARE(Visible, 1);
+
+	// Clearing it brings the parts back and hides the notice again.
+	Filter->clear();
+	QCoreApplication::processEvents();
+	QVERIFY(CountVisibleRows() > 0);
+
+	for (QLabel* Label : Notices)
+		QVERIFY2(Label->isHidden(), "the empty-state notice stayed after results came back");
+}
+
+// The count label is part of what the review asked to translate, so it has to
+// still agree with the list in both states rather than being a static string.
+void LocalizationTest::searchWithNoMatchesStillReportsZero()
+{
+	QLabel* CountLabel = nullptr;
+
+	for (QLabel* Label : mPanel->findChildren<QLabel*>())
+		if (Label->text().startsWith(QStringLiteral("零件: ")))
+		{
+			CountLabel = Label;
+			break;
+		}
+
+	QVERIFY2(CountLabel, "no translated part count label in the panel");
+
+	PartsFilter()->setText(QStringLiteral("zzzz-no-such-part"));
+	QCoreApplication::processEvents();
+	QCOMPARE(CountLabel->text(), QStringLiteral("零件: 0"));
+
+	PartsFilter()->clear();
+	QCoreApplication::processEvents();
+
+	// And the translated prefix survives a positive count: the number changes,
+	// the wording does not.
+	QVERIFY(CountLabel->text().startsWith(QStringLiteral("零件: ")));
+	QVERIFY(CountLabel->text() != QStringLiteral("零件: 0"));
 }
 
 int main(int argc, char** argv)
