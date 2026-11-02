@@ -55,7 +55,11 @@ D7 的 C 行还要求「字体」和「常用提示」，这两项当时没有�
   `FontStackIsReal()`（`i` 与 `W` 等宽即退化）探测，退化栈 `QSKIP` 附原因，真实栈逐字 `inFont`
   恢复执行；`.ts` 完整性与行高>0 全平台保留。跳过路径用空 fontconfig 本地复现验证；字形扫描的
   负向验证第一次注入的是**不存在的模式串**（空操作差点蒙混过关），改为断言替换必须改变文件后，
-  U+12000 注入准确报红。教训四连：`inFont` 语义、descent 语义、offscreen 无字体、**空操作的负向
+  U+12000 注入准确报红。**证据边界**：Windows runner 的 Qt 不带字体目录
+  （`Cannot find font directory`），offscreen 无字体库，这两项在 Windows CI 上是 `SKIP`
+  而非 `PASS`（20 passed / 2 skipped）；本地 Linux 字体栈完整，两项真 `PASS` 且做过注入负向
+  验证。故字体验收证据目前只有宿主 Linux，Windows 侧只保证其余 20 项不回归。**鸿蒙字体仍以真机
+  探针为准**。教训四连：`inFont` 语义、descent 语义、offscreen 无字体、**空操作的负向
   验证不是验证**，逐字字形覆盖归 `tools/d7/tst_d7_fonts.cpp` 探针在**真机**执行。另加
   `chineseTextIsNotWiderThanTheSpaceItsEnglishPredecessorHad()`——只断言「现在放得下」的话，
   翻译变长时宽度跟着变、测试照样通过，反而掩盖真正要看的事；这条对具体字体不敏感（CJK 全角单字
