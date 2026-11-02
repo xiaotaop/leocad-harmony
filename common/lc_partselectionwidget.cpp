@@ -14,6 +14,11 @@
 #include "lc_filter.h"
 #include "lc_colors.h"
 
+#include <QFontMetrics>
+#include <QStyleOptionMenuItem>
+
+#include <algorithm>
+
 Q_DECLARE_METATYPE(QList<int>)
 
 void lcPartSelectionItemDelegate::paint(QPainter* Painter, const QStyleOptionViewItem& Option, const QModelIndex& Index) const
@@ -1350,6 +1355,60 @@ void lcPartSelectionWidget::OptionsMenuAboutToShow()
 	PartDescriptionFilter->setCheckable(true);
 	PartDescriptionFilter->setChecked(ListModel->GetPartDescriptionFilter());
 	PartDescriptionFilter->setEnabled(ListModel->GetFileNameFilter());
+
+	// Size the menus to their text now that the contents exist.
+	//
+	// The menu is emptied and refilled in aboutToShow, which runs after Qt has
+	// already chosen a width for it: QMenu sizes itself from the actions it had
+	// when popup() was called. On device (D4-03 / issue #28) that showed up as
+	// "Regular...ression" and "显示...零件" — the longest entries elided in the
+	// middle while shorter neighbours were fine, because the width came from the
+	// previous contents.
+	//
+	// Setting a minimum width is what actually works here; adjustSize() or a
+	// plain re-populate leaves the stale width in place, and style-derived
+	// sizeFromContents() under-reports on the platforms this runs on. Each
+	// submenu needs its own call: a submenu inherits nothing from its parent.
+	SetMenuWidthToContents(Menu);
+}
+
+void lcPartSelectionWidget::SetMenuWidthToContents(QMenu* Menu)
+{
+	if (Menu == nullptr)
+		return;
+
+	const QFontMetrics Metrics(Menu->font());
+	int Widest = 0;
+
+	for (const QAction* Action : Menu->actions())
+	{
+		if (Action->isSeparator() || Action->isVisible() == false)
+			continue;
+
+		Widest = std::max(Widest, Metrics.horizontalAdvance(Action->text()));
+	}
+
+	// The indent is what QMenu reserves around the text: the check column, the
+	// icon column, the submenu arrow and the panel margins. Asking the style for
+	// the size of a representative option is more portable than hardcoding a
+	// pixel count, but it under-reports the text width on some styles, so the
+	// measured text width is what drives the result and the style only has to
+	// supply the parts that do not depend on the string.
+	QStyleOptionMenuItem Option;
+	Option.initFrom(Menu);
+	Option.menuItemType = QStyleOptionMenuItem::Normal;
+	Option.menuHasCheckableItems = true;
+
+	const QSize Chrome = Menu->style()->sizeFromContents(QStyle::CT_MenuItem, &Option, QSize(0, Menu->sizeHint().height()), Menu);
+	const int Overhead = std::max(Chrome.width(), Menu->style()->pixelMetric(QStyle::PM_MenuButtonIndicator, nullptr, Menu) * 2 + Menu->style()->pixelMetric(QStyle::PM_MenuPanelWidth, nullptr, Menu) * 2 + 8);
+
+	Menu->setMinimumWidth(Widest + Overhead);
+
+	// Recurse: a submenu was sized from its own actions when it was added, but
+	// the ones here are filled after the parent's aboutToShow ran.
+	for (QAction* Action : Menu->actions())
+		if (Action->menu() != nullptr)
+			SetMenuWidthToContents(Action->menu());
 }
 
 void lcPartSelectionWidget::EditPartPalettes()
@@ -1552,7 +1611,7 @@ void lcPartSelectionWidget::UpdateCategories()
 
 	for (int CategoryIdx = 0; CategoryIdx < static_cast<int>(gCategories.size()); CategoryIdx++)
 	{
-		QTreeWidgetItem* CategoryItem = new QTreeWidgetItem(mCategoriesWidget, QStringList(gCategories[CategoryIdx].Name));
+		QTreeWidgetItem* CategoryItem = new QTreeWidgetItem(mCategoriesWidget, QStringList(lcGetCategoryDisplayName(gCategories[CategoryIdx].Name)));
 		CategoryItem->setData(0, static_cast<int>(lcPartCategoryRole::Type), static_cast<int>(lcPartCategoryType::Category));
 		CategoryItem->setData(0, static_cast<int>(lcPartCategoryRole::Index), CategoryIdx);
 

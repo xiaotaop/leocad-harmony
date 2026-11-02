@@ -5,6 +5,8 @@
 class lcPartSelectionListModel;
 class lcPartSelectionListView;
 class lcPartSelectionWidget;
+class QMenu;
+class QTreeWidgetItem;
 
 enum class lcPartCategoryType
 {
@@ -385,6 +387,14 @@ protected slots:
 	void PartViewPartPicked(PieceInfo* Info);
 	void OptionsMenuAboutToShow();
 	void EditPartPalettes();
+
+	// Sizes Menu (and its submenus) so no action's text is elided.
+	//
+	// The options menu is rebuilt in aboutToShow, after Qt picked its width, so
+	// without this the longest entries are shown as "Regular...ression" on the
+	// device. Kept as a member so the D7 test can drive it directly instead of
+	// trying to inspect a popped-up menu.
+	static void SetMenuWidthToContents(QMenu* Menu);
 
 protected:
 	void LoadPartPalettes();

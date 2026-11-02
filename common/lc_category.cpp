@@ -288,3 +288,12 @@ bool lcMatchCategory(const char* PieceName, const char* Expression)
 
 	return true;
 }
+
+QString lcGetCategoryDisplayName(const QString& Name)
+{
+	// The stored name is the key both the profile format and a user's own
+	// categories file use, so it is never replaced — only looked up for display.
+	// QCoreApplication::translate() hands back the original when a category has
+	// no translation, which covers names a user typed themselves.
+	return QCoreApplication::translate("Categories", Name.toUtf8().constData());
+}

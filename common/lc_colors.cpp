@@ -364,6 +364,32 @@ bool lcLoadColorFile(lcFile& File, lcStudStyle StudStyle)
 	return Valid;
 }
 
+QString lcGetColorDisplayName(int ColorIndex)
+{
+	if (ColorIndex < 0 || ColorIndex >= static_cast<int>(gColorList.size()))
+		return QString();
+
+	// Translate only at the point of display: gColorList[].Name stays exactly as
+	// parsed so saved models, exports and the profile keep the LDraw name.
+	//
+	// Names synthesised as "Color 0004FF" carry a code, not a word; leaving them
+	// untranslated is correct, and QCoreApplication::translate() returns the
+	// input unchanged when no translation exists, so no special case is needed.
+	return QCoreApplication::translate("Colors", gColorList[ColorIndex].Name);
+}
+
+QString lcGetColorGroupDisplayName(int ColorGroup)
+{
+	if (ColorGroup < 0 || ColorGroup >= LC_NUM_COLORGROUPS)
+		return QString();
+
+	// gColorGroups[].Name is already the translated string: it is built with
+	// QApplication::tr() when the colour file loads, and a language change
+	// reloads the colours. Reading it back keeps the group headers and the colour
+	// list on the same wording.
+	return gColorGroups[ColorGroup].Name;
+}
+
 void lcLoadDefaultColors(lcStudStyle StudStyle)
 {
 	lcDiskFile ConfigFile(":/resources/ldconfig.ldr");
@@ -441,12 +467,12 @@ QString lcGetColorToolTip(int ColorIndex)
 	if (Color->Code != LC_COLOR_NOCOLOR)
 	{
 		const char* format = "<table><tr><td style=\"vertical-align:middle\"><img src=\"data:image/png;base64,%1\"/></td><td>%2 (%3)</td></tr></table>";
-		Text = QString(format).arg(QString(Buffer.data().toBase64()), gColorList[ColorIndex].Name, QString::number(gColorList[ColorIndex].Code));
+		Text = QString(format).arg(QString(Buffer.data().toBase64()), lcGetColorDisplayName(ColorIndex), QString::number(gColorList[ColorIndex].Code));
 	}
 	else
 	{
 		const char* format = "<table><tr><td style=\"vertical-align:middle\"><img src=\"data:image/png;base64,%1\"/></td><td>%2</td></tr></table>";
-		Text = QString(format).arg(QString(Buffer.data().toBase64()), gColorList[ColorIndex].Name);
+		Text = QString(format).arg(QString(Buffer.data().toBase64()), lcGetColorDisplayName(ColorIndex));
 	}
 
 	return Text;

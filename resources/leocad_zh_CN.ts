@@ -5775,6 +5775,65 @@
         <source>Submodels</source>
         <translation>子模型</translation>
     </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Filter</source>
+        <translation>筛选</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Filter Parts</source>
+        <translation>筛选零件</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Icons</source>
+        <translation>图标</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Lock Color</source>
+        <translation>锁定颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Open Submodel</source>
+        <translation>打开子模型</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Part Description</source>
+        <translation>零件描述</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Parts: %1</source>
+        <translation>零件: %1</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Regular Expression</source>
+        <translation>正则表达式</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>There are no parts to show in this category.</source>
+        <translation>此分类下没有可显示的零件。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>No parts match this search.
+
+Try a different keyword, or clear the search box.</source>
+        <translation>没有匹配此搜索的零件。
+
+请换一个关键词，或清空搜索框。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_partselectionwidget.cpp"/>
+        <source>Only a small number of parts are available, so models that use other parts will open with missing pieces.</source>
+        <translation>当前只有少量零件可用，因此使用其他零件的模型打开后会缺少部分零件。</translation>
+    </message>
 </context>
 <context>
     <name>lcPiecesLibrary</name>
@@ -8046,6 +8105,1852 @@ Anisotropic: %5
 %2</source>
         <translation>写入文件 &apos;%1&apos; 时出错:
 %2</translation>
+    </message>
+</context>
+<context>
+    <name>Categories</name>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Animal</source>
+        <translation>动物</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Antenna</source>
+        <translation>天线</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Arch</source>
+        <translation>拱形</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Bar</source>
+        <translation>杆件</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Baseplate</source>
+        <translation>底板</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Boat</source>
+        <translation>船</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Brick</source>
+        <translation>砖块</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Container</source>
+        <translation>容器</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Door and Window</source>
+        <translation>门窗</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Electric</source>
+        <translation>电动件</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Hinge and Bracket</source>
+        <translation>铰链与支架</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Hose</source>
+        <translation>软管</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Miscellaneous</source>
+        <translation>杂项</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Other</source>
+        <translation>其他</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Panel</source>
+        <translation>面板</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Plant</source>
+        <translation>植物</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Plate</source>
+        <translation>板</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Round</source>
+        <translation>圆形件</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Sign and Flag</source>
+        <translation>标志与旗帜</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Slope</source>
+        <translation>斜面</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Sticker</source>
+        <translation>贴纸</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Support</source>
+        <translation>支撑件</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Technic</source>
+        <translation>科技件</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Tile</source>
+        <translation>光面砖</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Train</source>
+        <translation>火车</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Tyre and Wheel</source>
+        <translation>轮胎与轮子</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Vehicle</source>
+        <translation>车辆</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Windscreen</source>
+        <translation>挡风玻璃</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Wedge</source>
+        <translation>楔形件</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Wing</source>
+        <translation>机翼</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_category.cpp"/>
+        <source>Minifig</source>
+        <translation>人仔</translation>
+    </message>
+</context>
+<context>
+    <name>Colors</name>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Aqua</source>
+        <translation>水蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Black</source>
+        <translation>黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Blue</source>
+        <translation>蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Blue Violet</source>
+        <translation>蓝色紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Bright Blue Violet</source>
+        <translation>亮蓝色紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Bright Green</source>
+        <translation>亮绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Bright Light Blue</source>
+        <translation>亮浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Bright Light Orange</source>
+        <translation>亮浅橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Bright Light Yellow</source>
+        <translation>亮浅黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Bright Pink</source>
+        <translation>亮粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Bright Reddish Lilac</source>
+        <translation>亮偏红丁香紫</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Brown</source>
+        <translation>棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Black</source>
+        <translation>帆布黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Blue</source>
+        <translation>帆布蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Bright Green</source>
+        <translation>帆布亮绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Brown</source>
+        <translation>帆布棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Cream</source>
+        <translation>帆布米色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Dark Bluish Grey</source>
+        <translation>帆布深偏蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Dark Green</source>
+        <translation>帆布深绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Dark Red</source>
+        <translation>帆布深红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Dark Tan</source>
+        <translation>帆布深棕褐色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Green</source>
+        <translation>帆布绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Light Bluish Grey</source>
+        <translation>帆布浅偏蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Light Brown</source>
+        <translation>帆布浅棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Light Grey</source>
+        <translation>帆布浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Purple</source>
+        <translation>帆布紫色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Red</source>
+        <translation>帆布红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Reddish Brown</source>
+        <translation>帆布偏红棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Sand Red</source>
+        <translation>帆布沙色红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Tan</source>
+        <translation>帆布棕褐色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas White</source>
+        <translation>帆布白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Canvas Yellow</source>
+        <translation>帆布黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Chrome Antique Brass</source>
+        <translation>镀铬古铜黄铜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Chrome Black</source>
+        <translation>镀铬黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Chrome Blue</source>
+        <translation>镀铬蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Chrome Gold</source>
+        <translation>镀铬金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Chrome Green</source>
+        <translation>镀铬绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Chrome Pink</source>
+        <translation>镀铬粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Chrome Silver</source>
+        <translation>镀铬银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Conductive Black</source>
+        <translation>导电黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Cool Silver</source>
+        <translation>冷银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Copper</source>
+        <translation>铜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Coral</source>
+        <translation>珊瑚色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Azure</source>
+        <translation>深天蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Blue</source>
+        <translation>深蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Blue Violet</source>
+        <translation>深蓝色紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Bluish Grey</source>
+        <translation>深蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Brown</source>
+        <translation>深棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Green</source>
+        <translation>深绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Grey</source>
+        <translation>深灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Nougat</source>
+        <translation>深牛轧糖色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Orange</source>
+        <translation>深橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Pink</source>
+        <translation>深粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Red</source>
+        <translation>深红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Salmon</source>
+        <translation>深橙红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Tan</source>
+        <translation>深棕褐色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Turquoise</source>
+        <translation>深绿松石色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Dark Yellow</source>
+        <translation>深黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Earth Orange</source>
+        <translation>土橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Edge Color</source>
+        <translation>边缘颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Edge Colour</source>
+        <translation>边缘颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Electric Contact Alloy</source>
+        <translation>电光触点合金</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Electric Contact Copper</source>
+        <translation>电光触点铜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Fabuland Brown</source>
+        <translation>Fabuland棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Fabuland Lime</source>
+        <translation>Fabuland黄绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Fabuland Orange</source>
+        <translation>Fabuland橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Fabuland Red</source>
+        <translation>Fabuland红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Flamingo Pink</source>
+        <translation>火烈鸟色粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Flat Gold</source>
+        <translation>哑光金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Flat Silver</source>
+        <translation>哑光银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Fluorescent Green Ink</source>
+        <translation>荧光绿色墨水</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Fluorescent Red Ink</source>
+        <translation>荧光红色墨水</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glitter Trans Bright Green</source>
+        <translation>闪粉透明亮绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glitter Trans Clear</source>
+        <translation>闪粉透明无色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glitter Trans Dark Pink</source>
+        <translation>闪粉透明深粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glitter Trans Light Blue</source>
+        <translation>闪粉透明浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glitter Trans Neon Green</source>
+        <translation>闪粉透明霓虹绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glitter Trans Orange</source>
+        <translation>闪粉透明橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glitter Trans Purple</source>
+        <translation>闪粉透明紫色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glow In Dark Opaque</source>
+        <translation>夜光内深不透明</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glow In Dark Trans</source>
+        <translation>夜光内深透明</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glow In Dark White</source>
+        <translation>夜光内深白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glow In The Dark Opaque</source>
+        <translation>夜光不透明</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Glow In The Dark Trans</source>
+        <translation>夜光透明</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Green</source>
+        <translation>绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Lavender</source>
+        <translation>薰衣草色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Lemon</source>
+        <translation>柠檬色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Lemon Metallic</source>
+        <translation>柠檬色金属</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Aqua</source>
+        <translation>浅水蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Blue</source>
+        <translation>浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Bluish Grey</source>
+        <translation>浅蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Brown</source>
+        <translation>浅棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Green</source>
+        <translation>浅绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Grey</source>
+        <translation>浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Lilac</source>
+        <translation>浅丁香紫</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Lime</source>
+        <translation>浅黄绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Nougat</source>
+        <translation>浅牛轧糖色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Orange</source>
+        <translation>浅橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Pink</source>
+        <translation>浅粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Salmon</source>
+        <translation>浅橙红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Turquoise</source>
+        <translation>浅绿松石色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Violet</source>
+        <translation>浅紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Light Yellow</source>
+        <translation>浅黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Lilac</source>
+        <translation>丁香紫</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Lime</source>
+        <translation>黄绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Maersk Blue</source>
+        <translation>马士基蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Magenta</source>
+        <translation>洋红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Magnet</source>
+        <translation>磁</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Main Color</source>
+        <translation>主颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Main Colour</source>
+        <translation>主颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Azure</source>
+        <translation>中天蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Blue</source>
+        <translation>中蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Blue Violet</source>
+        <translation>中蓝色紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Brown</source>
+        <translation>中棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Dark Pink</source>
+        <translation>中深粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Green</source>
+        <translation>中绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Lavender</source>
+        <translation>中薰衣草色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Lilac</source>
+        <translation>中丁香紫</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Lime</source>
+        <translation>中黄绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Nougat</source>
+        <translation>中牛轧糖色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Orange</source>
+        <translation>中橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Tan</source>
+        <translation>中棕褐色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Medium Violet</source>
+        <translation>中紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metal Black</source>
+        <translation>金属黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metal Blue</source>
+        <translation>金属蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Blue</source>
+        <translation>金属蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Bright Blue</source>
+        <translation>金属亮蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Bright Red</source>
+        <translation>金属亮红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Copper</source>
+        <translation>金属铜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Dark Green</source>
+        <translation>金属深绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Dark Grey</source>
+        <translation>金属深灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Gold</source>
+        <translation>金属金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Green</source>
+        <translation>金属绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Light Blue</source>
+        <translation>金属浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Light Pink</source>
+        <translation>金属浅粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Pink</source>
+        <translation>金属粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Metallic Silver</source>
+        <translation>金属银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Milky White</source>
+        <translation>乳白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Aqua Green</source>
+        <translation>Modulex水蓝色绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Black</source>
+        <translation>Modulex黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Blue</source>
+        <translation>Modulex蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Brown</source>
+        <translation>Modulex棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Buff</source>
+        <translation>Modulex浅黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Charcoal Grey</source>
+        <translation>Modulex炭黑色灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Clear</source>
+        <translation>Modulex透明</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Dark Brown</source>
+        <translation>Modulex深棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Dark Grey</source>
+        <translation>Modulex深灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Black</source>
+        <translation>Modulex箔黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Dark Blue</source>
+        <translation>Modulex箔深蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Dark Green</source>
+        <translation>Modulex箔深绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Dark Grey</source>
+        <translation>Modulex箔深灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Dark Red</source>
+        <translation>Modulex箔深红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Light Blue</source>
+        <translation>Modulex箔浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Light Green</source>
+        <translation>Modulex箔浅绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Light Grey</source>
+        <translation>Modulex箔浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Orange</source>
+        <translation>Modulex箔橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Violet</source>
+        <translation>Modulex箔紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil White</source>
+        <translation>Modulex箔白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Foil Yellow</source>
+        <translation>Modulex箔黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Lemon</source>
+        <translation>Modulex柠檬色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Light Bluish Grey</source>
+        <translation>Modulex浅偏蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Light Grey</source>
+        <translation>Modulex浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Light Orange</source>
+        <translation>Modulex浅橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Light Yellow</source>
+        <translation>Modulex浅黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Medium Blue</source>
+        <translation>Modulex中蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Ochre Yellow</source>
+        <translation>Modulex赭色黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Olive Green</source>
+        <translation>Modulex橄榄色绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Orange</source>
+        <translation>Modulex橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Pastel Blue</source>
+        <translation>Modulex柔和蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Pastel Green</source>
+        <translation>Modulex柔和绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Pink</source>
+        <translation>Modulex粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Pink Red</source>
+        <translation>Modulex粉色红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Red</source>
+        <translation>Modulex红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Strong Red</source>
+        <translation>Modulex强红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Teal Blue</source>
+        <translation>Modulex青绿色蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Terracotta</source>
+        <translation>Modulex陶土色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Very Light Grey</source>
+        <translation>Modulex极浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex Violet</source>
+        <translation>Modulex紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Modulex White</source>
+        <translation>Modulex白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Neon Yellow</source>
+        <translation>霓虹黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>No Color</source>
+        <translation>无颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Nougat</source>
+        <translation>牛轧糖色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Obsolete Light Orange Brown</source>
+        <translation>已停用浅橙色棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Ochre Yellow</source>
+        <translation>赭色黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Olive Green</source>
+        <translation>橄榄色绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Opal Trans Black</source>
+        <translation>蛋白石透明黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Opal Trans Bright Green</source>
+        <translation>蛋白石透明亮绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Opal Trans Clear</source>
+        <translation>蛋白石透明无色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Opal Trans Dark Blue</source>
+        <translation>蛋白石透明深蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Opal Trans Dark Pink</source>
+        <translation>蛋白石透明深粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Opal Trans Light Blue</source>
+        <translation>蛋白石透明浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Opal Trans Purple</source>
+        <translation>蛋白石透明紫色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Opal Trans Yellow</source>
+        <translation>蛋白石透明黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Orange</source>
+        <translation>橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Black</source>
+        <translation>珍珠黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Brown</source>
+        <translation>珍珠棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Dark Gold</source>
+        <translation>珍珠深金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Dark Grey</source>
+        <translation>珍珠深灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Gold</source>
+        <translation>珍珠金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Light Gold</source>
+        <translation>珍珠浅金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Light Grey</source>
+        <translation>珍珠浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Red</source>
+        <translation>珍珠红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Silver</source>
+        <translation>珍珠银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Very Light Grey</source>
+        <translation>珍珠极浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl White</source>
+        <translation>珍珠白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pearl Yellow</source>
+        <translation>珍珠黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Pink</source>
+        <translation>粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Purple</source>
+        <translation>紫色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Red</source>
+        <translation>红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Reddish Brown</source>
+        <translation>红棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Reddish Copper</source>
+        <translation>偏红铜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Reddish Gold</source>
+        <translation>偏红金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Reddish Lilac</source>
+        <translation>偏红丁香紫</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Reddish Orange</source>
+        <translation>偏橙红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rose Pink</source>
+        <translation>玫瑰色粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Black</source>
+        <translation>橡胶黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Blue</source>
+        <translation>橡胶蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Bright Green</source>
+        <translation>橡胶亮绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Bright Light Blue</source>
+        <translation>橡胶亮浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Bright Light Orange</source>
+        <translation>橡胶亮浅橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Bright Light Yellow</source>
+        <translation>橡胶亮浅黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Bright Pink</source>
+        <translation>橡胶亮粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Azure</source>
+        <translation>橡胶深天蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Blue</source>
+        <translation>橡胶深蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Bluish Grey</source>
+        <translation>橡胶深偏蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Brown</source>
+        <translation>橡胶深棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Green</source>
+        <translation>橡胶深绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Grey</source>
+        <translation>橡胶深灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Orange</source>
+        <translation>橡胶深橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Pink</source>
+        <translation>橡胶深粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Red</source>
+        <translation>橡胶深红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Tan</source>
+        <translation>橡胶深棕褐色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Dark Turquoise</source>
+        <translation>橡胶深绿松石色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Flat Silver</source>
+        <translation>橡胶哑光银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Green</source>
+        <translation>橡胶绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Lavender</source>
+        <translation>橡胶薰衣草色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Lemon Metallic</source>
+        <translation>橡胶柠檬色金属</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Light Aqua</source>
+        <translation>橡胶浅水蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Light Bluish Grey</source>
+        <translation>橡胶浅偏蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Light Grey</source>
+        <translation>橡胶浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Light Nougat</source>
+        <translation>橡胶浅牛轧糖色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Lime</source>
+        <translation>橡胶黄绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Magenta</source>
+        <translation>橡胶洋红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Medium Azure</source>
+        <translation>橡胶中天蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Medium Blue</source>
+        <translation>橡胶中蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Medium Lavender</source>
+        <translation>橡胶中薰衣草色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Medium Lilac</source>
+        <translation>橡胶中丁香紫</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Medium Nougat</source>
+        <translation>橡胶中牛轧糖色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Metallic Blue</source>
+        <translation>橡胶金属蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Milky White</source>
+        <translation>橡胶乳白白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Nougat</source>
+        <translation>橡胶牛轧糖色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Olive Green</source>
+        <translation>橡胶橄榄色绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Orange</source>
+        <translation>橡胶橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Pearl Dark Gold</source>
+        <translation>橡胶珍珠深金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Pearl Dark Grey</source>
+        <translation>橡胶珍珠深灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Pearl Gold</source>
+        <translation>橡胶珍珠金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Pearl Light Grey</source>
+        <translation>橡胶珍珠浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Pearl Very Light Grey</source>
+        <translation>橡胶珍珠极浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Purple</source>
+        <translation>橡胶紫色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Red</source>
+        <translation>橡胶红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Reddish Brown</source>
+        <translation>橡胶偏红棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Reddish Gold</source>
+        <translation>橡胶偏红金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Sand Green</source>
+        <translation>橡胶沙色绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Tan</source>
+        <translation>橡胶棕褐色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Trans Bright Green</source>
+        <translation>橡胶透明亮绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Trans Clear</source>
+        <translation>橡胶透明无色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Trans Dark Blue</source>
+        <translation>橡胶透明深蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Trans Green</source>
+        <translation>橡胶透明绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Trans Light Blue</source>
+        <translation>橡胶透明浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Trans Orange</source>
+        <translation>橡胶透明橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Trans Red</source>
+        <translation>橡胶透明红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Trans Yellow</source>
+        <translation>橡胶透明黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Very Light Bluish Grey</source>
+        <translation>橡胶极浅偏蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber White</source>
+        <translation>橡胶白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Yellow</source>
+        <translation>橡胶黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rubber Yellowish Green</source>
+        <translation>橡胶偏黄绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Rust</source>
+        <translation>铁锈色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Salmon</source>
+        <translation>橙红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Sand Blue</source>
+        <translation>沙色蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Sand Green</source>
+        <translation>沙色绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Sand Purple</source>
+        <translation>沙色紫色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Sand Red</source>
+        <translation>沙色红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Semi Transparent Green</source>
+        <translation>半透明绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Sienna Brown</source>
+        <translation>赭石色棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Sky Blue</source>
+        <translation>天蓝色蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Speckle Black Copper</source>
+        <translation>斑点黑铜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Speckle Black Gold</source>
+        <translation>斑点黑金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Speckle Black Silver</source>
+        <translation>斑点黑银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Speckle Black-Gold</source>
+        <translation>斑点黑金色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Speckle DBG Silver</source>
+        <translation>斑点深蓝灰银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Speckle Dark Bluish Grey Silver</source>
+        <translation>斑点深偏蓝灰色银色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Spud Orange</source>
+        <translation>Spud橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Stud Cylinder Color</source>
+        <translation>凸点柱体颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Tan</source>
+        <translation>棕褐色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Titanium Metallic</source>
+        <translation>钛色金属</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Black</source>
+        <translation>透明黑色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Black IR Lens</source>
+        <translation>透明黑色红外镜片</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Bright Green</source>
+        <translation>透明亮绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Bright Light Green</source>
+        <translation>透明亮浅绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Bright Light Orange</source>
+        <translation>透明亮浅橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Bright Reddish Lilac</source>
+        <translation>透明亮偏红丁香紫</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Brown</source>
+        <translation>透明棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Clear</source>
+        <translation>透明无色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Clear Opal</source>
+        <translation>透明蛋白石色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Dark Blue</source>
+        <translation>透明深蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Dark Pink</source>
+        <translation>透明深粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Fire Yellow</source>
+        <translation>透明火黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Green</source>
+        <translation>透明绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Light Blue</source>
+        <translation>透明浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Light Blue Violet</source>
+        <translation>透明浅蓝色紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Light Green</source>
+        <translation>透明浅绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Medium Blue</source>
+        <translation>透明中蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Neon Green</source>
+        <translation>透明霓虹绿色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Neon Orange</source>
+        <translation>透明霓虹橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Neon Red</source>
+        <translation>透明霓虹红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Neon Yellow</source>
+        <translation>透明霓虹黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Orange</source>
+        <translation>透明橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Pink</source>
+        <translation>透明粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Purple</source>
+        <translation>透明紫色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Red</source>
+        <translation>透明红色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Reddish Lilac</source>
+        <translation>透明偏红丁香紫</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Sticker</source>
+        <translation>透明贴纸</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Tan</source>
+        <translation>透明棕褐色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Very Light Blue</source>
+        <translation>透明极浅蓝色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans White</source>
+        <translation>透明白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Trans Yellow</source>
+        <translation>透明黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Umber Brown</source>
+        <translation>棕土色棕色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Very Light Bluish Grey</source>
+        <translation>极浅蓝灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Very Light Grey</source>
+        <translation>极浅灰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Very Light Orange</source>
+        <translation>极浅橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Violet</source>
+        <translation>紫罗兰色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Warm Pink</source>
+        <translation>暖粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Warm Yellowish Orange</source>
+        <translation>暖偏黄橙色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>White</source>
+        <translation>白色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Yellow</source>
+        <translation>黄色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Yellowish Dark Pink</source>
+        <translation>偏黄深粉色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_colors.cpp"/>
+        <source>Yellowish Green</source>
+        <translation>黄绿色</translation>
     </message>
 </context>
 </TS>

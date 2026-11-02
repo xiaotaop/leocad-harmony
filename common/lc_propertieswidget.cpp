@@ -13,6 +13,7 @@
 #include "lc_qutils.h"
 #include "lc_partselectionpopup.h"
 #include "lc_modelhistory.h"
+#include "lc_colors.h"
 
 lcPropertiesWidget::lcPropertiesWidget(QWidget* Parent)
 	: QWidget(Parent)
@@ -1031,7 +1032,7 @@ void lcPropertiesWidget::UpdatePieceColor(lcObjectPropertyId PropertyId)
 	Pixmap.fill(Color);
 
 	ColorButton->setIcon(Pixmap);
-	ColorButton->setText(Partial ? tr(" Multiple Colors") : QString("  ") + gColorList[ColorIndex].Name);
+	ColorButton->setText(Partial ? tr(" Multiple Colors") : QString("  ") + lcGetColorDisplayName(ColorIndex));
 
 	UpdateKeyFrameWidget(PropertyId);
 }
