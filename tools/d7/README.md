@@ -96,3 +96,41 @@ The PNGs under `docs/evidence/member-c/` are committed, so `.gitattributes` has 
 keep them byte-exact or the recorded SHA-256 values stop matching. The directory is
 already covered by the `-text` exceptions used for the other evidence trees; a new
 directory needs its own line.
+
+## Font probe (`tst_d7_fonts.cpp`)
+
+Separate from the screenshot harness and from the tests. `d7-fonts.pro` builds it:
+
+```bash
+source .devtools/env.sh
+mkdir -p build/d7-fonts && cd build/d7-fonts
+qmake ../../d7-fonts.pro CONFIG+=debug && make -j4
+QT_QPA_PLATFORM=offscreen ./build/debug/leocad-d7-fonts
+```
+
+It prints, in this order, the Qt version and platform; how many installed font
+families offer Simplified Chinese; whether a set of candidate families (including
+`HarmonyOS Sans SC`, which is what a device build would resolve to) have glyphs
+for the strings the UI shows, reporting `missing=N` per family; and the layout
+metrics — line height, and the pixel width of the longest menu entries in both
+languages.
+
+**Run it on the device too.** The host result only says the host fonts are fine.
+The HarmonyOS system font is a different set of files, and a fallback that works
+on the desktop can still leave a box on the device. Diffing the two outputs is the
+point of keeping it as a tool rather than a test: the device numbers cannot be
+asserted from here without inventing them.
+
+`missing=0` with `resolved=DejaVu Sans` is not a contradiction: Qt falls back
+per character, so a family without CJK still draws Chinese from another one. That
+also means replacing the font with a non-existent family does *not* simulate a
+missing glyph — the CI test asserts on a character no CJK font covers instead.
+
+**Read `missing` as a comparison, not a verdict.** `QFontMetrics::inFont()` asks
+the font's own engine, and the engines disagree about what "its own" means: on
+Linux fontconfig bakes the fallback into the default font, so every character
+measures as covered; on Windows DirectWrite reports the family alone, so Segoe UI
+reports every Chinese character as missing even though drawing resolves it to
+Microsoft YaHei per run. The same build passed coverage checks on the Linux
+suite and failed the identical assertion on Windows CI. That is why this lives in
+a tool run on the device rather than in a test run on a host nobody ships.

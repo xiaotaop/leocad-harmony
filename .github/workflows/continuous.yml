@@ -43,6 +43,18 @@ jobs:
             ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
           $missing = $paths | Where-Object { -not (Test-Path -LiteralPath $_) }
           if ($missing) { throw "Missing source-list files: $($missing -join ', ')" }
+      - name: Check first-release scope against the offline claim
+        shell: bash
+        # The privacy policy promises no network requests and no INTERNET
+        # permission. That holds because every path into common/lc_http.cpp is
+        # trimmed from the menus and the update check is compiled out — not
+        # because there is no network code. Both can regress silently, and the
+        # first symptom would be a store reviewer watching the app reach
+        # leocad.org, so they get asserted here instead of being remembered.
+        run: |
+          set -euo pipefail
+          python3 scripts/library/test_network_scope.py
+          python3 scripts/library/test_export_part_list.py
 
   desktop-build:
     name: Qt 6.12 desktop compile regression

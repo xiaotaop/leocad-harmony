@@ -5166,6 +5166,97 @@
         <source>Save Project</source>
         <translation>保存项目</translation>
     </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Error loading file &apos;%1&apos;:
+%2</source>
+        <translation>加载文件 &apos;%1&apos; 时出错：
+%2</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Error loading file &apos;%1&apos;:
+File format is not recognized.</source>
+        <translation>加载文件 &apos;%1&apos; 时出错：
+无法识别文件格式。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Error reading file &apos;%1&apos;:
+%2</source>
+        <translation>读取文件 &apos;%1&apos; 时出错：
+%2</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>The file contains no LDraw records.</source>
+        <translation>文件中没有 LDraw 记录。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>This format is disabled in this build.</source>
+        <translation>此版本已禁用该格式。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Duplicate submodel name.</source>
+        <translation>子模型名称重复。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Invalid submodel name.</source>
+        <translation>子模型名称无效。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Invalid part reference.</source>
+        <translation>零件引用无效。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Invalid color code.</source>
+        <translation>颜色代码无效。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Embedded binary data is not supported.</source>
+        <translation>不支持内嵌的二进制数据。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Missing or invalid geometry coordinates.</source>
+        <translation>几何坐标缺失或无效。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Missing or invalid piece pivot coordinates.</source>
+        <translation>零件旋转中心坐标缺失或无效。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Missing or invalid synth control point coordinates.</source>
+        <translation>合成控制点坐标缺失或无效。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Unexpected data after geometry coordinates.</source>
+        <translation>几何坐标之后出现了多余数据。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Geometry appears before the first MPD submodel.</source>
+        <translation>几何数据出现在第一个 MPD 子模型之前。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Circular submodel references are not supported.</source>
+        <translation>不支持循环引用的子模型。</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_mainwindow.cpp"/>
+        <source>Invalid LDraw data at line %1: %2</source>
+        <translation>第 %1 行的 LDraw 数据无效：%2</translation>
+    </message>
 </context>
 <context>
     <name>lcMinifigDialog</name>

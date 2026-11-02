@@ -1,4 +1,4 @@
-﻿# Build and run the D3 integration tests on Windows (MSVC), for CI.
+# Build and run the D3 integration tests on Windows (MSVC), for CI.
 #
 # Why this exists: the D3 suites live in four separate qmake projects, and the
 # existing model CI never built them, so a green run said nothing about them
@@ -72,13 +72,23 @@ foreach ($name in $Suite) {
         $binary = Join-Path $build "build\release\$target.exe"
         if (!(Test-Path -LiteralPath $binary)) { throw "binary not produced for $name" }
 
-        & $binary *> (Join-Path $build 'test-results.txt')
+        # QtTest's own -o, not PowerShell '*>' redirection: on the runner, native
+        # command output through '*>' landed in a zero-byte file, so every suite
+        # "passed" from an empty test-results.txt (an empty file contains no
+        # '^FAIL!' line) and the only real signal left was the exit code — a
+        # failing suite said nothing about what failed. Build-MemberB.ps1 already
+        # writes results with -o and its file is never empty. The console line
+        # below exists because a crash before the first flush leaves the file
+        # empty, and then the exit code is all there is to go on.
+        $results = Join-Path $build 'test-results.txt'
+        & $binary -o "$results,txt"
         $exit = $LASTEXITCODE
-        Get-Content (Join-Path $build 'test-results.txt') -Tail 3
+        Write-Output ('{0}: exit={1}, {2} bytes of results' -f $name, $exit, (Get-Item $results -ErrorAction SilentlyContinue).Length)
+        Get-Content $results -Tail 3
 
         # QtTest exits non-zero on failure; also treat a printed FAIL! as failure so
         # a crash after the summary cannot pass.
-        if ($exit -ne 0 -or (Select-String -Path (Join-Path $build 'test-results.txt') -Pattern '^FAIL!' -Quiet)) {
+        if ($exit -ne 0 -or (Select-String -Path $results -Pattern '^FAIL!' -Quiet)) {
             $failed += $name
         }
     }
