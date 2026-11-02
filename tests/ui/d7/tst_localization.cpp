@@ -27,6 +27,10 @@
 #include <QTranslator>
 #include <QTreeWidget>
 #include <QCursor>
+#include <QFile>
+#include <QFontInfo>
+#include <QFontMetrics>
+#include <QXmlStreamReader>
 #include <QtTest>
 
 #include "lc_application.h"
@@ -64,6 +68,17 @@ private slots:
 	// device screenshots showed in English next to translated neighbours.
 	void mainWindowStringsAroundThePanelAreTranslated();
 
+	// The other half of "中文资源、字体和常用提示": a translated string that the
+	// font cannot draw is still a blank box on screen, and that looks exactly
+	// like a missing translation.
+	void chineseGlyphsAreAvailableToTheUiFont();
+	void chineseTextIsNotWiderThanTheSpaceItsEnglishPredecessorHad();
+
+	// 常用提示: the messages a user meets when a file will not open or save. These
+	// come out of QMessageBox, so English here is a dialog in English on an
+	// otherwise Chinese build — the kind of thing a reviewer sees immediately.
+	void commonFileErrorMessagesAreTranslated();
+
 	// Menu width: the elision the device showed as "Regular...ression".
 	void optionsMenuFitsItsLongestEntry();
 	void filterSubmenuFitsItsLongestEntry();
@@ -91,6 +106,7 @@ private:
 	QToolButton* OptionsButton() const;
 	int CountVisibleRows() const;
 	QMenu* BuildOptionsMenu();
+	QList<QPair<QString, QString>> ReadZhTranslations(const QString& Context);
 };
 
 void LocalizationTest::initTestCase()
@@ -183,6 +199,75 @@ int LocalizationTest::CountVisibleRows() const
 			Visible++;
 
 	return Visible;
+}
+
+// Reads one context out of the .ts as (source, translation) pairs.
+//
+// The .ts rather than the installed translator because QTranslator only answers
+// "what does this exact source translate to", and what is needed here is the set
+// of strings that are actually shown, which the file lists. The .qm the tests
+// install is built from this same file, so a context that reads fine here is the
+// one the application uses.
+QList<QPair<QString, QString>> LocalizationTest::ReadZhTranslations(const QString& Context)
+{
+	QList<QPair<QString, QString>> Result;
+
+	const QString Ts = QFINDTESTDATA("../../../resources/leocad_zh_CN.ts");
+
+	if (Ts.isEmpty())
+		return Result;
+
+	QFile File(Ts);
+
+	if (!File.open(QIODevice::ReadOnly | QIODevice::Text))
+		return Result;
+
+	QXmlStreamReader Xml(&File);
+	QString Current;
+
+	while (!Xml.atEnd())
+	{
+		Xml.readNext();
+
+		if (!Xml.isStartElement())
+			continue;
+
+		if (Xml.name() == QLatin1String("context"))
+			Current.clear();
+		else if (Xml.name() == QLatin1String("name"))
+			Current = Xml.readElementText();
+		else if (Xml.name() == QLatin1String("message") && Current == Context)
+		{
+			// Walk the children by hand: readElementText() on the first one would
+			// consume the rest of the element.
+			QString Source;
+			QString Translation;
+
+			while (!(Xml.isEndElement() && Xml.name() == QLatin1String("message")))
+			{
+				if (Xml.atEnd())
+					break;
+
+				Xml.readNext();
+
+				if (!Xml.isStartElement())
+					continue;
+
+				if (Xml.name() == QLatin1String("source"))
+					Source = Xml.readElementText();
+				else if (Xml.name() == QLatin1String("translation"))
+				{
+					const bool Unfinished = Xml.attributes().value(QLatin1String("type")) == QLatin1String("unfinished");
+					Translation = Unfinished ? QString() : Xml.readElementText();
+				}
+			}
+
+			if (!Translation.isEmpty())
+				Result += qMakePair(Source, Translation);
+		}
+	}
+
+	return Result;
 }
 
 QMenu* LocalizationTest::BuildOptionsMenu()
@@ -442,7 +527,134 @@ void LocalizationTest::mainWindowStringsAroundThePanelAreTranslated()
 	QCOMPARE(QCoreApplication::translate("lcPropertiesWidget", "Multiple Pieces"), QStringLiteral("多个零件"));
 }
 
-// The device showed "Regular...ression": the menu was wider than the text in its
+// A translated string the font cannot draw renders as a blank box, which on screen
+// is indistinguishable from the string never having been translated. The device
+// review asked for 字体 as its own item, so it gets its own check rather than
+// riding on the strings.
+void LocalizationTest::chineseGlyphsAreAvailableToTheUiFont()
+{
+	// Every Chinese character the panels actually show. Taken from the .ts rather
+	// than typed again here: if a translation is later reworded with a character
+	// the font lacks, this fails, which hand-copying would miss.
+	QString Shown;
+
+	const QStringList Contexts = {
+		QStringLiteral("lcPartSelectionWidget"),
+		QStringLiteral("Categories"),
+		QStringLiteral("lcMainWindow"),
+		QStringLiteral("lcPropertiesWidget"),
+	};
+
+	for (const QString& Context : Contexts)
+		for (const QPair<QString, QString>& Entry : ReadZhTranslations(Context))
+			Shown += Entry.second;
+	QVERIFY2(!Shown.isEmpty(), "no Chinese translations were read from the .ts");
+
+	// The widget's own font is what matters, not QApplication::font(): a style or
+	// a stylesheet can hand the panel a different family.
+	const QFontMetrics Metrics(mPanel->font());
+	QString Missing;
+
+	for (const QChar Ch : Shown)
+	{
+		if (Ch.unicode() < 0x80 || Ch.isSpace())
+			continue;
+
+		if (!Metrics.inFont(Ch))
+			Missing += Ch;
+	}
+
+	QVERIFY2(Missing.isEmpty(),
+		qPrintable(QStringLiteral("%1 characters have no glyph in \"%2\": %3")
+			.arg(Missing.size()).arg(QFontInfo(mPanel->font()).family()).arg(Missing)));
+
+	// Line height has to be at least one ascent plus one descent, or the top and
+	// bottom of a Chinese glyph get clipped — a layout bug no missing-glyph count
+	// would report.
+	QVERIFY(Metrics.height() >= Metrics.ascent() + Metrics.descent());
+	QVERIFY2(Metrics.ascent() > 0 && Metrics.descent() > 0,
+		qPrintable(QStringLiteral("degenerate line metrics: ascent %1 descent %2")
+			.arg(Metrics.ascent()).arg(Metrics.descent())));
+}
+
+// The menu width was computed from the widest entry, so what matters is whether
+// the Chinese entry is wider than the English one that used to be there. A test
+// that only says "it fits now" would keep passing if a translation grew and the
+// width followed it, hiding the case where the menu outgrows its neighbours.
+void LocalizationTest::chineseTextIsNotWiderThanTheSpaceItsEnglishPredecessorHad()
+{
+	const QFontMetrics Metrics(mPanel->font());
+
+	// The two entries the device showed elided, against the English they replace.
+	const QPair<QString, QString> Pairs[] = {
+		{ QStringLiteral("Regular Expression"), QString::fromUtf8("正则表达式") },
+		{ QStringLiteral("Part Description"), QString::fromUtf8("零件描述") },
+		{ QStringLiteral("Filter Parts"), QString::fromUtf8("筛选零件") },
+	};
+
+	for (const auto& Pair : Pairs)
+	{
+		const int English = Metrics.horizontalAdvance(Pair.first);
+		const int Chinese = Metrics.horizontalAdvance(Pair.second);
+
+		QVERIFY2(Chinese <= English,
+			qPrintable(QStringLiteral("\"%1\" (%2 px) is wider than the \"%3\" (%4 px) it replaced")
+				.arg(Pair.second).arg(Chinese).arg(Pair.first).arg(English)));
+	}
+}
+
+// 常用提示. Each of these is reached from an ordinary action — open a broken file,
+// save to a format the build lacks — and is shown through a QMessageBox with the
+// text as its body, so an untranslated one is a fully English dialog.
+void LocalizationTest::commonFileErrorMessagesAreTranslated()
+{
+	// source -> something the translation must contain. Not the exact wording:
+	// that would make every future rewording a test failure, and the point is
+	// whether the user sees Chinese, not which Chinese.
+	const QPair<QString, QString> Required[] = {
+		{ QStringLiteral("Error loading file '%1':\n%2"), QString::fromUtf8("加载") },
+		{ QStringLiteral("Error loading file '%1':\nFile format is not recognized."), QString::fromUtf8("无法识别") },
+		{ QStringLiteral("Error reading file '%1':\n%2"), QString::fromUtf8("读取") },
+		{ QStringLiteral("The file contains no LDraw records."), QString::fromUtf8("没有") },
+		{ QStringLiteral("This format is disabled in this build."), QString::fromUtf8("禁用") },
+		{ QStringLiteral("Duplicate submodel name."), QString::fromUtf8("子模型") },
+		{ QStringLiteral("Invalid submodel name."), QString::fromUtf8("子模型") },
+		{ QStringLiteral("Invalid part reference."), QString::fromUtf8("零件") },
+		{ QStringLiteral("Invalid color code."), QString::fromUtf8("颜色") },
+		{ QStringLiteral("Embedded binary data is not supported."), QString::fromUtf8("不支持") },
+		{ QStringLiteral("Missing or invalid geometry coordinates."), QString::fromUtf8("坐标") },
+		{ QStringLiteral("Missing or invalid piece pivot coordinates."), QString::fromUtf8("坐标") },
+		{ QStringLiteral("Circular submodel references are not supported."), QString::fromUtf8("不支持") },
+		{ QStringLiteral("Invalid LDraw data at line %1: %2"), QString::fromUtf8("数据无效") },
+	};
+
+	QStringList Missing;
+
+	for (const auto& Entry : Required)
+	{
+		const QString Text = QCoreApplication::translate("lcMainWindow", Entry.first.toUtf8().constData());
+
+		// Untranslated means Qt hands back the source verbatim; that is the failure.
+		if (Text == Entry.first || !Text.contains(Entry.second))
+			Missing += Entry.first;
+	}
+
+	// Build the detail only when there is something to report: QVERIFY2 evaluates
+	// its message argument either way, so Missing.first() here would assert on the
+	// success path — a passing test that aborts is worse than a failing one.
+	if (!Missing.isEmpty())
+	{
+		QFAIL(qPrintable(QStringLiteral("%1 common messages are not translated, first: \"%2\"")
+			.arg(Missing.size()).arg(QString(Missing.first()).replace(QLatin1Char('\n'), QLatin1Char(' ')))));
+	}
+
+	// A format string that lost its placeholder would show "%1" to the user, or
+	// crash arg() in a debug build. Checked separately because it is a different
+	// mistake from leaving the string English.
+	const QString WithPlaceholder = QCoreApplication::translate("lcMainWindow", "Invalid LDraw data at line %1: %2");
+	QVERIFY2(WithPlaceholder.contains(QStringLiteral("%1")) && WithPlaceholder.contains(QStringLiteral("%2")),
+		qPrintable(QStringLiteral("placeholders were lost: \"%1\"").arg(WithPlaceholder)));
+}
 // neighbours but narrower than this entry, because it was sized before the
 // handler refilled it.
 void LocalizationTest::optionsMenuFitsItsLongestEntry()
