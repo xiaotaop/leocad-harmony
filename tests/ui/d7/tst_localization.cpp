@@ -28,8 +28,12 @@
 #include <QTreeWidget>
 #include <QCursor>
 #include <QFile>
+#include <QFontDatabase>
 #include <QFontInfo>
 #include <QFontMetrics>
+#include <QGlyphRun>
+#include <QTextLayout>
+#include <QTextLine>
 #include <QXmlStreamReader>
 #include <QtTest>
 
@@ -107,7 +111,7 @@ private:
 	int CountVisibleRows() const;
 	QMenu* BuildOptionsMenu();
 	QList<QPair<QString, QString>> ReadZhTranslations(const QString& Context);
-	bool FontStackIsReal() const;
+	bool GlyphsCovered(const QString& Text) const;
 };
 
 void LocalizationTest::initTestCase()
@@ -530,18 +534,18 @@ void LocalizationTest::mainWindowStringsAroundThePanelAreTranslated()
 
 // A translated string the font cannot draw renders as a blank box, which is
 // indistinguishable on screen from the string never having been translated.
-// Per the review after two Windows CI reds: CI verifies the GLYPHS the UI font
-// actually resolves to after its fallback chain, and that Chinese fits the
-// controls; the HarmonyOS font itself is a device measurement (probe below),
-// not a CI one. What was cancelled is the forced CJK-wider-than-Latin width
-// comparison — equal advances say nothing about glyph support (font, size and
-// fallback decide width), and it produced a false failure on a host that has
-// working Chinese text.
+//
+// This checks the glyphs shaping actually produced, not what a font family claims
+// to cover. QFontMetrics::inFont() answers for the font Qt handed it — on
+// DirectWrite that is the family alone, so 筛 reads "missing" while drawing
+// resolves it to Microsoft YaHei; asserting on that measured the engine's habit,
+// not the product (it failed Windows CI twice). The reliable question is the one
+// the renderer asks: lay the string out, take the glyph runs Qt produced after
+// fallback, and check for glyph index 0 (.notdef) — the box the user sees.
 void LocalizationTest::chineseGlyphsAreAvailableToTheUiFont()
 {
-	// Part one, valid on every platform: the translation source the app loads is
-	// parseable and actually carries Chinese for the visible contexts, and the
-	// line box has height at all (a zero-height layout clips everything).
+	// Part one works wherever there is a .ts at all: it parses and carries Chinese
+	// for the contexts this suite talks about, and the line box has height.
 	QString Shown;
 
 	const QStringList Contexts = {
@@ -560,45 +564,76 @@ void LocalizationTest::chineseGlyphsAreAvailableToTheUiFont()
 	QVERIFY2(Metrics.height() > 0,
 		qPrintable(QStringLiteral("zero or negative line height: %1").arg(Metrics.height())));
 
-	if (!FontStackIsReal())
-		QSKIP("font database is the fixed-advance stub: glyph coverage is unmeasurable here");
+	// Part two needs fonts to shape with. Ask the database rather than inferring
+	// it from advance widths: a monospaced font has equal i/W advances, and
+	// treating that as "no fonts" would skip the checks on a valid configuration.
+	// The Windows CI offscreen platform really has none ("Cannot find font
+	// directory .../lib/fonts"); skipping with that reason makes the host's state
+	// visible instead of silently green.
+	const QStringList Families = QFontDatabase::families();
+	if (Families.isEmpty())
+		QSKIP("no font families on this host: glyph coverage is unmeasurable here");
 
-	// Part two, on a real font stack: every Chinese character the panels show
-	// resolves to a glyph through the platform's fallback chain — the same
-	// question 字体 asks on the device, answered against whatever fonts the
-	// runner actually has. Engines disagree about per-GLOBAL-font coverage
-	// (DirectWrite answers for the family alone; fontconfig folds fallback into
-	// the answer), so this is the check that only makes sense once the stack is
-	// known real; the device probe carries the same wording for 组长 to run.
-	QString Missing;
+	QStringList Broken;
 
-	for (const QChar Ch : Shown)
+	// Iterate code points, not QChars. A character outside the BMP is a surrogate
+	// pair, and shaping a lone surrogate produces no glyph at all — the loop would
+	// report coverage for a character that is never drawable. (Found the hard way:
+	// injecting U+12000 into a translation still passed.)
+	for (int i = 0; i < Shown.size(); )
 	{
-		if (Ch.unicode() < 0x80 || Ch.isSpace())
+		const uint Code = Shown.at(i).isHighSurrogate() && i + 1 < Shown.size()
+			? QChar::surrogateToUcs4(Shown.at(i), Shown.at(i + 1))
+			: Shown.at(i).unicode();
+		const int Width = Code > 0xFFFF ? 2 : 1;
+		const QString One = Shown.mid(i, Width);
+		i += Width;
+
+		if (Code < 0x80 || QChar::isSpace(Code))
 			continue;
 
-		if (!Metrics.inFont(Ch))
-			Missing += Ch;
+		if (!GlyphsCovered(One))
+			Broken += One;
 	}
 
-	if (!Missing.isEmpty())
-		QFAIL(qPrintable(QStringLiteral("%1 characters have no glyph in \"%2\": %3")
-			.arg(Missing.size()).arg(QFontInfo(mPanel->font()).family()).arg(Missing)));
+	if (!Broken.isEmpty())
+		QFAIL(qPrintable(QStringLiteral("%1 characters shape to .notdef with \"%2\" (%3 families): %4")
+			.arg(Broken.size()).arg(QFontInfo(mPanel->font()).family())
+			.arg(Families.size()).arg(Broken.join(QString()))));
 }
 
-// Whether the resolved font stack is a real one or the platform's fixed-advance
-// guess. The Windows CI runs this suite on the offscreen platform, where the
-// font database comes up empty (QWARN "Cannot find font directory .../lib/fonts"
-// in the run log, and QFont point sizes computed from a -1 pixel size) and every
-// glyph — Latin or CJK — measures at the same fixed advance. Advance comparisons
-// in that state measure nothing: CJK > Latin spuriously failed there with both
-// sides at 24 px, and Chinese-narrower-than-English would spuriously pass on any
-// pair. i vs W is the detector: no real font ever draws those equally wide.
-bool LocalizationTest::FontStackIsReal() const
+// True when every glyph shaping produced has a real index. Qt shapes per run with
+// fallback, so a character the UI font lacks but another installed font provides
+// arrives in an extra run with valid ids — precisely the case inFont() miscalled.
+bool LocalizationTest::GlyphsCovered(const QString& Text) const
 {
-	const QFontMetrics Metrics(mPanel->font());
-	return Metrics.horizontalAdvance(QStringLiteral("i")) !=
-		   Metrics.horizontalAdvance(QStringLiteral("W"));
+	QTextLayout Layout(Text, mPanel->font());
+	Layout.beginLayout();
+
+	QTextLine Line = Layout.createLine();
+	if (!Line.isValid())
+	{
+		Layout.endLayout();
+		return false;
+	}
+
+	Line.setLineWidth(1000000);
+
+	bool Covered = true;
+	for (const QGlyphRun& Run : Line.glyphRuns())
+	{
+		for (quint32 Glyph : Run.glyphIndexes())
+		{
+			if (Glyph == 0)
+			{
+				Covered = false;
+				break;
+			}
+		}
+	}
+
+	Layout.endLayout();
+	return Covered;
 }
 
 // The menu width was computed from the widest entry, so what matters is whether
@@ -607,8 +642,10 @@ bool LocalizationTest::FontStackIsReal() const
 // width followed it, hiding the case where the menu outgrows its neighbours.
 void LocalizationTest::chineseTextIsNotWiderThanTheSpaceItsEnglishPredecessorHad()
 {
-	if (!FontStackIsReal())
-		QSKIP("offscreen fixed-advance font stack: text advances measure nothing");
+	// Needs fonts for advances to mean anything; a host with none reports the same
+	// width for everything, which would let this pass by accident.
+	if (QFontDatabase::families().isEmpty())
+		QSKIP("no font families on this host: text advances measure nothing");
 
 	const QFontMetrics Metrics(mPanel->font());
 
