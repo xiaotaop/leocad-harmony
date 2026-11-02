@@ -71,3 +71,7 @@ build-profile.local.json5
 *.p7b
 *.cer
 *.p12
+
+# Python bytecode from the library scripts.
+__pycache__/
+*.pyc
