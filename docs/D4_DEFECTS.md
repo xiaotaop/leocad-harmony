@@ -40,12 +40,15 @@
 D7 的 C 行还要求「字体」和「常用提示」，这两项当时没有任何记录，而「字串已在 `.ts` 里」推不出
 「用户能看见」。补上：
 
-- **字体**：缺字形时屏幕上是空白或方框，和设备报告的「仍是英文」在截图里长得一样。新增
-  `chineseGlyphsAreAvailableToTheUiFont()`，从 `.ts` 取出实际会显示的全部中文，逐字问面板自己的
-  字体有没有字形，并断言行高 ≥ ascent + descent。另加
+- **字体**：缺字形时屏幕上是空白或方框，和设备报告的「仍是英文」在截图里长得一样。初版
+  `chineseGlyphsAreAvailableToTheUiFont()` 用 `QFontMetrics::inFont()` 逐字查字形覆盖，
+  **在 Windows CI 上失败**（DirectWrite 的 `inFont` 只答 family 自身，Segoe UI 对所有中文答否，
+  尽管绘制照样回退；Linux 的 fontconfig 把回退并进字体所以本地全绿）。逐字覆盖随引擎语义变化，
+  不是可跨主机断言的产品属性——改为只断言平台无关的部分（`.ts` 完整可读、行高 ≥ ascent+descent、
+  中文测量宽度大于拉丁），逐字字形覆盖归 `tools/d7/tst_d7_fonts.cpp` 探针在**真机**执行。另加
   `chineseTextIsNotWiderThanTheSpaceItsEnglishPredecessorHad()`——只断言「现在放得下」的话，
-  翻译变长时宽度跟着变、测试照样通过，反而掩盖真正要看的事。宿主实测 `筛选零件` 48 px 对
-  `Filter Parts` 63 px，中文更窄，菜单宽度修复不会被译文反向吃掉。
+  翻译变长时宽度跟着变、测试照样通过，反而掩盖真正要看的事；这条对具体字体不敏感（CJK 全角单字
+  ≈1em 且同义中文串字数减半），宿主实测 `筛选零件` 48 px 对 `Filter Parts` 63 px。
 - **常用提示**：17 条打开/保存失败的 `QMessageBox` 正文全部翻译，并单独检查格式串没丢
   `%1`/`%2`。这些是用户正常操作就会撞见的（打开坏文件、另存为不支持的格式）。
 
@@ -75,3 +78,8 @@ D7 的 C 行还要求「字体」和「常用提示」，这两项当时没有�
   - **51 条是命令行 `--help` 的参数说明**（以及只有命令行路径会打印的 `StdOut`/`StdErr` 消息，如 `Saved '%1'.`）。鸿蒙首发版没有命令行入口，这些串到不了用户面前。
   - **24 条是相机、灯光的专业参数**（`Cone Angle`、`Penumbra Angle`、`Power of the light in Watts` 等）和属性编辑字段。这些需要先定术语表才能翻，不能逐词直译；其中 `POV-Ray Export`/`Blender Settings` 属于 #14 的裁剪范围，翻译等于给即将移除的控件做中文。
   两类都不在 F-02（零件面板）范围内，单列跟进。
+- **Windows CI 日志失明（本轮连带修复，不属 D4-03）**：`Run-D3Tests.ps1` 用 `*>` 重定向原生进程，
+  runner 上落盘恒为 0 字节，9 个套件「成功」从不打印任何 PASS——判定只剩退出码，空日志里永远搜不到
+  `FAIL!`。已改用 QtTest 自带 `-o file,txt`（`Build-MemberB.ps1` 一直用这个方式且日志非空），并把
+  退出码打回 console。详见 `docs/D7_中文资源与菜单尺寸.md` §5.1b。此前的 Windows「绿」只有退出码
+  作证据，日志作证据的从下一次运行开始。

@@ -124,4 +124,13 @@ asserted from here without inventing them.
 `missing=0` with `resolved=DejaVu Sans` is not a contradiction: Qt falls back
 per character, so a family without CJK still draws Chinese from another one. That
 also means replacing the font with a non-existent family does *not* simulate a
-missing glyph — the test uses a character no CJK font covers (U+12000) instead.
+missing glyph — the CI test asserts on a character no CJK font covers instead.
+
+**Read `missing` as a comparison, not a verdict.** `QFontMetrics::inFont()` asks
+the font's own engine, and the engines disagree about what "its own" means: on
+Linux fontconfig bakes the fallback into the default font, so every character
+measures as covered; on Windows DirectWrite reports the family alone, so Segoe UI
+reports every Chinese character as missing even though drawing resolves it to
+Microsoft YaHei per run. The same build passed coverage checks on the Linux
+suite and failed the identical assertion on Windows CI. That is why this lives in
+a tool run on the device rather than in a test run on a host nobody ships.
