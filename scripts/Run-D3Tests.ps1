@@ -1,4 +1,4 @@
-# Build and run the D3 integration tests on Windows (MSVC), for CI.
+﻿# Build and run the D3 integration tests on Windows (MSVC), for CI.
 #
 # Why this exists: the D3 suites live in four separate qmake projects, and the
 # existing model CI never built them, so a green run said nothing about them
@@ -13,7 +13,7 @@
 
 param(
     [string]$QtRoot = '',
-    [string[]]$Suite = @('archive', 'priority', 'menu', 'modellist', 'panel', 'preferences', 'theme', 'chain')
+    [string[]]$Suite = @('archive', 'priority', 'menu', 'modellist', 'panel', 'preferences', 'theme', 'chain', 'localization')
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
@@ -39,6 +39,7 @@ foreach ($name in $Suite) {
     if ($name -eq 'panel') { $project = "d4-$name-tests.pro"; $target = "leocad-d4-$name" }
     elseif ($name -eq 'preferences' -or $name -eq 'theme') { $project = "d5-$name-tests.pro"; $target = "leocad-d5-$name" }
     elseif ($name -eq 'chain') { $project = "d6-$name-tests.pro"; $target = "leocad-d6-$name" }
+    elseif ($name -eq 'localization') { $project = "d7-$name-tests.pro"; $target = "leocad-d7-$name" }
     else { $project = "d3-$name-tests.pro"; $target = "leocad-d3-$name" }
     if (!(Test-Path -LiteralPath (Join-Path $root $project))) { throw "No such suite: $name" }
 

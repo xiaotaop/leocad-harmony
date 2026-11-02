@@ -6,8 +6,10 @@
 # found the tests were never actually running in CI.
 #
 # Usage:
-#   scripts/dev/run-d3-tests.sh           # build and run all four
+#   scripts/dev/run-d3-tests.sh           # build and run every suite
 #   scripts/dev/run-d3-tests.sh archive   # one of: archive priority menu modellist
+#                                         #         panel preferences theme chain
+#                                         #         localization
 #
 # Requires: source .devtools/env.sh (or qmake on PATH). Exits non-zero if any
 # suite fails, so CI can gate on it.
@@ -28,7 +30,7 @@ python3 tests/library/d3/prepare_variants.py
 
 SUITES=("$@")
 if [ ${#SUITES[@]} -eq 0 ]; then
-    SUITES=(archive priority menu modellist panel preferences theme chain)
+    SUITES=(archive priority menu modellist panel preferences theme chain localization)
 fi
 
 FAILED=0
@@ -40,6 +42,7 @@ for SUITE in "${SUITES[@]}"; do
     panel)       PROJECT="d4-${SUITE}-tests.pro"; TARGET="leocad-d4-${SUITE}" ;;
     preferences|theme) PROJECT="d5-${SUITE}-tests.pro"; TARGET="leocad-d5-${SUITE}" ;;
     chain)       PROJECT="d6-${SUITE}-tests.pro"; TARGET="leocad-d6-${SUITE}" ;;
+    localization) PROJECT="d7-${SUITE}-tests.pro"; TARGET="leocad-d7-${SUITE}" ;;
     *)           PROJECT="d3-${SUITE}-tests.pro"; TARGET="leocad-d3-${SUITE}" ;;
     esac
 
