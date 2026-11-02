@@ -9978,4 +9978,22 @@ Anisotropic: %5
         <translation>黄绿色</translation>
     </message>
 </context>
+<context>
+    <name>lcPropertiesWidget</name>
+    <message>
+        <location filename="../common/lc_propertieswidget.cpp"/>
+        <source> Multiple Colors</source>
+        <translation> 多个颜色</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_propertieswidget.cpp"/>
+        <source>Multiple Pieces</source>
+        <translation>多个零件</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_propertieswidget.cpp"/>
+        <source>Multiple Values</source>
+        <translation>多个值</translation>
+    </message>
+</context>
 </TS>

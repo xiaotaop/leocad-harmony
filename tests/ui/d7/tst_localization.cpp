@@ -432,6 +432,14 @@ void LocalizationTest::mainWindowStringsAroundThePanelAreTranslated()
 
 	// Dialog titles the user meets while saving.
 	QCOMPARE(QCoreApplication::translate("lcMainWindow", "Save Project"), QStringLiteral("保存项目"));
+
+	// The properties tab draws the same colour name this change translates, and
+	// its "several different colours selected" state is the only text the colour
+	// button has there. Left English, selecting two bricks of different colours
+	// would put English back on screen from a path the panel fix never reaches.
+	QCOMPARE(QCoreApplication::translate("lcPropertiesWidget", " Multiple Colors"), QStringLiteral(" 多个颜色"));
+	QCOMPARE(QCoreApplication::translate("lcPropertiesWidget", "Multiple Values"), QStringLiteral("多个值"));
+	QCOMPARE(QCoreApplication::translate("lcPropertiesWidget", "Multiple Pieces"), QStringLiteral("多个零件"));
 }
 
 // The device showed "Regular...ression": the menu was wider than the text in its

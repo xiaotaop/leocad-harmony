@@ -42,4 +42,4 @@
 
 - 上述截图是 x86_64 **宿主**截图（WSLg Wayland + `QWidget::grab()`），不是真机截图。真机复验仍由组长按计划执行，**本次不宣称已通过真机验收**。
 - 三类问题不随本次修复关闭：D4-01 缩略图颜色（[#27](https://github.com/xiaotaop/leocad-harmony/issues/27)，A主责/C配合）、偏好设置裁剪（[#14](https://github.com/xiaotaop/leocad-harmony/issues/14)）、系统文件选择闭环（#15）。用翻译修复去替代缩略图问题的做法不可接受。
-- 相机、灯光和属性对话框仍有 57 条英文串（`origin/main` 时 73 条，本次修好 16 条，无新增缺口）。其中 `POV-Ray Export`/`Blender Settings` 属于 #14 的裁剪范围，翻译等于给即将移除的控件做中文。不在 F-02 范围内，单列跟进，且需先定专业术语表。
+- 相机、灯光和属性对话框仍有 54 条英文串（`origin/main` 时 73 条，本次修好 19 条，无新增缺口）。其中 `POV-Ray Export`/`Blender Settings` 属于 #14 的裁剪范围，翻译等于给即将移除的控件做中文。不在 F-02 范围内，单列跟进，且需先定专业术语表。
