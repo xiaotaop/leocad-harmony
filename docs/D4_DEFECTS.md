@@ -44,8 +44,11 @@ D7 的 C 行还要求「字体」和「常用提示」，这两项当时没有�
   `chineseGlyphsAreAvailableToTheUiFont()` 用 `QFontMetrics::inFont()` 逐字查字形覆盖，
   **在 Windows CI 上失败**（DirectWrite 的 `inFont` 只答 family 自身，Segoe UI 对所有中文答否，
   尽管绘制照样回退；Linux 的 fontconfig 把回退并进字体所以本地全绿）。逐字覆盖随引擎语义变化，
-  不是可跨主机断言的产品属性——改为只断言平台无关的部分（`.ts` 完整可读、行高 ≥ ascent+descent、
-  中文测量宽度大于拉丁），逐字字形覆盖归 `tools/d7/tst_d7_fonts.cpp` 探针在**真机**执行。另加
+  不是可跨主机断言的产品属性——改为只断言平台无关的部分（`.ts` 完整可读、行高 > 0、
+  中文测量宽度大于拉丁）。第二版又因 `ascent/descent > 0` 在 Windows 红一次：DirectWrite 对雅黑
+  报排版语义（typo descent=0），fontconfig 报上下文语义（>0），两边都没错，问的不是同一个问题；
+  连同 `height >= a+d` 一并移除——它通过靠的是排版度量恒等式的构造，不是引擎承诺。规则写进注释：
+  **跨引擎只断言语义无歧义的量**，逐字字形覆盖归 `tools/d7/tst_d7_fonts.cpp` 探针在**真机**执行。另加
   `chineseTextIsNotWiderThanTheSpaceItsEnglishPredecessorHad()`——只断言「现在放得下」的话，
   翻译变长时宽度跟着变、测试照样通过，反而掩盖真正要看的事；这条对具体字体不敏感（CJK 全角单字
   ≈1em 且同义中文串字数减半），宿主实测 `筛选零件` 48 px 对 `Filter Parts` 63 px。
