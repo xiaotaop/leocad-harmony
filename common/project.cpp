@@ -19,6 +19,7 @@
 #include "lc_string.h"
 #include "lc_colors.h"
 #include <QSaveFile>
+#include "lc_authorizedsave.h"
 #include <cmath>
 
 lcHTMLExportOptions::lcHTMLExportOptions(const Project* Project)
@@ -657,24 +658,50 @@ lcResult<void> Project::Load(const QString& FileName)
 
 lcResult<void> Project::Save(const QString& FileName)
 {
-	QSaveFile File(FileName);
-	File.setDirectWriteFallback(false);
+	// Complete serialization before touching an authorized external document.
+	QByteArray Contents;
+	QTextStream Serialized(&Contents, QIODevice::WriteOnly);
+	if (!Save(Serialized))
+		return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, tr("Could not serialize the model.")));
 
-	if (!File.open(QIODevice::WriteOnly))
-		return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
-
-	QTextStream Stream(&File);
-	if (!Save(Stream))
-		return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
-
-	// Suppress notifications from our own replacement, but retain the old
-	// document identity and dirty state if committing the temporary file fails.
-	const QString PreviousFileName = mFileName;
-	SetFileName(QString());
-	if (!File.commit())
+	bool Published = false;
+#ifdef Q_OS_HARMONY
+	if (QDir::cleanPath(FileName).startsWith(QStringLiteral("/storage/Users/currentUser/")))
 	{
-		SetFileName(PreviousFileName);
-		return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
+		const QString PreviousFileName = mFileName;
+		SetFileName(QString());
+		const auto Result = lcWriteAuthorizedDocument(FileName, Contents);
+		if (!Result.Success)
+		{
+			SetFileName(PreviousFileName);
+			QString Error = Result.Error;
+			if (!Result.RecoveryPath.isEmpty())
+				Error += QLatin1Char('\n') + tr("The previous file could not be restored. A recovery copy is available at: %1").arg(Result.RecoveryPath);
+			return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, Error));
+		}
+		Published = true;
+	}
+#endif
+	if (!Published)
+	{
+		QSaveFile File(FileName);
+		File.setDirectWriteFallback(false);
+
+		if (!File.open(QIODevice::WriteOnly))
+			return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
+
+		if (File.write(Contents) != Contents.size())
+			return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
+
+		// Suppress notifications from our own replacement, but retain the old
+		// document identity and dirty state if committing the temporary file fails.
+		const QString PreviousFileName = mFileName;
+		SetFileName(QString());
+		if (!File.commit())
+		{
+			SetFileName(PreviousFileName);
+			return lcUnexpected(tr("Error writing to file '%1':\n%2").arg(FileName, File.errorString()));
+		}
 	}
 
 	SetFileName(QFileInfo(FileName).absoluteFilePath());

@@ -13,7 +13,7 @@
 
 param(
     [string]$QtRoot = '',
-    [string[]]$Suite = @('archive', 'priority', 'menu', 'modellist', 'panel', 'preferences', 'theme', 'chain', 'localization')
+    [string[]]$Suite = @('archive', 'priority', 'menu', 'modellist', 'panel', 'preferences', 'theme', 'chain', 'localization', 'files')
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
@@ -40,6 +40,7 @@ foreach ($name in $Suite) {
     elseif ($name -eq 'preferences' -or $name -eq 'theme') { $project = "d5-$name-tests.pro"; $target = "leocad-d5-$name" }
     elseif ($name -eq 'chain') { $project = "d6-$name-tests.pro"; $target = "leocad-d6-$name" }
     elseif ($name -eq 'localization') { $project = "d7-$name-tests.pro"; $target = "leocad-d7-$name" }
+    elseif ($name -eq 'files') { $project = "d7-files-tests.pro"; $target = "leocad-d7-files" }
     else { $project = "d3-$name-tests.pro"; $target = "leocad-d3-$name" }
     if (!(Test-Path -LiteralPath (Join-Path $root $project))) { throw "No such suite: $name" }
 
