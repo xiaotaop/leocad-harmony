@@ -1,0 +1,82 @@
+# Provenance metadata added by Member B on 2026-11-02; not emitted by QtTest.
+# Downloaded CI evidence; not a new Member B local test run.
+# Run: https://github.com/xiaotaop/leocad-harmony/actions/runs/41374196474
+# Artifact: windows-model-1e00144528a20bdacffcc08362e51489baa9ccb0
+# Artifact file: build-tests/test-results.txt
+# CI checkout: 1e00144528a20bdacffcc08362e51489baa9ccb0
+# PR #40 head: 629ed2bb90ef1f4b15287410831e4f58f8533404
+# Both trees: 2181582bb5ce11067ee978843ab4038449315abb
+# B D7 documentation base: main 7d887f0507be0d123973fed1df1c8a11098848a0; does not include PR #40.
+# CI command: scripts/Build-MemberB.ps1 -Target Tests -RunTests; completed successfully.
+# Raw downloaded file SHA-256: b1364fa377a8812004f0272a46419bcb3a7b69b7452843c95441006dfa56b908
+# QtTest output follows; only line endings normalized to LF for repository storage.
+********* Start testing of ModelIoTest *********
+Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-llp64 shared (dynamic) release build; by MSVC 2022), windows server2022
+PASS   : ModelIoTest::initTestCase()
+QINFO  : ModelIoTest::thumbnailAndCameraColors(red) LEOCAD_GL_READBACK {"destination_format":5,"height":72,"source_depth":32,"source_format":6,"source_stride":288,"width":72}
+PASS   : ModelIoTest::thumbnailAndCameraColors(red)
+PASS   : ModelIoTest::thumbnailAndCameraColors(blue)
+PASS   : ModelIoTest::thumbnailAndCameraColors(light-blue)
+PASS   : ModelIoTest::tiledRenderKeepsColorAndOrientation(horizontal)
+PASS   : ModelIoTest::tiledRenderKeepsColorAndOrientation(vertical)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width1)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width2)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width3)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width1)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width2)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width3)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width1)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width2)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width3)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(3ds)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(dae)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(csv)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(pov)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(obj)
+PASS   : ModelIoTest::offlineDownloadCompletesWithError()
+PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(lcd)
+PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(leocad)
+PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(sniffed-binary)
+PASS   : ModelIoTest::disabledLddImportPreservesDocument()
+PASS   : ModelIoTest::disabledHtmlExportDoesNotCreateDirectory()
+PASS   : ModelIoTest::disabledBrickLinkExportReturnsError()
+PASS   : ModelIoTest::emptyModelRoundTrip()
+PASS   : ModelIoTest::ldrRoundTrip()
+PASS   : ModelIoTest::mpdRoundTrip()
+PASS   : ModelIoTest::missingFilePreservesModel()
+PASS   : ModelIoTest::unwritableDestinationReportsError()
+PASS   : ModelIoTest::failedSaveAsPreservesDocumentState()
+PASS   : ModelIoTest::streamWriteFailureIsReported()
+PASS   : ModelIoTest::successfulOverwriteCanBeReopened()
+PASS   : ModelIoTest::failedReplacementPreservesExistingFile()
+PASS   : ModelIoTest::editingSequenceUndoRedoAndSave()
+PASS   : ModelIoTest::insertTwentyPiecesUndoRedoAndReopen()
+PASS   : ModelIoTest::serializationDoesNotClearEditHistoryDirtyState()
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(empty-file)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-reference)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(missing-part-name)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-transform)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(duplicate-submodel)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(unnamed-submodel)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-triangle)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(overlong-reference)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(self-referencing-submodel)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(mutually-referencing-submodels)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(unused-submodel-cycle)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-synth-control-point)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-synth-control-point)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-piece-pivot)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-piece-pivot)
+PASS   : ModelIoTest::loadedActiveModelBelongsToProject()
+PASS   : ModelIoTest::sharedSubmodelRoundTrip()
+PASS   : ModelIoTest::relativeDocumentPathsSurviveWorkingDirectoryChange(load-relative-path)
+PASS   : ModelIoTest::relativeDocumentPathsSurviveWorkingDirectoryChange(save-relative-path)
+PASS   : ModelIoTest::compatibleLDrawSyntax(bom-and-direct-color)
+PASS   : ModelIoTest::compatibleLDrawSyntax(unknown-meta-and-line)
+PASS   : ModelIoTest::compatibleLDrawSyntax(mpd-trailing-signature)
+PASS   : ModelIoTest::compatibleLDrawSyntax(piece-pivot)
+PASS   : ModelIoTest::compatibleLDrawSyntax(synth-control-point)
+PASS   : ModelIoTest::compatibleLDrawSyntax(ignored-meta-after-nofile)
+PASS   : ModelIoTest::cleanupTestCase()
+Totals: 65 passed, 0 failed, 0 skipped, 0 blacklisted, 382ms
+********* Finished testing of ModelIoTest *********
