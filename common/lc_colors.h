@@ -92,4 +92,22 @@ inline bool lcIsColorRubber(size_t ColorIndex)
 }
 
 QString lcGetColorToolTip(int ColorIndex);
+
+// Display name for a colour, translated when a translation exists.
+//
+// gColorList[].Name is data, not text: it is written into saved models, exported
+// files and the colour profile, and lcColor::Name is a fixed char[64] filled by
+// the LDConfig parser. Translating it in place would change saved values and,
+// for names longer than 64 bytes, truncate them. So the stored name stays as
+// parsed and only the string drawn on screen goes through the translator.
+//
+// The source strings live in the "Colors" context (see lc_colors.cpp), which
+// keeps 300+ colour names out of the general translation context.
+QString lcGetColorDisplayName(int ColorIndex);
+
+// Same idea for the stored name of a colour group ("Solid", "Translucent",
+// "Special"). Those three are already built with QApplication::tr() at load
+// time, so this only exists to keep the call sites symmetrical.
+QString lcGetColorGroupDisplayName(int ColorGroup);
+
 void lcDrawNoColorRect(QPainter& Painter, const QRect& Rect);

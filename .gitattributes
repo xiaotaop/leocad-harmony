@@ -34,3 +34,5 @@
 
 # Preserve D7 input regression evidence.
 /docs/evidence/member-a/2026-11-02/* -text whitespace=cr-at-eol,-blank-at-eol
+# Preserve D7 localisation evidence bytes across platform checkouts.
+/docs/evidence/member-c/2026-11-02/* -text whitespace=cr-at-eol,-blank-at-eol

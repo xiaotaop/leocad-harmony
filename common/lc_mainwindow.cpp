@@ -2472,7 +2472,7 @@ void lcMainWindow::UpdateColor()
 	Pixmap.fill(QColor::fromRgbF(gColorList[mColorIndex].Value[0], gColorList[mColorIndex].Value[1], gColorList[mColorIndex].Value[2]));
 
 	mColorButton->setIcon(Pixmap);
-	mColorButton->setText(QString("  ") + gColorList[mColorIndex].Name);
+	mColorButton->setText(QString("  ") + lcGetColorDisplayName(mColorIndex));
 
 	mColorList->SetCurrentColor(mColorIndex);
 }
