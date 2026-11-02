@@ -47,8 +47,16 @@ D7 的 C 行还要求「字体」和「常用提示」，这两项当时没有�
   不是可跨主机断言的产品属性——改为只断言平台无关的部分（`.ts` 完整可读、行高 > 0、
   中文测量宽度大于拉丁）。第二版又因 `ascent/descent > 0` 在 Windows 红一次：DirectWrite 对雅黑
   报排版语义（typo descent=0），fontconfig 报上下文语义（>0），两边都没错，问的不是同一个问题；
-  连同 `height >= a+d` 一并移除——它通过靠的是排版度量恒等式的构造，不是引擎承诺。规则写进注释：
-  **跨引擎只断言语义无歧义的量**，逐字字形覆盖归 `tools/d7/tst_d7_fonts.cpp` 探针在**真机**执行。另加
+  连同 `height >= a+d` 一并移除——它通过靠的是排版度量恒等式的构造，不是引擎承诺。第三次红
+  （`Cjk>Latin` 报 24<=24）暴露了更底层的真相：Windows CI 的 offscreen 平台**根本没有字体库**
+  （QWARN `Cannot find font directory`、point size 由 -1px 换算成 -0.75、所有字符量成同一固定
+  advance），宽度比较在那里既会假红也会假绿。组长裁定：**取消强制宽度比较**（同宽不能证明缺字），
+  改为「真实栈上验证回退后的字形 + 中文放进控件」，鸿蒙字体真机另验。最终形态：
+  `FontStackIsReal()`（`i` 与 `W` 等宽即退化）探测，退化栈 `QSKIP` 附原因，真实栈逐字 `inFont`
+  恢复执行；`.ts` 完整性与行高>0 全平台保留。跳过路径用空 fontconfig 本地复现验证；字形扫描的
+  负向验证第一次注入的是**不存在的模式串**（空操作差点蒙混过关），改为断言替换必须改变文件后，
+  U+12000 注入准确报红。教训四连：`inFont` 语义、descent 语义、offscreen 无字体、**空操作的负向
+  验证不是验证**，逐字字形覆盖归 `tools/d7/tst_d7_fonts.cpp` 探针在**真机**执行。另加
   `chineseTextIsNotWiderThanTheSpaceItsEnglishPredecessorHad()`——只断言「现在放得下」的话，
   翻译变长时宽度跟着变、测试照样通过，反而掩盖真正要看的事；这条对具体字体不敏感（CJK 全角单字
   ≈1em 且同义中文串字数减半），宿主实测 `筛选零件` 48 px 对 `Filter Parts` 63 px。

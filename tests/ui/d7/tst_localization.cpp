@@ -28,6 +28,7 @@
 #include <QTreeWidget>
 #include <QCursor>
 #include <QFile>
+#include <QFontInfo>
 #include <QFontMetrics>
 #include <QXmlStreamReader>
 #include <QtTest>
@@ -106,6 +107,7 @@ private:
 	int CountVisibleRows() const;
 	QMenu* BuildOptionsMenu();
 	QList<QPair<QString, QString>> ReadZhTranslations(const QString& Context);
+	bool FontStackIsReal() const;
 };
 
 void LocalizationTest::initTestCase()
@@ -528,20 +530,18 @@ void LocalizationTest::mainWindowStringsAroundThePanelAreTranslated()
 
 // A translated string the font cannot draw renders as a blank box, which is
 // indistinguishable on screen from the string never having been translated.
-//
-// What this CANNOT check from CI: per-character coverage of the resolved font.
-// QFontMetrics::inFont() asks the font's own engine, and the engines disagree —
-// Linux fontconfig folds the CJK fallback into the default font so inFont says
-// yes for 筛, while Windows DirectWrite reports the family alone (Segoe UI: no
-// CJK) even though drawing still finds Microsoft YaHei. The first version of
-// this test asserted inFont over the whole .ts and failed on the Windows CI
-// while passing here, proving nothing about either platform. Glyph coverage is
-// a property of the device's font set, so it belongs to the probe
-// (tools/d7/tst_d7_fonts.cpp) run on the device, not to a CI host suite.
+// Per the review after two Windows CI reds: CI verifies the GLYPHS the UI font
+// actually resolves to after its fallback chain, and that Chinese fits the
+// controls; the HarmonyOS font itself is a device measurement (probe below),
+// not a CI one. What was cancelled is the forced CJK-wider-than-Latin width
+// comparison — equal advances say nothing about glyph support (font, size and
+// fallback decide width), and it produced a false failure on a host that has
+// working Chinese text.
 void LocalizationTest::chineseGlyphsAreAvailableToTheUiFont()
 {
-	// What CI can assert: the translation source that probe and app both read is
-	// complete, and the panel's line metrics leave room for CJK glyphs.
+	// Part one, valid on every platform: the translation source the app loads is
+	// parseable and actually carries Chinese for the visible contexts, and the
+	// line box has height at all (a zero-height layout clips everything).
 	QString Shown;
 
 	const QStringList Contexts = {
@@ -556,31 +556,49 @@ void LocalizationTest::chineseGlyphsAreAvailableToTheUiFont()
 			Shown += Entry.second;
 	QVERIFY2(!Shown.isEmpty(), "no Chinese translations were read from the .ts");
 
-	// A positive line height is what every engine is obliged to supply (a
-	// zero-height line clips everything, Chinese and Latin alike). No comparison
-	// involving ascent and descent, in either direction: those halves mean
-	// different things to different engines — DirectWrite reports Microsoft YaHei's
-	// typographic descent as 0 (it exists only to satisfy tmAscent+tmDescent+
-	// tmLineGap = tmHeight), while fontconfig reports the contextual descent a
-	// glyph actually sits in, which is positive. height >= a + d survived the
-	// Windows run by that construction, not by an engine guarantee — and after
-	// inFont() and ascent/descent>0 both flipped green-to-red across hosts, an
-	// assertion that passes on one engine only because of a numeric coincidence is
-	// a bug report still in flight. What a CJK font must do is MEASURE wider per
-	// character than Latin; that is the assertion with a cross-engine definition.
 	const QFontMetrics Metrics(mPanel->font());
 	QVERIFY2(Metrics.height() > 0,
 		qPrintable(QStringLiteral("zero or negative line height: %1").arg(Metrics.height())));
 
-	// Chinese must actually measure wider per character than Latin at the same
-	// point size — if the engine has no CJK metrics at all, the advance collapses
-	// to a default and text layout silently overlaps. Engine-independent: any
-	// fallback that draws Chinese also reports an advance.
-	const int Cjk = Metrics.horizontalAdvance(QString::fromUtf8("测试"));
-	const int Latin = Metrics.horizontalAdvance(QStringLiteral("ab"));
-	QVERIFY2(Cjk > Latin,
-		qPrintable(QStringLiteral("CJK advance %1 <= Latin advance %2: the font cannot measure Chinese")
-			.arg(Cjk).arg(Latin)));
+	if (!FontStackIsReal())
+		QSKIP("font database is the fixed-advance stub: glyph coverage is unmeasurable here");
+
+	// Part two, on a real font stack: every Chinese character the panels show
+	// resolves to a glyph through the platform's fallback chain — the same
+	// question 字体 asks on the device, answered against whatever fonts the
+	// runner actually has. Engines disagree about per-GLOBAL-font coverage
+	// (DirectWrite answers for the family alone; fontconfig folds fallback into
+	// the answer), so this is the check that only makes sense once the stack is
+	// known real; the device probe carries the same wording for 组长 to run.
+	QString Missing;
+
+	for (const QChar Ch : Shown)
+	{
+		if (Ch.unicode() < 0x80 || Ch.isSpace())
+			continue;
+
+		if (!Metrics.inFont(Ch))
+			Missing += Ch;
+	}
+
+	if (!Missing.isEmpty())
+		QFAIL(qPrintable(QStringLiteral("%1 characters have no glyph in \"%2\": %3")
+			.arg(Missing.size()).arg(QFontInfo(mPanel->font()).family()).arg(Missing)));
+}
+
+// Whether the resolved font stack is a real one or the platform's fixed-advance
+// guess. The Windows CI runs this suite on the offscreen platform, where the
+// font database comes up empty (QWARN "Cannot find font directory .../lib/fonts"
+// in the run log, and QFont point sizes computed from a -1 pixel size) and every
+// glyph — Latin or CJK — measures at the same fixed advance. Advance comparisons
+// in that state measure nothing: CJK > Latin spuriously failed there with both
+// sides at 24 px, and Chinese-narrower-than-English would spuriously pass on any
+// pair. i vs W is the detector: no real font ever draws those equally wide.
+bool LocalizationTest::FontStackIsReal() const
+{
+	const QFontMetrics Metrics(mPanel->font());
+	return Metrics.horizontalAdvance(QStringLiteral("i")) !=
+		   Metrics.horizontalAdvance(QStringLiteral("W"));
 }
 
 // The menu width was computed from the widest entry, so what matters is whether
@@ -589,6 +607,9 @@ void LocalizationTest::chineseGlyphsAreAvailableToTheUiFont()
 // width followed it, hiding the case where the menu outgrows its neighbours.
 void LocalizationTest::chineseTextIsNotWiderThanTheSpaceItsEnglishPredecessorHad()
 {
+	if (!FontStackIsReal())
+		QSKIP("offscreen fixed-advance font stack: text advances measure nothing");
+
 	const QFontMetrics Metrics(mPanel->font());
 
 	// The two entries the device showed elided, against the English they replace.
