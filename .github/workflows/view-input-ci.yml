@@ -29,7 +29,7 @@ jobs:
           arch: win64_msvc2022_64
           archives: qtbase qttools qtsvg opengl32sw
           cache: true
-      - name: Build and exercise production widgets at DPR1 and DPR2
+      - name: Build and exercise production widgets at DPR1, DPR1.5 and DPR2
         run: ./scripts/Run-MemberAInputTests.ps1 -QtRoot $env:QT_ROOT_DIR
       - uses: actions/upload-artifact@v4
         if: always()

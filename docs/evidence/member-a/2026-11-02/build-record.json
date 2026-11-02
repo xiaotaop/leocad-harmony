@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-02",
+  "baseline": "7d887f0507be0d123973fed1df1c8a11098848a0",
+  "qt": "6.12.0",
+  "host": "macOS-27.0.1-arm64-arm-64bit",
+  "source_sha256": {
+    "common/lc_viewwidget.cpp": "796c7fc1fd028845d8e888488da2816bb611f55cabdd70cfe9968ba72cff6607",
+    "tests/input/tst_view_input.cpp": "fd9b2c582419cfaab988ec2295348d0178bfd066917156bbd6195dd08ca80224",
+    "scripts/Run-MemberAInputTests.ps1": "1b4f2e7cf3a4669fb78661a2d2ae88cacbbb7310536615d43ee10e3ed8b0ceb0",
+    "member-a-input-tests.pro": "49ffba98205572fcd3d5e8ae419eb2272a939b424f2b5fac789adb5fd715aa67"
+  },
+  "binary_sha256": "042712d13b00c09334ad58a3f5b358c58f328cb32d4f2bbf81096f50a9da79ea",
+  "source_copy": "/private/tmp/leocad-d6-source",
+  "build_directory": "/private/tmp/leocad-d6-input-build",
+  "build_command": "make -j6 (incremental qmake Release build; production source synced from baseline + PR)",
+  "run_command": "TMPDIR=/private/tmp/leocad-d6-runtime QT_SCALE_FACTOR=<scale> LEOCAD_SAFE_RENDER=<0/1> ./build/release/leocad-input-tests -o <name>.txt,txt -o <name>.xml,junitxml",
+  "runs": [
+    {
+      "name": "normal-dpr2",
+      "QT_SCALE_FACTOR": "1",
+      "LEOCAD_SAFE_RENDER": 0,
+      "observed_dpr": 2,
+      "exit_code": 0,
+      "passed": 38,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "basic-dpr2",
+      "QT_SCALE_FACTOR": "1",
+      "LEOCAD_SAFE_RENDER": 1,
+      "observed_dpr": 2,
+      "exit_code": 0,
+      "passed": 38,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "normal-dpr1",
+      "QT_SCALE_FACTOR": "0.5",
+      "LEOCAD_SAFE_RENDER": 0,
+      "observed_dpr": 1,
+      "exit_code": 0,
+      "passed": 38,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "fractional-dpr1_5",
+      "QT_SCALE_FACTOR": "0.75",
+      "LEOCAD_SAFE_RENDER": 0,
+      "observed_dpr": 1.5,
+      "exit_code": 0,
+      "passed": 38,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "negative": {
+    "production_source": "baseline 7d887f0 common/lc_viewwidget.cpp",
+    "cases": "highResolutionWheel wheelRemainderAndFocusReset wheelModifiersAndHorizontalInput keyboardMoveUndoRedo modifierDragSemantics",
+    "passed": 6,
+    "failed": 5,
+    "exit_code": 5,
+    "fixture_note": "Negative ran before final explicit Qt window activation fixture adjustment; wheel cases unchanged. Final four-mode run uses explicit activation."
+  },
+  "device": "not executed; pending leader physical device batch; no new HAP generated"
+}

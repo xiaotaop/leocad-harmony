@@ -296,6 +296,120 @@ private slots:
         mouse(QEvent::MouseButtonRelease,P+QPointF(15,10),Qt::LeftButton,Qt::NoButton);
         QCOMPARE(View->GetCamera()->mPosition,Before);
     }
+public:
+    void angleWheel(int Delta, Qt::KeyboardModifiers Modifiers=Qt::NoModifier, bool Inverted=false)
+    {
+        const QPointF P=center();
+        QWheelEvent Event(P,Widget->mapToGlobal(P.toPoint()),QPoint(),QPoint(0,Delta),Qt::NoButton,Modifiers,Qt::NoScrollPhase,Inverted);
+        QApplication::sendEvent(Widget,&Event);
+        QVERIFY(Event.isAccepted());
+    }
+private slots:
+    void highResolutionWheel_data()
+    {
+        QTest::addColumn<int>("Delta");
+        QTest::newRow("positive-30")<<30;
+        QTest::newRow("negative-30")<<-30;
+        QTest::newRow("positive-8")<<8;
+        QTest::newRow("negative-8")<<-8;
+    }
+    void highResolutionWheel()
+    {
+        QFETCH(int,Delta);
+        const lcVector3 Before=View->GetCamera()->mPosition;
+        const int Count=120/std::abs(Delta);
+        for(int i=1;i<Count;i++) {angleWheel(Delta);QCOMPARE(View->GetCamera()->mPosition,Before);}
+        angleWheel(Delta); const lcVector3 Accumulated=View->GetCamera()->mPosition;
+        QVERIFY(Accumulated!=Before);
+        View->SetViewpoint(lcViewpoint::Home); View->ZoomExtents();
+        QCOMPARE(View->GetCamera()->mPosition,Before);
+        angleWheel(Delta>0?120:-120);
+        QCOMPARE(View->GetCamera()->mPosition,Accumulated);
+        QVERIFY(!Model->IsModified());
+    }
+    void wheelRemainderAndFocusReset()
+    {
+        const lcVector3 Before=View->GetCamera()->mPosition;
+        angleWheel(150); const lcVector3 First=View->GetCamera()->mPosition; QVERIFY(First!=Before);
+        angleWheel(60); QCOMPARE(View->GetCamera()->mPosition,First);
+        angleWheel(30); QVERIFY(View->GetCamera()->mPosition!=First);
+        const lcVector3 Second=View->GetCamera()->mPosition;
+        angleWheel(90); QCOMPARE(View->GetCamera()->mPosition,Second);
+        QFocusEvent Lost(QEvent::FocusOut); QApplication::sendEvent(Widget,&Lost);
+        angleWheel(30); QCOMPARE(View->GetCamera()->mPosition,Second);
+        angleWheel(-30); QCOMPARE(View->GetCamera()->mPosition,Second);
+        angleWheel(120); QVERIFY(View->GetCamera()->mPosition!=Second);
+        QVERIFY(!Model->IsModified());
+    }
+    void wheelModifiersAndHorizontalInput()
+    {
+        const lcVector3 Before=View->GetCamera()->mPosition;
+        auto Distance=[&]() {return lcLength(View->GetCamera()->mPosition-Before);};
+        const float Original=0;
+        angleWheel(120,Qt::ShiftModifier); const float Fine=std::abs(Distance()-Original);
+        View->SetViewpoint(lcViewpoint::Home); View->ZoomExtents();
+        angleWheel(120); const float Normal=std::abs(Distance()-Original);
+        View->SetViewpoint(lcViewpoint::Home); View->ZoomExtents();
+        angleWheel(120,Qt::ControlModifier); const float Fast=std::abs(Distance()-Original);
+        QVERIFY(Fine>0 && Fine<Normal && Normal<Fast);
+        View->SetViewpoint(lcViewpoint::Home); View->ZoomExtents();
+        angleWheel(120,Qt::NoModifier,true); // angleDelta already carries the platform's direction.
+        const lcVector3 Inverted=View->GetCamera()->mPosition;
+        View->SetViewpoint(lcViewpoint::Home); View->ZoomExtents(); angleWheel(120);
+        QCOMPARE(View->GetCamera()->mPosition,Inverted);
+        const lcVector3 After=View->GetCamera()->mPosition;
+        const QPointF P=center();
+        QWheelEvent Horizontal(P,Widget->mapToGlobal(P.toPoint()),QPoint(),QPoint(120,0),Qt::NoButton,Qt::NoModifier,Qt::NoScrollPhase,false);
+        QApplication::sendEvent(Widget,&Horizontal);
+        QVERIFY(!Horizontal.isAccepted()); QCOMPARE(View->GetCamera()->mPosition,After);
+        QVERIFY(Before!=After); QVERIFY(!Model->IsModified());
+    }
+    void keyboardMoveUndoRedo()
+    {
+        lcPiece* Piece=Model->GetPieces()[0].get();
+        Model->SetSelectionAndFocusAction({Piece},Piece,LC_PIECE_SECTION_POSITION,lcSelectionMode::Single);
+        Model->SetSaved(); const lcVector3 Before=Piece->mModelWorld.GetTranslation();
+        // Establish Qt shortcut context; desktop foreground policy is not
+        // part of this injected-event test (physical focus is a device check).
+        QApplication::setActiveWindow(Window.get()); Widget->setFocus();
+        QVERIFY(Window->isActiveWindow()); QVERIFY(Widget->hasFocus());
+        QTest::keyClick(Widget,Qt::Key_Right);
+        const lcVector3 After=Model->GetPieces()[0]->mModelWorld.GetTranslation();
+        QVERIFY(After!=Before); QVERIFY(Model->IsModified());
+        QTest::keySequence(Widget,QKeySequence("Ctrl+Z"));
+        QCOMPARE(Model->GetPieces()[0]->mModelWorld.GetTranslation(),Before); QVERIFY(!Model->IsModified());
+        QTest::keySequence(Widget,QKeySequence("Ctrl+Y"));
+        QCOMPARE(Model->GetPieces()[0]->mModelWorld.GetTranslation(),After); QVERIFY(Model->IsModified());
+    }
+    void modifierDragSemantics_data()
+    {
+        QTest::addColumn<int>("Modifiers");
+        QTest::newRow("shift-pan")<<int(Qt::ShiftModifier);
+        QTest::newRow("alt-zoom")<<int(Qt::AltModifier);
+    }
+    void modifierDragSemantics()
+    {
+        QFETCH(int,Modifiers); Window->SetTool(lcTool::Select);
+        const lcVector3 Before=View->GetCamera()->mPosition, Target=View->GetCamera()->mTargetPosition;
+        const QPointF P=center(); const auto Mods=Qt::KeyboardModifiers(Modifiers);
+        QTest::keyPress(Widget,Modifiers==int(Qt::ShiftModifier)?Qt::Key_Shift:Qt::Key_Alt);
+        mouse(QEvent::MouseButtonPress,P,Qt::RightButton,Qt::RightButton,Mods);
+        mouse(QEvent::MouseMove,P+QPointF(35,25),Qt::NoButton,Qt::RightButton,Mods);
+        mouse(QEvent::MouseButtonRelease,P+QPointF(35,25),Qt::RightButton,Qt::NoButton,Mods);
+        QTest::keyRelease(Widget,Modifiers==int(Qt::ShiftModifier)?Qt::Key_Shift:Qt::Key_Alt);
+        const lcVector3 After=View->GetCamera()->mPosition;
+        QVERIFY(After!=Before);
+        if(Modifiers==int(Qt::ShiftModifier))
+        {
+            QVERIFY(lcLength((After-Before)-(View->GetCamera()->mTargetPosition-Target))<0.001f);
+        }
+        else
+        {
+            QVERIFY(lcLength((After-Before)-(View->GetCamera()->mTargetPosition-Target))<0.001f);
+            QVERIFY(lcLength(lcCross(lcNormalize(Before-Target),lcNormalize(After-Before)))<0.001f);
+        }
+        QVERIFY(!View->IsTracking()); QVERIFY(!Model->IsModified());
+    }
     void staleRightReleaseDoesNotOpenMenu()
     {
         const QPointF P=center(); Window->SetTool(lcTool::Select);
