@@ -1,4 +1,4 @@
-﻿*.suo
+*.suo
 *.sln
 *.vcxproj
 *.filters
@@ -30,7 +30,10 @@
 .vs
 build
 debug
-release
+# Anchored: a bare "release" also swallowed docs/release/, which holds the
+# store listing, privacy policy and GPL source-offer docs that have to ship with
+# the build. The intent is the qmake shadow-build output directly under the root.
+/release
 ipch
 Debug*
 .DS_Store
