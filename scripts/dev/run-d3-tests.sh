@@ -69,16 +69,32 @@ for SUITE in "${SUITES[@]}"; do
     fi
 
     echo "== $SUITE"
-    if QT_QPA_PLATFORM=offscreen "$BINARY" 2>&1 | tee "$BUILD/test-results.txt" | tail -3; then
-        :
+    if QT_QPA_PLATFORM=offscreen "$BINARY" > "$BUILD/test-results.txt" 2>&1; then
+        STATUS=0
     else
+        STATUS=$?
         FAILED=1
     fi
+
+    # Show the lines that explain the result, not the last three of it. The
+    # summary line comes last, so "tail -3" cut the FAIL! line above it and a
+    # failure printed "12 passed, 1 failed" with no clue which test, or why.
+    # One archive failure was lost exactly that way on D8: the next run rebuilds
+    # $BUILD from scratch, so the only copy of the reason disappeared with it.
+    grep -E '^(FAIL!|QFATAL|Totals)' "$BUILD/test-results.txt" || tail -3 "$BUILD/test-results.txt"
+
+    # Keep a copy outside $BUILD, which the next run deletes, so a failure that
+    # does not reproduce can still be read afterwards.
+    mkdir -p "$REPO_ROOT/build/last-run"
+    cp "$BUILD/test-results.txt" "$REPO_ROOT/build/last-run/d3-$SUITE-results.txt"
 
     # QtTest exits non-zero on failure, but be explicit: a suite that printed
     # "FAIL!" must not pass just because the process exited 0.
     if grep -q '^FAIL!' "$BUILD/test-results.txt"; then
         FAILED=1
+    fi
+    if [ "$STATUS" -ne 0 ] && ! grep -q '^FAIL!' "$BUILD/test-results.txt"; then
+        echo "   (exit $STATUS without a FAIL! line: crash or platform error)"
     fi
 done
 

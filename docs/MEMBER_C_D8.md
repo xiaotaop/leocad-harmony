@@ -85,8 +85,29 @@ theme 14 / chain 9 / localization 22 / files 9
 **10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 18 项通过
 （`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项），`git diff --check` 干净。
 
+改动前后各跑一遍完整回归，两次均为 112 项全绿；Windows CI 上 `MenuScopeTest::removedCommandsAreNotVisible()`
+为 PASS，套件 8 passed / 0 failed。
+
+### 一次未复现的失败，以及证据为什么丢了
+
+在本轮改动后的第一次完整回归里，`archive` 套件报出 `Totals: 12 passed, 1 failed`，其余套件正常。
+之后重跑：完整回归 2 次 + 直接循环 `leocad-d3-archive` 二进制 15 次，共 **18 次采样全部 13 passed**，
+未能复现。**因此不宣称该失败已定位或已修复**，也不据此改生产代码。
+
+真正暴露出来的是取证链断在工具上：`scripts/dev/run-d3-tests.sh` 用
+`... | tee "$BUILD/test-results.txt" | tail -3` 回显结果，而 QtTest 把 `Totals` 打在最后一行、
+`FAIL!` 打在它上面——三行刚好只够显示 `Loc:`、`cleanupTestCase` 和 `Totals`，**失败用例名与原因
+被截掉**。同时脚本每次 `rm -rf "$BUILD"` 重建目录，唯一的完整结果副本随之消失，下一次运行就已无法追查。
+这与 D7 在 CI 侧踩过的坑（`*>` 产生 0 字节结果文件）是同一类问题：**套件报红但说不出哪一条红，
+等于没有证据**。
+
+已修 runner：改为完整写入结果文件、按 `^(FAIL!|QFATAL|Totals)` 回显（点名失败用例与原因），
+并把每套件结果复制到 `build/last-run/`——该目录不在循环的删除范围内，重跑之后仍能回看上一次失败。
+
 ## 五、边界与未完成项
 
+- `archive` 套件出现过一次未复现的失败，原因**未知**（见 §四）。留待 D9 若再次出现时按新日志定位，
+  本轮不推测、不为此改生产代码。
 - 本轮是**宿主验证**，不是真机。帮助菜单裁剪在真机上的表现（图标、菜单宽度）未另行取证。
 - `localization` 套件里的字形覆盖与文字宽度两项，在 Windows CI 上因 runner 无字体库而 `SKIP`
   （D7 已记录），本轮不改这一状况；**字体结论仍以真机探针为准**。
