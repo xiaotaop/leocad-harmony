@@ -1,0 +1,6 @@
+2026-11-03 21:38 local device attempt on a newly created TEST COPY only.
+Command: chmod 444 /storage/media/100/local/files/Docs/Download/LeoCAD-D8/readonly-target.ldr
+Result: Permission denied.
+Observed mode remained -rw-r----- owned by file_manager. This is NOT evidence of an application write denial.
+No app save was attempted against this target; actual authorization/write-failure behavior remains UNTESTED.
+Temporary test copy removed after this diagnostic.

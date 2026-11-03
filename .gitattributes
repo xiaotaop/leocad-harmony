@@ -40,3 +40,4 @@
 
 # Preserve D8 stability evidence bytes.
 /docs/evidence/member-a/2026-11-03/* -text whitespace=cr-at-eol,-blank-at-eol
+/docs/evidence/leader/2026-11-03/d8-device/* -text whitespace=cr-at-eol,-blank-at-eol

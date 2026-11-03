@@ -1,0 +1,589 @@
+# Application thread stack excerpt; complete original retained in ignored build/d8-device-raw.
+# Device fingerprint, unrelated processes, CPU/memory and system event details omitted.
+Original SHA-256: 306db4d8588031cc00c9dea9122bb7990a4084fc95d89b46080341100ec8a599
+Build info:HAD-W24 6.1.0.117(SP68C00E100R13P3)
+Pid:44779
+Reason:BUSSINESS_THREAD_BLOCK_6S
+Catche stack trace start time: 2026-11-03 21:13:39.887
+
+Tid:44779, Name:xiaotaop.leocad
+state=S, utime=119, stime=86, priority=-14, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000001a8d4 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EpollIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+276)(ebf3f32f240b948ca8871a4a4102e91f)
+#03 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000328a8 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+936)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000035ac4 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventRunner::Run()+540)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 00000000000ec840 /system/lib64/platformsdk/libappkit_native.z.so(OHOS::AppExecFwk::MainThread::Start()+240)(0c6aa719c4a059ebd4ab5d7f63ba1ea5)
+#08 pc 0000000000009fac /system/lib64/appspawn/appspawn/libappspawn_ace.z.so(RunChildProcessor(AppSpawnContent*, AppSpawnClient*)+792)(f3c793f4c769cbbde6a640600f3ae149)
+#09 pc 000000000000c06c /system/bin/appspawn(AppSpawnChild+384)(15566a166c6caa14754d8934165fc38d)
+#10 pc 00000000000172e0 /system/bin/appspawn(ProcessSpawnReqMsg+3528)(15566a166c6caa14754d8934165fc38d)
+#11 pc 00000000000151f4 /system/bin/appspawn(OnReceiveRequest+828)(15566a166c6caa14754d8934165fc38d)
+#12 pc 000000000001755c /system/lib64/chipset-sdk-sp/libbegetutil.z.so(HandleRecvMsg_+344)(969f19a102a59ea5896aa3cfbd86de86)
+#13 pc 0000000000016fe8 /system/lib64/chipset-sdk-sp/libbegetutil.z.so(HandleStreamEvent_+192)(969f19a102a59ea5896aa3cfbd86de86)
+#14 pc 0000000000014524 /system/lib64/chipset-sdk-sp/libbegetutil.z.so(ProcessEvent+92)(969f19a102a59ea5896aa3cfbd86de86)
+#15 pc 00000000000140e0 /system/lib64/chipset-sdk-sp/libbegetutil.z.so(RunLoop_+496)(969f19a102a59ea5896aa3cfbd86de86)
+#16 pc 00000000000123c8 /system/bin/appspawn(AppSpawnRun+212)(15566a166c6caa14754d8934165fc38d)
+#17 pc 000000000000f9a0 /system/bin/appspawn(main+1124)(15566a166c6caa14754d8934165fc38d)
+#18 pc 00000000000b366c /system/lib/ld-musl-aarch64.so.1(libc_start_main_stage2+84)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44854, Name:OS_IPC_4_44854
+state=S, utime=2, stime=25, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44830, Name:OS_IPC_0_44830
+state=S, utime=1, stime=0, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44831, Name:OS_IPC_1_44831
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44832, Name:OS_DfxWatchdog
+state=S, utime=3, stime=3, priority=0, nice=-20, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 000000000001dfe4 /system/lib64/chipset-sdk-sp/libhicollie.z.so(OHOS::HiviewDFX::WatchdogInner::Start()+760)(529dd0007d050291d479bdeb04c19339)
+#04 pc 00000000000285f4 /system/lib64/chipset-sdk-sp/libhicollie.z.so(void* std::__h::__thread_proxy[abi:v15004]<std::__h::tuple<std::__h::unique_ptr<std::__h::__thread_struct, std::__h::default_delete<std::__h::__thread_struct>>, bool (OHOS::HiviewDFX::WatchdogInner::*)(), OHOS::HiviewDFX::WatchdogInner*>>(void*)+64)(529dd0007d050291d479bdeb04c19339)
+#05 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44833, Name:assertFaultTHR
+state=S, utime=1, stime=1, priority=20, nice=0, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 000000000003b224 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 000000000003afe0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::NoneIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+220)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 0000000000032868 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+872)(ebf3f32f240b948ca8871a4a4102e91f)
+#08 pc 0000000000033ce0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::ThreadMain(std::__h::weak_ptr<OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl> const&) (.cfi)+208)(ebf3f32f240b948ca8871a4a4102e91f)
+#09 pc 00000000000341dc /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#10 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44834, Name:OS_IPC_2_44834
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44836, Name:OS_FFRT_Delay
+state=S, utime=7, stime=2, priority=20, nice=0, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000008dabc /system/lib64/ndk/libffrt.so(void* std::__h::__thread_proxy[abi:v15004]<std::__h::tuple<std::__h::unique_ptr<std::__h::__thread_struct, std::__h::default_delete<std::__h::__thread_struct>>, ffrt::DelayedWorker::ThreadInit()::$_0>>(void*)+744)(6df4d3320c40f0c6a9ac81214d74ed08)
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44838, Name:OS_GC_Thread
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000008536dc /system/lib64/platformsdk/libark_jsruntime.so(panda::ecmascript::DaemonThread::PopTask()+64)(fd8b6ea5852422ba9402fb70269eef5a)
+#03 pc 0000000000853648 /system/lib64/platformsdk/libark_jsruntime.so(panda::ecmascript::DaemonThread::Run()+128)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 0000000000853b5c /system/lib64/platformsdk/libark_jsruntime.so(void* std::__h::__thread_proxy[abi:v15004]<std::__h::tuple<std::__h::unique_ptr<std::__h::__thread_struct, std::__h::default_delete<std::__h::__thread_struct>>, panda::ecmascript::DaemonThread::StartRunning()::$_0>>(void*)+64)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44839, Name:OS_GC_Thread
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4988 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::wait(std::__h::unique_lock<std::__h::mutex>&)+32)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 00000000008a37c8 /system/lib64/platformsdk/libark_jsruntime.so(common::TaskQueue::PopTask()+104)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 00000000008a3380 /system/lib64/platformsdk/libark_jsruntime.so(common::Runner::Run(unsigned int)+140)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000008a3468 /system/lib64/platformsdk/libark_jsruntime.so(fd8b6ea5852422ba9402fb70269eef5a)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44840, Name:OS_GC_Thread
+state=S, utime=1, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4988 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::wait(std::__h::unique_lock<std::__h::mutex>&)+32)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 00000000008a37c8 /system/lib64/platformsdk/libark_jsruntime.so(common::TaskQueue::PopTask()+104)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 00000000008a3380 /system/lib64/platformsdk/libark_jsruntime.so(common::Runner::Run(unsigned int)+140)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000008a3468 /system/lib64/platformsdk/libark_jsruntime.so(fd8b6ea5852422ba9402fb70269eef5a)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44841, Name:OS_GC_Thread
+state=S, utime=2, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4988 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::wait(std::__h::unique_lock<std::__h::mutex>&)+32)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 00000000008a37c8 /system/lib64/platformsdk/libark_jsruntime.so(common::TaskQueue::PopTask()+104)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 00000000008a3380 /system/lib64/platformsdk/libark_jsruntime.so(common::Runner::Run(unsigned int)+140)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000008a3468 /system/lib64/platformsdk/libark_jsruntime.so(fd8b6ea5852422ba9402fb70269eef5a)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44842, Name:OS_GC_Thread
+state=S, utime=2, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4988 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::wait(std::__h::unique_lock<std::__h::mutex>&)+32)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 00000000008a37c8 /system/lib64/platformsdk/libark_jsruntime.so(common::TaskQueue::PopTask()+104)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 00000000008a3380 /system/lib64/platformsdk/libark_jsruntime.so(common::Runner::Run(unsigned int)+140)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000008a3468 /system/lib64/platformsdk/libark_jsruntime.so(fd8b6ea5852422ba9402fb70269eef5a)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44845, Name:OS_hdcRegister
+state=S, utime=1, stime=0, priority=20, nice=0, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000057ac /system/lib64/platformsdk/libhdc_register.z.so(Hdc::HdcJdwpSimulator::ReadFromJdwp()+212)(d39b6530d47fa795e2e1d27e54ee2e1c)
+#03 pc 0000000000005e54 /system/lib64/platformsdk/libhdc_register.z.so(Hdc::HdcJdwpSimulator::Connect()+244)(d39b6530d47fa795e2e1d27e54ee2e1c)
+#04 pc 0000000000004490 /system/lib64/platformsdk/libhdc_register.z.so(Hdc::HdcConnectRun(void*)+532)(d39b6530d47fa795e2e1d27e54ee2e1c)
+#05 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44849, Name:OS_EVENT_POLL
+state=S, utime=1, stime=1, priority=-53, nice=-20, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 0000000000017964 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::DeamonIoWaiter::EpollWaitFor()+460)(ebf3f32f240b948ca8871a4a4102e91f)
+#03 pc 0000000000017c2c /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44850, Name:OS_IPC_3_44850
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44852, Name:OS_MainDisplayS
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000001a8d4 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EpollIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+276)(ebf3f32f240b948ca8871a4a4102e91f)
+#03 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000328a8 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+936)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000033ce0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::ThreadMain(std::__h::weak_ptr<OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl> const&) (.cfi)+208)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 00000000000341dc /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#08 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44859, Name:QtMainThread
+state=S, utime=67, stime=36, priority=-42, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e55a8 /system/lib/ld-musl-aarch64.so.1(nanosleep+44)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000026055d8 /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QThread::msleep(unsigned long)+96)(825522ac844d0a65ed532a652b512b22867a00d4)
+#03 pc 000000000063cae8 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcPiecesLibrary::LoadPieceInfo(PieceInfo*, bool, bool)+128)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#04 pc 00000000005e3568 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcPiece::SetPieceInfo(PieceInfo*, QString const&, bool, bool)+60)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#05 pc 00000000005e3404 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcPiece::lcPiece(PieceInfo*)+264)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#06 pc 000000000068e520 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcModel::SetPreviewPieceInfo(PieceInfo*, int)+68)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#07 pc 00000000006d7fa8 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcThumbnailManager::DrawThumbnail(lcPartThumbnailId, lcPartThumbnail&)+496)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#08 pc 00000000006d7aa0 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcThumbnailManager::PartLoaded(PieceInfo*)+100)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#09 pc 00000000024b5594 /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QObject::event(QEvent*)+724)(825522ac844d0a65ed532a652b512b22867a00d4)
+#10 pc 00000000002e2c48 /data/storage/el1/bundle/libs/arm64/libQt6Widgets.so(QApplicationPrivate::notify_helper(QObject*, QEvent*)+336)(084e69eea09cb636fa212fdb5bf1f41fad77bb16)
+#11 pc 00000000002e3c40 /data/storage/el1/bundle/libs/arm64/libQt6Widgets.so(QApplication::notify(QObject*, QEvent*)+524)(084e69eea09cb636fa212fdb5bf1f41fad77bb16)
+#12 pc 0000000002462ea4 /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QCoreApplication::sendEvent(QObject*, QEvent*)+168)(825522ac844d0a65ed532a652b512b22867a00d4)
+#13 pc 00000000024637cc /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QCoreApplicationPrivate::sendPostedEvents(QObject*, int, QThreadData*)+544)(825522ac844d0a65ed532a652b512b22867a00d4)
+#14 pc 0000000002606fcc /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QEventDispatcherUNIX::processEvents(QFlags<QEventLoop::ProcessEventsFlag>)+84)(825522ac844d0a65ed532a652b512b22867a00d4)
+#15 pc 000000000080fbbc /data/storage/el1/bundle/libs/arm64/libQt6Gui.so(QUnixEventDispatcherQPA::processEvents(QFlags<QEventLoop::ProcessEventsFlag>)+20)(2954f3e83d766bba2564d823dc524f3fc225d9a5)
+#16 pc 00000000024701a0 /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>)+612)(825522ac844d0a65ed532a652b512b22867a00d4)
+#17 pc 0000000002462adc /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QCoreApplication::exec()+148)(825522ac844d0a65ed532a652b512b22867a00d4)
+#18 pc 00000000006fab14 /data/storage/el1/bundle/libs/arm64/libleocad.so(main+4360)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#19 pc 0000000000246a64 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#20 pc 000000000024723c /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#21 pc 0000000000247778 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#22 pc 0000000000249bc8 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#23 pc 00000000002d9e90 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#24 pc 00000000002d9c38 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#25 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44862, Name:gpu-mem-pool
+state=S, utime=2, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000002c457c /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44863, Name:gpu-work-client
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000021b584 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44864, Name:gpu-work-client
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000021b584 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44865, Name:gpu-work-client
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000021b584 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44866, Name:gpu-work-server
+state=S, utime=1, stime=3, priority=-42, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001bc16c /system/lib/ld-musl-aarch64.so.1(poll+104)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 0000000000357708 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44867, Name:gpu-mem-report
+state=S, utime=1, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000031c644 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44884, Name:Acquire Fence
+state=S, utime=1, stime=1, priority=-42, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 000000000003b224 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 000000000003afe0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::NoneIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+220)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 00000000000328a8 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+936)(ebf3f32f240b948ca8871a4a4102e91f)
+#08 pc 0000000000033ce0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::ThreadMain(std::__h::weak_ptr<OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl> const&) (.cfi)+208)(ebf3f32f240b948ca8871a4a4102e91f)
+#09 pc 00000000000341dc /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#10 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44917, Name:OS_ExtensionSes
+state=S, utime=1, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 000000000003b224 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 000000000003afe0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::NoneIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+220)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 00000000000328a8 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+936)(ebf3f32f240b948ca8871a4a4102e91f)
+#08 pc 0000000000033ce0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::ThreadMain(std::__h::weak_ptr<OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl> const&) (.cfi)+208)(ebf3f32f240b948ca8871a4a4102e91f)
+#09 pc 00000000000341dc /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#10 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:46426, Name:OS_FFRT_3_7
+state=S, utime=1, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 0000000000063d5c /system/lib64/ndk/libffrt.so(ffrt::SExecuteUnit::WorkerIdleAction(ffrt::CPUWorker*)+332)(6df4d3320c40f0c6a9ac81214d74ed08)
+#04 pc 000000000004e0cc /system/lib64/ndk/libffrt.so(ffrt::CPUWorker::WorkerLooper(ffrt::CPUWorker*)+192)(6df4d3320c40f0c6a9ac81214d74ed08)
+#05 pc 000000000004dd88 /system/lib64/ndk/libffrt.so(ffrt::CPUWorker::Dispatch(ffrt::CPUWorker*)+180)(6df4d3320c40f0c6a9ac81214d74ed08)
+#06 pc 000000000004da80 /system/lib64/ndk/libffrt.so(ffrt::CPUWorker::WrapDispatch(void*)+52)(6df4d3320c40f0c6a9ac81214d74ed08)
+#07 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Catche stack trace start time: 2026-11-03 21:13:48.855
+
+Tid:44779, Name:xiaotaop.leocad
+state=S, utime=124, stime=105, priority=-14, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000001a8d4 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EpollIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+276)(ebf3f32f240b948ca8871a4a4102e91f)
+#03 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000328a8 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+936)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000035ac4 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventRunner::Run()+540)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 00000000000ec840 /system/lib64/platformsdk/libappkit_native.z.so(OHOS::AppExecFwk::MainThread::Start()+240)(0c6aa719c4a059ebd4ab5d7f63ba1ea5)
+#08 pc 0000000000009fac /system/lib64/appspawn/appspawn/libappspawn_ace.z.so(RunChildProcessor(AppSpawnContent*, AppSpawnClient*)+792)(f3c793f4c769cbbde6a640600f3ae149)
+#09 pc 000000000000c06c /system/bin/appspawn(AppSpawnChild+384)(15566a166c6caa14754d8934165fc38d)
+#10 pc 00000000000172e0 /system/bin/appspawn(ProcessSpawnReqMsg+3528)(15566a166c6caa14754d8934165fc38d)
+#11 pc 00000000000151f4 /system/bin/appspawn(OnReceiveRequest+828)(15566a166c6caa14754d8934165fc38d)
+#12 pc 000000000001755c /system/lib64/chipset-sdk-sp/libbegetutil.z.so(HandleRecvMsg_+344)(969f19a102a59ea5896aa3cfbd86de86)
+#13 pc 0000000000016fe8 /system/lib64/chipset-sdk-sp/libbegetutil.z.so(HandleStreamEvent_+192)(969f19a102a59ea5896aa3cfbd86de86)
+#14 pc 0000000000014524 /system/lib64/chipset-sdk-sp/libbegetutil.z.so(ProcessEvent+92)(969f19a102a59ea5896aa3cfbd86de86)
+#15 pc 00000000000140e0 /system/lib64/chipset-sdk-sp/libbegetutil.z.so(RunLoop_+496)(969f19a102a59ea5896aa3cfbd86de86)
+#16 pc 00000000000123c8 /system/bin/appspawn(AppSpawnRun+212)(15566a166c6caa14754d8934165fc38d)
+#17 pc 000000000000f9a0 /system/bin/appspawn(main+1124)(15566a166c6caa14754d8934165fc38d)
+#18 pc 00000000000b366c /system/lib/ld-musl-aarch64.so.1(libc_start_main_stage2+84)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44854, Name:OS_IPC_4_44854
+state=S, utime=3, stime=44, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44830, Name:OS_IPC_0_44830
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44831, Name:OS_IPC_1_44831
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44832, Name:OS_DfxWatchdog
+state=S, utime=4, stime=3, priority=0, nice=-20, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 000000000001dfe4 /system/lib64/chipset-sdk-sp/libhicollie.z.so(OHOS::HiviewDFX::WatchdogInner::Start()+760)(529dd0007d050291d479bdeb04c19339)
+#04 pc 00000000000285f4 /system/lib64/chipset-sdk-sp/libhicollie.z.so(void* std::__h::__thread_proxy[abi:v15004]<std::__h::tuple<std::__h::unique_ptr<std::__h::__thread_struct, std::__h::default_delete<std::__h::__thread_struct>>, bool (OHOS::HiviewDFX::WatchdogInner::*)(), OHOS::HiviewDFX::WatchdogInner*>>(void*)+64)(529dd0007d050291d479bdeb04c19339)
+#05 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44833, Name:assertFaultTHR
+state=S, utime=1, stime=1, priority=20, nice=0, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 000000000003b224 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 000000000003afe0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::NoneIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+220)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 0000000000032868 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+872)(ebf3f32f240b948ca8871a4a4102e91f)
+#08 pc 0000000000033ce0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::ThreadMain(std::__h::weak_ptr<OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl> const&) (.cfi)+208)(ebf3f32f240b948ca8871a4a4102e91f)
+#09 pc 00000000000341dc /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#10 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44834, Name:OS_IPC_2_44834
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44836, Name:OS_FFRT_Delay
+state=S, utime=7, stime=2, priority=20, nice=0, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000008dabc /system/lib64/ndk/libffrt.so(void* std::__h::__thread_proxy[abi:v15004]<std::__h::tuple<std::__h::unique_ptr<std::__h::__thread_struct, std::__h::default_delete<std::__h::__thread_struct>>, ffrt::DelayedWorker::ThreadInit()::$_0>>(void*)+744)(6df4d3320c40f0c6a9ac81214d74ed08)
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44838, Name:OS_GC_Thread
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000008536dc /system/lib64/platformsdk/libark_jsruntime.so(panda::ecmascript::DaemonThread::PopTask()+64)(fd8b6ea5852422ba9402fb70269eef5a)
+#03 pc 0000000000853648 /system/lib64/platformsdk/libark_jsruntime.so(panda::ecmascript::DaemonThread::Run()+128)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 0000000000853b5c /system/lib64/platformsdk/libark_jsruntime.so(void* std::__h::__thread_proxy[abi:v15004]<std::__h::tuple<std::__h::unique_ptr<std::__h::__thread_struct, std::__h::default_delete<std::__h::__thread_struct>>, panda::ecmascript::DaemonThread::StartRunning()::$_0>>(void*)+64)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44839, Name:OS_GC_Thread
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4988 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::wait(std::__h::unique_lock<std::__h::mutex>&)+32)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 00000000008a37c8 /system/lib64/platformsdk/libark_jsruntime.so(common::TaskQueue::PopTask()+104)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 00000000008a3380 /system/lib64/platformsdk/libark_jsruntime.so(common::Runner::Run(unsigned int)+140)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000008a3468 /system/lib64/platformsdk/libark_jsruntime.so(fd8b6ea5852422ba9402fb70269eef5a)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44840, Name:OS_GC_Thread
+state=S, utime=1, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4988 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::wait(std::__h::unique_lock<std::__h::mutex>&)+32)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 00000000008a37c8 /system/lib64/platformsdk/libark_jsruntime.so(common::TaskQueue::PopTask()+104)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 00000000008a3380 /system/lib64/platformsdk/libark_jsruntime.so(common::Runner::Run(unsigned int)+140)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000008a3468 /system/lib64/platformsdk/libark_jsruntime.so(fd8b6ea5852422ba9402fb70269eef5a)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44841, Name:OS_GC_Thread
+state=S, utime=2, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4988 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::wait(std::__h::unique_lock<std::__h::mutex>&)+32)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 00000000008a37c8 /system/lib64/platformsdk/libark_jsruntime.so(common::TaskQueue::PopTask()+104)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 00000000008a3380 /system/lib64/platformsdk/libark_jsruntime.so(common::Runner::Run(unsigned int)+140)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000008a3468 /system/lib64/platformsdk/libark_jsruntime.so(fd8b6ea5852422ba9402fb70269eef5a)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44842, Name:OS_GC_Thread
+state=S, utime=2, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4988 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::wait(std::__h::unique_lock<std::__h::mutex>&)+32)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 00000000008a37c8 /system/lib64/platformsdk/libark_jsruntime.so(common::TaskQueue::PopTask()+104)(fd8b6ea5852422ba9402fb70269eef5a)
+#04 pc 00000000008a3380 /system/lib64/platformsdk/libark_jsruntime.so(common::Runner::Run(unsigned int)+140)(fd8b6ea5852422ba9402fb70269eef5a)
+#05 pc 00000000008a3468 /system/lib64/platformsdk/libark_jsruntime.so(fd8b6ea5852422ba9402fb70269eef5a)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44845, Name:OS_hdcRegister
+state=S, utime=1, stime=0, priority=20, nice=0, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000057ac /system/lib64/platformsdk/libhdc_register.z.so(Hdc::HdcJdwpSimulator::ReadFromJdwp()+212)(d39b6530d47fa795e2e1d27e54ee2e1c)
+#03 pc 0000000000005e54 /system/lib64/platformsdk/libhdc_register.z.so(Hdc::HdcJdwpSimulator::Connect()+244)(d39b6530d47fa795e2e1d27e54ee2e1c)
+#04 pc 0000000000004490 /system/lib64/platformsdk/libhdc_register.z.so(Hdc::HdcConnectRun(void*)+532)(d39b6530d47fa795e2e1d27e54ee2e1c)
+#05 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44849, Name:OS_EVENT_POLL
+state=S, utime=1, stime=1, priority=-53, nice=-20, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 0000000000017964 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::DeamonIoWaiter::EpollWaitFor()+460)(ebf3f32f240b948ca8871a4a4102e91f)
+#03 pc 0000000000017c2c /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44850, Name:OS_IPC_3_44850
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 0000000000196514 /system/lib/ld-musl-aarch64.so.1(ioctl+188)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 000000000000fb74 /system/lib64/platformsdk/libipc_common.z.so(OHOS::BinderConnector::WriteBinder(unsigned long, void*)+108)(421160d39e041bb7f0425119ca696cd7)
+#02 pc 0000000000073c2c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::TransactWithDriver(bool)+284)(25c70f92f35e49654e8fc0746e3f89d2)
+#03 pc 000000000007401c /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::StartWorkLoop()+100)(25c70f92f35e49654e8fc0746e3f89d2)
+#04 pc 00000000000769b0 /system/lib64/platformsdk/libipc_single.z.so(OHOS::BinderInvoker::JoinThread(bool)+80)(25c70f92f35e49654e8fc0746e3f89d2)
+#05 pc 000000000006bd50 /system/lib64/platformsdk/libipc_single.z.so(OHOS::IPCWorkThread::ThreadHandler(void*)+1056)(25c70f92f35e49654e8fc0746e3f89d2)
+#06 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44852, Name:OS_MainDisplayS
+state=S, utime=1, stime=1, priority=0, nice=-20, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 0000000000176834 /system/lib/ld-musl-aarch64.so.1(epoll_wait+52)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000001a8d4 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EpollIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+276)(ebf3f32f240b948ca8871a4a4102e91f)
+#03 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000328a8 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+936)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000033ce0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::ThreadMain(std::__h::weak_ptr<OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl> const&) (.cfi)+208)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 00000000000341dc /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#08 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44859, Name:QtMainThread
+state=S, utime=71, stime=36, priority=-42, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e55a8 /system/lib/ld-musl-aarch64.so.1(nanosleep+44)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000026055d8 /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QThread::msleep(unsigned long)+96)(825522ac844d0a65ed532a652b512b22867a00d4)
+#03 pc 000000000063cae8 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcPiecesLibrary::LoadPieceInfo(PieceInfo*, bool, bool)+128)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#04 pc 00000000005e3568 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcPiece::SetPieceInfo(PieceInfo*, QString const&, bool, bool)+60)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#05 pc 00000000005e3404 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcPiece::lcPiece(PieceInfo*)+264)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#06 pc 000000000068e520 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcModel::SetPreviewPieceInfo(PieceInfo*, int)+68)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#07 pc 00000000006d7fa8 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcThumbnailManager::DrawThumbnail(lcPartThumbnailId, lcPartThumbnail&)+496)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#08 pc 00000000006d7aa0 /data/storage/el1/bundle/libs/arm64/libleocad.so(lcThumbnailManager::PartLoaded(PieceInfo*)+100)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#09 pc 00000000024b5594 /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QObject::event(QEvent*)+724)(825522ac844d0a65ed532a652b512b22867a00d4)
+#10 pc 00000000002e2c48 /data/storage/el1/bundle/libs/arm64/libQt6Widgets.so(QApplicationPrivate::notify_helper(QObject*, QEvent*)+336)(084e69eea09cb636fa212fdb5bf1f41fad77bb16)
+#11 pc 00000000002e3c40 /data/storage/el1/bundle/libs/arm64/libQt6Widgets.so(QApplication::notify(QObject*, QEvent*)+524)(084e69eea09cb636fa212fdb5bf1f41fad77bb16)
+#12 pc 0000000002462ea4 /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QCoreApplication::sendEvent(QObject*, QEvent*)+168)(825522ac844d0a65ed532a652b512b22867a00d4)
+#13 pc 00000000024637cc /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QCoreApplicationPrivate::sendPostedEvents(QObject*, int, QThreadData*)+544)(825522ac844d0a65ed532a652b512b22867a00d4)
+#14 pc 0000000002606fcc /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QEventDispatcherUNIX::processEvents(QFlags<QEventLoop::ProcessEventsFlag>)+84)(825522ac844d0a65ed532a652b512b22867a00d4)
+#15 pc 000000000080fbbc /data/storage/el1/bundle/libs/arm64/libQt6Gui.so(QUnixEventDispatcherQPA::processEvents(QFlags<QEventLoop::ProcessEventsFlag>)+20)(2954f3e83d766bba2564d823dc524f3fc225d9a5)
+#16 pc 00000000024701a0 /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>)+612)(825522ac844d0a65ed532a652b512b22867a00d4)
+#17 pc 0000000002462adc /data/storage/el1/bundle/libs/arm64/libQt6Core.so(QCoreApplication::exec()+148)(825522ac844d0a65ed532a652b512b22867a00d4)
+#18 pc 00000000006fab14 /data/storage/el1/bundle/libs/arm64/libleocad.so(main+4360)(34d8ed0e87c6fc4d692c6742abfcfed9a53c8431)
+#19 pc 0000000000246a64 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#20 pc 000000000024723c /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#21 pc 0000000000247778 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#22 pc 0000000000249bc8 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#23 pc 00000000002d9e90 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#24 pc 00000000002d9c38 /data/storage/el1/bundle/libs/arm64/libqohos.so(872ecde94d3effa71257b11979ec48732a88aae0)
+#25 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44862, Name:gpu-mem-pool
+state=S, utime=2, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000002c457c /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44863, Name:gpu-work-client
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000021b584 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44864, Name:gpu-work-client
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000021b584 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44865, Name:gpu-work-client
+state=S, utime=1, stime=0, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000021b584 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44866, Name:gpu-work-server
+state=S, utime=1, stime=3, priority=-42, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001bc16c /system/lib/ld-musl-aarch64.so.1(poll+104)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 0000000000357708 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44867, Name:gpu-mem-report
+state=S, utime=1, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001e1754 /system/lib/ld-musl-aarch64.so.1(sem_timedwait+396)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 000000000031c644 /vendor/lib64/passthrough/libhvgr_v210.so
+#03 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44884, Name:Acquire Fence
+state=S, utime=1, stime=1, priority=-42, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 000000000003b224 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 000000000003afe0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::NoneIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+220)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 00000000000328a8 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+936)(ebf3f32f240b948ca8871a4a4102e91f)
+#08 pc 0000000000033ce0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::ThreadMain(std::__h::weak_ptr<OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl> const&) (.cfi)+208)(ebf3f32f240b948ca8871a4a4102e91f)
+#09 pc 00000000000341dc /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#10 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:44917, Name:OS_ExtensionSes
+state=S, utime=1, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 000000000003b224 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#04 pc 000000000003afe0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::NoneIoWaiter::WaitFor(OHOS::AppExecFwk::UniqueLockBase&, long, bool)+220)(ebf3f32f240b948ca8871a4a4102e91f)
+#05 pc 00000000000238e0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueue::WaitUntilLocked(std::__h::chrono::time_point<std::__h::chrono::steady_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>> const&, OHOS::AppExecFwk::UniqueLockBase&, bool)+152)(ebf3f32f240b948ca8871a4a4102e91f)
+#06 pc 0000000000027358 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::EventQueueBase::GetEvent()+304)(ebf3f32f240b948ca8871a4a4102e91f)
+#07 pc 00000000000328a8 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::Run()+936)(ebf3f32f240b948ca8871a4a4102e91f)
+#08 pc 0000000000033ce0 /system/lib64/chipset-sdk-sp/libeventhandler.z.so(OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl::ThreadMain(std::__h::weak_ptr<OHOS::AppExecFwk::(anonymous namespace)::EventRunnerImpl> const&) (.cfi)+208)(ebf3f32f240b948ca8871a4a4102e91f)
+#09 pc 00000000000341dc /system/lib64/chipset-sdk-sp/libeventhandler.z.so(ebf3f32f240b948ca8871a4a4102e91f)
+#10 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)
+
+Tid:46426, Name:OS_FFRT_3_7
+state=S, utime=1, stime=1, priority=10, nice=-10, clk=100
+#00 pc 00000000001d846c /system/lib/ld-musl-aarch64.so.1(__syscall_cp+112)(c2fc22711e877dfaf24033c00c4cbe7f)
+#01 pc 00000000001daa10 /system/lib/ld-musl-aarch64.so.1(pthread_cond_timedwait+304)(c2fc22711e877dfaf24033c00c4cbe7f)
+#02 pc 00000000000c4a24 /system/lib64/chipset-sdk-sp/libc++.so(std::__h::condition_variable::__do_timed_wait(std::__h::unique_lock<std::__h::mutex>&, std::__h::chrono::time_point<std::__h::chrono::system_clock, std::__h::chrono::duration<long long, std::__h::ratio<1l, 1000000000l>>>)+104)(94629166ab73653a7989e0623786a6ab946d1082)
+#03 pc 0000000000063d5c /system/lib64/ndk/libffrt.so(ffrt::SExecuteUnit::WorkerIdleAction(ffrt::CPUWorker*)+332)(6df4d3320c40f0c6a9ac81214d74ed08)
+#04 pc 000000000004e0cc /system/lib64/ndk/libffrt.so(ffrt::CPUWorker::WorkerLooper(ffrt::CPUWorker*)+192)(6df4d3320c40f0c6a9ac81214d74ed08)
+#05 pc 000000000004dd88 /system/lib64/ndk/libffrt.so(ffrt::CPUWorker::Dispatch(ffrt::CPUWorker*)+180)(6df4d3320c40f0c6a9ac81214d74ed08)
+#06 pc 000000000004da80 /system/lib64/ndk/libffrt.so(ffrt::CPUWorker::WrapDispatch(void*)+52)(6df4d3320c40f0c6a9ac81214d74ed08)
+#07 pc 00000000001dd450 /system/lib/ld-musl-aarch64.so.1(start+240)(c2fc22711e877dfaf24033c00c4cbe7f)

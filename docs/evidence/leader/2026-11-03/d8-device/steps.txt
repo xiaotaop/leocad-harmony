@@ -1,0 +1,24 @@
+2026-11-03T21:03:14.3324412+08:00 Installed new Alpha d9ff2a4f; launch blank without command line model.
+2026-11-03T21:03:59.6635305+08:00 Part filter text 3003 via HDC injected text.
+2026-11-03T21:04:09.4898441+08:00 Attempted thumbnail drag; no insertion observed. Actual successful insertion used Piece -> Insert afterward (insert-command-result.jpeg).
+2026-11-03T21:07:26.7924147+08:00 Leader confirms physical Right, Ctrl+Z, Ctrl+Y all normal on Alpha.
+2026-11-03T21:08:56.5770710+08:00 System picker save new Chinese-spaced LDR; output read from actual public target.
+2026-11-03T21:10:18.3885094+08:00 Paint selected to color3 then rotate via injected Shift+Right; saved existing authorized external target.
+2026-11-03T21:10:41.0446910+08:00 Delete and undo tested with injected keys. Normal close then fresh process opens actual system picker.
+2026-11-03T21:11:02.9055983+08:00 PID44779 reopen attempt; selector had not closed yet. Actual callback/open completed21:11:32; see next observation.
+2026-11-03T21:11:46.9285690+08:00 Reopen completed21:11:32; scene shows saved color3 and rotated3003. Exact coordinates/matrix established by file readback, not Ctrl+A status bar.
+2026-11-03T21:12:25.6864127+08:00 PID44779 system LDR -> curated MPD first transition.
+2026-11-03T21:12:51.7741386+08:00 MPD first transition attempted select redcup, injected Right/CtrlZ/CtrlY, and submodel menu. No response; see subsequent failure record.
+2026-11-03T21:13:09.4507598+08:00 MPD same-process first transition unresponsive to select/keyboard/submodel menu; preserve PID44779 before any termination.
+2026-11-03T21:14:43.3666526+08:00 Two system appfreeze fault records retrieved; standalone dumpcatcher/processdump and SDK lldb-server execution denied.
+2026-11-03T21:15:51.6032936+08:00 PID44779 stopped only after full thread fault snapshots21:12:33/36 and21:13:39/48 exported; no normal exit.
+2026-11-03T21:16:17.5410208+08:00 PID46664 fresh process direct MPD system picker, select cup attempt.
+2026-11-03T21:17:19.5192927+08:00 Fresh PID46664 MPD edit/undo/redo and main-child switch responsive; first failed PID remains failure.
+2026-11-03T21:18:55.1326900+08:00 PID49150 actual system reopen edited MPD following normal exitPID46664.
+2026-11-03T21:20:03.6277608+08:00 Cycle MPD rejected; current dirty edited MPD and cup(-45,-20,0) retained.
+2026-11-03T21:20:20.0283942+08:00 Truncated LDR rejection attempt on dirty MPD.
+2026-11-03T21:21:04.2574730+08:00 Invalid cycle/truncated and picker cancel preserve dirty MPD; undone extra testmove afterward.
+2026-11-03T21:22:53.7613482+08:00 Original WiFi enabled; toggled WiFi OFF through device control center for offline test (USB HDC remains).
+2026-11-03T21:24:57.4236651+08:00 Offline LDR open/edit/save/normal exit/system reopen passed; WiFi restored ON.
+2026-11-03T21:27:13.5644021+08:00 Leader confirms network authentication restored.
+2026-11-03T21:30:15.9754759+08:00 Final category check complete; normal close PID54836; original config restored again.

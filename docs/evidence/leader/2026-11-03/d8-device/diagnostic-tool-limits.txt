@@ -1,0 +1,6 @@
+PID44779 captured before force-stop.
+/system/bin/dumpcatcher: Permission denied (shell invocation reported inaccessible or not found).
+/bin/processdump: Permission denied.
+SDK aarch64 lldb-server copied to /data/local/tmp, chmod755; execution: Permission denied.
+Alternative succeeded: hidumper -s 1201 -a "-p Faultlogger -f <record>".
+Two appfreeze records contain four native all-thread snapshots, including QtMainThread and OHOS main/UI threads.

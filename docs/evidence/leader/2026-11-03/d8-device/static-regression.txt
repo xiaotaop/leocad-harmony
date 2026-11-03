@@ -1,0 +1,62 @@
+COMMAND: python scripts/library/test_packaged_resources.py
+test_bundled_library_matches_its_manifest (__main__.PackagedResources.test_bundled_library_matches_its_manifest) ... ok
+test_code_references_resolve_to_packaged_resources (__main__.PackagedResources.test_code_references_resolve_to_packaged_resources) ... ok
+test_every_qrc_entry_is_either_tracked_or_generated (__main__.PackagedResources.test_every_qrc_entry_is_either_tracked_or_generated) ... ok
+test_generated_translations_have_tracked_sources (__main__.PackagedResources.test_generated_translations_have_tracked_sources)
+Every .qm the qrc lists must come from a .ts in the repository. ... ok
+test_library_manifest_counts_match_the_file_list (__main__.PackagedResources.test_library_manifest_counts_match_the_file_list) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.264s
+
+OK
+EXIT: 0
+COMMAND: python scripts/library/test_network_scope.py
+test_cmake_disables_the_remaining_first_release_features (__main__.NetworkScopeTests.test_cmake_disables_the_remaining_first_release_features)
+The trim is belt and braces: these gates must stay compiled out too. ... ok
+test_cmake_disables_the_update_check_for_leocad (__main__.NetworkScopeTests.test_cmake_disables_the_update_check_for_leocad)
+The real build defines the macro, so the P0 does not ship. ... ok
+test_cmake_harmony_target_also_disables_network (__main__.NetworkScopeTests.test_cmake_harmony_target_also_disables_network)
+OHOS additionally compiles out the network layer entirely. ... ok
+test_external_url_commands_are_trimmed (__main__.NetworkScopeTests.test_external_url_commands_are_trimmed)
+Help entries that open a browser must not ship either. ... ok
+test_external_url_trim_matches_the_actual_call_sites (__main__.NetworkScopeTests.test_external_url_trim_matches_the_actual_call_sites)
+The list above has to track the code, not the other way round. ... ok
+test_harmony_build_script_uses_this_cmake_project (__main__.NetworkScopeTests.test_harmony_build_script_uses_this_cmake_project)
+The constraint above only protects the app if the app is built here. ... ok
+test_networked_commands_are_trimmed (__main__.NetworkScopeTests.test_networked_commands_are_trimmed)
+Every command that downloads something must be unreachable. ... ok
+test_networked_commands_still_exist (__main__.NetworkScopeTests.test_networked_commands_still_exist)
+A renamed constant would make the check above pass by accident. ... ok
+test_update_check_default_is_on (__main__.NetworkScopeTests.test_update_check_default_is_on)
+Documents why the macro matters: the default is to check. ... ok
+test_update_check_needs_the_macro (__main__.NetworkScopeTests.test_update_check_needs_the_macro)
+The startup path must still be behind the macro, not merely trimmed. ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.004s
+
+OK
+EXIT: 0
+COMMAND: python scripts/library/test_export_part_list.py
+test_complete_archive_passes (__main__.ExportPartListTests.test_complete_archive_passes) ... ok
+test_indirect_top_level_part_missing_fails (__main__.ExportPartListTests.test_indirect_top_level_part_missing_fails)
+The same chain with 3102 omitted must fail, not be silently accepted. ... ok
+test_missing_closure_part_fails (__main__.ExportPartListTests.test_missing_closure_part_fails)
+A top-level part referenced by a seed but absent must fail. ... ok
+test_missing_manifest_entry_fails (__main__.ExportPartListTests.test_missing_manifest_entry_fails)
+A shipped part with no manifest entry must fail with a clear message. ... ok
+test_missing_primitive_under_subpart_fails (__main__.ExportPartListTests.test_missing_primitive_under_subpart_fails)
+A primitive referenced only by a subpart must still be checked. ... ok
+test_missing_seed_part_fails (__main__.ExportPartListTests.test_missing_seed_part_fails)
+A seed listed in selection.txt but absent from the archive must fail. ... ok
+test_top_level_part_reached_through_subpart_is_closure (__main__.ExportPartListTests.test_top_level_part_reached_through_subpart_is_closure)
+A top-level part referenced from inside a subpart joins the closure. ... ok
+test_wrong_root_directory_fails (__main__.ExportPartListTests.test_wrong_root_directory_fails)
+Every entry must sit under ldraw/, matching what the loader accepts. ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.305s
+
+OK
+EXIT: 0
