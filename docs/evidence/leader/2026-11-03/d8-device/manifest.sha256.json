@@ -122,6 +122,26 @@
       "sha256": "e06a0c6fdb7b21efa4b95de7e4d5c0cc89ca9e3a99db39714fe06afc1dd07b59"
     },
     {
+      "path": "manual-fault-query.txt",
+      "bytes": 216,
+      "sha256": "ea5cb58c32b083513c20516911d464d2168cbffda5787fc00583afd5b669a260"
+    },
+    {
+      "path": "manual-hang-pid59946.hilog.txt",
+      "bytes": 116627,
+      "sha256": "102877e6c286f99c2a54abf56c5e653c71983ccf778fccfc34a70491add7ed97"
+    },
+    {
+      "path": "manual-hang-pid59946.jpeg",
+      "bytes": 337355,
+      "sha256": "b66c637f225f6507c52031ecc569824b5bfdfe3ff7fd51d7c2c6c44207592ff3"
+    },
+    {
+      "path": "manual-hang-receipt.json",
+      "bytes": 771,
+      "sha256": "2f7d33e19aa2fa1db88626c820114a7f7e52629dea79da1105d5241a946878c7"
+    },
+    {
       "path": "model-and-restoration-checks.json",
       "bytes": 2916,
       "sha256": "4da99c5646e5d8ca0c57b5393032e8c41ace7abe995494c73a7a8dfe2719590f"

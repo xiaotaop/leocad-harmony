@@ -1,0 +1,15 @@
+{
+  "pid": 59946,
+  "input": "User physically followed reproduction steps; assistant issued no app input or restart during capture.",
+  "ldr_picker_result": "2026-11-03 21:49:53.298 +08:00",
+  "mpd_picker_result": "2026-11-03 21:50:32.803 +08:00",
+  "continuous_watchdog_from": "2026-11-03 21:50:37.193 +08:00",
+  "state": "User reported hung; scene screenshot and continuous watchdog agree; process preserved.",
+  "fresh_native_stack_obtained": false,
+  "limits": [
+    "Hiview fault query after21:49 returned no new record.",
+    "/data/log/faultlog/temp access denied.",
+    "Earlier four native thread snapshots belong to PID44779, not this manual process."
+  ],
+  "raw_log_sha256": "102877e6c286f99c2a54abf56c5e653c71983ccf778fccfc34a70491add7ed97"
+}

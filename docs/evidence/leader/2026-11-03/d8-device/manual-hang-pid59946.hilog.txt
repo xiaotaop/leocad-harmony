@@ -1,0 +1,599 @@
+11-03 21:49:06.116 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init begin
+11-03 21:49:06.116 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init end
+11-03 21:49:06.119 59946 59946 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbilityStage::onCreate()
+11-03 21:49:06.119 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onCreate: hot start enabled: false
+11-03 21:49:06.120 59946 59946 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbilityStage::onAcceptWant: want.parameters: {"KEY_START_ABILITY_FLAG":2097152,"isCallBySCB":false,"isShellCall":false,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"com.ohos.sceneboard","ohos.aafwk.param.callerPid":3975,"ohos.aafwk.param.callerToken":537183755,"ohos.aafwk.param.callerUid":20020042,"ohos.aafwk.param.displayId":0,"ohos.ability.param.realCallerKey":"3975:20020042","ohos.abilityRuntime.pageConfig":"","ohos.extra.param.key.appCloneIndex":0,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0,"ohos.params.launchReasonMessage":"ReasonMessage_DesktopIcon","startParams":{}}
+11-03 21:49:06.120 59946 59946 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbilityStage::initQtAppContextImpl: init
+11-03 21:49:06.121 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QtOhos::(anonymous namespace)::setupQtApplicationImpl(QtOhos::JsState &, QNapi::Object, QtOhos::QtRunMode): setting up Qt in Normal mode
+11-03 21:49:06.121 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Registered pending auto-started Ability instance, id='0'
+11-03 21:49:06.121 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.deviceInfo' via napi_load_module()
+11-03 21:49:06.121 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.intl' via napi_load_module()
+11-03 21:49:06.122 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.i18n' via napi_load_module()
+11-03 21:49:06.123 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.app.ability.ConfigurationConstant' via napi_load_module()
+11-03 21:49:06.123 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: setupQtApplication() - sharedLibraryName: libleocad.so
+11-03 21:49:06.123 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: setupQtApplication() - bundleCodeDir: /data/storage/el1/bundle
+11-03 21:49:06.123 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: setupQtApplication() - Shared libraries directory: /data/storage/el1/bundle/libs/arm64
+11-03 21:49:06.123 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onAcceptWant: input Want: {"deviceId":"","bundleName":"io.github.xiaotaop.leocad","abilityName":"QAbility","moduleName":"entry","uri":"","type":"","flags":0,"action":"","parameters":{"KEY_START_ABILITY_FLAG":2097152,"isCallBySCB":false,"isShellCall":false,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"com.ohos.sceneboard","ohos.aafwk.param.callerPid":3975,"ohos.aafwk.param.callerToken":537183755,"ohos.aafwk.param.callerUid":20020042,"ohos.aafwk.param.displayId":0,"ohos.ability.param.realCallerKey":"3975:20020042","ohos.abilityRuntime.pageConfig":"","ohos.extra.param.key.appCloneIndex":0,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0,"ohos.params.launchReasonMessage":"ReasonMessage_DesktopIcon","startParams":{}},"fds":{},"entities":[]}
+11-03 21:49:06.123 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: AbilityStage::onAcceptWant: returning instanceId='0'
+11-03 21:49:06.123 59946 59946 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbilityStage::onAcceptWant: instanceKey: "0"
+11-03 21:49:06.132 59946 59946 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbility::onCreate(): want.parameters: {"KEY_START_ABILITY_FLAG":2097152,"component.startup.newRules":true,"isCallBySCB":false,"isShellCall":false,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"com.ohos.sceneboard","ohos.aafwk.param.callerPid":3975,"ohos.aafwk.param.callerToken":537183755,"ohos.aafwk.param.callerUid":20020042,"ohos.aafwk.param.displayId":0,"ohos.extra.param.key.appCloneIndex":0,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0,"ohos.params.launchReasonMessage":"ReasonMessage_DesktopIcon","startParams":{}}
+11-03 21:49:06.132 59946 59946 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbilityStage::initQtAppContextImpl: already initialized
+11-03 21:49:06.132 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QtOhos::(anonymous namespace)::handleAbilityOnCreate(const QtOhos::CallbackInfo &) begin
+11-03 21:49:06.132 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QtOhos::(anonymous namespace)::handleAbilityOnCreate(const QtOhos::CallbackInfo &) end
+11-03 21:49:06.145 59946 59946 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbility::onWindowStageCreate(): this.launchWant.parameters: {"KEY_START_ABILITY_FLAG":2097152,"component.startup.newRules":true,"isCallBySCB":false,"isShellCall":false,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"com.ohos.sceneboard","ohos.aafwk.param.callerPid":3975,"ohos.aafwk.param.callerToken":537183755,"ohos.aafwk.param.callerUid":20020042,"ohos.aafwk.param.displayId":0,"ohos.extra.param.key.appCloneIndex":0,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0,"ohos.params.launchReasonMessage":"ReasonMessage_DesktopIcon","startParams":{}}
+11-03 21:49:06.145 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaEtsFactoryOrFail(const QNapi::Function &, const std::string &): loading napi module 'LocalStorage' via ets factory
+11-03 21:49:06.149 59946 59946 I A00000/io.github.xiaotaop.leocad/ohosQtTemplate: QAbility::onForeground()
+11-03 21:49:06.188 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QtOhos::(anonymous namespace)::loadWindowStageContentPage(QtOhos::JsState &, QNapi::Object &, const QNapi::Object &)::(anonymous class)::operator()(const QtOhos::CallbackInfo &) const: launchWant: {"deviceId":"","bundleName":"io.github.xiaotaop.leocad","abilityName":"QAbility","moduleName":"entry","uri":"","type":"","flags":0,"action":"","parameters":{"KEY_START_ABILITY_FLAG":2097152,"component.startup.newRules":true,"isCallBySCB":false,"isShellCall":false,"moduleName":"entry","ohoSpecifiedProcessCallerProcess":"","ohoSpecifiedProcessFlag":"","ohos.aafwk.param.callerAbilityName":"","ohos.aafwk.param.callerBundleName":"com.ohos.sceneboard","ohos.aafwk.param.callerPid":3975,"ohos.aafwk.param.callerToken":537183755,"ohos.aafwk.param.callerUid":20020042,"ohos.aafwk.param.displayId":0,"ohos.extra.param.key.appCloneIndex":0,"ohos.extra.param.key.appInstance":"","ohos.param.callerAppCloneIndex":0,"ohos.params.launchReasonMessage":"ReasonMessage_DesktopIcon","startParams":{}},"fds":{},"entities":[]}
+11-03 21:49:06.190 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init begin
+11-03 21:49:06.190 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init end
+11-03 21:49:06.191 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: JsStateImpl: appLaunchParam set from Ability with instanceId='0'
+11-03 21:49:06.191 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: JsStateImpl: added QAbilityPeer, instanceId: 0, qwindow: 
+11-03 21:49:06.191 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: std::size_t QtOhos::(anonymous namespace)::getPreferredStackSizeForQtThread(): preferred stack size for Qt Thread: 8388608
+11-03 21:49:06.191 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QtOhos::(anonymous namespace)::makeConditionFlagMTAccessors(std::string)::(anonymous class)::operator()(bool) const: setting condition 'Qt thread idle' to false
+11-03 21:49:06.191 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: startApplicationMainFunction begin
+11-03 21:49:06.199 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: std::function<int (std::vector<std::string>)> QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &): opened library '/data/storage/el1/bundle/libs/arm64/libleocad.so' with main function
+11-03 21:49:06.199 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: calling 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad.so' (argc=1)
+11-03 21:49:06.199 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function argv[0]='/data/storage/el1/bundle/libs/arm64/libleocad.so'
+11-03 21:49:06.200 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: XComponentId: __nnMainWindow_0 onAppear
+11-03 21:49:06.216 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.display' via napi_load_module()
+11-03 21:49:06.217 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.multimodalInput.inputDevice' via napi_load_module()
+11-03 21:49:06.225 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.font' via napi_load_module()
+11-03 21:49:06.255 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.graphics.text' via napi_load_module()
+11-03 21:49:06.346 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"error":"","framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","gles_build":true,"glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"passed":true,"renderer":"Maleoon 916","shaders":true,"share_requested":true,"sharing":true,"stage":"renderer_offscreen","surface_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"surface_requested_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"surface_valid":true,"valid":true,"vendor":"HUAWEI"}
+11-03 21:49:06.349 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_RENDERER {"passed":true,"programs":9,"safe_render":false,"skipped_programs":0}
+11-03 21:49:06.409 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.bundle.bundleManager' via napi_load_module()
+11-03 21:49:06.412 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.abilityAccessCtrl' via napi_load_module()
+11-03 21:49:06.412 59946 59946 E A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QOhosClipboardObject::getPasteboardDataWithLazyFetch()::(anonymous class)::operator()(QtOhos::JsState &, QOhosTaskPromise<std::pair<std::optional<QOhosClipboardObject::PasteboardDataSource>, std::function<std::unique_ptr<QMimeData> ()>>>)::(anonymous class)::operator()(auto &, bool) const [auto:1 = QtOhos::JsState]: ohos.permission.READ_PASTEBOARD hasn't been granted by user. Cannot read pasteboard data.
+11-03 21:49:06.412 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 775,61 size: 1520,1140
+11-03 21:49:06.414 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Registering callbacks for xcomponent 0x5a4e9070b8
+11-03 21:49:06.414 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-03 21:49:06.416 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "lcMainWindowClassWindow"
+11-03 21:49:06.424 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"dpr":1.899999976158142,"framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"logical_height":173,"logical_width":200,"renderer":"Maleoon 916","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"HUAWEI"}
+11-03 21:49:06.425 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":173,"logical_width":200,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-03 21:49:06.427 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"dpr":1.899999976158142,"framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"logical_height":501,"logical_width":514,"renderer":"Maleoon 916","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"HUAWEI"}
+11-03 21:49:06.427 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":501,"logical_width":514,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-03 21:49:06.428 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QtOhos::(anonymous namespace)::QAbilityPeerImpl::setQWindow(Napi::Env, QtOhos::QObjectThreadSafeRef): setting QAbilityPeer's QWindow: 0 / 
+11-03 21:49:06.429 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a4e696c98
+11-03 21:49:06.429 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a4e696c98 node: 0x5a4e930960
+11-03 21:49:06.429 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-03 21:49:06.430 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-03 21:49:06.430 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::setSize(const QSize &): 1520,1210
+11-03 21:49:06.437 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:49:06.438 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 0 surface: 0x5a4d8dfca0
+11-03 21:49:06.439 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.window' via napi_load_module()
+11-03 21:49:06.440 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 775,-9,0.000000
+11-03 21:49:06.457 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.multimodalInput.pointer' via napi_load_module()
+11-03 21:49:06.459 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-03 21:49:06.459 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::setWindowTopmost(bool): topMost: false
+11-03 21:49:06.461 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-03 21:49:06.462 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_RESOURCE_PATHS {"app_data":"/data/storage/el2/base/files","app_local_data":"/data/storage/el2/base/preferences","bundled_archive":":/assets/ldraw-lite/library-lite.zip","bundled_candidates":["/data/storage/el2/base/preferences/ldraw-lite/library-lite.zip","/data/storage/el1/bundle/libs/arm64/ldraw-lite/library-lite.zip",":/assets/ldraw-lite/library-lite.zip"],"bundled_problem":"","cache":"/data/storage/el2/base/cache","loaded_parts":1162}
+11-03 21:49:06.464 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":515,"depth_range_far":1,"depth_range_near":0,"depth_test":true,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":501,"logical_width":532,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-03 21:49:06.472 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:49:06.472 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:49:06.473 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:49:06.473 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:49:06.481 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:49:06.481 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_READBACK {"destination_format":5,"height":243,"source_depth":32,"source_format":18,"source_stride":972,"width":243}
+11-03 21:49:06.519 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":515,"depth_range_far":1,"depth_range_near":0,"depth_test":true,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":893,"logical_width":1374,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-03 21:49:06.583 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.multimedia.image' via napi_load_module()
+11-03 21:49:16.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:49:16.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: Thread may be blocked, do not report this time. currTime: 53128.570, lastTime: 0.000
+11-03 21:49:27.975 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:49:30.789 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 0,0 size: 190,57
+11-03 21:49:30.792 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Registering callbacks for xcomponent 0x5a6384f0d8
+11-03 21:49:30.792 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-03 21:49:30.792 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "QMenuClassWindow"
+11-03 21:49:30.793 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::raise(): stack node has no parent, ignore raising it
+11-03 21:49:30.793 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 8,116 size: 1049,467
+11-03 21:49:30.816 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init begin
+11-03 21:49:30.816 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init end
+11-03 21:49:30.817 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a6384f0d8 window: 0x5a4e76c280
+11-03 21:49:30.817 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4c440 eventType: 0 surface: 0x5a4e76c280
+11-03 21:49:30.818 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a4e959918
+11-03 21:49:30.818 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a4e959918 node: 0x5a4e9352e0
+11-03 21:49:30.818 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-03 21:49:30.818 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-03 21:49:30.819 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::setSize(const QSize &): 1049,467
+11-03 21:49:30.819 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 8,116,0.000000
+11-03 21:49:30.821 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-03 21:49:30.832 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-03 21:49:30.846 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a6384f0d8 window: 0x5a4e76c280
+11-03 21:49:30.846 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4c440 eventType: 1 surface: 0x5a4e76c280
+11-03 21:49:31.394 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:49:31.399 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:49:38.258 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+11-03 21:49:38.261 59946 59946 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 385.000000
+11-03 21:49:38.261 59946 59946 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 385.000000
+11-03 21:49:38.261 59946 59946 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 385.000000
+11-03 21:49:38.261 59946 59946 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 385.000000
+11-03 21:49:38.279 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: WindowNativeNodeCreateInfo.onDisAppear() called from JS for xComponentId='__nnSubWindow_WIID_3'
+11-03 21:49:38.286 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:49:38.287 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-03 21:49:38.290 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Unregistering callbacks for xcomponent 0x5a6384f0d8
+11-03 21:49:38.290 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Unregistering gestures for NativeNode 0x5a4eb4b540
+11-03 21:49:38.290 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceDestroyed(::OH_NativeXComponent *, void *): xc: 0x5a6384f0d8 window: 0x5a4e76c280
+11-03 21:49:38.290 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Error: xComponent 0x5a6384f0d8 does not have any assigned receiver
+11-03 21:49:38.292 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 1465,984 size: 190,57
+11-03 21:49:38.293 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.file.picker' via napi_load_module()
+11-03 21:49:38.294 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Calling DocumentViewPicker.select() with options: {"maxSelectNumber":1,"fileSuffixFilters":["支持的文件 (*.lcd *.ldr *.dat *.mpd)|.lcd,.ldr,.dat,.mpd","所有文件 (*.*)|.*"],"defaultFilePathUri":"file://docs/storage/Users/currentUser/Documents","selectMode":0}
+11-03 21:49:38.295 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] ParseWindow: window mode.
+11-03 21:49:38.295 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] parseDocumentPickerSelectOption start
+11-03 21:49:38.295 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] parseDocumentPickerSelectOption end
+11-03 21:49:38.295 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] modalPicker start 
+11-03 21:49:53.297 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] document select selectResult: : errorcode is = 0, selecturi is = file://docs/storage/Users/currentUser/Download/LeoCAD-D8/******r
+11-03 21:49:53.298 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Called DocumentViewPicker.select() callback with result: ["file://docs/storage/Users/currentUser/Download/LeoCAD-D8/%E9%A6%96%E5%8F%91%20%E5%BB%BA%E6%A8%A1%E9%97%AD%E7%8E%AF.ldr"]
+11-03 21:49:53.298 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] Get Selected Suffix Index start
+11-03 21:49:53.298 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] Get Selected Suffix Index end: -1
+11-03 21:49:53.308 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:49:53.313 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"dpr":1.899999976158142,"framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"logical_height":893,"logical_width":1374,"renderer":"Maleoon 916","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"HUAWEI"}
+11-03 21:49:53.314 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":893,"logical_width":1374,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-03 21:50:00.631 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 8,116 size: 1153,467
+11-03 21:50:00.634 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Registering callbacks for xcomponent 0x5a4e6309b8
+11-03 21:50:00.634 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-03 21:50:00.634 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "QMenuClassWindow"
+11-03 21:50:00.635 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::raise(): stack node has no parent, ignore raising it
+11-03 21:50:00.684 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init begin
+11-03 21:50:00.684 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: qohosjsmain Init end
+11-03 21:50:00.686 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a4e6309b8 window: 0x5a4e76fb60
+11-03 21:50:00.686 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4ea782c0 eventType: 0 surface: 0x5a4e76fb60
+11-03 21:50:00.687 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a4e902538
+11-03 21:50:00.687 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a4e902538 node: 0x5a4e932c60
+11-03 21:50:00.687 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-03 21:50:00.687 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-03 21:50:00.688 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::setSize(const QSize &): 1153,467
+11-03 21:50:00.689 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 8,116,0.000000
+11-03 21:50:00.691 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-03 21:50:00.700 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-03 21:50:01.248 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:50:01.254 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:50:02.807 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+11-03 21:50:02.808 59946 59946 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 388.000000
+11-03 21:50:02.808 59946 59946 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 388.000000
+11-03 21:50:02.808 59946 59946 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 388.000000
+11-03 21:50:02.808 59946 59946 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 388.000000
+11-03 21:50:02.817 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: WindowNativeNodeCreateInfo.onDisAppear() called from JS for xComponentId='__nnSubWindow_WIID_5'
+11-03 21:50:02.819 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-03 21:50:02.829 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:50:02.829 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Unregistering callbacks for xcomponent 0x5a4e6309b8
+11-03 21:50:02.829 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Unregistering gestures for NativeNode 0x5a4eb4cb20
+11-03 21:50:02.829 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceDestroyed(::OH_NativeXComponent *, void *): xc: 0x5a4e6309b8 window: 0x5a4e76fb60
+11-03 21:50:02.829 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Error: xComponent 0x5a4e6309b8 does not have any assigned receiver
+11-03 21:50:02.830 59946 60402 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a6250d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 1465,984 size: 190,57
+11-03 21:50:02.833 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Calling DocumentViewPicker.select() with options: {"maxSelectNumber":1,"fileSuffixFilters":["支持的文件 (*.lcd *.ldr *.dat *.mpd)|.lcd,.ldr,.dat,.mpd","所有文件 (*.*)|.*"],"defaultFilePathUri":"file://docs/storage/Users/currentUser/Download/LeoCAD-D8/%E9%A6%96%E5%8F%91%20%E5%BB%BA%E6%A8%A1%E9%97%AD%E7%8E%AF.ldr","selectMode":0}
+11-03 21:50:02.833 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] ParseWindow: window mode.
+11-03 21:50:02.833 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] parseDocumentPickerSelectOption start
+11-03 21:50:02.833 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] parseDocumentPickerSelectOption end
+11-03 21:50:02.833 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] modalPicker start 
+11-03 21:50:32.803 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] document select selectResult: : errorcode is = 0, selecturi is = file://docs/storage/Users/currentUser/Download/LeoCAD-D8/Input/******d
+11-03 21:50:32.803 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Called DocumentViewPicker.select() callback with result: ["file://docs/storage/Users/currentUser/Download/LeoCAD-D8/Input/curated-device.mpd"]
+11-03 21:50:32.803 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] Get Selected Suffix Index start
+11-03 21:50:32.803 59946 59946 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] Get Selected Suffix Index end: -1
+11-03 21:50:32.810 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"dpr":1.899999976158142,"framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"logical_height":893,"logical_width":1374,"renderer":"Maleoon 916","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"HUAWEI"}
+11-03 21:50:32.811 59946 60402 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":893,"logical_width":1374,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-03 21:50:32.900 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:50:37.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:50:40.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:50:43.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:50:46.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:50:47.904 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:50:49.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:50:51.823 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:50:52.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:50:55.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:50:58.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:01.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:04.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:07.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:10.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:13.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:16.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:18.264 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:18.265 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:19.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:20.282 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:20.285 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:21.291 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:21.292 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:21.344 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:21.345 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:21.633 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:21.633 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:21.687 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:21.687 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:21.992 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:21.992 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:22.044 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:22.044 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:22.191 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:22.393 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:22.394 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:23.019 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:51:25.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:25.467 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:51:26.583 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:26.584 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:27.266 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:27.266 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:27.668 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:51:27.668 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:51:28.194 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:29.286 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:29.286 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:29.564 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:51:29.564 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:51:30.293 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:30.293 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:30.345 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:30.345 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:30.633 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:30.633 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:30.688 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:30.688 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:30.992 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:30.992 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:31.044 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:31.044 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:31.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:31.394 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:31.394 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:31.670 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:51:31.670 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:51:33.085 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:51:33.085 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:51:34.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:35.584 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:35.584 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:37.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:39.207 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:51:39.207 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:51:40.029 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:51:40.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:41.653 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:51:41.653 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:51:43.102 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:51:43.103 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:51:43.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:46.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:49.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:50.654 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:51:50.654 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:51:52.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:55.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:51:58.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:01.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:02.740 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:52:04.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:06.769 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:52:07.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:07.880 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: got close request from source 1, id: '0'
+11-03 21:52:07.880 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: returning Promise, id: '0'
+11-03 21:52:09.107 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:52:09.107 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:52:09.919 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:52:10.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:13.110 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a4e9070b8 window: 0x5a4d8dfca0
+11-03 21:52:13.110 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4dd4a840 eventType: 1 surface: 0x5a4d8dfca0
+11-03 21:52:13.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:16.191 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:16.882 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved as 1, id: '0'
+11-03 21:52:16.882 59946 59946 I A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: Window.windowWillClose: promise resolved by timeout, id: '0'
+11-03 21:52:19.195 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:22.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:25.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:28.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:31.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:34.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:37.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:40.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:43.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:46.191 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:49.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:52.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:55.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:52:58.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:01.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:04.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:07.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:10.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:13.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:14.294 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:53:14.459 59946 59946 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x59ad5c6650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-03 21:53:16.194 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:19.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:22.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:25.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:28.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:31.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:34.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:37.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:40.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:43.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:46.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:49.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:52.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:55.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:53:58.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:01.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:04.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:07.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:10.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:13.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:16.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:19.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:22.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:25.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:28.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:31.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:34.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:37.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:40.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:43.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:46.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:49.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:52.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:55.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:54:58.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:01.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:04.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:07.194 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:10.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:13.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:16.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:19.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:22.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:25.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:28.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:31.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:34.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:37.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:40.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:43.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:46.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:49.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:52.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:55:52.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:52.266 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:55:52.266 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:55:52.266 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:55:52.266 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:55:52.266 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:55:52.266 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:55:52.266 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:55:52.425 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:55:52.507 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:55:52.507 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:55:52.507 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:55:55.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:55:55.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:55.231 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:55:55.231 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:55:55.231 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:55:55.231 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:55:55.231 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:55:55.231 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:55:55.231 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:55:55.369 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:55:55.438 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:55:55.438 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:55:55.438 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:55:58.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:55:58.193 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:55:58.228 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:55:58.228 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:55:58.228 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:55:58.228 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:55:58.228 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:55:58.228 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:55:58.228 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:55:58.334 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:55:58.403 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:55:58.403 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:55:58.403 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:01.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:01.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:01.247 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:01.247 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:01.247 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:01.247 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:01.247 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:01.247 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:01.248 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:01.414 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:01.495 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:01.495 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:01.495 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:04.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:04.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:04.240 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:04.240 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:04.240 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:04.240 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:04.240 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:04.240 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:04.241 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:04.367 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:04.450 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:04.450 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:04.450 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:07.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:07.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:07.238 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:07.238 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:07.238 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:07.238 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:07.238 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:07.238 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:07.239 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:07.372 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:07.453 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:07.453 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:07.453 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:10.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:10.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:10.249 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:10.249 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:10.249 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:10.249 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:10.249 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:10.249 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:10.249 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:10.377 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:10.459 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:10.459 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:10.459 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:13.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:13.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:13.228 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:13.228 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:13.228 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:13.228 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:13.228 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:13.228 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:13.228 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:13.359 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:13.420 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:13.420 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:13.420 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:16.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:16.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:16.255 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:16.255 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:16.255 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:16.255 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:16.255 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:16.255 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:16.255 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:16.383 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:16.456 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:16.456 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:16.456 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:19.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:19.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:19.237 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:19.237 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:19.237 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:19.237 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:19.237 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:19.237 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:19.237 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:19.371 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:19.456 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:19.456 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:19.456 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:22.191 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:22.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:22.238 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:22.239 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:22.239 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:22.239 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:22.239 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:22.239 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:22.239 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:22.382 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:22.494 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:22.494 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:22.494 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:25.191 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:25.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:25.232 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:25.232 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:25.232 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:25.232 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:25.232 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:25.232 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:25.232 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:25.347 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:25.417 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:25.417 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:25.417 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:28.191 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:28.191 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:28.218 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:28.218 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:28.218 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:28.218 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:28.218 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:28.218 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:28.218 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:28.335 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:28.411 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:28.411 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:28.411 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:31.191 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:31.191 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:31.218 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:31.218 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:31.218 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:31.218 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:31.218 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:31.218 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:31.218 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:31.354 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:31.438 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:31.438 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:31.438 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:34.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:34.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:34.245 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:34.245 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:34.245 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:34.245 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:34.245 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:34.245 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:34.245 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:34.370 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:34.448 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:34.448 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:34.448 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:37.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:37.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:37.229 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:37.229 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:37.229 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:37.229 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:37.229 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:37.229 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:37.230 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:37.358 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:37.428 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:37.428 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:37.428 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:40.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:40.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:40.232 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:40.232 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:40.232 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:40.232 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:40.232 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:40.232 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:40.233 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:40.353 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:40.425 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:40.425 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:40.425 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:43.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:43.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:43.235 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:43.235 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:43.235 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:43.235 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:43.235 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:43.235 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:43.236 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:43.368 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:43.478 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:43.478 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:43.478 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
+11-03 21:56:46.192 59946 60347 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-03 21:56:46.192 59946 60347 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive
+11-03 21:56:46.240 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ Begin jemalloc bin lock statistics ___
+11-03 21:56:46.240 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[0]:
+11-03 21:56:46.240 59946 61289 W C03F07/MUSL-SIGCHAIN: tid	bin	arena[1]:
+11-03 21:56:46.240 59946 61289 W C03F07/MUSL-SIGCHAIN: ___ End jemalloc bin lock statistics ___
+11-03 21:56:46.240 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 sca_sigaction=59adf87fe0 noreturn=0 FREEZE_signo_35 thread_list_lock_status:0 tl_lock_count=0 tl_lock_waiters=0 tl_lock_tid_fail=-1 tl_lock_count_tid=660 tl_lock_count_fail=-10000 tl_lock_count_tid_sub=660 thread_list_lock_after_lock=62684 thread_list_lock_pre_unlock=59946 thread_list_lock_pthread_exit=62684 thread_list_lock_tid_overlimit=-1 tl_lock_unlock_count=0 __pthread_gettid_np_tl_lock=0 __pthread_exit_tl_lock=0 __pthread_create_tl_lock=0 __pthread_key_delete_tl_lock=0 __synccall_tl_lock=0 __membarrier_tl_lock=0 install_new_tls_tl_lock=0 set_syscall_hooks_tl_lock=0 set_syscall_hooks_linux_tl_lock=0 fork_tl_lock=0 register_count=0 __custom_hook_flag=0g_dlcloseLockStatus=0g_dlcloseLockLastExitTid=59946
+11-03 21:56:46.240 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), si_code(-2), pid(59946), tid(61289).
+11-03 21:56:46.240 59946 61289 I C02D11/DfxSignalHandler: DFX_SignalHandler :: signo(35), pid(59946), processName(io.github.xiaotaop.leocad), threadName(OS_IPC_5_61289).
+11-03 21:56:46.372 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:46.449 59946 61289 E C02D11/DfxSignalHandler: dummy exit (0)
+11-03 21:56:46.449 59946 61289 I C02D11/DfxSignalHandler: Finish handle signal(35) in 59946:61289.
+11-03 21:56:46.449 59946 61289 W C03F07/MUSL-SIGCHAIN: signal_chain_handler call 0 rd sigchain action for signal: 35 directly return
