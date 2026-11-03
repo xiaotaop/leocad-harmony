@@ -1,0 +1,74 @@
+{
+  "date": "2026-11-03",
+  "baseline": "0bc7dc3f010b137f402a177133aa8c81ae5e66f4",
+  "reviewed_pr44": "68544d22530b541027d1bacd4c993666837899a5",
+  "review_save_tests": {
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "requires_private_cache_access": true
+  },
+  "host": "macOS-27.0.1-arm64-arm-64bit",
+  "qt": "6.12.0",
+  "build": "Release; incremental qmake production widget suite; ASCII source copy SHA256 checked",
+  "source_sha256": {
+    "tests/input/tst_view_input.cpp": "adb221d4f71a631c1bb3a1095da7bb5f6ea41c35063c46ab9075219e38fb24b5",
+    "tests/fixtures/input-switch.mpd": "9532231d54a63756f347b83acd717f5d683ad9780b37f1e5089030b7faded40e",
+    "common/lc_viewwidget.cpp": "796c7fc1fd028845d8e888488da2816bb611f55cabdd70cfe9968ba72cff6607",
+    "common/project.cpp": "d7b6e645f8771749343042fe2bf7df6784b8696fed2ccdb8b051100ad83ce6dc",
+    "member-a-input-tests.pro": "49ffba98205572fcd3d5e8ae419eb2272a939b424f2b5fac789adb5fd715aa67"
+  },
+  "binary_sha256": "55db2785e01600f3d070e562d00b257e32a692b993dc6b5498bd02a433624e49",
+  "command": "QT_SCALE_FACTOR=<scale> LEOCAD_SAFE_RENDER=<0/1> TMPDIR=/private/tmp/leocad-d6-runtime ./build/release/leocad-input-tests -o <name>.txt,txt -o <name>.xml,junitxml",
+  "process_timeout_seconds": 120,
+  "runs": [
+    {
+      "name": "normal-dpr2",
+      "QT_SCALE_FACTOR": "1",
+      "LEOCAD_SAFE_RENDER": 0,
+      "observed_dpr": 2,
+      "exit": 0,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "new_sequence_checkpoints": 40
+    },
+    {
+      "name": "basic-dpr2",
+      "QT_SCALE_FACTOR": "1",
+      "LEOCAD_SAFE_RENDER": 1,
+      "observed_dpr": 2,
+      "exit": 0,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "new_sequence_checkpoints": 40
+    },
+    {
+      "name": "normal-dpr1",
+      "QT_SCALE_FACTOR": "0.5",
+      "LEOCAD_SAFE_RENDER": 0,
+      "observed_dpr": 1,
+      "exit": 0,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "new_sequence_checkpoints": 40
+    },
+    {
+      "name": "fractional-dpr1_5",
+      "QT_SCALE_FACTOR": "0.75",
+      "LEOCAD_SAFE_RENDER": 0,
+      "observed_dpr": 1.5,
+      "exit": 0,
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "new_sequence_checkpoints": 40
+    }
+  ],
+  "application_build": "cmake --build /private/tmp/leocad-d6-app-build -j6",
+  "startup": "ctest --test-dir /private/tmp/leocad-d6-app-build --output-on-failure; 1/1 passed",
+  "issue45": "not reproduced on host; open, awaiting device repro and thread stacks",
+  "device": "not executed; no new HAP generated"
+}
