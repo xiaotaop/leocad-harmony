@@ -44,13 +44,24 @@ D8 要求为「完成全部首发界面和包内资源；停止新增页面」�
 
 | 项 | 结果 |
 |---|---|
-| `leocad.qrc` 条目 | **156 条，缺失 0 条**（逐条 `os.path.exists` 校验，含 alias 项） |
-| 翻译文件 | 8 个 `.qm`（cs/de/es/fr/pt/ru/uk/zh_CN），`zh_CN` 为 **1891 条，0 条未完成** |
+| qrc 条目 | 合计 **164**：`leocad.qrc` 156（其中 8 条为 `.qm` 构建产物）+ `resources/stylesheet/stylesheet.qrc` 8。**仓库需提供的 156 条全部存在** |
+| 翻译 | 仓库跟踪 **8 个 `.ts`**；`.qm` **不在仓库里**（`.gitignore:15` 的 `*.qm`），由构建生成。`zh_CN` 编译结果 **1891 条，0 条未完成** |
 | 离线零件库 | `assets/ldraw-lite/library-lite.zip` **3833541 字节**，SHA-256 `09922e82…4268c0f3`，与 `manifest.json` 记录**逐字节一致** |
 | 库清单 | 1160 零件 / 669 子零件 / 911 基元 / 1 配置，共 **2741 文件**，`files` 数组 2741 条 |
 | 应用图标 | qrc 内 64/256/512 三档，64×64 保留历史 alias `:/resources/leocad.png` |
 | 着色器 | **17 个** `.glsl` 全部存在：`resources/shaders/` 下 fakelit 4、unlit 12（含 view_sphere 一对）、text_sdf 1。磁盘与 qrc 双向比对，无「有文件未打包」也无「有条目缺文件」 |
 | 代码资源引用 | `common/` + `qt/` 中 **147 处** `:/…` 引用全部可解析（修复前 2 处不可解析，见 §二之二） |
+
+**一条本可在本地发现、却只能由 CI 抓出的错误**：第一版核对写的是「156 条 qrc 条目逐条
+`os.path.exists`，缺失 0 条」，本地全绿而 CI 的 port-policy 直接失败——因为 `.qm` 是构建产物、
+根本不在仓库里，本地那份是早前 `lrelease` 留下的**陈旧生成文件**。换句话说，那条断言当时测的是
+我这台机器的目录状态，不是仓库状态。现在检查显式区分**仓库提供**与**构建生成**两类资源：
+前者必须存在，后者必须能追溯到被跟踪的源文件（8 个 `.ts`），并新增
+`test_generated_translations_have_tracked_sources` 锁定这条追溯关系。
+
+验证覆盖两种检出状态：**移走全部 `.qm` 模拟干净检出后 5 项仍 OK**；抽走 `leocad_ru.ts` 后立即以
+`['leocad_ru.qm has no leocad_ru.ts']` 失败，恢复后通过。教训本身：**凡按文件存在性做的核对，
+都要问一句「干净检出会不会长成这样」**，否则检查器会被本地残留喂出假绿。
 
 `.qm` 在 CMake 构建时由 `qt_add_translations()` 生成，`CMakeLists.txt:30-52` 会把 `leocad.qrc` 中
 的 `.qm` 条目过滤掉再生成构建树 qrc（避免与生成的翻译资源重复），所以 `.qm` 实际来自构建产物；
@@ -78,11 +89,12 @@ qrc 里保留条目是给 qmake 路径用的。这一处此前无记录，本轮
 界面上无处可点、无处可发现。对 PC 键盘用户可用，但真机上若有不带 `+/-` 的输入场景就不可达。
 是否加入 View 菜单按分工文档 §1.2 末尾的「等量交换」规则由组长定，不应在冻结日由本成员单方新增入口。
 
-新增 `scripts/library/test_packaged_resources.py`（**4 项**，已接入 `continuous.yml` 的 port-policy）：
+新增 `scripts/library/test_packaged_resources.py`（**5 项**，已接入 `continuous.yml` 的 port-policy）：
 
 | 用例 | 锁住什么 |
 |---|---|
-| `test_every_qrc_entry_exists_on_disk` | qrc 列出的每个文件都在树里（两个 qrc 的相对根不同） |
+| `test_every_qrc_entry_is_either_tracked_or_generated` | qrc 列出的条目要么在仓库里，要么属于已声明的构建产物（`.qm`），两个 qrc 的相对根不同 |
+| `test_generated_translations_have_tracked_sources` | 每个 `.qm` 都能追溯到被跟踪的 `.ts`，防止构建静默停止产出某个语言 |
 | `test_code_references_resolve_to_packaged_resources` | 代码中每个 `:/…` 引用都能解析到已打包资源；按各自 `prefix` 计算真实资源路径，并对动态拼接名重试扩展名 |
 | `test_bundled_library_matches_its_manifest` | `library-lite.zip` 的字节数与 SHA-256 与 manifest 一致 |
 | `test_library_manifest_counts_match_the_file_list` | manifest 的 `counts` 与 `files` 列表自洽 |
@@ -173,8 +185,8 @@ archive 13 / priority 8 / menu 8 / modellist 5 / panel 15 / preferences 9 /
 theme 14 / chain 9 / localization 22 / files 9
 ```
 
-**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **22 项**通过
-（`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项 + `test_packaged_resources.py` 4 项），
+**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **23 项**通过
+（`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项 + `test_packaged_resources.py` 5 项），
 `git diff --check` 干净。
 
 改动前的完整回归为 112 项全绿，改动后第一遍同样全绿（第二遍见下节）；Windows CI 上
