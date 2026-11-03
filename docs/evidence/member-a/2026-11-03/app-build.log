@@ -1,0 +1,18 @@
+-- GLOB mismatch!
+-- Configuring done (0.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/leocad-d6-app-build
+[  0%] Built target leocad_autogen_timestamp_deps
+[  1%] Generating leocad_zh_CN.qm
+Updating '/tmp/leocad-d6-app-build/leocad_zh_CN.qm'...
+    Generated 1891 translation(s) (1891 finished and 0 unfinished)
+[  7%] Built target LeoCADHarmony_lrelease
+[  8%] Automatic MOC and UIC for target leocad
+[  8%] Built target leocad_autogen
+[  9%] Running rcc for resource leocad_translations
+[ 10%] Automatic RCC for generated/leocad_resources.qrc
+[ 11%] Building CXX object CMakeFiles/leocad.dir/common/project.cpp.o
+[ 12%] Building CXX object CMakeFiles/leocad.dir/.qt/rcc/qrc_leocad_translations.cpp.o
+[ 13%] Building CXX object CMakeFiles/leocad.dir/leocad_autogen/K4MSJZ3WG2/qrc_leocad_resources.cpp.o
+[ 14%] Linking CXX executable leocad
+[100%] Built target leocad

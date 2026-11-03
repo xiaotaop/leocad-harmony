@@ -1,0 +1,14 @@
+********* Start testing of AuthorizedSaveTest *********
+Config: Using QtTest library 6.12.0, Qt 6.12.0 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.3.19.1)), macos 27.0.1
+PASS   : AuthorizedSaveTest::initTestCase()
+PASS   : AuthorizedSaveTest::newUnicodeDocument()
+PASS   : AuthorizedSaveTest::shorterOverwriteRemovesOldTail()
+PASS   : AuthorizedSaveTest::failedPartialOverwriteRestoresOriginal()
+PASS   : AuthorizedSaveTest::failedNewWriteRemovesPartialFile()
+PASS   : AuthorizedSaveTest::invalidDestinationDoesNotPublish()
+PASS   : AuthorizedSaveTest::mismatchedReadbackRestoresOriginal()
+QWARN  : AuthorizedSaveTest::failedRollbackRetainsRecoveryCopy() QFileDevice::seek: IODevice is not open
+PASS   : AuthorizedSaveTest::failedRollbackRetainsRecoveryCopy()
+PASS   : AuthorizedSaveTest::cleanupTestCase()
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 3ms
+********* Finished testing of AuthorizedSaveTest *********

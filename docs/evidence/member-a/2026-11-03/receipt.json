@@ -1,0 +1,101 @@
+{
+  "algorithm": "SHA-256",
+  "scope": "All files except receipt.json",
+  "files": [
+    {
+      "name": "app-build.log",
+      "bytes": 895,
+      "sha256": "23c56de784c5bca0f0ed65d741a5aeccd7a3269c9cccaf1ffc69bfeaba12d506"
+    },
+    {
+      "name": "basic-dpr2-renderer.log",
+      "bytes": 1017,
+      "sha256": "f2732543967bbe6d8127e264042af362fd6093bcca158dbdb5a102ef2503f22a"
+    },
+    {
+      "name": "basic-dpr2.txt",
+      "bytes": 394928,
+      "sha256": "c68bc3da87adcc205f4344c141cf35471eec8f121a773a04269dba0a8e160add"
+    },
+    {
+      "name": "basic-dpr2.xml",
+      "bytes": 380817,
+      "sha256": "5dbaf6279ea578e2f22c9332d788685d4fa3c74bf2d0ed09c1b28a8440d1b432"
+    },
+    {
+      "name": "build-record.json",
+      "bytes": 2566,
+      "sha256": "fd78eecfd16f58ac4b11c51803e7655ad8f090f6b29331a957e7851953279233"
+    },
+    {
+      "name": "d8-switch-canvas.png",
+      "bytes": 408985,
+      "sha256": "9294f28029793e2644ad178ed905c091532c6a24e3a51a54590137f5f21bb201"
+    },
+    {
+      "name": "d8-switch-parts.png",
+      "bytes": 267777,
+      "sha256": "80262c7e46c3ddaee9b35d108d042e3c164549a0316aab8d43518f80a1d4705d"
+    },
+    {
+      "name": "fractional-dpr1_5-renderer.log",
+      "bytes": 1016,
+      "sha256": "f83cdf943a730d9caaaa6898470838c024b1eb055e4f73cb40be59615cde3002"
+    },
+    {
+      "name": "fractional-dpr1_5.txt",
+      "bytes": 396761,
+      "sha256": "eddc463a6701894fee393dc2efbe894c96566e38d7b56d223ad3c603693a0249"
+    },
+    {
+      "name": "fractional-dpr1_5.xml",
+      "bytes": 382621,
+      "sha256": "a02b280d608000c815fd639692e44b8e54d932a11adf93adfe4d2414a5d2dd48"
+    },
+    {
+      "name": "input-build.log",
+      "bytes": 13155,
+      "sha256": "fcbddaedf32e00dd7b1e76be74b8d89da476668a07ca0f50441db8c939084123"
+    },
+    {
+      "name": "normal-dpr1-renderer.log",
+      "bytes": 1018,
+      "sha256": "1ad67f596d1a17ee34180a86d2feb6bd6429886e89936f75f29e5466b9d9a1c6"
+    },
+    {
+      "name": "normal-dpr1.txt",
+      "bytes": 396852,
+      "sha256": "91e4fb1dd19bcdbc61201d9bbd336ed36a1cff4eef6582028abaeedf7a8f73c6"
+    },
+    {
+      "name": "normal-dpr1.xml",
+      "bytes": 382741,
+      "sha256": "7c77dfa98b6fb0df580170268dada21b63869260ebefb8099df05b18b8e9e2d5"
+    },
+    {
+      "name": "normal-dpr2-renderer.log",
+      "bytes": 1018,
+      "sha256": "f02be79527a3af2eb7108eb473054f156a9e111b17f01023edb549cd26443b06"
+    },
+    {
+      "name": "normal-dpr2.txt",
+      "bytes": 394928,
+      "sha256": "7ceda653eede35da6e45018ec8bf0f7bc0a2c8bbfdcc03cf88b0dc08b8b18b0c"
+    },
+    {
+      "name": "normal-dpr2.xml",
+      "bytes": 380817,
+      "sha256": "f2813ac10fc459c9ff8363db59f77960a5f228c029d024d91650516280ecef83"
+    },
+    {
+      "name": "review-pr44-save-tests.txt",
+      "bytes": 971,
+      "sha256": "dfa688b57be1386e9fd8a03e11a97516d0baed7128bd5210eeed90ede004953e"
+    },
+    {
+      "name": "startup-tests.txt",
+      "bytes": 292,
+      "sha256": "8dab5803d613a66dcf6618ed6311eccad205d9a7e37064ca2b8cc0692fe8616b"
+    }
+  ]
+}

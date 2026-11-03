@@ -45,6 +45,16 @@ class ViewInputTests : public QObject
         return QPointF(P[0]/Scale,(View->GetHeight()-1-P[1])/Scale);
     }
     QPointF center() const { return QPointF(Widget->width()/2.0,Widget->height()/2.0); }
+    bool openAndRefresh(const QString& Path)
+    {
+        if(!Window->OpenProject(Path)) return false;
+        View=Window->GetActiveView(); Widget=View?View->GetWidget():nullptr;
+        Model=lcGetActiveProject()->GetActiveModel();
+        if(!View || !Widget || !Model) return false;
+        QApplication::setActiveWindow(Window.get()); Widget->setFocus();
+        QCoreApplication::processEvents();
+        return true;
+    }
 private slots:
     void rayBoxBoundaries_data()
     {
@@ -409,6 +419,78 @@ private slots:
             QVERIFY(lcLength(lcCross(lcNormalize(Before-Target),lcNormalize(After-Before)))<0.001f);
         }
         QVERIFY(!View->IsTracking()); QVERIFY(!Model->IsModified());
+    }
+    void alphaSwitchSequence_data()
+    {
+        QTest::addColumn<bool>("PartsVisible");
+        QTest::newRow("canvas-only")<<false;
+        QTest::newRow("parts-visible")<<true;
+    }
+    void alphaSwitchSequence()
+    {
+        QFETCH(bool,PartsVisible);
+        if(PartsVisible)
+        {
+            auto* Parts=Window->findChild<QDockWidget*>(QStringLiteral("PartsToolbar"));
+            QVERIFY(Parts); Parts->show();
+        }
+        QTemporaryDir Files; QVERIFY(Files.isValid());
+        const QString Ldr=Files.filePath("baseline.ldr"), Mpd=Files.filePath("assembly.mpd");
+        QVERIFY(QFile::copy(QFINDTESTDATA("../fixtures/render-baseline.ldr"),Ldr));
+        QVERIFY(QFile::copy(QFINDTESTDATA("../fixtures/input-switch.mpd"),Mpd));
+        int Heartbeats=0; QTimer Heartbeat;
+        connect(&Heartbeat,&QTimer::timeout,this,[&]() {Heartbeats++;}); Heartbeat.start(1);
+        for(int Iteration=0;Iteration<10;Iteration++)
+        {
+            for(const QString& Input : {Ldr,Mpd})
+            {
+                QVERIFY(openAndRefresh(Input)); QTRY_VERIFY(Widget->isValid());
+                const bool IsMpd=Input==Mpd;
+                QCOMPARE(lcGetActiveProject()->GetModels().size(),size_t(IsMpd?2:1));
+                QCOMPARE(Model->GetPieces().size(),size_t(2));
+                View->SetViewpoint(lcViewpoint::Home); View->ZoomExtents(); Window->SetTool(lcTool::Select);
+                lcPiece* Piece=Model->GetPieces()[0].get();
+                const auto& Bounds=Piece->mPieceInfo->GetBoundingBox();
+                const QPointF P=fromView(View->ProjectPoint(lcMul31((Bounds.Min+Bounds.Max)/2.0f,Piece->mModelWorld)));
+                mouse(QEvent::MouseButtonPress,P,Qt::LeftButton,Qt::LeftButton);
+                mouse(QEvent::MouseButtonRelease,P,Qt::LeftButton,Qt::NoButton);
+                QCOMPARE(Model->GetFocusObject(),static_cast<lcObject*>(Piece));
+                const lcVector3 Before=Piece->mModelWorld.GetTranslation();
+                const quint32 Colour=Piece->GetColorCode();
+                QTest::keyClick(Widget,Qt::Key_Right);
+                const lcVector3 Moved=Model->GetPieces()[0]->mModelWorld.GetTranslation();
+                QVERIFY(Moved!=Before); QVERIFY(lcGetActiveProject()->IsModified());
+                QTest::keySequence(Widget,QKeySequence("Ctrl+Z"));
+                QCOMPARE(Model->GetPieces()[0]->mModelWorld.GetTranslation(),Before);
+                QTest::keySequence(Widget,QKeySequence("Ctrl+Y"));
+                QCOMPARE(Model->GetPieces()[0]->mModelWorld.GetTranslation(),Moved);
+                const QString Output=Files.filePath(IsMpd?"edited.mpd":"edited.ldr");
+                QVERIFY(Window->SaveProject(Output)); QVERIFY(!lcGetActiveProject()->IsModified());
+                QVERIFY(openAndRefresh(Output));
+                QCOMPARE(lcGetActiveProject()->GetModels().size(),size_t(IsMpd?2:1));
+                QCOMPARE(Model->GetPieces()[0]->mModelWorld.GetTranslation(),Moved);
+                QCOMPARE(Model->GetPieces()[0]->GetColorCode(),Colour);
+                if(IsMpd)
+                {
+                    lcGetActiveProject()->SetActiveModel(1,true);
+                    View=Window->GetActiveView(); Widget=View->GetWidget(); Model=View->GetActiveModel();
+                    QCOMPARE(Model->GetPieces().size(),size_t(1));
+                    lcGetActiveProject()->SetActiveModel(0,true);
+                    View=Window->GetActiveView(); Widget=View->GetWidget(); Model=View->GetActiveModel();
+                    QCOMPARE(Model->GetPieces().size(),size_t(2));
+                }
+                QMenu* Menu=Window->menuBar()->actions().front()->menu(); QVERIFY(Menu);
+                Menu->popup(Widget->mapToGlobal(QPoint(15,15))); QTRY_VERIFY(Menu->isVisible());
+                QTest::keyClick(Menu,Qt::Key_Escape); QTRY_VERIFY(!Menu->isVisible());
+                QApplication::setActiveWindow(Window.get()); Widget->setFocus();
+                const int Previous=Heartbeats; QTest::qWait(5); QVERIFY(Heartbeats>Previous);
+                QVERIFY(!View->IsTracking()); QVERIFY(!lcGetActiveProject()->IsModified());
+                QVERIFY(!Widget->grabFramebuffer().isNull());
+                qInfo()<<"D8_SWITCH"<<Iteration<<(IsMpd?"MPD":"LDR")<<"parts"<<PartsVisible
+                       <<"heartbeat"<<Heartbeats<<"DPR"<<Widget->GetDeviceScale();
+            }
+        }
+        capture(PartsVisible?"d8-switch-parts":"d8-switch-canvas");
     }
     void staleRightReleaseDoesNotOpenMenu()
     {
