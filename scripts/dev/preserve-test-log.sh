@@ -62,13 +62,17 @@ if [ ! -f "$RESULT_FILE" ]; then
 fi
 
 # Neither write below may abort the caller; see the note at the top of the file.
+#
+# Neither one may skip the failure branch either. These used to "exit 0" on
+# failure, which was wrong in the one case that matters: if the last-run copy
+# could not be written, a genuinely failed suite went on to record no failure
+# log at all — the feature would lose the evidence precisely when the disk was
+# already misbehaving. The two destinations are independent, so a problem with
+# the first must not prevent the second.
 if ! mkdir -p "$LOG_ROOT/build/last-run"; then
-    warn "cannot create $LOG_ROOT/build/last-run; no log preserved for $SUITE"
-    exit 0
-fi
-if ! cp "$RESULT_FILE" "$LOG_ROOT/build/last-run/d3-$SUITE-results.txt"; then
-    warn "cannot write the last-run copy for $SUITE; no log preserved"
-    exit 0
+    warn "cannot create $LOG_ROOT/build/last-run; no last-run log preserved for $SUITE"
+elif ! cp "$RESULT_FILE" "$LOG_ROOT/build/last-run/d3-$SUITE-results.txt"; then
+    warn "cannot write the last-run copy for $SUITE; no last-run log preserved"
 fi
 
 # A suite failed if it told us so, whatever the exit status claimed. QtTest exits

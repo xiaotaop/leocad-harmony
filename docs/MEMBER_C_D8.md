@@ -193,9 +193,9 @@ archive 13 / priority 8 / menu 8 / modellist 5 / panel 15 / preferences 9 /
 theme 14 / chain 9 / localization 22 / files 9
 ```
 
-**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **35 项**通过，分别是
+**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **36 项**通过，分别是
 `test_network_scope.py` 10 项、`test_export_part_list.py` 8 项、`test_packaged_resources.py` 5 项、
-`test_failure_log_retention.py` 12 项；`git diff --check` 干净。
+`test_failure_log_retention.py` 13 项；`git diff --check` 干净。
 
 改动前的完整回归为 112 项全绿，改动后第一遍同样全绿（第二遍见下节）；Windows CI 上
 `MenuScopeTest::removedCommandsAreNotVisible()` 为 PASS，套件 8 passed / 0 failed。
@@ -235,12 +235,17 @@ theme 14 / chain 9 / localization 22 / files 9
 逻辑从 runner 里抽成 `scripts/dev/preserve-test-log.sh`：保留规则本身才是此前出错的部分，
 而写在 20 分钟构建循环里的规则无法被回归验证；抽出来后可毫秒级直接测试。
 
-回归验证 `scripts/library/test_failure_log_retention.py`（12 项，已接入 port-policy）用
+回归验证 `scripts/library/test_failure_log_retention.py`（13 项，已接入 port-policy）用
 `PRESERVE_LOG_ROOT` 指向临时目录，按**丢失证据的那串真实顺序**驱动同一份脚本：
-先写失败日志、删掉源文件（模拟 `rm -rf $BUILD`）、再跑一次成功——断言失败原文、
-`tst_archive.cpp(214)` 与 `12 passed, 1 failed` 仍在，且不含 `13 passed`。
+先写失败日志、删掉源文件（模拟 `rm -rf $BUILD`）、再跑一次成功——断言失败那一行、
+`tst_archive_validation.cpp(154)` 与 `12 passed, 1 failed` 仍在，且不含 `13 passed`。
 
-**第二轮自我复核又补了 7 项**，都是「说的和做的不一样」这一类的同一把尺子：
+这里的日志内容是**合成的**，不是 D8 那次失败的原始记录——原始记录正是因为这个问题才没留下来。
+合成时把套件名、类名和位置取自真实存在的 `tests/library/d3/tst_archive_validation.cpp:154`
+（`ArchiveValidationTest::truncatedArchiveIsRejected()`），使细节不至于凭空捏造；
+但它断言的是**脚本的保留行为**，不是那次失败的原因。
+
+**第二轮自我复核又补了 8 项**，都是「说的和做的不一样」这一类的同一把尺子：
 
 | 补充用例 | 它锁住的规则 | 此前可以被删掉而不报警 |
 |---|---|---|
@@ -251,10 +256,14 @@ theme 14 / chain 9 / localization 22 / files 9
 | `test_a_failed_meta_write_is_reported_not_leaked` | meta 写入失败时同样给出 `warning:` 并 exit 0 | `if ! { ...; } > file` **不会**返回重定向失败，防护看着对但永不触发 |
 | `test_an_uncreatable_failure_dir_does_not_fail_the_suite` | `last-failure` 的 `mkdir` 失败时 exit 0 | 该分支只有失败时才走到，此前无任何用例覆盖，裸 `mkdir` 可存活 |
 | `test_a_failed_failure_copy_does_not_fail_the_suite` | `last-failure` 的 `cp` 失败时 exit 0 | 上一条会先被目录检查拦住，`cp` 仍可裸奔 |
+| `test_a_failed_last_run_write_still_records_the_failure` | `last-run` 写失败时**仍然**要写 `last-failure` | 两个 `exit 0` 排在失败分支之前：`last-run` 一失败，失败证据就一条都不留——而这时磁盘已经在出问题了 |
 
-对应地，`preserve-test-log.sh` 把**五处**写入尝试都包进 `if ! ...; then` + `warn` + `exit 0`
-（`last-run` 的目录与拷贝、`last-failure` 的目录与拷贝、meta 文件），
+对应地，`preserve-test-log.sh` 把**五处**写入尝试都包进 `if ! ...; then` + `warn`，
 并对 `<exit-status>` 加了 `case` 数字校验（参数错误 exit 2，与「日志写失败」区分开）。
+其中三处（`last-failure` 的目录与拷贝、meta）在 `warn` 之后 `exit 0`；`last-run` 的两处**不退出**，
+只 `warn` 然后继续往下走——因为失败分支在它们后面：两个目的地互相独立，
+前一个写不成不能连带把后一个也跳过。这条是预推送复核用一个「把 `exit 0` 加回去」的变异体抓出来的，
+当时 12 项测试全绿。
 其中 meta 那处不能用组重定向 `{ ...; } > file`：实测该形态下 bash 只打自己的错误、
 `then` 分支被跳过、脚本继续当作写成功了——防护形同虚设。改成先算进变量、再用单条简单命令
 写入，重定向失败才真的会进 `then`。**这个坑本身也是被测出来的**：先写了组重定向版本，实测发现 `warning:` 没出现、
@@ -274,18 +283,29 @@ theme 14 / chain 9 / localization 22 / files 9
 而不是因为读代码时觉得它不可疑。
 
 负向验证（变异测试，全部在 `/tmp` 副本上做，仓库未动）：把脚本改坏成下列任一形态，
-测试都会立刻变红——M1 还原「无条件覆盖同一文件」→ `FAILED (failures=2)`，含
-`the failure log was deleted by a passing run`；M3 删掉判定式的 `FAIL!` 半边 → 1 项失败；
+测试都会立刻变红——M1 还原修复前的单路径形态（截断到失败分支之前、直接 `exit 0`）
+→ `FAILED (failures=7, errors=1)`，含
+`the failure log was deleted by a passing run`；另有一个只写 `if true; then` 的简化变体
+→ `FAILED (failures=2)`，两者不是同一个变异，数字也不同；
+M3 删掉判定式的 `FAIL!` 半边 → 1 项失败；
 M8 把 `mkdir` 恢复成裸写 → 1 项失败；M10 把 `cp` 恢复成裸写 → 1 项失败；
 M9 删掉数字校验 → 1 项失败；M11 把 meta 写回 `{ ...; } > file` 的组重定向形态 → 1 项失败；
-M12 把 `last-failure` 的 `mkdir` 恢复成裸写 → 1 项失败；M13 把 `last-failure` 的 `cp` 恢复成裸写 → 1 项失败。
-恢复后 12 项全绿。**其中 M3、M8、M9、M10、M11、M12、M13 正是本轮新补的用例才抓得住的**，
+M12 把 `last-failure` 的 `mkdir` 恢复成裸写 → 1 项失败；M13 把 `last-failure` 的 `cp` 恢复成裸写 → 1 项失败；
+MFALL 把 `last-run` 两处守卫的 `exit 0` 加回去（修复前的形态）→ 1 项失败，
+红的正是 `test_a_failed_last_run_write_still_records_the_failure`。
+恢复后 13 项全绿。**其中 M3、M8、M9、M10、M11、M12、M13、MFALL 正是本轮新补的用例才抓得住的**，
 补之前它们全部存活。组长另用 Git Bash 按旧的相同 `cp` 逻辑独立验证过同样的「失败→成功」顺序，结论一致。
 
 ## 五、边界与未完成项
 
 - `archive` 套件出现过一次未复现的失败，原因**未知**（见 §四）。留待 D9 若再次出现时按新日志定位，
   本轮不推测、不为此改生产代码。
+- **构建失败不留取证**：`scripts/dev/run-d3-tests.sh:56` 先 `rm -rf "$BUILD"`，`:58-62` 的
+  `qmake`/`make` 跑在 `set -euo pipefail` 下，而保留日志的那次调用在 `:95`——构建一失败，整轮直接中止，
+  `build/last-run` 与 `build/last-failure` 都不会被创建（实测：stub `qmake` 退 1 时 rc=1，
+  两个套件一个都没开始，两个目录都没生成）。二进制没产出的路径同理（`:65-69` 打一行 `FAIL`、`continue`，
+  不写任何日志）。**这恰好是最需要留证据的一类失败**。该结构在本次改动之前就存在（基线提交行为一致），
+  不是这四笔提交引入的回归，但本节此前没有把这条边界写出来。留待 D9 处理。
 - 取证链（`last-run` / `last-failure`）只做在 **bash runner**（`scripts/dev/run-d3-tests.sh`）上。
   Windows 入口 `scripts/Run-D3Tests.ps1` 仍只写 `.local/build-d3-<name>/test-results.txt` 并靠
   `model-ci.yml` 上传 artifact，没有失败独立留存；本节结论不覆盖该路径，若要求全平台同等需另开一轮。

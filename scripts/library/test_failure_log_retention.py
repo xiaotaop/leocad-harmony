@@ -48,29 +48,36 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[2]
 SCRIPT = REPO / "scripts" / "dev" / "preserve-test-log.sh"
 
-FAILED_RUN = """********* Start testing of ArchiveTest *********
-PASS   : ArchiveTest::goodArchiveLoads()
-FAIL!  : ArchiveTest::truncatedArchiveIsRejected() Compared values are not the same
-   Actual   (message): "opened"
-   Expected (message): "rejected"
-   Loc: [tst_archive.cpp(214)]
+# Synthetic log bodies. They are NOT a transcript of the real D8 failure — that
+# transcript no longer exists, which is the whole reason this file exists. What
+# they do carry is the shape the script has to survive: a FAIL! line naming a
+# test, a "Loc:" line, and the Totals line underneath it. The names and the
+# location are copied from the suite that actually failed so the fixture is at
+# least not fictional in its details: ArchiveValidationTest::truncatedArchiveIsRejected
+# lives at tests/library/d3/tst_archive_validation.cpp:154.
+FAILED_RUN = """********* Start testing of ArchiveValidationTest *********
+PASS   : ArchiveValidationTest::goodArchiveIsAccepted()
+FAIL!  : ArchiveValidationTest::truncatedArchiveIsRejected() Compared values are not the same
+   Actual   (Check.Problem): "opened"
+   Expected (Check.Problem): "rejected"
+   Loc: [../leocad-harmony/tests/library/d3/tst_archive_validation.cpp(154)]
 Totals: 12 passed, 1 failed, 0 skipped, 0 blacklisted
-********* Finished testing of ArchiveTest *********
+********* Finished testing of ArchiveValidationTest *********
 """
 
-PASSED_RUN = """********* Start testing of ArchiveTest *********
-PASS   : ArchiveTest::goodArchiveLoads()
-PASS   : ArchiveTest::truncatedArchiveIsRejected()
+PASSED_RUN = """********* Start testing of ArchiveValidationTest *********
+PASS   : ArchiveValidationTest::goodArchiveIsAccepted()
+PASS   : ArchiveValidationTest::truncatedArchiveIsRejected()
 Totals: 13 passed, 0 failed, 0 skipped, 0 blacklisted
-********* Finished testing of ArchiveTest *********
+********* Finished testing of ArchiveValidationTest *********
 """
 
 # QtTest prints its summary before it exits, so a FAIL! line followed by a crash
 # can reach disk while the process still reports success. The runner keeps a
 # belt-and-braces "printed FAIL! is a failure" check for exactly this; a log left
 # behind by such a run is the only thing that would explain it afterwards.
-PASSED_STATUS_BUT_FAILED = PASSED_RUN + """FAIL!  : ArchiveTest::lateFailure() Aborted before the summary was updated
-   Loc: [tst_archive.cpp(301)]
+PASSED_STATUS_BUT_FAILED = PASSED_RUN + """FAIL!  : ArchiveValidationTest::danglingReferenceIsRejected() Aborted before the summary was updated
+   Loc: [../leocad-harmony/tests/library/d3/tst_archive_validation.cpp(145)]
 """
 
 SUITE = "archive"
@@ -106,7 +113,7 @@ class FailureLogRetention(unittest.TestCase):
         self.assertTrue(failure_log.exists(), "the failure log was deleted by a passing run")
         text = failure_log.read_text(encoding="utf-8")
         self.assertIn("truncatedArchiveIsRejected", text)
-        self.assertIn("tst_archive.cpp(214)", text)
+        self.assertIn("tst_archive_validation.cpp(154)", text)
         self.assertIn("12 passed, 1 failed", text)
         self.assertNotIn("13 passed", text, "the passing run overwrote the failure log")
 
@@ -125,7 +132,13 @@ class FailureLogRetention(unittest.TestCase):
         meta = self.root / "build" / "last-failure" / f"d3-{SUITE}-meta.txt"
         text = meta.read_text(encoding="utf-8")
         self.assertIn(f"suite={SUITE}", text)
-        self.assertIn("captured=", text)
+        self.assertIn("exit_status=1", text)
+        self.assertRegex(
+            text,
+            r"captured=\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z",
+            "the timestamp must stay ISO-8601 in UTC; a local-time format is unreadable next to CI logs",
+        )
+        self.assertIn("failed_tests:", text, "the header is what makes the list skimmable")
         self.assertIn("truncatedArchiveIsRejected", text)
 
     def test_a_crash_without_fail_line_is_still_preserved(self) -> None:
@@ -151,11 +164,11 @@ class FailureLogRetention(unittest.TestCase):
             failure_log.exists(),
             "a suite that printed FAIL! was recorded as a pass",
         )
-        self.assertIn("lateFailure", failure_log.read_text(encoding="utf-8"))
+        self.assertIn("danglingReferenceIsRejected", failure_log.read_text(encoding="utf-8"))
         meta = self.root / "build" / "last-failure" / f"d3-{SUITE}-meta.txt"
         text = meta.read_text(encoding="utf-8")
         self.assertIn("exit_status=0", text)
-        self.assertIn("lateFailure", text)
+        self.assertIn("danglingReferenceIsRejected", text)
 
     def test_passing_runs_leave_no_failure_record(self) -> None:
         """No phantom failure: green from the start must not create one."""
@@ -315,6 +328,38 @@ class FailureLogRetention(unittest.TestCase):
             f"a failed failure-log copy must not fail the suite: {completed.stderr}",
         )
         self.assertIn("warning:", completed.stderr)
+
+    def test_a_failed_last_run_write_still_records_the_failure(self) -> None:
+        """The failure log must not depend on the last-run copy succeeding.
+
+        Both guards used to "exit 0" on failure, and because the last-run pair
+        comes first, an unwritable last-run path skipped the failure branch
+        entirely: a genuinely failed suite left no failure record at all. That
+        is the one outcome this whole file exists to prevent, so the two
+        destinations are written independently and this case pins it.
+        """
+        result = self.root / "test-results.txt"
+        result.write_text(FAILED_RUN, encoding="utf-8")
+        build = self.root / "build"
+        build.mkdir(parents=True)
+        (build / "last-run").write_text("", encoding="utf-8")
+
+        env = dict(os.environ, PRESERVE_LOG_ROOT=str(self.root))
+        completed = subprocess.run(
+            ["bash", str(SCRIPT), SUITE, "1", str(result)],
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        self.assertIn("warning:", completed.stderr)
+        failure_log = build / "last-failure" / f"d3-{SUITE}-results.txt"
+        self.assertTrue(
+            failure_log.exists(),
+            "an unwritable last-run copy suppressed the failure log",
+        )
+        self.assertIn("truncatedArchiveIsRejected", failure_log.read_text(encoding="utf-8"))
 
     def test_a_non_numeric_exit_status_is_rejected_as_a_usage_error(self) -> None:
         """A wrong argument is an error; it must not quietly read as a pass.
