@@ -301,8 +301,15 @@ void lcMainWindow::CreateActions()
 	mActions[LC_PIECE_SHOW_LATER]->setIcon(QIcon(":/resources/piece_show_later.png"));
 	mActions[LC_VIEW_SPLIT_HORIZONTAL]->setIcon(QIcon(":/resources/view_split_horizontal.png"));
 	mActions[LC_VIEW_SPLIT_VERTICAL]->setIcon(QIcon(":/resources/view_split_vertical.png"));
-	mActions[LC_VIEW_ZOOM_IN]->setIcon(QIcon(":/resources/view_zoomin.png"));
-	mActions[LC_VIEW_ZOOM_OUT]->setIcon(QIcon(":/resources/view_zoomout.png"));
+	// Zoom in and out had setIcon() calls pointing at view_zoomin.png and
+	// view_zoomout.png, which are not in the tree and never were: they are in no
+	// .qrc and in no commit. Qt turns that into a null icon rather than an error,
+	// so the two menu rows rendered without an icon beside zoom-extents. The
+	// calls are dropped instead of the files being invented — D8 is a freeze, and
+	// new artwork is not something to slip in under "complete the resources".
+	// scripts/library/test_packaged_resources.py fails if a ":/..." reference
+	// comes back without a packaged file behind it, so restoring these means
+	// adding real icons, not just the lines.
 	mActions[LC_VIEW_ZOOM_EXTENTS]->setIcon(QIcon(":/resources/view_zoomextents.png"));
 	mActions[LC_VIEW_TIME_FIRST]->setIcon(QIcon(":/resources/time_first.png"));
 	mActions[LC_VIEW_TIME_PREVIOUS]->setIcon(QIcon(":/resources/time_previous.png"));

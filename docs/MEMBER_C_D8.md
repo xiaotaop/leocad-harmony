@@ -2,7 +2,12 @@
 
 日期 2026-11-03。基线 main `b947ef80`（含 A #46、B #47、组长 #44 与 C #43 合并后的状态）。
 D8 要求为「完成全部首发界面和包内资源；停止新增页面」。本轮**不新增任何页面或功能**，
-只做三件事：逐项核对首发界面已无越界入口、核对包内资源完整、把发现的一处遗漏修掉并锁住。
+做四件事：逐项核对首发界面已无越界入口；把源码中每个硬编码 URL 与每个资源引用拿去判定可达性；
+修掉核对中发现的**两处**缺口并分别锁定；修掉取证工具自身的两处缺陷。
+
+两处缺口分别是：帮助菜单两项会拉起浏览器（§一），以及两个菜单命令引用了不存在的图标文件
+（§二之二）。二者性质不同——前者违反离线承诺，后者是长期无人察觉的资源死引用——
+但都属「首发界面与包内资源是否真的完成」这一问，都不是新增功能。
 
 ## 一、本轮修掉的越界入口：帮助菜单会拉起浏览器
 
@@ -44,11 +49,53 @@ D8 要求为「完成全部首发界面和包内资源；停止新增页面」�
 | 离线零件库 | `assets/ldraw-lite/library-lite.zip` **3833541 字节**，SHA-256 `09922e82…4268c0f3`，与 `manifest.json` 记录**逐字节一致** |
 | 库清单 | 1160 零件 / 669 子零件 / 911 基元 / 1 配置，共 **2741 文件**，`files` 数组 2741 条 |
 | 应用图标 | qrc 内 64/256/512 三档，64×64 保留历史 alias `:/resources/leocad.png` |
-| 着色器 | 18 个 `.glsl` 全部存在（fake-lit 4、unlit 10、text SDF 1、view sphere 2 等） |
+| 着色器 | **17 个** `.glsl` 全部存在：`resources/shaders/` 下 fakelit 4、unlit 12（含 view_sphere 一对）、text_sdf 1。磁盘与 qrc 双向比对，无「有文件未打包」也无「有条目缺文件」 |
+| 代码资源引用 | `common/` + `qt/` 中 **147 处** `:/…` 引用全部可解析（修复前 2 处不可解析，见 §二之二） |
 
 `.qm` 在 CMake 构建时由 `qt_add_translations()` 生成，`CMakeLists.txt:30-52` 会把 `leocad.qrc` 中
 的 `.qm` 条目过滤掉再生成构建树 qrc（避免与生成的翻译资源重复），所以 `.qm` 实际来自构建产物；
 qrc 里保留条目是给 qmake 路径用的。这一处此前无记录，本轮核实并写在这里。
+
+### 二之二、引用不存在文件的图标：缩放 in/out
+
+资源审计（不只数 qrc 条目，而是把代码里每个 `:/…` 引用拿去和 qrc 比对）查出 2 处死引用：
+`common/lc_mainwindow.cpp` 对 `LC_VIEW_ZOOM_IN` / `LC_VIEW_ZOOM_OUT` 调用
+`setIcon(QIcon(":/resources/view_zoomin.png"))` 与 `view_zoomout.png`，**这两个文件不存在、也从未存在于本仓库**
+（`git log --all --diff-filter=A -- "*view_zoomin*" "*view_zoomout*"` 无结果，非遗失）。Qt 对缺失资源不报错，
+只返回 null 图标，因此这类引用可以长期存在而不被发现。
+
+**影响面经核查为零**，这点要说清楚，不能夸大成「界面坏了」：这两个命令**既不在任何菜单里，也不在任何工具栏里**
+（`ViewMenu` 只加 `LC_VIEW_ZOOM_EXTENTS`；`mStandardToolBar` / `mTimeToolBar` / `mToolsToolBar` 均无缩放项），
+所以图标从来没有被渲染过。它们的可达途径只有键盘：`lc_commands.cpp` 表里 `DefaultShortcut` 为 `+` / `-`，
+经 `lc_shortcuts.cpp:61` 全表装载、`lc_mainwindow.cpp:2691` 赋给动作，而动作在 `CreateActions()` 里
+对所有命令 id 统一 `addAction()` 挂到窗口上。命令处理分支仍在 `lc_mainwindow.cpp:3474/3479`。
+
+处理方式：**移除这两处死引用，而不是凭空补两张图标**。D8 是冻结日，「完成包内资源」不应成为塞入新美术的理由；
+且这两个命令没有任何可见界面，补图标在今天没有可验证的收益。若日后要把缩放暴露进菜单，
+新检查会要求**先有真实文件、再谈引用**。
+
+顺带记一条给组长的首发界面观察（**本轮不擅自改**，属范围决策）：缩放 in/out 目前是**纯键盘命令**，
+界面上无处可点、无处可发现。对 PC 键盘用户可用，但真机上若有不带 `+/-` 的输入场景就不可达。
+是否加入 View 菜单按分工文档 §1.2 末尾的「等量交换」规则由组长定，不应在冻结日由本成员单方新增入口。
+
+新增 `scripts/library/test_packaged_resources.py`（**4 项**，已接入 `continuous.yml` 的 port-policy）：
+
+| 用例 | 锁住什么 |
+|---|---|
+| `test_every_qrc_entry_exists_on_disk` | qrc 列出的每个文件都在树里（两个 qrc 的相对根不同） |
+| `test_code_references_resolve_to_packaged_resources` | 代码中每个 `:/…` 引用都能解析到已打包资源；按各自 `prefix` 计算真实资源路径，并对动态拼接名重试扩展名 |
+| `test_bundled_library_matches_its_manifest` | `library-lite.zip` 的字节数与 SHA-256 与 manifest 一致 |
+| `test_library_manifest_counts_match_the_file_list` | manifest 的 `counts` 与 `files` 列表自洽 |
+
+两处踩过的坑已写进代码注释，因为它们决定这个检查能否被信任：
+
+- 起初忽略 `<qresource prefix="/stylesheet">`，把 `close.svg`、`stylesheet.qss` 判成缺失——**误报会淹没真问题**，
+  资源路径必须按各自 prefix 计算。
+- 解释性注释里写的 `":/..."` 字样被当成引用，导致检查因散文而失败。**能被注释骗过的检查会被禁用**，
+  因此改为在剥离注释之后再扫描（同时跟踪字符串字面量，避免 URL 里的 `//` 误删整行），偏移与行号保持不变。
+
+**负向验证**：把 `view_zoomin.png` 那行恢复后，检查立即以
+`{'/resources/view_zoomin.png': ['common/lc_mainwindow.cpp:313']}` 失败并点名行号；移除后 4 项 OK。
 
 ## 三、首发界面：已做到的裁剪
 
@@ -126,8 +173,9 @@ archive 13 / priority 8 / menu 8 / modellist 5 / panel 15 / preferences 9 /
 theme 14 / chain 9 / localization 22 / files 9
 ```
 
-**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 18 项通过
-（`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项），`git diff --check` 干净。
+**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **22 项**通过
+（`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项 + `test_packaged_resources.py` 4 项），
+`git diff --check` 干净。
 
 改动前的完整回归为 112 项全绿，改动后第一遍同样全绿（第二遍见下节）；Windows CI 上
 `MenuScopeTest::removedCommandsAreNotVisible()` 为 PASS，套件 8 passed / 0 failed。
@@ -156,6 +204,8 @@ theme 14 / chain 9 / localization 22 / files 9
 - 本轮是**宿主验证**，不是真机。帮助菜单裁剪在真机上的表现（图标、菜单宽度）未另行取证。
 - `localization` 套件里的字形覆盖与文字宽度两项，在 Windows CI 上因 runner 无字体库而 `SKIP`
   （D7 已记录），本轮不改这一状况；**字体结论仍以真机探针为准**。
+- 缩放 in/out 是**纯键盘命令**（`+` / `-`），首发界面里没有任何可点入口。是否加进 View 菜单属范围决策，
+  按「等量交换」由组长定；本成员未在冻结日单方新增入口（详见 §二之二）。
 - 首发界面「全部完成」是**裁剪意义上的完成**：范围内功能可用、越界入口已移除。不包含
   外观层面的真机逐页验收，那属 D9 真机回归。
 - 开放问题未关闭：`#28`（面板文案，已随 #43 基本完成待收尾）、`#14`（偏好设置裁剪）、

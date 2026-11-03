@@ -1,0 +1,248 @@
+#!/usr/bin/env python3
+"""Lock the integrity of what ships inside the package.
+
+D8 asked for the first-release resources to be complete. "Complete" is checkable
+in three ways that a build does not verify for you:
+
+  1. every file the .qrc lists exists on disk (a missing entry is a compile-time
+     RCC error only for qmake; CMake's generated copy silently keeps the alias);
+  2. every ":/..." path the code asks Qt for actually resolves to something the
+     package ships. A QIcon on a nonexistent path is not an error at runtime:
+     Qt hands back a null icon and the menu row simply renders differently from
+     its neighbours. Two commands were doing exactly that (see below), which is
+     how this check earned its place;
+  3. the bundled parts library still matches the digest its own manifest
+     declares. The archive is loaded straight out of the package, so a silently
+     altered or partially committed zip would ship as "the offline library"
+     without anything noticing until a device failed to find parts.
+
+Run: python3 scripts/library/test_packaged_resources.py
+"""
+
+import hashlib
+import json
+import re
+import unittest
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parents[2]
+
+QRC_FILES = (
+    REPO / "leocad.qrc",
+    REPO / "resources" / "stylesheet" / "stylesheet.qrc",
+)
+
+# Where ":/..." literals are looked for. The libraries/ tree is upstream
+# third-party code and holds no LeoCAD resource paths of its own.
+SOURCE_GLOBS = ("common/*.cpp", "common/*.h", "qt/*.cpp", "qt/*.h")
+
+# Extensions a bare reference is retried with. Cursor names are built as
+# ":/resources/cursor_x" plus a suffix in code, so they resolve only once the
+# extension is re-attached; the check must not call those missing.
+TRIED_SUFFIXES = (".png", ".qm", ".glsl", ".svg", ".qss", ".dat", ".json")
+
+LIBRARY_DIR = REPO / "assets" / "ldraw-lite"
+
+
+def read(path: Path) -> str:
+    return path.read_text(encoding="utf-8", errors="replace")
+
+
+def qrc_paths() -> set:
+    """Every resource path Qt would serve, honouring each block's prefix.
+
+    The path RCC serves is <qresource prefix> + alias-or-file-name, and the two
+    .qrc files in this project use different prefixes ("/" and "/stylesheet").
+    Reading only the file names makes every stylesheet reference look broken,
+    which is a false positive this function produced the first time it ran.
+    """
+
+    available = set()
+    for qrc in QRC_FILES:
+        text = read(qrc)
+        for prefix, body in re.findall(
+            r'<qresource(?:\s+prefix="([^"]*)")?>(.*?)</qresource>', text, re.S
+        ):
+            prefix = (prefix or "/").rstrip("/")
+            for alias, path in re.findall(
+                r'<file(?: alias="([^"]*)")?>([^<]+)</file>', body
+            ):
+                available.add(prefix + "/" + (alias or path.strip()))
+    return available
+
+
+def strip_comments(text: str) -> str:
+    """Blank out comments while keeping every offset and newline.
+
+    Prose inside a comment is not a reference. This function was written after
+    the checker reported a failure caused by nothing but the text ":/..." inside
+    an explanatory comment — a check that prose can trip is a check that gets
+    switched off, so the comments go rather than the prose.
+
+    Offsets are preserved (comments become spaces) so line numbers computed from
+    the result still point at the real line. String literals are tracked so a
+    "//" inside a URL does not erase the rest of the line.
+
+    Known blind spot: C++ raw string literals, R"( ... ), are not tracked, so a
+    ":/..." written inside one that also contains "//" could be missed. None of
+    the scanned files use raw strings (grep -c 'R"(' is 0 across common/ and
+    qt/), so the simplification is currently free — if raw strings appear, this
+    function needs a third state before the checker can be trusted again.
+    """
+
+    out = []
+    i = 0
+    n = len(text)
+    in_string = in_char = False
+    while i < n:
+        c = text[i]
+        if in_string:
+            out.append(c)
+            if c == "\\" and i + 1 < n:
+                out.append(text[i + 1])
+                i += 2
+                continue
+            if c == '"':
+                in_string = False
+            i += 1
+            continue
+        if in_char:
+            out.append(c)
+            if c == "\\" and i + 1 < n:
+                out.append(text[i + 1])
+                i += 2
+                continue
+            if c == "'":
+                in_char = False
+            i += 1
+            continue
+        if c == '"':
+            in_string = True
+            out.append(c)
+            i += 1
+            continue
+        if c == "'":
+            in_char = True
+            out.append(c)
+            i += 1
+            continue
+        if c == "/" and i + 1 < n and text[i + 1] == "/":
+            while i < n and text[i] != "\n":
+                out.append(" ")
+                i += 1
+            continue
+        if c == "/" and i + 1 < n and text[i + 1] == "*":
+            while i < n and not (text[i] == "*" and i + 1 < n and text[i + 1] == "/"):
+                out.append("\n" if text[i] == "\n" else " ")
+                i += 1
+            out.append("  ")
+            i += 2
+            continue
+        out.append(c)
+        i += 1
+    return "".join(out)
+
+
+def source_references() -> dict:
+    """Map each ":/..." literal to the files that mention it."""
+
+    refs = {}
+    for pattern in SOURCE_GLOBS:
+        for source in sorted(REPO.glob(pattern)):
+            text = strip_comments(read(source))
+            for match in re.finditer(r'":(/[A-Za-z0-9_./+-]*)"', text):
+                location = "%s:%d" % (
+                    source.relative_to(REPO),
+                    text.count("\n", 0, match.start()) + 1,
+                )
+                seen = refs.setdefault(match.group(1), [])
+                if location not in seen:
+                    seen.append(location)
+    return refs
+
+
+class PackagedResources(unittest.TestCase):
+    def test_every_qrc_entry_exists_on_disk(self) -> None:
+        missing = []
+        for qrc in QRC_FILES:
+            root = qrc.parent
+            for path in re.findall(r"<file(?: alias=\"[^\"]*\")?>([^<]+)</file>", read(qrc)):
+                # stylesheet.qrc lists its files next to itself; leocad.qrc
+                # lists them relative to the repository root.
+                target = (REPO / path) if qrc == QRC_FILES[0] else (root / path)
+                if not target.exists():
+                    missing.append(f"{qrc.name}: {path}")
+        self.assertEqual(
+            missing, [], "qrc lists files that are not in the tree: " + "; ".join(missing)
+        )
+
+    def test_code_references_resolve_to_packaged_resources(self) -> None:
+        available = qrc_paths()
+        unresolved = {}
+
+        for ref, where in source_references().items():
+            # A directory prefix is how the dynamic names are built, not a
+            # resource on its own.
+            if ref == "/resources":
+                continue
+            if ref in available or any(ref + s in available for s in TRIED_SUFFIXES):
+                continue
+            unresolved[ref] = where
+
+        self.assertEqual(
+            unresolved,
+            {},
+            "code asks Qt for resources the package does not ship, which render "
+            "as null icons / missing styles rather than failing loudly: "
+            + "; ".join(f"{r} ({', '.join(w)})" for r, w in sorted(unresolved.items())),
+        )
+
+    def test_bundled_library_matches_its_manifest(self) -> None:
+        manifest_path = LIBRARY_DIR / "manifest.json"
+        self.assertTrue(manifest_path.is_file(), "no library manifest to verify against")
+
+        manifest = json.loads(read(manifest_path))
+        archive = manifest["archive"]
+        path = REPO / archive["path"]
+
+        self.assertTrue(path.is_file(), f"bundled library missing: {archive['path']}")
+        self.assertEqual(
+            path.stat().st_size,
+            archive["bytes"],
+            f"{archive['path']} is {path.stat().st_size} bytes, manifest says "
+            f"{archive['bytes']}",
+        )
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        self.assertEqual(
+            digest,
+            archive["sha256"],
+            f"{archive['path']} digest {digest} does not match the manifest; the "
+            "offline library users get is not the one that was reviewed",
+        )
+
+    def test_library_manifest_counts_match_the_file_list(self) -> None:
+        manifest = json.loads(read(LIBRARY_DIR / "manifest.json"))
+        counts = manifest["counts"]
+        files = manifest["files"]
+
+        self.assertEqual(
+            len(files),
+            counts["total_files"],
+            f"manifest lists {len(files)} files but declares {counts['total_files']}",
+        )
+        by_kind = {}
+        for entry in files:
+            by_kind[entry.get("type", "?")] = by_kind.get(entry.get("type", "?"), 0) + 1
+        for kind, expected in counts.items():
+            if kind in ("total_files",):
+                continue
+            if kind in by_kind:
+                self.assertEqual(
+                    by_kind[kind],
+                    expected,
+                    f"manifest counts.{kind}={expected} but the file list has {by_kind[kind]}",
+                )
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
