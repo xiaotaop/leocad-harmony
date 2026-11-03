@@ -85,14 +85,15 @@ theme 14 / chain 9 / localization 22 / files 9
 **10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 18 项通过
 （`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项），`git diff --check` 干净。
 
-改动前后各跑一遍完整回归，两次均为 112 项全绿；Windows CI 上 `MenuScopeTest::removedCommandsAreNotVisible()`
-为 PASS，套件 8 passed / 0 failed。
+改动前的完整回归为 112 项全绿，改动后第一遍同样全绿（第二遍见下节）；Windows CI 上
+`MenuScopeTest::removedCommandsAreNotVisible()` 为 PASS，套件 8 passed / 0 failed。
 
 ### 一次未复现的失败，以及证据为什么丢了
 
-在本轮改动后的第一次完整回归里，`archive` 套件报出 `Totals: 12 passed, 1 failed`，其余套件正常。
-之后重跑：完整回归 2 次 + 直接循环 `leocad-d3-archive` 二进制 15 次，共 **18 次采样全部 13 passed**，
-未能复现。**因此不宣称该失败已定位或已修复**，也不据此改生产代码。
+改动后的完整回归跑了两遍：**第一遍 112 项全绿，第二遍 `archive` 报出 `Totals: 12 passed, 1 failed`**，
+其余套件正常。针对这个失败重新采样：单独运行 `archive` 1 次（13 passed）、换用下面修正后的 runner 再跑
+完整回归 1 次（archive 13 passed）、直接循环 `leocad-d3-archive` 二进制 15 次（每次 13 passed）——
+**共 17 次采样全部通过，未能复现**。**因此不宣称该失败已定位或已修复**，也不据此改生产代码。
 
 真正暴露出来的是取证链断在工具上：`scripts/dev/run-d3-tests.sh` 用
 `... | tee "$BUILD/test-results.txt" | tail -3` 回显结果，而 QtTest 把 `Totals` 打在最后一行、
