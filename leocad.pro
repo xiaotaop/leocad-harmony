@@ -250,6 +250,7 @@ SOURCES += \
 	qt/lc_qutils.cpp \
 	qt/lc_renderdialog.cpp
 HEADERS += \
+	common/lc_authorizedsave.h \
 	common/camera.h \
 	common/group.h \
 	common/image.h \

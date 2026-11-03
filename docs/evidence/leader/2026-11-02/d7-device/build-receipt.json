@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-02",
+  "base": "c52eb4ebcb8120b3c06e34e8d95118fd07fac4f3",
+  "source": "ba4bc21f7ce7e0e6a578ce0990e85feb21925c0c",
+  "bundle": "io.github.xiaotaop.leocad",
+  "model": "HAD-W32",
+  "os": "OpenHarmony-6.1.0.115",
+  "api": 23,
+  "screen": [
+    3120,
+    2080
+  ],
+  "qt": "6.12.0",
+  "sdk": "26.0.0.105",
+  "cli": "26.0.0.851",
+  "safe_render": false,
+  "model_test_hap": false,
+  "hap": {
+    "name": "leocad-d7-final-signed.hap",
+    "bytes": 80141982,
+    "sha256": "48375f884f6075cbbffec5e94506be5693911952c3b29107b066f271e688d571"
+  },
+  "normal_exits": [
+    35098,
+    37873
+  ],
+  "physical_keyboard_package_sha256": "157dd920e6b52b61bfc672499b58932160bad4e25a9b1ae9f7792e775de261ef",
+  "intermediate_package_sha256": "206f91ece77d1ad8ddf08dbecded582a824a31d16c0e7e75fefb2e3c7bfd3804",
+  "intermediate_note": "Uncommitted exploratory build, before translated save errors; MPD/window observations belong to this package, not final HAP.",
+  "restoration": {
+    "preferences_sha256": "5575996fecc88dc99bb3513e4d8d5a68da11521b04685dfc3c6c65fa66a13631",
+    "preferences_match": true,
+    "fixture_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "fixture_match": true,
+    "public_ldr_unchanged": true,
+    "public_mpd_unchanged": true
+  }
+}

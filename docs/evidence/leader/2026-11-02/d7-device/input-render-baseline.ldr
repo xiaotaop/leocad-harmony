@@ -1,0 +1,6 @@
+0 Member A desktop rendering baseline: two 2x2 bricks
+0 Name: render-baseline.ldr
+0 Author: LeoCAD HarmonyOS Member A
+0 Uses 3003.dat from the upstream bundled resources/library.zip.
+1 4 -30 0 0 1 0 0 0 1 0 0 0 1 3003.dat
+1 1 30 0 0 0 0 1 0 1 0 -1 0 0 3003.dat

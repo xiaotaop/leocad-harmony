@@ -1,0 +1,21 @@
+test_cmake_disables_the_remaining_first_release_features (test_network_scope.NetworkScopeTests.test_cmake_disables_the_remaining_first_release_features)
+The trim is belt and braces: these gates must stay compiled out too. ... ok
+test_cmake_disables_the_update_check_for_leocad (test_network_scope.NetworkScopeTests.test_cmake_disables_the_update_check_for_leocad)
+The real build defines the macro, so the P0 does not ship. ... ok
+test_cmake_harmony_target_also_disables_network (test_network_scope.NetworkScopeTests.test_cmake_harmony_target_also_disables_network)
+OHOS additionally compiles out the network layer entirely. ... ok
+test_harmony_build_script_uses_this_cmake_project (test_network_scope.NetworkScopeTests.test_harmony_build_script_uses_this_cmake_project)
+The constraint above only protects the app if the app is built here. ... ok
+test_networked_commands_are_trimmed (test_network_scope.NetworkScopeTests.test_networked_commands_are_trimmed)
+Every command that downloads something must be unreachable. ... ok
+test_networked_commands_still_exist (test_network_scope.NetworkScopeTests.test_networked_commands_still_exist)
+A renamed constant would make the check above pass by accident. ... ok
+test_update_check_default_is_on (test_network_scope.NetworkScopeTests.test_update_check_default_is_on)
+Documents why the macro matters: the default is to check. ... ok
+test_update_check_needs_the_macro (test_network_scope.NetworkScopeTests.test_update_check_needs_the_macro)
+The startup path must still be behind the macro, not merely trimmed. ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.003s
+
+OK

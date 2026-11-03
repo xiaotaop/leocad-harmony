@@ -1,0 +1,14 @@
+********* Start testing of AuthorizedSaveTest *********
+Config: Using QtTest library 6.12.0, Qt 6.12.0 (x86_64-little_endian-llp64 shared (dynamic) release build; by GCC 15.1.0), windows 11
+PASS   : AuthorizedSaveTest::initTestCase()
+PASS   : AuthorizedSaveTest::newUnicodeDocument()
+PASS   : AuthorizedSaveTest::shorterOverwriteRemovesOldTail()
+PASS   : AuthorizedSaveTest::failedPartialOverwriteRestoresOriginal()
+PASS   : AuthorizedSaveTest::failedNewWriteRemovesPartialFile()
+PASS   : AuthorizedSaveTest::invalidDestinationDoesNotPublish()
+PASS   : AuthorizedSaveTest::mismatchedReadbackRestoresOriginal()
+QWARN  : AuthorizedSaveTest::failedRollbackRetainsRecoveryCopy() QFileDevice::seek: IODevice is not open
+PASS   : AuthorizedSaveTest::failedRollbackRetainsRecoveryCopy()
+PASS   : AuthorizedSaveTest::cleanupTestCase()
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 48ms
+********* Finished testing of AuthorizedSaveTest *********

@@ -2665,6 +2665,38 @@
 <context>
     <name>Project</name>
     <message>
+        <source>Could not serialize the model.</source>
+        <translation>无法生成完整的模型文件内容。</translation>
+    </message>
+    <message>
+        <source>The previous file could not be restored. A recovery copy is available at: %1</source>
+        <translation>无法恢复原文件。恢复副本保留在：%1</translation>
+    </message>
+    <message>
+        <source>File write failed</source>
+        <translation>文件写入失败</translation>
+    </message>
+    <message>
+        <source>Destination is a directory</source>
+        <translation>保存目标是文件夹</translation>
+    </message>
+    <message>
+        <source>Cannot create local recovery backup</source>
+        <translation>无法创建本地恢复备份</translation>
+    </message>
+    <message>
+        <source>Cannot write local recovery backup</source>
+        <translation>无法写入本地恢复备份</translation>
+    </message>
+    <message>
+        <source>Saved file did not match the model.</source>
+        <translation>保存后读回的文件与模型内容不一致。</translation>
+    </message>
+    <message>
+        <source>Write failed; incomplete target could not be removed: %1</source>
+        <translation>写入失败，且无法删除未完成的目标文件：%1</translation>
+    </message>
+    <message>
         <location filename="../common/project.cpp" line="209"/>
         <source>Empty Name</source>
         <translation>名称为空</translation>
