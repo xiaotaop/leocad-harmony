@@ -121,6 +121,14 @@ void MenuScopeTest::removedCommandsAreNotVisible()
 		LC_PIECE_EDIT_SELECTED_SUBMODEL,
 		LC_HELP_UPDATES,
 
+		// Help entries that open a browser on an external https URL. They were
+		// reachable until the D8 freeze review: LC_DISABLE_NETWORK only stubs out
+		// lc_http, so QDesktopServices still launched the browser and the offline
+		// promise in the privacy policy did not hold. Asserted here as well as in
+		// the static network-scope check because this one looks at the real menu.
+		LC_HELP_HOMEPAGE,
+		LC_HELP_BUG_REPORT,
+
 		// The step commands reachable from the timeline panel's context menu.
 		// They are a second set of command ids for the same operations as the
 		// LC_VIEW_TIME_* entries above, and were missed for exactly that reason:

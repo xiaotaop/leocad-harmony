@@ -55,6 +55,8 @@ jobs:
           set -euo pipefail
           python3 scripts/library/test_network_scope.py
           python3 scripts/library/test_export_part_list.py
+          python3 scripts/library/test_packaged_resources.py
+          python3 scripts/library/test_failure_log_retention.py
 
   desktop-build:
     name: Qt 6.12 desktop compile regression

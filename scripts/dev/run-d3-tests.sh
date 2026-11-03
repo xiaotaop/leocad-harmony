@@ -69,16 +69,38 @@ for SUITE in "${SUITES[@]}"; do
     fi
 
     echo "== $SUITE"
-    if QT_QPA_PLATFORM=offscreen "$BINARY" 2>&1 | tee "$BUILD/test-results.txt" | tail -3; then
-        :
+    if QT_QPA_PLATFORM=offscreen "$BINARY" > "$BUILD/test-results.txt" 2>&1; then
+        STATUS=0
     else
+        STATUS=$?
         FAILED=1
     fi
+
+    # Show the lines that explain the result, not the last three of it. The
+    # summary line comes last, so "tail -3" cut the FAIL! line above it and a
+    # failure printed "12 passed, 1 failed" with no clue which test, or why.
+    # One archive failure was lost exactly that way on D8: the next run rebuilds
+    # $BUILD from scratch, so the only copy of the reason disappeared with it.
+    grep -E '^(FAIL!|QFATAL|Totals)' "$BUILD/test-results.txt" || tail -3 "$BUILD/test-results.txt"
+
+    # Keep the result outside $BUILD, which the next run deletes, so a failure
+    # that does not reproduce can still be read afterwards.
+    #
+    # A passing run must NOT erase a previous failure: an earlier version copied
+    # every run to one file, so "archive failed, then passed on the retry" left
+    # only "13 passed" behind and the reason was lost again — the very thing the
+    # comment above claimed to prevent. The script keeps last-run (whatever
+    # happened) and last-failure (updated only on failure) separate, and is
+    # exercised directly by scripts/library/test_failure_log_retention.py.
+    bash "$REPO_ROOT/scripts/dev/preserve-test-log.sh" "$SUITE" "$STATUS" "$BUILD/test-results.txt"
 
     # QtTest exits non-zero on failure, but be explicit: a suite that printed
     # "FAIL!" must not pass just because the process exited 0.
     if grep -q '^FAIL!' "$BUILD/test-results.txt"; then
         FAILED=1
+    fi
+    if [ "$STATUS" -ne 0 ] && ! grep -q '^FAIL!' "$BUILD/test-results.txt"; then
+        echo "   (exit $STATUS without a FAIL! line: crash or platform error)"
     fi
 done
 
