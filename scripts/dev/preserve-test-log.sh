@@ -85,13 +85,20 @@ if [ "$STATUS" -ne 0 ] || grep -q '^FAIL!' "$RESULT_FILE"; then
         warn "cannot write the failure log for $SUITE"
         exit 0
     fi
-    if ! {
+    # Build the body first, then write it with a single simple command. This
+    # shape is not a style choice: "if ! { ... } > file" does NOT return the
+    # redirection failure — bash prints its own error, the "then" branch is
+    # skipped, and execution continues as if the write had succeeded. The
+    # simple command below does report it, so the promise of a "warning:" plus
+    # a zero exit holds here too.
+    META="$(
         printf 'suite=%s\n' "$SUITE"
         printf 'exit_status=%s\n' "$STATUS"
         printf 'captured=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
         printf 'failed_tests:\n'
         grep -E '^FAIL!' "$RESULT_FILE" || printf '  (exit status only, no FAIL! line: crash or platform error)\n'
-    } > "$FAIL_DIR/d3-$SUITE-meta.txt"; then
+    )"
+    if ! printf '%s\n' "$META" > "$FAIL_DIR/d3-$SUITE-meta.txt"; then
         warn "cannot write $FAIL_DIR/d3-$SUITE-meta.txt"
         exit 0
     fi

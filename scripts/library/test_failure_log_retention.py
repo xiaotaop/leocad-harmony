@@ -219,6 +219,42 @@ class FailureLogRetention(unittest.TestCase):
         )
         self.assertIn("warning:", completed.stderr)
 
+    def test_a_failed_meta_write_is_reported_not_leaked(self) -> None:
+        """The third write needs its own case, for a shell-semantics reason.
+
+        "if ! { ...; } > file" does not return the redirection's failure: bash
+        prints its own message, the "then" branch is skipped, and the script
+        carries on as though the meta file had been written. So the guard can
+        look right, pass review, and never fire. Here the destination is a
+        dangling symlink, which makes the redirect fail while leaving the
+        directory writable, and the assertion is that the promised "warning:"
+        appears rather than bash's raw error alone.
+        """
+        failure_dir = self.root / "build" / "last-failure"
+        failure_dir.mkdir(parents=True)
+        (failure_dir / f"d3-{SUITE}-meta.txt").symlink_to("/nonexistent/meta-target")
+
+        result = self.root / "test-results.txt"
+        result.write_text(FAILED_RUN, encoding="utf-8")
+        env = dict(os.environ, PRESERVE_LOG_ROOT=str(self.root))
+        completed = subprocess.run(
+            ["bash", str(SCRIPT), SUITE, "1", str(result)],
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(
+            completed.returncode,
+            0,
+            f"a failed meta write must not fail the suite: {completed.stderr}",
+        )
+        self.assertIn(
+            "warning:",
+            completed.stderr,
+            f"the guard did not fire; bash's raw error is not the promised report: {completed.stderr}",
+        )
+
     def test_a_non_numeric_exit_status_is_rejected_as_a_usage_error(self) -> None:
         """A wrong argument is an error; it must not quietly read as a pass.
 
