@@ -255,6 +255,67 @@ class FailureLogRetention(unittest.TestCase):
             f"the guard did not fire; bash's raw error is not the promised report: {completed.stderr}",
         )
 
+    def test_an_uncreatable_failure_dir_does_not_fail_the_suite(self) -> None:
+        """The last-failure "mkdir" guard, which the last-run cases miss.
+
+        The last-run directory is created first and succeeds here, so this
+        reaches the failure branch; a regular file where build/last-failure
+        belongs makes "mkdir -p" fail without needing any special rights. If
+        the guard were bare, "set -e" would abort the caller and the remaining
+        suites would never run — the same defect the header comment promises
+        against, on a path nothing was watching.
+        """
+        result = self.root / "test-results.txt"
+        result.write_text(FAILED_RUN, encoding="utf-8")
+        build = self.root / "build"
+        build.mkdir(parents=True)
+        (build / "last-failure").write_text("", encoding="utf-8")
+
+        env = dict(os.environ, PRESERVE_LOG_ROOT=str(self.root))
+        completed = subprocess.run(
+            ["bash", str(SCRIPT), SUITE, "1", str(result)],
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(
+            completed.returncode,
+            0,
+            f"an uncreatable failure dir must not fail the suite: {completed.stderr}",
+        )
+        self.assertIn("warning:", completed.stderr)
+        last_run = self.root / "build" / "last-run" / f"d3-{SUITE}-results.txt"
+        self.assertTrue(last_run.exists(), "the last-run copy must still be written")
+
+    def test_a_failed_failure_copy_does_not_fail_the_suite(self) -> None:
+        """The last-failure "cp" guard, reached only when its "mkdir" succeeds.
+
+        A dangling symlink at the failure-copy path makes the destination
+        unwritable while the directory itself is fine, so this exercises the
+        copy and not the directory check before it.
+        """
+        result = self.root / "test-results.txt"
+        result.write_text(FAILED_RUN, encoding="utf-8")
+        failure_dir = self.root / "build" / "last-failure"
+        failure_dir.mkdir(parents=True)
+        (failure_dir / f"d3-{SUITE}-results.txt").symlink_to("/nonexistent/failure-target")
+
+        env = dict(os.environ, PRESERVE_LOG_ROOT=str(self.root))
+        completed = subprocess.run(
+            ["bash", str(SCRIPT), SUITE, "1", str(result)],
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(
+            completed.returncode,
+            0,
+            f"a failed failure-log copy must not fail the suite: {completed.stderr}",
+        )
+        self.assertIn("warning:", completed.stderr)
+
     def test_a_non_numeric_exit_status_is_rejected_as_a_usage_error(self) -> None:
         """A wrong argument is an error; it must not quietly read as a pass.
 
