@@ -20,8 +20,14 @@
 # Usage:
 #   preserve-test-log.sh <suite> <exit-status> <result-file>
 #
-# Exit status is always 0 unless the arguments are wrong: logging must never
-# turn a passing suite into a failing one.
+# Once the arguments are accepted this script exits 0 even if the log root turns
+# out to be unwritable. Both reasons are about not losing more than the write
+# itself: the runner runs under "set -e", so returning non-zero here would
+# abandon every remaining suite, and a suite's verdict must come from the tests,
+# never from the logging that follows them. A failed write is reported on stderr
+# — loudly, but not fatally. (An earlier version of this comment claimed that
+# property while "set -e" quietly broke it: the promise is only worth making if
+# the code keeps it, and the test file now checks both halves.)
 set -euo pipefail
 
 if [ $# -ne 3 ]; then
@@ -33,30 +39,62 @@ SUITE="$1"
 STATUS="$2"
 RESULT_FILE="$3"
 
+# A status that is not a number is a wrong argument, not a failed suite: say so
+# instead of letting "[ -ne ]" print "integer expression expected" and then
+# silently decide the run passed.
+case "$STATUS" in
+'' | *[!0-9]*)
+    echo "usage: <exit-status> must be a non-negative integer, got: $STATUS" >&2
+    exit 2
+    ;;
+esac
+
 DEFAULT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 LOG_ROOT="${PRESERVE_LOG_ROOT:-$DEFAULT_ROOT}"
+
+warn() {
+    echo "warning: $*" >&2
+}
 
 if [ ! -f "$RESULT_FILE" ]; then
     echo "warning: no result file to preserve for $SUITE: $RESULT_FILE" >&2
     exit 0
 fi
 
-mkdir -p "$LOG_ROOT/build/last-run"
-cp "$RESULT_FILE" "$LOG_ROOT/build/last-run/d3-$SUITE-results.txt"
+# Neither write below may abort the caller; see the note at the top of the file.
+if ! mkdir -p "$LOG_ROOT/build/last-run"; then
+    warn "cannot create $LOG_ROOT/build/last-run; no log preserved for $SUITE"
+    exit 0
+fi
+if ! cp "$RESULT_FILE" "$LOG_ROOT/build/last-run/d3-$SUITE-results.txt"; then
+    warn "cannot write the last-run copy for $SUITE; no log preserved"
+    exit 0
+fi
 
 # A suite failed if it told us so, whatever the exit status claimed. QtTest exits
-# non-zero on failure, but the FAIL! line is the thing that names the test.
+# non-zero on failure, but the FAIL! line is the thing that names the test, and a
+# FAIL! printed just before a crash can leave the process exit status at 0. Both
+# halves of this condition are load-bearing and both are covered by tests.
 if [ "$STATUS" -ne 0 ] || grep -q '^FAIL!' "$RESULT_FILE"; then
     FAIL_DIR="$LOG_ROOT/build/last-failure"
-    mkdir -p "$FAIL_DIR"
-    cp "$RESULT_FILE" "$FAIL_DIR/d3-$SUITE-results.txt"
-    {
+    if ! mkdir -p "$FAIL_DIR"; then
+        warn "cannot create $FAIL_DIR; the failure log for $SUITE was not preserved"
+        exit 0
+    fi
+    if ! cp "$RESULT_FILE" "$FAIL_DIR/d3-$SUITE-results.txt"; then
+        warn "cannot write the failure log for $SUITE"
+        exit 0
+    fi
+    if ! {
         printf 'suite=%s\n' "$SUITE"
         printf 'exit_status=%s\n' "$STATUS"
         printf 'captured=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
         printf 'failed_tests:\n'
         grep -E '^FAIL!' "$RESULT_FILE" || printf '  (exit status only, no FAIL! line: crash or platform error)\n'
-    } > "$FAIL_DIR/d3-$SUITE-meta.txt"
+    } > "$FAIL_DIR/d3-$SUITE-meta.txt"; then
+        warn "cannot write $FAIL_DIR/d3-$SUITE-meta.txt"
+        exit 0
+    fi
     echo "   preserved failure log: build/last-failure/d3-$SUITE-results.txt" >&2
 fi
 

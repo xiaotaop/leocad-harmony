@@ -193,10 +193,9 @@ archive 13 / priority 8 / menu 8 / modellist 5 / panel 15 / preferences 9 /
 theme 14 / chain 9 / localization 22 / files 9
 ```
 
-**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **28 项**通过
-（`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项 + `test_packaged_resources.py` 5 项
-+ `test_failure_log_retention.py` 5 项），
-`git diff --check` 干净。
+**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **32 项**通过，分别是
+`test_network_scope.py` 10 项、`test_export_part_list.py` 8 项、`test_packaged_resources.py` 5 项、
+`test_failure_log_retention.py` 9 项；`git diff --check` 干净。
 
 改动前的完整回归为 112 项全绿，改动后第一遍同样全绿（第二遍见下节）；Windows CI 上
 `MenuScopeTest::removedCommandsAreNotVisible()` 为 PASS，套件 8 passed / 0 failed。
@@ -236,19 +235,37 @@ theme 14 / chain 9 / localization 22 / files 9
 逻辑从 runner 里抽成 `scripts/dev/preserve-test-log.sh`：保留规则本身才是此前出错的部分，
 而写在 20 分钟构建循环里的规则无法被回归验证；抽出来后可毫秒级直接测试。
 
-回归验证 `scripts/library/test_failure_log_retention.py`（5 项，已接入 port-policy）用
+回归验证 `scripts/library/test_failure_log_retention.py`（9 项，已接入 port-policy）用
 `PRESERVE_LOG_ROOT` 指向临时目录，按**丢失证据的那串真实顺序**驱动同一份脚本：
 先写失败日志、删掉源文件（模拟 `rm -rf $BUILD`）、再跑一次成功——断言失败原文、
 `tst_archive.cpp(214)` 与 `12 passed, 1 failed` 仍在，且不含 `13 passed`。
 
-负向验证：把脚本还原成「无条件覆盖同一文件」的旧逻辑，该用例立即以
-`the failure log was deleted by a passing run` 失败（同时另外 2 项受影响），恢复后 5 项全绿。
-组长另用 Git Bash 按旧的相同 `cp` 逻辑独立验证过同样的「失败→成功」顺序，结论一致。
+**第二轮自我复核又补了 4 项**，都是「说的和做的不一样」这一类的同一把尺子：
+
+| 补充用例 | 它锁住的规则 | 此前可以被删掉而不报警 |
+|---|---|---|
+| `test_a_fail_line_with_exit_zero_is_still_preserved` | 退出码 0 **但**打印了 `FAIL!` 也算失败 | 判定式的 `\|\| grep -q '^FAIL!'` 半边可整段删除，原有 5 项测试无人察觉 |
+| `test_an_unwritable_log_root_does_not_fail_the_suite` | 日志目录不可建时仍 exit 0 | 注释承诺「日志永不让套件变失败」，`set -e` 下 `mkdir` 失败会直接中止调用方 |
+| `test_a_failed_copy_does_not_fail_the_suite` | `cp` 失败时同样 exit 0 | 上一条会先被目录检查拦住，`cp` 仍可能裸奔——用悬空符号链接单独证伪 |
+| `test_a_non_numeric_exit_status_is_rejected_as_a_usage_error` | 非数字退出码按参数错误 exit 2 | `[ 1x -ne 0 ]` 只打一句 shell 警告，随后静默当通过 |
+
+对应地，`preserve-test-log.sh` 把两处写入都包进 `if ! ...; then` + `warn` + `exit 0`，
+并对 `<exit-status>` 加了 `case` 数字校验（参数错误 exit 2，与「日志写失败」区分开）。
+
+负向验证（变异测试，全部在 `/tmp` 副本上做，仓库未动）：把脚本改坏成下列任一形态，
+测试都会立刻变红——M1 还原「无条件覆盖同一文件」→ `FAILED (failures=2)`，含
+`the failure log was deleted by a passing run`；M3 删掉判定式的 `FAIL!` 半边 → 1 项失败；
+M8 把 `mkdir` 恢复成裸写 → 1 项失败；M10 把 `cp` 恢复成裸写 → 1 项失败；
+M9 删掉数字校验 → 1 项失败。恢复后 9 项全绿。**其中 M3、M8、M10、M9 正是本轮新补的用例才抓得住的**，
+补之前它们全部存活。组长另用 Git Bash 按旧的相同 `cp` 逻辑独立验证过同样的「失败→成功」顺序，结论一致。
 
 ## 五、边界与未完成项
 
 - `archive` 套件出现过一次未复现的失败，原因**未知**（见 §四）。留待 D9 若再次出现时按新日志定位，
   本轮不推测、不为此改生产代码。
+- 取证链（`last-run` / `last-failure`）只做在 **bash runner**（`scripts/dev/run-d3-tests.sh`）上。
+  Windows 入口 `scripts/Run-D3Tests.ps1` 仍只写 `.local/build-d3-<name>/test-results.txt` 并靠
+  `model-ci.yml` 上传 artifact，没有失败独立留存；本节结论不覆盖该路径，若要求全平台同等需另开一轮。
 - 本轮是**宿主验证**，不是真机。帮助菜单裁剪在真机上的表现（图标、菜单宽度）未另行取证。
 - `localization` 套件里的字形覆盖与文字宽度两项，在 Windows CI 上因 runner 无字体库而 `SKIP`
   （D7 已记录），本轮不改这一状况；**字体结论仍以真机探针为准**。

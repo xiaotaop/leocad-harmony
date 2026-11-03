@@ -20,6 +20,14 @@ never touches build/ and does not need Qt, a compiler, or a completed suite: the
 retention rule is checkable in milliseconds, which is why it is checked here
 rather than only on a 20-minute full run.
 
+Two rules here are not about retention but about honesty, and both are checked
+because the previous version of this file got the first one wrong by omission:
+the script decides "failure" from the exit status OR a printed FAIL! line, and
+each half needs a test or half of the rule can be deleted with the suite still
+green; and the script promises never to turn a passing suite into a failing one,
+which "set -e" used to break by aborting the caller when the log root was
+unwritable.
+
 What this does NOT establish: that a real suite's failure produces a FAIL! line,
 or that the runner passes the right arguments. Those are covered by running the
 suites; this file is about whether the evidence survives to be read.
@@ -55,6 +63,14 @@ PASS   : ArchiveTest::goodArchiveLoads()
 PASS   : ArchiveTest::truncatedArchiveIsRejected()
 Totals: 13 passed, 0 failed, 0 skipped, 0 blacklisted
 ********* Finished testing of ArchiveTest *********
+"""
+
+# QtTest prints its summary before it exits, so a FAIL! line followed by a crash
+# can reach disk while the process still reports success. The runner keeps a
+# belt-and-braces "printed FAIL! is a failure" check for exactly this; a log left
+# behind by such a run is the only thing that would explain it afterwards.
+PASSED_STATUS_BUT_FAILED = PASSED_RUN + """FAIL!  : ArchiveTest::lateFailure() Aborted before the summary was updated
+   Loc: [tst_archive.cpp(301)]
 """
 
 SUITE = "archive"
@@ -121,10 +137,107 @@ class FailureLogRetention(unittest.TestCase):
         meta = self.root / "build" / "last-failure" / f"d3-{SUITE}-meta.txt"
         self.assertIn("exit_status=134", meta.read_text(encoding="utf-8"))
 
+    def test_a_fail_line_with_exit_zero_is_still_preserved(self) -> None:
+        """The other half of the rule: a printed FAIL! outranks a zero exit status.
+
+        Without this case the condition can lose its "|| grep FAIL!" arm and the
+        whole file still passes, which is how a rule that two places document
+        goes unenforced. Documented in docs/MEMBER_C_D8.md.
+        """
+        self.preserve(PASSED_STATUS_BUT_FAILED, 0)
+
+        failure_log = self.root / "build" / "last-failure" / f"d3-{SUITE}-results.txt"
+        self.assertTrue(
+            failure_log.exists(),
+            "a suite that printed FAIL! was recorded as a pass",
+        )
+        self.assertIn("lateFailure", failure_log.read_text(encoding="utf-8"))
+        meta = self.root / "build" / "last-failure" / f"d3-{SUITE}-meta.txt"
+        text = meta.read_text(encoding="utf-8")
+        self.assertIn("exit_status=0", text)
+        self.assertIn("lateFailure", text)
+
     def test_passing_runs_leave_no_failure_record(self) -> None:
         """No phantom failure: green from the start must not create one."""
         self.preserve(PASSED_RUN, 0)
         self.assertFalse((self.root / "build" / "last-failure").exists())
+
+    def test_an_unwritable_log_root_does_not_fail_the_suite(self) -> None:
+        """The script's own promise: logging never changes a suite's verdict.
+
+        The runner runs under "set -e" and calls this before it records the
+        suite, so a non-zero exit here would abandon every remaining suite. The
+        failure is simulated with a plain file where a directory is needed, which
+        needs no root and fails the same way on any filesystem.
+        """
+        result = self.root / "test-results.txt"
+        result.write_text(FAILED_RUN, encoding="utf-8")
+        blocker = self.root / "not-a-directory"
+        blocker.write_text("", encoding="utf-8")
+
+        env = dict(os.environ, PRESERVE_LOG_ROOT=str(blocker))
+        completed = subprocess.run(
+            ["bash", str(SCRIPT), SUITE, "1", str(result)],
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(
+            completed.returncode,
+            0,
+            f"an unwritable log root must not fail the suite: {completed.stderr}",
+        )
+        self.assertIn("warning:", completed.stderr, "the lost log must at least be reported")
+
+    def test_a_failed_copy_does_not_fail_the_suite(self) -> None:
+        """The same promise for the copy itself, not just for "mkdir".
+
+        Written separately because the directory check above aborts first: with
+        only that case present, "cp" could be left bare under "set -e" and the
+        suite would still pass. A dangling symlink is the portable way to make
+        the destination unwritable without depending on the test user's rights.
+        """
+        result = self.root / "test-results.txt"
+        result.write_text(FAILED_RUN, encoding="utf-8")
+        last_run = self.root / "build" / "last-run"
+        last_run.mkdir(parents=True)
+        (last_run / f"d3-{SUITE}-results.txt").symlink_to("/nonexistent/dangling-target")
+
+        env = dict(os.environ, PRESERVE_LOG_ROOT=str(self.root))
+        completed = subprocess.run(
+            ["bash", str(SCRIPT), SUITE, "1", str(result)],
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(
+            completed.returncode,
+            0,
+            f"a failed copy must not fail the suite: {completed.stderr}",
+        )
+        self.assertIn("warning:", completed.stderr)
+
+    def test_a_non_numeric_exit_status_is_rejected_as_a_usage_error(self) -> None:
+        """A wrong argument is an error; it must not quietly read as a pass.
+
+        "[ 1x -ne 0 ]" prints "integer expression expected", the test fails, and
+        the script would otherwise fall through to the grep and record nothing.
+        """
+        result = self.root / "test-results.txt"
+        result.write_text(FAILED_RUN, encoding="utf-8")
+
+        env = dict(os.environ, PRESERVE_LOG_ROOT=str(self.root))
+        completed = subprocess.run(
+            ["bash", str(SCRIPT), SUITE, "1x", str(result)],
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(completed.returncode, 2, "a non-numeric status is a usage error")
+        self.assertIn("non-negative integer", completed.stderr)
 
 
 if __name__ == "__main__":
