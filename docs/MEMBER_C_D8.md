@@ -33,6 +33,11 @@ D8 要求为「完成全部首发界面和包内资源；停止新增页面」�
 - 窗口级测试 `tests/library/d3/tst_menu_scope.cpp` 把两条命令加进 `removedCommandsAreNotVisible()`，
   在真实 `lcMainWindow` 的菜单上确认它们不可见。
 
+**Windows CI 实测数据**（上一 head `f619874c`，run 41599882211 产物，逐套件读取）：
+archive 13p/0f、menu 8p/0f、chain 9、files 9、localization **20p/0f/2skip**、modellist 5、panel 15、
+preferences 9、priority 8、theme 14，另 `build-tests` 65p/0f——**合计 175 passed / 0 failed / 2 skipped**。
+其中 localization 的 2 项 skip 就是字体相关两项，见 §五 的边界说明；这条数字不是推断，是产物里读的。
+
 **负向验证**（两处都做了）：从 `RemovedCommands[]` 删掉这两行后，
 `test_external_url_commands_are_trimmed` 失败、菜单套件 `7 passed / 1 failed`；恢复后
 `10 passed` / `8 passed` 全绿。
@@ -200,7 +205,8 @@ theme 14 / chain 9 / localization 22 / files 9
 改动后的完整回归跑了两遍：**第一遍 112 项全绿，第二遍 `archive` 报出 `Totals: 12 passed, 1 failed`**，
 其余套件正常。针对这个失败重新采样：单独运行 `archive` 1 次（13 passed）、换用下面修正后的 runner 再跑
 完整回归 1 次（archive 13 passed）、直接循环 `leocad-d3-archive` 二进制 15 次（每次 13 passed）——
-**共 17 次采样全部通过，未能复现**。**因此不宣称该失败已定位或已修复**，也不据此改生产代码。
+**共 17 次采样全部通过，未能复现**。Windows CI 侧同套件亦为 13 passed / 0 failed（见上）。
+**因此不宣称该失败已定位或已修复**，也不据此改生产代码——它是一个仍未解释的单点观测。
 
 真正暴露出来的是取证链断在工具上：`scripts/dev/run-d3-tests.sh` 用
 `... | tee "$BUILD/test-results.txt" | tail -3` 回显结果，而 QtTest 把 `Totals` 打在最后一行、
