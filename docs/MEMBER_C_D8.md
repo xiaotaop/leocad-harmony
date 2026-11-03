@@ -73,6 +73,27 @@ qrc 里保留条目是给 qmake 路径用的。这一处此前无记录，本轮
 渲染对话框、Blender），裁剪关掉的是用户可达的入口。两层都成立才谈得上首发范围收敛，
 所以本轮新增的静态检查同时覆盖两侧。
 
+## 三之二、全部可达网址的穷举审计
+
+修完帮助菜单后不能只相信那两条，因此把源码里所有硬编码 URL 逐条判定可达性（`grep -rn "https\?://" common/ qt/`）：
+
+| 位置 | 内容 | 首发版是否可达 | 依据 |
+|---|---|---|---|
+| `lc_mainwindow.cpp:3665,3669` | `openUrl` 打开 leocad.org / GitHub issues | **否（本轮修复）** | 加入 `RemovedCommands[]`，菜单与静态检查双重锁定 |
+| `lc_updatedialog.cpp:42,122` | 下载 `updates.txt`、releases 链接 | 否 | `LC_DISABLE_UPDATE_CHECK=1` + `LC_HELP_UPDATES` 已裁剪 |
+| `lc_setsdatabasedialog.cpp:21,113,174` | Rebrickable API | 否 | `LC_DISABLE_NETWORK=1` 使 `lc_http` 编译为空 + `LC_FILE_IMPORT_INVENTORY` 等已裁剪 |
+| `project.cpp:1860,1882,1987` | 导出 HTML 里写入 `leocad.org` 锚点 | 否 | `LC_FILE_INSTRUCTIONS`、`LC_FILE_EXPORT_HTML` 均在裁剪列表内，`ShowHTMLDialog()` 唯一调用点是后者 |
+| `lc_blenderpreferences.cpp:1844` | `openUrl("file:///" + LogFile)`（本地文件，非网络） | 否 | 调用链经 `LC_DISABLE_BLENDER=1` 编译为空，且该按钮 `BlenderAddonSettingsButton` 在 `FirstReleaseHiddenWidgets` 中已隐藏——**双重保护，不会留下点击无响应的死控件** |
+| `lc_application.cpp:1428,1430` | 零件库加载失败提示正文含 `https://www.leocad.org` | 提示本身可达，**但为纯文本、无 `<a>`，不可点击，不触发任何联网动作** | `QMessageBox::information` 纯文本 |
+| `lc_filter.cpp:115` | Apache 2.0 许可证头注释 | 否 | 注释 |
+
+结论：**修复后不存在任何用户可触达、会发起联网动作的界面入口**。
+
+唯一残留问题属于文案而非行为，且不在本成员可改文件内：`lc_application.cpp` 那两条提示在鸿蒙首发版语境下
+不成立——零件库是**打包内置**的（`assets/ldraw-lite/library-lite.zip`），引导用户「去网站下载并安装库」
+既不适用也无法在沙箱内完成。若真机出现该提示，实际含义是内置库加载失败，应按缺陷排查而不是让用户去装库。
+建议在 D9 文案轮调整为内置库故障措辞（该文件属组长热点，本成员未改动）。
+
 ## 四、测试结果
 
 本轮在更新后的 `main`（`b947ef80`）上完整跑了一遍：
