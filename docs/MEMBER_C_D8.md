@@ -193,8 +193,9 @@ archive 13 / priority 8 / menu 8 / modellist 5 / panel 15 / preferences 9 /
 theme 14 / chain 9 / localization 22 / files 9
 ```
 
-**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **23 项**通过
-（`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项 + `test_packaged_resources.py` 5 项），
+**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 **28 项**通过
+（`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项 + `test_packaged_resources.py` 5 项
++ `test_failure_log_retention.py` 5 项），
 `git diff --check` 干净。
 
 改动前的完整回归为 112 项全绿，改动后第一遍同样全绿（第二遍见下节）；Windows CI 上
@@ -215,8 +216,34 @@ theme 14 / chain 9 / localization 22 / files 9
 这与 D7 在 CI 侧踩过的坑（`*>` 产生 0 字节结果文件）是同一类问题：**套件报红但说不出哪一条红，
 等于没有证据**。
 
-已修 runner：改为完整写入结果文件、按 `^(FAIL!|QFATAL|Totals)` 回显（点名失败用例与原因），
-并把每套件结果复制到 `build/last-run/`——该目录不在循环的删除范围内，重跑之后仍能回看上一次失败。
+已修 runner：改为完整写入结果文件、按 `^(FAIL!|QFATAL|Totals)` 回显（点名失败用例与原因）。
+
+**第一次修得不彻底，被组长复审抓出（P2）**：当时是每轮无条件复制到同一个
+`build/last-run/d3-<suite>-results.txt`。于是「archive 先失败、重跑成功」时，循环开头的
+`rm -rf $BUILD` 删掉构建副本，成功结果再把唯一备份覆盖掉——**失败证据仍然丢失**，
+而注释和本文都写着「重跑后仍能回看上一次失败」。注释描述的是意图，实现没有做到，这正是
+一处只靠读代码、不靠跑一遍就会发现不了的缺陷。
+
+现在拆成两个去向，语义相反且都必要：
+
+| 目录 | 更新时机 | 用途 |
+|---|---|---|
+| `build/last-run/d3-<suite>-results.txt` | **每轮** | 最新一次结果，无论成败 |
+| `build/last-failure/d3-<suite>-results.txt` | **仅失败时** | 最近一次失败，成功重跑不会覆盖 |
+| `build/last-failure/d3-<suite>-meta.txt` | 同上 | 套件名、退出码、UTC 时间戳、失败用例列表 |
+
+判定「失败」看退出码**或** `FAIL!` 行——崩溃时只有退出码，没有 `FAIL!`，那种情况同样要留证据。
+逻辑从 runner 里抽成 `scripts/dev/preserve-test-log.sh`：保留规则本身才是此前出错的部分，
+而写在 20 分钟构建循环里的规则无法被回归验证；抽出来后可毫秒级直接测试。
+
+回归验证 `scripts/library/test_failure_log_retention.py`（5 项，已接入 port-policy）用
+`PRESERVE_LOG_ROOT` 指向临时目录，按**丢失证据的那串真实顺序**驱动同一份脚本：
+先写失败日志、删掉源文件（模拟 `rm -rf $BUILD`）、再跑一次成功——断言失败原文、
+`tst_archive.cpp(214)` 与 `12 passed, 1 failed` 仍在，且不含 `13 passed`。
+
+负向验证：把脚本还原成「无条件覆盖同一文件」的旧逻辑，该用例立即以
+`the failure log was deleted by a passing run` 失败（同时另外 2 项受影响），恢复后 5 项全绿。
+组长另用 Git Bash 按旧的相同 `cp` 逻辑独立验证过同样的「失败→成功」顺序，结论一致。
 
 ## 五、边界与未完成项
 
