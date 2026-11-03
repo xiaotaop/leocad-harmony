@@ -1,0 +1,104 @@
+# 成员 C D8：首发界面与包内资源收口
+
+日期 2026-11-03。基线 main `b947ef80`（含 A #46、B #47、组长 #44 与 C #43 合并后的状态）。
+D8 要求为「完成全部首发界面和包内资源；停止新增页面」。本轮**不新增任何页面或功能**，
+只做三件事：逐项核对首发界面已无越界入口、核对包内资源完整、把发现的一处遗漏修掉并锁住。
+
+## 一、本轮修掉的越界入口：帮助菜单会拉起浏览器
+
+界面冻结核对时发现的真实缺口，也是本轮唯一的生产代码改动。
+
+`common/lc_mainwindow.cpp` 的帮助菜单里有「主页」和「报告问题」两项，分别调用
+`QDesktopServices::openUrl` 打开 `https://www.leocad.org/` 和 GitHub issues。
+
+**为什么 `LC_DISABLE_NETWORK` 拦不住它**：该宏只把 `lc_http` 换成空实现（见
+`common/lc_http.cpp:4`、`lc_http.h:3`），而 `QDesktopServices` 属 Qt GUI，不在其覆盖范围。
+结果是应用自身不发请求，却会拉起浏览器去联网——与 `隐私政策.md` §2「不发起网络请求」、
+`权限说明.md` §2.3 的离线承诺直接冲突。此前这两项**没有任何拦截**，也不在任何裁剪列表里
+（`LC_HELP_UPDATES` 被裁剪了，但主页与报告问题没有）。
+
+修复：两项加入 `ApplyFirstReleaseScope()` 的 `RemovedCommands[]`，与该函数已有的裁剪方式一致
+（不另设编译分支，避免"哪个宏管哪一项"再次被误读）。
+
+**双重锁定**：
+
+- 静态检查 `scripts/library/test_network_scope.py` 新增两项断言：这两条命令在裁剪列表内；且
+  `lc_mainwindow.cpp` 里 `openUrl(http…)` 的调用点数必须等于裁剪命令数——新增一处外链调用而
+  忘了入列会直接失败，而不是等复查发现。
+- 窗口级测试 `tests/library/d3/tst_menu_scope.cpp` 把两条命令加进 `removedCommandsAreNotVisible()`，
+  在真实 `lcMainWindow` 的菜单上确认它们不可见。
+
+**负向验证**（两处都做了）：从 `RemovedCommands[]` 删掉这两行后，
+`test_external_url_commands_are_trimmed` 失败、菜单套件 `7 passed / 1 failed`；恢复后
+`10 passed` / `8 passed` 全绿。
+
+文档同步：`隐私政策.md` §2 与 `权限说明.md` §2.3 各补一段，说明「没有网络权限」不等于
+「没有任何联网动作」，这两层必须分别核对——`LC_DISABLE_NETWORK` 管前者，菜单裁剪管后者。
+
+## 二、包内资源核对
+
+| 项 | 结果 |
+|---|---|
+| `leocad.qrc` 条目 | **156 条，缺失 0 条**（逐条 `os.path.exists` 校验，含 alias 项） |
+| 翻译文件 | 8 个 `.qm`（cs/de/es/fr/pt/ru/uk/zh_CN），`zh_CN` 为 **1891 条，0 条未完成** |
+| 离线零件库 | `assets/ldraw-lite/library-lite.zip` **3833541 字节**，SHA-256 `09922e82…4268c0f3`，与 `manifest.json` 记录**逐字节一致** |
+| 库清单 | 1160 零件 / 669 子零件 / 911 基元 / 1 配置，共 **2741 文件**，`files` 数组 2741 条 |
+| 应用图标 | qrc 内 64/256/512 三档，64×64 保留历史 alias `:/resources/leocad.png` |
+| 着色器 | 18 个 `.glsl` 全部存在（fake-lit 4、unlit 10、text SDF 1、view sphere 2 等） |
+
+`.qm` 在 CMake 构建时由 `qt_add_translations()` 生成，`CMakeLists.txt:30-52` 会把 `leocad.qrc` 中
+的 `.qm` 条目过滤掉再生成构建树 qrc（避免与生成的翻译资源重复），所以 `.qm` 实际来自构建产物；
+qrc 里保留条目是给 qmake 路径用的。这一处此前无记录，本轮核实并写在这里。
+
+## 三、首发界面：已做到的裁剪
+
+`ApplyFirstReleaseScope()` 现移除 **57 条命令**（本轮 +2；统计已扣除注释中提到的宏名，按 `RemovedCommands[]` 数组内真实条目计）。分段如下，与分工文档 §1.2
+「首发版明确不做」逐条对应：
+
+| 条数 | 分组 | 对应 §1.2 条目 |
+|---|---|---|
+| 4 | 打印、HTML 说明书、导出图片 | 打印、HTML 说明书 |
+| 10 | 非核心导入导出格式（3DS/COLLADA/HTML/CSV/POV-Ray/Wavefront/BrickLink/LDD/清单等） | POV-Ray、Blender 等外部渲染或导出；LXF/OBJ/3DS/COLLADA 等 |
+| 3 | 外部渲染器（POV-Ray、Blender、在 Blender 中打开） | 同上 |
+| 10 | 步骤编辑与时间轴导航 | 动画、复杂多模型步骤编辑 |
+| 7 | 时间轴右键菜单的第二套命令 id | 同上 |
+| 7 | 查找替换 | 原版帮助内容与高级选项 |
+| 4 | 多视图布局 | 多窗口和多视图 |
+| 9 | 子模型结构编辑（切换保留 `LC_MODEL_LIST`） | 复杂多模型步骤编辑 |
+| 2 | **外部网址两项（本轮新增）** | 联网功能 |
+| 1 | 在线更新检查 | 在线更新 |
+| **57** | 合计 | |
+
+菜单裁剪与 `LC_DISABLE_*` 宏是两层独立保护：宏关掉的是代码路径（`lc_http`、更新检查、
+渲染对话框、Blender），裁剪关掉的是用户可达的入口。两层都成立才谈得上首发范围收敛，
+所以本轮新增的静态检查同时覆盖两侧。
+
+## 四、测试结果
+
+本轮在更新后的 `main`（`b947ef80`）上完整跑了一遍：
+
+```
+archive 13 / priority 8 / menu 8 / modellist 5 / panel 15 / preferences 9 /
+theme 14 / chain 9 / localization 22 / files 9
+```
+
+**10 个套件共 112 项，全部通过，0 失败 0 跳过。** Python 静态检查 18 项通过
+（`test_network_scope.py` 10 项 + `test_export_part_list.py` 8 项），`git diff --check` 干净。
+
+## 五、边界与未完成项
+
+- 本轮是**宿主验证**，不是真机。帮助菜单裁剪在真机上的表现（图标、菜单宽度）未另行取证。
+- `localization` 套件里的字形覆盖与文字宽度两项，在 Windows CI 上因 runner 无字体库而 `SKIP`
+  （D7 已记录），本轮不改这一状况；**字体结论仍以真机探针为准**。
+- 首发界面「全部完成」是**裁剪意义上的完成**：范围内功能可用、越界入口已移除。不包含
+  外观层面的真机逐页验收，那属 D9 真机回归。
+- 开放问题未关闭：`#28`（面板文案，已随 #43 基本完成待收尾）、`#14`（偏好设置裁剪）、
+  `#15`（系统文件选择闭环）、`#13`（启动前模态）、`#16`（Qt 默认权限）、`#45`（A 的无响应跟踪）。
+  其中 `#14`、`#15` 与首发界面相关，但按分工文档属后续阶段或组长范围，本轮不擅自收敛。
+- `module.json5` 是否声明 `ohos.permission.INTERNET` 仍待组长在打包产物上核对（源码宏替代不了）。
+
+## 六、停止新增页面
+
+自本轮起不再添加任何首发界面页面或功能。后续工作限定为：修复已记录的缺陷、完善测试矩阵
+（D9 范围）、以及发布材料填写。任何需要新增页面的需求都应先与现有范围交换，按分工文档 §1.2
+末尾的规则处理。

@@ -54,6 +54,19 @@ NETWORKED_COMMANDS = (
     "LC_FILE_IMPORT_INVENTORY",
 )
 
+# Commands that leave the app for an external https URL through
+# QDesktopServices::openUrl. Not lc_http, so LC_DISABLE_NETWORK does not touch
+# them: the browser still opens, and the "no network requests" line in the
+# privacy policy would be false. They were in the Help menu with no guard at all
+# until the D8 interface freeze review. Kept separate from NETWORKED_COMMANDS
+# because the mechanism that has to catch a regression differs — that one is the
+# trim list, this one is also the trim list, but for a different reason worth
+# naming in the failure message.
+EXTERNAL_URL_COMMANDS = (
+    "LC_HELP_HOMEPAGE",
+    "LC_HELP_BUG_REPORT",
+)
+
 
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
@@ -151,6 +164,46 @@ class NetworkScopeTests(unittest.TestCase):
             [],
             "these commands reach lc_http.cpp but are still in the menus, so the "
             "offline claim in the privacy policy is false: " + ", ".join(missing),
+        )
+
+    def test_external_url_commands_are_trimmed(self) -> None:
+        """Help entries that open a browser must not ship either.
+
+        LC_HELP_HOMEPAGE and LC_HELP_BUG_REPORT call QDesktopServices::openUrl on
+        an https address. That is Qt GUI, not Qt Network, so LC_DISABLE_NETWORK=1
+        does not stub it out — the app itself requests nothing, but it launches a
+        browser that does, which is still a network action the privacy policy
+        says the first release does not take. Both were reachable in the Help
+        menu until the D8 freeze; this keeps them out.
+        """
+
+        removed = removed_commands(read(MAINWINDOW))
+        self.assertTrue(removed, "could not find the first-release trim list")
+
+        missing = [c for c in EXTERNAL_URL_COMMANDS if c not in removed]
+        self.assertEqual(
+            missing,
+            [],
+            "these commands open an external https URL through "
+            "QDesktopServices and are back in a menu: " + ", ".join(missing),
+        )
+
+    def test_external_url_trim_matches_the_actual_call_sites(self) -> None:
+        """The list above has to track the code, not the other way round.
+
+        If another QDesktopServices::openUrl(http…) call is added to a menu later,
+        the trim list silently stops covering it. This fails on the new call site,
+        naming the command, instead of waiting for a reviewer to notice.
+        """
+
+        source = read(MAINWINDOW)
+        calls = re.findall(r"QDesktopServices::openUrl\(\s*QUrl\(\s*\"https?://", source)
+        self.assertEqual(
+            len(calls),
+            len(EXTERNAL_URL_COMMANDS),
+            f"{len(calls)} external-URL call site(s) in lc_mainwindow.cpp but "
+            f"{len(EXTERNAL_URL_COMMANDS)} command(s) listed for trimming; every "
+            "openUrl(http...) needs its command in EXTERNAL_URL_COMMANDS",
         )
 
     def test_networked_commands_still_exist(self) -> None:

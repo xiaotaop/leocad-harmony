@@ -715,6 +715,15 @@ void lcMainWindow::ApplyFirstReleaseScope()
 		LC_PIECE_MOVE_SELECTION_TO_MODEL,
 		LC_MODEL_NEW,
 
+		// Help entries that leave the application. Homepage and "report a problem"
+		// call QDesktopServices::openUrl with an https URL, which opens a browser
+		// — a network action the offline first release promises not to take.
+		// LC_DISABLE_NETWORK does not cover them: it only stubs out lc_http, and
+		// QDesktopServices is Qt GUI, not Qt Network. Same reason LC_HELP_UPDATES
+		// is listed: trimming is what makes the privacy claim true, not the macro.
+		LC_HELP_HOMEPAGE,
+		LC_HELP_BUG_REPORT,
+
 		// Online update check.
 		LC_HELP_UPDATES,
 	};
