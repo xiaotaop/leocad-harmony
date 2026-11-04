@@ -1,0 +1,692 @@
+11-04 22:49:23.664 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:49:23.712 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.multimedia.image' via napi_load_module()
+11-04 22:49:25.623 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 0,0 size: 190,57
+11-04 22:49:25.626 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Registering callbacks for xcomponent 0x5a30201fb8
+11-04 22:49:25.626 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:49:25.626 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "QMenuClassWindow"
+11-04 22:49:25.627 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::raise(): stack node has no parent, ignore raising it
+11-04 22:49:25.627 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 8,116 size: 1049,467
+11-04 22:49:25.651 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init begin
+11-04 22:49:25.651 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init end
+11-04 22:49:25.653 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a30201fb8 window: 0x5a3103d340
+11-04 22:49:25.653 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a2f757300 eventType: 0 surface: 0x5a3103d340
+11-04 22:49:25.653 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a30591ff8
+11-04 22:49:25.653 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a30591ff8 node: 0x5a3009c000
+11-04 22:49:25.654 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-04 22:49:25.654 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-04 22:49:25.655 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setSize(const QSize &): 1049,467
+11-04 22:49:25.655 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 8,116,0.000000
+11-04 22:49:25.657 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-04 22:49:25.670 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-04 22:49:25.683 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a30201fb8 window: 0x5a3103d340
+11-04 22:49:25.683 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a2f757300 eventType: 1 surface: 0x5a3103d340
+11-04 22:49:26.179 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:49:26.181 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:49:27.226 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+11-04 22:49:27.227 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 82.000000
+11-04 22:49:27.227 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 82.000000
+11-04 22:49:27.227 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 82.000000
+11-04 22:49:27.227 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 82.000000
+11-04 22:49:27.235 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: WindowNativeNodeCreateInfo.onDisAppear() called from JS for xComponentId='__nnSubWindow_WIID_3'
+11-04 22:49:27.238 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:49:27.239 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering callbacks for xcomponent 0x5a30201fb8
+11-04 22:49:27.239 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering gestures for NativeNode 0x5a30c62200
+11-04 22:49:27.240 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceDestroyed(::OH_NativeXComponent *, void *): xc: 0x5a30201fb8 window: 0x5a3103d340
+11-04 22:49:27.240 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Error: xComponent 0x5a30201fb8 does not have any assigned receiver
+11-04 22:49:27.243 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 1465,984 size: 190,57
+11-04 22:49:27.243 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:49:27.245 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: QNapi::Object QtOhos::(anonymous namespace)::loadJsModuleViaNapiOrFail(napi_env, const std::string &): loading napi module '@ohos.file.picker' via napi_load_module()
+11-04 22:49:27.245 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Calling DocumentViewPicker.select() with options: {"maxSelectNumber":1,"fileSuffixFilters":["支持的文件 (*.lcd *.ldr *.dat *.mpd)|.lcd,.ldr,.dat,.mpd","所有文件 (*.*)|.*"],"defaultFilePathUri":"file://docs/storage/Users/currentUser/Download/LeoCAD-D8/Input","selectMode":0}
+11-04 22:49:27.246 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] ParseWindow: window mode.
+11-04 22:49:27.246 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] parseDocumentPickerSelectOption start
+11-04 22:49:27.246 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] parseDocumentPickerSelectOption end
+11-04 22:49:27.246 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] modalPicker start 
+11-04 22:50:06.695 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] document select selectResult: : errorcode is = 0, selecturi is = file://docs/storage/Users/currentUser/Download/LeoCAD-D8/******r
+11-04 22:50:06.695 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: ["file://docs/storage/Users/currentUser/Download/LeoCAD-D8/%E9%A6%96%E5%8F%91%20%E5%BB%BA%E6%A8%A1%E9%97%AD%E7%8E%AF.ldr"]
+11-04 22:50:06.696 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] Get Selected Suffix Index start
+11-04 22:50:06.696 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] Get Selected Suffix Index end: -1
+11-04 22:50:06.701 11449 11574 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"dpr":1.899999976158142,"framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"logical_height":893,"logical_width":1374,"renderer":"Maleoon 916","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"HUAWEI"}
+11-04 22:50:06.701 11449 11574 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":893,"logical_width":1374,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-04 22:50:06.705 11449 11574 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"dpr":1.899999976158142,"framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"logical_height":893,"logical_width":1374,"renderer":"Maleoon 916","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"HUAWEI"}
+11-04 22:50:06.706 11449 11574 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":893,"logical_width":1374,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-04 22:50:06.740 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:50:09.823 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:09.959 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:09.963 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:09.973 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:50:09.973 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:50:09.973 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:50:10.129 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:50:10.136 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:10.140 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:10.149 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:50:10.149 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:50:10.149 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:50:10.900 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:50:10.900 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:50:10.900 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:50:11.010 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:11.480 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:12.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:13.064 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:13.068 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:13.070 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 8,116 size: 1153,467
+11-04 22:50:13.073 11449 11449 W C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] XComponent[]'s can not get rotation FoldDisplayMode 0 angleConfig 
+11-04 22:50:13.073 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Registering callbacks for xcomponent 0x5a3058cfd8
+11-04 22:50:13.073 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:50:13.074 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "QMenuClassWindow"
+11-04 22:50:13.074 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::raise(): stack node has no parent, ignore raising it
+11-04 22:50:13.075 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to maximizeSupported
+11-04 22:50:13.075 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to outlineEnabled
+11-04 22:50:13.076 11449 11449 E C04200/io.github.xiaotaop.leocad/WMS: SetWindowType: permission denied!
+11-04 22:50:13.080 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 0 state_: 0
+11-04 22:50:13.080 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSceneSessionImpl: AdjustWindowAnimationFlag: session invalid!
+11-04 22:50:13.083 11449 11449 W C04217/io.github.xiaotaop.leocad/WMSAttribute: RegisterGetWMSWindowListCallback: callback has registered
+11-04 22:50:13.083 11449 11449 W C04218/io.github.xiaotaop.leocad/WMSPc: UpdateSidebarBlurStyleWhenColorModeChange: RSAnimatableProperty is null
+11-04 22:50:13.085 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] FeatureParamParseEntry init twice
+11-04 22:50:13.085 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] UICorrectionParamParseEntry init twice
+11-04 22:50:13.087 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100002:100002:scope)] Invalid config:zh_CN-long-notround-horizontal-light-tablet-xhdpi
+11-04 22:50:13.087 11449 11449 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libtransform_interaction_ext.z.so: check ns accessible failed namespace=ndk.
+11-04 22:50:13.087 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=ndk no inherits, errno=2
+11-04 22:50:13.087 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=default, errno=2
+11-04 22:50:13.087 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libtransform_interaction_ext.z.so
+11-04 22:50:13.087 11449 11449 E C03934/io.github.xiaotaop.leocad/AceUIEvent: [(100002:100002:scope)] AceTransform load failed: Error loading shared library /system/lib64/libtransform_interaction_ext.z.so: No such file or directory
+11-04 22:50:13.087 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100002:100002:scope)] not found systemTheme in HapModuleInfo, loading default OHOS_THEME
+11-04 22:50:13.087 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100002:100002:scope)] GetAsset failed: resources/styles/default.json
+11-04 22:50:13.092 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571955 not found
+11-04 22:50:13.092 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571955 not found
+11-04 22:50:13.093 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM420]callback exist
+11-04 22:50:13.093 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM438]callback exist
+11-04 22:50:13.094 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 82 state_: 6
+11-04 22:50:13.094 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSessionImpl: Destroy: session is invalid
+11-04 22:50:13.097 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100002:100002:scope)] GetAsset failed: manifest.json
+11-04 22:50:13.098 11449 11449 W C04208/io.github.xiaotaop.leocad/WMSLayout: UpdateViewportConfig: invalid width: 0, height: 0, id: 86
+11-04 22:50:13.098 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.layout.enabled remoteWatcherId 129 success
+11-04 22:50:13.098 11449 11449 W C03F00/io.github.xiaotaop.leocad/ArkCompiler: [debugger] DebuggerImpl::NotifyScriptParsed: Script already been parsed: url: entry|entry|1.0.0|src/main/ets/pages/SubWindowNativeNode.ts fileName: /data/storage/el1/bundle/entry/ets/modules.abc
+11-04 22:50:13.098 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.inputevent.enabled remoteWatcherId 129 success
+11-04 22:50:13.099 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix const.security.developermode.state remoteWatcherId 129 success
+11-04 22:50:13.099 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init begin
+11-04 22:50:13.099 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init end
+11-04 22:50:13.099 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100002:100002:scope)] no need to trigger onPageShow callback when not in the foreground
+11-04 22:50:13.099 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.statemgr.enabled remoteWatcherId 129 success
+11-04 22:50:13.100 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.boundary.enabled remoteWatcherId 129 success
+11-04 22:50:13.100 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.performance.monitor.enabled remoteWatcherId 129 success
+11-04 22:50:13.100 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=ndk no inherits, errno=2
+11-04 22:50:13.100 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=moduleNs_default, errno=2
+11-04 22:50:13.100 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for lib.so
+11-04 22:50:13.100 11449 11449 W C03F04/io.github.xiaotaop.leocad/MMG: [NMM:1207]key:default/ First: failed Error loading shared library lib.so: No such file or directory.Second: load module default/ failed..load  failed
+11-04 22:50:13.100 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a3058cfd8 window: 0x5a47e58960
+11-04 22:50:13.100 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4784b1c0 eventType: 0 surface: 0x5a47e58960
+11-04 22:50:13.101 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a30594018
+11-04 22:50:13.101 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a30594018 node: 0x5a47db03e0
+11-04 22:50:13.102 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-04 22:50:13.102 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-04 22:50:13.102 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setSize(const QSize &): 1153,467
+11-04 22:50:13.103 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 8,116,0.000000
+11-04 22:50:13.103 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571955 not found
+11-04 22:50:13.105 11449 11449 E C04219/io.github.xiaotaop.leocad/WMSDecor: SetWindowTitle: DecorEnable is false
+11-04 22:50:13.105 11449 11449 W C01320/io.github.xiaotaop.leocad/JsEnv: [source_map.cpp145]the stack without line info
+11-04 22:50:13.105 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-04 22:50:13.106 11449 11449 W C0394E/io.github.xiaotaop.leocad/AceWindow: [(100002:100002:scope)] width:0.000000, height:0.000000
+11-04 22:50:13.111 11449 14849 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:50:13.112 11449 11449 W C04201/io.github.xiaotaop.leocad/DMS: OnDisplayInfoChange: data is not changed.
+11-04 22:50:13.112 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-04 22:50:13.230 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:50:13.233 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:13.235 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:14.026 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:50:14.033 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:50:14.033 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:14.035 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:50:14.039 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:50:14.039 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:15.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:16.261 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100002:100002:scope)] json str is empty.
+11-04 22:50:16.265 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100002:100002:scope)] json str is empty.
+11-04 22:50:16.433 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:50:16.442 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100002:100002:scope)] json str is empty.
+11-04 22:50:16.445 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100002:100002:scope)] json str is empty.
+11-04 22:50:16.458 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+11-04 22:50:16.461 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 86.000000
+11-04 22:50:16.461 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 86.000000
+11-04 22:50:16.461 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 86.000000
+11-04 22:50:16.461 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 86.000000
+11-04 22:50:16.479 11449 11449 E C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyWMSWindowDestroyed: window destroyed listener is nullptr
+11-04 22:50:16.479 11449 14827 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:50:16.479 11449 11449 W C03903/io.github.xiaotaop.leocad/AceSubWindow: [(-2:100000:active)] Fail to get subwindow in dialogSubwindowMap_, instanceId is 100002
+11-04 22:50:16.479 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.layout.enabled count 1
+11-04 22:50:16.479 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.inputevent.enabled count 1
+11-04 22:50:16.479 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ const.security.developermode.state count 1
+11-04 22:50:16.479 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.statemgr.enabled count 1
+11-04 22:50:16.479 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.boundary.enabled count 1
+11-04 22:50:16.479 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.performance.monitor.enabled count 1
+11-04 22:50:16.479 11449 11449 W C0391C/io.github.xiaotaop.leocad/AceFocus: [(100002:100002:scope)] viewStack empty
+11-04 22:50:16.479 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: WindowNativeNodeCreateInfo.onDisAppear() called from JS for xComponentId='__nnSubWindow_WIID_5'
+11-04 22:50:16.481 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:active)] Unregister from watch dog failed with instanceID 100002
+11-04 22:50:16.483 11449 11449 E C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: WindowInputChannel is nullptr InputTracking id:5092 windowId:86
+11-04 22:50:16.484 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:50:16.485 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:50:16.485 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:16.485 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:50:16.486 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering callbacks for xcomponent 0x5a3058cfd8
+11-04 22:50:16.486 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering gestures for NativeNode 0x5a47db0d80
+11-04 22:50:16.487 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceDestroyed(::OH_NativeXComponent *, void *): xc: 0x5a3058cfd8 window: 0x5a47e58960
+11-04 22:50:16.487 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Error: xComponent 0x5a3058cfd8 does not have any assigned receiver
+11-04 22:50:16.488 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 1465,984 size: 190,57
+11-04 22:50:16.488 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Calling DocumentViewPicker.select() with options: {"maxSelectNumber":1,"fileSuffixFilters":["支持的文件 (*.lcd *.ldr *.dat *.mpd)|.lcd,.ldr,.dat,.mpd","所有文件 (*.*)|.*"],"defaultFilePathUri":"file://docs/storage/Users/currentUser/Download/LeoCAD-D8/%E9%A6%96%E5%8F%91%20%E5%BB%BA%E6%A8%A1%E9%97%AD%E7%8E%AF.ldr","selectMode":0}
+11-04 22:50:16.488 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] ParseWindow: window mode.
+11-04 22:50:16.489 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] parseDocumentPickerSelectOption start
+11-04 22:50:16.489 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] parseDocumentPickerSelectOption end
+11-04 22:50:16.489 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] modalPicker start 
+11-04 22:50:16.494 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:16.548 11449 14894 E C04204/io.github.xiaotaop.leocad/WMSScb: SetRSUIContext: RSUIContext is null, RSNode [id: 62165356643290], RSUIContext is null
+11-04 22:50:16.548 11449 14894 E C04201/io.github.xiaotaop.leocad/DMS: GetScreenSession: Error found screen session with id: 18446744073709551615
+11-04 22:50:16.561 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:50:16.980 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] ArkUI request vsync, but no vsync received in 500ms
+11-04 22:50:17.080 11449 11449 W C04202/io.github.xiaotaop.leocad/WMSMain: OnVsyncTimeOut: in
+11-04 22:50:18.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:19.480 11449 11449 E C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] ArkUI request vsync,but no vsync received in 3 seconds
+11-04 22:50:21.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:24.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:27.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:30.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:31.914 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] The sessionId 1120636931 does not exist
+11-04 22:50:31.919 11449 11449 W C0392A/io.github.xiaotaop.leocad/AceUiExtensionComponent: [(100000:100000:scope)] [@2038][ID: 1] UIExtension pattern instanceId 100000 not equal frame node instanceId -1
+11-04 22:50:31.919 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 62165356643290 not found
+11-04 22:50:31.922 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100000:100000:scope)] The sessionId 1120636931 does not exist
+11-04 22:50:31.965 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] document select selectResult: : errorcode is = 0, selecturi is = file://docs/storage/Users/currentUser/Download/LeoCAD-D8/Input/******d
+11-04 22:50:31.965 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: ["file://docs/storage/Users/currentUser/Download/LeoCAD-D8/Input/curated-device.mpd"]
+11-04 22:50:31.965 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] Get Selected Suffix Index start
+11-04 22:50:31.965 11449 11449 I A03D00/io.github.xiaotaop.leocad/JSAPP: [picker] Get Selected Suffix Index end: -1
+11-04 22:50:31.972 11449 11574 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":24,"major":3,"minor":2,"profile":0,"renderable_type":2,"samples":0,"stencil_bits":8},"dpr":1.899999976158142,"framebuffers":true,"gl_version":"OpenGL ES 3.2 B301","glsl_version":"OpenGL ES GLSL ES 3.20","is_current":true,"is_gles":true,"logical_height":893,"logical_width":1374,"renderer":"Maleoon 916","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"HUAWEI"}
+11-04 22:50:31.973 11449 11574 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":1.899999976158142,"framebuffer":1,"framebuffer_status":36053,"logical_height":893,"logical_width":1374,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+11-04 22:50:32.000 11449 11574 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_THUMBNAIL_DEFERRED �=@�Z�kk state 0 refs 0
+11-04 22:50:32.005 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:50:32.006 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:50:32.006 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:32.430 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:50:32.430 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:50:32.430 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:50:33.273 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:33.276 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:33.284 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:50:33.284 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:50:33.284 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:50:33.443 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:50:33.451 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:33.455 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:33.460 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:50:33.460 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:50:33.460 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:50:33.823 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:36.289 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:6333|163]The client receives a key, Fd:86
+11-04 22:50:36.345 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:6334|163]The client receives a key, Fd:86
+11-04 22:50:36.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:39.305 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:6335|163]The client receives a key, Fd:86
+11-04 22:50:39.406 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:6336|163]The client receives a key, Fd:86
+11-04 22:50:39.479 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:6337|163]The client receives a key, Fd:86
+11-04 22:50:39.561 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:6338|163]The client receives a key, Fd:86
+11-04 22:50:39.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:40.620 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:6339|163]The client receives a key, Fd:86
+11-04 22:50:40.697 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:D:6340|163]The client receives a key, Fd:86
+11-04 22:50:40.772 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:6341|163]The client receives a key, Fd:86
+11-04 22:50:40.843 11449 11449 W C02805/io.github.xiaotaop.leocad/ClientMsgHandler: [K:U:6342|163]The client receives a key, Fd:86
+11-04 22:50:42.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:42.862 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:50:42.862 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:50:42.862 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:50:43.102 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:43.793 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:50:44.328 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:44.330 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:44.332 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 8,116 size: 1281,467
+11-04 22:50:44.333 11449 11449 W C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] XComponent[]'s can not get rotation FoldDisplayMode 0 angleConfig 
+11-04 22:50:44.333 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Registering callbacks for xcomponent 0x5a30594558
+11-04 22:50:44.333 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:50:44.333 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "QMenuClassWindow"
+11-04 22:50:44.334 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::raise(): stack node has no parent, ignore raising it
+11-04 22:50:44.335 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to maximizeSupported
+11-04 22:50:44.335 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to outlineEnabled
+11-04 22:50:44.336 11449 11449 E C04200/io.github.xiaotaop.leocad/WMS: SetWindowType: permission denied!
+11-04 22:50:44.337 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 0 state_: 0
+11-04 22:50:44.337 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSceneSessionImpl: AdjustWindowAnimationFlag: session invalid!
+11-04 22:50:44.340 11449 11449 W C04217/io.github.xiaotaop.leocad/WMSAttribute: RegisterGetWMSWindowListCallback: callback has registered
+11-04 22:50:44.340 11449 11449 W C04218/io.github.xiaotaop.leocad/WMSPc: UpdateSidebarBlurStyleWhenColorModeChange: RSAnimatableProperty is null
+11-04 22:50:44.342 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] FeatureParamParseEntry init twice
+11-04 22:50:44.342 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] UICorrectionParamParseEntry init twice
+11-04 22:50:44.344 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100003:100003:scope)] Invalid config:zh_CN-long-notround-horizontal-light-tablet-xhdpi
+11-04 22:50:44.344 11449 15874 W C057C1/io.github.xiaotaop.leocad/IPCWorkThread: ThreadHandler: proto:0 policy:0 name:OS_IPC_7_15874 invoker:1208330496
+11-04 22:50:44.344 11449 11449 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libtransform_interaction_ext.z.so: check ns accessible failed namespace=ndk.
+11-04 22:50:44.344 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=ndk no inherits, errno=2
+11-04 22:50:44.344 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=default, errno=2
+11-04 22:50:44.344 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libtransform_interaction_ext.z.so
+11-04 22:50:44.344 11449 11449 E C03934/io.github.xiaotaop.leocad/AceUIEvent: [(100003:100003:scope)] AceTransform load failed: Error loading shared library /system/lib64/libtransform_interaction_ext.z.so: No such file or directory
+11-04 22:50:44.344 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100003:100003:scope)] not found systemTheme in HapModuleInfo, loading default OHOS_THEME
+11-04 22:50:44.344 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100003:100003:scope)] GetAsset failed: resources/styles/default.json
+11-04 22:50:44.349 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571967 not found
+11-04 22:50:44.349 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571967 not found
+11-04 22:50:44.350 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM420]callback exist
+11-04 22:50:44.350 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM438]callback exist
+11-04 22:50:44.350 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 86 state_: 6
+11-04 22:50:44.350 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSessionImpl: Destroy: session is invalid
+11-04 22:50:44.354 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100003:100003:scope)] GetAsset failed: manifest.json
+11-04 22:50:44.354 11449 11449 W C04208/io.github.xiaotaop.leocad/WMSLayout: UpdateViewportConfig: invalid width: 0, height: 0, id: 89
+11-04 22:50:44.354 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.layout.enabled remoteWatcherId 129 success
+11-04 22:50:44.354 11449 11449 W C03F00/io.github.xiaotaop.leocad/ArkCompiler: [debugger] DebuggerImpl::NotifyScriptParsed: Script already been parsed: url: entry|entry|1.0.0|src/main/ets/pages/SubWindowNativeNode.ts fileName: /data/storage/el1/bundle/entry/ets/modules.abc
+11-04 22:50:44.355 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init begin
+11-04 22:50:44.355 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init end
+11-04 22:50:44.355 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100003:100003:scope)] no need to trigger onPageShow callback when not in the foreground
+11-04 22:50:44.356 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.inputevent.enabled remoteWatcherId 129 success
+11-04 22:50:44.357 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=ndk no inherits, errno=2
+11-04 22:50:44.357 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=moduleNs_default, errno=2
+11-04 22:50:44.357 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for lib.so
+11-04 22:50:44.357 11449 11449 W C03F04/io.github.xiaotaop.leocad/MMG: [NMM:1207]key:default/ First: failed Error loading shared library lib.so: No such file or directory.Second: load module default/ failed..load  failed
+11-04 22:50:44.357 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a30594558 window: 0x5a47e64800
+11-04 22:50:44.357 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4784f0c0 eventType: 0 surface: 0x5a47e64800
+11-04 22:50:44.357 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix const.security.developermode.state remoteWatcherId 129 success
+11-04 22:50:44.357 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a305927d8
+11-04 22:50:44.357 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a305927d8 node: 0x5a2f761780
+11-04 22:50:44.358 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-04 22:50:44.358 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-04 22:50:44.359 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.statemgr.enabled remoteWatcherId 129 success
+11-04 22:50:44.359 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setSize(const QSize &): 1281,467
+11-04 22:50:44.359 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.boundary.enabled remoteWatcherId 129 success
+11-04 22:50:44.359 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 8,116,0.000000
+11-04 22:50:44.360 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571967 not found
+11-04 22:50:44.360 11449 15587 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.performance.monitor.enabled remoteWatcherId 129 success
+11-04 22:50:44.361 11449 11449 E C04219/io.github.xiaotaop.leocad/WMSDecor: SetWindowTitle: DecorEnable is false
+11-04 22:50:44.361 11449 11449 W C01320/io.github.xiaotaop.leocad/JsEnv: [source_map.cpp145]the stack without line info
+11-04 22:50:44.361 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-04 22:50:44.362 11449 11449 W C0394E/io.github.xiaotaop.leocad/AceWindow: [(100003:100003:scope)] width:0.000000, height:0.000000
+11-04 22:50:44.371 11449 14827 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:50:44.371 11449 11449 W C04201/io.github.xiaotaop.leocad/DMS: OnDisplayInfoChange: data is not changed.
+11-04 22:50:44.371 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-04 22:50:44.493 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:50:44.497 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:44.500 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:45.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:48.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:50.677 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+11-04 22:50:50.680 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 89.000000
+11-04 22:50:50.680 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 89.000000
+11-04 22:50:50.680 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 89.000000
+11-04 22:50:50.680 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 89.000000
+11-04 22:50:50.689 11449 15874 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:50:50.689 11449 11449 E C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyWMSWindowDestroyed: window destroyed listener is nullptr
+11-04 22:50:50.689 11449 11449 W C03903/io.github.xiaotaop.leocad/AceSubWindow: [(-2:100000:active)] Fail to get subwindow in dialogSubwindowMap_, instanceId is 100003
+11-04 22:50:50.690 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.layout.enabled count 1
+11-04 22:50:50.690 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.inputevent.enabled count 1
+11-04 22:50:50.690 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ const.security.developermode.state count 1
+11-04 22:50:50.690 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.statemgr.enabled count 1
+11-04 22:50:50.690 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.boundary.enabled count 1
+11-04 22:50:50.690 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.performance.monitor.enabled count 1
+11-04 22:50:50.690 11449 11449 W C0391C/io.github.xiaotaop.leocad/AceFocus: [(100003:100003:scope)] viewStack empty
+11-04 22:50:50.690 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: WindowNativeNodeCreateInfo.onDisAppear() called from JS for xComponentId='__nnSubWindow_WIID_7'
+11-04 22:50:50.693 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:active)] Unregister from watch dog failed with instanceID 100003
+11-04 22:50:50.700 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:50:50.702 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 0,0 size: 190,57
+11-04 22:50:50.704 11449 11449 W C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] XComponent[]'s can not get rotation FoldDisplayMode 0 angleConfig 
+11-04 22:50:50.705 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Registering callbacks for xcomponent 0x5a30592878
+11-04 22:50:50.705 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:50:50.706 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=ndk no inherits, errno=2
+11-04 22:50:50.706 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=moduleNs_default, errno=2
+11-04 22:50:50.706 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for lib.so
+11-04 22:50:50.706 11449 11449 W C03F04/io.github.xiaotaop.leocad/MMG: [NMM:1207]key:default/ First: failed Error loading shared library lib.so: No such file or directory.Second: load module default/ failed..load  failed
+11-04 22:50:50.706 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a30592878 window: 0x5a47e63f40
+11-04 22:50:50.706 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4784b1c0 eventType: 0 surface: 0x5a47e63f40
+11-04 22:50:50.708 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "QMenuClassWindow"
+11-04 22:50:50.709 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::raise(): stack node has no parent, ignore raising it
+11-04 22:50:50.709 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 91,116 size: 348,621
+11-04 22:50:50.710 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to maximizeSupported
+11-04 22:50:50.710 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to outlineEnabled
+11-04 22:50:50.712 11449 11449 E C04200/io.github.xiaotaop.leocad/WMS: SetWindowType: permission denied!
+11-04 22:50:50.712 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 0 state_: 0
+11-04 22:50:50.712 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSceneSessionImpl: AdjustWindowAnimationFlag: session invalid!
+11-04 22:50:50.716 11449 11449 W C04217/io.github.xiaotaop.leocad/WMSAttribute: RegisterGetWMSWindowListCallback: callback has registered
+11-04 22:50:50.716 11449 11449 W C04218/io.github.xiaotaop.leocad/WMSPc: UpdateSidebarBlurStyleWhenColorModeChange: RSAnimatableProperty is null
+11-04 22:50:50.721 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] FeatureParamParseEntry init twice
+11-04 22:50:50.721 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] UICorrectionParamParseEntry init twice
+11-04 22:50:50.724 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100004:100004:scope)] Invalid config:zh_CN-long-notround-horizontal-light-tablet-xhdpi
+11-04 22:50:50.724 11449 11449 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libtransform_interaction_ext.z.so: check ns accessible failed namespace=ndk.
+11-04 22:50:50.724 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=ndk no inherits, errno=2
+11-04 22:50:50.724 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=default, errno=2
+11-04 22:50:50.724 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libtransform_interaction_ext.z.so
+11-04 22:50:50.724 11449 11449 E C03934/io.github.xiaotaop.leocad/AceUIEvent: [(100004:100004:scope)] AceTransform load failed: Error loading shared library /system/lib64/libtransform_interaction_ext.z.so: No such file or directory
+11-04 22:50:50.725 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100004:100004:scope)] not found systemTheme in HapModuleInfo, loading default OHOS_THEME
+11-04 22:50:50.725 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100004:100004:scope)] GetAsset failed: resources/styles/default.json
+11-04 22:50:50.732 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571976 not found
+11-04 22:50:50.732 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571976 not found
+11-04 22:50:50.734 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM420]callback exist
+11-04 22:50:50.734 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM438]callback exist
+11-04 22:50:50.734 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 89 state_: 6
+11-04 22:50:50.734 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSessionImpl: Destroy: session is invalid
+11-04 22:50:50.738 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100004:100004:scope)] GetAsset failed: manifest.json
+11-04 22:50:50.740 11449 11449 W C04208/io.github.xiaotaop.leocad/WMSLayout: UpdateViewportConfig: invalid width: 0, height: 0, id: 90
+11-04 22:50:50.741 11449 15588 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.layout.enabled remoteWatcherId 129 success
+11-04 22:50:50.743 11449 11449 W C03F00/io.github.xiaotaop.leocad/ArkCompiler: [debugger] DebuggerImpl::NotifyScriptParsed: Script already been parsed: url: entry|entry|1.0.0|src/main/ets/pages/SubWindowNativeNode.ts fileName: /data/storage/el1/bundle/entry/ets/modules.abc
+11-04 22:50:50.743 11449 15588 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.inputevent.enabled remoteWatcherId 129 success
+11-04 22:50:50.744 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init begin
+11-04 22:50:50.744 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init end
+11-04 22:50:50.744 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100004:100004:scope)] no need to trigger onPageShow callback when not in the foreground
+11-04 22:50:50.748 11449 15588 I C02C03/PARAM_WATCHER: Add watcher keyPrefix const.security.developermode.state remoteWatcherId 129 success
+11-04 22:50:50.749 11449 15588 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.statemgr.enabled remoteWatcherId 129 success
+11-04 22:50:50.750 11449 15588 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.boundary.enabled remoteWatcherId 129 success
+11-04 22:50:50.751 11449 15588 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.performance.monitor.enabled remoteWatcherId 129 success
+11-04 22:50:50.752 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a3059e538
+11-04 22:50:50.752 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a3059e538 node: 0x5a47db1800
+11-04 22:50:50.753 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-04 22:50:50.753 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-04 22:50:50.754 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setSize(const QSize &): 348,621
+11-04 22:50:50.756 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 91,116,0.000000
+11-04 22:50:50.756 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571976 not found
+11-04 22:50:50.758 11449 11449 E C04219/io.github.xiaotaop.leocad/WMSDecor: SetWindowTitle: DecorEnable is false
+11-04 22:50:50.758 11449 11449 W C01320/io.github.xiaotaop.leocad/JsEnv: [source_map.cpp145]the stack without line info
+11-04 22:50:50.758 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-04 22:50:50.759 11449 11449 W C0394E/io.github.xiaotaop.leocad/AceWindow: [(100004:100004:scope)] width:0.000000, height:0.000000
+11-04 22:50:50.773 11449 14849 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:50:50.773 11449 11449 W C04201/io.github.xiaotaop.leocad/DMS: OnDisplayInfoChange: data is not changed.
+11-04 22:50:50.776 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-04 22:50:50.788 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a30592878 window: 0x5a47e63f40
+11-04 22:50:50.788 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a4784b1c0 eventType: 1 surface: 0x5a47e63f40
+11-04 22:50:51.190 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:active)] ArkUI request vsync, but no vsync received in 500ms
+11-04 22:50:51.825 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:53.507 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:53.511 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:53.514 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+11-04 22:50:53.516 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 90.000000
+11-04 22:50:53.516 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 90.000000
+11-04 22:50:53.516 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 90.000000
+11-04 22:50:53.516 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 90.000000
+11-04 22:50:53.528 11449 14827 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:50:53.528 11449 11449 E C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyWMSWindowDestroyed: window destroyed listener is nullptr
+11-04 22:50:53.528 11449 11449 W C03903/io.github.xiaotaop.leocad/AceSubWindow: [(-2:100000:active)] Fail to get subwindow in dialogSubwindowMap_, instanceId is 100004
+11-04 22:50:53.528 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.layout.enabled count 1
+11-04 22:50:53.528 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.inputevent.enabled count 1
+11-04 22:50:53.528 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ const.security.developermode.state count 1
+11-04 22:50:53.528 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.statemgr.enabled count 1
+11-04 22:50:53.528 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.boundary.enabled count 1
+11-04 22:50:53.528 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.performance.monitor.enabled count 1
+11-04 22:50:53.528 11449 11449 W C0391C/io.github.xiaotaop.leocad/AceFocus: [(100004:100004:scope)] viewStack empty
+11-04 22:50:53.528 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: WindowNativeNodeCreateInfo.onDisAppear() called from JS for xComponentId='__nnSubWindow_WIID_8'
+11-04 22:50:53.531 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:active)] Unregister from watch dog failed with instanceID 100004
+11-04 22:50:53.532 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:50:53.533 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering callbacks for xcomponent 0x5a30592878
+11-04 22:50:53.533 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering gestures for NativeNode 0x5a47db2de0
+11-04 22:50:53.533 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceDestroyed(::OH_NativeXComponent *, void *): xc: 0x5a30592878 window: 0x5a47e63f40
+11-04 22:50:53.533 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Error: xComponent 0x5a30592878 does not have any assigned receiver
+11-04 22:50:53.676 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:50:53.684 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:53.688 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:50:53.696 11449 11449 E C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] ArkUI request vsync,but no vsync received in 3 seconds
+11-04 22:50:54.128 11449 11449 W C04202/io.github.xiaotaop.leocad/WMSMain: OnVsyncTimeOut: in
+11-04 22:50:54.530 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] ArkUI request vsync, but no vsync received in 500ms
+11-04 22:50:54.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:50:56.528 11449 11449 E C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] ArkUI request vsync,but no vsync received in 3 seconds
+11-04 22:50:57.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:00.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:01.236 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:51:01.236 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:51:01.236 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:51:01.344 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:51:02.406 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:51:03.114 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:51:03.117 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:51:03.118 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 0,0 size: 190,57
+11-04 22:51:03.119 11449 11449 W C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] XComponent[]'s can not get rotation FoldDisplayMode 0 angleConfig 
+11-04 22:51:03.120 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Registering callbacks for xcomponent 0x5a30573b58
+11-04 22:51:03.120 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:51:03.120 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "QMenuClassWindow"
+11-04 22:51:03.121 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::raise(): stack node has no parent, ignore raising it
+11-04 22:51:03.121 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 342,116 size: 211,207
+11-04 22:51:03.121 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to maximizeSupported
+11-04 22:51:03.121 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to outlineEnabled
+11-04 22:51:03.122 11449 11449 E C04200/io.github.xiaotaop.leocad/WMS: SetWindowType: permission denied!
+11-04 22:51:03.123 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 0 state_: 0
+11-04 22:51:03.123 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSceneSessionImpl: AdjustWindowAnimationFlag: session invalid!
+11-04 22:51:03.126 11449 11449 W C04217/io.github.xiaotaop.leocad/WMSAttribute: RegisterGetWMSWindowListCallback: callback has registered
+11-04 22:51:03.126 11449 11449 W C04218/io.github.xiaotaop.leocad/WMSPc: UpdateSidebarBlurStyleWhenColorModeChange: RSAnimatableProperty is null
+11-04 22:51:03.129 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] FeatureParamParseEntry init twice
+11-04 22:51:03.129 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] UICorrectionParamParseEntry init twice
+11-04 22:51:03.131 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100005:100005:scope)] Invalid config:zh_CN-long-notround-horizontal-light-tablet-xhdpi
+11-04 22:51:03.131 11449 11449 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libtransform_interaction_ext.z.so: check ns accessible failed namespace=ndk.
+11-04 22:51:03.131 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=ndk no inherits, errno=2
+11-04 22:51:03.131 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=default, errno=2
+11-04 22:51:03.131 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libtransform_interaction_ext.z.so
+11-04 22:51:03.131 11449 11449 E C03934/io.github.xiaotaop.leocad/AceUIEvent: [(100005:100005:scope)] AceTransform load failed: Error loading shared library /system/lib64/libtransform_interaction_ext.z.so: No such file or directory
+11-04 22:51:03.131 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100005:100005:scope)] not found systemTheme in HapModuleInfo, loading default OHOS_THEME
+11-04 22:51:03.131 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100005:100005:scope)] GetAsset failed: resources/styles/default.json
+11-04 22:51:03.137 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571985 not found
+11-04 22:51:03.137 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571985 not found
+11-04 22:51:03.138 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM420]callback exist
+11-04 22:51:03.138 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM438]callback exist
+11-04 22:51:03.138 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 90 state_: 6
+11-04 22:51:03.138 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSessionImpl: Destroy: session is invalid
+11-04 22:51:03.141 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100005:100005:scope)] GetAsset failed: manifest.json
+11-04 22:51:03.142 11449 11449 W C04208/io.github.xiaotaop.leocad/WMSLayout: UpdateViewportConfig: invalid width: 0, height: 0, id: 91
+11-04 22:51:03.142 11449 11449 W C03F00/io.github.xiaotaop.leocad/ArkCompiler: [debugger] DebuggerImpl::NotifyScriptParsed: Script already been parsed: url: entry|entry|1.0.0|src/main/ets/pages/SubWindowNativeNode.ts fileName: /data/storage/el1/bundle/entry/ets/modules.abc
+11-04 22:51:03.143 11449 14816 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.layout.enabled remoteWatcherId 129 success
+11-04 22:51:03.143 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init begin
+11-04 22:51:03.143 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init end
+11-04 22:51:03.143 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100005:100005:scope)] no need to trigger onPageShow callback when not in the foreground
+11-04 22:51:03.144 11449 14816 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.inputevent.enabled remoteWatcherId 129 success
+11-04 22:51:03.145 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=ndk no inherits, errno=2
+11-04 22:51:03.145 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=moduleNs_default, errno=2
+11-04 22:51:03.145 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for lib.so
+11-04 22:51:03.145 11449 11449 W C03F04/io.github.xiaotaop.leocad/MMG: [NMM:1207]key:default/ First: failed Error loading shared library lib.so: No such file or directory.Second: load module default/ failed..load  failed
+11-04 22:51:03.145 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a30573b58 window: 0x5a478898a0
+11-04 22:51:03.145 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a2f757d80 eventType: 0 surface: 0x5a478898a0
+11-04 22:51:03.145 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a30598458
+11-04 22:51:03.145 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a30598458 node: 0x5a47db0ae0
+11-04 22:51:03.145 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-04 22:51:03.145 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-04 22:51:03.146 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setSize(const QSize &): 211,207
+11-04 22:51:03.147 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 342,116,0.000000
+11-04 22:51:03.147 11449 14816 I C02C03/PARAM_WATCHER: Add watcher keyPrefix const.security.developermode.state remoteWatcherId 129 success
+11-04 22:51:03.148 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571985 not found
+11-04 22:51:03.148 11449 14816 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.statemgr.enabled remoteWatcherId 129 success
+11-04 22:51:03.148 11449 14816 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.boundary.enabled remoteWatcherId 129 success
+11-04 22:51:03.149 11449 14816 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.performance.monitor.enabled remoteWatcherId 129 success
+11-04 22:51:03.149 11449 11449 E C04219/io.github.xiaotaop.leocad/WMSDecor: SetWindowTitle: DecorEnable is false
+11-04 22:51:03.149 11449 11449 W C01320/io.github.xiaotaop.leocad/JsEnv: [source_map.cpp145]the stack without line info
+11-04 22:51:03.149 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-04 22:51:03.150 11449 11449 W C0394E/io.github.xiaotaop.leocad/AceWindow: [(100005:100005:scope)] width:0.000000, height:0.000000
+11-04 22:51:03.163 11449 14827 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:51:03.163 11449 11449 W C04201/io.github.xiaotaop.leocad/DMS: OnDisplayInfoChange: data is not changed.
+11-04 22:51:03.164 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-04 22:51:03.178 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a30573b58 window: 0x5a478898a0
+11-04 22:51:03.178 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a2f757d80 eventType: 1 surface: 0x5a478898a0
+11-04 22:51:03.280 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:51:03.283 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:51:03.285 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] json str is empty.
+11-04 22:51:03.826 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:03.964 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:51:03.966 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:51:03.967 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:51:03.968 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:51:03.972 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:51:03.972 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:51:04.711 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100005:100005:scope)] json str is empty.
+11-04 22:51:04.716 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100005:100005:scope)] json str is empty.
+11-04 22:51:04.883 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:51:04.889 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100005:100005:scope)] json str is empty.
+11-04 22:51:04.893 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100005:100005:scope)] json str is empty.
+11-04 22:51:04.897 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+11-04 22:51:04.899 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 91.000000
+11-04 22:51:04.899 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 91.000000
+11-04 22:51:04.899 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 91.000000
+11-04 22:51:04.899 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 91.000000
+11-04 22:51:04.905 11449 14826 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:51:04.905 11449 11449 E C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyWMSWindowDestroyed: window destroyed listener is nullptr
+11-04 22:51:04.905 11449 11449 W C03903/io.github.xiaotaop.leocad/AceSubWindow: [(-2:100000:active)] Fail to get subwindow in dialogSubwindowMap_, instanceId is 100005
+11-04 22:51:04.905 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.layout.enabled count 1
+11-04 22:51:04.905 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.inputevent.enabled count 1
+11-04 22:51:04.905 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ const.security.developermode.state count 1
+11-04 22:51:04.905 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.statemgr.enabled count 1
+11-04 22:51:04.905 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.boundary.enabled count 1
+11-04 22:51:04.905 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.performance.monitor.enabled count 1
+11-04 22:51:04.905 11449 11449 W C0391C/io.github.xiaotaop.leocad/AceFocus: [(100005:100005:scope)] viewStack empty
+11-04 22:51:04.905 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: WindowNativeNodeCreateInfo.onDisAppear() called from JS for xComponentId='__nnSubWindow_WIID_9'
+11-04 22:51:04.907 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:active)] Unregister from watch dog failed with instanceID 100005
+11-04 22:51:04.907 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:51:04.910 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering callbacks for xcomponent 0x5a30573b58
+11-04 22:51:04.910 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering gestures for NativeNode 0x5a47db27c0
+11-04 22:51:04.910 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceDestroyed(::OH_NativeXComponent *, void *): xc: 0x5a30573b58 window: 0x5a478898a0
+11-04 22:51:04.910 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Error: xComponent 0x5a30573b58 does not have any assigned receiver
+11-04 22:51:04.911 11449 11449 E C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: WindowInputChannel is nullptr InputTracking id:7640 windowId:91
+11-04 22:51:04.912 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:51:04.913 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:51:04.913 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:51:04.914 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 1159,682 size: 800,661
+11-04 22:51:04.915 11449 11449 W C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100000:100000:scope)] XComponent[]'s can not get rotation FoldDisplayMode 0 angleConfig 
+11-04 22:51:04.915 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Registering callbacks for xcomponent 0x5a3059fbb8
+11-04 22:51:04.915 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:51:04.916 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual WId QOhosFloatingWindow::winId() const: winId called for window named: "lcModelListDialogWindow"
+11-04 22:51:04.917 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: virtual void QOhosPlatformWindow::setGeometry(const QRect &): pos: 1142,676 size: 800,661
+11-04 22:51:04.917 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to maximizeSupported
+11-04 22:51:04.917 11449 11449 E C04203/io.github.xiaotaop.leocad/WMSSub: ParseSubWindowOptions: Failed to convert parameter to outlineEnabled
+11-04 22:51:04.918 11449 11449 E C04200/io.github.xiaotaop.leocad/WMS: SetWindowType: permission denied!
+11-04 22:51:04.919 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 0 state_: 0
+11-04 22:51:04.919 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSceneSessionImpl: AdjustWindowAnimationFlag: session invalid!
+11-04 22:51:04.922 11449 11449 W C04217/io.github.xiaotaop.leocad/WMSAttribute: RegisterGetWMSWindowListCallback: callback has registered
+11-04 22:51:04.922 11449 11449 W C04218/io.github.xiaotaop.leocad/WMSPc: UpdateSidebarBlurStyleWhenColorModeChange: RSAnimatableProperty is null
+11-04 22:51:04.923 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] FeatureParamParseEntry init twice
+11-04 22:51:04.923 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] UICorrectionParamParseEntry init twice
+11-04 22:51:04.925 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100006:100006:scope)] Invalid config:zh_CN-long-notround-horizontal-light-tablet-xhdpi
+11-04 22:51:04.925 11449 11449 W C03F07/MUSL-LDSO: load absolute_path /system/lib64/libtransform_interaction_ext.z.so: check ns accessible failed namespace=ndk.
+11-04 22:51:04.925 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=ndk no inherits, errno=2
+11-04 22:51:04.925 11449 11449 W C03F07/MUSL-LDSO: load /system/lib64/libtransform_interaction_ext.z.so failed, namespace=default, errno=2
+11-04 22:51:04.925 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for /system/lib64/libtransform_interaction_ext.z.so
+11-04 22:51:04.925 11449 11449 E C03934/io.github.xiaotaop.leocad/AceUIEvent: [(100006:100006:scope)] AceTransform load failed: Error loading shared library /system/lib64/libtransform_interaction_ext.z.so: No such file or directory
+11-04 22:51:04.925 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100006:100006:scope)] not found systemTheme in HapModuleInfo, loading default OHOS_THEME
+11-04 22:51:04.925 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100006:100006:scope)] GetAsset failed: resources/styles/default.json
+11-04 22:51:04.930 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571994 not found
+11-04 22:51:04.930 11449 11449 E C03952/io.github.xiaotaop.leocad/AceAppBar: [(100006:100006:scope)] read abc file success!
+11-04 22:51:04.932 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style container_modal_pattern not contains icon_primary!
+11-04 22:51:04.932 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style container_modal_pattern not contains icon_on_primary!
+11-04 22:51:04.932 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style container_modal_pattern not contains interactive_hover!
+11-04 22:51:04.932 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style container_modal_pattern not contains interactive_click!
+11-04 22:51:04.932 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style container_modal_pattern not contains warning!
+11-04 22:51:04.932 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style container_modal_pattern not contains window_left_screen!
+11-04 22:51:04.932 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style container_modal_pattern not contains window_right_screen!
+11-04 22:51:04.932 11449 11449 E C03952/io.github.xiaotaop.leocad/AceAppBar: [(100006:100006:scope)] read abc file success!
+11-04 22:51:04.934 11449 11449 E C03952/io.github.xiaotaop.leocad/AceAppBar: [(100006:100006:scope)] read abc file success!
+11-04 22:51:04.938 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571994 not found
+11-04 22:51:04.939 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM420]callback exist
+11-04 22:51:04.939 11449 11449 W C01321/io.github.xiaotaop.leocad/JsRuntime: [CSM438]callback exist
+11-04 22:51:04.939 11449 11449 W C0420A/io.github.xiaotaop.leocad/WMSLife: IsWindowSessionInvalid: already destroyed or not created! id: 91 state_: 6
+11-04 22:51:04.939 11449 11449 W C04200/io.github.xiaotaop.leocad/WindowSessionImpl: Destroy: session is invalid
+11-04 22:51:04.943 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100006:100006:scope)] GetAsset failed: manifest.json
+11-04 22:51:04.943 11449 15590 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.layout.enabled remoteWatcherId 129 success
+11-04 22:51:04.943 11449 11449 W C04208/io.github.xiaotaop.leocad/WMSLayout: UpdateViewportConfig: invalid width: 0, height: 0, id: 92
+11-04 22:51:04.944 11449 15590 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.trace.inputevent.enabled remoteWatcherId 129 success
+11-04 22:51:04.944 11449 11449 W C03F00/io.github.xiaotaop.leocad/ArkCompiler: [debugger] DebuggerImpl::NotifyScriptParsed: Script already been parsed: url: entry|entry|1.0.0|src/main/ets/pages/SubWindowNativeNode.ts fileName: /data/storage/el1/bundle/entry/ets/modules.abc
+11-04 22:51:04.944 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init begin
+11-04 22:51:04.944 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: qohosjsmain Init end
+11-04 22:51:04.945 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(100006:100006:scope)] no need to trigger onPageShow callback when not in the foreground
+11-04 22:51:04.945 11449 15590 I C02C03/PARAM_WATCHER: Add watcher keyPrefix const.security.developermode.state remoteWatcherId 129 success
+11-04 22:51:04.945 11449 15590 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.statemgr.enabled remoteWatcherId 129 success
+11-04 22:51:04.946 11449 15590 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.debug.boundary.enabled remoteWatcherId 129 success
+11-04 22:51:04.946 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=ndk no inherits, errno=2
+11-04 22:51:04.946 11449 11449 W C03F07/MUSL-LDSO: load lib.so failed, namespace=moduleNs_default, errno=2
+11-04 22:51:04.946 11449 11449 W C03F07/MUSL-LDSO: dlopen_impl load library header failed for lib.so
+11-04 22:51:04.946 11449 11449 W C03F04/io.github.xiaotaop.leocad/MMG: [NMM:1207]key:default/ First: failed Error loading shared library lib.so: No such file or directory.Second: load module default/ failed..load  failed
+11-04 22:51:04.946 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceCreated(::OH_NativeXComponent *, void *): xc: 0x5a3059fbb8 window: 0x5a311e5a20
+11-04 22:51:04.946 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a314f8940 eventType: 0 surface: 0x5a311e5a20
+11-04 22:51:04.946 11449 15590 I C02C03/PARAM_WATCHER: Add watcher keyPrefix persist.ace.performance.monitor.enabled remoteWatcherId 129 success
+11-04 22:51:04.946 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setParentOrReparent(QArkUi::QEmbeddedWindowNode::ParentDescriptor): XComponentNode parent: 0x5a305a7d98
+11-04 22:51:04.946 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::(anonymous namespace)::attachNativeRootNodeOrFail(QXComponentNode, ::ArkUI_NodeHandle): parentXc: 0x5a305a7d98 node: 0x5a47db0ae0
+11-04 22:51:04.947 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setPosition(const QPointF &): 0.000000,0.000000
+11-04 22:51:04.947 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setSizeParentFillPercentageNormalized(const QSizeF &): 1.000000,1.000000
+11-04 22:51:04.947 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setSize(const QSize &): 800,731
+11-04 22:51:04.948 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::moveWindowToGlobalOrGlobalDisplay(const QPoint &, std::optional<QOhosDisplayInfo::JsDisplayId>): 1142,606,0.000000
+11-04 22:51:04.948 11449 11449 W C01406/io.github.xiaotaop.leocad/OHOS::RS: RSNodeMap::UnregisterNode: node id 49173080571994 not found
+11-04 22:51:04.950 11449 11574 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: void QOhosView::updateWindowModality(Qt::WindowModality): Qt::ApplicationModal policy is unsupported by the platform. The window will behave like Qt::WindowModal.
+11-04 22:51:04.950 11449 11574 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: void QOhosWindowProxy::setWindowTitleButtonVisible(bool, bool, bool): isMaximizeVisible:true, isMinimizeVisible:true, isCloseVisible:true
+11-04 22:51:04.951 11449 11449 W C0394E/io.github.xiaotaop.leocad/AceWindow: [(100006:100006:scope)] width:0.000000, height:0.000000
+11-04 22:51:04.954 11449 14827 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:51:04.955 11449 11449 W C04201/io.github.xiaotaop.leocad/DMS: OnDisplayInfoChange: data is not changed.
+11-04 22:51:04.956 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): visible
+11-04 22:51:04.957 11449 14827 E C04207/io.github.xiaotaop.leocad/WMSFocus: UpdateFocus: check time fail
+11-04 22:51:04.957 11449 14827 E C04207/io.github.xiaotaop.leocad/WMSFocus: NotifyHighlightChange: check time fail
+11-04 22:51:04.970 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style 125829872 not contains image_pattern!
+11-04 22:51:04.970 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style 125829872 not contains app_theme_pattern!
+11-04 22:51:04.970 11449 11449 E C01E00/io.github.xiaotaop.leocad/ResourceManager: ref <private> id not found
+11-04 22:51:04.970 11449 11449 E C01E00/io.github.xiaotaop.leocad/ResourceManager: ref <private> id not found
+11-04 22:51:04.970 11449 11449 W C03937/io.github.xiaotaop.leocad/AceResource: [(100006:100006:scope)] Get pattern by name error, name=app_theme_pattern
+11-04 22:51:04.970 11449 11449 E C01E00/io.github.xiaotaop.leocad/ResourceManager: ref <private> id not found
+11-04 22:51:04.970 11449 11449 E C01E00/io.github.xiaotaop.leocad/ResourceManager: ref <private> id not found
+11-04 22:51:04.970 11449 11449 W C03937/io.github.xiaotaop.leocad/AceResource: [(100006:100006:scope)] Get pattern by name error, name=app_theme_pattern
+11-04 22:51:04.970 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style app_theme_pattern not contains app_theme_drag_distancethreshold!
+11-04 22:51:04.971 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style text_pattern not contains linear_split_child_min_size!
+11-04 22:51:04.971 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style text_pattern not contains menu_celia_ask_is_support!
+11-04 22:51:04.972 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style select_pattern not contains text_font_family_regular!
+11-04 22:51:04.972 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style select_pattern not contains menu_default_width!
+11-04 22:51:04.972 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style select_pattern not contains menu_min_width!
+11-04 22:51:04.972 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style select_pattern not contains menu_max_width!
+11-04 22:51:04.972 11449 11449 W C03926/io.github.xiaotaop.leocad/AceTheme: [(100006:100006:scope)] style select_pattern not contains menu_max_width_ratio!
+11-04 22:51:04.974 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceChanged(::OH_NativeXComponent *, void *): xc: 0x5a3059fbb8 window: 0x5a311e5a20
+11-04 22:51:04.974 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: virtual void QArkUi::QQtEmbeddedWindowNode::onSurfaceEvent(QArkUi::QXComponentCallbackReceiver::SurfaceEventType, ::OHNativeWindow *): node: 0x5a314f8940 eventType: 1 surface: 0x5a311e5a20
+11-04 22:51:05.892 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100006:active)] ArkUI request vsync, but no vsync received in 500ms
+11-04 22:51:06.294 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:51:06.297 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:51:06.298 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:51:06.299 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:51:06.506 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:51:06.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:09.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:11.418 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100006:100006:scope)] json str is empty.
+11-04 22:51:11.422 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100006:100006:scope)] json str is empty.
+11-04 22:51:11.589 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:51:11.597 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100006:100006:scope)] json str is empty.
+11-04 22:51:11.600 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100006:100006:scope)] json str is empty.
+11-04 22:51:12.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:14.233 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100006:100006:scope)] json str is empty.
+11-04 22:51:14.237 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100006:100006:scope)] json str is empty.
+11-04 22:51:14.407 11449 11449 E C02D66/io.github.xiaotaop.leocad/XPERF_SERVICE: [CheckClientValid]: Failed to get SystemAbility[XPERF_SA_ID].
+11-04 22:51:14.412 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100006:100006:scope)] json str is empty.
+11-04 22:51:14.415 11449 11449 E C03931/io.github.xiaotaop.leocad/AceXcomponent: [(100006:100006:scope)] json str is empty.
+11-04 22:51:14.417 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Tagging JS Window as closing (from: QOhosWindowProxy::JsScopeData destructor)
+11-04 22:51:14.419 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits]: 92.000000
+11-04 22:51:14.419 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::TouchEventFilterRegistryTraits] - 92.000000
+11-04 22:51:14.419 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits]: 92.000000
+11-04 22:51:14.419 11449 11449 W A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: auto QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::registerEventsConsumer(QArkUi::JsWindowId, QOhosConsumer<const QArkUi::(anonymous namespace)::EventConsumersMap<QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits>::MappedEventType &>)::(anonymous class)::operator()() const [Traits = QArkUi::(anonymous namespace)::MouseEventFilterRegistryTraits] - 92.000000
+11-04 22:51:14.421 11449 15874 E C04207/io.github.xiaotaop.leocad/WMSFocus: UpdateFocus: check time fail
+11-04 22:51:14.426 11449 14826 W C04203/io.github.xiaotaop.leocad/WMSSub: NotifyWindowAttachStateChange: listener is null
+11-04 22:51:14.426 11449 11449 E C0420A/io.github.xiaotaop.leocad/WMSLife: NotifyWMSWindowDestroyed: window destroyed listener is nullptr
+11-04 22:51:14.426 11449 11449 W C03903/io.github.xiaotaop.leocad/AceSubWindow: [(-2:100000:active)] Fail to get subwindow in dialogSubwindowMap_, instanceId is 100006
+11-04 22:51:14.426 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.layout.enabled count 1
+11-04 22:51:14.426 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.trace.inputevent.enabled count 1
+11-04 22:51:14.426 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ const.security.developermode.state count 1
+11-04 22:51:14.426 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.statemgr.enabled count 1
+11-04 22:51:14.426 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.debug.boundary.enabled count 1
+11-04 22:51:14.426 11449 11449 I C02C03/PARAM_WATCHER: DelWatcher keyPrefix_ persist.ace.performance.monitor.enabled count 1
+11-04 22:51:14.427 11449 11449 W C0391C/io.github.xiaotaop.leocad/AceFocus: [(100006:100006:scope)] viewStack empty
+11-04 22:51:14.427 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: WindowNativeNodeCreateInfo.onDisAppear() called from JS for xComponentId='__nnSubWindow_WIID_10'
+11-04 22:51:14.429 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:active)] Unregister from watch dog failed with instanceID 100006
+11-04 22:51:14.430 11449 11449 E C04213/io.github.xiaotaop.leocad/InputKeyFlow: HandleInputEvent: WindowInputChannel is nullptr InputTracking id:8441 windowId:92
+11-04 22:51:14.430 11449 11449 E C0420C/io.github.xiaotaop.leocad/WMSEvent: oh_window_event_filter.cpp: find mouse event action fail
+11-04 22:51:14.430 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void (anonymous namespace)::QOhosNativeNodeMouseInputHandler::handleMouseEvent(QArkUi::NativeNodeMouseEvent): got unsupported action in mouse event (0), ignoring
+11-04 22:51:14.430 11449 11449 E C0393D/io.github.xiaotaop.leocad/AceNativeNode: [<private>(<private>)] the event of 9 is not register
+11-04 22:51:14.431 11449 11449 E C03900/io.github.xiaotaop.leocad/Ace: [(100006:100006:scope)] pipeline context is null, OnInactive failed.
+11-04 22:51:14.431 11449 11449 E C03900/io.github.xiaotaop.leocad/Ace: [(100006:100006:scope)] pipeline context is null, OnInactive failed.
+11-04 22:51:14.431 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: void QArkUi::QEmbeddedWindowNode::setNodeVisibility(bool): hidden
+11-04 22:51:14.431 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering callbacks for xcomponent 0x5a3059fbb8
+11-04 22:51:14.431 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Unregistering gestures for NativeNode 0x5a47db4660
+11-04 22:51:14.431 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: static void QArkUi::(anonymous namespace)::XComponentCallbackDispatcher::handleSurfaceDestroyed(::OH_NativeXComponent *, void *): xc: 0x5a3059fbb8 window: 0x5a311e5a20
+11-04 22:51:14.431 11449 11449 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Error: xComponent 0x5a3059fbb8 does not have any assigned receiver
+11-04 22:51:14.796 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|105]Memory out of bounds on read... errCode:65208328
+11-04 22:51:14.796 11449 11449 E C02800/io.github.xiaotaop.leocad/StreamBuffer: [|101][READ_ERROR] size:4 count:1,errCode:65077249
+11-04 22:51:14.796 11449 11449 W C02800/io.github.xiaotaop.leocad/StreamBuffer: [|166]Read data failed
+11-04 22:51:14.913 11449 11449 W C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] ArkUI request vsync, but no vsync received in 500ms
+11-04 22:51:15.012 11449 11449 W C04202/io.github.xiaotaop.leocad/WMSMain: OnVsyncTimeOut: in
+11-04 22:51:15.823 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:17.413 11449 11449 E C03900/io.github.xiaotaop.leocad/Ace: [(-2:100000:singleton)] ArkUI request vsync,but no vsync received in 3 seconds
+11-04 22:51:18.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:21.823 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:24.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:27.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:30.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:33.823 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:36.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:39.823 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr
+11-04 22:51:42.824 11449 11523 E C02D06/io.github.xiaotaop.leocad/XCollie: Failed to open file: /sys/power/last_sr

@@ -1,0 +1,10 @@
+HAP bytes/SHA-256 matches build receipt: PASS
+Source HEAD matches device source: PASS
+Normal renderer startup 2 processes, programs=9, skipped=0: PASS
+Normal main return 0, 2 processes: PASS
+Saved/reopened MPD byte equality, 2 models/3 references/colors/transforms: PASS
+Legal empty model output 61 bytes, 0 type-1: PASS
+Restored config and unchanged original fixtures, 9 files: PASS
+Static checks 5+10+8 passed, 3 EXIT 0: PASS
+Report local links: PASS
+Scope: no full Tab/DPI/basic-mode/real permission-failure or recovery claim.
