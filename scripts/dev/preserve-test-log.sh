@@ -4,7 +4,8 @@
 #
 # Why this is a separate script: the retention rule is the part that was wrong
 # before, and a rule inside a 20-minute build loop cannot be regression-tested.
-# The runner calls this once per suite; scripts/library/test_failure_log_retention.py
+# The runner calls this once per suite — for every outcome, including a build
+# that never produced a test binary; scripts/library/test_failure_log_retention.py
 # calls it directly to prove that a green run does not erase the previous failure.
 #
 # Two destinations, deliberately different:
@@ -18,7 +19,18 @@
 # evidence with "13 passed" if both went to the same file.
 #
 # Usage:
-#   preserve-test-log.sh <suite> <exit-status> <result-file>
+#   preserve-test-log.sh <suite> <exit-status> <result-file> [<failed-stage> [<build-log>]]
+#
+# <failed-stage> is "test" for a suite that ran, or "qmake" / "make" / "binary"
+# for one that never got that far. It is a parameter rather than a third log
+# type because the runner is the only thing that knows how far the build got,
+# and the retention rule has to stay testable without running a build. The meta
+# file records it so a reader can tell a compile failure from a test failure by
+# opening one small text file.
+#
+# <build-log> is the qmake/make output. When it is given and exists it is
+# preserved under the same two destinations as the result file, so a failure
+# that never reached a test binary still leaves the compiler's own words behind.
 #
 # Once the arguments are accepted this script exits 0 even if the log root turns
 # out to be unwritable. Both reasons are about not losing more than the write
@@ -30,14 +42,16 @@
 # the code keeps it, and the test file now checks both halves.)
 set -euo pipefail
 
-if [ $# -ne 3 ]; then
-    echo "usage: preserve-test-log.sh <suite> <exit-status> <result-file>" >&2
+if [ $# -lt 3 ] || [ $# -gt 5 ]; then
+    echo "usage: preserve-test-log.sh <suite> <exit-status> <result-file> [<failed-stage> [<build-log>]]" >&2
     exit 2
 fi
 
 SUITE="$1"
 STATUS="$2"
 RESULT_FILE="$3"
+STAGE="${4:-test}"
+BUILD_LOG="${5:-}"
 
 # A status that is not a number is a wrong argument, not a failed suite: say so
 # instead of letting "[ -ne ]" print "integer expression expected" and then
@@ -75,6 +89,18 @@ elif ! cp "$RESULT_FILE" "$LOG_ROOT/build/last-run/d3-$SUITE-results.txt"; then
     warn "cannot write the last-run copy for $SUITE; no last-run log preserved"
 fi
 
+# The build log follows the result to the same place. It is copied only when the
+# caller supplied one and it exists, and an absent build log never removes a
+# previous one: a suite whose build worked still leaves the last build's output
+# readable rather than trading it for nothing. Any write failure is a warning
+# for the same reason as above — this must not decide a suite's verdict, and it
+# must not stop the failure branch below from running.
+if [ -n "$BUILD_LOG" ] && [ -f "$BUILD_LOG" ]; then
+    if ! cp "$BUILD_LOG" "$LOG_ROOT/build/last-run/d3-$SUITE-build.log"; then
+        warn "cannot write the last-run build log for $SUITE; the build output was not preserved"
+    fi
+fi
+
 # A suite failed if it told us so, whatever the exit status claimed. QtTest exits
 # non-zero on failure, but the FAIL! line is the thing that names the test, and a
 # FAIL! printed just before a crash can leave the process exit status at 0. Both
@@ -89,6 +115,15 @@ if [ "$STATUS" -ne 0 ] || grep -q '^FAIL!' "$RESULT_FILE"; then
         warn "cannot write the failure log for $SUITE"
         exit 0
     fi
+    # A build failure has no test output at all; without this copy the failure
+    # directory would hold a result file that says "the build failed" and
+    # nothing that says why.
+    if [ -n "$BUILD_LOG" ] && [ -f "$BUILD_LOG" ]; then
+        if ! cp "$BUILD_LOG" "$FAIL_DIR/d3-$SUITE-build.log"; then
+            warn "cannot write the failure build log for $SUITE; the build output was not preserved"
+            exit 0
+        fi
+    fi
     # Build the body first, then write it with a single simple command. This
     # shape is not a style choice: "if ! { ... } > file" does NOT return the
     # redirection failure — bash prints its own error, the "then" branch is
@@ -98,9 +133,17 @@ if [ "$STATUS" -ne 0 ] || grep -q '^FAIL!' "$RESULT_FILE"; then
     META="$(
         printf 'suite=%s\n' "$SUITE"
         printf 'exit_status=%s\n' "$STATUS"
+        printf 'stage=%s\n' "$STAGE"
         printf 'captured=%s\n' "$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
         printf 'failed_tests:\n'
-        grep -E '^FAIL!' "$RESULT_FILE" || printf '  (exit status only, no FAIL! line: crash or platform error)\n'
+        # A build failure has no FAIL! lines because no test ever ran; saying
+        # "crash or platform error" there would mislabel the one case this
+        # stage field exists to distinguish.
+        if [ "$STAGE" = test ]; then
+            grep -E '^FAIL!' "$RESULT_FILE" || printf '  (exit status only, no FAIL! line: crash or platform error)\n'
+        else
+            printf '  (none: build failed during %s, so no test ran)\n' "$STAGE"
+        fi
     )"
     if ! printf '%s\n' "$META" > "$FAIL_DIR/d3-$SUITE-meta.txt"; then
         warn "cannot write $FAIL_DIR/d3-$SUITE-meta.txt"

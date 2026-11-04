@@ -12,6 +12,7 @@
 #include <QAction>
 #include <QMenu>
 #include <QTabWidget>
+#include <QToolBar>
 #include <QtTest>
 
 #include "lc_application.h"
@@ -37,6 +38,21 @@ private slots:
 	// above cannot see this, because the removed actions are invisible as
 	// intended — the container is what is wrong.
 	void noVisibleEmptySubmenus();
+
+	// The same failure for toolbars, reported on the Z6 device review. Every
+	// command the Time toolbar holds is out of scope, so the scope empties it —
+	// and Qt keeps drawing the empty toolbar as a blank strip reserved in the
+	// layout. The menu tests above cannot see this: no command is visible that
+	// should not be, the toolbar itself is the leftover.
+	void noVisibleEmptyToolbars();
+
+	// The toggle for that toolbar has to go with it, otherwise the View menu
+	// offers a checkbox that switches an empty strip on and off.
+	void emptiedToolbarToggleIsNotOffered();
+
+	// The toolbars that still have commands must survive: hiding every toolbar
+	// with no visible action would be an easy overreach.
+	void toolbarsWithCommandsStayVisible();
 
 private:
 	// True when some visible QAction carrying this command's label exists. The
@@ -194,6 +210,109 @@ void MenuScopeTest::modelTabBarIsNotMovable()
 
 	// Dragging a tab would reorder the MPD submodels.
 	QVERIFY(!Tabs->isMovable());
+}
+
+void MenuScopeTest::noVisibleEmptyToolbars()
+{
+	// Measured via isVisible(), not isHidden(): the window is never shown under
+	// QT_QPA_PLATFORM=offscreen, so isVisible() is false for every child widget
+	// and would make this test vacuous. isHidden() reflects the explicit hide()
+	// the scope performs, which is the thing under test.
+	QStringList Blank;
+
+	for (QToolBar* ToolBar : mWindow->findChildren<QToolBar*>())
+	{
+		if (ToolBar->parentWidget() != mWindow)
+			continue;
+
+		bool HasVisibleAction = false;
+
+		for (QAction* Action : ToolBar->actions())
+		{
+			if (Action->isVisible() && !Action->isSeparator())
+			{
+				HasVisibleAction = true;
+				break;
+			}
+		}
+
+		if (!HasVisibleAction && !ToolBar->isHidden())
+			Blank.append(ToolBar->windowTitle().isEmpty() ? QStringLiteral("<untitled>") : ToolBar->windowTitle());
+	}
+
+	QVERIFY2(Blank.isEmpty(),
+		qPrintable(QStringLiteral("toolbars left visible with no command in them: %1").arg(Blank.join(", "))));
+}
+
+void MenuScopeTest::emptiedToolbarToggleIsNotOffered()
+{
+	// The Time toolbar is the one the scope empties: all five of its actions
+	// (LC_VIEW_TIME_FIRST/PREVIOUS/NEXT/LAST/ADD_KEYS) are removed. Asserting on
+	// the concrete toolbar rather than on "whatever ended up empty" keeps this
+	// test meaningful if the removal list changes.
+	QToolBar* Time = mWindow->findChild<QToolBar*>("TimeToolbar");
+	QVERIFY2(Time, "TimeToolbar not found");
+
+	QVERIFY2(Time->isHidden(), "the emptied Time toolbar is still visible as a blank strip");
+
+	// Hidden, not deleted: the dock widgets and UpdateDockWidgetActions()
+	// dereference these actions, so the object has to stay alive.
+	//
+	// Found through the View menu rather than by label across the whole window:
+	// the toolbar's own windowTitle() is "Time" too, and the label is what the
+	// user reads in the menu, which is the thing under test.
+	const QString Label = QString::fromLatin1(gCommands[LC_VIEW_TOOLBAR_TIME].MenuName);
+	QAction* Toggle = nullptr;
+	QMenu* ToolBarsMenu = nullptr;
+
+	for (QAction* BarAction : mWindow->menuBar()->actions())
+	{
+		QMenu* Menu = BarAction->menu();
+		if (!Menu)
+			continue;
+		for (QAction* Entry : Menu->actions())
+			if (Entry->menu() && Entry->text().contains(QStringLiteral("oolbar")))
+				ToolBarsMenu = Entry->menu();
+	}
+
+	QVERIFY2(ToolBarsMenu, "the View > Toolbars submenu is gone");
+	for (QAction* Entry : ToolBarsMenu->actions())
+		if (Entry->text() == Label)
+			Toggle = Entry;
+
+	QVERIFY2(Toggle, qPrintable(QStringLiteral("toggle action %1 disappeared; it must stay allocated").arg(Label)));
+	QVERIFY2(!Toggle->isVisible(), "the View menu still offers a toggle for an empty toolbar");
+	QVERIFY2(!Toggle->isEnabled(), "the toggle for an empty toolbar is still clickable");
+}
+
+void MenuScopeTest::toolbarsWithCommandsStayVisible()
+{
+	// The Standard toolbar is the control: it holds file/edit actions, none of
+	// which the scope removes, so it must still be a live toolbar after the
+	// sweep. It is also the reference for "should be visible" — the Tools
+	// toolbar is hidden by CreateToolBars() itself (lc_mainwindow.cpp:1024) and
+	// so cannot serve as one.
+	QToolBar* Standard = mWindow->findChild<QToolBar*>("StandardToolbar");
+	QVERIFY2(Standard, "StandardToolbar not found");
+	QVERIFY2(!Standard->isHidden(), "a toolbar with commands was hidden by the empty-toolbar sweep");
+
+	int Visible = 0;
+	for (QAction* Action : Standard->actions())
+		if (Action->isVisible() && !Action->isSeparator())
+			Visible++;
+
+	QVERIFY2(Visible > 0, "the control toolbar reports no visible action; the test would be vacuous");
+
+	// And the sweep must not have taken the control's toggle away.
+	const QString Label = QString::fromLatin1(gCommands[LC_VIEW_TOOLBAR_STANDARD].MenuName);
+	QAction* Toggle = nullptr;
+
+	for (QAction* Action : mWindow->findChildren<QAction*>())
+		if (Action->text() == Label && !Action->isSeparator())
+			Toggle = Action;
+
+	QVERIFY2(Toggle, "the Standard toolbar toggle disappeared");
+	QVERIFY2(Toggle->isVisible(), "the sweep hid a toolbar toggle that still has a toolbar behind it");
 }
 
 QList<QMenu*> MenuScopeTest::VisibleMenuTree() const
