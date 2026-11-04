@@ -23,7 +23,10 @@ std::pair<lcPartThumbnailId, QPixmap> lcThumbnailManager::RequestThumbnail(Piece
 {
 	for (auto &[ThumbnailId, Thumbnail] : mThumbnails)
 		if (Thumbnail.Info == Info && Thumbnail.ColorIndex == ColorIndex && Thumbnail.Size == Size && Thumbnail.DeviceScale == DeviceScale)
+		{
+			Thumbnail.ReferenceCount++;
 			return { ThumbnailId, Thumbnail.Pixmap };
+		}
 
 	lcPartThumbnailId ThumbnailId = static_cast<lcPartThumbnailId>(mNextThumbnailId++);
 	lcPartThumbnail& Thumbnail = mThumbnails[ThumbnailId];
@@ -71,6 +74,18 @@ void lcThumbnailManager::PartLoaded(PieceInfo* Info)
 
 void lcThumbnailManager::DrawThumbnail(lcPartThumbnailId ThumbnailId, lcPartThumbnail& Thumbnail)
 {
+	// A queued completion can belong to an earlier load of the same part.
+	// Keep our pending reference and let the current load's notification retry;
+	// constructing a preview here would synchronously wait on the GUI thread.
+	if (!Thumbnail.Pixmap.isNull())
+		return;
+	if (Thumbnail.Info->mState != lcPieceInfoState::Loaded)
+	{
+		qInfo() << "LEOCAD_THUMBNAIL_DEFERRED" << Thumbnail.Info->mFileName
+			<< "state" << int(Thumbnail.Info->mState) << "refs" << Thumbnail.Info->GetRefCount();
+		return;
+	}
+
 	const int Width = Thumbnail.Size * 2 * Thumbnail.DeviceScale;
 	const int Height = Thumbnail.Size * 2 * Thumbnail.DeviceScale;
 
@@ -152,6 +167,11 @@ void lcThumbnailManager::DrawThumbnail(lcPartThumbnailId ThumbnailId, lcPartThum
 	float ScaledSize = Thumbnail.Size * Thumbnail.DeviceScale;
 
 	Thumbnail.Pixmap = QPixmap::fromImage(Image).scaled(ScaledSize, ScaledSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+
+	// Null pixmaps are still pending (including readback failures). Their load
+	// reference is released on cancellation/destruction or a successful retry.
+	if (Thumbnail.Pixmap.isNull())
+		return;
 
 	mLibrary->ReleasePieceInfo(Info);
 

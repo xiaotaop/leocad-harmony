@@ -2,6 +2,8 @@
 #include <QtTest>
 #include "lc_application.h"
 #include "lc_context.h"
+#include "lc_thumbnailmanager.h"
+#include <QScopeGuard>
 #include "lc_library.h"
 #include "lc_mainwindow.h"
 #include "lc_model.h"
@@ -420,6 +422,49 @@ private slots:
         }
         QVERIFY(!View->IsTracking()); QVERIFY(!Model->IsModified());
     }
+    void thumbnailSharedRequestLifetime()
+    {
+        auto* Manager=lcGetPiecesLibrary()->GetThumbnailManager();
+        PieceInfo* Info=Model->GetPieces()[0]->mPieceInfo;
+        std::vector<lcPartThumbnailId> Owned;
+        auto Cleanup=qScopeGuard([&]() {for(auto Id:Owned) Manager->ReleaseThumbnail(Id);});
+        auto First=Manager->RequestThumbnail(Info,lcGetColorIndex(4),73,1);
+        Owned.push_back(First.first); QVERIFY(!First.second.isNull());
+        auto Second=Manager->RequestThumbnail(Info,lcGetColorIndex(4),73,1);
+        Owned.push_back(Second.first); QCOMPARE(Second.first,First.first);
+        Manager->ReleaseThumbnail(First.first); Owned.erase(Owned.begin());
+        auto Third=Manager->RequestThumbnail(Info,lcGetColorIndex(4),73,1);
+        Owned.push_back(Third.first);
+        QCOMPARE(Third.first,Second.first); QVERIFY(!Third.second.isNull());
+    }
+    void thumbnailDefersStaleCompletion()
+    {
+        auto* Library=lcGetPiecesLibrary(); auto* Manager=Library->GetThumbnailManager();
+        PieceInfo* Info=Model->GetPieces()[0]->mPieceInfo;
+        const int Before=Info->GetRefCount();
+        // Model owns a fully loaded mesh. Delay publication of completion on
+        // the GUI loop to reproduce a stale notification during a new load.
+        Info->mState=lcPieceInfoState::Loading;
+        auto Restore=qScopeGuard([&]() {Info->mState=lcPieceInfoState::Loaded;});
+        auto Pending=Manager->RequestThumbnail(Info,lcGetColorIndex(1),79,1);
+        auto Release=qScopeGuard([&]() {Manager->ReleaseThumbnail(Pending.first);});
+        QVERIFY(Pending.second.isNull()); QCOMPARE(Info->GetRefCount(),Before+1);
+        QSignalSpy Ready(Manager,&lcThumbnailManager::ThumbnailReady);
+        QTimer Complete; Complete.setSingleShot(true);
+        connect(&Complete,&QTimer::timeout,this,[&]() {
+            Info->mState=lcPieceInfoState::Loaded;
+            Library->PartLoaded(Info);
+        });
+        Complete.start(0);
+        qInfo()<<"D9_STALE_CALLBACK before dispatch";
+        QVERIFY(QMetaObject::invokeMethod(Manager,"PartLoaded",Qt::DirectConnection,Q_ARG(PieceInfo*,Info)));
+        QCOMPARE(Ready.count(),0); QCOMPARE(Info->GetRefCount(),Before+1);
+        QTRY_COMPARE(Ready.count(),1);
+        QCOMPARE(qvariant_cast<lcPartThumbnailId>(Ready.at(0).at(0)),Pending.first);
+        QVERIFY(!qvariant_cast<QPixmap>(Ready.at(0).at(1)).isNull());
+        QCOMPARE(Info->mState,lcPieceInfoState::Loaded);
+        qInfo()<<"D9_STALE_CALLBACK completed";
+    }
     void alphaSwitchSequence_data()
     {
         QTest::addColumn<bool>("PartsVisible");
@@ -457,6 +502,10 @@ private slots:
                 QCOMPARE(Model->GetFocusObject(),static_cast<lcObject*>(Piece));
                 const lcVector3 Before=Piece->mModelWorld.GetTranslation();
                 const quint32 Colour=Piece->GetColorCode();
+                // Picking can process native activation events. Establish the
+                // Qt shortcut context immediately before injected key input.
+                QApplication::setActiveWindow(Window.get()); Widget->setFocus();
+                QVERIFY(Widget->hasFocus());
                 QTest::keyClick(Widget,Qt::Key_Right);
                 const lcVector3 Moved=Model->GetPieces()[0]->mModelWorld.GetTranslation();
                 QVERIFY(Moved!=Before); QVERIFY(lcGetActiveProject()->IsModified());

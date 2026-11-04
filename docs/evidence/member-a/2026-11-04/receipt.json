@@ -1,0 +1,125 @@
+{
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "name": "app-build.log",
+      "bytes": 321,
+      "sha256": "e4de49e1b4035a6c15d5f58b5c00098bc57e7e63b94abcc6628b5e235e2a2824"
+    },
+    {
+      "name": "basic-dpr2-renderer.log",
+      "bytes": 1017,
+      "sha256": "1df81fc5923f29de28c719d8c11c61ab60d523f25c07cc2ca432627f6bc9d5e1"
+    },
+    {
+      "name": "basic-dpr2.txt",
+      "bytes": 330228,
+      "sha256": "d69579eea36d0caf89834676ebf37dedbc77c6d57dda5c43485bfa26529abaa6"
+    },
+    {
+      "name": "basic-dpr2.xml",
+      "bytes": 316267,
+      "sha256": "8cf5926155d7c85266c654556d0499d033db68bf6d53a62a514ead04a9049b0f"
+    },
+    {
+      "name": "build-record.json",
+      "bytes": 1868,
+      "sha256": "7b09ca491dc4f7e5789656ab32e57a1035ff6796fa829c3f4ad5c0b1a7aaa018"
+    },
+    {
+      "name": "fractional-dpr1_5-renderer.log",
+      "bytes": 1018,
+      "sha256": "d35532d4e2ccc1d676a4cbd4045575b7cba9d81bf420a78f894bd0b0e6205f59"
+    },
+    {
+      "name": "fractional-dpr1_5.txt",
+      "bytes": 415958,
+      "sha256": "2bcb0a565ff9af06f87326136b0bd2aeb01008c08dc524ad2608a1834a301679"
+    },
+    {
+      "name": "fractional-dpr1_5.xml",
+      "bytes": 401534,
+      "sha256": "65108f4a3f93e32e38d8f5b7d9c42bb00f28e5364472bc6e74a348a8838dd2c2"
+    },
+    {
+      "name": "input-build.log",
+      "bytes": 7312,
+      "sha256": "9a896f0c6d2e743679c74ca4260240d72f0eedd66d4ea1d50a81bb8bec93fa82"
+    },
+    {
+      "name": "negative-build.log",
+      "bytes": 7312,
+      "sha256": "9a896f0c6d2e743679c74ca4260240d72f0eedd66d4ea1d50a81bb8bec93fa82"
+    },
+    {
+      "name": "negative-thumbnailDefersStaleCompletion-renderer.log",
+      "bytes": 1018,
+      "sha256": "0d7e174f506b867e85705994eba59a5a439a18dbfe0768f4c42e88c4d6ac682b"
+    },
+    {
+      "name": "negative-thumbnailDefersStaleCompletion.txt",
+      "bytes": 1331,
+      "sha256": "047f629c15d19ee0a97da3e5bfac5d95d22b745bff36e76d44928c43070d77ba"
+    },
+    {
+      "name": "negative-thumbnailSharedRequestLifetime-renderer.log",
+      "bytes": 1018,
+      "sha256": "0950c4e5e03b4f3b0f2aa1fd350a410a830ac7d4cd588b3c3a0bffa17f20c0ea"
+    },
+    {
+      "name": "negative-thumbnailSharedRequestLifetime.txt",
+      "bytes": 9298,
+      "sha256": "e17be17d9d7ff57e715e8e4cddd0697b3066d06f1798c41303da30cf4cfefa79"
+    },
+    {
+      "name": "negative.json",
+      "bytes": 115,
+      "sha256": "61f541c0f8e22d15aec57b75bdc40d12949fb80f1ea5a2cffd4f78d9b03cdb9f"
+    },
+    {
+      "name": "normal-dpr1-renderer.log",
+      "bytes": 1018,
+      "sha256": "305e79cc8b53b8177a7bc8139b10e94cc02700ed8677a09925283448a41fcf8d"
+    },
+    {
+      "name": "normal-dpr1.txt",
+      "bytes": 416077,
+      "sha256": "a4bd04b9ff515263e7e6ba9f4e94eb33cdb229cfe9b57314950b5923cdaf9eca"
+    },
+    {
+      "name": "normal-dpr1.xml",
+      "bytes": 401682,
+      "sha256": "03dddd7ecda9157a70dbcfd7b791afaed1328d44490785c38afb963dc605e514"
+    },
+    {
+      "name": "normal-dpr2-renderer.log",
+      "bytes": 1018,
+      "sha256": "9433bda522810bca05df48cc080569403f65834368d8bde54afe957e60c58886"
+    },
+    {
+      "name": "normal-dpr2.txt",
+      "bytes": 246456,
+      "sha256": "194f56de06036f4bdd812a66944f33480af3e606161cac9ff2c8cbce4fc6cd84"
+    },
+    {
+      "name": "normal-dpr2.xml",
+      "bytes": 232983,
+      "sha256": "775a93a0047fef3dcd174210ebd85a7a24b66d6906e55a5df341b2fe0fb41ae0"
+    },
+    {
+      "name": "review-pr52-menu.txt",
+      "bytes": 1148,
+      "sha256": "c94c8ad509e6ec142e3e25b54abb917b55f4151e30a4a283646cefee2dc60ab7"
+    },
+    {
+      "name": "review-pr52-retention.txt",
+      "bytes": 4997,
+      "sha256": "0f55e708ecb4788ee7536ca1b1ab6025e923acb4846c249e152369586ef7829f"
+    },
+    {
+      "name": "startup-tests.txt",
+      "bytes": 292,
+      "sha256": "ae4cc977afd2467ad8b25ea8b9b3cc41f18fc9cfbe603badc77550bc52560e98"
+    }
+  ]
+}
