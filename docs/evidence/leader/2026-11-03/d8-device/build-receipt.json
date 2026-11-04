@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-03",
+  "source": "d9ff2a4f7b43f23773e5c4fdad91d00ac8674efe",
+  "bundle": "io.github.xiaotaop.leocad",
+  "qt": "6.12.0",
+  "sdk": "26.0.0.105",
+  "cli": "26.0.0.851",
+  "device_param_model": "HAD-W32",
+  "device_param_os": "OpenHarmony-6.1.0.115",
+  "fault_report_build": "HAD-W24 6.1.0.117(SP68C00E100R13P3)",
+  "api": 23,
+  "screen": [
+    3120,
+    2080
+  ],
+  "safe_render": false,
+  "model_test_hap": false,
+  "hap": {
+    "name": "leocad-d8-alpha-signed.hap",
+    "bytes": 80134241,
+    "sha256": "d457e954696f56533a731034b1dd5c7fc6f488ae699a713e74ebe0ff423804fa"
+  },
+  "native_build_id": "34d8ed0e87c6fc4d692c6742abfcfed9a53c8431",
+  "normal_exits": [
+    41365,
+    46664,
+    49150,
+    51713,
+    52739,
+    54836
+  ],
+  "hung_pid": 44779,
+  "physical_confirmation": "Leader confirmed physical Right/Ctrl+Z/Ctrl+Y normal; remaining inputs injected.",
+  "network": "WiFi disabled for file loop, enabled again; leader confirmed network authentication restored.",
+  "restoration": [
+    {
+      "name": "LeoCAD.conf",
+      "sha256": "5575996fecc88dc99bb3513e4d8d5a68da11521b04685dfc3c6c65fa66a13631",
+      "bytes": 5420,
+      "match": true
+    },
+    {
+      "name": "render-baseline.ldr",
+      "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "bytes": 267,
+      "match": true
+    },
+    {
+      "name": "curated-device.mpd",
+      "sha256": "0d12679de5b1b19b97243aae3ee5dc50fe6ce43248eefe0aa98a79fe7e1b48fa",
+      "bytes": 381,
+      "match": true
+    },
+    {
+      "name": "render-baseline.ldr",
+      "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "bytes": 267,
+      "match": true
+    },
+    {
+      "name": "curated-device.mpd",
+      "sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742",
+      "bytes": 250,
+      "match": true
+    }
+  ]
+}

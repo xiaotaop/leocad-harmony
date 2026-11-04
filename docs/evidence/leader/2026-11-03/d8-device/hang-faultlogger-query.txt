@@ -1,0 +1,11 @@
+
+-------------------------------[ability]-------------------------------
+
+
+----------------------------------HiviewService----------------------------------
+Fault log list:
+******
+appfreeze-io.github.xiaotaop.leocad-20020151-20261103211237
+appfreeze-io.github.xiaotaop.leocad-20020151-20261103211349
+appfreeze-io.github.xiaotaop.leocad-20020151-20261103211401
+******

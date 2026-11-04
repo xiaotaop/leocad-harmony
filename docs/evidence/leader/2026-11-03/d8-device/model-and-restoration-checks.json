@@ -1,0 +1,167 @@
+{
+  "core": [
+    {
+      "model": "single",
+      "color": 3,
+      "position": [
+        -150.0,
+        -24.0,
+        0.0
+      ],
+      "matrix": [
+        0.866025,
+        -0.5,
+        0.0,
+        0.5,
+        0.866025,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "part": "3003.dat"
+    }
+  ],
+  "mpd": [
+    {
+      "model": "main.ldr",
+      "color": 4,
+      "position": [
+        -45.0,
+        0.0,
+        -10.0
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "part": "10172.dat"
+    },
+    {
+      "model": "main.ldr",
+      "color": 1,
+      "position": [
+        45.0,
+        0.0,
+        0.0
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "part": "child.ldr"
+    },
+    {
+      "model": "child.ldr",
+      "color": 14,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "part": "30293.dat"
+    }
+  ],
+  "offline": [
+    {
+      "model": "single",
+      "color": 4,
+      "position": [
+        -30.0,
+        0.0,
+        -10.0
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "part": "3003.dat"
+    },
+    {
+      "model": "single",
+      "color": 1,
+      "position": [
+        30.0,
+        0.0,
+        0.0
+      ],
+      "matrix": [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "part": "3003.dat"
+    }
+  ],
+  "unchanged_or_restored": [
+    {
+      "name": "LeoCAD.conf",
+      "sha256": "5575996fecc88dc99bb3513e4d8d5a68da11521b04685dfc3c6c65fa66a13631",
+      "bytes": 5420,
+      "match": true
+    },
+    {
+      "name": "render-baseline.ldr",
+      "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "bytes": 267,
+      "match": true
+    },
+    {
+      "name": "curated-device.mpd",
+      "sha256": "0d12679de5b1b19b97243aae3ee5dc50fe6ce43248eefe0aa98a79fe7e1b48fa",
+      "bytes": 381,
+      "match": true
+    },
+    {
+      "name": "render-baseline.ldr",
+      "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "bytes": 267,
+      "match": true
+    },
+    {
+      "name": "curated-device.mpd",
+      "sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742",
+      "bytes": 250,
+      "match": true
+    }
+  ],
+  "passed": true
+}
