@@ -70,6 +70,9 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: "6.12.*"
+          archives: qtbase qttools qtsvg qtdeclarative icu
+          # Avoid fallback hits on the render-only qtbase/icu cache.
+          cache-key-prefix: leocad-desktop-qt612-tools-v1
           cache: true
       - name: Configure
         run: cmake -S . -B build/desktop -G Ninja -DCMAKE_BUILD_TYPE=Release -DLEOCAD_TEST_RESOURCE_PATHS=ON

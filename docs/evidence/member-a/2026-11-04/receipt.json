@@ -27,6 +27,11 @@
       "sha256": "7b09ca491dc4f7e5789656ab32e57a1035ff6796fa829c3f4ad5c0b1a7aaa018"
     },
     {
+      "name": "ci-desktop-first-failure.log",
+      "bytes": 6934,
+      "sha256": "62f8d6cdc7471508b4adea885ddee6be82e6abe8e7f24c1d48c224f69b443a63"
+    },
+    {
       "name": "fractional-dpr1_5-renderer.log",
       "bytes": 1018,
       "sha256": "d35532d4e2ccc1d676a4cbd4045575b7cba9d81bf420a78f894bd0b0e6205f59"

@@ -26,3 +26,5 @@ Qt6.12 Release主程序构建和官方启动CTest 1/1通过。源码/二进制SH
 组长#51头未变，继续沿用已提交的资料批准和Draft边界。C #52已独立审核通过：13项Git blob校验，菜单/工具栏11项、日志留存24项和Bash语法检查通过，远程9项CI成功；不冒认真机工具栏布局。
 
 新包九步交接见 [D9设备请求](MEMBER_A_D9_DEVICE_HANDOFF.md)。A未生成新HAP或执行设备操作，#45保持开放；#15授权失败/恢复体验、物理鼠标/滚轮等继续待测。回退本PR恢复原缩略图行为，D6–D8其他输入修复保留。需要B/C重点复核异步通知与引用计数，再由组长合并和构建。
+
+CI首次桌面配置失败发生在源码编译前：install-qt-action的默认缓存前缀退回命中图形测试的qtbase/icu缓存，缺Qt6LinguistTools。现为桌面显式声明qtbase/qttools/qtsvg/qtdeclarative/icu及独立缓存前缀，避免再次复用精简缓存；原失败输出随证据归档。
