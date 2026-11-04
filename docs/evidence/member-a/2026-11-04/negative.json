@@ -1,0 +1,4 @@
+{
+  "thumbnailSharedRequestLifetime": 1,
+  "thumbnailDefersStaleCompletion": "timeout after 12s (process killed)"
+}

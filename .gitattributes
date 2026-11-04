@@ -40,3 +40,6 @@
 
 # Preserve D8 stability evidence bytes.
 /docs/evidence/member-a/2026-11-03/* -text whitespace=cr-at-eol,-blank-at-eol
+
+# Preserve D9 thumbnail regression evidence.
+/docs/evidence/member-a/2026-11-04/* -text whitespace=cr-at-eol,-blank-at-eol

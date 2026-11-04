@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-04",
+  "baseline": "d9ff2a4f7b43f23773e5c4fdad91d00ac8674efe",
+  "host": "macOS-27.0.1-arm64-arm-64bit",
+  "qt": "6.12.0",
+  "source_sha256": {
+    "common/lc_thumbnailmanager.cpp": "acc5415c136d8442b038337ff1abac659ad722d16d1fbb5a1dfdaa526b7cd937",
+    "tests/input/tst_view_input.cpp": "66936495c40b45f341eeb1247f44d9dd8f80635acbc028171bc28ea839f4b217",
+    "member-a-input-tests.pro": "49ffba98205572fcd3d5e8ae419eb2272a939b424f2b5fac789adb5fd715aa67"
+  },
+  "binary_sha256": "9bd344191af8c7b6c3bc5a4778fd8d99e12d874c971c2594605501fb075a0057",
+  "build": "make -C /private/tmp/leocad-d6-input-build -j6 (qmake Release, ASCII source SHA256 matched)",
+  "runs": [
+    {
+      "name": "normal-dpr2",
+      "dpr": 2,
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0,
+      "exit": 0
+    },
+    {
+      "name": "basic-dpr2",
+      "dpr": 2,
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0,
+      "exit": 0
+    },
+    {
+      "name": "normal-dpr1",
+      "dpr": 1,
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0,
+      "exit": 0
+    },
+    {
+      "name": "fractional-dpr1_5",
+      "dpr": 1.5,
+      "passed": 42,
+      "failed": 0,
+      "skipped": 0,
+      "exit": 0
+    }
+  ],
+  "process_timeout_seconds": 120,
+  "negative": {
+    "thumbnailSharedRequestLifetime": 1,
+    "thumbnailDefersStaleCompletion": "timeout after 12s (process killed)"
+  },
+  "negative_note": "Baseline production source with the two new controlled callback/reference tests; stale callback process killed after 12 seconds. No natural OHOS repro claimed.",
+  "app_build": "CMake Release target leocad built; startup CTest1/1 passed",
+  "review52": {
+    "head": "a0fe499c6e4702829e9e7d69145c1a84439d350a",
+    "menu_passed": 11,
+    "retention_passed": 24
+  },
+  "device": "not executed; #45 remains open P1 until new HAP device validation"
+}

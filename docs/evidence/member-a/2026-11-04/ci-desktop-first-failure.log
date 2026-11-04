@@ -1,0 +1,58 @@
+Qt 6.12 desktop compile regression	Configure	﻿2026-11-04T06:14:40.6859297Z ##[group]Run cmake -S . -B build/desktop -G Ninja -DCMAKE_BUILD_TYPE=Release -DLEOCAD_TEST_RESOURCE_PATHS=ON
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6859836Z [36;1mcmake -S . -B build/desktop -G Ninja -DCMAKE_BUILD_TYPE=Release -DLEOCAD_TEST_RESOURCE_PATHS=ON[0m
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6871732Z shell: /usr/bin/bash -e {0}
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6871936Z env:
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6872156Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.8/x64
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6872612Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib/pkgconfig:/home/runner/work/leocad-harmony/Qt/6.12.0/gcc_64/lib/pkgconfig
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6873060Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6873334Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6873613Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6874019Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib:/home/runner/work/leocad-harmony/Qt/6.12.0/gcc_64/lib
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6874425Z   QT_ROOT_DIR: /home/runner/work/leocad-harmony/Qt/6.12.0/gcc_64
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6874795Z   QT_PLUGIN_PATH: /home/runner/work/leocad-harmony/Qt/6.12.0/gcc_64/plugins
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6875132Z   QML2_IMPORT_PATH: /home/runner/work/leocad-harmony/Qt/6.12.0/gcc_64/qml
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:40.6875399Z ##[endgroup]
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:44.2574758Z -- The CXX compiler identification is GNU 15.2.0
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:44.3028651Z -- Detecting CXX compiler ABI info
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:44.4868614Z -- Detecting CXX compiler ABI info - done
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:44.5345071Z -- Check for working CXX compiler: /usr/bin/c++ - skipped
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:44.5352744Z -- Detecting CXX compile features
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:44.5365175Z -- Detecting CXX compile features - done
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:44.6132795Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.0912247Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.0929471Z -- Found Threads: TRUE
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.0945250Z -- Performing Test HAVE_STDATOMIC
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.5648490Z -- Performing Test HAVE_STDATOMIC - Success
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.5654759Z -- Found WrapAtomic: TRUE
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.5906935Z -- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.5914971Z -- Found WrapOpenGL: TRUE
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.5956413Z -- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.6855182Z -- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7191360Z -- Could NOT find Cups (missing: CUPS_LIBRARIES CUPS_INCLUDE_DIR) 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7218851Z -- Could NOT find Qt6LinguistTools (missing: Qt6LinguistTools_DIR)
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7219487Z CMake Error at CMakeLists.txt:22 (find_package):
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7219775Z   Found package configuration file:
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7220166Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7220429Z     /home/runner/work/leocad-harmony/Qt/6.12.0/gcc_64/lib/cmake/Qt6/Qt6Config.cmake
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7220706Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7220908Z   but it set Qt6_FOUND to FALSE so package "Qt6" is considered to be NOT
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7221269Z   FOUND.  Reason given by package:
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7221463Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7222115Z   Failed to find required Qt component "LinguistTools".
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7222387Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7222477Z   Expected Config file at
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7222843Z   "/home/runner/work/leocad-harmony/Qt/6.12.0/gcc_64/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsConfig.cmake"
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7223208Z   does NOT exist
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7223306Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7223310Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7223314Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7223485Z   Configuring with --debug-find-pkg=Qt6LinguistTools might reveal details why
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7223770Z   the package was not found.
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7223884Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7224034Z   Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7224390Z   of the path variables that find_package uses to try and find the package.
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7224587Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7224882Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7224886Z 
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7229451Z -- Configuring incomplete, errors occurred!
+Qt 6.12 desktop compile regression	Configure	2026-11-04T06:14:45.7343614Z ##[error]Process completed with exit code 1.
