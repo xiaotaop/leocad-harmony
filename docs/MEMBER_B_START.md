@@ -5,8 +5,8 @@
 ## 当前基线
 
 - 本地目录：`F:\codes\LiteX_trans\leocad-harmony-b`
-- 当前 D8 交付分支：`feature/b-model-d8`；D7 使用 `feature/b-model-d7`，此前使用 `feature/b-model`。
-- 团队仓库：`https://github.com/xiaotaop/leocad-harmony.git`，remote 名为 `origin`；D8 交付推送至 `origin/feature/b-model-d8`。
+- 当前 D9 交付分支：`feature/b-model-d9`；D8 使用 `feature/b-model-d8`，D7 使用 `feature/b-model-d7`。
+- 团队仓库：`https://github.com/xiaotaop/leocad-harmony.git`，remote 名为 `origin`；D9 交付推送至 `origin/feature/b-model-d9`。
 - 上游：`https://github.com/leozide/leocad.git`，remote 名为 `upstream`。
 - 固定标签：`v26.09`；提交：`5196355d4a5adb35f14c97e7672d7a9bfd3af391`。
 - 首批和第二批已通过 PR #2、#5 合入；D2 从 `main` 的 `cf2adc6`（已含 #7、#8、#9）快进同步后继续。团队保留上游根目录布局。
@@ -17,6 +17,12 @@
 组长方案文件的来源与 SHA-256 记录于 `member-b-baseline.json`。该文件只是 B 的准备记录，不取代组长负责的正式 `toolchain.lock`。
 
 10/28 D2 测试：49 个业务用例通过（含初始化/清理共 51 passed），0 failed、0 skipped，进程退出码为 0。保留 10/27 第二批的 37 个业务用例，新增 12 项格式隔离和离线错误回调用例；不代表完整 GUI 或鸿蒙验收。结果见 `member-b-validation.json`、`member-b-test-results.txt`，包含固定源码与产物哈希。
+
+## D9 模型、文件与加载生命周期（2026-11-04）
+
+D8 B #47 已合入（`b947ef80475214def5dd0ac16c0b3efc03381fdb`）。本轮完成 [D9 覆盖矩阵、审核与设备交接](MEMBER_B_D9.md)：现有模型用例覆盖空模型、非法输入、失败保存保护、中文/相对路径及撤销重做；核对 #52 模型 CI 65/65、基础渲染 7/7、授权保存 9/9，以及 #53 初审版 Windows 四种输入配置各 42/42。保留本地化两项字体跳过，不声明新 HAP 验收。
+
+B 已审核并正常合并 C #52（`25fa7ed`）和 A #53（`8a3ee8a`）；后者组合 head 的 6 项检查成功，最终模型/输入产物与合并提交同树，结果和两项字体跳过见 D9 交付。重算组长 D8 设备证据 64 项哈希，确认 MPD 编辑保存退出重开、取消/坏文件保护和断网闭环已有证据；同进程切换仍被 #45 阻断，#15 的实际授权失败及恢复体验仍待验收。D8 以下段落保留当时状态，最新范围见 D9 交付。
 
 ## D8 文件闭环与异常保护（2026-11-03）
 
