@@ -1,0 +1,30 @@
+source: 2741 entries
+  brokencolour.zip: 3823610 bytes
+  codeonlycfg.zip: 3823619 bytes
+  dangling.zip: 3833031 bytes
+  emptycfg.zip: 3823593 bytes
+  garbagecfg.zip: 3823630 bytes
+  nocfg.zip: 3823479 bytes
+  truncated.zip: 1403602 bytes
+  wrongroot.zip: 3800649 bytes
+== archive
+Totals: 13 passed, 0 failed, 0 skipped, 0 blacklisted, 203ms
+== priority
+Totals: 8 passed, 0 failed, 0 skipped, 0 blacklisted, 186ms
+== menu
+Totals: 11 passed, 0 failed, 0 skipped, 0 blacklisted, 32ms
+== modellist
+Totals: 5 passed, 0 failed, 0 skipped, 0 blacklisted, 10ms
+== panel
+Totals: 15 passed, 0 failed, 0 skipped, 0 blacklisted, 454ms
+== preferences
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 9ms
+== theme
+Totals: 14 passed, 0 failed, 0 skipped, 0 blacklisted, 7ms
+== chain
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 51ms
+== localization
+Totals: 22 passed, 0 failed, 0 skipped, 0 blacklisted, 73ms
+== files
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 18ms
+EXIT=0
