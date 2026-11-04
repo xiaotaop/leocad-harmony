@@ -1,0 +1,19 @@
+D9 空工具栏缺陷的取证（探针：构造真实 lcMainWindow，读取控件状态）
+
+修复前（origin/main d9ff2a4f + 未加清扫）:
+=== TOOLBARS ===
+Standard | objectName=StandardToolbar | visible=1 | hidden=0 | visibleActions=11 | size=327x39
+Time     | objectName=TimeToolbar     | visible=1 | hidden=0 | visibleActions=0  | size=473x39
+Tools    | objectName=ToolsToolbar    | visible=0 | hidden=1 | visibleActions=19 | size=100x30
+Toolbar  | objectName=Toolbar         | visible=1 | hidden=0 | visibleActions=3  | size=200x39
+
+说明:
+  Time 工具栏 visibleActions=0 但 visible=1 —— 空容器仍占布局一行（473x39）。
+  Tools 的 visible=0 是 CreateToolBars() 里就 hide() 的（lc_mainwindow.cpp:1024），
+  与本缺陷无关，不能拿来当对照。
+  第四行 objectName=Toolbar 是预览停靠面板自己的工具栏（lc_previewwidget.cpp:29），
+  不是主窗口的，所以清扫里按 parentWidget()==this 过滤。
+
+修复后:
+  Time 工具栏 isHidden()=true，View > Toolbars 里 "Time" 项不可见且不可用。
+  其余工具栏不受影响（Standard 仍可见且有 11 个动作）。

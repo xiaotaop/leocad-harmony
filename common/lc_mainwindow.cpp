@@ -138,6 +138,19 @@ void lcMainWindow::CreateWidgets()
 	move(QPoint(200, 200));
 	restoreGeometry(Settings.value("Geometry").toByteArray());
 	restoreState(Settings.value("State").toByteArray());
+
+	// restoreState() applies a saved layout over the widgets, including the
+	// visible flag of a toolbar that was visible when the state was written. A
+	// settings file saved before this build trimmed the scope (or one written
+	// by an unfiltered build) can therefore bring the empty Time toolbar back.
+	// Re-applying the scope's toolbar decision here, after the restore, is what
+	// keeps the blank strip from reappearing for existing users — re-running
+	// ApplyFirstReleaseScope() itself would not help, since it only touches
+	// menus and actions, and restoreState() has already re-shown the toolbar.
+	for (QToolBar* ToolBar : findChildren<QToolBar*>())
+		if (ToolBar->parentWidget() == this)
+			HideToolBarIfEmptied(ToolBar);
+
 	mPartSelectionWidget->LoadState(Settings);
 	Settings.endGroup();
 }
@@ -834,6 +847,78 @@ void lcMainWindow::ApplyFirstReleaseScope()
 			Menu->removeAction(Actions[Index]);
 		}
 	}
+
+	// The same rule for toolbars, and the reason it has to be here rather than
+	// in CreateToolBars(): the scope is what empties them.
+	//
+	// The Time toolbar is built from five actions and every one of them is in
+	// the removal list above, so the scope leaves an empty QToolBar behind. Qt
+	// keeps it visible and the layout keeps reserving its row, which on device
+	// is a blank strip above the viewport with no buttons in it. The View >
+	// Toolbars menu still offers a checkbox for it, so a user can turn that
+	// blank strip on and off.
+	//
+	// Hiding the toolbar is not enough on its own: an unchecked-but-present
+	// toggle stays clickable, and clicking it re-shows the empty strip. The
+	// toggle therefore goes too. Hiding the QAction rather than deleting one is
+	// what makes that safe — the same action object is shared by the View menu,
+	// the title-bar popup menu (createPopupMenu()) and UpdateDockWidgetActions().
+	//
+	// Only toolbars this window owns: other widgets in the window build their
+	// own QToolBar (lc_previewwidget.cpp does), and a scope decision taken for
+	// the main window's toolbars must not reach into them.
+	for (QToolBar* ToolBar : findChildren<QToolBar*>())
+		if (ToolBar->parentWidget() == this)
+			HideToolBarIfEmptied(ToolBar);
+}
+
+// The View-menu command that toggles a toolbar, or LC_NUM_COMMANDS when the
+// toolbar has no toggle. Matches by pointer: objectName is set on the toolbars
+// this window owns, but the preview dock builds its own "Toolbar" and must not
+// be affected by a scope decision made for the main window.
+lcCommandId lcMainWindow::ToolBarToggleCommand(const QToolBar* ToolBar) const
+{
+	if (ToolBar == mStandardToolBar)
+		return LC_VIEW_TOOLBAR_STANDARD;
+	if (ToolBar == mToolsToolBar)
+		return LC_VIEW_TOOLBAR_TOOLS;
+	if (ToolBar == mTimeToolBar)
+		return LC_VIEW_TOOLBAR_TIME;
+
+	return LC_NUM_COMMANDS;
+}
+
+// Hides a toolbar that has no visible action left, together with its toggle.
+//
+// Emptiness is "no visible action other than a separator", the same rule the
+// menu sweep above uses: a toolbar keeps its separators as QActions, and a
+// toolbar holding only separators is empty to a user.
+bool lcMainWindow::HideToolBarIfEmptied(QToolBar* ToolBar)
+{
+	if (ToolBar == nullptr || ToolBar->isHidden())
+		return false;
+
+	for (QAction* Action : ToolBar->actions())
+	{
+		if (Action->isVisible() && !Action->isSeparator())
+			return false;
+	}
+
+	// removeAction() above already dropped the scope's actions from every
+	// toolbar, so an "empty" toolbar here means the scope emptied it. A toolbar
+	// that was empty before the scope existed would be hidden too; none is, and
+	// the test for this asserts the toolbar is not merely hidden but empty.
+	ToolBar->hide();
+
+	const lcCommandId Command = ToolBarToggleCommand(ToolBar);
+
+	if (Command != LC_NUM_COMMANDS && mActions[Command])
+	{
+		mActions[Command]->setVisible(false);
+		mActions[Command]->setEnabled(false);
+	}
+
+	return true;
 }
 
 void lcMainWindow::CreateToolBars()

@@ -14,6 +14,7 @@ class lcColorList;
 class lcPropertiesWidget;
 class lcTimelineWidget;
 class lcElidedLabel;
+class QToolBar;
 enum class lcRenderDialogMode;
 
 class lcModelTabWidget : public QWidget
@@ -301,6 +302,14 @@ protected:
 	// See the definition in lc_mainwindow.cpp for what it does and why it only
 	// touches QAction objects.
 	void ApplyFirstReleaseScope();
+
+	// Hides a toolbar the scope just emptied and takes its toggle out of the
+	// View menu. Returns true when the toolbar was hidden.
+	bool HideToolBarIfEmptied(QToolBar* ToolBar);
+
+	// The View-menu command that toggles a toolbar, or LC_NUM_COMMANDS when the
+	// toolbar has no toggle.
+	lcCommandId ToolBarToggleCommand(const QToolBar* ToolBar) const;
 
 	void CreateToolBars();
 	void CreateStatusBar();
