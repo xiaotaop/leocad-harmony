@@ -1,0 +1,17 @@
+********* Start testing of MenuScopeTest *********
+Config: Using QtTest library 6.12.0, Qt 6.12.0 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.3.19.1)), macos 27.0.1
+QWARN  : MenuScopeTest::initTestCase() qt.qpa.fonts: Populating font family aliases took 70 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+QWARN  : MenuScopeTest::initTestCase() QOpenGLWidget is not supported on this platform.
+PASS   : MenuScopeTest::initTestCase()
+PASS   : MenuScopeTest::removedCommandsAreNotVisible()
+PASS   : MenuScopeTest::keptCommandsAreVisible()
+PASS   : MenuScopeTest::submodelListIsKept()
+PASS   : MenuScopeTest::modelTabBarIsNotClosable()
+PASS   : MenuScopeTest::modelTabBarIsNotMovable()
+PASS   : MenuScopeTest::noVisibleEmptySubmenus()
+PASS   : MenuScopeTest::noVisibleEmptyToolbars()
+PASS   : MenuScopeTest::emptiedToolbarToggleIsNotOffered()
+PASS   : MenuScopeTest::toolbarsWithCommandsStayVisible()
+PASS   : MenuScopeTest::cleanupTestCase()
+Totals: 11 passed, 0 failed, 0 skipped, 0 blacklisted, 163ms
+********* Finished testing of MenuScopeTest *********
