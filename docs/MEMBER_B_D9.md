@@ -25,6 +25,8 @@ B 已审核并正常合并 [C #52](https://github.com/xiaotaop/leocad-harmony/pu
 
 B 独立重算 A 的 **3 项源码、25 项证据**大小/SHA-256，全部一致。Mac 四配置各 **42/0/0**；旧实现的共享用例失败、陈旧通知用例超时。另下载 [Windows 输入 CI 41784535409](https://github.com/xiaotaop/leocad-harmony/actions/runs/41784535409) 原始产物，正常 DPR1、DPR1.5、DPR2、基础 DPR2 各 **42 passed / 0 failed / 0 skipped**。这些结果仅代表初审版本；组合 head 的 CI 和合并状态以 #53 为准。
 
+**合并结果（2026-11-04）**：组合 head 的 6 项检查全部成功、有效批准且无未解决讨论后，B 正常合并 #53；远端确认 `merged=true`，合并提交 `8a3ee8aa39550ab0e935e836a2978e67bd507452`。同步后的 [模型 CI 41785351097](https://github.com/xiaotaop/leocad-harmony/actions/runs/41785351097) 和 [输入 CI 41785351067](https://github.com/xiaotaop/leocad-harmony/actions/runs/41785351067) 原始产物均已下载核对：模型 **65/65**、基础渲染 **7/7**、授权保存 **9/9**、菜单 **11/11**、四种输入配置各 **42/42**；本地化仍为 20 passed / 2 skipped。两份产物的检出提交 `67be9cca00301a39893f751e3ba41219afe201d7` 与被审 head、最终合并提交的源码树一致。本交付分支已同步该最终主线，PR 相对 main 仅保留 B 的两份文档差异。
+
 受控通知测试验证 GUI 不同步等待、当前完成通知随后产生非空缩略图，不能证明 OHOS 自然触发异常加载状态的完整根因。#45 保持 P1 / Alpha 阻断，代码合入不自动关闭。
 
 ## D8 设备证据更新
