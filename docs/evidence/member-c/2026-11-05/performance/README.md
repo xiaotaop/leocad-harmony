@@ -27,19 +27,22 @@ scripts/dev/perf-baseline.sh            # 默认 3 轮，输出到本目录 runs
 PERF_ROUNDS=5 scripts/dev/perf-baseline.sh
 ```
 
-脚本会把 `perf-baseline.pro` / `perf-baseline.cpp` 复制到仓库根（`leocad.pro` 的相对路径只能从根解析），
-在 `/tmp/bd-perf` 影子构建，跑完用 `trap` 删掉这两个临时文件。**不要把这两个文件提交到根目录**。
+脚本会把 `perf-baseline.pro` / `perf-baseline.cpp` 以 `perf-baseline-<pid>.pro/.cpp` 的名字复制到仓库根
+（`leocad.pro` 的相对路径只能从根解析，放 `/tmp` 会让一串资源路径找不到），在 `/tmp/bd-perf` 影子构建，
+跑完用 `trap` 删掉这两个临时文件。**不要把这类文件提交到根目录**；若进程被强杀留下残留，
+按 `perf-baseline-*.pro/.cpp` 手工清理即可。
 
 影子构建目录会在需要时自动创建，干净机器上首次运行不需要手工准备。目录**跨轮复用**（全量重建要
-几分钟，而测量结果不依赖构建目录）；想换构建位置时可覆盖：
+几分钟，而测量结果不依赖构建目录）。想换构建位置时可覆盖：
 
 ```bash
 PERF_BUILD_DIR=/tmp/bd-perf-2 scripts/dev/perf-baseline.sh /tmp/perf-out-2
 ```
 
-**每个 checkout 同时只能运行一个探针。** 不同 `PERF_BUILD_DIR` 和输出目录仍会共用仓库根的
-两个暂存源码文件，一次运行退出时的 `trap` 会删除另一进程仍在使用的文件。需要并行时，必须
-使用独立 checkout，并分别设置构建目录和输出目录；仅覆盖上面的目录不支持同 checkout 并行。
+**在同一 checkout 上并行跑**时，两次运行要同时给出不同的构建目录和输出目录。
+暂存到仓库根的 `perf-baseline-<pid>.pro/.cpp` 按进程命名，两次运行互不可见，所以一个先退出不会
+删掉另一个正在配置的输入——早期脚本用固定文件名时确实会互相破坏，那个问题已修。注意两个进程
+各做一次全量 debug 构建，7 GB 内存的机器上仍可能吃紧。
 
 两轮测量之间要清掉缓存才有「冷」：脚本每轮都新建空的 `XDG_CACHE_HOME`，所以 `run-N` 之间互相独立。
 

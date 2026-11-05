@@ -33,9 +33,12 @@ ROUNDS="${PERF_ROUNDS:-3}"
 ARCHIVE="$REPO_ROOT/assets/ldraw-lite/library-lite.zip"
 # Shadow build directory, reused across runs: a full rebuild costs minutes and
 # the measured numbers do not depend on which directory the build happened in.
-# Overridable to choose a different build location. Run only one probe per
-# checkout: staged source files in the repository root are shared. Concurrent
-# runs require separate checkouts as well as separate build/output directories.
+# Overridable so a clean environment, or a second concurrent run, can point it
+# somewhere else. Note that the build directory is not the only shared resource:
+# the staged probe files are what actually collided between concurrent runs, and
+# those are isolated by $RUN_TAG below — a distinct PERF_BUILD_DIR alone was
+# never enough. Two concurrent runs also each do a full debug build, which is
+# heavy on a small machine.
 BUILD="${PERF_BUILD_DIR:-/tmp/bd-perf}"
 QT_LIB="$REPO_ROOT/.devtools/Qt/6.12.0/gcc_64/lib"
 
@@ -49,9 +52,18 @@ if [ ! -f "$ARCHIVE" ]; then
     exit 2
 fi
 
-STAGED_PRO="$REPO_ROOT/perf-baseline.pro"
-STAGED_CPP="$REPO_ROOT/perf-baseline.cpp"
+# The probe has to be staged at the repository root (leocad.pro resolves its
+# relative paths against the directory the top-level .pro sits in), and that root
+# is shared by every run on this checkout. Staging under a fixed name made two
+# concurrent runs collide: whichever exited first removed the other's input
+# mid-configure. The PID suffix keeps each run's pair private, so a second run
+# cannot even see the first one's files, let alone delete them.
+RUN_TAG="$$"
+STAGED_PRO="$REPO_ROOT/perf-baseline-$RUN_TAG.pro"
+STAGED_CPP="$REPO_ROOT/perf-baseline-$RUN_TAG.cpp"
 
+# Only ever removes this run's own pair. A bare "perf-baseline.*" glob here would
+# reintroduce exactly the cross-run deletion this suffix exists to prevent.
 cleanup() {
     rm -f "$STAGED_PRO" "$STAGED_CPP"
 }
@@ -68,7 +80,11 @@ mkdir -p "$OUTDIR" "$BUILD"
 
 # Reuse an existing shadow build when the qmake project has not changed: a full
 # rebuild costs minutes and the numbers do not depend on the build directory.
-if ! ( cd "$BUILD" && qmake "$STAGED_PRO" CONFIG+=debug CONFIG-=debug_and_release ) > "$OUTDIR/qmake.log" 2>&1; then
+# PERF_PROBE_SOURCE tells the staged .pro which uniquely-named .cpp belongs to this
+# run; without it the probe would look for the shared default name and pick up
+# whichever run wrote it last.
+if ! ( cd "$BUILD" && qmake "$STAGED_PRO" CONFIG+=debug CONFIG-=debug_and_release \
+        PERF_PROBE_SOURCE="perf-baseline-$RUN_TAG.cpp" ) > "$OUTDIR/qmake.log" 2>&1; then
     echo "error: qmake failed; see $OUTDIR/qmake.log" >&2
     tail -20 "$OUTDIR/qmake.log" >&2
     exit 1

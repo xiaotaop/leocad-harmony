@@ -183,4 +183,39 @@ scripts/dev/perf-baseline.sh: line 62: cd: /tmp/bd-perf: No such file or directo
 `summary.md`，`SCRIPT_EXIT=0`。修复只影响目录创建，探针的测量行为（3 轮、每轮空 `XDG_CACHE_HOME`）
 未变，所以既有数字不需重测。
 
+### 6.3 并行承诺不成立：暂存文件共用固定名字（P2，第三轮）
+
+6.2 的修复顺带在 README 与脚本注释里写了「换个 `PERF_BUILD_DIR` 就能并行跑第二次」。**这个承诺是错的**，
+评审指出并复现了：`PERF_BUILD_DIR` 只隔离了构建目录，**没有隔离暂存路径**。
+
+脚本把探针源码暂存到仓库根两个**固定名字**上，`cleanup()` 也是按这两个名字删。名字与进程无关，
+所以两个进程暂存到同一对文件，任一进程退出就把这一对删掉，另一进程在配置中途失去输入。
+
+复现（两次暂存 + 一次退出）：
+
+```
+run A: stage -> True
+run B: stage -> True
+run B: exits, trap cleanup -> pro exists=False cpp exists=False
+run A still configuring: perf-baseline.pro exists = False
+RACE CONFIRMED
+```
+
+**为什么不能把暂存挪到 `/tmp` 来解决**：`leocad.pro` 里 `INCLUDEPATH += qt common`、`SOURCES += ...`
+全是相对路径，qmake 以顶层 `.pro` 所在目录为基准解析。实测放 `/tmp` 后 qmake「成功」但报一串
+`WARNING: Failure to find: resources/*.ts / leocad.qrc / common/lc_authorizedsave.h`——源文件全找不到，
+构建必然是错的。所以暂存**必须**留在仓库根，隔离只能靠**文件名唯一**。
+
+修复：暂存改名为 `perf-baseline-<pid>.pro/.cpp`（`RUN_TAG="$$"`），`.pro` 里源码名参数化为
+`PERF_PROBE_SOURCE`，qmake 时传入本次的唯一名；`cleanup()` 只删自己那一对，不再可能误删别人的。
+
+选隔离而不是「把文档收缩成只支持单进程」：收缩只是把陷阱写进说明书，下一个照做的人仍会毁掉正在
+跑的构建；文件名唯一之后，并行**真的**成立，文档的承诺也随之变成事实。
+
+验证用无信号的交错时序：A 走全新构建目录（耗时），B 走已构建好的目录（很快跑完），B 在 A 仍在
+构建时退出并执行 trap。结果 A 的暂存输入完好，两边都以 0 退出并各写出 summary，仓库根无残留。
+早期版本用 SIGSTOP 冻结 A 得到同样结论，但 bash 的 `wait` 在子进程被停止时会返回 147，容易被
+误读成脚本缺陷（已用独立探针确认 trap 在正常/SIGSTOP/SIGTERM 三种情况下都正确清理），故改用
+无信号版本。
+
 命令与原始输出见 [docs/evidence/member-c/2026-11-05/](./evidence/member-c/2026-11-05/)。
