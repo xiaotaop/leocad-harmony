@@ -114,6 +114,18 @@ INTERNET 确实不在清单里——这一条文档原来是对的，本轮补�
 
 两处变异验证：删掉文档里的 `PRINT` → 2 项红；往产物里塞 `INTERNET` → 1 项红并点名。
 
+### 一处被评审抓到的缺陷：断言失败但进程返回 0
+
+初版这个脚本用 `unittest.main(..., exit=False)` 收尾——这是我自己的偏离，仓库另外 4 个检查脚本都用
+`unittest.main(verbosity=2)`。`exit=False` 让 `main()` 返回 `None` 而不调 `sys.exit`，
+于是**断言失败时进程仍以 0 退出**：注入 `INTERNET` 后输出 `FAILED (failures=1)`，退出码却是 0。
+
+后果是 CI 的 `set -euo pipefail`（`continuous.yml:55`）形同虚设——权限清单漂移的变更照样能合入，
+这个脚本存在的唯一理由被抵消掉了。已改为 `unittest.main(verbosity=2)`。
+
+**教训写在验证方式里**：变异测试只对比输出文本是不够的，必须显式检查 `$?`。
+本轮的验证脚本对每种变异都断言了退出码非零，见 `docs/evidence/member-c/2026-11-05/mutation-exit-codes.txt`。
+
 **它守不住的部分**：读的是留档副本，不是当晚打出来的包。所以 RC0 解包核对仍是人工项（矩阵 T-08）。
 
 ## 四、边界与未完成项
@@ -131,8 +143,44 @@ INTERNET 确实不在清单里——这一条文档原来是对的，本轮补�
 | --- | --- |
 | QTest 全量（10 套件） | **115 项通过，0 失败**，`EXIT=0`，与 D9 基线一致 |
 | Python 静态检查 | **52 项全通过**（network 10 / permission 5 / packaged 5 / export 8 / retention 24） |
-| 变异验证 | 权限检查 2 处变异均被抓 |
+| 变异验证 | 2 处变异均被抓**且退出码为 1**（修复前退出码为 0，CI 拦不住） |
 
 QTest 分套件：archive 13、priority 8、menu 11、modellist 5、panel 15、preferences 9、theme 14、chain 9、localization 22、files 9。原始日志见 `docs/evidence/member-c/2026-11-05/full-matrix.log`。
+
+## 六、评审反馈修复（第二轮）
+
+评审在独立工作目录复核 D10 材料，复现了两处缺陷。两处都是真的，都已修复并逐条验证。
+
+### 6.1 权限检查断言失败却返回 0（P1）
+
+见第三节末尾。根因是 `exit=False`；修复为与仓库其余 4 个脚本一致的 `unittest.main(verbosity=2)`。
+
+验证（显式断言退出码，不只看输出文本）：
+
+| 变异 | 修复前退出码 | 修复后退出码 | 断言结果 |
+| --- | --- | --- | --- |
+| 无变异 | 0 | 0 | OK |
+| 留档清单注入 `INTERNET` | **0**（漏拦） | **1** | FAILED，点名 `test_the_package_does_not_request_internet` |
+| 文档删除 `PRINT` | **0**（漏拦） | **1** | FAILED，2 项红 |
+
+验证脚本还断言了两个证据文件在跑完后**逐字节一致**——第一次验证时我用 `write_text` 恢复清单，
+把原来的 CRLF 换行写成了 LF，导致 89 行全部显示为改动。改成字节级读写后才真正无损。
+
+### 6.2 性能脚本在干净机器上提前退出（P2）
+
+`scripts/dev/perf-baseline.sh` 只 `mkdir -p "$OUTDIR"`，随后直接 `cd "$BUILD"`（`/tmp/bd-perf`）。
+新机器上该目录不存在，脚本在 **qmake 之前**就退出，文档写的复现步骤跑不通。已复现：
+
+```
+error: qmake failed; see /tmp/perf-out/qmake.log
+scripts/dev/perf-baseline.sh: line 62: cd: /tmp/bd-perf: No such file or directory
+```
+
+修复：`mkdir -p "$OUTDIR" "$BUILD"`，并让路径可覆盖 `BUILD="${PERF_BUILD_DIR:-/tmp/bd-perf}"`。
+**保留复用语义**——脚本注释说明复用影子构建是因为全量重建要几分钟，所以不能换成一次性 `mktemp`。
+
+验证：`rm -rf /tmp/bd-perf` 后从空目录跑完整流程，越过 qmake、进入 make、跑完 1 轮并写出
+`summary.md`，`SCRIPT_EXIT=0`。修复只影响目录创建，探针的测量行为（3 轮、每轮空 `XDG_CACHE_HOME`）
+未变，所以既有数字不需重测。
 
 命令与原始输出见 [docs/evidence/member-c/2026-11-05/](./evidence/member-c/2026-11-05/)。

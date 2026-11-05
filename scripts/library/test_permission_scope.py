@@ -36,9 +36,7 @@ Run with:
 
 from __future__ import annotations
 
-import json
 import re
-import sys
 import unittest
 from pathlib import Path
 
@@ -120,4 +118,4 @@ class PermissionDocMatchesPackage(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main(argv=[sys.argv[0], "-v"], exit=False)
+    unittest.main(verbosity=2)

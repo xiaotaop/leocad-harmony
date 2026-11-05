@@ -30,6 +30,13 @@ PERF_ROUNDS=5 scripts/dev/perf-baseline.sh
 脚本会把 `perf-baseline.pro` / `perf-baseline.cpp` 复制到仓库根（`leocad.pro` 的相对路径只能从根解析），
 在 `/tmp/bd-perf` 影子构建，跑完用 `trap` 删掉这两个临时文件。**不要把这两个文件提交到根目录**。
 
+影子构建目录会在需要时自动创建，干净机器上首次运行不需要手工准备。目录**跨轮复用**（全量重建要
+几分钟，而测量结果不依赖构建目录）；想换位置或并行跑第二次时覆盖即可：
+
+```bash
+PERF_BUILD_DIR=/tmp/bd-perf-2 scripts/dev/perf-baseline.sh /tmp/perf-out-2
+```
+
 两轮测量之间要清掉缓存才有「冷」：脚本每轮都新建空的 `XDG_CACHE_HOME`，所以 `run-N` 之间互相独立。
 
 ## 文件

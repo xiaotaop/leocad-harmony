@@ -31,7 +31,11 @@ OUTDIR="${1:-$PERF_DIR/runs}"
 JOBS="${JOBS:-4}"
 ROUNDS="${PERF_ROUNDS:-3}"
 ARCHIVE="$REPO_ROOT/assets/ldraw-lite/library-lite.zip"
-BUILD="/tmp/bd-perf"
+# Shadow build directory, reused across runs: a full rebuild costs minutes and
+# the measured numbers do not depend on which directory the build happened in.
+# Overridable so a clean environment (or a second concurrent run) can point it
+# somewhere else instead of colliding on the default path.
+BUILD="${PERF_BUILD_DIR:-/tmp/bd-perf}"
 QT_LIB="$REPO_ROOT/.devtools/Qt/6.12.0/gcc_64/lib"
 
 if ! command -v qmake >/dev/null 2>&1; then
@@ -55,7 +59,11 @@ trap cleanup EXIT INT TERM
 cp "$PERF_DIR/perf-baseline.pro" "$STAGED_PRO"
 cp "$PERF_DIR/perf-baseline.cpp" "$STAGED_CPP"
 
-mkdir -p "$OUTDIR"
+# $BUILD has to exist before the cd below: on a machine that has never run this
+# script the directory is absent, and a bare "cd" into a missing path aborted the
+# whole baseline before qmake ever ran. Reuse is deliberate (see $BUILD above),
+# so this creates the directory rather than starting from a fresh temp one.
+mkdir -p "$OUTDIR" "$BUILD"
 
 # Reuse an existing shadow build when the qmake project has not changed: a full
 # rebuild costs minutes and the numbers do not depend on the build directory.

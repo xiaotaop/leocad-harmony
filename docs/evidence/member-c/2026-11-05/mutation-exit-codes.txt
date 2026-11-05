@@ -1,0 +1,55 @@
+D10 权限检查变异验证 —— 退出码逐条记录
+=====================================================
+
+目的：证明 test_permission_scope.py 在断言失败时返回非零，CI 的 set -e 能真正拦住漂移。
+教训：只对比输出文本不够，必须检查 $?。初版因 exit=False 导致 FAILED 但退出码 0。
+
+验证方式：python3 脚本对每种变异运行被测脚本，断言 returncode，并校验两个证据文件
+跑完后逐字节一致（首次验证用 write_text 恢复清单，把 CRLF 写成了 LF，89 行全部
+显示为改动；改为字节级读写后才无损）。
+
+check                           exit  result   pass
+----------------------------------------------------------
+V-1 baseline (no mutation)         0  OK       YES
+V-2 inject INTERNET                1  FAILED   YES
+V-3 remove PRINT from doc          1  FAILED   YES
+V-4 restored                       0  OK       YES
+V-4b files byte-identical          0  intact   YES
+
+ALL PASSED
+VERIFIER_EXIT=0
+
+修复前对照（同一变异，exit=False 时期）：
+  注入 INTERNET → 输出 FAILED (failures=1)，EXIT CODE = 0   <- CI 漏拦
+
+-----------------------------------------------------
+性能脚本干净环境验证（V-5）
+-----------------------------------------------------
+修复前：
+  error: qmake failed; see /tmp/perf-out/qmake.log
+  scripts/dev/perf-baseline.sh: line 62: cd: /tmp/bd-perf: No such file or directory
+
+修复后（/tmp/bd-perf 与 /tmp/perf-out 均不存在时）：
+  === /tmp/bd-perf absent: YES ===
+  == build ==
+  == run ==
+    run 1: core
+    run 1: show
+  == summarise ==
+  wrote /tmp/perf-out/summary.md
+  done: /tmp/perf-out
+  SCRIPT_EXIT=0
+
+-----------------------------------------------------
+全套 Python 检查（V-6）
+-----------------------------------------------------
+test_network_scope.py                exit=0 ran=10
+test_permission_scope.py             exit=0 ran=5
+test_export_part_list.py             exit=0 ran=8
+test_packaged_resources.py           exit=0 ran=5
+test_failure_log_retention.py        exit=0 ran=24
+TOTAL TESTS: 52
+
+bash -n scripts/dev/perf-baseline.sh  -> syntax OK
+python3 -m py_compile                 -> py OK
+仓库根暂存文件 perf-baseline.pro/.cpp -> 由 trap 清理，跑完后不存在
