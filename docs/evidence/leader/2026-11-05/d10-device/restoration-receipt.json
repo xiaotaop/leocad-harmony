@@ -1,0 +1,51 @@
+{
+  "files": [
+    {
+      "path": "Download/LeoCAD-D9/D9 \u5b50\u6a21\u578b\u95ed\u73af.mpd",
+      "before_sha256": "74398c6cf5a05bb7dd9e7ebb11bdce1fd571b98ddd90f591969680183c3f5616",
+      "after_sha256": "74398c6cf5a05bb7dd9e7ebb11bdce1fd571b98ddd90f591969680183c3f5616"
+    },
+    {
+      "path": "Download/LeoCAD-D9/Input/curated-device.mpd",
+      "before_sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742",
+      "after_sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742"
+    },
+    {
+      "path": "Download/LeoCAD-D9/Input/cycle.mpd",
+      "before_sha256": "468c20455fcda4ce47362a1ac465619e8b6bc9f0251188f7f4c02caa87081438",
+      "after_sha256": "468c20455fcda4ce47362a1ac465619e8b6bc9f0251188f7f4c02caa87081438"
+    },
+    {
+      "path": "Download/LeoCAD-D9/Input/empty-valid.ldr",
+      "before_sha256": "41669ea5e6ed01a1714a8659d92b05fb3653c806732a6aa15bcb8b40fbe29ebb",
+      "after_sha256": "41669ea5e6ed01a1714a8659d92b05fb3653c806732a6aa15bcb8b40fbe29ebb"
+    },
+    {
+      "path": "Download/LeoCAD-D9/Input/render-baseline.ldr",
+      "before_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "after_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b"
+    },
+    {
+      "path": "Download/LeoCAD-D9/Input/truncated.ldr",
+      "before_sha256": "d5c108f49a09c75a5cd2b910e8532d930e06ed8735937837915dfb8fc7b7b171",
+      "after_sha256": "d5c108f49a09c75a5cd2b910e8532d930e06ed8735937837915dfb8fc7b7b171"
+    },
+    {
+      "path": "Download/LeoCAD-D9/Input/zero-byte.ldr",
+      "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "private preferences",
+      "before_sha256": "66819ceff7026c86c6d3ccf088f3556068cc7bd78b7dc39202b161803fd10530",
+      "after_sha256": "66819ceff7026c86c6d3ccf088f3556068cc7bd78b7dc39202b161803fd10530"
+    },
+    {
+      "path": "sandbox render baseline",
+      "before_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "after_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b"
+    }
+  ],
+  "all_equal": true,
+  "app_closed_before_restore": true
+}

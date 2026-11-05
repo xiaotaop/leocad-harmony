@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-05",
+  "source": "adaf4893e3fd04ba00e5f903472db0f89ddbb7e8",
+  "package": "leocad-d10-signed.hap",
+  "bytes": 80154238,
+  "sha256": "de2faff13a08f75eca80c39fe2995b4b05ef45bbccb7dfd3355c01457d8b1243",
+  "qt": "6.12.0",
+  "sdk": "26.0.0.105",
+  "safe_render": false,
+  "model_test_hap": false,
+  "pid": 32382,
+  "physical_resolution": [
+    3120,
+    2080
+  ],
+  "config_before_sha256": "66819ceff7026c86c6d3ccf088f3556068cc7bd78b7dc39202b161803fd10530",
+  "native_build_id": "6de8cbbe920edd63e23b21ce325306508de93338",
+  "permissions": [
+    {
+      "name": "ohos.permission.STORE_PERSISTENT_DATA"
+    },
+    {
+      "name": "ohos.permission.FILE_ACCESS_PERSIST"
+    },
+    {
+      "name": "ohos.permission.PREPARE_APP_TERMINATE"
+    },
+    {
+      "reason": "$string:qt_permission_reason_read_pasteboard",
+      "reasonId": 16777223,
+      "usedScene": {
+        "abilities": [
+          "QAbility"
+        ],
+        "when": "always"
+      },
+      "name": "ohos.permission.READ_PASTEBOARD"
+    },
+    {
+      "name": "ohos.permission.GET_FILE_ICON"
+    },
+    {
+      "name": "ohos.permission.PRINT"
+    }
+  ],
+  "fresh_pid": 35069,
+  "dpr": 1.9,
+  "device_model_parameter": "HAD-W32",
+  "software_version_parameter": "HAD-W24 6.1.0.117(SP68C00E100R13P3)",
+  "os_fullname_parameter": "OpenHarmony-6.1.0.115",
+  "reopen_pid": 46458
+}

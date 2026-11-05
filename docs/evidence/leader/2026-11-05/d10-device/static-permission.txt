@@ -1,0 +1,10 @@
+test_every_packaged_permission_is_explained_in_the_doc (__main__.PermissionDocMatchesPackage.test_every_packaged_permission_is_explained_in_the_doc) ... ok
+test_removal_recommendations_explain_themselves (__main__.PermissionDocMatchesPackage.test_removal_recommendations_explain_themselves) ... ok
+test_the_doc_names_each_permission_with_the_ohos_prefix (__main__.PermissionDocMatchesPackage.test_the_doc_names_each_permission_with_the_ohos_prefix) ... ok
+test_the_package_does_not_request_internet (__main__.PermissionDocMatchesPackage.test_the_package_does_not_request_internet) ... ok
+test_the_recorded_manifest_exists_and_lists_permissions (__main__.PermissionDocMatchesPackage.test_the_recorded_manifest_exists_and_lists_permissions) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK

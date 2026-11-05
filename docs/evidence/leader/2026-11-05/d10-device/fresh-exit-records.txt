@@ -1,0 +1,3 @@
+time                       foreground        reason          record_id                   process_name                     
+2026-11-05 20:05:05        True              CppCrash        02263796989034418629        io.github.xiaotaop.leocad        
+2026-10-30 21:11:54        False             CppCrash        10503293892318333973        io.github.xiaotaop.leocad        
