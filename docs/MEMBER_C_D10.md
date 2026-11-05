@@ -1,0 +1,222 @@
+# 成员 C D10：权限清单收口与性能边界
+
+D10 行给成员 C 的任务是「优化零件索引和首启加载；完成隐私、权限和第三方清单」。当日统一出口是「性能边界和已知限制写入发布说明」。
+
+本文记录两件事：做了什么，以及**为什么"优化零件索引和首启加载"这一半几乎没有产出**——后者比前者更需要解释。
+
+## 一、先说两半的结果
+
+| 任务 | 结果 |
+| --- | --- |
+| 优化零件索引和首启加载 | **实测无瓶颈，未做优化**（见第二节）。产出了性能基线，并把边界写进发布说明 |
+| 完成隐私、权限和第三方清单 | **发现并修掉一处上架阻断**：发布文档与打包产物的权限清单不一致（见第三节） |
+
+## 二、"优化"这一半为什么没有优化
+
+任务写的是"优化"，但优化必须有可优化的东西。先测：
+
+| 项 | 宿主实测（3 轮中位） | 判断 |
+| --- | --- | --- |
+| 零件库冷加载（空缓存，1160 件） | 13.19 ms | 看不出来 |
+| 零件库热加载 | 5.33 ms | 看不出来 |
+| 零件面板逐击键（1161 行全量） | 0.27 ms | 一次击键间隔通常 100 ms 以上 |
+| `CreateWidgets()` | 20.28 ms | 与启动其它阶段同一量级 |
+
+本轮探针和留档原始输出未包含逐分类切换计时，因此不将分类切换耗时列入 D10 实测结论。
+
+在这些数字下改代码，产出的是风险而不是性能。本仓库的规矩是「不为凑任务臆造优化」，所以第二轮什么也没改。
+
+这一点写进了发布说明原文：**本轮未优化，不含任何「提升 X%」的说法**。读者不会误以为这里发生过一次性能改进。
+
+### 测了但没写进结论的部分
+
+首帧 333.5 ms 这个数字，宿主和真机不可比。文档里逐条给了三个理由：
+
+1. **离屏 GL 初始化占 180.7 ms**，是 offscreen 平台特有路径，真机由鸿蒙 GPU 合成器承担；
+2. **x86 + SSD 与 ARM64 + UFS 不可换算**，且真机还要从 HAP 解压包内资源；
+3. **debug 构建**，未开优化。
+
+还记了一条容易忽略的差异：真机取库走 `:/assets/ldraw-lite/library-lite.zip` 的 qrc 内嵌路径
+（`docs/D4_DEVICE_ACCEPTANCE.md:75` 实测记录），首次读要解压到内存；探针传的是普通文件路径。
+**路径不同，数字就更不能直接搬。**
+
+### 一处自己抓到的错误
+
+第一版把 `startup_with_show_ms`（482.8 ms）当成首启耗时。它其实是探针里跑了五次 `hide/show` 的累计值。
+正确的首启是「show 之前 + 第一次 show」= **333.5 ms**。汇总脚本已永久加上这条警告，防止复现。
+
+### 发现但**故意没改**的两处 O(n)
+
+测量时找到两处低效，都如实记录、都没动：
+
+| 位置 | 问题 | 为什么没改 |
+| --- | --- | --- |
+| `lc_partselectionwidget.cpp:287-295` | `lcFilter` 与 `QRegularExpression` 无条件构造，默认过滤类型下正则用不到 | 实测单次构造 **0.03 µs**，1160 行合计约 0.035 ms，可忽略 |
+| `lc_partselectionwidget.cpp:1670-1672` | `RefreshStatus()` 为刷计数标签又全表扫一遍 | 两趟合计端到端 0.27 ms；省下的约 0.1 ms 换不来任何用户可感知的差别 |
+
+两处都进了 §7.4「已知限制」：首发版不受影响，但**扩库时会痛**，附 1.16k / 5k / 20k / 50k / 100k 的实测增长曲线（近线性，100k 行约 42 ms）。这是给将来扩库的人留的，不是给首发版留的。
+
+## 三、权限清单：一处上架阻断
+
+### 问题
+
+`docs/release/权限说明.md` 当时的结论表写的是「不申请 INTERNET」+「文件选择使用非敏感权限」。而打包产物
+`docs/evidence/leader/2026-11-02/d7-device/packaged-module.json5` 实际声明了 **6 项**：
+
+```
+STORE_PERSISTENT_DATA / FILE_ACCESS_PERSIST / PREPARE_APP_TERMINATE
+READ_PASTEBOARD / GET_FILE_ICON / PRINT
+```
+
+文档一项都没写。应用市场要求权限逐项说明，这是阻断项。
+
+INTERNET 确实不在清单里——这一条文档原来是对的，本轮补上了产物实证（`grep -c` = 0）。
+
+### 清单到底从哪来
+
+这条定位比权限本身更有用：`module.json5` **不在本仓库，也不由本仓库生成**。
+`CMakeLists.txt:111-119` 把 Qt 的 `harmonyos/templates` 整个 `file(COPY)` 到构建树，
+`:120-134` 只设应用属性，**一行都没设权限**。
+
+两个后果：
+
+- 在仓库里改权限改不动，得改 DevEco 工程或模板副本；
+- `:117` 每次 configure 都重新 COPY，**在 build 目录手改 `module.json5` 会被覆盖**，不能作为交付方式。
+
+### 逐项结论
+
+| 权限 | 结论 | 依据 |
+| --- | --- | --- |
+| `READ_PASTEBOARD` | **必须保留** | 复制/粘贴整条链路在用（`lc_mainwindow.cpp:132-133,1452-1462`；`lc_application.cpp:772-780`；`lc_model.cpp:1180-1193`） |
+| `FILE_ACCESS_PERSIST` | 保留 | 系统文件选择器读写（`lc_mainwindow.cpp:2803` / `:2938`） |
+| `STORE_PERSISTENT_DATA` | 保留（暂定） | `QSettings` 在用，但"是否为持久化前提"无据 |
+| `PREPARE_APP_TERMINATE` | 保留（暂定） | 仓库 0 调用点，用途未证实 |
+| `GET_FILE_ICON` | **建议移除** | 图标/文件浏览类 API 全仓库 0 命中 |
+| `PRINT` | **建议移除（谨慎）** | 命令已在裁剪列表（`lc_mainwindow.cpp:658-659`），处理函数不可达，默认快捷键为空串。但 PrintSupport 仍链接，所以是"用不到"而非"必须删" |
+
+### 拒权会不会崩
+
+会问这个问题是因为设备日志里有 80 处 `READ_PASTEBOARD` 未授权的提示。逐行核对后：**不崩**。
+
+- `ClipboardChanged()` 判空后才取数据（`lc_mainwindow.cpp:1458`）；
+- 空内容 → `SetClipboard` 传空数组 → `UpdatePaste(false)` 把粘贴项置灰（`:2510-2517`）；
+- `Paste()` 开头 `isEmpty()` 直接 return（`lc_model.cpp:1192-1193`）；
+- 复制走 `setMimeData`，**不依赖读权限**。
+
+所以降级行为是"无法粘贴，但可复制、可启动"。文档明确写了这只证明启动不受阻，没证明点击粘贴的可见行为。
+
+### 新增一致性检查
+
+漂移之所以发生，是因为**没有任何检查覆盖它**。新增 `scripts/library/test_permission_scope.py`（5 项，已接入 CI）：
+
+- 记录产物里的每项权限都必须在文档里出现；
+- 产物不得出现 `INTERNET`；
+- 标为"建议移除"的行必须带理由。
+
+两处变异验证：删掉文档里的 `PRINT` → 2 项红；往产物里塞 `INTERNET` → 1 项红并点名。
+
+### 一处被评审抓到的缺陷：断言失败但进程返回 0
+
+初版这个脚本用 `unittest.main(..., exit=False)` 收尾——这是我自己的偏离，仓库另外 4 个检查脚本都用
+`unittest.main(verbosity=2)`。`exit=False` 让 `main()` 返回 `None` 而不调 `sys.exit`，
+于是**断言失败时进程仍以 0 退出**：注入 `INTERNET` 后输出 `FAILED (failures=1)`，退出码却是 0。
+
+后果是 CI 的 `set -euo pipefail`（`continuous.yml:55`）形同虚设——权限清单漂移的变更照样能合入，
+这个脚本存在的唯一理由被抵消掉了。已改为 `unittest.main(verbosity=2)`。
+
+**教训写在验证方式里**：变异测试只对比输出文本是不够的，必须显式检查 `$?`。
+本轮的验证脚本对每种变异都断言了退出码非零，见 `docs/evidence/member-c/2026-11-05/mutation-exit-codes.txt`。
+
+**它守不住的部分**：读的是留档副本，不是当晚打出来的包。所以 RC0 解包核对仍是人工项（矩阵 T-08）。
+
+## 四、边界与未完成项
+
+- **权限清单不在本仓库**：产出是交给组长的差异建议清单，不是"我们已收敛权限"。正式签名包可能与该次构建不同，**RC0 必须重新核对**并留权限差异与包 SHA-256。
+- **6 项的 `system_grant`/`user_grant` 分级未查到**：无法访问华为权限文档（web 接口返回空/余额不足），本机也无 HarmonyOS 文档或 Qt 模板目录。写成"弱推断"而非结论，没有编。
+- **真机性能一个数字都没有**。性能边界全部是宿主结论，真机采集项已列给组长。
+- **模型规模界定不属成员 C**：按分工文档归成员 A（渲染侧），§7.3 只划零件库/面板侧的边界。
+- **两处 O(n) 未改**：理由见第二节，属"扩库时才痛"的后续版本范围。
+- **新脚本未在 CI 上实跑过**：CI 要等 PR 推送后才执行；本机 52 项 Python 检查全绿。
+
+## 五、本轮实测
+
+| 项 | 结果 |
+| --- | --- |
+| QTest 全量（10 套件） | **115 项通过，0 失败**，`EXIT=0`，与 D9 基线一致 |
+| Python 静态检查 | **52 项全通过**（network 10 / permission 5 / packaged 5 / export 8 / retention 24） |
+| 变异验证 | 2 处变异均被抓**且退出码为 1**（修复前退出码为 0，CI 拦不住） |
+
+QTest 分套件：archive 13、priority 8、menu 11、modellist 5、panel 15、preferences 9、theme 14、chain 9、localization 22、files 9。原始日志见 `docs/evidence/member-c/2026-11-05/full-matrix.log`。
+
+## 六、评审反馈修复（第二轮）
+
+评审在独立工作目录复核 D10 材料，复现了两处缺陷。两处都是真的，都已修复并逐条验证。
+
+### 6.1 权限检查断言失败却返回 0（P1）
+
+见第三节末尾。根因是 `exit=False`；修复为与仓库其余 4 个脚本一致的 `unittest.main(verbosity=2)`。
+
+验证（显式断言退出码，不只看输出文本）：
+
+| 变异 | 修复前退出码 | 修复后退出码 | 断言结果 |
+| --- | --- | --- | --- |
+| 无变异 | 0 | 0 | OK |
+| 留档清单注入 `INTERNET` | **0**（漏拦） | **1** | FAILED，点名 `test_the_package_does_not_request_internet` |
+| 文档删除 `PRINT` | **0**（漏拦） | **1** | FAILED，2 项红 |
+
+验证脚本还断言了两个证据文件在跑完后**逐字节一致**——第一次验证时我用 `write_text` 恢复清单，
+把原来的 CRLF 换行写成了 LF，导致 89 行全部显示为改动。改成字节级读写后才真正无损。
+
+### 6.2 性能脚本在干净机器上提前退出（P2）
+
+`scripts/dev/perf-baseline.sh` 只 `mkdir -p "$OUTDIR"`，随后直接 `cd "$BUILD"`（`/tmp/bd-perf`）。
+新机器上该目录不存在，脚本在 **qmake 之前**就退出，文档写的复现步骤跑不通。已复现：
+
+```
+error: qmake failed; see /tmp/perf-out/qmake.log
+scripts/dev/perf-baseline.sh: line 62: cd: /tmp/bd-perf: No such file or directory
+```
+
+修复：`mkdir -p "$OUTDIR" "$BUILD"`，并让路径可覆盖 `BUILD="${PERF_BUILD_DIR:-/tmp/bd-perf}"`。
+**保留复用语义**——脚本注释说明复用影子构建是因为全量重建要几分钟，所以不能换成一次性 `mktemp`。
+
+验证：`rm -rf /tmp/bd-perf` 后从空目录跑完整流程，越过 qmake、进入 make、跑完 1 轮并写出
+`summary.md`，`SCRIPT_EXIT=0`。修复只影响目录创建，探针的测量行为（3 轮、每轮空 `XDG_CACHE_HOME`）
+未变，所以既有数字不需重测。
+
+### 6.3 并行承诺不成立：暂存文件共用固定名字（P2，第三轮）
+
+6.2 的修复顺带在 README 与脚本注释里写了「换个 `PERF_BUILD_DIR` 就能并行跑第二次」。**这个承诺是错的**，
+评审指出并复现了：`PERF_BUILD_DIR` 只隔离了构建目录，**没有隔离暂存路径**。
+
+脚本把探针源码暂存到仓库根两个**固定名字**上，`cleanup()` 也是按这两个名字删。名字与进程无关，
+所以两个进程暂存到同一对文件，任一进程退出就把这一对删掉，另一进程在配置中途失去输入。
+
+复现（两次暂存 + 一次退出）：
+
+```
+run A: stage -> True
+run B: stage -> True
+run B: exits, trap cleanup -> pro exists=False cpp exists=False
+run A still configuring: perf-baseline.pro exists = False
+RACE CONFIRMED
+```
+
+**为什么不能把暂存挪到 `/tmp` 来解决**：`leocad.pro` 里 `INCLUDEPATH += qt common`、`SOURCES += ...`
+全是相对路径，qmake 以顶层 `.pro` 所在目录为基准解析。实测放 `/tmp` 后 qmake「成功」但报一串
+`WARNING: Failure to find: resources/*.ts / leocad.qrc / common/lc_authorizedsave.h`——源文件全找不到，
+构建必然是错的。所以暂存**必须**留在仓库根，隔离只能靠**文件名唯一**。
+
+修复：暂存改名为 `perf-baseline-<pid>.pro/.cpp`（`RUN_TAG="$$"`），`.pro` 里源码名参数化为
+`PERF_PROBE_SOURCE`，qmake 时传入本次的唯一名；`cleanup()` 只删自己那一对，不再可能误删别人的。
+
+选隔离而不是「把文档收缩成只支持单进程」：收缩只是把陷阱写进说明书，下一个照做的人仍会毁掉正在
+跑的构建；文件名唯一之后，并行**真的**成立，文档的承诺也随之变成事实。
+
+验证用无信号的交错时序：A 走全新构建目录（耗时），B 走已构建好的目录（很快跑完），B 在 A 仍在
+构建时退出并执行 trap。结果 A 的暂存输入完好，两边都以 0 退出并各写出 summary，仓库根无残留。
+早期版本用 SIGSTOP 冻结 A 得到同样结论，但 bash 的 `wait` 在子进程被停止时会返回 147，容易被
+误读成脚本缺陷（已用独立探针确认 trap 在正常/SIGSTOP/SIGTERM 三种情况下都正确清理），故改用
+无信号版本。
+
+命令与原始输出见 [docs/evidence/member-c/2026-11-05/](./evidence/member-c/2026-11-05/)。

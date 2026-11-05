@@ -1,0 +1,111 @@
+# 并行暂存冲突修复验证（第三轮评审）
+
+日期：2026-11-05
+触发：评审 @zycAlmira 在 df677058 上指出「两个不同 PERF_BUILD_DIR 的进程并行时，
+      后退出者会删掉前者正在配置的输入」。
+
+## 0. 缺陷复现（修复前）
+
+脚本把探针源码暂存到仓库根两个**固定名字**，cleanup() 也按这两个名字删：
+
+    STAGED_PRO="$REPO_ROOT/perf-baseline.pro"
+    STAGED_CPP="$REPO_ROOT/perf-baseline.cpp"
+    cleanup() { rm -f "$STAGED_PRO" "$STAGED_CPP"; }
+
+名字与进程无关 -> 两个进程暂存同一对文件 -> 任一退出即删除另一方的输入。
+
+模拟两次暂存 + 一次退出：
+
+    run A: stage -> True
+    run B: stage -> True
+    run B: exits, trap cleanup -> pro exists=False cpp exists=False
+    run A still configuring: perf-baseline.pro exists = False
+    RACE CONFIRMED
+
+## 1. 为什么不能靠「把暂存挪到 /tmp」解决
+
+已验证 leocad.pro 的相对路径以顶层 .pro 所在目录为基准。把 .pro 放 /tmp 后：
+
+    WARNING: Failure to find: resources/leocad_zh_CN.ts
+    WARNING: Failure to find: leocad.qrc
+    WARNING: Failure to find: common/lc_authorizedsave.h
+    QMAKE_EXIT=0
+
+qmake 返回 0 但源文件全找不到 —— 配置"成功"、构建必错。故暂存必须留在仓库根，
+隔离只能靠文件名唯一。
+
+## 2. 修复
+
+    RUN_TAG="$$"
+    STAGED_PRO="$REPO_ROOT/perf-baseline-$RUN_TAG.pro"
+    STAGED_CPP="$REPO_ROOT/perf-baseline-$RUN_TAG.cpp"
+
+perf-baseline.pro 把源码名参数化，暂存时无需改写正文：
+
+    isEmpty(PERF_PROBE_SOURCE): PERF_PROBE_SOURCE = perf-baseline.cpp
+    SOURCES += $$PERF_PROBE_SOURCE
+
+qmake 调用传入本次唯一名：
+
+    qmake "$STAGED_PRO" ... PERF_PROBE_SOURCE="perf-baseline-$RUN_TAG.cpp"
+
+cleanup() 只删自己那一对。
+
+## 3. 验证
+
+### V-2 交错运行（核心）
+
+A 用**全新构建目录**（构建耗时长），B 用**已构建好的目录**（很快跑完）。B 在 A 还在
+构建时退出并执行自己的 trap —— 正是评审描述的时序，且不需要任何信号干预：
+
+    A staged: perf-baseline-126675.pro  (A still building)
+    B finished exit=0
+    PASS: A's staged input survived B's exit
+    A finished exit=0
+    wrote /tmp/o3-A/summary.md
+    leftovers: (none)
+
+两边都正常退出、都写出 summary、仓库根无残留。
+
+补充说明：早期版本这段测试用 SIGSTOP 冻结 A，虽然结论相同，但 bash 的 wait 在子进程被
+停止时就返回 147，会让「A 退出码非零」看起来像脚本缺陷，实际是测试手法造成的假象
+（已用独立探针确认 trap 在正常/SIGSTOP/SIGTERM 三种情况下都正确清理）。故改用上面的
+无信号版本，结论更干净。
+
+### 对照实验（证明因果，而非巧合）
+
+同一测试对修复前方案：
+
+    A (old scheme) staged: perf-baseline.cpp perf-baseline.pro
+    B (old scheme) exited and ran its trap ->
+      A's input GONE - this is the reported bug
+
+新方案：
+
+    perf-baseline-999.cpp perf-baseline-999.pro <- still present
+
+### V-4 参数化 .pro 确实用唯一源文件编译
+
+对象文件名即为证据：
+
+    /tmp/bd-perf-v1/build/debug/.obj/perf-baseline-73067.o
+    perf-baseline.o -> none (good：未回退到共享默认名)
+    leocad-perf: 95614984 bytes
+    /tmp/v1-out/summary.md 已生成
+
+### V-1 / V-3 / V-5
+
+    V-1 单次默认路径运行      SCRIPT_EXIT=0
+    V-3 仓库根残留            none (clean)
+    V-5 bash -n               OK
+        test_network_scope.py      exit=0 ran=10
+        test_permission_scope.py   exit=0 ran=5
+        test_export_part_list.py   exit=0 ran=8
+        test_packaged_resources.py exit=0 ran=5
+        test_failure_log_retention.py exit=0 ran=24
+        TOTAL=52
+
+## 4. 影响面
+
+修复只改暂存命名与 qmake 入参，探针测量行为（3 轮、每轮空 XDG_CACHE_HOME）未变，
+既有性能数字不需重测。
