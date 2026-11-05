@@ -149,8 +149,6 @@ void PieceInfo::Load()
 {
 	if (!IsModel() && !IsProject())
 	{
-		mState = lcPieceInfoState::Loading; // todo: mutex lock when changing load state
-
 		if (IsPlaceholder())
 		{
 			if (lcGetPiecesLibrary()->LoadPieceData(this))
@@ -159,8 +157,6 @@ void PieceInfo::Load()
 		else
 			lcGetPiecesLibrary()->LoadPieceData(this);
 	}
-
-	mState = lcPieceInfoState::Loaded;
 }
 
 void PieceInfo::ReleaseMesh()

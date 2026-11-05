@@ -1,0 +1,25 @@
+--- /private/tmp/leocad-d10-base/common/lc_library.cpp	2026-11-05 13:38:52
++++ /private/tmp/leocad-d6-source/common/lc_library.cpp	2026-11-05 13:42:10
+@@ -1875,6 +1875,11 @@
+ 		Meshes.push_back(Mesh);
+ 	}
+ 
++	static const bool TraceUploads = qEnvironmentVariableIntValue("LEOCAD_PERF_TRACE") != 0;
++	QElapsedTimer UploadTimer;
++	if (TraceUploads)
++		UploadTimer.start();
++
+ 	Context->DestroyVertexBuffer(mVertexBuffer);
+ 	Context->DestroyIndexBuffer(mIndexBuffer);
+ 
+@@ -1905,6 +1910,10 @@
+ 
+ 	free(VertexData);
+ 	free(IndexData);
++
++	if (TraceUploads)
++		qInfo() << "LEOCAD_GL_UPLOAD" << "meshes" << Meshes.size() << "vertex_bytes" << VertexDataSize
++			<< "index_bytes" << IndexDataSize << "cpu_us" << UploadTimer.nsecsElapsed() / 1000;
+ }
+ 
+ void lcPiecesLibrary::UnloadUnusedParts()

@@ -72,6 +72,9 @@ lcPiecesLibrary::~lcPiecesLibrary()
 
 void lcPiecesLibrary::Unload()
 {
+	WaitForLoadQueue();
+	mPendingLoadNotifications.clear();
+
 	for (const auto& PieceIt : mPieces)
 		delete PieceIt.second;
 	mPieces.clear();
@@ -96,8 +99,10 @@ void lcPiecesLibrary::RemoveTemporaryPieces()
 	{
 		PieceInfo* Info = PieceIt->second;
 
-		if (Info->IsTemporary() && Info->GetRefCount() == 0)
+		if (Info->GetRefCount() == 0 && Info->mState != lcPieceInfoState::Loading && Info->IsTemporary())
 		{
+			mLoadQueue.removeAll(Info);
+			mPendingLoadNotifications.remove(Info);
 			PieceIt = mPieces.erase(PieceIt);
 			delete Info;
 		}
@@ -1578,29 +1583,25 @@ void lcPiecesLibrary::LoadPieceInfo(PieceInfo* Info, bool Wait, bool Priority)
 {
 	QMutexLocker LoadLock(&mLoadMutex);
 
-	if (Wait)
-	{
-		if (Info->AddRef() == 1)
-			Info->Load();
-		else
-		{
-			if (Info->mState == lcPieceInfoState::Unloaded)
-			{
-				Info->Load();
-				emit PartLoaded(Info);
-			}
-			else
-			{
-				LoadLock.unlock();
+	const int RefCount = Info->AddRef();
+	const lcPieceInfoState State = Info->mState;
+	if (State == lcPieceInfoState::Loaded)
+		return;
 
-				while (Info->mState != lcPieceInfoState::Loaded)
-					lcSleeper::msleep(10);
-			}
-		}
-	}
-	else
+	if (State == lcPieceInfoState::Loading)
 	{
-		if (Info->AddRef() == 1)
+		if (Wait)
+		{
+			LoadLock.unlock();
+			while (Info->mState != lcPieceInfoState::Loaded)
+				lcSleeper::msleep(10);
+		}
+		return;
+	}
+
+	if (!Wait && !Info->IsModel() && !Info->IsProject())
+	{
+		if (RefCount == 1)
 		{
 			if (Priority)
 				mLoadQueue.prepend(Info);
@@ -1609,6 +1610,17 @@ void lcPiecesLibrary::LoadPieceInfo(PieceInfo* Info, bool Wait, bool Priority)
 
 			mLoadFutures.append(QtConcurrent::run([this]() { LoadQueuedPiece(); }));
 		}
+		return;
+	}
+
+	mLoadQueue.removeAll(Info);
+	Info->mState = lcPieceInfoState::Loading;
+	Info->Load();
+	Info->mState = lcPieceInfoState::Loaded;
+	if (RefCount > 1)
+	{
+		LoadLock.unlock();
+		emit PartLoaded(Info);
 	}
 }
 
@@ -1616,7 +1628,14 @@ void lcPiecesLibrary::ReleasePieceInfo(PieceInfo* Info)
 {
 	QMutexLocker LoadLock(&mLoadMutex);
 
-	if (Info->GetRefCount() == 0 || Info->Release() == 0)
+	if (Info->GetRefCount() != 0 && Info->Release() != 0)
+		return;
+
+	// The queue does not own a reference. Cancel before a temporary piece can
+	// be removed, and let an in-flight worker finish before unloading its mesh.
+	mLoadQueue.removeAll(Info);
+	mPendingLoadNotifications.remove(Info);
+	if (Info->mState != lcPieceInfoState::Loading)
 		Info->Unload();
 }
 
@@ -1641,10 +1660,34 @@ void lcPiecesLibrary::LoadQueuedPiece()
 
 	mLoadMutex.unlock();
 
-	if (Info)
-		Info->Load();
+	if (!Info)
+		return;
 
-	emit PartLoaded(Info);
+	Info->Load();
+
+	QMutexLocker LoadLock(&mLoadMutex);
+	if (Info->GetRefCount() == 0)
+	{
+		Info->Unload();
+		return;
+	}
+
+	Info->mState = lcPieceInfoState::Loaded;
+	const quint64 Notification = ++mNextLoadNotification;
+	mPendingLoadNotifications.insert(Info, Notification);
+
+	// A release between loading and GUI dispatch can delete or recycle Info.
+	// Match the load notification before passing the pointer to GUI consumers.
+	QMetaObject::invokeMethod(this, [this, Info, Notification]()
+	{
+		{
+			QMutexLocker NotificationLock(&mLoadMutex);
+			if (mPendingLoadNotifications.value(Info) != Notification)
+				return;
+			mPendingLoadNotifications.remove(Info);
+		}
+		emit PartLoaded(Info);
+	}, Qt::QueuedConnection);
 }
 
 void lcPiecesLibrary::WaitForLoadQueue()
@@ -1846,6 +1889,8 @@ void lcPiecesLibrary::ReleaseBuffers()
 	Context->DestroyVertexBuffer(mVertexBuffer);
 	Context->DestroyIndexBuffer(mIndexBuffer);
 
+	mPackedVertexBytes = 0;
+	mPackedIndexBytes = 0;
 	mBuffersDirty = true;
 }
 
@@ -1856,11 +1901,15 @@ void lcPiecesLibrary::UpdateBuffers(lcContext* Context)
 
 	int VertexDataSize = 0;
 	int IndexDataSize = 0;
+	bool AllMeshesPacked = true;
 	std::vector<lcMesh*> Meshes;
 
 	for (const auto& PieceIt : mPieces)
 	{
 		const PieceInfo* const Info = PieceIt.second;
+		if (Info->mState != lcPieceInfoState::Loaded)
+			continue;
+
 		lcMesh* Mesh = Info->GetMesh();
 
 		if (!Mesh)
@@ -1871,12 +1920,28 @@ void lcPiecesLibrary::UpdateBuffers(lcContext* Context)
 
 		VertexDataSize += Mesh->mVertexDataSize;
 		IndexDataSize += Mesh->mIndexDataSize;
-
+		AllMeshesPacked &= Mesh->mVertexCacheOffset != -1 && Mesh->mIndexCacheOffset != -1;
 		Meshes.push_back(Mesh);
 	}
 
+	// Reloading a model or its history can mark unchanged packed meshes dirty.
+	// New meshes have no offsets. Removing one changes the total size.
+	if (AllMeshesPacked && VertexDataSize == mPackedVertexBytes && IndexDataSize == mPackedIndexBytes)
+	{
+		mBuffersDirty = false;
+		return;
+	}
+
+	static const bool TraceUploads = qEnvironmentVariableIntValue("LEOCAD_PERF_TRACE") != 0;
+	QElapsedTimer UploadTimer;
+	if (TraceUploads)
+		UploadTimer.start();
+
 	Context->DestroyVertexBuffer(mVertexBuffer);
 	Context->DestroyIndexBuffer(mIndexBuffer);
+	mPackedVertexBytes = 0;
+	mPackedIndexBytes = 0;
+	mBuffersDirty = false;
 
 	if (!VertexDataSize || !IndexDataSize)
 		return;
@@ -1901,10 +1966,15 @@ void lcPiecesLibrary::UpdateBuffers(lcContext* Context)
 
 	mVertexBuffer = Context->CreateVertexBuffer(VertexDataSize, VertexData);
 	mIndexBuffer = Context->CreateIndexBuffer(IndexDataSize, IndexData);
-	mBuffersDirty = false;
+	mPackedVertexBytes = VertexDataSize;
+	mPackedIndexBytes = IndexDataSize;
 
 	free(VertexData);
 	free(IndexData);
+
+	if (TraceUploads)
+		qInfo() << "LEOCAD_GL_UPLOAD" << "meshes" << Meshes.size() << "vertex_bytes" << VertexDataSize
+			<< "index_bytes" << IndexDataSize << "cpu_us" << UploadTimer.nsecsElapsed() / 1000;
 }
 
 void lcPiecesLibrary::UnloadUnusedParts()
@@ -1914,7 +1984,7 @@ void lcPiecesLibrary::UnloadUnusedParts()
 	for (const auto& PieceIt : mPieces)
 	{
 		PieceInfo* Info = PieceIt.second;
-		if (Info->GetRefCount() == 0 && Info->mState != lcPieceInfoState::Unloaded)
+		if (Info->GetRefCount() == 0 && Info->mState == lcPieceInfoState::Loaded)
 			ReleasePieceInfo(Info);
 	}
 }
