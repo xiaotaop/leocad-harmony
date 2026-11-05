@@ -1,0 +1,73 @@
+{
+  "saved_reopened_byte_equal": true,
+  "mpd_sha256": "74398c6cf5a05bb7dd9e7ebb11bdce1fd571b98ddd90f591969680183c3f5616",
+  "mpd_bytes": 321,
+  "models": {
+    "main.ldr": [
+      {
+        "color": 4,
+        "position": [
+          -45.0,
+          0.0,
+          -10.0
+        ],
+        "matrix": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "reference": "10172.dat"
+      },
+      {
+        "color": 1,
+        "position": [
+          45.0,
+          0.0,
+          0.0
+        ],
+        "matrix": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "reference": "child.ldr"
+      }
+    ],
+    "child.ldr": [
+      {
+        "color": 14,
+        "position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "matrix": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "reference": "30293.dat"
+      }
+    ]
+  },
+  "empty_saved_bytes": 61,
+  "empty_type1_count": 0
+}
