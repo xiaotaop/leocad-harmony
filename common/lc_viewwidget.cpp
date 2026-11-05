@@ -75,7 +75,7 @@ void lcViewWidget::UpdateMousePosition()
 
 void lcViewWidget::initializeGL()
 {
-	mFramebufferSignature.clear();
+	mFramebufferSignature.reset();
 	QJsonObject Report = lcGLContextInfo(*context(), nullptr, QOpenGLContext::globalShareContext());
 	Report["stage"] = QStringLiteral("view_initialize");
 	Report["dpr"] = GetDeviceScale();
@@ -96,19 +96,18 @@ void lcViewWidget::paintGL()
 {
 	// paintGL, rather than initializeGL, is where Qt guarantees its widget FBO
 	// is bound. Resize/DPR changes can replace that FBO without a new context.
-	QJsonObject Key{{"fbo", int(defaultFramebufferObject())}, {"width", width()},
-		{"height", height()}, {"dpr", GetDeviceScale()}};
-	const QByteArray Signature = QJsonDocument(Key).toJson(QJsonDocument::Compact);
-	if (Signature != mFramebufferSignature)
+	const FramebufferSignature Signature{defaultFramebufferObject(), size(), GetDeviceScale()};
+	if (!mFramebufferSignature || Signature.Id != mFramebufferSignature->Id ||
+		Signature.Size != mFramebufferSignature->Size || Signature.Scale != mFramebufferSignature->Scale)
 	{
 		QJsonObject Report = lcGLFramebufferInfo(*context()->functions());
 		Report["stage"] = QStringLiteral("view_framebuffer");
-		Report["logical_width"] = width();
-		Report["logical_height"] = height();
-		Report["dpr"] = GetDeviceScale();
-		Report["qt_framebuffer"] = int(defaultFramebufferObject());
+		Report["logical_width"] = Signature.Size.width();
+		Report["logical_height"] = Signature.Size.height();
+		Report["dpr"] = Signature.Scale;
+		Report["qt_framebuffer"] = int(Signature.Id);
 		Report["passed"] = Report["passed"].toBool()
-			&& Report["framebuffer"].toInt() == int(defaultFramebufferObject());
+			&& Report["framebuffer"].toInt() == int(Signature.Id);
 		const QByteArray Log = QJsonDocument(Report).toJson(QJsonDocument::Compact);
 		if (Report["passed"].toBool())
 			qInfo().noquote() << "LEOCAD_GL_FRAMEBUFFER" << Log;

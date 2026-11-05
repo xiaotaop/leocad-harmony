@@ -82,7 +82,7 @@ void lcThumbnailManager::DrawThumbnail(lcPartThumbnailId ThumbnailId, lcPartThum
 	if (Thumbnail.Info->mState != lcPieceInfoState::Loaded)
 	{
 		qInfo() << "LEOCAD_THUMBNAIL_DEFERRED" << Thumbnail.Info->mFileName
-			<< "state" << int(Thumbnail.Info->mState) << "refs" << Thumbnail.Info->GetRefCount();
+			<< "state" << int(Thumbnail.Info->mState.load()) << "refs" << Thumbnail.Info->GetRefCount();
 		return;
 	}
 

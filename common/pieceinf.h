@@ -1,5 +1,6 @@
 #pragma once
 
+#include <atomic>
 #include <stdio.h>
 #include "lc_math.h"
 
@@ -196,7 +197,7 @@ public:
 	char m_strDescription[256];
 	lcZipFileType mZipFileType;
 	int mZipFileIndex;
-	lcPieceInfoState mState;
+	std::atomic<lcPieceInfoState> mState;
 	int mFolderType;
 	int mFolderIndex;
 

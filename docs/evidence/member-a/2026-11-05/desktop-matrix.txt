@@ -1,0 +1,51 @@
+normal-dpr1
+original_txt_sha256=e87705580ac96f7a6e60789242b837b8b6462e0cd287861071c067584699ca0f
+original_xml_sha256=85971ad33f68295a412055fa489915ddadabae6c7fa3a9c0a526200f32f4ead8
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 1 view 1094 698
+PASS   : ViewInputTests::thumbnailSharedRequestLifetime()
+PASS   : ViewInputTests::thumbnailDefersStaleCompletion()
+PASS   : ViewInputTests::thumbnailCancelledLoadDoesNotNotify()
+PASS   : ViewInputTests::thumbnailQueuedTemporaryCanBeRemoved()
+PASS   : ViewInputTests::renderScale(500)
+PASS   : ViewInputTests::renderScale(2000)
+PASS   : ViewInputTests::renderScale(5000)
+Totals: 47 passed, 0 failed, 0 skipped, 0 blacklisted, 7781ms
+
+fractional-dpr1_5
+original_txt_sha256=a1a88ce399a81feb358329397f1d4ada738b1af3d89de4d11e02027ba584d881
+original_xml_sha256=7f61bee4589c13b92434d68f540f24e7caf14f9a0dc2fd8d62e0c8e66ba9ebf1
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 1.5 view 1641 1047
+PASS   : ViewInputTests::thumbnailSharedRequestLifetime()
+PASS   : ViewInputTests::thumbnailDefersStaleCompletion()
+PASS   : ViewInputTests::thumbnailCancelledLoadDoesNotNotify()
+PASS   : ViewInputTests::thumbnailQueuedTemporaryCanBeRemoved()
+PASS   : ViewInputTests::renderScale(500)
+PASS   : ViewInputTests::renderScale(2000)
+PASS   : ViewInputTests::renderScale(5000)
+Totals: 47 passed, 0 failed, 0 skipped, 0 blacklisted, 9055ms
+
+normal-dpr2
+original_txt_sha256=fdf2af250b70c86e966a18458c8906ce9b9f23fcbf4141b4c3950bdae897849a
+original_xml_sha256=9d8fc5fc1f3fd2408ac33df57d6b37b30184bef7a3d98e6bedf8c1b9e072a244
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396
+PASS   : ViewInputTests::thumbnailSharedRequestLifetime()
+PASS   : ViewInputTests::thumbnailDefersStaleCompletion()
+PASS   : ViewInputTests::thumbnailCancelledLoadDoesNotNotify()
+PASS   : ViewInputTests::thumbnailQueuedTemporaryCanBeRemoved()
+PASS   : ViewInputTests::renderScale(500)
+PASS   : ViewInputTests::renderScale(2000)
+PASS   : ViewInputTests::renderScale(5000)
+Totals: 47 passed, 0 failed, 0 skipped, 0 blacklisted, 8933ms
+
+basic-dpr2
+original_txt_sha256=ac2af22e8cd15bdf0cacddf8511dfbb6dad22fdf24959d384db9371a758e28c1
+original_xml_sha256=0222a27a1b9a5ccc00a5bd722ddc5e912b81fe23cc0b9f5075bcac91981cd05f
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396
+PASS   : ViewInputTests::thumbnailSharedRequestLifetime()
+PASS   : ViewInputTests::thumbnailDefersStaleCompletion()
+PASS   : ViewInputTests::thumbnailCancelledLoadDoesNotNotify()
+PASS   : ViewInputTests::thumbnailQueuedTemporaryCanBeRemoved()
+PASS   : ViewInputTests::renderScale(500)
+PASS   : ViewInputTests::renderScale(2000)
+PASS   : ViewInputTests::renderScale(5000)
+Totals: 47 passed, 0 failed, 0 skipped, 0 blacklisted, 8670ms

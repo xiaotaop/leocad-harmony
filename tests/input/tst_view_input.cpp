@@ -4,6 +4,8 @@
 #include "lc_context.h"
 #include "lc_thumbnailmanager.h"
 #include <QScopeGuard>
+#include <QSemaphore>
+#include <QThreadPool>
 #include "lc_library.h"
 #include "lc_mainwindow.h"
 #include "lc_model.h"
@@ -464,6 +466,175 @@ private slots:
         QVERIFY(!qvariant_cast<QPixmap>(Ready.at(0).at(1)).isNull());
         QCOMPARE(Info->mState,lcPieceInfoState::Loaded);
         qInfo()<<"D9_STALE_CALLBACK completed";
+    }
+    void thumbnailCancelledLoadDoesNotNotify()
+    {
+        auto* Library=lcGetPiecesLibrary();
+        auto* Manager=Library->GetThumbnailManager();
+        PieceInfo* Info=Library->FindPiece("3001.dat",lcGetActiveProject(),false,false);
+        QVERIFY(Info);
+        QCOMPARE(Info->GetRefCount(),0);
+
+        QSignalSpy Completed(Library,&lcPiecesLibrary::PartLoaded);
+        QSignalSpy Ready(Manager,&lcThumbnailManager::ThumbnailReady);
+        const auto Cancelled=Manager->RequestThumbnail(Info,lcGetColorIndex(4),67,1);
+        Library->WaitForLoadQueue();
+        Manager->ReleaseThumbnail(Cancelled.first);
+        QCOMPARE(Info->mState,lcPieceInfoState::Unloaded);
+
+        const auto Current=Manager->RequestThumbnail(Info,lcGetColorIndex(1),67,1);
+        auto Release=qScopeGuard([&]() {Manager->ReleaseThumbnail(Current.first);});
+        Library->WaitForLoadQueue();
+        QCoreApplication::sendPostedEvents();
+        QCOMPARE(Completed.count(),1);
+        QCOMPARE(Ready.count(),1);
+        QCOMPARE(qvariant_cast<lcPartThumbnailId>(Ready.at(0).at(0)),Current.first);
+        QVERIFY(!qvariant_cast<QPixmap>(Ready.at(0).at(1)).isNull());
+    }
+    void thumbnailQueuedTemporaryCanBeRemoved()
+    {
+        auto* Library=lcGetPiecesLibrary();
+        auto* Manager=Library->GetThumbnailManager();
+        Library->WaitForLoadQueue();
+        QCoreApplication::sendPostedEvents();
+
+        auto* Pool=QThreadPool::globalInstance();
+        const int ThreadCount=Pool->maxThreadCount();
+        QSemaphore Entered,Unblock,Exited;
+        Pool->setMaxThreadCount(1);
+        Pool->start([&]() {Entered.release(); Unblock.acquire(); Exited.release();});
+        auto Restore=qScopeGuard([&]() {
+            Unblock.release();
+            Exited.acquire();
+            Library->WaitForLoadQueue();
+            Pool->setMaxThreadCount(ThreadCount);
+        });
+        QVERIFY(Entered.tryAcquire(1,5000));
+
+        constexpr char Name[]="d10-unlisted-cancelled.dat";
+        auto* Info=Library->FindPiece(Name,lcGetActiveProject(),true,false);
+        QVERIFY(Info && Info->IsPlaceholder());
+        QSignalSpy Completed(Library,&lcPiecesLibrary::PartLoaded);
+        const auto Pending=Manager->RequestThumbnail(Info,lcGetColorIndex(4),69,1);
+        Manager->ReleaseThumbnail(Pending.first);
+        Library->RemoveTemporaryPieces();
+        QVERIFY(!Library->FindPiece(Name,lcGetActiveProject(),false,false));
+        Restore.dismiss();
+        Unblock.release();
+        Exited.acquire();
+        Library->WaitForLoadQueue();
+        Pool->setMaxThreadCount(ThreadCount);
+        QCoreApplication::sendPostedEvents();
+        QCOMPARE(Completed.count(),0);
+    }
+    void renderScale_data()
+    {
+        QTest::addColumn<int>("Count");
+        QTest::newRow("500")<<500;
+        QTest::newRow("2000")<<2000;
+        QTest::newRow("5000")<<5000;
+    }
+    void renderScale()
+    {
+        QFETCH(int,Count);
+        QTemporaryDir Files;
+        QVERIFY(Files.isValid());
+        const QString Name=QStringLiteral("d10-%1.mpd").arg(Count);
+        const QString Path=Files.filePath(Name);
+        static constexpr std::array<int,16> Parts{
+            3001,3002,3003,3004,3005,3008,3010,3020,
+            3021,3022,3024,3030,3031,3032,3622,3039
+        };
+        QFile File(Path);
+        QVERIFY(File.open(QIODevice::WriteOnly));
+        QByteArray Mpd("0 FILE main.ldr\n");
+        for(int Child=0;Child<4;Child++)
+            Mpd+=QStringLiteral("1 16 %1 0 0 1 0 0 0 1 0 0 0 1 child-%2.ldr\n").arg(Child*1040).arg(Child).toLatin1();
+        Mpd+="0 NOFILE\n";
+        for(int Child=0;Child<4;Child++)
+        {
+            Mpd+=QStringLiteral("0 FILE child-%1.ldr\n").arg(Child).toLatin1();
+            for(int Index=0;Index<Count/4;Index++)
+            {
+                const int Color=1+(Index+Child)%15;
+                Mpd+=QStringLiteral("1 %1 %2 %3 %4 1 0 0 0 1 0 0 0 1 %5.dat\n")
+                    .arg(Color).arg((Index%20)*50).arg(-(Index/400)*32)
+                    .arg(((Index/20)%20)*50).arg(Parts[(Index+Child)%Parts.size()]).toLatin1();
+            }
+            Mpd+="0 NOFILE\n";
+        }
+        QCOMPARE(File.write(Mpd),qint64(Mpd.size()));
+        File.close();
+        const QString Export=qEnvironmentVariable("LEOCAD_D10_FIXTURE_DIR");
+        if(!Export.isEmpty())
+        {
+            QVERIFY(QDir().mkpath(Export));
+            QFile Copy(QDir(Export).filePath(Name));
+            QVERIFY(Copy.open(QIODevice::WriteOnly));
+            QCOMPARE(Copy.write(Mpd),qint64(Mpd.size()));
+        }
+
+        for(const char* Stage : {"open","reopen"})
+        {
+            qInfo()<<"D10_RENDER_STAGE"<<Count<<Stage;
+            QElapsedTimer Timer;
+            Timer.start();
+            QVERIFY(Window->OpenProject(Path));
+            const qint64 OpenUs=Timer.nsecsElapsed()/1000;
+            View=Window->GetActiveView();
+            QVERIFY(View);
+            Widget=View->GetWidget();
+            QVERIFY(Widget);
+            const auto& Models=lcGetActiveProject()->GetModels();
+            QCOMPARE(Models.size(),size_t(5));
+            QCOMPARE(Models[0]->GetPieces().size(),size_t(4));
+            for(size_t Index=1;Index<Models.size();Index++)
+                QCOMPARE(Models[Index]->GetPieces().size(),size_t(Count/4));
+            QSignalSpy Swapped(Widget,&QOpenGLWidget::frameSwapped);
+            View->SetViewpoint(lcViewpoint::Home);
+            View->ZoomExtents();
+            Widget->update();
+            QVERIFY(Swapped.count() || Swapped.wait(5000));
+            const qint64 FrameUs=Timer.nsecsElapsed()/1000;
+            QImage First=Widget->grabFramebuffer();
+            QVERIFY(!First.isNull());
+            qInfo()<<"D10_RENDER_FRAME"<<Count<<Stage<<"open_us"<<OpenUs<<"first_swap_us"<<FrameUs
+                   <<"size"<<First.size()<<"dpr"<<Widget->GetDeviceScale();
+            if(qstrcmp(Stage,"reopen")!=0)
+                continue;
+
+            QList<qint64> Samples;
+            for(int Index=0;Index<12;Index++)
+            {
+                View->SetViewpoint(Index%2?lcViewpoint::Home:lcViewpoint::Front);
+                View->ZoomExtents();
+                Timer.restart();
+                const QImage Frame=Widget->grabFramebuffer();
+                Samples.push_back(Timer.nsecsElapsed()/1000);
+                QVERIFY(!Frame.isNull());
+                if(Index==0)
+                    QVERIFY(Frame!=First);
+            }
+            std::sort(Samples.begin(),Samples.end());
+            qInfo()<<"D10_RENDER_REDRAW"<<Count<<"min_us"<<Samples.front()
+                   <<"median_us"<<(Samples[5]+Samples[6])/2<<"max_us"<<Samples.back()<<"samples"<<Samples.size();
+
+            // Exercise the conservative dirty flag with all current meshes
+            // still resident, then confirm the real rendered pixels are stable.
+            View->SetViewpoint(lcViewpoint::Home);
+            View->ZoomExtents();
+            const QImage Resident=Widget->grabFramebuffer();
+            QVERIFY(!Resident.isNull());
+            auto* Library=lcGetPiecesLibrary();
+            qInfo()<<"D10_RENDER_STAGE"<<Count<<"resident-invalidations";
+            Timer.restart();
+            for(int Index=0;Index<8;Index++)
+            {
+                Library->mBuffersDirty=true;
+                QCOMPARE(Widget->grabFramebuffer(),Resident);
+            }
+            qInfo()<<"D10_RENDER_RESIDENT"<<Count<<"elapsed_us"<<Timer.nsecsElapsed()/1000<<"frames"<<8;
+        }
     }
     void alphaSwitchSequence_data()
     {
