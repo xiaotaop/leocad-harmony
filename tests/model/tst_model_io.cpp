@@ -637,6 +637,99 @@ private slots:
         QCOMPARE(reopened.GetMainModel()->GetPieces().size(), size_t(20));
     }
 
+    void continuousMpdEditsPreserveStructureAndHistory()
+    {
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        const QString path = dir.filePath(QString::fromUtf8("连续 编辑.mpd"));
+        QFile input(path);
+        QVERIFY(input.open(QIODevice::WriteOnly));
+        const QByteArray contents("0 FILE root.ldr\n"
+            "1 4 0 0 0 1 0 0 0 1 0 0 0 1 child.ldr\n"
+            "1 1 20 30 40 0 0 1 0 1 0 -1 0 0 child.ldr\n"
+            "0 FILE child.ldr\n"
+            "1 4 0 0 0 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n"
+            "1 14 0 10 20 1 0 0 0 1 0 0 0 1 b_fixture_brick.dat\n");
+        QCOMPARE(input.write(contents), qint64(contents.size()));
+        input.close();
+        QFile invalid(dir.filePath("cycle.mpd"));
+        QVERIFY(invalid.open(QIODevice::WriteOnly));
+        const QByteArray cycle("0 FILE self.ldr\n1 4 0 0 0 1 0 0 0 1 0 0 0 1 self.ldr\n");
+        QCOMPARE(invalid.write(cycle), qint64(cycle.size()));
+        invalid.close();
+
+        EditingSession session;
+        auto loaded = std::make_unique<Project>();
+        QVERIFY(loaded->Load(path, false));
+        gApplication->SetProject(loaded.release());
+        Project* project = lcGetActiveProject();
+        lcModel* child = project->GetModel("child.ldr");
+        QVERIFY(child);
+        project->SetActiveModel(child, true);
+        QVERIFY(project->Save(path).has_value());
+        const lcMatrix44 identity = lcMatrix44Identity();
+
+        for (int round = 1; round <= 20; ++round)
+        {
+            lcPiece* piece = child->GetPieces()[0].get();
+            child->SetSelectionAndFocusAction({piece}, piece, LC_PIECE_SECTION_POSITION, lcSelectionMode::Single);
+            child->MoveSelectedObjects(lcVector3(20, 0, 0), lcModelTransformFlag::Checkpoint, lcModelHistoryEditMerge::None);
+            const quint32 color = round % 2 ? 2 : 14;
+            child->SetSelectedPiecesColorIndex(lcGetColorIndex(color));
+            QVERIFY(project->IsModified());
+
+            // Rejected inputs and failed saves must not discard the active
+            // child, edits, or the history leading back to the last savepoint.
+            QVERIFY(!project->Load(invalid.fileName(), false));
+            QVERIFY(!project->Save(dir.path()).has_value());
+            QCOMPARE(project->GetFileName(), path);
+            QCOMPARE(project->GetActiveModel(), child);
+            QVERIFY(project->IsModified());
+            child->UndoAction();
+            child->UndoAction();
+            QVERIFY(!project->IsModified());
+            QCOMPARE(child->GetPieces()[0]->mModelWorld.GetTranslation(), lcVector3(20.0f * (round - 1), 0, 0));
+            QCOMPARE(child->GetPieces()[0]->GetColorCode(), quint32(round == 1 ? 4 : (round % 2 ? 14 : 2)));
+            child->RedoAction();
+            child->RedoAction();
+            QVERIFY(project->IsModified());
+            QVERIFY(project->Save(path).has_value());
+            QVERIFY(!project->IsModified());
+
+            Project reopened(true);
+            QVERIFY(reopened.Load(path, false));
+            QCOMPARE(reopened.GetModels().size(), size_t(2));
+            lcModel* root = reopened.GetModel("root.ldr");
+            lcModel* reopenedChild = reopened.GetModel("child.ldr");
+            QVERIFY(root && reopenedChild);
+            QCOMPARE(root->GetPieces().size(), size_t(2));
+            QCOMPARE(reopenedChild->GetPieces().size(), size_t(2));
+            for (const auto& reference : root->GetPieces())
+            {
+                QCOMPARE(reference->GetID(), QString("child.ldr"));
+                QCOMPARE(reference->mPieceInfo->GetModel(), reopenedChild);
+            }
+            QCOMPARE(root->GetPieces()[0]->GetColorCode(), quint32(4));
+            QCOMPARE(root->GetPieces()[1]->GetColorCode(), quint32(1));
+            // Independent LDraw -> LeoCAD coordinate/rotation expectations.
+            QCOMPARE(root->GetPieces()[1]->mModelWorld.GetTranslation(), lcVector3(20, 40, -30));
+            QCOMPARE(root->GetPieces()[1]->mModelWorld[0], lcVector4(0, -1, 0, 0));
+            QCOMPARE(root->GetPieces()[1]->mModelWorld[1], lcVector4(1, 0, 0, 0));
+            QCOMPARE(root->GetPieces()[1]->mModelWorld[2], lcVector4(0, 0, 1, 0));
+            for (int row = 0; row < 4; ++row)
+                QCOMPARE(root->GetPieces()[0]->mModelWorld[row], identity[row]);
+            for (int index = 0; index < 2; ++index)
+            {
+                const auto& actual = reopenedChild->GetPieces()[index];
+                QCOMPARE(actual->GetID(), QString("b_fixture_brick.dat"));
+                QCOMPARE(actual->GetColorCode(), index == 0 ? color : quint32(14));
+                QCOMPARE(actual->mModelWorld.GetTranslation(), index == 0 ? lcVector3(20.0f * round, 0, 0) : lcVector3(0, 20, -10));
+                for (int row = 0; row < 3; ++row)
+                    QCOMPARE(actual->mModelWorld[row], identity[row]);
+            }
+        }
+    }
+
     void serializationDoesNotClearEditHistoryDirtyState()
     {
         EditingSession session;
