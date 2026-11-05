@@ -1,0 +1,85 @@
+# D10 perf probe, mode=core
+# qt=6.12.0 platform=offscreen
+# archive=/home/dax/leocad-harmony/assets/ldraw-lite/library-lite.zip
+# archive_bytes=3833541
+# cache=/tmp/bd-perf/cache-run-3/LeoCAD Software/LeoCAD
+# ideal_threads=32
+library_cold_loaded=1
+library_cold_pieces=1160
+library_cold_ms=12.760
+library_warm_ms=5.321
+library_warm_ms=5.216
+library_warm_ms=5.369
+library_warm_ms=5.089
+library_warm_ms=4.820
+window_ms=0.136
+createwidgets_ms=19.504
+project_ms=4.733
+setdefaultpart_ms=0.727
+keystroke_rows=1161
+# keystroke: textChanged on PartsFilter, end to end
+keystroke_ms=0.367 step=b
+keystroke_ms=0.258 step=br
+keystroke_ms=0.233 step=bri
+keystroke_ms=0.231 step=bric
+keystroke_ms=0.337 step=brick
+keystroke_ms=0.368 step=(clear)
+keystroke_ms=0.492 step=b
+keystroke_ms=0.301 step=br
+keystroke_ms=0.243 step=bri
+keystroke_ms=0.233 step=bric
+keystroke_ms=0.239 step=brick
+keystroke_ms=0.226 step=(clear)
+keystroke_ms=0.395 step=b
+keystroke_ms=0.261 step=br
+keystroke_ms=0.237 step=bri
+keystroke_ms=0.233 step=bric
+keystroke_ms=0.238 step=brick
+keystroke_ms=0.200 step=(clear)
+keystroke_ms=0.313 step=b
+keystroke_ms=0.277 step=br
+keystroke_ms=0.295 step=bri
+keystroke_ms=0.256 step=bric
+keystroke_ms=0.268 step=brick
+keystroke_ms=0.228 step=(clear)
+keystroke_ms=0.507 step=b
+keystroke_ms=0.317 step=br
+keystroke_ms=0.269 step=bri
+keystroke_ms=0.261 step=bric
+keystroke_ms=0.432 step=brick
+keystroke_ms=0.320 step=(clear)
+# scaling: synthetic widths over the loaded library's parts.
+# scaling: rows repeat beyond the real count on purpose; only the
+# scaling: per-row cost is being measured, not the contents.
+scaling_build=1160,0.258
+scaling_row=1160,b,0.433
+scaling_row=1160,bri,0.297
+scaling_row=1160,brick,0.457
+scaling_build=5000,2.461
+scaling_row=5000,b,1.097
+scaling_row=5000,bri,1.227
+scaling_row=5000,brick,1.289
+scaling_build=20000,10.035
+scaling_row=20000,b,6.121
+scaling_row=20000,bri,5.416
+scaling_row=20000,brick,5.610
+scaling_build=50000,28.048
+scaling_row=50000,b,14.779
+scaling_row=50000,bri,19.011
+scaling_row=50000,brick,15.672
+scaling_build=100000,60.794
+scaling_row=100000,b,37.668
+scaling_row=100000,bri,45.665
+scaling_row=100000,brick,43.072
+# summary
+library_warm_min=4.820
+library_warm_median=5.216
+library_warm_mean=5.163
+library_warm_max=5.369
+library_warm_n=5
+keystroke_min=0.200
+keystroke_median=0.268
+keystroke_mean=0.295
+keystroke_max=0.507
+keystroke_n=30
+whole_core_ms=401.112

@@ -1,0 +1,23 @@
+# D10 perf probe, mode=show
+# qt=6.12.0 platform=offscreen
+# archive=/home/dax/leocad-harmony/assets/ldraw-lite/library-lite.zip
+# archive_bytes=3833541
+# cache=/tmp/bd-perf/cache-run-2/LeoCAD Software/LeoCAD
+# ideal_threads=32
+renderer_init_ms=168.590
+renderer_ok=1
+style_ms=0.119
+window_ms=0.396
+library_ms=12.182
+library_loaded=1
+library_pieces=1160
+createwidgets_ms=24.295
+project_ms=5.117
+setdefaultpart_ms=1.008
+startup_before_show_ms=211.801
+show_stage_ms=110.343
+show_stage_ms=29.227
+show_stage_ms=22.613
+show_stage_ms=23.853
+show_stage_ms=22.613
+startup_with_show_ms=468.770

@@ -1,0 +1,4 @@
+QOpenGLWidget is not supported on this platform.
+QOpenGLWidget is not supported on this platform.
+LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":0,"profile":0,"renderable_type":1,"samples":-1,"stencil_bits":0},"error":"","framebuffers":true,"gl_version":"4.1 (Compatibility Profile) Mesa 23.2.1-1ubuntu3.1~22.04.4","gles_build":false,"glsl_version":"4.10","is_current":true,"is_gles":false,"passed":true,"renderer":"D3D12 (Intel(R) UHD Graphics)","shaders":true,"share_requested":false,"sharing":false,"stage":"renderer_offscreen","surface_format":{"depth_bits":0,"major":2,"minor":0,"profile":0,"renderable_type":1,"samples":-1,"stencil_bits":0},"surface_requested_format":{"depth_bits":0,"major":2,"minor":0,"profile":0,"renderable_type":1,"samples":-1,"stencil_bits":0},"surface_valid":true,"valid":true,"vendor":"Microsoft Corporation"}
+LEOCAD_GL_RENDERER {"passed":true,"programs":9,"safe_render":false,"skipped_programs":0}
