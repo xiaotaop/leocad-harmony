@@ -1,0 +1,4 @@
+2026-11-04T22:35:56.7141838+08:00 D9 new signed main2c514fcb OFF package installed and started. Await manual three rounds.
+2026-11-04T22:51:48.6786527+08:00 Leader confirms all three manual sameprocess LDR->MPD rounds responsive and thumbnails normal.
+2026-11-04T22:57:16.6872449+08:00 Native system picker rejects directory-name collision; dirty state preserved on cancel. Not an app write-permission/rollback test.
+2026-11-04T23:02:23.6940010+08:00 Second D9 process closed via title bar; config restored and originals read back for hash comparison.

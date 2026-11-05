@@ -1,0 +1,221 @@
+-- Configuring done (6.2s)
+-- Generating done (3.0s)
+-- Build files have been written to: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4
+[0/2] Re-checking globbed directories...
+[1/27] Automatic MOC and UIC for target leocad
+[2/27] Running AUTOMOC file extraction for target leocad
+[3/27] Running moc --collect-json for target leocad
+[4/27] Automatic RCC for generated/leocad_resources.qrc
+[5/27] Building CXX object CMakeFiles/leocad.dir/common/lc_aboutdialog.cpp.o
+[6/27] Building CXX object CMakeFiles/leocad.dir/common/lc_blenderpreferences.cpp.o
+[7/27] Building CXX object CMakeFiles/leocad.dir/common/project.cpp.o
+[8/27] Building CXX object CMakeFiles/leocad.dir/common/lc_application.cpp.o
+[9/27] Building CXX object CMakeFiles/leocad.dir/common/lc_context.cpp.o
+[10/27] Building CXX object CMakeFiles/leocad.dir/common/lc_doublespinbox.cpp.o
+[11/27] Building CXX object CMakeFiles/leocad.dir/leocad_autogen/mocs_compilation.cpp.o
+[12/27] Building CXX object CMakeFiles/leocad.dir/common/lc_findreplacewidget.cpp.o
+[13/27] Building CXX object CMakeFiles/leocad.dir/common/lc_lxf.cpp.o
+[14/27] Building CXX object CMakeFiles/leocad.dir/common/lc_propertieswidget.cpp.o
+[15/27] Building CXX object CMakeFiles/leocad.dir/common/lc_mainwindow.cpp.o
+[16/27] Building CXX object CMakeFiles/leocad.dir/common/lc_partselectionwidget.cpp.o
+[17/27] Building CXX object CMakeFiles/leocad.dir/common/lc_thumbnailmanager.cpp.o
+[18/27] Building CXX object CMakeFiles/leocad.dir/common/lc_timelinewidget.cpp.o
+[19/27] Building CXX object CMakeFiles/leocad.dir/common/lc_viewmanipulator.cpp.o
+[20/27] Building CXX object CMakeFiles/leocad.dir/common/lc_view.cpp.o
+[21/27] Building CXX object CMakeFiles/leocad.dir/common/lc_viewwidget.cpp.o
+[22/27] Building CXX object CMakeFiles/leocad.dir/common/lc_model.cpp.o
+[23/27] Building CXX object CMakeFiles/leocad.dir/qt/lc_qpreferencesdialog.cpp.o
+[24/27] Building CXX object CMakeFiles/leocad.dir/leocad_autogen/WEMFWQQXNA/qrc_leocad_resources.cpp.o
+[25/27] Linking CXX shared module libleocad.so
+[26/27] Generating HarmonyOS HAP for leocad
+harmonydeployqt: external application output: > hvigor Finished :entry:default@PreBuild... after 950 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@CreateModuleInfo... after 5 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@GenerateMetadata... after 12 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@ConfigureCmake... after 84 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@MergeProfile... after 149 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@CreateBuildProfile... after 12 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@PreCheckSyscap... after 2 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@GeneratePkgContextInfo... after 53 ms 
+
+harmonydeployqt: external application output: > hvigor UP-TO-DATE :entry:default@GeneratePkgSdkInfo...  
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@ProcessIntegratedHsp... after 3 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@BuildNativeWithCmake... after 212 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@MakePackInfo... after 14 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@SyscapTransform... after 64 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@ProcessProfile... after 587 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@ProcessRouterMap... after 16 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@ProcessShareConfig... after 15 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@ProcessStartupConfig... after 7 ms 
+
+harmonydeployqt: external application output: > hvigor UP-TO-DATE :entry:default@ProcessResource...  
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@GenerateLoaderJson... after 58 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@CompileResource... after 1 s 25 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@BuildJS... after 18 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@BuildNativeWithNinja... after 578 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@ProcessLibs... after 417 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@DoNativeStrip... after 808 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@CacheNativeLibs... after 88 ms 
+
+harmonydeployqt: external application output: > hvigor WARN: WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/qability/QAbility.ets:7:17
+ Currently module for 'libqohos.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/qability/OhosExportModules.ts:13:58
+ The system capacity of this api '__kit__StatusBarExtensionKit__statusBarManager' is not supported on all devices
+
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/process/QChild
+==============================================
+Deployment completed successfully!
+==============================================
+Project location: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build
+HAP package: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/build/default/outputs/default/entry-default-unsigned.hap
+Process.ets:4:17
+ Currently module for 'libqohos.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/qabilitystage/QAbilityStage.ets:8:17
+ Currently module for 'libqohos.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/pages/MainWindowNativeNode.ets:24:32
+ 'NODE' has been deprecated.
+
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/pages/FloatWindowNativeNode.ets:23:32
+ 'NODE' has been deprecated.
+
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/pages/SubWindowNativeNode.ets:23:32
+ 'NODE' has been deprecated.
+
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/pages/UiExtensionNativeNode.ets:27:32
+ 'NODE' has been deprecated.
+
+
+
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@CompileArkTS... after 1 min 2 s 790 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@GeneratePkgModuleJson... after 11 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@ProcessCompiledResources... after 3 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@PackageHap... after 2 s 628 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@PackingCheck... after 16 ms 
+
+harmonydeployqt: external application output: > hvigor WARN: Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\build\harmony-d4\harmonyos-build\build-profile.json5.
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@SignHap... after 8 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:default@CollectDebugSymbol... after 3 ms 
+
+harmonydeployqt: external application output: > hvigor Finished :entry:assembleHap... after 1 ms 
+
+harmonydeployqt: external application output: > hvigor BUILD SUCCESSFUL in 2 min 33 s 856 ms 
+
+harmonydeployqt: external application output: 
+33 tasks in total: 31 executed, 2 up-to-date
+
+Executing signature generate command
+Start generating p12
+Start generating csr
+Start generating certificate
+Note: You are applying for restricted ACL permissions: FILE_ACCESS_PERSIST, READ_PASTEBOARD These permissions are subject to review together with your app release. For a faster review process, apply for the following permissions instead, if they are sufficient for your purposes: PasteButton (https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/pastebutton). Permission Application Scenarios (https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/restricted-permissions)
+Start generating profile
+Signing config written to D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\build\harmony-d4\harmonyos-build\build-profile.json5
+Signature generation completed successfully.
+
+New cli version 1.3.10 available, run `devecocli update` to update
+New docs version 1.3.10 available, run `devecocli docs update` to upgrade
+> hvigor [32mFinished :entry:default@PreBuild... after 193 ms [39m
+> hvigor [32mFinished :entry:default@CreateModuleInfo... after 1 ms [39m
+> hvigor [32mFinished :entry:default@GenerateMetadata... after 5 ms [39m
+> hvigor [32mFinished :entry:default@ConfigureCmake... after 19 ms [39m
+> hvigor [32mFinished :entry:default@MergeProfile... after 35 ms [39m
+> hvigor [32mFinished :entry:default@CreateBuildProfile... after 3 ms [39m
+> hvigor [32mFinished :entry:default@PreCheckSyscap... after 1 ms [39m
+> hvigor [32mFinished :entry:default@GeneratePkgContextInfo... after 16 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@GeneratePkgSdkInfo...  [39m
+> hvigor [32mFinished :entry:default@ProcessIntegratedHsp... after 1 ms [39m
+> hvigor [32mFinished :entry:default@BuildNativeWithCmake... after 35 ms [39m
+> hvigor [32mFinished :entry:default@MakePackInfo... after 4 ms [39m
+> hvigor [32mFinished :entry:default@SyscapTransform... after 14 ms [39m
+> hvigor [32mFinished :entry:default@ProcessProfile... after 121 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@ProcessRouterMap...  [39m
+> hvigor [32mUP-TO-DATE :entry:default@ProcessShareConfig...  [39m
+> hvigor [32mFinished :entry:default@ProcessStartupConfig... after 2 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@ProcessResource...  [39m
+> hvigor [32mUP-TO-DATE :entry:default@GenerateLoaderJson...  [39m
+> hvigor [32mFinished :entry:default@CompileResource... after 435 ms [39m
+> hvigor [32mFinished :entry:default@BuildJS... after 4 ms [39m
+> hvigor [32mFinished :entry:default@BuildNativeWithNinja... after 127 ms [39m
+> hvigor [32mFinished :entry:default@ProcessLibs... after 89 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@DoNativeStrip...  [39m
+> hvigor [32mUP-TO-DATE :entry:default@CacheNativeLibs...  [39m
+> hvigor WARN: WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/qability/QAbility.ets:7:17
+ Currently module for 'libqohos.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/qability/OhosExportModules.ts:13:58
+ The system capacity of this api '__kit__StatusBarExtensionKit__statusBarManager' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/process/QChildProcess.ets:4:17
+ Currently module for 'libqohos.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/qabilitystage/QAbilityStage.ets:8:17
+ Currently module for 'libqohos.so' is not verified. If you're importing napi, its verification will be enabled in later SDK version. Please make sure the corresponding .d.ts file is provided and the napis are correctly declared.
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/pages/MainWindowNativeNode.ets:24:32
+ 'NODE' has been deprecated.
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/pages/FloatWindowNativeNode.ets:23:32
+ 'NODE' has been deprecated.
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/pages/SubWindowNativeNode.ets:23:32
+ 'NODE' has been deprecated.
+
+WARN: ArkTS:WARN File: D:/codex/2026-10-26/winhttrack-website-copier-colorhug-leocad-olive/work/leocad-harmony/build/harmony-d4/harmonyos-build/entry/src/main/ets/pages/UiExtensionNativeNode.ets:27:32
+ 'NODE' has been deprecated.
+
+
+> hvigor [32mFinished :entry:default@CompileArkTS... after 11 s 82 ms [39m
+> hvigor [32mFinished :entry:default@GeneratePkgModuleJson... after 10 ms [39m
+> hvigor [32mFinished :entry:default@ProcessCompiledResources... after 3 ms [39m
+> hvigor [32mFinished :entry:default@PackageHap... after 706 ms [39m
+> hvigor [32mFinished :entry:default@PackingCheck... after 22 ms [39m
+> hvigor [32mFinished :entry:default@SignHap... after 3 s 738 ms [39m
+> hvigor [32mFinished :entry:default@CollectDebugSymbol... after 6 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 21 s 510 ms [39m
+
+33 tasks in total: 26 executed, 7 up-to-date
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          DB69D9F1E4E3DC0FD6D80C4E87B4A1AB90477FABD59BC722BD48F2B0F8FDF54E       D:\codex\2026-10-26\winhttrack-w…
+

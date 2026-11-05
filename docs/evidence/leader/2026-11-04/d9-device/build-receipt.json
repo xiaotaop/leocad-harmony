@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-04",
+  "source": "2c514fcbfffc8282ae53ffdbe20de62aed21f881",
+  "qt": "6.12.0",
+  "sdk": "26.0.0.105",
+  "cli": "26.0.0.851",
+  "model": "HAD-W32",
+  "os_parameter": "OpenHarmony-6.1.0.115",
+  "api": 23,
+  "safe_render": false,
+  "model_test_hap": false,
+  "package": {
+    "name": "leocad-d9-signed.hap",
+    "bytes": 80139912,
+    "sha256": "db69d9f1e4e3dc0fd6d80c4e87b4a1ab90477fabd59bc722bd48f2b0f8fdf54e"
+  },
+  "native_build_id": "16c20e3b70e5573652735e73b3320e294c68a688",
+  "permissions": [
+    "ohos.permission.STORE_PERSISTENT_DATA",
+    "ohos.permission.FILE_ACCESS_PERSIST",
+    "ohos.permission.PREPARE_APP_TERMINATE",
+    "ohos.permission.READ_PASTEBOARD",
+    "ohos.permission.GET_FILE_ICON",
+    "ohos.permission.PRINT"
+  ],
+  "initial_pid": 11449,
+  "config_before_sha256": "66819ceff7026c86c6d3ccf088f3556068cc7bd78b7dc39202b161803fd10530"
+}

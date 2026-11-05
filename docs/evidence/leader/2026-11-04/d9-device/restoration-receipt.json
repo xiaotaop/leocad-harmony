@@ -1,0 +1,69 @@
+{
+  "app_closed_before_restore": true,
+  "pid_before_restore": 16935,
+  "files": [
+    {
+      "path": "Download/LeoCAD-D8/Input/curated-device.mpd",
+      "bytes": 250,
+      "before_sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742",
+      "after_sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742",
+      "equal": true
+    },
+    {
+      "path": "Download/LeoCAD-D8/Input/cycle.mpd",
+      "bytes": 53,
+      "before_sha256": "468c20455fcda4ce47362a1ac465619e8b6bc9f0251188f7f4c02caa87081438",
+      "after_sha256": "468c20455fcda4ce47362a1ac465619e8b6bc9f0251188f7f4c02caa87081438",
+      "equal": true
+    },
+    {
+      "path": "Download/LeoCAD-D8/Input/render-baseline.ldr",
+      "bytes": 267,
+      "before_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "after_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "equal": true
+    },
+    {
+      "path": "Download/LeoCAD-D8/Input/truncated.ldr",
+      "bytes": 23,
+      "before_sha256": "d5c108f49a09c75a5cd2b910e8532d930e06ed8735937837915dfb8fc7b7b171",
+      "after_sha256": "d5c108f49a09c75a5cd2b910e8532d930e06ed8735937837915dfb8fc7b7b171",
+      "equal": true
+    },
+    {
+      "path": "Download/LeoCAD-D8/offline-roundtrip.ldr",
+      "bytes": 269,
+      "before_sha256": "2d2f8a26b4d4aaeb370a5a7d2a36f8a6fc8bf203491552659326e40c3780c7bf",
+      "after_sha256": "2d2f8a26b4d4aaeb370a5a7d2a36f8a6fc8bf203491552659326e40c3780c7bf",
+      "equal": true
+    },
+    {
+      "path": "Download/LeoCAD-D8/子模型 编辑闭环.mpd",
+      "bytes": 321,
+      "before_sha256": "74398c6cf5a05bb7dd9e7ebb11bdce1fd571b98ddd90f591969680183c3f5616",
+      "after_sha256": "74398c6cf5a05bb7dd9e7ebb11bdce1fd571b98ddd90f591969680183c3f5616",
+      "equal": true
+    },
+    {
+      "path": "Download/LeoCAD-D8/首发 建模闭环.ldr",
+      "bytes": 104,
+      "before_sha256": "c5f81e3906b195ab1093c4496628b12c5ae1aa983d0deb6b81d0131e0ca8dfce",
+      "after_sha256": "c5f81e3906b195ab1093c4496628b12c5ae1aa983d0deb6b81d0131e0ca8dfce",
+      "equal": true
+    },
+    {
+      "path": "private preferences",
+      "bytes": 5972,
+      "before_sha256": "66819ceff7026c86c6d3ccf088f3556068cc7bd78b7dc39202b161803fd10530",
+      "after_sha256": "66819ceff7026c86c6d3ccf088f3556068cc7bd78b7dc39202b161803fd10530",
+      "equal": true
+    },
+    {
+      "path": "sandbox render baseline",
+      "bytes": 267,
+      "before_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "after_sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+      "equal": true
+    }
+  ]
+}
