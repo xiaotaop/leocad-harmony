@@ -33,8 +33,9 @@ ROUNDS="${PERF_ROUNDS:-3}"
 ARCHIVE="$REPO_ROOT/assets/ldraw-lite/library-lite.zip"
 # Shadow build directory, reused across runs: a full rebuild costs minutes and
 # the measured numbers do not depend on which directory the build happened in.
-# Overridable so a clean environment (or a second concurrent run) can point it
-# somewhere else instead of colliding on the default path.
+# Overridable to choose a different build location. Run only one probe per
+# checkout: staged source files in the repository root are shared. Concurrent
+# runs require separate checkouts as well as separate build/output directories.
 BUILD="${PERF_BUILD_DIR:-/tmp/bd-perf}"
 QT_LIB="$REPO_ROOT/.devtools/Qt/6.12.0/gcc_64/lib"
 
