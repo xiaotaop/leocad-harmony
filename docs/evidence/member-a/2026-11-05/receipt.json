@@ -1,0 +1,108 @@
+{
+  "baseline": "2c514fcbfffc8282ae53ffdbe20de62aed21f881",
+  "host": "macOS arm64, Qt 6.12.0 Release",
+  "baseline_inputs": "Main source plus the same tests and baseline-trace-only.patch",
+  "baseline_binary_sha256": "817d6fe082314109fed181089803efdf48f956bc174f8b6d4805c89318ce76d6",
+  "fixed_binary_sha256": "c0188fecd24478bbf051b7556f85ab309d5edbbd80f6889da982cddf2d74b95f",
+  "fixed_app_binary_sha256": "20484fe725a51af65d76258ca2c4596e0df5ba48bd8b4f0275d5d5086f16c2a3",
+  "sources": {
+    "common/lc_library.cpp": "1f3776ac98696519189ee6cf98bf53247f246456d174a4154f73679eee0daa16",
+    "common/lc_library.h": "9d1304174842a3023afd201fe7f277c060778f100a8fd9c90bd8079c7fe06378",
+    "common/lc_thumbnailmanager.cpp": "3be2999a27ff6c37f7be1c3e6cb58590a1b5eff78f7dbb671dd9e279b233653d",
+    "common/lc_viewwidget.cpp": "b2070859bed2192c228056afa0b73032fd9e88749d7c1eb1957fc74eca843e64",
+    "common/lc_viewwidget.h": "d1e7373d0e9cfd34cbe57fbfa6efb277fe73c2226390ed8bce6a97bfa81849fa",
+    "common/pieceinf.cpp": "6116f009b1e0e72f793731d95a07cf3baf52fc8ab568e4ff6b43a8149aa4fdc6",
+    "common/pieceinf.h": "424e5dcd8a2c8eb25d114dcd40a51600a0d697ba29e8f67fc6e042440430cf0b",
+    "tests/input/tst_view_input.cpp": "a386cd7abd4990d1996fb809aa96d9e5e058230f48a9f74a8d8438da879139a9"
+  },
+  "evidence": {
+    "app-build-summary.txt": {
+      "bytes": 550,
+      "sha256": "dca5d6ccd5005792691cfc1c9fef3a510c7435b744d13961f5782575b7498d07"
+    },
+    "baseline-thumbnailCancelledLoadDoesNotNotify.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "baseline-thumbnailCancelledLoadDoesNotNotify.txt": {
+      "bytes": 9807,
+      "sha256": "6e11f446447cca74766fc8da7209fc904ef54c07a7d6693138d1d793c9f3ed54"
+    },
+    "baseline-thumbnailQueuedTemporaryCanBeRemoved.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "baseline-thumbnailQueuedTemporaryCanBeRemoved.txt": {
+      "bytes": 9491,
+      "sha256": "7ca505b6e6eb6b8c629586058b2d48ad10593fb3552706714977701d0e266d6d"
+    },
+    "baseline-trace-only.patch": {
+      "bytes": 787,
+      "sha256": "110257b4691319f6e7b95a62420d1793429cbab817efc716624427b4b518556d"
+    },
+    "d10-2000.mpd": {
+      "bytes": 83122,
+      "sha256": "45fb6e2e5f8ac52719bc287e957960c070ac4ce686e0d06c4f4cd763e7d357c6"
+    },
+    "desktop-matrix.txt": {
+      "bytes": 2845,
+      "sha256": "d32e7b1c1092b9127c91c13c0609f87bf6aba919c99d33206e4bb58a9c5808a1"
+    },
+    "fixed-probe.txt": {
+      "bytes": 58687,
+      "sha256": "aa2ffa8a474e867a8d13855911a0a9091d5d9a80f27cdf8fff1a3c855db27ce0"
+    },
+    "perf-1-baseline.renderer.log": {
+      "bytes": 1798,
+      "sha256": "b4fb5e240164e6ce7901e69bed7e003be67c4b77107cedbbbe4fa326875ddabe"
+    },
+    "perf-1-baseline.txt": {
+      "bytes": 32854,
+      "sha256": "237a7f45e0f688eb019dba962d496943da0cd347fd209728696dcb9524169abc"
+    },
+    "perf-1-fixed.renderer.log": {
+      "bytes": 1795,
+      "sha256": "240618af406ed92032f7c5ffcc8f97e9f3ec837971595b33b8f57258f00a3eab"
+    },
+    "perf-1-fixed.txt": {
+      "bytes": 38738,
+      "sha256": "5e49d74438d5910d27a485e92505820c5d4a747a1779ac7159c491cc725750c6"
+    },
+    "perf-2-baseline.renderer.log": {
+      "bytes": 1798,
+      "sha256": "bd7f2ba5cac07bd9bbce7b162384a43c08854ad276064ebd624d3bf96930952e"
+    },
+    "perf-2-baseline.txt": {
+      "bytes": 41234,
+      "sha256": "56306a5b656d5b46caf2653ee4ac26becdbe032d0d0f449475fc5bbb406cca6a"
+    },
+    "perf-2-fixed.renderer.log": {
+      "bytes": 1795,
+      "sha256": "54363218b02f4743b0d6208e71730212e1227292e19f6726a60a059f362e23ca"
+    },
+    "perf-2-fixed.txt": {
+      "bytes": 38741,
+      "sha256": "8bce789577dc87c103d13f9637b9cff6f7b8949a5a01e846e0b8d37c46b4b31c"
+    },
+    "perf-3-baseline.renderer.log": {
+      "bytes": 1798,
+      "sha256": "67e363a6d59afbbba143aad367fd220d350cf179daa0163fb9ea36b62484c46c"
+    },
+    "perf-3-baseline.txt": {
+      "bytes": 41231,
+      "sha256": "c607f5b2a58ae893c0a406a6cbdd666dcff669b25961db94eb0a2cb524a3060a"
+    },
+    "perf-3-fixed.renderer.log": {
+      "bytes": 1795,
+      "sha256": "952a9395d2a7bf0cf67eadbb73a5e0f7da3db186e8dd8f83a42ad0e1804bcec8"
+    },
+    "perf-3-fixed.txt": {
+      "bytes": 38737,
+      "sha256": "4a90187d51b0175bc3891991a60f94ed790e067b34a455c1a79369e8095e460a"
+    },
+    "startup-ctest.txt": {
+      "bytes": 292,
+      "sha256": "25695ebc1defa9046e8f0eb55a0a8d5db91cd008579730ab6ed7a021b25d9897"
+    }
+  }
+}
