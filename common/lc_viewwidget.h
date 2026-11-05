@@ -49,5 +49,11 @@ protected:
 	QSize mPreferredSize;
 	int mWheelAccumulator = 0;
 	Qt::MouseButtons mPressedButtons = Qt::NoButton;
-	QByteArray mFramebufferSignature;
+	struct FramebufferSignature
+	{
+		GLuint Id;
+		QSize Size;
+		float Scale;
+	};
+	std::optional<FramebufferSignature> mFramebufferSignature;
 };

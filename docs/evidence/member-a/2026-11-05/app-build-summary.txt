@@ -1,0 +1,9 @@
+CMake Qt 6.12 Release, target leocad
+[ 43%] Building CXX object CMakeFiles/leocad.dir/common/lc_viewmanipulator.cpp.o
+[ 44%] Building CXX object CMakeFiles/leocad.dir/common/lc_viewwidget.cpp.o
+[ 45%] Building CXX object CMakeFiles/leocad.dir/qt/qtmain.cpp.o
+[ 46%] Building CXX object CMakeFiles/leocad.dir/qt/lc_qpropertiesdialog.cpp.o
+[ 47%] Building CXX object CMakeFiles/leocad.dir/qt/lc_qpreferencesdialog.cpp.o
+[ 48%] Building CXX object CMakeFiles/leocad.dir/qt/lc_qutils.cpp.o
+[ 49%] Linking CXX executable leocad
+[100%] Built target leocad

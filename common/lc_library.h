@@ -326,6 +326,8 @@ protected:
 
 	void ReleaseBuffers();
 
+	int mPackedVertexBytes = 0;
+	int mPackedIndexBytes = 0;
 	std::vector<std::unique_ptr<lcLibrarySource>> mSources;
 
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 0, 0))
@@ -335,6 +337,8 @@ protected:
 #endif
 	QList<QFuture<void>> mLoadFutures;
 	QList<PieceInfo*> mLoadQueue;
+	QHash<PieceInfo*, quint64> mPendingLoadNotifications;
+	quint64 mNextLoadNotification = 0;
 
 	QMutex mTextureMutex;
 

@@ -1,0 +1,21 @@
+LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"error":"","framebuffers":true,"gl_version":"2.1 Metal - 91.7","gles_build":false,"glsl_version":"1.20","is_current":true,"is_gles":false,"passed":true,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"renderer_offscreen","surface_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"surface_requested_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"surface_valid":true,"valid":true,"vendor":"Apple"}
+LEOCAD_GL_RENDERER {"passed":true,"programs":9,"safe_render":false,"skipped_programs":0}
+2026-11-05 13:43:16.544 leocad-input-baseline[36694:28877080] ApplePersistenceIgnoreState: Existing state will not be touched. New state will be written to /var/folders/4z/mlzxlmks3lz3p8_ygr5pc1540000gn/T/com.leozide.leocad.savedState
+        1.96 real         1.29 user         0.20 sys
+           323436544  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               31809  page reclaims
+                  84  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  44  messages sent
+                   0  messages received
+                   0  signals received
+                  38  voluntary context switches
+                6705  involuntary context switches
+         23512532095  instructions retired
+          5884652226  cycles elapsed
+           667403488  peak memory footprint
