@@ -17,6 +17,14 @@
 
 本地 Windows / Qt 6.8.3 / MSVC Release，通过仓库 `scripts/Build-MemberB.ps1 -Target Tests -RunTests` 构建并运行，**66 passed / 0 failed / 0 skipped**。原始结果见 [member-b-d10-test-results.txt](member-b-d10-test-results.txt)。首次受限进程运行出现 MSVC C1902，调整运行环境后构建与完整模型套件通过；未改构建脚本或测试断言来避错。
 
+## 审核与集成
+
+B 已审核 A [#57](https://github.com/xiaotaop/leocad-harmony/pull/57)，独立核对 8 项源码及 22 项证据哈希；最终输入 CI [41978227997](https://github.com/xiaotaop/leocad-harmony/actions/runs/41978227997) 四配置各 47/47，模型 CI [41978227956](https://github.com/xiaotaop/leocad-harmony/actions/runs/41978227956) 模型 65/65、基础渲染 7/7、授权保存 9/9。本地化 20 通过、2 项字体环境跳过。6 项检查全部成功并取得 C 的独立批准后，正常合并为 `31a3a5d69ae8fa13fe2217b614dab3aad736d990`，远端已确认 merged。
+
+B [#58](https://github.com/xiaotaop/leocad-harmony/pull/58) 初始提交 `8eb3550` 的 9 项 CI 全部成功，模型 66/66；产物 `68614b076cb97c2bc78881a767e96cd8ca96a4c6` 与该提交同树。本分支随后同步 A #57，模型测试文件未改，最终组合验证与 C 独立审核以 #58 最新 head 为准，不把旧基线结果当成新组合已通过。
+
+C [#56](https://github.com/xiaotaop/leocad-harmony/pull/56) 最新 `fc05fff` 已复审批准：权限变异检查正常退出 0、两种违规退出 1；交错执行真实性能脚本，验证按 PID 暂存后 B 进程退出不删除 A 的配置输入，两个进程各自清理正确。此实验只验证并行暂存边界，不重算性能数字；原审核意见及最终 CI 仍须在 PR 中收口。
+
 ## D9 真机证据复核
 
 组长 #55 已合入。B 逐项重算 [D9 manifest](evidence/leader/2026-11-04/d9-device/manifest.json) 的 **58 项**大小/SHA-256，全部一致；独立解析保存与重开 MPD，模型/颜色/坐标/矩阵/引用均匹配 [model-receipt.json](evidence/leader/2026-11-04/d9-device/model-receipt.json)，两文件逐字节相同，SHA-256 `74398c6cf5a05bb7dd9e7ebb11bdce1fd571b98ddd90f591969680183c3f5616`。
@@ -25,7 +33,7 @@
 
 ## D10 联合设备验收
 
-与 A 的 [D10 设备交接](https://github.com/xiaotaop/leocad-harmony/pull/57) 合并一个批次，由组长构建最终集成源码的签名包并记录源码、HAP SHA-256、Build ID、PID、时间和渲染模式。B 不另造与 A 不同的中型性能样例。
+与 A 的 [D10 设备交接](MEMBER_A_D10_DEVICE_HANDOFF.md) 合并一个批次，由组长构建最终集成源码的签名包并记录源码、HAP SHA-256、Build ID、PID、时间和渲染模式。B 不另造与 A 不同的中型性能样例。
 
 - 使用 A 固定的 2,000 实例 / 16 种网格 / 4 子模型 MPD，30 分钟编辑中在子模型执行移动、改色、撤销/重做；记录编辑目标与预期差值。保存到中文路径后正常退出、再次启动、经系统选择器重开；拉回文件核对 5 个模型、4 条主模型引用、每子模型 500 个实例，以及被编辑条目的颜色/位姿。保存文件与重新打开文件相同只证明文件未变，还须核对 UI 和结构结果。
 - 脏工程下取消打开/另存为、选择循环/截断文件，确认工程身份、活动模型、编辑与修改标记保留。合法空模型和零字节文件分别验证。
