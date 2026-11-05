@@ -1,0 +1,70 @@
+source: 2741 entries
+  brokencolour.zip: 3823610 bytes
+  codeonlycfg.zip: 3823619 bytes
+  dangling.zip: 3833031 bytes
+  emptycfg.zip: 3823593 bytes
+  garbagecfg.zip: 3823630 bytes
+  nocfg.zip: 3823479 bytes
+  truncated.zip: 1403602 bytes
+  wrongroot.zip: 3800649 bytes
+== archive
+Totals: 13 passed, 0 failed, 0 skipped, 0 blacklisted, 242ms
+== priority
+Totals: 8 passed, 0 failed, 0 skipped, 0 blacklisted, 200ms
+== menu
+Totals: 11 passed, 0 failed, 0 skipped, 0 blacklisted, 36ms
+== modellist
+Totals: 5 passed, 0 failed, 0 skipped, 0 blacklisted, 10ms
+== panel
+Totals: 15 passed, 0 failed, 0 skipped, 0 blacklisted, 509ms
+== preferences
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 9ms
+== theme
+Totals: 14 passed, 0 failed, 0 skipped, 0 blacklisted, 6ms
+== chain
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 51ms
+source: 2741 entries
+  brokencolour.zip: 3823610 bytes
+  codeonlycfg.zip: 3823619 bytes
+  dangling.zip: 3833031 bytes
+  emptycfg.zip: 3823593 bytes
+  garbagecfg.zip: 3823630 bytes
+  nocfg.zip: 3823479 bytes
+  truncated.zip: 1403602 bytes
+  wrongroot.zip: 3800649 bytes
+error: no such suite: --only (d3---only-tests.pro)
+(suite localization failed)
+source: 2741 entries
+  brokencolour.zip: 3823610 bytes
+  codeonlycfg.zip: 3823619 bytes
+  dangling.zip: 3833031 bytes
+  emptycfg.zip: 3823593 bytes
+  garbagecfg.zip: 3823630 bytes
+  nocfg.zip: 3823479 bytes
+  truncated.zip: 1403602 bytes
+  wrongroot.zip: 3800649 bytes
+error: no such suite: --only (d3---only-tests.pro)
+(suite files failed)
+source: 2741 entries
+  brokencolour.zip: 3823610 bytes
+  codeonlycfg.zip: 3823619 bytes
+  dangling.zip: 3833031 bytes
+  emptycfg.zip: 3823593 bytes
+  garbagecfg.zip: 3823630 bytes
+  nocfg.zip: 3823479 bytes
+  truncated.zip: 1403602 bytes
+  wrongroot.zip: 3800649 bytes
+source: 2741 entries
+  brokencolour.zip: 3823610 bytes
+  codeonlycfg.zip: 3823619 bytes
+  dangling.zip: 3833031 bytes
+  emptycfg.zip: 3823593 bytes
+  garbagecfg.zip: 3823630 bytes
+  nocfg.zip: 3823479 bytes
+  truncated.zip: 1403602 bytes
+  wrongroot.zip: 3800649 bytes
+== localization
+Totals: 22 passed, 0 failed, 0 skipped, 0 blacklisted, 255ms
+== files
+Totals: 9 passed, 0 failed, 0 skipped, 0 blacklisted, 1ms
+EXIT=0
