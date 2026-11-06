@@ -52,12 +52,24 @@ def read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
+# .gitattributes sets "* text=auto", so a text icon is CRLF in a Windows
+# checkout and LF in CI. Hashing the worktree bytes would then make the freeze
+# table platform-dependent and fail on the platform it was not recorded on --
+# which is exactly what happened the first time this check ran in CI. Binary
+# icons are hashed as they are; text ones are normalised to LF first, so the
+# recorded value means the same thing everywhere.
+TEXT_ICON_SUFFIXES = (".svg",)
+
+
+def icon_bytes(path: Path) -> bytes:
+    data = path.read_bytes()
+    if path.suffix.lower() in TEXT_ICON_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n")
+    return data
+
+
 def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    return hashlib.sha256(icon_bytes(path)).hexdigest()
 
 
 def frozen_icon_rows() -> list[tuple[str, int, str]]:
@@ -132,7 +144,7 @@ class ReleaseMaterialTests(unittest.TestCase):
                 f"{name} is listed in the freeze document but is not on disk",
             )
 
-            actual_bytes = path.stat().st_size
+            actual_bytes = len(icon_bytes(path))
             self.assertEqual(
                 actual_bytes,
                 expected_bytes,
