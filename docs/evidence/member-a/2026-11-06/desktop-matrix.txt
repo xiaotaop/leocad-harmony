@@ -1,0 +1,27 @@
+normal-dpr1
+original_txt_sha256=f6d90556a65fcda3d89917cd616b7beadfa2ed984ed11c7b65a950225a83f828
+original_xml_sha256=ef62273ec0d8d01e3d401160d6d744d0351126122d97dd60b70b6f4e82c7f604
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 1 view 1094 698
+PASS   : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup()
+Totals: 48 passed, 0 failed, 0 skipped, 0 blacklisted, 7187ms
+
+fractional-dpr1_5
+original_txt_sha256=c602257e5ce4540df1e98924136442af71c68cc5dfc73471b7c106951e7e4bd2
+original_xml_sha256=29fad8d723e7d2eee31b3156d45b201881b9060fb6c93c5ad4400c6ec701a0f1
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 1.5 view 1641 1047
+PASS   : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup()
+Totals: 48 passed, 0 failed, 0 skipped, 0 blacklisted, 8159ms
+
+normal-dpr2
+original_txt_sha256=0c4a91e86f3c72c3310a1f90a80352a40f478c5b816770f275d1bf7f0002be3d
+original_xml_sha256=0fda6028d21c38f214de1c27d66e7344e1fd7106c4036d8e8d4e676a5cbfec16
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396
+PASS   : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup()
+Totals: 48 passed, 0 failed, 0 skipped, 0 blacklisted, 9934ms
+
+basic-dpr2
+original_txt_sha256=df64301ada75afeb8ead3f72e13d7c8be68ac13be83103c44cc415db4a04e077
+original_xml_sha256=9d83800541f3b63525904026cbf6bf144b633f4657112867c394eb6e1084b788
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396
+PASS   : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup()
+Totals: 48 passed, 0 failed, 0 skipped, 0 blacklisted, 9124ms

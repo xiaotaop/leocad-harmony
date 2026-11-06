@@ -1,0 +1,8 @@
+[ 93%] Building CXX object CMakeFiles/leocad.dir/qt/lc_qpropertiesdialog.cpp.o
+[ 94%] Building CXX object CMakeFiles/leocad.dir/qt/lc_qpreferencesdialog.cpp.o
+[ 95%] Building CXX object CMakeFiles/leocad.dir/qt/lc_qutils.cpp.o
+[ 96%] Building CXX object CMakeFiles/leocad.dir/qt/lc_renderdialog.cpp.o
+[ 97%] Building CXX object CMakeFiles/leocad.dir/leocad_autogen/K4MSJZ3WG2/qrc_leocad_resources.cpp.o
+[ 98%] Building CXX object CMakeFiles/leocad.dir/leocad_autogen/QMRDY4TJUB/qrc_stylesheet.cpp.o
+[100%] Linking CXX executable leocad
+[100%] Built target leocad

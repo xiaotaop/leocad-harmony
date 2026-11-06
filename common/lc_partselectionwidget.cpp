@@ -81,6 +81,16 @@ lcPartSelectionListModel::~lcPartSelectionListModel()
 	ReleaseThumbnails();
 }
 
+void lcPartSelectionListModel::ClearParts()
+{
+	beginResetModel();
+	ReleaseThumbnails();
+	mParts.clear();
+	endResetModel();
+
+	SetFilter(mFilterString);
+}
+
 void lcPartSelectionListModel::UpdateThumbnails()
 {
 	beginResetModel();
@@ -662,7 +672,7 @@ void lcPartSelectionListView::SetCategory(lcPartCategoryType Type, int Index)
 	{
 		CurrentIndex = mListModel->index(CurrentIt->second, 0);
 
-		if (!isRowHidden(CurrentIndex.row()))
+		if (CurrentIndex.isValid() && !isRowHidden(CurrentIndex.row()))
 		{
 			scrollTo(CurrentIndex);
 			setCurrentIndex(CurrentIndex);
@@ -684,6 +694,17 @@ void lcPartSelectionListView::SetCustomParts(const std::vector<std::pair<PieceIn
 	mListModel->SetCustomParts(Parts, ColorIndex);
 
 	setCurrentIndex(mListModel->index(0, 0));
+}
+
+void lcPartSelectionListView::ClearProjectParts()
+{
+	const QModelIndex CurrentIndex = currentIndex();
+	if (CurrentIndex.isValid())
+		mLastCategoryRow[{mCategoryType, mCategoryIndex}] = CurrentIndex.row();
+
+	mContextInfo = nullptr;
+	setCurrentIndex(QModelIndex());
+	mListModel->ClearParts();
 }
 
 void lcPartSelectionListView::SetCurrentPart(PieceInfo* Info)
@@ -1425,6 +1446,11 @@ void lcPartSelectionWidget::EditPartPalettes()
 void lcPartSelectionWidget::UpdateThumbnails()
 {
 	mPartsWidget->GetListModel()->UpdateThumbnails();
+}
+
+void lcPartSelectionWidget::ClearProjectParts()
+{
+	mPartsWidget->ClearProjectParts();
 }
 
 void lcPartSelectionWidget::SetDefaultPart()
