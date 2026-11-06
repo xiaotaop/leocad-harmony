@@ -1,0 +1,187 @@
+{
+  "session-39541-live.hilog.txt": {
+    "bytes": 400671,
+    "lines": 2388,
+    "renderer": [
+      "11-06 21:14:16.886 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_RENDERER {\"passed\":true,\"programs\":9,\"safe_render\":false,\"skipped_programs\":0}"
+    ],
+    "deferred": [],
+    "framebuffer": [
+      "11-06 21:14:16.961 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":173,\"logical_width\":200,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:14:16.963 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":514,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:14:16.994 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":532,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:14:17.038 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:18:29.635 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:18:40.709 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:19:55.587 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:20:46.765 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:26:14.085 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":532,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:26:45.901 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}"
+    ],
+    "watchdog": [
+      "11-06 21:14:26.649 39541 39647 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive",
+      "11-06 21:14:26.650 39541 39647 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: Thread may be blocked, do not report this time. currTime: 17254.951, lastTime: 0.000"
+    ],
+    "normal_exit": [
+      "11-06 21:26:47.376 39541 39708 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43fcd920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad.so' returned 0"
+    ],
+    "crash_lines": [],
+    "picker_callbacks": [
+      "11-06 21:18:29.628 39541 39541 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/roundtrip.ldr\"]",
+      "11-06 21:18:40.699 39541 39541 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/curated-device.mpd\"]",
+      "11-06 21:19:55.551 39541 39541 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/d10-2000.mpd\"]"
+    ]
+  },
+  "first-process-final.hilog.txt": {
+    "bytes": 195031,
+    "lines": 852,
+    "renderer": [
+      "11-06 21:14:16.886 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_RENDERER {\"passed\":true,\"programs\":9,\"safe_render\":false,\"skipped_programs\":0}"
+    ],
+    "deferred": [],
+    "framebuffer": [
+      "11-06 21:14:16.961 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":173,\"logical_width\":200,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:14:16.963 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":514,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:14:16.994 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":532,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:14:17.038 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:18:29.635 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:18:40.709 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:19:55.587 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:20:46.765 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:26:14.085 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":532,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:26:45.901 39541 39708 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}"
+    ],
+    "watchdog": [
+      "11-06 21:14:26.649 39541 39647 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive",
+      "11-06 21:14:26.650 39541 39647 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: Thread may be blocked, do not report this time. currTime: 17254.951, lastTime: 0.000"
+    ],
+    "normal_exit": [
+      "11-06 21:26:47.376 39541 39708 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43fcd920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad.so' returned 0"
+    ],
+    "crash_lines": [],
+    "picker_callbacks": [
+      "11-06 21:18:29.628 39541 39541 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/roundtrip.ldr\"]",
+      "11-06 21:18:40.699 39541 39541 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/curated-device.mpd\"]",
+      "11-06 21:19:55.551 39541 39541 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/d10-2000.mpd\"]"
+    ]
+  },
+  "fresh-process-final.hilog.txt": {
+    "bytes": 67261,
+    "lines": 322,
+    "renderer": [
+      "11-06 21:26:49.073 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_RENDERER {\"passed\":true,\"programs\":9,\"safe_render\":false,\"skipped_programs\":0}"
+    ],
+    "deferred": [],
+    "framebuffer": [
+      "11-06 21:26:49.145 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":173,\"logical_width\":200,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:26:49.148 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":514,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:26:49.185 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":532,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:26:49.230 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:27:53.832 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:28:23.713 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:28:23.735 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:28:23.767 44332 44727 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}"
+    ],
+    "watchdog": [
+      "11-06 21:26:58.925 44332 44700 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive",
+      "11-06 21:26:58.925 44332 44700 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: Thread may be blocked, do not report this time. currTime: 18007.226, lastTime: 0.000"
+    ],
+    "normal_exit": [
+      "11-06 21:29:07.551 44332 44727 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43c4d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad.so' returned 0"
+    ],
+    "crash_lines": [],
+    "picker_callbacks": [
+      "11-06 21:27:53.799 44332 44332 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/d10-2000.mpd\"]",
+      "11-06 21:28:23.683 44332 44332 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/D11%20%E4%B8%AD%E5%9E%8B%E6%A8%A1%E5%9E%8B%E9%97%AD%E7%8E%AF.mpd\"]"
+    ]
+  },
+  "clean-install-final.hilog.txt": {
+    "bytes": 44063,
+    "lines": 204,
+    "renderer": [
+      "11-06 21:29:48.106 46950 47190 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_RENDERER {\"passed\":true,\"programs\":9,\"safe_render\":false,\"skipped_programs\":0}"
+    ],
+    "deferred": [],
+    "framebuffer": [
+      "11-06 21:29:48.196 46950 47190 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":173,\"logical_width\":200,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:29:48.199 46950 47190 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":339,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:31:30.023 46950 47190 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":339,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}"
+    ],
+    "watchdog": [
+      "11-06 21:29:57.749 46950 47148 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive",
+      "11-06 21:29:57.749 46950 47148 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: Thread may be blocked, do not report this time. currTime: 18186.051, lastTime: 0.000"
+    ],
+    "normal_exit": [
+      "11-06 21:31:47.189 46950 47190 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43d4d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad.so' returned 0"
+    ],
+    "crash_lines": [],
+    "picker_callbacks": [
+      "11-06 21:31:29.980 46950 46950 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/D11%20%E4%B8%AD%E5%9E%8B%E6%A8%A1%E5%9E%8B%E9%97%AD%E7%8E%AF.mpd\"]"
+    ]
+  },
+  "restored-config-final.hilog.txt": {
+    "bytes": 62490,
+    "lines": 331,
+    "renderer": [
+      "11-06 21:33:40.370 48688 48939 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_RENDERER {\"passed\":true,\"programs\":9,\"safe_render\":false,\"skipped_programs\":0}"
+    ],
+    "deferred": [],
+    "framebuffer": [
+      "11-06 21:33:40.443 48688 48939 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":173,\"logical_width\":200,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:33:40.446 48688 48939 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":514,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:33:40.489 48688 48939 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":532,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:33:40.534 48688 48939 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}"
+    ],
+    "watchdog": [
+      "11-06 21:33:50.219 48688 48881 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive",
+      "11-06 21:33:50.219 48688 48881 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: Thread may be blocked, do not report this time. currTime: 18418.520, lastTime: 0.000"
+    ],
+    "normal_exit": [
+      "11-06 21:34:06.082 48688 48939 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43b4d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad.so' returned 0"
+    ],
+    "crash_lines": [],
+    "picker_callbacks": []
+  },
+  "injected-three-rounds-final.hilog.txt": {
+    "bytes": 164608,
+    "lines": 771,
+    "renderer": [
+      "11-06 21:35:33.906 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_RENDERER {\"passed\":true,\"programs\":9,\"safe_render\":false,\"skipped_programs\":0}"
+    ],
+    "deferred": [],
+    "framebuffer": [
+      "11-06 21:35:33.978 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":173,\"logical_width\":200,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:35:33.981 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":514,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:35:34.027 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":501,\"logical_width\":532,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:35:34.076 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":515,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":true,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:36:19.370 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:36:23.344 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:37:53.719 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:37:53.726 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:37:57.743 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:37:57.748 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:38:50.735 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:38:50.740 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:38:54.753 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:38:54.757 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}",
+      "11-06 21:40:05.113 49060 49600 I A00000/io.github.xiaotaop.leocad/LeoCAD: LEOCAD_GL_FRAMEBUFFER {\"clear_depth\":1,\"depth_bits\":24,\"depth_func\":513,\"depth_range_far\":1,\"depth_range_near\":0,\"depth_test\":false,\"depth_write\":true,\"dpr\":1.899999976158142,\"framebuffer\":1,\"framebuffer_status\":36053,\"logical_height\":893,\"logical_width\":1374,\"passed\":true,\"qt_framebuffer\":1,\"stage\":\"view_framebuffer\",\"stencil_bits\":8}"
+    ],
+    "watchdog": [
+      "11-06 21:35:43.756 49060 49526 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: AppMainThread is not alive",
+      "11-06 21:35:43.756 49060 49526 W A00000/io.github.xiaotaop.leocad/LeoCAD: qt.ohos: qt.ohos: QtWatchdog: Thread may be blocked, do not report this time. currTime: 18532.057, lastTime: 0.000"
+    ],
+    "normal_exit": [
+      "11-06 21:40:51.868 49060 49600 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x5a43c4d920, M: auto QtOhos::(anonymous namespace)::openLibraryWithMainFunctionOrFail(const std::string &)::(anonymous class)::operator()(std::vector<std::string>) const: 'main' function in library '/data/storage/el1/bundle/libs/arm64/libleocad.so' returned 0"
+    ],
+    "crash_lines": [],
+    "picker_callbacks": [
+      "11-06 21:36:19.363 49060 49060 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/roundtrip.ldr\"]",
+      "11-06 21:36:23.320 49060 49060 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/curated-device.mpd\"]",
+      "11-06 21:37:53.703 49060 49060 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/roundtrip.ldr\"]",
+      "11-06 21:37:57.737 49060 49060 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/curated-device.mpd\"]",
+      "11-06 21:38:50.727 49060 49060 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/roundtrip.ldr\"]",
+      "11-06 21:38:54.747 49060 49060 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/curated-device.mpd\"]",
+      "11-06 21:40:05.080 49060 49060 D A00000/io.github.xiaotaop.leocad/OHOS plugin: [QtForOhos]: T: 0x598ef8d650, M: Called DocumentViewPicker.select() callback with result: [\"file://docs/storage/Users/currentUser/Download/LeoCAD-D11/Input/d10-2000.mpd\"]"
+    ]
+  }
+}

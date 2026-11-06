@@ -1,0 +1,24 @@
+2026-11-06T21:14:17.6460072+08:00 D11 internal RC0 candidate installed over existing app; nativeRelease normalOFF, official debug signing, not store release.
+2026-11-06T21:16:56.2398331+08:00 PID 39541 continuous hilog capture started; overwrite installation succeeded.
+2026-11-06T21:19:20.6075204+08:00 User reports three manual LDR→curated MPD rounds: no hang, thumbnails normal. Third round state retained.
+2026-11-06T21:19:45.4199568+08:00 Same PID 39541 after three manual rounds: picker selected Input/d10-2000.mpd with All Parts retained.
+2026-11-06T21:20:09.3292492+08:00 PID 39541 successfully opened original 2000-piece model after manual three rounds, All Parts retained; viewport and list visible.
+2026-11-06T21:20:29.1824580+08:00 Search child.ldr returned 0; cleared search and Submodels shows four non-empty thumbnails.
+2026-11-06T21:24:14.8168524+08:00 Child-0 row221 3032 selected at UI50,550,0; injected direction move/undo/redo sampled, then undo and property Y set540. Selected piece color set red, undo/redo sampled. Final 50,540,0 red expected.
+2026-11-06T21:26:48.1799120+08:00 Parts panel hidden/restored; restored-size then maximized window; same PID 39541 responsive. Child active Submodels shows three siblings; main earlier four.
+2026-11-06T21:27:25.5139482+08:00 First process exited normally; fresh control PID44332 launched.
+2026-11-06T21:28:10.4338747+08:00 Fresh PID44332 directly opened original 2000-piece model successfully; startup QtWatchdog AppMainThread is not alive warning retained separately.
+2026-11-06T21:29:09.7131732+08:00 PID44332 original direct-open control and saved Chinese MPD reopen passed; structural comparison exact with one expected moved/recolored3032, 5models/4references/500each. Closed normally.
+2026-11-06T21:29:31.3984564+08:00 Before uninstall: seven non-cache private files freshly read back; hashes match original backup. Original preferences backed up locally; public D10 backup retained.
+2026-11-06T21:29:44.7420184+08:00 Uninstall succeeded; bm dump reports bundle not found.
+2026-11-06T21:30:21.7332416+08:00 Clean reinstall PID46950 started with default empty model and parts thumbnails. Fresh config29bytes; old private a-d3 model absent, public D11 files remain.
+2026-11-06T21:31:49.3395060+08:00 Clean reinstall opens public Chinese saved MPD through fresh picker selection; PID46950 normal exit. No application-private data auto-preservation expected after uninstall.
+2026-11-06T21:33:41.0752218+08:00 Seven original private files and four preferences restored; all11 read-back hashes match original local backup. Derived caches/hiappevent runtime databases not restored.
+2026-11-06T21:34:08.5419163+08:00 Restored-config PID48688 launches with original layout and parts library; normal exit. Original four preferences restored once more after close to retain original bytes. App stopped, no WLAN changes.
+2026-11-06T21:36:19.2527640+08:00 Additional injected sequence PID49060 started to independently log all three picker rounds; first user session retains user-reported3rounds but only1pair of picker callbacks in capture.
+2026-11-06T21:37:13.6212417+08:00 Injected round1 LDR→curatedMPD selected red cup, Right/Undo/Redo and File/Submodel menus, Parts All Parts retained.
+2026-11-06T21:38:08.2886188+08:00 Injected round2 LDR→curatedMPD, cup Right/Undo/Redo and menus completed; All Parts retained.
+2026-11-06T21:39:05.1143871+08:00 Injected round3 LDR→curatedMPD, cup Right/Undo/Redo and menus completed; All Parts retained.
+2026-11-06T21:40:52.6437983+08:00 PID49060 after three fully injected picker rounds opens original 2000 MPD with All Parts; Submodels four actual thumbnails; no crash observed.
+2026-11-06T21:40:54.4023165+08:00 Additional injected process normal exit; original preferences restored again. Correction: uninstall bm dump returned generic failure, not explicit bundle-not-found wording; uninstall tool itself reported success.
+2026-11-06T21:44:43.6285491+08:00 Final read-back verification after all testing:11 private files/preferences and8 prior public D10 files match pre-test SHA256. No app PID remains.

@@ -1,0 +1,17 @@
+{
+  "source_commit": "96d14f760c9b904c2ae8db906e5ffdea27804a9d",
+  "hap_name": "leocad-d11-rc0-debug-signed.hap",
+  "hap_bytes": 80153176,
+  "hap_sha256": "67834801e859f7267b151901f4200a0111298d8e9a798150421fd6cbb22aa9f8",
+  "native_build_type": "Release",
+  "hap_signing": "official debug signing; internal RC0 candidate, not store release",
+  "safe_render": false,
+  "libleocad.so": {
+    "sha256": "1ddf09b92df57f1f1e716634740f0712d2b70a554cff0bc73478ca3434800c72",
+    "build_id": "0fe58fb6eed6cd95e322b0b735dd7605ac80e037"
+  },
+  "libQt6Gui.so": {
+    "sha256": "7f7f918f8c9203b28c4284c631dff7cb53882facf189efdb4c3a69396fce13dd",
+    "build_id": "2954f3e83d766bba2564d823dc524f3fc225d9a5"
+  }
+}

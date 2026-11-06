@@ -1,0 +1,347 @@
+[
+  {
+    "file": "after-three-rounds-medium.hilog.txt",
+    "bytes": 164247,
+    "sha256": "f43bc48a5c640e2530380271a342ead942d7c3fe92416d989d0dc32b4178f6ab"
+  },
+  {
+    "file": "after-uninstall-bundle.txt",
+    "bytes": 67,
+    "sha256": "eb38add3caf062fd8dfe5a887ec518de761fd8843396d40690624a6f4326f698"
+  },
+  {
+    "file": "child-color-redo.jpeg",
+    "bytes": 1053630,
+    "sha256": "6b2e34dd41936e9af2d7e42557b983a0eaff6dd595d77b83ed06e27c832db4f3"
+  },
+  {
+    "file": "child-color-undo.jpeg",
+    "bytes": 1054725,
+    "sha256": "fd2c03c30541e319f528d807f26658836cbd98a8058820ead3fcc9f31ae8313c"
+  },
+  {
+    "file": "child-move.jpeg",
+    "bytes": 1054682,
+    "sha256": "91c5e0068e438c568dc5206a35e3118d3e18c2f24d7b92fdb1de88ff0899cefb"
+  },
+  {
+    "file": "child-position-confirmed.jpeg",
+    "bytes": 1054839,
+    "sha256": "0f8186102f712bb9bd110b9b0f50665f0d15ee01ae3c0f0586aa1315546b705f"
+  },
+  {
+    "file": "child-redo.jpeg",
+    "bytes": 1054682,
+    "sha256": "91c5e0068e438c568dc5206a35e3118d3e18c2f24d7b92fdb1de88ff0899cefb"
+  },
+  {
+    "file": "child-undo.jpeg",
+    "bytes": 1054872,
+    "sha256": "977ac20d359e538ba5c672c4cfe4797fa38dcd7f8a4fcfb65358fdcbfa65bdf5"
+  },
+  {
+    "file": "clean-install-final.hilog.txt",
+    "bytes": 44063,
+    "sha256": "e1abf22bd17281cba92bffd881cec67b03a2cd35ae9b44b291f44cfdbc07e9c3"
+  },
+  {
+    "file": "clean-install-first-start.jpeg",
+    "bytes": 448641,
+    "sha256": "73d8b080fffa290ca1e665804726afa556500b0d00ecc2ee49593039f245baed"
+  },
+  {
+    "file": "clean-install-public-saved-open.jpeg",
+    "bytes": 443899,
+    "sha256": "c00cb53d7c8c535871902bb707020099f4a7d3c4ce003ca5dc343ed3156d395d"
+  },
+  {
+    "file": "clean-install-result.txt",
+    "bytes": 218,
+    "sha256": "82ee348398211003ba1c6b767bfffd147ea643c9f8655832d015807502fab412"
+  },
+  {
+    "file": "device-info.json",
+    "bytes": 335,
+    "sha256": "b78bb3d4a7097363c1d120c18f59c10fd5ac26cf52f0ae00df65b518c02dcbf1"
+  },
+  {
+    "file": "display-info.txt",
+    "bytes": 904,
+    "sha256": "fa9844844363201f80ab6b611bac22ff5f0c65b7c851c18e919bb47f8720a6ec"
+  },
+  {
+    "file": "first-process-final.hilog.txt",
+    "bytes": 195031,
+    "sha256": "201f87518b5c43dd77fd77a29384b86e56e56528a1a88ce61fd33e5cae51cc4c"
+  },
+  {
+    "file": "four-submodel-thumbnails.jpeg",
+    "bytes": 505486,
+    "sha256": "80605ad94e88ae92b3865e1295dab458c5d45641c2faa460c8b2d9c5b99f162c"
+  },
+  {
+    "file": "fresh-control-medium.hilog.txt",
+    "bytes": 55687,
+    "sha256": "772c0686122bcaa6de5ec04f53b835a56d0e0eada80dcd683dc903e62e1596c8"
+  },
+  {
+    "file": "fresh-control-medium.jpeg",
+    "bytes": 516702,
+    "sha256": "efee8e629556a5d161fe1e3e3795b9067a8b64b1be2a008dc9fcec7b2a6fe923"
+  },
+  {
+    "file": "fresh-process-final.hilog.txt",
+    "bytes": 67261,
+    "sha256": "85ad59b79ed5f009f767cf4f2e7103039797be576d3c46880a8f22fa327c4048"
+  },
+  {
+    "file": "host-checks.json",
+    "bytes": 45901,
+    "sha256": "adb3ff56e92701c224258645349f7847ead51fc90a4950ee0484265a404da409"
+  },
+  {
+    "file": "host-log-retention-retry.txt",
+    "bytes": 36409,
+    "sha256": "1367f43160bad695895247cdec11cb28a757237018daf755389bbbb8f1a5c0bc"
+  },
+  {
+    "file": "injected-r1-file-menu.jpeg",
+    "bytes": 399854,
+    "sha256": "be50570d3ec7f37b3f16450fb8a0e229a37ae602c832c93e120d4647f8f1367f"
+  },
+  {
+    "file": "injected-r1-ldr.jpeg",
+    "bytes": 306831,
+    "sha256": "b2a94bd6a0b338c4d065131723ef837bd9c10ba6aeda20164d7e5f6004235210"
+  },
+  {
+    "file": "injected-r1-move.jpeg",
+    "bytes": 356594,
+    "sha256": "c794e0338b99caa0dbeb4de5c04bbbbb6c925a32e37c2ad2ab934db58525015a"
+  },
+  {
+    "file": "injected-r1-mpd.jpeg",
+    "bytes": 349570,
+    "sha256": "2196e8ede685c5fe8097dc0deeeeba7abf760a43a83a066950fc724260066169"
+  },
+  {
+    "file": "injected-r1-redo.jpeg",
+    "bytes": 356594,
+    "sha256": "c794e0338b99caa0dbeb4de5c04bbbbb6c925a32e37c2ad2ab934db58525015a"
+  },
+  {
+    "file": "injected-r1-selected.jpeg",
+    "bytes": 355866,
+    "sha256": "3e624fdc7cc0f28fd0718cb62d25c36c3e01866b0a35e4c00c1c691048764926"
+  },
+  {
+    "file": "injected-r1-submodel-menu.jpeg",
+    "bytes": 366436,
+    "sha256": "3a952e3e9f258a8cfbf5da3218408aaf136df9f22df72e0cf0b4c3e976a8d2b2"
+  },
+  {
+    "file": "injected-r1-undo.jpeg",
+    "bytes": 356158,
+    "sha256": "1c509d971428a80c07c374a78d76bd425ddf5cb852bc8d2c74565399a4d96870"
+  },
+  {
+    "file": "injected-r2-ldr.jpeg",
+    "bytes": 306901,
+    "sha256": "dbcff1bcea7eb9a3b64a339b9ff3e20b31c595558d38fab06d032a202831d7b7"
+  },
+  {
+    "file": "injected-r2-menu.jpeg",
+    "bytes": 366487,
+    "sha256": "b6275eb310d57ab5b2a160544f6e1125d5c87dfd24e004891c882e97c19d7382"
+  },
+  {
+    "file": "injected-r2-move.jpeg",
+    "bytes": 356635,
+    "sha256": "201a6a113e32afd9506d1b4a88eca485a45dc6892121182e46c4de85498d69fd"
+  },
+  {
+    "file": "injected-r2-mpd.jpeg",
+    "bytes": 349495,
+    "sha256": "cbc1cc616343512fca914ea3db15adfca61cf38be98addefbee6ea955d007b82"
+  },
+  {
+    "file": "injected-r2-redo.jpeg",
+    "bytes": 356635,
+    "sha256": "201a6a113e32afd9506d1b4a88eca485a45dc6892121182e46c4de85498d69fd"
+  },
+  {
+    "file": "injected-r2-undo.jpeg",
+    "bytes": 356199,
+    "sha256": "035a5a24b2028e6bb3837cd26c4396636581a701375678d64dfabf140a8eae21"
+  },
+  {
+    "file": "injected-r3-ldr.jpeg",
+    "bytes": 306931,
+    "sha256": "ab740513b3824816293a1aed41d9ada79e44f9d6f02085a23d21590f80678fab"
+  },
+  {
+    "file": "injected-r3-menu.jpeg",
+    "bytes": 366472,
+    "sha256": "e99fa578dfafbd4afa592c1f5061296c6f974800996fe09256773d83ea3a0bec"
+  },
+  {
+    "file": "injected-r3-move.jpeg",
+    "bytes": 356635,
+    "sha256": "201a6a113e32afd9506d1b4a88eca485a45dc6892121182e46c4de85498d69fd"
+  },
+  {
+    "file": "injected-r3-mpd.jpeg",
+    "bytes": 349551,
+    "sha256": "1f36420c49fda061efc79b8aca34b4556ae254cdf5aac44a8582a8da5bc14d64"
+  },
+  {
+    "file": "injected-r3-redo.jpeg",
+    "bytes": 356619,
+    "sha256": "6b87caa955183e0034ef7ab3e5ef1a6ea280a8c3e6493e2edaa64e286efc1511"
+  },
+  {
+    "file": "injected-r3-undo.jpeg",
+    "bytes": 356199,
+    "sha256": "035a5a24b2028e6bb3837cd26c4396636581a701375678d64dfabf140a8eae21"
+  },
+  {
+    "file": "injected-three-rounds-final.hilog.txt",
+    "bytes": 164608,
+    "sha256": "37ae12e6be4467fd6fa088d0fd4f4f8897495477c68f2812353c47269329133e"
+  },
+  {
+    "file": "injected-three-rounds-four-thumbnails.jpeg",
+    "bytes": 505414,
+    "sha256": "b2a3bb7d8d77b7d57aebd9394300278e06f796f93e3710a28d2b561bb47fc9af"
+  },
+  {
+    "file": "injected-three-rounds-medium.jpeg",
+    "bytes": 516072,
+    "sha256": "e41e8bc1ab73666d2ef0acaaf628d00673115b1de06c04d0c5918dcb0baefeaf"
+  },
+  {
+    "file": "log-summary.json",
+    "bytes": 34064,
+    "sha256": "d6dfd17737212487490a78d32cbabd188bf4e51b516aece0a89cf0227d58d5d9"
+  },
+  {
+    "file": "manual-three-rounds-final.jpeg",
+    "bytes": 362284,
+    "sha256": "a2f2a2f767fc3961ad7d3c77b99801208fb797932d21a2a22976e0f04d6bb6a8"
+  },
+  {
+    "file": "medium-open-confirmed.jpeg",
+    "bytes": 516325,
+    "sha256": "8c2dd520b360a285564af4abd8028c57b4719980cd8a0841bc3854428175c18b"
+  },
+  {
+    "file": "medium-reopened.mpd",
+    "bytes": 85317,
+    "sha256": "9518248df9bfbcab75df382157cfe22c30fffcdf1c71632d80d495ea0c34f253"
+  },
+  {
+    "file": "medium-saved.jpeg",
+    "bytes": 1054870,
+    "sha256": "18cdb15ec159c7eefb321d1f7f98597770cf57a07f85d9afe329ed18c756b0c1"
+  },
+  {
+    "file": "medium-saved.mpd",
+    "bytes": 85317,
+    "sha256": "9518248df9bfbcab75df382157cfe22c30fffcdf1c71632d80d495ea0c34f253"
+  },
+  {
+    "file": "model-receipt.json",
+    "bytes": 808,
+    "sha256": "6778235b02323d36731869c7bbd3519b57cc654d8a89435050982471b89b7282"
+  },
+  {
+    "file": "normal-start-all-parts.jpeg",
+    "bytes": 311809,
+    "sha256": "c81c78cab0a8e9fc2edc9dda6fbb99a70c8cf4e1b8c94ee14dec898a3ae41e96"
+  },
+  {
+    "file": "old-child-search.jpeg",
+    "bytes": 506609,
+    "sha256": "f6ee6c1de44ceaf1379888bcbe10406428cbb567984a21c9288e80c516bf6c2a"
+  },
+  {
+    "file": "package-receipt.json",
+    "bytes": 717,
+    "sha256": "8c7e607d3d0e56498680fae879ae18d1ee9886b9f0b4f4fa6ec4f8b4f7277903"
+  },
+  {
+    "file": "packaged-module.json",
+    "bytes": 3470,
+    "sha256": "e377cb76c3b444da9b69ae1c8ff8cb90288cd44be7e544ce1b124763b39ad860"
+  },
+  {
+    "file": "parts-hidden.jpeg",
+    "bytes": 1054049,
+    "sha256": "597c0a69fa4e3c373359f892378228ddfb33006d03e2ff68f7712d177060da0d"
+  },
+  {
+    "file": "parts-restored.jpeg",
+    "bytes": 1050123,
+    "sha256": "5ba3f1b21f42221f894f451756fbb83cb99a5c99ba4ff6f43976eb001164ae9c"
+  },
+  {
+    "file": "public-d10-preserved.json",
+    "bytes": 1357,
+    "sha256": "3122ea9af69bf06ce504ed71633d6b0208fea7eac1a44e06d6be9bfb977b964f"
+  },
+  {
+    "file": "reopened-edit-properties.jpeg",
+    "bytes": 1056665,
+    "sha256": "9f3a9f505d81269ffc564f348baabddece3481a4d02182da30c5e9d99ce0dc04"
+  },
+  {
+    "file": "restored-config-final.hilog.txt",
+    "bytes": 62490,
+    "sha256": "3da135363052773ed292f11679d38c57571833607a371020149cb0055cf4dc7f"
+  },
+  {
+    "file": "restored-original-config-start.jpeg",
+    "bytes": 311990,
+    "sha256": "10be00602fba69fa7c4657a2e0d03a8a0917061f26133efd7b6423a184f44717"
+  },
+  {
+    "file": "restored-private-files.json",
+    "bytes": 2249,
+    "sha256": "b8f700c4b85103b6900746e8c93d32f6751f0daafcef7abef4d689a7f49062ba"
+  },
+  {
+    "file": "save-chinese-path.jpeg",
+    "bytes": 399743,
+    "sha256": "35bfbf8451e8f95e931e529a15e9cdc7bcdc9980a48273141c273428811d6534"
+  },
+  {
+    "file": "selected-edit-target.jpeg",
+    "bytes": 1054829,
+    "sha256": "800331491205b4eab2ca85ae60ccbc41faa04459fe0c8424f3e64c0af60097c4"
+  },
+  {
+    "file": "session-39541-live.hilog.txt",
+    "bytes": 400671,
+    "sha256": "e8ca0dd23cd15e70212fc1e6adce6475c172244ec022650b9302defa564ab320"
+  },
+  {
+    "file": "steps.txt",
+    "bytes": 4143,
+    "sha256": "b1131502320d1012d8760a79a2aacd6a4cd8580c99dc5066a6498c9cee47f36a"
+  },
+  {
+    "file": "uninstall-result.txt",
+    "bytes": 82,
+    "sha256": "b5e56afcc567b621a47f6bec77f215f6f9344a85b72e7cc9d5c0b73b8434ff7a"
+  },
+  {
+    "file": "window-maximized-again.jpeg",
+    "bytes": 1050471,
+    "sha256": "b0081d5bf76cf4f55bd542dc9fe1457a3f4d3b9f146880ada86cfcb818bfac36"
+  },
+  {
+    "file": "window-restored.jpeg",
+    "bytes": 805434,
+    "sha256": "2c6d0a58354f2778120c94b65765b98a6b168c53da0298135bccc266d7c78406"
+  }
+]
