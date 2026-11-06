@@ -68,6 +68,50 @@ EXTERNAL_URL_COMMANDS = (
 )
 
 
+# A .ui label with openExternalLinks=true turns an http(s) anchor into a working
+# "open this in the browser" control. The trim list cannot see it: the link lives
+# in the widget file, not in a menu command. Both of these shipped enabled until
+# the D11 release-material review, which is exactly the gap this check closes.
+#
+# The one file below is excluded because it cannot be shown: lcUpdateDialog is
+# only ever constructed from lcDoInitialUpdateCheck(), which the CMake target
+# compiles out (LC_DISABLE_UPDATE_CHECK=1) and whose menu command LC_HELP_UPDATES
+# is in the trim list. Two independent reasons, both asserted here, so the
+# exclusion cannot outlive them.
+PRIVACY_POLICY = REPO / "docs" / "release" / "隐私政策.md"
+STORE_COPY = REPO / "docs" / "release" / "商店文案.md"
+ICON_FREEZE = REPO / "docs" / "release" / "图标冻结.md"
+
+UNREACHABLE_CLICKABLE_LINKS = {
+    "common/lc_updatedialog.ui": (
+        "lcUpdateDialog has no reachable entry point: LC_HELP_UPDATES is trimmed "
+        "and lcDoInitialUpdateCheck() is behind #if !LC_DISABLE_UPDATE_CHECK"
+    ),
+}
+
+UI_DIRECTORIES = ("common", "qt")
+
+
+def clickable_link_labels(path: Path) -> list[str]:
+    """Text of every label in a .ui file that enables openExternalLinks."""
+
+    source = read(path)
+    texts = []
+
+    for match in re.finditer(
+        r'<widget class="QLabel" name="[^"]*">(.*?)</widget>', source, re.S
+    ):
+        body = match.group(1)
+        if not re.search(
+            r'<property name="openExternalLinks">\s*<bool>true</bool>', body
+        ):
+            continue
+        text = re.search(r"<string[^>]*>(.*?)</string>", body, re.S)
+        texts.append(text.group(1) if text else "")
+
+    return texts
+
+
 def read(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
@@ -336,6 +380,78 @@ class NetworkScopeTests(unittest.TestCase):
                 f"{gate} is no longer compiled into the leocad target; the "
                 "first-release scope trim and this macro are meant to agree",
             )
+
+    def test_no_reachable_dialog_has_a_clickable_external_link(self) -> None:
+        """A label can open a browser without any command being involved.
+
+        openExternalLinks on a label holding an http anchor is a live link the
+        trim list cannot remove, because no command backs it. The About dialog
+        and the Sets Database dialog (reachable from the part panel context menu
+        through Edit Palettes... -> Import...) both shipped that way until the
+        D11 review. Every remaining one has to be justified as unreachable.
+        """
+
+        offenders = []
+
+        for directory in UI_DIRECTORIES:
+            for path in sorted((REPO / directory).rglob("*.ui")):
+                if not clickable_link_labels(path):
+                    continue
+                if path.relative_to(REPO).as_posix() in UNREACHABLE_CLICKABLE_LINKS:
+                    continue
+                offenders.append(str(path.relative_to(REPO)))
+
+        self.assertEqual(
+            offenders,
+            [],
+            "these .ui files enable openExternalLinks, so a label in them opens a "
+            "browser on click — a network action the privacy policy says the first "
+            "release does not take. Make the text plain, or add the file to "
+            "UNREACHABLE_CLICKABLE_LINKS with the reason it cannot be shown: "
+            + ", ".join(offenders),
+        )
+
+    def test_the_excluded_clickable_link_is_still_unreachable(self) -> None:
+        """The exemption above must expire when its two reasons do.
+
+        If the update dialog ever becomes reachable again, the allowlist entry
+        would silently hide a live external link. Both guards are re-asserted
+        here so removing either one fails this test first.
+        """
+
+        self.assertIn(
+            "LC_HELP_UPDATES",
+            removed_commands(read(MAINWINDOW)),
+            "LC_HELP_UPDATES is back in a menu, so lcUpdateDialog is reachable and "
+            "its clickable link is no longer covered by UNREACHABLE_CLICKABLE_LINKS",
+        )
+
+        self.assertRegex(
+            read(QTMAIN),
+            r"#if\s*!\s*LC_DISABLE_UPDATE_CHECK[\s\S]*?lcDoInitialUpdateCheck\(\)",
+            "lcDoInitialUpdateCheck() is no longer compiled out, so the update "
+            "dialog can appear at startup and its clickable link ships live",
+        )
+
+    def test_privacy_policy_describes_the_clickable_link_rule(self) -> None:
+        """The policy has to name the mechanism, not just the outcome.
+
+        The .ui links were found by reading the file, not by any check, and a
+        policy that only says "no external URLs" would have been true-looking
+        while both links shipped live. This keeps the description attached to the
+        check that now enforces it.
+        """
+
+        policy = read(PRIVACY_POLICY)
+        self.assertTrue(policy, "could not read the privacy policy")
+
+        self.assertIn(
+            "openExternalLinks",
+            policy,
+            "the privacy policy no longer explains that the .ui labels themselves "
+            "can open a browser; if that paragraph was dropped, the rule it "
+            "describes is undocumented even though the check still runs",
+        )
 
     def test_harmony_build_script_uses_this_cmake_project(self) -> None:
         """The constraint above only protects the app if the app is built here.

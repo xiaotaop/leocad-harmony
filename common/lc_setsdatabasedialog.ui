@@ -71,10 +71,15 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Sets Database provided by &lt;a href=&quot;https://www.rebrickable.com&quot;&gt;Rebrickable&lt;/a&gt;</string>
+      <!-- Plain text for the same reason as lc_aboutdialog.ui: this dialog is
+           reachable (part panel context menu -> Edit Palettes... -> Import...),
+           so a clickable link here contradicts the privacy policy the same way
+           the About dialog did. The HTTP search behind it is already stubbed
+           out by LC_DISABLE_NETWORK; only the outbound browser launch remained. -->
+      <string>Sets Database provided by Rebrickable (https://www.rebrickable.com)</string>
      </property>
      <property name="openExternalLinks">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
     </widget>
    </item>
