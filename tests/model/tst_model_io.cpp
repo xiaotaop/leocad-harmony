@@ -730,6 +730,60 @@ private slots:
         }
     }
 
+    void mediumMpdSaveAfterProjectSwitch_data()
+    {
+        QTest::addColumn<int>("switchRounds");
+        QTest::newRow("direct-open") << 0;
+        QTest::newRow("three-ldr-mpd-rounds") << 3;
+    }
+
+    void mediumMpdSaveAfterProjectSwitch()
+    {
+        QFETCH(int, switchRounds);
+        QTemporaryDir dir;
+        QVERIFY(dir.isValid());
+        EditingSession session;
+        for (int round = 0; round < switchRounds; ++round)
+        {
+            QVERIFY(session.window->OpenProject(QFINDTESTDATA("../fixtures/two-pieces.ldr")));
+            QVERIFY(session.window->OpenProject(QFINDTESTDATA("../fixtures/submodel.mpd")));
+        }
+
+        QVERIFY(session.window->OpenProject(QFINDTESTDATA("../../docs/evidence/member-a/2026-11-05/d10-2000.mpd")));
+        Project* project = lcGetActiveProject();
+        lcModel* child = project->GetModel("child-0.ldr");
+        QVERIFY(child);
+        QCOMPARE(child->GetPieces().size(), size_t(500));
+        project->SetActiveModel(child, true);
+        lcPiece* edited = child->GetPieces()[221].get();
+        QCOMPARE(edited->GetID(), QString("3032.dat"));
+        QCOMPARE(edited->mModelWorld.GetTranslation(), lcVector3(50, 550, 0));
+        child->SetSelectionAndFocusAction({edited}, edited, LC_PIECE_SECTION_POSITION, lcSelectionMode::Single);
+        child->MoveSelectedObjects(lcVector3(0, -10, 0), lcModelTransformFlag::Checkpoint, lcModelHistoryEditMerge::None);
+        QVERIFY(project->IsModified());
+        const QString saved = dir.filePath(QString::fromUtf8("中型 模型.mpd"));
+        QVERIFY(project->Save(saved).has_value());
+        QVERIFY(session.window->OpenProject(saved));
+
+        Project* reopened = lcGetActiveProject();
+        QCOMPARE(reopened->GetModels().size(), size_t(5));
+        const auto& references = reopened->GetMainModel()->GetPieces();
+        QCOMPARE(references.size(), size_t(4));
+        for (int index = 0; index < 4; ++index)
+        {
+            const QString name = QString("child-%1.ldr").arg(index);
+            lcModel* model = reopened->GetModel(name);
+            QVERIFY(model);
+            QCOMPARE(references[index]->GetID(), name);
+            QCOMPARE(references[index]->mPieceInfo->GetModel(), model);
+            QCOMPARE(model->GetPieces().size(), size_t(500));
+        }
+        const auto& piece = reopened->GetModel("child-0.ldr")->GetPieces()[221];
+        QCOMPARE(piece->GetID(), QString("3032.dat"));
+        QCOMPARE(piece->GetColorCode(), quint32(12));
+        QCOMPARE(piece->mModelWorld.GetTranslation(), lcVector3(50, 540, 0));
+    }
+
     void serializationDoesNotClearEditHistoryDirtyState()
     {
         EditingSession session;
@@ -932,7 +986,7 @@ int main(int argc, char** argv)
     if (!fixtureDirectory.isValid())
         return 2;
     gHarmonyFixtureDirectory = fixtureDirectory.path();
-    for (const char* name : {"two-pieces.ldr", "submodel.mpd", "empty-model.lxf"})
+    for (const char* name : {"two-pieces.ldr", "submodel.mpd", "empty-model.lxf", "d10-2000.mpd"})
     {
         QFile source(QStringLiteral(":/fixtures/") + QString::fromLatin1(name));
         QFile destination(fixtureDirectory.filePath(QString::fromLatin1(name)));

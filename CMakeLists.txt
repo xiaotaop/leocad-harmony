@@ -154,6 +154,8 @@ if(OHOS AND LEOCAD_BUILD_MODEL_TEST_HAP)
     qt_add_resources(leocad-model-tests model_fixtures PREFIX "/fixtures"
         BASE tests/fixtures FILES tests/fixtures/two-pieces.ldr
         tests/fixtures/submodel.mpd tests/fixtures/empty-model.lxf)
+    qt_add_resources(leocad-model-tests medium_fixture PREFIX "/fixtures"
+        BASE docs/evidence/member-a/2026-11-05 FILES docs/evidence/member-a/2026-11-05/d10-2000.mpd)
     set_target_properties(leocad-model-tests PROPERTIES
         QT_HARMONYOS_APP_BUNDLE_NAME "io.github.xiaotaop.leocad.modeltests"
         QT_HARMONYOS_APP_NAME "LeoCAD Model Tests"
