@@ -1,88 +1,79 @@
 0 Screenshot sample: small house
 0 Name: screenshot-sample.ldr
 0 Author: LeoCAD Harmony port (member C, D11)
-0 !LPUB CALCULATE BOM FALSE
 0
-0 Baseplate 6x10 (real part 3033 is not in the lite library; the base is
-0 built from 2x4 plates instead so every id below exists in
-0 assets/ldraw-lite/library-lite.zip -- see verify_sample_model.py).
+0 VERTICAL CONVENTION -- this is what was wrong in the first revision.
+0 ---------------------------------------------------------------------
+0 An LDraw part's origin sits on its TOP face: a 2x4 brick occupies
+0 y = 0..24 BELOW its origin, with studs sticking up to y = -4. LDraw Y grows
+0 DOWNWARD, and LeoCAD preserves that when converting
+0 (common/lc_math.h lcVector3LDrawToLeoCAD maps (x, y, z) to (x, z, -y)),
+0 so a LARGER y is LOWER on screen. Stacking upward therefore means counting
+0 DOWN: each course above another has a smaller y than the one below.
+0 The first revision counted up, which placed the roof under the walls and the
+0 chimney under that. Existence checks on part ids and colours cannot see that;
+0 the geometry check in verify_sample_model.py can.
 0
-1 71 0 0 0 1 0 0 0 1 0 0 0 1 3001.dat
-1 71 80 0 0 1 0 0 0 1 0 0 0 1 3001.dat
-1 71 160 0 0 1 0 0 0 1 0 0 0 1 3001.dat
-1 71 0 0 40 1 0 0 0 1 0 0 0 1 3001.dat
-1 71 80 0 40 1 0 0 0 1 0 0 0 1 3001.dat
-1 71 160 0 40 1 0 0 0 1 0 0 0 1 3001.dat
+0 Measured from assets/ldraw-lite/library-lite.zip:
+0   3001 brick 2x4, 3003 brick 2x2, 3004 brick 1x2: body 0..24, studs -4..0
+0   3035 plate 4x8:                                body 0..8,  studs -4..0
 0
-0 Four walls, 2x2 bricks, two courses high.
+0 Resulting stack (top face of each layer):
+0   base plate  top    0  body    0..8
+0   wall 1      top  -24  body  -24..0     rests on the base plate
+0   wall 2      top  -48  body  -48..-24   rests on wall 1
+0   roof        top  -56  body  -56..-48   rests on wall 2
+0   chimney     top  -80  body  -80..-56   rests on the roof
+0   chimney 2   top -104  body -104..-80   rests on the chimney
 0
-1 4 -20 24 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 20 24 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 60 24 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 100 24 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 140 24 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 180 24 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 -20 24 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 20 24 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 60 24 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 100 24 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 140 24 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 4 180 24 180 1 0 0 0 1 0 0 0 1 3003.dat
+0 Footprint: 8x8 studs, x -80..80, z -80..80. Walls are one stud thick (20).
+0 Front and back walls span x -60..60 so the corners belong to the side walls;
+0 that keeps four groups from interpenetrating at the corners.
+0 ---------------------------------------------------------------------
 0
-0 Door gap left open at the front, window in the back wall.
+0 Base: two 4x8 plates, together 8x8 studs.
+1 71 0 0 -40 1 0 0 0 1 0 0 0 1 3035.dat
+1 71 0 0 40 1 0 0 0 1 0 0 0 1 3035.dat
 0
-1 14 -20 48 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 20 48 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 60 48 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 140 48 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 180 48 20 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 -20 48 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 20 48 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 60 48 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 100 48 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 140 48 180 1 0 0 0 1 0 0 0 1 3003.dat
-1 14 180 48 180 1 0 0 0 1 0 0 0 1 3003.dat
+0 Walls, course 1, resting on the base plate top face (y = 0).
+0 Front and back: three 1x2 bricks each, long axis along x.
+1 4 -40 -24 -70 1 0 0 0 1 0 0 0 1 3004.dat
+1 4 0 -24 -70 1 0 0 0 1 0 0 0 1 3004.dat
+1 4 40 -24 -70 1 0 0 0 1 0 0 0 1 3004.dat
+1 4 -40 -24 70 1 0 0 0 1 0 0 0 1 3004.dat
+1 4 0 -24 70 1 0 0 0 1 0 0 0 1 3004.dat
+1 4 40 -24 70 1 0 0 0 1 0 0 0 1 3004.dat
+0 Sides: four 1x2 bricks each, rotated 90 degrees about Y so the long axis runs
+0 along z. This is the rotation used by the repository's own fixtures.
+1 4 -70 -24 -60 0 0 1 0 1 0 -1 0 0 3004.dat
+1 4 -70 -24 -20 0 0 1 0 1 0 -1 0 0 3004.dat
+1 4 -70 -24 20 0 0 1 0 1 0 -1 0 0 3004.dat
+1 4 -70 -24 60 0 0 1 0 1 0 -1 0 0 3004.dat
+1 4 70 -24 -60 0 0 1 0 1 0 -1 0 0 3004.dat
+1 4 70 -24 -20 0 0 1 0 1 0 -1 0 0 3004.dat
+1 4 70 -24 20 0 0 1 0 1 0 -1 0 0 3004.dat
+1 4 70 -24 60 0 0 1 0 1 0 -1 0 0 3004.dat
 0
-0 Side walls: 2x4 bricks, two courses.
+0 Walls, course 2, resting on course 1 (y = -48).
+1 14 -40 -48 -70 1 0 0 0 1 0 0 0 1 3004.dat
+1 14 0 -48 -70 1 0 0 0 1 0 0 0 1 3004.dat
+1 14 40 -48 -70 1 0 0 0 1 0 0 0 1 3004.dat
+1 14 -40 -48 70 1 0 0 0 1 0 0 0 1 3004.dat
+1 14 0 -48 70 1 0 0 0 1 0 0 0 1 3004.dat
+1 14 40 -48 70 1 0 0 0 1 0 0 0 1 3004.dat
+1 14 -70 -48 -60 0 0 1 0 1 0 -1 0 0 3004.dat
+1 14 -70 -48 -20 0 0 1 0 1 0 -1 0 0 3004.dat
+1 14 -70 -48 20 0 0 1 0 1 0 -1 0 0 3004.dat
+1 14 -70 -48 60 0 0 1 0 1 0 -1 0 0 3004.dat
+1 14 70 -48 -60 0 0 1 0 1 0 -1 0 0 3004.dat
+1 14 70 -48 -20 0 0 1 0 1 0 -1 0 0 3004.dat
+1 14 70 -48 20 0 0 1 0 1 0 -1 0 0 3004.dat
+1 14 70 -48 60 0 0 1 0 1 0 -1 0 0 3004.dat
 0
-1 4 -20 24 60 0 0 1 0 1 0 -1 0 0 3001.dat
-1 4 -20 24 100 0 0 1 0 1 0 -1 0 0 3001.dat
-1 4 -20 24 140 0 0 1 0 1 0 -1 0 0 3001.dat
-1 14 -20 48 60 0 0 1 0 1 0 -1 0 0 3001.dat
-1 14 -20 48 100 0 0 1 0 1 0 -1 0 0 3001.dat
-1 14 -20 48 140 0 0 1 0 1 0 -1 0 0 3001.dat
-1 4 180 24 60 0 0 1 0 1 0 -1 0 0 3001.dat
-1 4 180 24 100 0 0 1 0 1 0 -1 0 0 3001.dat
-1 4 180 24 140 0 0 1 0 1 0 -1 0 0 3001.dat
-1 14 180 48 60 0 0 1 0 1 0 -1 0 0 3001.dat
-1 14 180 48 100 0 0 1 0 1 0 -1 0 0 3001.dat
-1 14 180 48 140 0 0 1 0 1 0 -1 0 0 3001.dat
+0 Roof: two 4x8 plates covering the full 8x8 footprint, on the wall top (y = -48).
+1 320 0 -56 -40 1 0 0 0 1 0 0 0 1 3035.dat
+1 320 0 -56 40 1 0 0 0 1 0 0 0 1 3035.dat
 0
-0 Roof: 4x8 plates, two courses, dark red.
-0
-1 320 -20 72 20 1 0 0 0 1 0 0 0 1 3035.dat
-1 320 140 72 20 1 0 0 0 1 0 0 0 1 3035.dat
-1 320 -20 72 180 1 0 0 0 1 0 0 0 1 3035.dat
-1 320 140 72 180 1 0 0 0 1 0 0 0 1 3035.dat
-1 320 -20 84 20 1 0 0 0 1 0 0 0 1 3035.dat
-1 320 140 84 20 1 0 0 0 1 0 0 0 1 3035.dat
-1 320 -20 84 180 1 0 0 0 1 0 0 0 1 3035.dat
-1 320 140 84 180 1 0 0 0 1 0 0 0 1 3035.dat
-0
-0 Chimney: 2x2 bricks, tan.
-0
-1 19 140 96 100 1 0 0 0 1 0 0 0 1 3003.dat
-1 19 140 120 100 1 0 0 0 1 0 0 0 1 3003.dat
-0
-0 Door and window, yellow.
-0
-1 14 80 24 20 1 0 0 0 1 0 0 0 1 3069b.dat
-1 14 80 48 20 1 0 0 0 1 0 0 0 1 3069b.dat
-1 15 80 72 20 1 0 0 0 1 0 0 0 1 3069b.dat
-0
-0 Small tree beside the house: green round plates on a grey axle brick.
-0
-1 8 -60 0 60 1 0 0 0 1 0 0 0 1 3003.dat
-1 2 -60 24 60 1 0 0 0 1 0 0 0 1 3004.dat
-1 2 -60 48 60 1 0 0 0 1 0 0 0 1 3024.dat
-1 2 -60 72 60 1 0 0 0 1 0 0 0 1 3021.dat
+0 Chimney: two 2x2 bricks standing on the roof (y = -56), tan.
+1 19 40 -80 40 1 0 0 0 1 0 0 0 1 3003.dat
+1 19 40 -104 40 1 0 0 0 1 0 0 0 1 3003.dat
