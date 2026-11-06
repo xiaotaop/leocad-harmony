@@ -1,0 +1,27 @@
+2026-11-05T20:00:20.4511295+08:00 Install D10 normal Release OFF source adaf4893 signed package.
+2026-11-05T20:04:29.2863887+08:00 Leader confirms all three manual LDR -> MPD rounds normal, no restart; physical keyboard/touchpad.
+2026-11-05T20:04:51.4533107+08:00 Medium model system picker Open clicked; timings from commands/screenshot are coarse, not first-frame measurement.
+2026-11-05T20:07:06.4515196+08:00 Fresh process 35069 opens same medium file successfully after first process 32382 crashed. Keep failure and fresh control separate.
+2026-11-05T20:07:08.5219976+08:00 Stability minute 0 same PID 35069; injected navigation/edit exercise start
+2026-11-05T20:07:13.0548993+08:00 Stability minute 0 exercise completed; commands delivered, visual result requires inspection
+2026-11-05T20:09:12.5905369+08:00 child-0 selected Plate4x6 3032; Right/Undo/Redo UI final X50 Y540 Z0, dirty.
+2026-11-05T20:09:42.9714736+08:00 child-0 3032 expected red color4, UI X50 Y540 Z0; color undo/redo sampled via property display.
+2026-11-05T20:12:08.5076833+08:00 Stability minute 5 same PID 35069; injected navigation/edit exercise start
+2026-11-05T20:12:13.0942015+08:00 Stability minute 5 exercise completed; commands delivered, visual result requires inspection
+2026-11-05T20:17:08.4361416+08:00 Stability minute 10 same PID 35069; injected navigation/edit exercise start
+2026-11-05T20:17:13.0398979+08:00 Stability minute 10 exercise completed; commands delivered, visual result requires inspection
+2026-11-05T20:18:33.3617232+08:00 At minute 10 selection lost after layout navigation; select all active child pieces for subsequent periodic move/undo/redo cycles. Final individual edit will be set and verified before save.
+2026-11-05T20:22:09.4038392+08:00 Stability minute 15 same PID 35069; injected navigation/edit exercise start
+2026-11-05T20:22:13.8391354+08:00 Stability minute 15 exercise completed; commands delivered, visual result requires inspection
+2026-11-05T20:25:17.5118523+08:00 Minute18 switch to main model, all four child references selected for periodic movement/undo cycles; full2000 scene active.
+2026-11-05T20:27:08.9924014+08:00 Stability minute 20 same PID 35069; injected navigation/edit exercise start
+2026-11-05T20:27:13.2550395+08:00 Stability minute 20 exercise completed; commands delivered, visual result requires inspection
+2026-11-05T20:29:21.6356278+08:00 Cycle and truncated input errors returned to dirty medium main, four selected references preserved; no new process.
+2026-11-05T20:32:08.5829857+08:00 Stability minute 25 same PID 35069; injected navigation/edit exercise start
+2026-11-05T20:32:12.4249692+08:00 Stability minute 25 exercise completed; commands delivered, visual result requires inspection
+2026-11-05T20:32:35.8302063+08:00 Final edit: all500 child-0 instances set to red color4; undo/redo sampled. Keep moved3032 positional delta if still present; output will be compared to fixed input before claiming.
+2026-11-05T20:37:09.1572153+08:00 Stability minute 30 same PID 35069; injected navigation/edit exercise start
+2026-11-05T20:37:13.0507623+08:00 Stability minute 30 exercise completed; commands delivered, visual result requires inspection
+2026-11-05T20:37:13.0519434+08:00 30 minutes elapsed after medium model loaded; stability harness finished
+2026-11-05T20:42:28.1692213+08:00 D10 final test process closed; restore original preferences, leave test outputs/new package. No WLAN changes.
+2026-11-05T20:45:35.5797066+08:00 Correction to20:32 entry: color change attempted during sampling; properties still showed multiple colors afterward, so it was not accepted as final. Reapplied after harness ended20:37:13; final-child500-red.jpeg captured 2026-11-05T20:37:48.4502374+08:00 shows500 selected and red. Saved model independently confirms all500 color4.

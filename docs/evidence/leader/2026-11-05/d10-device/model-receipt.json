@@ -1,0 +1,30 @@
+{
+  "input_sha256": "45fb6e2e5f8ac52719bc287e957960c070ac4ce686e0d06c4f4cd763e7d357c6",
+  "saved_sha256": "720e572b5791c68b98f28ec228aa3312b18b65a57a7dd9eab740ef37aa30fe5b",
+  "reopened_sha256": "720e572b5791c68b98f28ec228aa3312b18b65a57a7dd9eab740ef37aa30fe5b",
+  "saved_bytes": 85120,
+  "model_counts": {
+    "main.ldr": 4,
+    "child-0.ldr": 500,
+    "child-1.ldr": 500,
+    "child-2.ldr": 500,
+    "child-3.ldr": 500
+  },
+  "expected_vs_actual_equal": true,
+  "child_0_expected_all_colors": 4,
+  "only_position_change": {
+    "row_zero_based": 221,
+    "id": "3032.dat",
+    "from_ldraw": [
+      50,
+      0,
+      550
+    ],
+    "to_ldraw": [
+      50,
+      0,
+      540
+    ]
+  },
+  "other_models_unchanged": true
+}

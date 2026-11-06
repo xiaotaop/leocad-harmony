@@ -49,3 +49,6 @@
 /docs/evidence/member-a/2026-11-05/*.patch -text whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
 # Preserve leader D9 device receipts and original logs.
 /docs/evidence/leader/2026-11-04/d9-device/* -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+
+# Preserve D10 original device evidence and crash reports.
+/docs/evidence/leader/2026-11-05/d10-device/* -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof

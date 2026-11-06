@@ -1,0 +1,9 @@
+Artifact size/SHA and source identity: PASS
+31 minute memory records and 30 minute completion marker: PASS
+Medium save/reopen byte equality and fixed-input-derived structure: PASS
+Legal empty model 62bytes/zero type1: PASS
+Crash32382 retained separately from normal exits35069/46458: PASS
+20 static tests: PASS
+9 original config/fixture hashes restored or unchanged: PASS
+Local report links: PASS
+Overall device acceptance: BLOCKED by crash; real permission/write-failure/recovery still UNTESTED
