@@ -743,6 +743,10 @@ void lcApplication::SetProject(Project* Project)
 	{
 		gMainWindow->RemoveAllModelTabs();
 
+		// The parts panel borrows descriptors from the outgoing project.
+		if (gMainWindow->GetPartSelectionWidget())
+			gMainWindow->GetPartSelectionWidget()->ClearProjectParts();
+
 		if (gMainWindow->GetPreviewWidget())
 			gMainWindow->GetPreviewWidget()->ClearPreview();
 	}
@@ -750,8 +754,10 @@ void lcApplication::SetProject(Project* Project)
 	delete mProject;
 	mProject = Project;
 
-	Project->SetActiveModel(0, true);
+	// Activating the model rebuilds the panel from the library. Reclaim the
+	// outgoing project's temporary descriptors before it takes that snapshot.
 	lcGetPiecesLibrary()->RemoveTemporaryPieces();
+	Project->SetActiveModel(0, true);
 
 	if (mProject && !mProject->GetFileName().isEmpty() && mPreferences.mRestoreTabLayout)
 	{

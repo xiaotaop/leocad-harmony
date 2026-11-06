@@ -47,6 +47,9 @@
 # Preserve D10 render probe evidence and device fixture bytes.
 /docs/evidence/member-a/2026-11-05/* -text whitespace=cr-at-eol,-blank-at-eol
 /docs/evidence/member-a/2026-11-05/*.patch -text whitespace=cr-at-eol,-blank-at-eol,-space-before-tab
+
+# Preserve D11 project-switch regression evidence.
+/docs/evidence/member-a/2026-11-06/* -text whitespace=cr-at-eol,-blank-at-eol
 # Preserve leader D9 device receipts and original logs.
 /docs/evidence/leader/2026-11-04/d9-device/* -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
 

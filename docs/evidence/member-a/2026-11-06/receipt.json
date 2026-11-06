@@ -1,0 +1,40 @@
+{
+  "baseline": "2fe051d2b3b72bd046d7b25c52a20a2b5e36372b",
+  "baseline_inputs": "Baseline production sources with the same D11 test",
+  "host": "macOS arm64, Qt 6.12.0 Release",
+  "sources": {
+    "common/lc_application.cpp": "ebd5958b957deb15b6bb7bbe39bde3c33a501e4fc3c0a895f905ce0d952292e7",
+    "common/lc_partselectionwidget.cpp": "b557bc00a8715eee3ce55301c2d17763e8158b6ea6d4e3c2717f94afd3d73289",
+    "common/lc_partselectionwidget.h": "6357495d389870382fe19aa1963d63085cd0130c77b26e78b1dc4cda6ba596cb",
+    "tests/input/tst_view_input.cpp": "e71464e4465504d09a43192810a1d55d73b61382d28f2168216dd20512e36403"
+  },
+  "baseline_binary_sha256": "13709d0ac53270cfa494dfeaa6fb66ae0bf75f60f21387c487c74f2cd993cae8",
+  "fixed_binary_sha256": "e76cc661924aa93c72ce996886a5d90f50c5a3b8f481c9f173bf4e7796652a18",
+  "app_binary_sha256": "9341887f18b5224c2ad347213019c62249c2b0c3f36550d6b84377cccb73b8dc",
+  "evidence": {
+    "app-build-summary.txt": {
+      "bytes": 563,
+      "sha256": "6c4c2fc90751a04d1ebacc94a8ab4d7f2c45f2702675731d4448e2e86dc8cbf4"
+    },
+    "baseline.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "baseline.renderer.log": {
+      "bytes": 1021,
+      "sha256": "b70a11bb1d971c33c134d1ef0bac0e480bd64740ab5c06b9ca1a6ff6f48cff6c"
+    },
+    "baseline.txt": {
+      "bytes": 10988,
+      "sha256": "c76767af2f1ba9aa49ef318f7faf6c5735ea88ac57f50dcbcdf236e436b42a6f"
+    },
+    "desktop-matrix.txt": {
+      "bytes": 1625,
+      "sha256": "734cb9f3b3c5e655f6e604d641d91cec7ae4dafeb98c5a2368a88b3b66e9761c"
+    },
+    "startup-ctest.txt": {
+      "bytes": 294,
+      "sha256": "7562c5cc439f946ff20702a46ed9bc664337e43e7dd1ebab52aecf42fa5308d8"
+    }
+  }
+}

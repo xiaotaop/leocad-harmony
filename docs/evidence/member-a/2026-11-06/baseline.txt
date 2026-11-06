@@ -1,0 +1,62 @@
+********* Start testing of ViewInputTests *********
+Config: Using QtTest library 6.12.0, Qt 6.12.0 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.3.19.1)), macos 27.0.1
+PASS   : ViewInputTests::initTestCase()
+QINFO  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}
+QINFO  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+QINFO  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396
+QINFO  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}
+QINFO  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+QINFO  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() LEOCAD_GL_CONTEXT {"buffers":true,"context_format":{"depth_bits":0,"major":2,"minor":1,"profile":0,"renderable_type":1,"samples":0,"stencil_bits":0},"dpr":2,"framebuffers":true,"gl_version":"2.1 Metal - 91.7","glsl_version":"1.20","is_current":true,"is_gles":false,"logical_height":698,"logical_width":1094,"renderer":"Apple M4","shaders":true,"share_requested":true,"sharing":true,"stage":"view_initialize","valid":true,"vendor":"Apple"}
+QINFO  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() LEOCAD_GL_FRAMEBUFFER {"clear_depth":1,"depth_bits":24,"depth_func":513,"depth_range_far":1,"depth_range_near":0,"depth_test":false,"depth_write":true,"dpr":2,"framebuffer":1,"framebuffer_status":36053,"logical_height":698,"logical_width":1094,"passed":true,"qt_framebuffer":1,"stage":"view_framebuffer","stencil_bits":8}
+FAIL!  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() '!List->GetPieceInfoIndex(OldInfo).isValid()' returned FALSE. (All Parts retained a submodel descriptor removed by project cleanup)
+   Loc: [../leocad-d6-source/tests/input/tst_view_input.cpp(670)]
+QWARN  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() qt.qpa.menus: QPlatformMenuItem(0x79ce24a980) does not belong to <QCocoaNSMenu: 0x79cf911db0>
+    Title: Edit
+    Supermenu: 0x79cf336200 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x79cedb7b40, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x79cedb7c00 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x79cedf38e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x79cf1ddbb0, reps:(\n    \"NSBitmapImageRep 0x79ce3150a0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ced9b340>\",\n    \"NSBitmapImageRep 0x79ce315110 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ced9a300>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x79cedb7cc0 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x79cedf2c60 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x79cf1de840, reps:(\n    \"NSBitmapImageRep 0x79ce315420 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce390b40>\",\n    \"NSBitmapImageRep 0x79ce315490 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce390000>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x79cedb7d80 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x79cedf2bc0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x79cf1de820, reps:(\n    \"NSBitmapImageRep 0x79ce315340 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce3fca00>\",\n    \"NSBitmapImageRep 0x79ce3153b0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce3fc8c0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x79cedb7f00, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x79ce39c3c0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x79ce39c480 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x79ce39cb40, separator>",
+        "<QCocoaNSMenuItem: 0x79ce39cfc0 Transform, non-symbol image: <NSImage 0x79cedf3160 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x79cf1ddce0, reps:(\n    \"NSBitmapImageRep 0x79ce3156c0 Size={24, 24} ColorSpace=sRGB IEC61966-2.1 colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce3fc640>\"\n)>>, submenu: 0x79cf911e50 (Untitled)>",
+        "<QCocoaNSMenuItem: 0x79ce39dec0 Tools, submenu: 0x79cf911ea0 (Untitled)>",
+        "<NSMenuItem: 0x79cedf30c0, separator>",
+        "<NSMenuItem: 0x79cedf3f20 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x79cf9a7bc0 ()>",
+        "<NSMenuItem: 0x79cedf2a80 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x79cedf29e0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x79ce3f6760 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x79ce3f5040 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x79ce3f4780 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )
+QWARN  : ViewInputTests::projectSwitchRebuildsPartsAfterCleanup() qt.qpa.menus: QPlatformMenuItem(0x79ce24ac80) does not belong to <QCocoaNSMenu: 0x79cf911db0>
+    Title: Edit
+    Supermenu: 0x79cf336200 (), autoenable: YES
+    Previous menu: 0x0 (None)
+    Next menu: 0x0 (None)
+    Items:     (
+        "<QCocoaNSMenuItem: 0x79cedb7b40, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x79cedb7c00 Cut, ke='Command-X', action: cut:, non-symbol image: <NSImage 0x79cedf38e0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x79cf1ddbb0, reps:(\n    \"NSBitmapImageRep 0x79ce3150a0 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ced9b340>\",\n    \"NSBitmapImageRep 0x79ce315110 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ced9a300>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x79cedb7cc0 Copy, ke='Command-C', action: copy:, non-symbol image: <NSImage 0x79cedf2c60 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x79cf1de840, reps:(\n    \"NSBitmapImageRep 0x79ce315420 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce390b40>\",\n    \"NSBitmapImageRep 0x79ce315490 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce390000>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x79cedb7d80 Paste, ke='Command-V', action: paste:, non-symbol image: <NSImage 0x79cedf2bc0 Size={16, 16} RepProvider=<NSImageArrayRepProvider: 0x79cf1de820, reps:(\n    \"NSBitmapImageRep 0x79ce315340 Size={24, 24} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce3fca00>\",\n    \"NSBitmapImageRep 0x79ce3153b0 Size={16, 16} ColorSpace=This profile has a bad description tag colorspace BPS=8 BPP=32 Pixels=24x24 Alpha=YES Planar=NO Format=1 CurrentBacking=<CGImageRef: 0x79ce3fc8c0>\"\n)>>, hidden>",
+        "<QCocoaNSMenuItem: 0x79cedb7f00, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x79ce39c3c0, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x79ce39c480 Select All, ke='Command-A', action: selectAll:, action image: character.textbox, hidden>",
+        "<QCocoaNSMenuItem: 0x79ce39cb40, separator, hidden>",
+        "<QCocoaNSMenuItem: 0x79ce39dec0 Tools, submenu: 0x79cf911ea0 (Untitled)>",
+        "<NSMenuItem: 0x79cedf30c0, separator>",
+        "<NSMenuItem: 0x79cedf3f20 AutoFill, action image: rectangle.and.pencil.and.ellipsis, submenu: 0x79cf9a7bc0 ()>",
+        "<NSMenuItem: 0x79cedf2a80 Start Dictation\U2026, ke='\Ud83c\Udfa4', action: startDictation:, action image: microphone>",
+        "<NSMenuItem: 0x79cedf29e0 Start Dictation\U2026, ke='Function-D', action: startDictation:, action image: microphone, hidden>",
+        "<NSMenuItem: 0x79ce3f6760 Emoji & Symbols, ke='Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning>",
+        "<NSMenuItem: 0x79ce3f5040 Emoji & Symbols, ke='Control-Command-Space bar', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>",
+        "<NSMenuItem: 0x79ce3f4780 Emoji & Symbols, ke='Function-E', action: orderFrontCharacterPalette:, action image: emoji.face.grinning, hidden>"
+    )
+PASS   : ViewInputTests::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 960ms
+********* Finished testing of ViewInputTests *********

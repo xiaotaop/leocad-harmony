@@ -9,6 +9,7 @@
 #include "lc_library.h"
 #include "lc_mainwindow.h"
 #include "lc_model.h"
+#include "lc_partselectionwidget.h"
 #include "lc_view.h"
 #include "lc_viewwidget.h"
 #include "lc_viewsphere.h"
@@ -635,6 +636,58 @@ private slots:
             }
             qInfo()<<"D10_RENDER_RESIDENT"<<Count<<"elapsed_us"<<Timer.nsecsElapsed()/1000<<"frames"<<8;
         }
+    }
+    void projectSwitchRebuildsPartsAfterCleanup()
+    {
+        QTemporaryDir Files;
+        QVERIFY(Files.isValid());
+        const QString OldPath = Files.filePath("old.mpd");
+        const QString NewPath = Files.filePath("medium.mpd");
+        QVERIFY(QFile::copy(QFINDTESTDATA("../fixtures/input-switch.mpd"), OldPath));
+        QVERIFY(QFile::copy(QFINDTESTDATA("../../docs/evidence/member-a/2026-11-05/d10-2000.mpd"), NewPath));
+
+        auto* Library = lcGetPiecesLibrary();
+        auto* Panel = Window->GetPartSelectionWidget();
+        auto* Parts = Panel->findChild<lcPartSelectionListView*>();
+        QVERIFY(Parts);
+        auto* List = Parts->GetListModel();
+        Panel->SetCategory(lcPartCategoryType::AllParts, 0);
+
+        for (int Round = 0; Round < 3; Round++)
+        {
+            QVERIFY(Window->OpenProject(OldPath));
+            lcModel* OldChild = lcGetActiveProject()->GetModel(QStringLiteral("child.ldr"));
+            QVERIFY(OldChild);
+            PieceInfo* OldInfo = OldChild->GetPieceInfo();
+            QVERIFY(List->GetPieceInfoIndex(OldInfo).isValid());
+
+            // Inspect the real list as soon as OpenProject returns, before an
+            // invalid row can be dereferenced by a paint or a tooltip.
+            QVERIFY(Window->OpenProject(NewPath));
+            QCOMPARE(lcGetActiveProject()->GetModels().size(), size_t(5));
+            QVERIFY(!Library->FindPiece("child.ldr", lcGetActiveProject(), false, false));
+            QVERIFY2(!List->GetPieceInfoIndex(OldInfo).isValid(),
+                     "All Parts retained a submodel descriptor removed by project cleanup");
+
+            std::vector<PieceInfo*> PartsInLibrary;
+            Library->GetParts(PartsInLibrary);
+            const QSet<PieceInfo*> Live(PartsInLibrary.begin(), PartsInLibrary.end());
+            for (int Row = 0; Row < List->rowCount(); Row++)
+                QVERIFY(Live.contains(List->GetPieceInfo(Row)));
+
+            PieceInfo* NewChild = lcGetActiveProject()->GetModels()[1]->GetPieceInfo();
+            QVERIFY(List->GetPieceInfoIndex(NewChild).isValid());
+        }
+
+        // Ask the real list delegate to render the new project's thumbnail.
+        auto* Dock = Window->findChild<QDockWidget*>(QStringLiteral("PartsToolbar"));
+        QVERIFY(Dock);
+        Dock->show();
+        Panel->SetCategory(lcPartCategoryType::Submodels, 0);
+        Parts->SetMediumIcons();
+        QTRY_VERIFY(List->rowCount() == 4);
+        QTRY_VERIFY(List->data(List->index(0, 0), Qt::DecorationRole).canConvert<QPixmap>());
+        QVERIFY(!List->data(List->index(0, 0), Qt::DecorationRole).value<QPixmap>().isNull());
     }
     void alphaSwitchSequence_data()
     {

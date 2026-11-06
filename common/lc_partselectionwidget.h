@@ -145,6 +145,7 @@ public:
 	}
 
 	void UpdateThumbnails();
+	void ClearParts();
 	void SetColorIndex(int ColorIndex);
 	void ToggleColorLocked();
 	void ToggleListMode();
@@ -211,6 +212,7 @@ public:
 	QSize sizeHint() const override;
 
 	void SetCategory(lcPartCategoryType Type, int Index);
+	void ClearProjectParts();
 	void SetCustomParts(const std::vector<std::pair<PieceInfo*, std::string>>& Parts, int ColorIndex);
 	void SetCurrentPart(PieceInfo* Info);
 
@@ -281,6 +283,7 @@ public:
 	lcPartSelectionWidget(QWidget* Parent);
 
 	void UpdateThumbnails();
+	void ClearProjectParts();
 	void SetDefaultPart();
 	void UpdateModels();
 	void UpdateInUseCategory();
