@@ -56,10 +56,14 @@
          <item>
           <widget class="QLabel" name="label_2">
            <property name="text">
-            <string notr="true">&lt;a href=&quot;https://www.leocad.org&quot;&gt;https://www.leocad.org&lt;/a&gt;</string>
+            <!-- Plain text, not an anchor: the first release promises not to
+                 open external URLs (see docs/release/隐私政策.md). The address
+                 stays visible and selectable so attribution is intact, but
+                 there is no control that launches a browser. -->
+            <string notr="true">https://www.leocad.org</string>
            </property>
            <property name="openExternalLinks">
-            <bool>true</bool>
+            <bool>false</bool>
            </property>
           </widget>
          </item>
