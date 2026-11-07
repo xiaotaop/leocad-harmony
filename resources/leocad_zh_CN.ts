@@ -6043,6 +6043,16 @@ Try a different keyword, or clear the search box.</source>
 <context>
     <name>lcAboutDialog</name>
     <message>
+        <location filename="../common/lc_aboutdialog.cpp" line="15"/>
+        <source>About %1</source>
+        <translation>关于 %1</translation>
+    </message>
+    <message>
+        <location filename="../common/lc_aboutdialog.cpp" line="16"/>
+        <source>A community port of LeoCAD for building virtual brick models on HarmonyOS PC.</source>
+        <translation>基于 LeoCAD 的鸿蒙 PC 社区移植版，用于拼搭三维积木模型。</translation>
+    </message>
+    <message>
         <location filename="../common/lc_aboutdialog.ui" line="14"/>
         <source>About LeoCAD</source>
         <translation>关于 LeoCAD</translation>

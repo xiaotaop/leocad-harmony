@@ -11,6 +11,11 @@ lcAboutDialog::lcAboutDialog(QWidget* Parent)
 {
 	ui->setupUi(this);
 
+#ifdef LC_HARMONY_APP_DISPLAY_NAME
+	setWindowTitle(tr("About %1").arg(QGuiApplication::applicationDisplayName()));
+	ui->description->setText(tr("A community port of LeoCAD for building virtual brick models on HarmonyOS PC."));
+#endif
+
 #ifdef LC_CONTINUOUS_BUILD
 	ui->version->setText(tr("LeoCAD Continuous Build %1").arg(QString::fromLatin1(QT_STRINGIFY(LC_CONTINUOUS_BUILD))));
 #else
