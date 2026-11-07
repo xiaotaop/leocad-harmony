@@ -60,6 +60,7 @@ jobs:
           python3 scripts/library/test_failure_log_retention.py
           python3 scripts/library/test_release_materials.py
           python3 scripts/library/verify_sample_model.py
+          python3 scripts/library/test_release_consistency.py
 
   desktop-build:
     name: Qt 6.12 desktop compile regression
