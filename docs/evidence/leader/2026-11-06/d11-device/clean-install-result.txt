@@ -1,0 +1,2 @@
+[Info]App install path:D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\build\d11-device-package\leocad-d11-rc0-debug-signed.hap msg:install bundle successfully. 
+AppMod finish
