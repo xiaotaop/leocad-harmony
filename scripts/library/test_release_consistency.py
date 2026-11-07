@@ -28,10 +28,12 @@ Run with:
 
 from __future__ import annotations
 
+import base64
 import json
 import re
 import unittest
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 REPO = Path(__file__).resolve().parents[2]
 
@@ -153,34 +155,61 @@ class ReleaseConsistencyTests(unittest.TestCase):
                         f"it nearby ({reason}): {line.strip()}",
                     )
 
+    def assertScreenshotEvidence(self, store: str, repo: Path) -> None:
+        rows = re.findall(r"^\|\s*(\d{2})\s*\|[^|]*\|[^|]*\|\s*([^|]+)\|\s*$", store, re.M)
+        self.assertEqual([number for number, _ in rows], ["01", "02", "03", "04", "05", "06"])
+        for number, status in rows:
+            if status.strip() == "`[待拍]`":
+                continue
+            link = re.fullmatch(r"\[已完成\]\(([^)]+)\)", status.strip())
+            self.assertIsNotNone(link, f"截图 {number} 须为待拍或链接到图片的 [已完成](相对路径)")
+            image = (repo / "docs" / "release" / link.group(1)).resolve()
+            leader = (repo / "docs" / "evidence" / "leader").resolve()
+            self.assertTrue(image.is_relative_to(leader), f"截图 {number} 必须位于组长证据目录")
+            self.assertEqual(image.parent.name, "store-shots")
+            self.assertRegex(image.name, rf"^leocad-harmony-.+-{number}-.+\.png$")
+            self.assertTrue(image.is_file(), f"缺少截图 {number}: {image}")
+            self.assertTrue(image.read_bytes().startswith(b"\x89PNG\r\n\x1a\n"), f"截图 {number} 必须为 PNG")
+            manifest = image.parent / "manifest.json"
+            self.assertTrue(manifest.is_file(), f"截图 {number} 缺少 manifest.json")
+            self.assertTrue(json.loads(read(manifest)), f"截图 {number} 清单不能为空")
+
     def test_screenshots_marked_done_have_files_behind_them(self) -> None:
-        store = read(STORE_COPY)
-        if "待拍" not in store:
-            self.skipTest("every screenshot already delivered; nothing to guard")
+        self.assertScreenshotEvidence(read(STORE_COPY), REPO)
 
-        shot_dir = REPO / "docs" / "evidence" / "leader"
-        delivered = sorted(
-            str(path.relative_to(REPO))
-            for path in shot_dir.rglob("*")
-            if path.suffix.lower() in (".png", ".jpg", ".jpeg")
-            and path.parent.name.startswith("d12")
-        )
-
-        pending = re.findall(r"^\| (\d\d) \|.*待拍.*\|$", store, re.M)
-        self.assertTrue(
-            pending,
-            "the screenshot table no longer has [待拍] rows in the expected "
-            "format; this check can no longer see the status",
-        )
-
-        self.assertEqual(
-            delivered,
-            [],
-            "screenshots exist under docs/evidence/leader/*d12*/ but the store "
-            "copy still marks them [待拍]; update the table and checklist "
-            "together instead of leaving them out of step: "
-            + ", ".join(delivered),
-        )
+    def test_completed_screenshots_require_evidence(self) -> None:
+        table = "\n".join(f"| {i:02} | 场景 | 要点 | `[待拍]` |" for i in range(1, 7))
+        with TemporaryDirectory() as directory:
+            repo = Path(directory)
+            self.assertScreenshotEvidence(table, repo)
+            with self.assertRaises(AssertionError):
+                self.assertScreenshotEvidence(table.replace("待拍", "已完成"), repo)
+            with self.assertRaises(AssertionError):
+                self.assertScreenshotEvidence(table.split("\n", 1)[1], repo)
+            partial = table.replace("`[待拍]`",
+                "[已完成](../evidence/leader/2026-11-07/store-shots/leocad-harmony-0.1.0-01-main.png)", 1)
+            with self.assertRaises(AssertionError):
+                self.assertScreenshotEvidence(partial, repo)
+            shots = repo / "docs/evidence/leader/2026-11-07/store-shots"
+            shots.mkdir(parents=True)
+            # Known 1x1 PNG used only to exercise this file-presence guard.
+            png = base64.b64decode(
+                "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aB9sAAAAASUVORK5CYII=")
+            (shots / "leocad-harmony-0.1.0-01-main.png").write_bytes(png)
+            with self.assertRaises(AssertionError):
+                self.assertScreenshotEvidence(partial, repo)
+            (shots / "manifest.json").write_text('{"files":["leocad-harmony-0.1.0-01-main.png"]}', encoding="utf-8")
+            self.assertScreenshotEvidence(partial, repo)
+            complete = "\n".join(
+                f"| {i:02} | 场景 | 要点 | [已完成](../evidence/leader/2026-11-07/store-shots/leocad-harmony-0.1.0-{i:02}-main.png) |"
+                for i in range(1, 7))
+            with self.assertRaises(AssertionError):
+                self.assertScreenshotEvidence(complete, repo)
+            files = [f"leocad-harmony-0.1.0-{i:02}-main.png" for i in range(1, 7)]
+            for filename in files:
+                (shots / filename).write_bytes(png)
+            (shots / "manifest.json").write_text(json.dumps({"files": files}), encoding="utf-8")
+            self.assertScreenshotEvidence(complete, repo)
 
 
 if __name__ == "__main__":
