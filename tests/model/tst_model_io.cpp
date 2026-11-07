@@ -6,6 +6,8 @@
 #include "lc_scene.h"
 #ifndef Q_OS_HARMONY
 #include <QOpenGLFramebufferObject>
+#include <QProcess>
+#include <QProcessEnvironment>
 #include "lc_thumbnailmanager.h"
 #include "lc_view.h"
 #include "camera.h"
@@ -783,6 +785,108 @@ private slots:
         QCOMPARE(piece->GetColorCode(), quint32(12));
         QCOMPARE(piece->mModelWorld.GetTranslation(), lcVector3(50, 540, 0));
     }
+
+#ifndef Q_OS_HARMONY
+    void restartPreservesSavedModel_data()
+    {
+        QTest::addColumn<bool>("mpd");
+        QTest::newRow("ldr") << false;
+        QTest::newRow("mpd") << true;
+    }
+
+    void restartPreservesSavedModel()
+    {
+        QFETCH(bool, mpd);
+        const QString phase = qEnvironmentVariable("LEOCAD_TEST_RESTART_PHASE");
+        if (phase.isEmpty())
+        {
+            QTemporaryDir directory;
+            QVERIFY(directory.isValid());
+            const QString path = directory.filePath(QString::fromUtf8("重启 后模型.") + (mpd ? "mpd" : "ldr"));
+            QByteArray savedBytes;
+            for (const QString& stage : {QStringLiteral("write"), QStringLiteral("read")})
+            {
+                QProcess process;
+                auto environment = QProcessEnvironment::systemEnvironment();
+                environment.insert("LEOCAD_TEST_RESTART_PHASE", stage);
+                environment.insert("LEOCAD_TEST_RESTART_PATH", path);
+                process.setProcessEnvironment(environment);
+                process.setProcessChannelMode(QProcess::MergedChannels);
+                const QString logPath = directory.filePath(stage + ".txt");
+                process.start(QCoreApplication::applicationFilePath(),
+                    {QString("restartPreservesSavedModel:") + QLatin1String(QTest::currentDataTag()),
+                     "-o", logPath + ",txt"});
+                QVERIFY2(process.waitForStarted(), qPrintable(process.errorString()));
+                const qint64 pid = process.processId();
+                QVERIFY2(process.waitForFinished(60000), qPrintable(process.errorString()));
+                QFile log(logPath);
+                QVERIFY(log.open(QIODevice::ReadOnly));
+                const QByteArray output = log.readAll();
+                QVERIFY(!output.isEmpty());
+                qInfo().noquote() << stage << "pid" << pid << output;
+                QCOMPARE(process.exitStatus(), QProcess::NormalExit);
+                QVERIFY2(process.exitCode() == 0, output.constData());
+                QFile file(path);
+                QVERIFY(file.open(QIODevice::ReadOnly));
+                const QByteArray contents = file.readAll();
+                QVERIFY(!contents.isEmpty());
+                if (stage == "write")
+                    savedBytes = contents;
+                else
+                    QCOMPARE(contents, savedBytes);
+            }
+            return;
+        }
+
+        QVERIFY(phase == "write" || phase == "read");
+        const QString path = qEnvironmentVariable("LEOCAD_TEST_RESTART_PATH");
+        QVERIFY(!path.isEmpty());
+        EditingSession session;
+        const QString fixture = mpd ? QFINDTESTDATA("../fixtures/submodel.mpd") : QFINDTESTDATA("../fixtures/two-pieces.ldr");
+        QVERIFY(session.window->OpenProject(phase == "write" ? fixture : path));
+        Project* project = lcGetActiveProject();
+        QCOMPARE(project->GetModels().size(), size_t(mpd ? 2 : 1));
+        lcModel* model = mpd ? project->GetModel("child.ldr") : project->GetMainModel();
+        QVERIFY(model);
+        QCOMPARE(model->GetPieces().size(), size_t(mpd ? 1 : 2));
+        if (phase == "write")
+        {
+            project->SetActiveModel(model, true);
+            lcPiece* piece = model->GetPieces()[0].get();
+            model->SetSelectionAndFocusAction({piece}, piece, LC_PIECE_SECTION_POSITION, lcSelectionMode::Single);
+            model->MoveSelectedObjects(lcVector3(20, 0, 0), lcModelTransformFlag::Checkpoint, lcModelHistoryEditMerge::None);
+            model->SetSelectedPiecesColorIndex(lcGetColorIndex(2));
+            model->UndoAction();
+            model->RedoAction();
+            QVERIFY(project->IsModified());
+            QVERIFY(project->Save(path).has_value());
+            QVERIFY(!project->IsModified());
+            return;
+        }
+
+        QVERIFY(!project->IsModified());
+        QCOMPARE(project->GetFileName(), path);
+        const auto& piece = model->GetPieces()[0];
+        QCOMPARE(piece->GetID(), QString("b_fixture_brick.dat"));
+        QCOMPARE(piece->GetColorCode(), quint32(2));
+        QCOMPARE(piece->mModelWorld.GetTranslation(), lcVector3(20, 0, 0));
+        if (mpd)
+        {
+            const auto& references = project->GetMainModel()->GetPieces();
+            QCOMPARE(references.size(), size_t(1));
+            QCOMPARE(references[0]->mPieceInfo->GetModel(), model);
+            QCOMPARE(references[0]->GetColorCode(), quint32(4));
+            QCOMPARE(references[0]->mModelWorld.GetTranslation(), lcVector3(10, 0, 0));
+        }
+        else
+        {
+            const auto& second = model->GetPieces()[1];
+            QCOMPARE(second->GetID(), QString("b_fixture_brick.dat"));
+            QCOMPARE(second->GetColorCode(), quint32(1));
+            QCOMPARE(second->mModelWorld.GetTranslation(), lcVector3(20, 40, -30));
+        }
+    }
+#endif
 
     void serializationDoesNotClearEditHistoryDirtyState()
     {

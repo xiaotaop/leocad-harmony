@@ -1,0 +1,107 @@
+********* Start testing of ModelIoTest *********
+Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-llp64 shared (dynamic) release build; by MSVC 2022), windows 11
+PASS   : ModelIoTest::initTestCase()
+QINFO  : ModelIoTest::thumbnailAndCameraColors(red) LEOCAD_GL_READBACK {"destination_format":5,"height":72,"source_depth":32,"source_format":6,"source_stride":288,"width":72}
+PASS   : ModelIoTest::thumbnailAndCameraColors(red)
+PASS   : ModelIoTest::thumbnailAndCameraColors(blue)
+PASS   : ModelIoTest::thumbnailAndCameraColors(light-blue)
+PASS   : ModelIoTest::tiledRenderKeepsColorAndOrientation(horizontal)
+PASS   : ModelIoTest::tiledRenderKeepsColorAndOrientation(vertical)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width1)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width2)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode1-width3)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width1)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width2)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode2-width3)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width1)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width2)
+PASS   : ModelIoTest::referenceGridPreservesModelLineWidth(mode0-width3)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(3ds)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(dae)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(csv)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(pov)
+PASS   : ModelIoTest::disabledExportsPreserveFilesAndDocument(obj)
+PASS   : ModelIoTest::offlineDownloadCompletesWithError()
+PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(lcd)
+PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(leocad)
+PASS   : ModelIoTest::disabledLegacyLoadPreservesDocument(sniffed-binary)
+PASS   : ModelIoTest::disabledLddImportPreservesDocument()
+PASS   : ModelIoTest::disabledHtmlExportDoesNotCreateDirectory()
+PASS   : ModelIoTest::disabledBrickLinkExportReturnsError()
+PASS   : ModelIoTest::emptyModelRoundTrip()
+PASS   : ModelIoTest::ldrRoundTrip()
+PASS   : ModelIoTest::mpdRoundTrip()
+PASS   : ModelIoTest::missingFilePreservesModel()
+PASS   : ModelIoTest::unwritableDestinationReportsError()
+PASS   : ModelIoTest::failedSaveAsPreservesDocumentState()
+PASS   : ModelIoTest::streamWriteFailureIsReported()
+PASS   : ModelIoTest::successfulOverwriteCanBeReopened()
+PASS   : ModelIoTest::failedReplacementPreservesExistingFile()
+PASS   : ModelIoTest::editingSequenceUndoRedoAndSave()
+PASS   : ModelIoTest::insertTwentyPiecesUndoRedoAndReopen()
+PASS   : ModelIoTest::continuousMpdEditsPreserveStructureAndHistory()
+PASS   : ModelIoTest::mediumMpdSaveAfterProjectSwitch(direct-open)
+PASS   : ModelIoTest::mediumMpdSaveAfterProjectSwitch(three-ldr-mpd-rounds)
+QINFO  : ModelIoTest::restartPreservesSavedModel(ldr) write pid 48676 ********* Start testing of ModelIoTest *********?
+Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-llp64 shared (dynamic) release build; by MSVC 2022), windows 11?
+PASS   : ModelIoTest::initTestCase()?
+PASS   : ModelIoTest::restartPreservesSavedModel(ldr)?
+PASS   : ModelIoTest::cleanupTestCase()?
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 103ms?
+********* Finished testing of ModelIoTest *********?
+
+QINFO  : ModelIoTest::restartPreservesSavedModel(ldr) read pid 49016 ********* Start testing of ModelIoTest *********?
+Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-llp64 shared (dynamic) release build; by MSVC 2022), windows 11?
+PASS   : ModelIoTest::initTestCase()?
+PASS   : ModelIoTest::restartPreservesSavedModel(ldr)?
+PASS   : ModelIoTest::cleanupTestCase()?
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 98ms?
+********* Finished testing of ModelIoTest *********?
+
+PASS   : ModelIoTest::restartPreservesSavedModel(ldr)
+QINFO  : ModelIoTest::restartPreservesSavedModel(mpd) write pid 9208 ********* Start testing of ModelIoTest *********?
+Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-llp64 shared (dynamic) release build; by MSVC 2022), windows 11?
+PASS   : ModelIoTest::initTestCase()?
+PASS   : ModelIoTest::restartPreservesSavedModel(mpd)?
+PASS   : ModelIoTest::cleanupTestCase()?
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 105ms?
+********* Finished testing of ModelIoTest *********?
+
+QINFO  : ModelIoTest::restartPreservesSavedModel(mpd) read pid 48768 ********* Start testing of ModelIoTest *********?
+Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-llp64 shared (dynamic) release build; by MSVC 2022), windows 11?
+PASS   : ModelIoTest::initTestCase()?
+PASS   : ModelIoTest::restartPreservesSavedModel(mpd)?
+PASS   : ModelIoTest::cleanupTestCase()?
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 102ms?
+********* Finished testing of ModelIoTest *********?
+
+PASS   : ModelIoTest::restartPreservesSavedModel(mpd)
+PASS   : ModelIoTest::serializationDoesNotClearEditHistoryDirtyState()
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(empty-file)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-reference)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(missing-part-name)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-transform)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(duplicate-submodel)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(unnamed-submodel)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-triangle)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(overlong-reference)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(self-referencing-submodel)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(mutually-referencing-submodels)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(unused-submodel-cycle)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-synth-control-point)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-synth-control-point)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(truncated-piece-pivot)
+PASS   : ModelIoTest::invalidLDrawPreservesCurrentDocument(nonfinite-piece-pivot)
+PASS   : ModelIoTest::loadedActiveModelBelongsToProject()
+PASS   : ModelIoTest::sharedSubmodelRoundTrip()
+PASS   : ModelIoTest::relativeDocumentPathsSurviveWorkingDirectoryChange(load-relative-path)
+PASS   : ModelIoTest::relativeDocumentPathsSurviveWorkingDirectoryChange(save-relative-path)
+PASS   : ModelIoTest::compatibleLDrawSyntax(bom-and-direct-color)
+PASS   : ModelIoTest::compatibleLDrawSyntax(unknown-meta-and-line)
+PASS   : ModelIoTest::compatibleLDrawSyntax(mpd-trailing-signature)
+PASS   : ModelIoTest::compatibleLDrawSyntax(piece-pivot)
+PASS   : ModelIoTest::compatibleLDrawSyntax(synth-control-point)
+PASS   : ModelIoTest::compatibleLDrawSyntax(ignored-meta-after-nofile)
+PASS   : ModelIoTest::cleanupTestCase()
+Totals: 70 passed, 0 failed, 0 skipped, 0 blacklisted, 5742ms
+********* Finished testing of ModelIoTest *********
