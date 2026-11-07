@@ -1,0 +1,11 @@
+test_bundled_library_matches_its_manifest (__main__.PackagedResources.test_bundled_library_matches_its_manifest) ... ok
+test_code_references_resolve_to_packaged_resources (__main__.PackagedResources.test_code_references_resolve_to_packaged_resources) ... ok
+test_every_qrc_entry_is_either_tracked_or_generated (__main__.PackagedResources.test_every_qrc_entry_is_either_tracked_or_generated) ... ok
+test_generated_translations_have_tracked_sources (__main__.PackagedResources.test_generated_translations_have_tracked_sources)
+Every .qm the qrc lists must come from a .ts in the repository. ... ok
+test_library_manifest_counts_match_the_file_list (__main__.PackagedResources.test_library_manifest_counts_match_the_file_list) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.136s
+
+OK

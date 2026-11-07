@@ -1,0 +1,23 @@
+normal-dpr1
+original_txt_sha256=205fe62e0437d12dc8fc3bb48eeb7154b61b0f499f3bf95885a3d9cae32eded7
+original_xml_sha256=0d46408c9e368d0e7d21d4b1937504201a8a1f5878cad2c446170fccfd8b4c0d
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 1 view 1094 698
+Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 7577ms
+
+fractional-dpr1_5
+original_txt_sha256=aca45422733d7aee688f0e647e4c87c7d327bf8f4762294e187fdd7b0ccd30fa
+original_xml_sha256=c86835bb254e6e97c3aa7cca7e6f3b8159b6a5cb73b5e8e950a80b7b82a98e75
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 1.5 view 1641 1047
+Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 8578ms
+
+normal-dpr2
+original_txt_sha256=0534400645af89dca92e9e0be0616da806df39a4a677f7de8103e277f6571e17
+original_xml_sha256=a54704cea4bdf542a977aa8a5248ef4a884027ff09ca1f24f5de0c69fadc419d
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396
+Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 10862ms
+
+basic-dpr2
+original_txt_sha256=cc2f9fb8cdbcb7a3ae1d555d5c8433170b1f9063a018c7875d21be9c3d79b8de
+original_xml_sha256=5766cfad729b2aa1450d3897e364c22f210a68342d3330e35ef55ae6c4fee964
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 698) DPR 2 view 2188 1396
+Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 10362ms

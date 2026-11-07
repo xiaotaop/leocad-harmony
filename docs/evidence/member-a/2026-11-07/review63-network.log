@@ -1,0 +1,31 @@
+test_cmake_disables_the_remaining_first_release_features (__main__.NetworkScopeTests.test_cmake_disables_the_remaining_first_release_features)
+The trim is belt and braces: these gates must stay compiled out too. ... ok
+test_cmake_disables_the_update_check_for_leocad (__main__.NetworkScopeTests.test_cmake_disables_the_update_check_for_leocad)
+The real build defines the macro, so the P0 does not ship. ... ok
+test_cmake_harmony_target_also_disables_network (__main__.NetworkScopeTests.test_cmake_harmony_target_also_disables_network)
+OHOS additionally compiles out the network layer entirely. ... ok
+test_external_url_commands_are_trimmed (__main__.NetworkScopeTests.test_external_url_commands_are_trimmed)
+Help entries that open a browser must not ship either. ... ok
+test_external_url_trim_matches_the_actual_call_sites (__main__.NetworkScopeTests.test_external_url_trim_matches_the_actual_call_sites)
+The list above has to track the code, not the other way round. ... ok
+test_harmony_build_script_uses_this_cmake_project (__main__.NetworkScopeTests.test_harmony_build_script_uses_this_cmake_project)
+The constraint above only protects the app if the app is built here. ... ok
+test_networked_commands_are_trimmed (__main__.NetworkScopeTests.test_networked_commands_are_trimmed)
+Every command that downloads something must be unreachable. ... ok
+test_networked_commands_still_exist (__main__.NetworkScopeTests.test_networked_commands_still_exist)
+A renamed constant would make the check above pass by accident. ... ok
+test_no_reachable_dialog_has_a_clickable_external_link (__main__.NetworkScopeTests.test_no_reachable_dialog_has_a_clickable_external_link)
+A label can open a browser without any command being involved. ... ok
+test_privacy_policy_describes_the_clickable_link_rule (__main__.NetworkScopeTests.test_privacy_policy_describes_the_clickable_link_rule)
+The policy has to name the mechanism, not just the outcome. ... ok
+test_the_excluded_clickable_link_is_still_unreachable (__main__.NetworkScopeTests.test_the_excluded_clickable_link_is_still_unreachable)
+The exemption above must expire when its two reasons do. ... ok
+test_update_check_default_is_on (__main__.NetworkScopeTests.test_update_check_default_is_on)
+Documents why the macro matters: the default is to check. ... ok
+test_update_check_needs_the_macro (__main__.NetworkScopeTests.test_update_check_needs_the_macro)
+The startup path must still be behind the macro, not merely trimmed. ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.008s
+
+OK

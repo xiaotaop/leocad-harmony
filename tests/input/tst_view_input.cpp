@@ -637,6 +637,65 @@ private slots:
             qInfo()<<"D10_RENDER_RESIDENT"<<Count<<"elapsed_us"<<Timer.nsecsElapsed()/1000<<"frames"<<8;
         }
     }
+    void windowReentryPreservesScene_data()
+    {
+        QTest::addColumn<bool>("Minimize");
+        QTest::newRow("hidden") << false;
+        QTest::newRow("minimized") << true;
+    }
+    void windowReentryPreservesScene()
+    {
+        QFETCH(bool, Minimize);
+        lcPiece* Piece = Model->GetPieces()[0].get();
+        const lcVector3 Position = Piece->mModelWorld.GetTranslation();
+        for (QSize Size : {QSize(850, 620), QSize(1300, 850)})
+        {
+            Window->resize(Size);
+            QCoreApplication::processEvents();
+            View->SetViewpoint(lcViewpoint::Home);
+            View->ZoomExtents();
+            Window->SetTool(lcTool::Select);
+            const QPointF P = center();
+            mouse(QEvent::MouseButtonPress, P, Qt::RightButton, Qt::RightButton);
+            QVERIFY(View->IsTracking());
+            if (Minimize)
+            {
+                Window->showMinimized();
+                QTRY_VERIFY(Window->isMinimized());
+            }
+            else
+                Window->hide();
+            QTRY_VERIFY(!View->IsTracking());
+
+            Window->showNormal();
+            Window->raise();
+            Window->activateWindow();
+            QVERIFY(QTest::qWaitForWindowExposed(Window.get()));
+            QApplication::setActiveWindow(Window.get());
+            Widget->setFocus();
+            QTRY_VERIFY(Widget->hasFocus());
+            const lcVector3 Camera = View->GetCamera()->mPosition;
+            mouse(QEvent::MouseMove, P + QPointF(30, 20), Qt::NoButton, Qt::NoButton);
+            mouse(QEvent::MouseButtonRelease, P, Qt::RightButton, Qt::NoButton);
+            QCOMPARE(View->GetCamera()->mPosition, Camera);
+            QCOMPARE(View->GetWidth(), int(Widget->width() * Widget->GetDeviceScale()));
+            QCOMPARE(View->GetHeight(), int(Widget->height() * Widget->GetDeviceScale()));
+            QVERIFY(!Widget->grabFramebuffer().isNull());
+
+            const auto& Bounds = Piece->mPieceInfo->GetBoundingBox();
+            const QPointF Pick = fromView(View->ProjectPoint(
+                lcMul31((Bounds.Min + Bounds.Max) / 2.0f, Piece->mModelWorld)));
+            mouse(QEvent::MouseButtonPress, Pick, Qt::LeftButton, Qt::LeftButton);
+            mouse(QEvent::MouseButtonRelease, Pick, Qt::LeftButton, Qt::NoButton);
+            QCOMPARE(Model->GetFocusObject(), static_cast<lcObject*>(Piece));
+            QTest::keyClick(Widget, Qt::Key_Right);
+            QVERIFY(Piece->mModelWorld.GetTranslation() != Position);
+            QTest::keySequence(Widget, QKeySequence("Ctrl+Z"));
+            QCOMPARE(Model->GetPieces()[0]->mModelWorld.GetTranslation(), Position);
+            Model->SetSaved();
+            Piece = Model->GetPieces()[0].get();
+        }
+    }
     void projectSwitchRebuildsPartsAfterCleanup()
     {
         QTemporaryDir Files;

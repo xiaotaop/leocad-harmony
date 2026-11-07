@@ -1,0 +1,8 @@
+[  1%] Automatic MOC and UIC for target leocad
+[  1%] Built target leocad_autogen
+[  2%] Automatic RCC for generated/leocad_resources.qrc
+[  3%] Building CXX object CMakeFiles/leocad.dir/common/lc_aboutdialog.cpp.o
+[  4%] Building CXX object CMakeFiles/leocad.dir/common/lc_setsdatabasedialog.cpp.o
+[  5%] Building CXX object CMakeFiles/leocad.dir/leocad_autogen/K4MSJZ3WG2/qrc_leocad_resources.cpp.o
+[  6%] Linking CXX executable leocad
+[100%] Built target leocad

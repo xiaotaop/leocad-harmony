@@ -1,0 +1,55 @@
+{
+  "baseline": "aa2017fe8f4de7d367ad56af76d1eee9ec47b787",
+  "host": "macOS arm64, Qt 6.12.0 Release",
+  "sources": {
+    "tests/input/tst_view_input.cpp": "2a206434a2f7fce80cd7023b522c22403026417733d0dc59169327a12b31d59b"
+  },
+  "input_binary_sha256": "577be41b7df340e5efd80d9656ef590bf3e4d553e3b5d6ad7ac5ab79d8aa23c3",
+  "app_binary_sha256": "fc2b7bc3cbe28114f35da43e1f9dcda25cbf08fcf04ec95e7fc77af206a95115",
+  "evidence": {
+    "app-build-summary.txt": {
+      "bytes": 465,
+      "sha256": "f8b3ff2a80b95602902df05e256cfe155d33ab4ed3730f0b689dd1e9111f2a99"
+    },
+    "basic-dpr2-reentry.txt": {
+      "bytes": 4664,
+      "sha256": "523425bd02839449e80ac71f4c5ea19d25f9d6da31bbc540bd6ed2aa5862e9c4"
+    },
+    "desktop-matrix.txt": {
+      "bytes": 1363,
+      "sha256": "270def3d3367fd78609a5d25495e347bdabfd2320d3093e48f893bf56df77c5e"
+    },
+    "fractional-dpr1_5-reentry.txt": {
+      "bytes": 5842,
+      "sha256": "4816eb6e499b768ae7b6e2570e9c4fba21eb05a9b5f5dded05e67e2064b39206"
+    },
+    "normal-dpr1-reentry.txt": {
+      "bytes": 4280,
+      "sha256": "ac66220cf8a31b17ffb91d526ed09f55677344636b4ad9482c1e04cbc66165cb"
+    },
+    "normal-dpr2-reentry.txt": {
+      "bytes": 4664,
+      "sha256": "d8ed68a076868268c2fef620bbbcb1c902981ba9da521da1019298a0da66f754"
+    },
+    "review63-network.log": {
+      "bytes": 2564,
+      "sha256": "500c2d49f1c73faec33ca2e5e3f450ee952115839f4f76902f29c526d8d6f2ef"
+    },
+    "review63-permissions.log": {
+      "bytes": 844,
+      "sha256": "d749ed5db7044b662c3a9eca1239937cf15b2e6ee2b11180e18bccb7b326b658"
+    },
+    "review63-resources.log": {
+      "bytes": 828,
+      "sha256": "2faebca105b730021e0cebf1bf132518eb46e17f28b5d7157b267d83a98aeca9"
+    },
+    "review63-retention.log": {
+      "bytes": 4997,
+      "sha256": "efe5fa839057e12b21d7ab9924f3671c78ec59deb666376317e350cd18d2c3e0"
+    },
+    "startup-ctest.txt": {
+      "bytes": 294,
+      "sha256": "c71775888f729091943bd3240bb71d464eb266933422951668b7a93bc5e1eec8"
+    }
+  }
+}
