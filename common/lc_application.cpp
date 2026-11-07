@@ -190,7 +190,11 @@ void lcPreferences::SetInterfaceColors(lcColorTheme ColorTheme)
 lcApplication::lcApplication(int& Argc, char** Argv)
 	: QApplication(Argc, Argv)
 {
+#ifdef LC_HARMONY_APP_DISPLAY_NAME
+	setApplicationDisplayName(QString::fromUtf8(LC_HARMONY_APP_DISPLAY_NAME));
+#else
 	setApplicationDisplayName(QLatin1String("LeoCAD"));
+#endif
 
 	gApplication = this;
 

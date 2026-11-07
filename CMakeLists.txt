@@ -120,8 +120,8 @@ if(OHOS)
     set_target_properties(leocad PROPERTIES
         QT_HARMONYOS_PACKAGE_SOURCE_DIR "${_harmony_package}"
         QT_HARMONYOS_APP_BUNDLE_NAME "io.github.xiaotaop.leocad"
-        QT_HARMONYOS_APP_NAME "LeoCAD Harmony"
-        QT_HARMONYOS_APP_LABEL "LeoCAD Harmony"
+        QT_HARMONYOS_APP_NAME "积木立构"
+        QT_HARMONYOS_APP_LABEL "积木立构"
         QT_HARMONYOS_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/tools/icon/512x512/apps/leocad.png"
         QT_HARMONYOS_APP_VENDOR "xiaotaop"
         QT_HARMONYOS_APP_VERSION_CODE 1
@@ -132,6 +132,8 @@ if(OHOS)
         QT_HARMONYOS_TARGET_SDK_VERSION "26.0.0"
         QT_HARMONYOS_COMPILE_SDK_VERSION "26.0.0"
     )
+    target_compile_definitions(leocad PRIVATE
+        LC_HARMONY_APP_DISPLAY_NAME="$<TARGET_PROPERTY:QT_HARMONYOS_APP_LABEL>")
 endif()
 
 option(LEOCAD_BUILD_MODEL_TEST_HAP "Build the separate HarmonyOS model regression HAP" OFF)
