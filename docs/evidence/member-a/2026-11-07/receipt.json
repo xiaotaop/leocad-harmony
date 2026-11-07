@@ -1,4 +1,5 @@
 {
+  "tested_commit": "01babdeed9d4ef06f9230fb4db0a48ffe61404ab",
   "baseline": "aa2017fe8f4de7d367ad56af76d1eee9ec47b787",
   "host": "macOS arm64, Qt 6.12.0 Release",
   "sources": {

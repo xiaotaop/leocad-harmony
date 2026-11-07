@@ -682,6 +682,8 @@ private slots:
             QCOMPARE(View->GetHeight(), int(Widget->height() * Widget->GetDeviceScale()));
             QVERIFY(!Widget->grabFramebuffer().isNull());
 
+            Model->ClearSelectionAction();
+            QVERIFY(!Model->GetFocusObject());
             const auto& Bounds = Piece->mPieceInfo->GetBoundingBox();
             const QPointF Pick = fromView(View->ProjectPoint(
                 lcMul31((Bounds.Min + Bounds.Max) / 2.0f, Piece->mModelWorld)));
