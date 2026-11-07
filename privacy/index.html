@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>积木立构隐私政策</title>
+<style>
+body { margin: 0; padding: 2rem 1rem; color: #20252b; background: #fff; font: 1rem/1.75 system-ui, sans-serif; }
+main { max-width: 50rem; margin: auto; overflow-wrap: anywhere; }
+h1, h2 { line-height: 1.35; }
+h2 { margin-top: 2rem; }
+a { color: #0757a3; }
+table { border-collapse: collapse; width: 100%; }
+th, td { padding: .45rem .65rem; border: 1px solid #c4cbd1; text-align: left; vertical-align: top; }
+th { background: #f5f7f9; }
+</style>
+</head>
+<body>
+<main>
+<h1>积木立构隐私政策</h1>
+<p><strong>适用范围</strong>　积木立构 0.1.0 鸿蒙 PC 版（含邀请测试），应用包名为 <code>io.github.xiaotaop.leocad</code>。</p>
+<p><strong>开发者</strong>　潘孝涛</p>
+<p><strong>修订日期</strong>　2026 年 11 月 7 日。本政策自本版本首次随应用向用户提供之日起生效。</p>
+<h2>1. 本应用如何处理您的信息</h2>
+<p>积木立构是一款离线 3D 积木建模工具。您无需注册或登录。建模所需的文件、偏好和剪贴板零件数据由应用在您的设备本地处理。应用不把这些数据上传给开发者，不提供云同步，也没有广告、行为统计或开发者侧崩溃上报功能。</p>
+<p>如果您主动通过电子邮件联系开发者，我们会收到您提供的邮箱地址、邮件正文及附件，并仅为处理该请求使用这些信息。请只提供解决问题所需的信息。</p>
+<h2>2. 本地信息、用途与处理时机</h2>
+<table>
+<thead>
+<tr>
+<th>信息</th>
+<th>何时处理及用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模型文件、文件名和保存路径</td>
+<td>当您打开或保存模型时，应用读写您主动选定的文件。模型可包含您填写的作者名等元数据，这些信息随模型保存。如果保存失败、原文件无法恢复且已有本地恢复副本，应用会在错误提示里说明副本位置。</td>
+</tr>
+<tr>
+<td>剪贴板中的 LeoCAD 零件数据</td>
+<td>当窗口创建或剪贴板内容变化时，应用查询剪贴板格式；在系统授权允许的情况下，只读取匹配 LeoCAD 格式的零件数据，用于更新粘贴状态。执行粘贴时，应用将该数据插入当前模型。执行复制时，应用把选中的零件写入系统剪贴板。</td>
+</tr>
+<tr>
+<td>最近打开的文件</td>
+<td>在本机记录最近使用的文件路径，以便您再次打开模型。</td>
+</tr>
+<tr>
+<td>应用偏好与缓存</td>
+<td>在本机保存语言、主题、窗口布局等偏好，并保留零件库索引等缓存，以便恢复使用习惯和加快加载。</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 保存期限及用户控制</h2>
+<ul>
+<li><strong>模型与作者信息</strong>保留在您选择的保存位置，直到您自行修改或删除。您可以通过系统文件管理器查阅、复制或删除这些文件，也可以用应用修改模型并重新保存。卸载应用后，您在公共目录保存的模型可能仍保留。</li>
+<li><strong>最近文件、偏好与缓存</strong>保留在应用本地目录，直至被覆盖或清理。您可使用系统提供的清除应用数据功能，或卸载应用以移除应用私有数据。</li>
+<li><strong>剪贴板</strong>由系统管理。您可以在系统隐私与安全设置中关闭本应用的剪贴板读取权限，也可以在系统中清空或覆盖剪贴板内容。关闭读取权限可能影响粘贴功能。</li>
+<li><strong>隐私请求邮件</strong>按处理请求所需的期限保存。如果适用规则要求继续保存，我们会按相应要求处理。</li>
+</ul>
+<h2>4. 我们申请哪些权限</h2>
+<p>下表列出鸿蒙 PC 0.1.0 测试版本软件包实际声明的权限。权限声明表示软件包请求相应系统能力，具体行为和授权由应用功能及系统设置决定。</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>用途和范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ohos.permission.FILE_ACCESS_PERSIST</code></td>
+<td>让应用持续访问您通过系统文件选择器授权的模型文件，便于后续打开、编辑和保存。</td>
+</tr>
+<tr>
+<td><code>ohos.permission.READ_PASTEBOARD</code></td>
+<td>检查并读取匹配 LeoCAD 格式的剪贴板零件数据，更新粘贴状态并支持粘贴。读取时机和范围见第 2 节。</td>
+</tr>
+<tr>
+<td><code>ohos.permission.STORE_PERSISTENT_DATA</code></td>
+<td>软件包声明的持久存储能力。应用在本机保存偏好和最近文件记录。</td>
+</tr>
+<tr>
+<td><code>ohos.permission.PREPARE_APP_TERMINATE</code></td>
+<td>Qt 运行环境声明的终止前处理能力，供系统安排应用结束前的处理。</td>
+</tr>
+<tr>
+<td><code>ohos.permission.GET_FILE_ICON</code></td>
+<td>Qt 运行环境声明的文件类型图标查询能力。</td>
+</tr>
+<tr>
+<td><code>ohos.permission.PRINT</code></td>
+<td>软件包声明了 Qt 打印框架权限；当前测试版本未提供打印入口。</td>
+</tr>
+</tbody>
+</table>
+<p>本版本不申请应用网络权限（<code>ohos.permission.INTERNET</code>、<code>ohos.permission.GET_NETWORK_INFO</code>），也不申请位置、相机、麦克风或通讯录权限。</p>
+<h2>5. 共享及第三方组件</h2>
+<p>应用内的模型、偏好、最近文件和剪贴板零件数据不由本应用上传、出售或共享给第三方。应用使用 Qt 界面框架和随包提供的 LDraw 零件资源，用于在本机显示和编辑模型。若您自行把模型文件复制给他人或保存到其他服务，请留意文件中可能包含您填写的作者名等内容。</p>
+<h2>6. 未成年人保护</h2>
+<p>本应用是通用的离线建模工具，未设置注册、社交或上传功能，也不主动收集未成年人的身份信息。监护人如对本应用在设备本地处理的信息有疑问，可通过下方邮箱联系开发者。</p>
+<h2 id="privacy-rights">7. 隐私权利与联系方式</h2>
+<p>您可通过第 3 节的方式查阅、复制、修改或删除本地信息，以及调整剪贴板权限。对于您主动通过邮件提交的信息，您也可以联系开发者提出查询、更正、删除请求或隐私投诉。</p>
+<p><strong>开发者</strong>　潘孝涛</p>
+<p><strong>隐私联系邮箱</strong>　<a href="mailto:2675843667@qq.com">2675843667@qq.com</a></p>
+<h2>8. 政策更新</h2>
+<p>如果后续版本改变数据处理方式或权限用途，我们会更新本政策，并通过应用或应用市场版本说明告知您相关变化。</p>
+</main>
+</body>
+</html>
