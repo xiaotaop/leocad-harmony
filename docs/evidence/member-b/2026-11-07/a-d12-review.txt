@@ -22,4 +22,3 @@ basic-dpr2
 original_txt_sha256=0832f82ba6b270ee28b3101fdf19bf3f70a48ee683ff487376bc6fdc77b37627
 QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(849, 408) DPR 3 view 2547 1224
 Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 19034ms
-
