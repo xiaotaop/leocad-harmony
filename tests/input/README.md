@@ -26,4 +26,6 @@ D10 checks cancelled thumbnail loads before worker start and before GUI delivery
 
 D11's `projectSwitchRebuildsPartsAfterCleanup` opens a small MPD and the fixed 2,000-instance sample through the real project opening path. It checks every All Parts row against the live library immediately after replacement and confirms a real thumbnail from the incoming project. See [D11 device reproduction](../../docs/MEMBER_A_D11.md).
 
+D12's `windowReentryPreservesScene` covers real hide/show and minimize/restore at two window sizes, navigation cancellation, late release, framebuffer readback, fresh picking and keyboard undo. Actual system suspend/resume remains in the [RC1 device steps](../../docs/MEMBER_A_D12.md).
+
 D9 adds shared-thumbnail request lifetime and controlled stale-completion delivery through the production manager. The latter delays Loaded publication with a GUI timer, verifies dispatch returns before completion, then requires a real nonempty pixmap after completion. Baseline hangs are externally bounded at 12 seconds. This models callback timing and does not establish the exact OHOS lifecycle root cause of #45.

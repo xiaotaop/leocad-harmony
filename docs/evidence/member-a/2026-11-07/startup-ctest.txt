@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /tmp/leocad-d11-app-build
+Test project /tmp/leocad-d11-app-build
+    Start 1: resource-paths-early-exit
+1/1 Test #1: resource-paths-early-exit ........   Passed    1.00 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   1.01 sec

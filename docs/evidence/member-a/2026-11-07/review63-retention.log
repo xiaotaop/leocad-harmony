@@ -1,0 +1,53 @@
+test_a_bad_build_does_not_stop_the_next_suite (__main__.EvidenceForBuildFailures.test_a_bad_build_does_not_stop_the_next_suite)
+One broken suite must not cost the others their evidence. ... ok
+test_a_failed_build_log_copy_does_not_fail_the_suite (__main__.EvidenceForBuildFailures.test_a_failed_build_log_copy_does_not_fail_the_suite)
+The build-log copy needs its own guard, and this file just proved it. ... ok
+test_a_failed_failure_build_log_copy_is_reported_not_fatal (__main__.EvidenceForBuildFailures.test_a_failed_failure_build_log_copy_is_reported_not_fatal)
+Same guard on the failure destination, reached only when its "mkdir" worked. ... ok
+test_a_failing_test_suite_records_stage_test (__main__.EvidenceForBuildFailures.test_a_failing_test_suite_records_stage_test)
+The ordinary failure path, after the restructure: stage=test, not a build stage. ... ok
+test_a_passing_suite_still_records_only_last_run (__main__.EvidenceForBuildFailures.test_a_passing_suite_still_records_only_last_run)
+The restructured loop must not turn a green suite into a red one. ... ok
+test_a_usage_error_is_still_exit_2 (__main__.EvidenceForBuildFailures.test_a_usage_error_is_still_exit_2)
+An unknown suite stays a usage error, and it stays loud. ... ok
+test_an_unwritable_log_root_keeps_a_failed_build_failed (__main__.EvidenceForBuildFailures.test_an_unwritable_log_root_keeps_a_failed_build_failed)
+The D8 promise, checked on the D9 path instead of the happy one. ... ok
+test_make_failure_is_preserved_with_its_output (__main__.EvidenceForBuildFailures.test_make_failure_is_preserved_with_its_output)
+qmake succeeded, the compiler did not. The runner keeps going past it. ... ok
+test_missing_binary_is_preserved_as_its_own_stage (__main__.EvidenceForBuildFailures.test_missing_binary_is_preserved_as_its_own_stage)
+make exits 0 and produces nothing runnable. ... ok
+test_qmake_failure_is_preserved_with_its_output (__main__.EvidenceForBuildFailures.test_qmake_failure_is_preserved_with_its_output)
+The path that used to be a one-line "rc=1" and nothing else. ... ok
+test_the_build_log_travels_with_the_result (__main__.EvidenceForBuildFailures.test_the_build_log_travels_with_the_result)
+A build failure preserved without its output is not evidence. ... ok
+test_a_crash_without_fail_line_is_still_preserved (__main__.FailureLogRetention.test_a_crash_without_fail_line_is_still_preserved)
+Exit status alone marks a failure: a crash prints no FAIL! line. ... ok
+test_a_fail_line_with_exit_zero_is_still_preserved (__main__.FailureLogRetention.test_a_fail_line_with_exit_zero_is_still_preserved)
+The other half of the rule: a printed FAIL! outranks a zero exit status. ... ok
+test_a_failed_copy_does_not_fail_the_suite (__main__.FailureLogRetention.test_a_failed_copy_does_not_fail_the_suite)
+The same promise for the copy itself, not just for "mkdir". ... ok
+test_a_failed_failure_copy_does_not_fail_the_suite (__main__.FailureLogRetention.test_a_failed_failure_copy_does_not_fail_the_suite)
+The last-failure "cp" guard, reached only when its "mkdir" succeeds. ... ok
+test_a_failed_last_run_write_still_records_the_failure (__main__.FailureLogRetention.test_a_failed_last_run_write_still_records_the_failure)
+The failure log must not depend on the last-run copy succeeding. ... ok
+test_a_failed_meta_write_is_reported_not_leaked (__main__.FailureLogRetention.test_a_failed_meta_write_is_reported_not_leaked)
+The third write needs its own case, for a shell-semantics reason. ... ok
+test_a_non_numeric_exit_status_is_rejected_as_a_usage_error (__main__.FailureLogRetention.test_a_non_numeric_exit_status_is_rejected_as_a_usage_error)
+A wrong argument is an error; it must not quietly read as a pass. ... ok
+test_a_passing_rerun_keeps_the_previous_failure_readable (__main__.FailureLogRetention.test_a_passing_rerun_keeps_the_previous_failure_readable)
+The exact sequence that lost the D8 evidence, in order. ... ok
+test_an_uncreatable_failure_dir_does_not_fail_the_suite (__main__.FailureLogRetention.test_an_uncreatable_failure_dir_does_not_fail_the_suite)
+The last-failure "mkdir" guard, which the last-run cases miss. ... ok
+test_an_unwritable_log_root_does_not_fail_the_suite (__main__.FailureLogRetention.test_an_unwritable_log_root_does_not_fail_the_suite)
+The script's own promise: logging never changes a suite's verdict. ... ok
+test_last_run_tracks_the_most_recent_result (__main__.FailureLogRetention.test_last_run_tracks_the_most_recent_result)
+last-run is the opposite on purpose: it always follows the latest run. ... ok
+test_passing_runs_leave_no_failure_record (__main__.FailureLogRetention.test_passing_runs_leave_no_failure_record)
+No phantom failure: green from the start must not create one. ... ok
+test_the_failure_copy_records_when_and_why (__main__.FailureLogRetention.test_the_failure_copy_records_when_and_why)
+A log without its date cannot be matched to the run that produced it. ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 5.573s
+
+OK

@@ -1,0 +1,24 @@
+Windows 11 / Qt 6.8.3 / MSVC 2022 Release
+Command: scripts/Run-MemberAInputTests.ps1
+Reviewed input: 01babdeed9d4ef06f9230fb4db0a48ffe61404ab + clear selection/focus before each fresh pick
+Original A receipt: 1 source + 11 evidence hashes matched 01babdee
+
+normal
+original_txt_sha256=c199841bd64e5d7c20618e1f7cac7ec109775047e3891afe751ce038876fe8d2
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 685) DPR 1.5 view 1641 1027
+Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 16922ms
+
+fractional
+original_txt_sha256=def47ce965e7ba00c661f04f0b910f81ce0200295364ebd726e3082e2ed45134
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(1094, 583) DPR 2.25 view 2461 1311
+Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 18368ms
+
+dpr2
+original_txt_sha256=7d5867bc4ae30739ed32b687fd06f14ebeb7ad5f8a862e102f9f1490200dfe9c
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(849, 408) DPR 3 view 2547 1224
+Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 18767ms
+
+basic-dpr2
+original_txt_sha256=0832f82ba6b270ee28b3101fdf19bf3f70a48ee683ff487376bc6fdc77b37627
+QINFO  : ViewInputTests::navigation(orbit) INPUT_WIDGET QSize(849, 408) DPR 3 view 2547 1224
+Totals: 50 passed, 0 failed, 0 skipped, 0 blacklisted, 19034ms
