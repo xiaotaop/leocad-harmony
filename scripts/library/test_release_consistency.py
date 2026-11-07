@@ -8,10 +8,8 @@ permission doc explains what it asks for, and the policy tells the user what
 happens to their data. Overlap means they can disagree, and a store reviewer
 reads all three.
 
-They did disagree. Before D12 the privacy policy never mentioned permissions at
-all: grep for the word returned nothing, so the one document a user actually
-reads implied the app asks for nothing, while the package declared six
-permissions with five of them carrying no reason string whatsoever.
+The existing privacy policy already listed six permissions. D12 makes their
+full identifiers explicit and checks that the three documents stay consistent.
 
 What this checks:
 
