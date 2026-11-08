@@ -1,0 +1,10 @@
+{
+  "collected_at": "2026-11-06T21:46:50.5287681+08:00",
+  "model": "HAD-W32",
+  "software_version": "HAD-W24 6.1.0.117(SP68C00E100R13P3)",
+  "fullname": "OpenHarmony-6.1.0.115",
+  "device_time": "Fri Nov  6 21:46:49 CST 2026",
+  "resolution": "3120x2080",
+  "active_refresh_hz": 60,
+  "dpr_from_gl_log": 1.899999976158142
+}

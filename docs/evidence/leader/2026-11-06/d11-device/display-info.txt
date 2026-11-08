@@ -1,0 +1,15 @@
+
+-------------------------------[ability]-------------------------------
+
+
+----------------------------------RenderService----------------------------------
+-- ScreenInfo
+screen[0]: id=0, powerStatus=POWER_STATUS_ON, backlight=1390, screenType=EXTERNAL_TYPE, render resolution=3120x2080, physical resolution=3120x2080, isVirtual=false, skipFrameInterval=1, expectedRefreshRate=-1, skipFrameStrategy=0
+supportedMode[0]: 3120x2080, refreshRate=120
+supportedMode[1]: 3120x2080, refreshRate=80
+supportedMode[2]: 3120x2080, refreshRate=60
+supportedMode[3]: 3120x2080, refreshRate=48
+activeMode: 3120x2080, refreshRate=60
+name=, phyWidth=300, phyHeight=200, supportLayers=12, virtualDispCount=0, propertyCount=0, type=DISP_INTF_HDMI, supportWriteBack=false
+isSamplingOn=0, samplingScale=1.00, samplingTranslateX=0.00, samplingTranslateY=0.00
+enableVisibleRect=0, mainScreenVisibleRect=[0,0,0,0]

@@ -58,3 +58,6 @@
 
 # Preserve D10 original device evidence and crash reports.
 /docs/evidence/leader/2026-11-05/d10-device/* -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
+
+# Preserve D11 device logs, saved model bytes, and receipt hashes across checkouts.
+/docs/evidence/leader/2026-11-06/d11-device/* -text whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof

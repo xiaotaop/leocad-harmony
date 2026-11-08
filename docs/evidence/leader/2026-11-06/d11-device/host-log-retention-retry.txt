@@ -1,0 +1,449 @@
+test_a_bad_build_does_not_stop_the_next_suite (__main__.EvidenceForBuildFailures.test_a_bad_build_does_not_stop_the_next_suite)
+One broken suite must not cost the others their evidence. ... Exception in thread Thread-2 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+FAIL
+test_a_failed_build_log_copy_does_not_fail_the_suite (__main__.EvidenceForBuildFailures.test_a_failed_build_log_copy_does_not_fail_the_suite)
+The build-log copy needs its own guard, and this file just proved it. ... ERROR
+test_a_failed_failure_build_log_copy_is_reported_not_fatal (__main__.EvidenceForBuildFailures.test_a_failed_failure_build_log_copy_is_reported_not_fatal)
+Same guard on the failure destination, reached only when its "mkdir" worked. ... ERROR
+test_a_failing_test_suite_records_stage_test (__main__.EvidenceForBuildFailures.test_a_failing_test_suite_records_stage_test)
+The ordinary failure path, after the restructure: stage=test, not a build stage. ... Exception in thread Thread-4 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+FAIL
+test_a_passing_suite_still_records_only_last_run (__main__.EvidenceForBuildFailures.test_a_passing_suite_still_records_only_last_run)
+The restructured loop must not turn a green suite into a red one. ... Exception in thread Thread-6 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+FAIL
+test_a_usage_error_is_still_exit_2 (__main__.EvidenceForBuildFailures.test_a_usage_error_is_still_exit_2)
+An unknown suite stays a usage error, and it stays loud. ... Exception in thread Thread-8 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+FAIL
+test_an_unwritable_log_root_keeps_a_failed_build_failed (__main__.EvidenceForBuildFailures.test_an_unwritable_log_root_keeps_a_failed_build_failed)
+The D8 promise, checked on the D9 path instead of the happy one. ... Exception in thread Thread-10 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+ERROR
+test_make_failure_is_preserved_with_its_output (__main__.EvidenceForBuildFailures.test_make_failure_is_preserved_with_its_output)
+qmake succeeded, the compiler did not. The runner keeps going past it. ... Exception in thread Thread-12 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+ERROR
+test_missing_binary_is_preserved_as_its_own_stage (__main__.EvidenceForBuildFailures.test_missing_binary_is_preserved_as_its_own_stage)
+make exits 0 and produces nothing runnable. ... Exception in thread Thread-14 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+ERROR
+test_qmake_failure_is_preserved_with_its_output (__main__.EvidenceForBuildFailures.test_qmake_failure_is_preserved_with_its_output)
+The path that used to be a one-line "rc=1" and nothing else. ... Exception in thread Thread-16 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+ERROR
+test_the_build_log_travels_with_the_result (__main__.EvidenceForBuildFailures.test_the_build_log_travels_with_the_result)
+A build failure preserved without its output is not evidence. ... ERROR
+test_a_crash_without_fail_line_is_still_preserved (__main__.FailureLogRetention.test_a_crash_without_fail_line_is_still_preserved)
+Exit status alone marks a failure: a crash prints no FAIL! line. ... ERROR
+test_a_fail_line_with_exit_zero_is_still_preserved (__main__.FailureLogRetention.test_a_fail_line_with_exit_zero_is_still_preserved)
+The other half of the rule: a printed FAIL! outranks a zero exit status. ... ERROR
+test_a_failed_copy_does_not_fail_the_suite (__main__.FailureLogRetention.test_a_failed_copy_does_not_fail_the_suite)
+The same promise for the copy itself, not just for "mkdir". ... ERROR
+test_a_failed_failure_copy_does_not_fail_the_suite (__main__.FailureLogRetention.test_a_failed_failure_copy_does_not_fail_the_suite)
+The last-failure "cp" guard, reached only when its "mkdir" succeeds. ... ERROR
+test_a_failed_last_run_write_still_records_the_failure (__main__.FailureLogRetention.test_a_failed_last_run_write_still_records_the_failure)
+The failure log must not depend on the last-run copy succeeding. ... Exception in thread Thread-24 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+FAIL
+test_a_failed_meta_write_is_reported_not_leaked (__main__.FailureLogRetention.test_a_failed_meta_write_is_reported_not_leaked)
+The third write needs its own case, for a shell-semantics reason. ... ERROR
+test_a_non_numeric_exit_status_is_rejected_as_a_usage_error (__main__.FailureLogRetention.test_a_non_numeric_exit_status_is_rejected_as_a_usage_error)
+A wrong argument is an error; it must not quietly read as a pass. ... Exception in thread Thread-26 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+FAIL
+test_a_passing_rerun_keeps_the_previous_failure_readable (__main__.FailureLogRetention.test_a_passing_rerun_keeps_the_previous_failure_readable)
+The exact sequence that lost the D8 evidence, in order. ... ERROR
+test_an_uncreatable_failure_dir_does_not_fail_the_suite (__main__.FailureLogRetention.test_an_uncreatable_failure_dir_does_not_fail_the_suite)
+The last-failure "mkdir" guard, which the last-run cases miss. ... Exception in thread Thread-30 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+FAIL
+test_an_unwritable_log_root_does_not_fail_the_suite (__main__.FailureLogRetention.test_an_unwritable_log_root_does_not_fail_the_suite)
+The script's own promise: logging never changes a suite's verdict. ... Exception in thread Thread-32 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xc0 in position 10: invalid start byte
+FAIL
+test_last_run_tracks_the_most_recent_result (__main__.FailureLogRetention.test_last_run_tracks_the_most_recent_result)
+last-run is the opposite on purpose: it always follows the latest run. ... ERROR
+test_passing_runs_leave_no_failure_record (__main__.FailureLogRetention.test_passing_runs_leave_no_failure_record)
+No phantom failure: green from the start must not create one. ... ERROR
+test_the_failure_copy_records_when_and_why (__main__.FailureLogRetention.test_the_failure_copy_records_when_and_why)
+A log without its date cannot be matched to the run that produced it. ... ERROR
+
+======================================================================
+ERROR: test_a_failed_build_log_copy_does_not_fail_the_suite (__main__.EvidenceForBuildFailures.test_a_failed_build_log_copy_does_not_fail_the_suite)
+The build-log copy needs its own guard, and this file just proved it.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 669, in test_a_failed_build_log_copy_does_not_fail_the_suite
+    (last_run / f"d3-{SUITE}-build.log").symlink_to("/nonexistent/build-log-target")
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1386, in symlink_to
+    os.symlink(target, self, target_is_directory)
+OSError: [WinError 1314] 客户端没有所需的特权。: '/nonexistent/build-log-target' -> 'C:\\Users\\pxt\\AppData\\Local\\Temp\\build-failure-f6fzak76\\build\\last-run\\d3-archive-build.log'
+
+======================================================================
+ERROR: test_a_failed_failure_build_log_copy_is_reported_not_fatal (__main__.EvidenceForBuildFailures.test_a_failed_failure_build_log_copy_is_reported_not_fatal)
+Same guard on the failure destination, reached only when its "mkdir" worked.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 698, in test_a_failed_failure_build_log_copy_is_reported_not_fatal
+    (failure_dir / f"d3-{SUITE}-build.log").symlink_to("/nonexistent/failure-build-log")
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1386, in symlink_to
+    os.symlink(target, self, target_is_directory)
+OSError: [WinError 1314] 客户端没有所需的特权。: '/nonexistent/failure-build-log' -> 'C:\\Users\\pxt\\AppData\\Local\\Temp\\build-failure-4085o5ci\\build\\last-failure\\d3-archive-build.log'
+
+======================================================================
+ERROR: test_an_unwritable_log_root_keeps_a_failed_build_failed (__main__.EvidenceForBuildFailures.test_an_unwritable_log_root_keeps_a_failed_build_failed)
+The D8 promise, checked on the D9 path instead of the happy one.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 604, in test_an_unwritable_log_root_keeps_a_failed_build_failed
+    self.assertIn("warning:", completed.stderr, "a lost log must still be reported")
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\unittest\case.py", line 1149, in assertIn
+    if member not in container:
+       ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable
+
+======================================================================
+ERROR: test_make_failure_is_preserved_with_its_output (__main__.EvidenceForBuildFailures.test_make_failure_is_preserved_with_its_output)
+qmake succeeded, the compiler did not. The runner keeps going past it.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 532, in test_make_failure_is_preserved_with_its_output
+    self.assertIn("FAIL priority: build failed during make", completed.stderr)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\unittest\case.py", line 1149, in assertIn
+    if member not in container:
+       ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable
+
+======================================================================
+ERROR: test_missing_binary_is_preserved_as_its_own_stage (__main__.EvidenceForBuildFailures.test_missing_binary_is_preserved_as_its_own_stage)
+make exits 0 and produces nothing runnable.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 552, in test_missing_binary_is_preserved_as_its_own_stage
+    self.assertIn("FAIL priority: binary not produced", completed.stderr)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\unittest\case.py", line 1149, in assertIn
+    if member not in container:
+       ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable
+
+======================================================================
+ERROR: test_qmake_failure_is_preserved_with_its_output (__main__.EvidenceForBuildFailures.test_qmake_failure_is_preserved_with_its_output)
+The path that used to be a one-line "rc=1" and nothing else.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 519, in test_qmake_failure_is_preserved_with_its_output
+    self.assertIn("FAIL priority: build failed during qmake", completed.stderr)
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\unittest\case.py", line 1149, in assertIn
+    if member not in container:
+       ^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: argument of type 'NoneType' is not iterable
+
+======================================================================
+ERROR: test_the_build_log_travels_with_the_result (__main__.EvidenceForBuildFailures.test_the_build_log_travels_with_the_result)
+A build failure preserved without its output is not evidence.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 734, in test_the_build_log_travels_with_the_result
+    subprocess.run(
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['bash', 'D:\\codex\\2026-10-26\\winhttrack-website-copier-colorhug-leocad-olive\\work\\leocad-harmony\\scripts\\dev\\preserve-test-log.sh', 'archive', '2', 'C:\\Users\\pxt\\AppData\\Local\\Temp\\build-failure-2aylsfud\\test-results.txt', 'make', 'C:\\Users\\pxt\\AppData\\Local\\Temp\\build-failure-2aylsfud\\build.log']' returned non-zero exit status 1.
+
+======================================================================
+ERROR: test_a_crash_without_fail_line_is_still_preserved (__main__.FailureLogRetention.test_a_crash_without_fail_line_is_still_preserved)
+Exit status alone marks a failure: a crash prints no FAIL! line.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 159, in test_a_crash_without_fail_line_is_still_preserved
+    self.preserve("********* Start testing *********\n", 134)
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 109, in preserve
+    subprocess.run(
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['bash', 'D:\\codex\\2026-10-26\\winhttrack-website-copier-colorhug-leocad-olive\\work\\leocad-harmony\\scripts\\dev\\preserve-test-log.sh', 'archive', '134', 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-leslmc1u\\test-results.txt']' returned non-zero exit status 1.
+
+======================================================================
+ERROR: test_a_fail_line_with_exit_zero_is_still_preserved (__main__.FailureLogRetention.test_a_fail_line_with_exit_zero_is_still_preserved)
+The other half of the rule: a printed FAIL! outranks a zero exit status.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 173, in test_a_fail_line_with_exit_zero_is_still_preserved
+    self.preserve(PASSED_STATUS_BUT_FAILED, 0)
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 109, in preserve
+    subprocess.run(
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['bash', 'D:\\codex\\2026-10-26\\winhttrack-website-copier-colorhug-leocad-olive\\work\\leocad-harmony\\scripts\\dev\\preserve-test-log.sh', 'archive', '0', 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-w7zff_nl\\test-results.txt']' returned non-zero exit status 1.
+
+======================================================================
+ERROR: test_a_failed_copy_does_not_fail_the_suite (__main__.FailureLogRetention.test_a_failed_copy_does_not_fail_the_suite)
+The same promise for the copy itself, not just for "mkdir".
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 231, in test_a_failed_copy_does_not_fail_the_suite
+    (last_run / f"d3-{SUITE}-results.txt").symlink_to("/nonexistent/dangling-target")
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1386, in symlink_to
+    os.symlink(target, self, target_is_directory)
+OSError: [WinError 1314] 客户端没有所需的特权。: '/nonexistent/dangling-target' -> 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-ybmxnlf8\\build\\last-run\\d3-archive-results.txt'
+
+======================================================================
+ERROR: test_a_failed_failure_copy_does_not_fail_the_suite (__main__.FailureLogRetention.test_a_failed_failure_copy_does_not_fail_the_suite)
+The last-failure "cp" guard, reached only when its "mkdir" succeeds.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 328, in test_a_failed_failure_copy_does_not_fail_the_suite
+    (failure_dir / f"d3-{SUITE}-results.txt").symlink_to("/nonexistent/failure-target")
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1386, in symlink_to
+    os.symlink(target, self, target_is_directory)
+OSError: [WinError 1314] 客户端没有所需的特权。: '/nonexistent/failure-target' -> 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-zs0isndd\\build\\last-failure\\d3-archive-results.txt'
+
+======================================================================
+ERROR: test_a_failed_meta_write_is_reported_not_leaked (__main__.FailureLogRetention.test_a_failed_meta_write_is_reported_not_leaked)
+The third write needs its own case, for a shell-semantics reason.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 261, in test_a_failed_meta_write_is_reported_not_leaked
+    (failure_dir / f"d3-{SUITE}-meta.txt").symlink_to("/nonexistent/meta-target")
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1386, in symlink_to
+    os.symlink(target, self, target_is_directory)
+OSError: [WinError 1314] 客户端没有所需的特权。: '/nonexistent/meta-target' -> 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-5pi9bzkn\\build\\last-failure\\d3-archive-meta.txt'
+
+======================================================================
+ERROR: test_a_passing_rerun_keeps_the_previous_failure_readable (__main__.FailureLogRetention.test_a_passing_rerun_keeps_the_previous_failure_readable)
+The exact sequence that lost the D8 evidence, in order.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 118, in test_a_passing_rerun_keeps_the_previous_failure_readable
+    self.preserve(FAILED_RUN, 1)
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 109, in preserve
+    subprocess.run(
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['bash', 'D:\\codex\\2026-10-26\\winhttrack-website-copier-colorhug-leocad-olive\\work\\leocad-harmony\\scripts\\dev\\preserve-test-log.sh', 'archive', '1', 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-jjduc4hd\\test-results.txt']' returned non-zero exit status 1.
+
+======================================================================
+ERROR: test_last_run_tracks_the_most_recent_result (__main__.FailureLogRetention.test_last_run_tracks_the_most_recent_result)
+last-run is the opposite on purpose: it always follows the latest run.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 135, in test_last_run_tracks_the_most_recent_result
+    self.preserve(FAILED_RUN, 1)
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 109, in preserve
+    subprocess.run(
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['bash', 'D:\\codex\\2026-10-26\\winhttrack-website-copier-colorhug-leocad-olive\\work\\leocad-harmony\\scripts\\dev\\preserve-test-log.sh', 'archive', '1', 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-j93usfs7\\test-results.txt']' returned non-zero exit status 1.
+
+======================================================================
+ERROR: test_passing_runs_leave_no_failure_record (__main__.FailureLogRetention.test_passing_runs_leave_no_failure_record)
+No phantom failure: green from the start must not create one.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 188, in test_passing_runs_leave_no_failure_record
+    self.preserve(PASSED_RUN, 0)
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 109, in preserve
+    subprocess.run(
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['bash', 'D:\\codex\\2026-10-26\\winhttrack-website-copier-colorhug-leocad-olive\\work\\leocad-harmony\\scripts\\dev\\preserve-test-log.sh', 'archive', '0', 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-ttme68te\\test-results.txt']' returned non-zero exit status 1.
+
+======================================================================
+ERROR: test_the_failure_copy_records_when_and_why (__main__.FailureLogRetention.test_the_failure_copy_records_when_and_why)
+A log without its date cannot be matched to the run that produced it.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 143, in test_the_failure_copy_records_when_and_why
+    self.preserve(FAILED_RUN, 1)
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 109, in preserve
+    subprocess.run(
+  File "C:\Users\pxt\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['bash', 'D:\\codex\\2026-10-26\\winhttrack-website-copier-colorhug-leocad-olive\\work\\leocad-harmony\\scripts\\dev\\preserve-test-log.sh', 'archive', '1', 'C:\\Users\\pxt\\AppData\\Local\\Temp\\retention-azsew1s1\\test-results.txt']' returned non-zero exit status 1.
+
+======================================================================
+FAIL: test_a_bad_build_does_not_stop_the_next_suite (__main__.EvidenceForBuildFailures.test_a_bad_build_does_not_stop_the_next_suite)
+One broken suite must not cost the others their evidence.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 571, in test_a_bad_build_does_not_stop_the_next_suite
+    self.assertTrue(
+AssertionError: False is not true : priority left no failure record; the loop stopped at the first bad build
+
+======================================================================
+FAIL: test_a_failing_test_suite_records_stage_test (__main__.EvidenceForBuildFailures.test_a_failing_test_suite_records_stage_test)
+The ordinary failure path, after the restructure: stage=test, not a build stage.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 648, in test_a_failing_test_suite_records_stage_test
+    self.assertTrue(failure.exists())
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_a_passing_suite_still_records_only_last_run (__main__.EvidenceForBuildFailures.test_a_passing_suite_still_records_only_last_run)
+The restructured loop must not turn a green suite into a red one.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 626, in test_a_passing_suite_still_records_only_last_run
+    self.assertEqual(completed.returncode, 0, completed.stderr)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_a_usage_error_is_still_exit_2 (__main__.EvidenceForBuildFailures.test_a_usage_error_is_still_exit_2)
+An unknown suite stays a usage error, and it stays loud.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 762, in test_a_usage_error_is_still_exit_2
+    self.assertEqual(completed.returncode, 2, completed.stderr)
+AssertionError: 1 != 2
+
+======================================================================
+FAIL: test_a_failed_last_run_write_still_records_the_failure (__main__.FailureLogRetention.test_a_failed_last_run_write_still_records_the_failure)
+The failure log must not depend on the last-run copy succeeding.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 368, in test_a_failed_last_run_write_still_records_the_failure
+    self.assertEqual(completed.returncode, 0, completed.stderr)
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_a_non_numeric_exit_status_is_rejected_as_a_usage_error (__main__.FailureLogRetention.test_a_non_numeric_exit_status_is_rejected_as_a_usage_error)
+A wrong argument is an error; it must not quietly read as a pass.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 394, in test_a_non_numeric_exit_status_is_rejected_as_a_usage_error
+    self.assertEqual(completed.returncode, 2, "a non-numeric status is a usage error")
+AssertionError: 1 != 2 : a non-numeric status is a usage error
+
+======================================================================
+FAIL: test_an_uncreatable_failure_dir_does_not_fail_the_suite (__main__.FailureLogRetention.test_an_uncreatable_failure_dir_does_not_fail_the_suite)
+The last-failure "mkdir" guard, which the last-run cases miss.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 308, in test_an_uncreatable_failure_dir_does_not_fail_the_suite
+    self.assertEqual(
+AssertionError: 1 != 0 : an uncreatable failure dir must not fail the suite: None
+
+======================================================================
+FAIL: test_an_unwritable_log_root_does_not_fail_the_suite (__main__.FailureLogRetention.test_an_unwritable_log_root_does_not_fail_the_suite)
+The script's own promise: logging never changes a suite's verdict.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\codex\2026-10-26\winhttrack-website-copier-colorhug-leocad-olive\work\leocad-harmony\scripts\library\test_failure_log_retention.py", line 212, in test_an_unwritable_log_root_does_not_fail_the_suite
+    self.assertEqual(
+AssertionError: 1 != 0 : an unwritable log root must not fail the suite: None
+
+----------------------------------------------------------------------
+Ran 24 tests in 3.219s
+
+FAILED (failures=8, errors=16)

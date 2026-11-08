@@ -1,0 +1,50 @@
+[
+  {
+    "path": "D10 中型模型闭环.mpd",
+    "bytes": 85120,
+    "sha256": "720e572b5791c68b98f28ec228aa3312b18b65a57a7dd9eab740ef37aa30fe5b",
+    "match": true
+  },
+  {
+    "path": "Input/curated-device.mpd",
+    "bytes": 250,
+    "sha256": "ef964c4aeccc8e325b45f0f30835e7b3c924a1f9e6de234ec9362a5d88261742",
+    "match": true
+  },
+  {
+    "path": "Input/cycle.mpd",
+    "bytes": 53,
+    "sha256": "468c20455fcda4ce47362a1ac465619e8b6bc9f0251188f7f4c02caa87081438",
+    "match": true
+  },
+  {
+    "path": "Input/d10-2000.mpd",
+    "bytes": 83122,
+    "sha256": "45fb6e2e5f8ac52719bc287e957960c070ac4ce686e0d06c4f4cd763e7d357c6",
+    "match": true
+  },
+  {
+    "path": "Input/empty-valid.ldr",
+    "bytes": 62,
+    "sha256": "2595dad95b75c2e6302f78a745c133dbda1bfc7ec82356191461787879941d3c",
+    "match": true
+  },
+  {
+    "path": "Input/roundtrip.ldr",
+    "bytes": 104,
+    "sha256": "c5f81e3906b195ab1093c4496628b12c5ae1aa983d0deb6b81d0131e0ca8dfce",
+    "match": true
+  },
+  {
+    "path": "Input/truncated.ldr",
+    "bytes": 23,
+    "sha256": "d5c108f49a09c75a5cd2b910e8532d930e06ed8735937837915dfb8fc7b7b171",
+    "match": true
+  },
+  {
+    "path": "Input/zero-byte.ldr",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "match": true
+  }
+]

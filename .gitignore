@@ -22,6 +22,7 @@
 !/docs/evidence/leader/2026-10-29/a-d3-render/*.ldr
 !/docs/evidence/leader/2026-10-30/d4-device/*.ldr
 !/docs/evidence/member-c/2026-11-06/*.ldr
+!/docs/evidence/leader/2026-11-06/d11-device/*.mpd
 /.local/
 /aqtinstall.log
 !/resources/*.ldr

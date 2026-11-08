@@ -1,0 +1,79 @@
+[
+  {
+    "area": "files",
+    "path": "a-d3-device.ldr",
+    "bytes": 267,
+    "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "match": true
+  },
+  {
+    "area": "files",
+    "path": "curated-device.mpd",
+    "bytes": 381,
+    "sha256": "0d12679de5b1b19b97243aae3ee5dc50fe6ce43248eefe0aa98a79fe7e1b48fa",
+    "match": true
+  },
+  {
+    "area": "files",
+    "path": "d4-external/library-lite.zip",
+    "bytes": 3833541,
+    "sha256": "09922e82d157dd1e3906661db44384bf212b9e065bb0205f8fd1702e4268c0f3",
+    "match": true
+  },
+  {
+    "area": "files",
+    "path": "d5-fixtures/render-baseline.ldr",
+    "bytes": 267,
+    "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "match": true
+  },
+  {
+    "area": "files",
+    "path": "ldraw-lite/library-lite.zip.d4-invalid",
+    "bytes": 37,
+    "sha256": "c0c6150932268b94c18080417d3dfb0b22c3aa028e0cb8819a2846e339c490b4",
+    "match": true
+  },
+  {
+    "area": "files",
+    "path": "render-baseline.ldr/fixtures/render-baseline.ldr",
+    "bytes": 267,
+    "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "match": true
+  },
+  {
+    "area": "files",
+    "path": "tests/fixtures/render-baseline.ldr",
+    "bytes": 267,
+    "sha256": "25a650cddc8a6da11ae8edac3f71328294308244ea1280eaa9a78fbd88a1769b",
+    "match": true
+  },
+  {
+    "area": "preferences",
+    "path": "QtProject.conf",
+    "bytes": 137,
+    "sha256": "15ed4d93ac38f4e3535580ca3ae2b3627fc569e086acef7b01b7177809ac590b",
+    "match": true
+  },
+  {
+    "area": "preferences",
+    "path": "ldraw-lite/library-lite.zip.d4-invalid",
+    "bytes": 37,
+    "sha256": "c0c6150932268b94c18080417d3dfb0b22c3aa028e0cb8819a2846e339c490b4",
+    "match": true
+  },
+  {
+    "area": "preferences",
+    "path": "LeoCAD Software/LeoCAD.conf",
+    "bytes": 5972,
+    "sha256": "66819ceff7026c86c6d3ccf088f3556068cc7bd78b7dc39202b161803fd10530",
+    "match": true
+  },
+  {
+    "area": "preferences",
+    "path": "LeoCAD Software/build/d5-restore/LeoCAD.conf",
+    "bytes": 3357,
+    "sha256": "452a53ac671c264a8232d2f33c8c996204e6f0ad80696f7fe7caa8d17c6d8a8a",
+    "match": true
+  }
+]
