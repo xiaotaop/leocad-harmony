@@ -4986,6 +4986,10 @@
         <translation>步骤 %1</translation>
     </message>
     <message>
+        <source>Unsaved changes</source>
+        <translation>有未保存的修改</translation>
+    </message>
+    <message>
         <source> M: %1 %2 R: %3 </source>
         <translation type="vanished"> M: %1 %2 R: %3 </translation>
     </message>

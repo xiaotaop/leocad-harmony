@@ -1,0 +1,6 @@
+{
+  "layered-image": {
+    "background": "$media:jimuligou_background",
+    "foreground": "$media:jimuligou_foreground"
+  }
+}

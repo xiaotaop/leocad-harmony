@@ -3,9 +3,10 @@
 Owner: team lead.
 
 Qt 6.12 for HarmonyOS generates the application module, Ability metadata and
-Hvigor packaging project from the root CMake target. Port-owned package source
-overrides (icon, label, permissions and localized metadata) will live here only
-when `QT_HARMONYOS_PACKAGE_SOURCE_DIR` is enabled.
+Hvigor packaging project from the root CMake target. CMake overlays
+`icons/jimuligou_icon.json` and its PNG layers onto Qt's package template.
+`icons/jimuligou_store.png` is the flattened 1024 × 1024 opaque PNG for the
+AppGallery listing.
 
 Do not create a second manual ArkUI application shell around the Qt window. Do
 not commit signing keys, passwords, local SDK paths or generated packages.

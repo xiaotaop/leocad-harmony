@@ -101,7 +101,12 @@ void lcMainWindow::CreateWidgets()
 			setWindowIcon(QIcon(":/resources/leocad.png"));
 	}
 
+#ifdef Q_OS_HARMONY
+	// HarmonyOS PC uses the main window title for its recent-task card.
+	setWindowTitle(QGuiApplication::applicationDisplayName());
+#else
 	setWindowFilePath(QString());
+#endif
 
 	CreateActions();
 	CreateToolBars();
@@ -1302,6 +1307,12 @@ void lcMainWindow::CreateStatusBar()
 
 	mStatusBarLabel = new lcElidedLabel();
 	StatusBar->addWidget(mStatusBarLabel, 1);
+
+#ifdef Q_OS_HARMONY
+	mStatusModifiedLabel = new QLabel(tr("Unsaved changes"));
+	StatusBar->addPermanentWidget(mStatusModifiedLabel);
+	mStatusModifiedLabel->hide();
+#endif
 
 	mStatusPositionLabel = new QLabel();
 	StatusBar->addPermanentWidget(mStatusPositionLabel);
@@ -2761,13 +2772,19 @@ void lcMainWindow::UpdateCategories()
 
 void lcMainWindow::UpdateTitle()
 {
-	setWindowModified(lcGetActiveProject()->IsModified());
+	UpdateModified(lcGetActiveProject()->IsModified());
+#ifndef Q_OS_HARMONY
 	setWindowFilePath(lcGetActiveProject()->GetTitle());
+#endif
 }
 
 void lcMainWindow::UpdateModified(bool Modified)
 {
+#ifdef Q_OS_HARMONY
+	mStatusModifiedLabel->setVisible(Modified);
+#else
 	setWindowModified(Modified);
+#endif
 }
 
 void lcMainWindow::UpdateShortcuts()
