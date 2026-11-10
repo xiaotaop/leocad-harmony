@@ -386,6 +386,9 @@ protected:
 	lcPreviewDockWidget* mPreviewWidget = nullptr;
 
 	lcElidedLabel* mStatusBarLabel = nullptr;
+#ifdef Q_OS_HARMONY
+	QLabel* mStatusModifiedLabel = nullptr;
+#endif
 	QLabel* mStatusPositionLabel = nullptr;
 	QLabel* mStatusSnapLabel = nullptr;
 	QLabel* mStatusTimeLabel = nullptr;

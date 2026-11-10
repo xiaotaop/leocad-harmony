@@ -105,9 +105,7 @@ qt_add_translations(leocad
 )
 
 if(OHOS)
-    # Qt's APP_ICON sets the app/Ability icons, but its template keeps a separate
-    # startIcon.png. Copy the installed template into the build tree so all
-    # packaging routes use our startup icon without editing the Qt installation.
+    # Overlay our icons on the Qt template without editing the Qt installation.
     get_filename_component(_harmony_qt_prefix "${Qt6_DIR}/../../.." ABSOLUTE)
     set(_harmony_template "${_harmony_qt_prefix}/src/harmonyos/templates")
     if(NOT EXISTS "${_harmony_template}/entry/src/main/module.json5")
@@ -115,16 +113,25 @@ if(OHOS)
     endif()
     set(_harmony_package "${CMAKE_CURRENT_BINARY_DIR}/leocad-harmony-package")
     file(COPY "${_harmony_template}/" DESTINATION "${_harmony_package}")
-    configure_file("tools/icon/512x512/apps/leocad.png"
+    foreach(_icon_file IN ITEMS jimuligou_icon.json jimuligou_foreground.png jimuligou_background.png)
+        configure_file("app/icons/${_icon_file}"
+            "${_harmony_package}/AppScope/resources/base/media/${_icon_file}" COPYONLY)
+    endforeach()
+    foreach(_manifest IN ITEMS AppScope/app.json5 entry/src/main/module.json5)
+        file(READ "${_harmony_template}/${_manifest}" _manifest_text)
+        string(REGEX REPLACE "\\$media:(app_icon|layered_image)" "$media:jimuligou_icon"
+            _manifest_text "${_manifest_text}")
+        file(WRITE "${_harmony_package}/${_manifest}" "${_manifest_text}")
+    endforeach()
+    configure_file("app/icons/jimuligou_foreground.png"
         "${_harmony_package}/entry/src/main/resources/base/media/startIcon.png" COPYONLY)
     set_target_properties(leocad PROPERTIES
         QT_HARMONYOS_PACKAGE_SOURCE_DIR "${_harmony_package}"
         QT_HARMONYOS_APP_BUNDLE_NAME "io.github.xiaotaop.leocad"
         QT_HARMONYOS_APP_NAME "积木立构"
         QT_HARMONYOS_APP_LABEL "积木立构"
-        QT_HARMONYOS_APP_ICON "${CMAKE_CURRENT_SOURCE_DIR}/tools/icon/512x512/apps/leocad.png"
         QT_HARMONYOS_APP_VENDOR "xiaotaop"
-        QT_HARMONYOS_APP_VERSION_CODE 1
+        QT_HARMONYOS_APP_VERSION_CODE 3
         QT_HARMONYOS_APP_VERSION_NAME "0.1.0"
         QT_HARMONYOS_MODULE_DESCRIPTION "LDraw model editor for HarmonyOS PC"
         QT_HARMONYOS_MODULE_DEVICE_TYPES "2in1;tablet"
